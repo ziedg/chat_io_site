@@ -1,0 +1,29 @@
+<div id="facebook-content">
+    <div class="facebook-connect">
+
+        <form (ngSubmit)="loginWithFacebook()">
+            <div class="col-xs-12">
+                <div class="user-img-facebook"
+                    [ngStyle]="{'background-image': 'url(' + facebookUser.profilePicture + ')'}">
+                    <div class="social-logo-login facebook-logo"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <button type="submit" class="loginButton-facebook" *ngIf="!loadingSign">Se connecter en tant que {{facebookUser.firstName}} {{facebookUser.lastName}}</button>
+                <button type="submit" class="loginButton-facebook" *ngIf="loadingSign" disabled>
+                    <div class="loading"></div>
+                </button>
+            </div>
+        </form>
+        <div class="col-xs-12 separatorBox">
+
+            Pas {{facebookUser.firstName}} {{facebookUser.lastName}} ? <span class="change-account" 
+            (click)="goSignIn()">Changer de compte</span>
+
+        </div>
+
+ 
+
+    </div>
+   
+</div>

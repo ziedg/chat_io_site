@@ -1,0 +1,680 @@
+import { Input, Output, EventEmitter, Component, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import 'rxjs/add/operator/map';
+
+import { Publication } from '../../publication/publication';
+import { Comment } from '../../comment/comment';
+
+/* conf */
+import { AppSettings } from '../../conf/app-settings';
+
+/* services */
+import { LoginService } from '../../service/loginService';
+import { LinkView } from "../../service/linkView";
+import { LinkPreview } from "../../service/linkPreview";
+import { PostService } from "../../service/postService";
+
+/* user  */
+import { User } from '../../beans/user';
+
+/* beans */
+import { PublicationBean } from '../../beans/publication-bean';
+import { NotFound } from "../notFound/not-found";
+import { Title } from "@angular/platform-browser";
+import { LinkBean } from '../../beans/linkBean';
+
+declare var jQuery: any;
+declare var $: any;
+declare var FB: any;
+declare var auth: any;
+declare const gapi: any;
+@Component({
+    moduleId: module.id,
+    selector: 'home',
+    templateUrl: 'home.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
+})
+
+export class Home {
+    form;
+    uploadedPicture: File;
+    isLock: boolean = false;
+    finPosts: boolean = false;
+    public publicationBeanList: Array<PublicationBean> = [];
+    public user: User = new User();
+    public link: LinkBean = new LinkBean();
+    public previewLink: Array<LinkBean> = [];
+
+
+    //Variables Declarations
+    titleEnable = false;
+    youtubeInput = false;
+    youtubeLink = "";
+    menuFilter = "recent";
+    selectedMenuElement = 0;
+    nbLoadedPosts = 10;
+    failureMessage;
+    showLoading = false;
+    errorMsg = "";
+    lastPostId: string = "null";
+    publication;
+    loadingPublish = false;
+    afficheWelcome: Boolean;
+    pubText: string;
+    publishText: string;
+    showErreurConnexion = false;
+    linkLoading = false;
+    isEmpty = true;
+
+    constructor(private postService: PostService, private linkView: LinkView, private linkPreview: LinkPreview, private title: Title, private http: Http, private router: Router, private loginService: LoginService, private changeDetector: ChangeDetectorRef) {
+        //this.previewLink.push(this.link);
+
+        this.title.setTitle("Speegar");
+        this.postService.setShowErrorConnexion(false);
+
+        if (!this.loginService.isConnected()) {
+            if (this.loginService.isWasConnectedWithFacebook()) {
+                this.router.navigate(['/login/facebook-login']);
+            }
+            else if (this.loginService.isWasConnectedWithGoogle()) {
+                this.router.navigate(['/login/google-login']);
+            }
+            else {
+                this.router.navigate(['/login/sign-in']);
+            }
+        }
+
+        this.changeDetector.markForCheck();
+        this.user = this.loginService.getUser();
+        this.form = new FormGroup({
+            publicationTitle: new FormControl(),
+            publicationText: new FormControl('', Validators.required),
+            publicationYoutubeLink: new FormControl()
+        });
+        if (this.user) {
+            this.publicationBeanList = [];
+            this.loadFirstPosts();
+            if (!this.publicationBeanList.length)
+                this.loadFirstPosts();
+            this.changeDetector.markForCheck();
+
+        }
+
+        window.scrollTo(0, 0);
+        if (localStorage.getItem('isNewInscri')) {
+            if (localStorage.getItem('isNewInscri') == "true") {
+                this.afficheWelcome = true;
+                localStorage.removeItem('isNewInscri');
+            }
+            else {
+                this.afficheWelcome = false;
+            }
+        }
+        else {
+            this.afficheWelcome = false;
+        }
+        if (localStorage.getItem('typePosts')) {
+            if (localStorage.getItem('typePosts') != 'recent' && localStorage.getItem('typePosts') != 'popular') {
+                localStorage.setItem('typePosts', 'recent');
+            }
+        }
+        else {
+            localStorage.setItem('typePosts', 'recent');
+        }
+        this.menuFilter = localStorage.getItem('typePosts');
+        jQuery("meta[property='og:url']").remove();
+        jQuery('head').append('<meta property="og:url" content="' + AppSettings.SITE_URL + '#/main/home" />');
+    }
+
+    putNewPub(pub: PublicationBean, isShared: boolean) {
+        var element = pub;
+        element.displayed = true;
+        if (isShared) {
+            element.isShared = true;
+        }
+        else {
+            element.isShared = false;
+        }
+        this.publicationBeanList.unshift(element);
+        this.changeDetector.markForCheck();
+    }
+    checkPreviewLink($event) {
+        this.pubText = jQuery("#pubText").val();
+        this.changeDetector.markForCheck();
+        this.linkView.getListLinks(this.pubText);
+    }
+    putIntoList(response) {
+        if(!response.length) this.showLoading = false;
+        this.isLock = true;
+        var element;
+        for (var i = 0; i < response.length; i++) {
+            element = response[i];
+            element.displayed = true;
+
+            if (response[i].isShared == "true") {
+                element.isShared = true;
+            }
+            else {
+                element.isShared = false;
+            }
+
+            if (response[i].isLiked == "true")
+                element.isLiked = true;
+            else
+                element.isLiked = false;
+
+            if (response[i].isDisliked == "true")
+                element.isDisliked = true;
+            else
+                element.isDisliked = false;
+
+            for (var j = 0; j < response[i].comments.length; j++) {
+                if (response[i].comments[j].isLiked == "true")
+                    element.comments[j].isLiked = true;
+                else
+                    element.comments[j].isLiked = false;
+
+                if (response[i].comments[j].isDisliked == "true")
+                    element.comments[j].isDisliked = true;
+                else
+                    element.comments[j].isDisliked = false;
+
+                if (j == response[i].comments.length) {
+                    this.publicationBeanList.push(element);
+
+                    if (i == response.length - 1) {
+                        this.showLoading = false;
+                        this.isLock = false;
+                        this.lastPostId = response[i]._id;
+                    }
+                }
+            }
+
+            this.publicationBeanList.push(element);
+            if (i == response.length - 1) {
+                this.showLoading = false;
+                this.isLock = false;
+                this.lastPostId = response[i]._id;
+            }
+
+        }
+    }
+    //load first Post
+    loadFirstPosts() {
+        if (this.user) {
+            var urlAndPara = "";
+            //localStorage.getItem('typePosts') != 'recent' && localStorage.getItem('typePosts') != 'popular'
+            if (localStorage.getItem('typePosts') == 'popular') {
+                urlAndPara = AppSettings.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
+            }
+            else {
+                urlAndPara = AppSettings.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
+            }
+            this.http.get(
+                urlAndPara, AppSettings.OPTIONS)
+                .map((res: Response) => res.json())
+                .subscribe(
+                response => {
+
+                    this.publicationBeanList = [];
+                    this.putIntoList(response);
+                    this.changeDetector.markForCheck();
+                },
+                err => {
+                    setTimeout(() => {
+                        //this.showErreurConnexion = true;
+                        this.showLoading = false;
+                    }, 3000);
+                },
+                () => {
+                    this.isLock = false;
+                }
+                );
+        }
+    }
+    //load more Posts
+    loadMorePosts() {
+        if (this.user) {
+            var urlAndPara = "";
+            //localStorage.getItem('typePosts') != 'recent' && localStorage.getItem('typePosts') != 'popular'
+            if (localStorage.getItem('typePosts') == 'popular') {
+                urlAndPara = AppSettings.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id=' + this.lastPostId;
+            }
+            else {
+                urlAndPara = AppSettings.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=' + this.lastPostId;
+            }
+            this.http.get(
+                urlAndPara, AppSettings.OPTIONS)
+                .map((res: Response) => res.json())
+                .subscribe(
+                response => {
+                    this.putIntoList(response);
+                    this.changeDetector.markForCheck();
+                },
+                err => {
+                    setTimeout(() => {
+                        this.showErreurConnexion = true;
+                        this.showLoading = false;
+                    }, 3000);
+                },
+                () => {
+                    this.isLock = false;
+                }
+                );
+        }
+    }
+    onScrollDown() {
+        if (this.finPosts) {
+            this.showLoading = false;
+            this.isLock = true;
+            return 0;
+        }
+        else if ((((this.lastPostId == "null") || (this.isLock)) || this.showErreurConnexion) || !$(window).scrollTop()) {
+            this.showLoading = true;
+            return 0;
+        }
+        else {
+            this.isLock = true;
+            this.loadMorePosts();
+            return 1;
+        }
+    }
+
+    reLoadposts() {
+        this.showLoading = true;
+        this.showErreurConnexion = false;
+        if (this.user) {
+            if (this.publicationBeanList.length == 0)
+                this.loadFirstPosts();
+            else
+                this.loadMorePosts();
+        }
+    }
+    updatePublishTextOnPaste($event) {
+        $event.preventDefault();
+        var text = $event.clipboardData.getData("text/plain");
+
+        if (text.search("youtube.com/watch") >= 0) {
+            this.youtubeInput = true;
+            jQuery(".yt-in-url").val(text);
+            this.changeDetector.markForCheck();
+            this.youtubeLink = text;
+            this.updateYoutube();
+            //this.form.controls.publicationYoutubeLink.updateValue(text);
+            return 1;
+        }
+        if (this.isEmpty) {
+            jQuery(".textarea-publish")[0].innerHTML = jQuery(".textarea-publish")[0].innerHTML + "&nbsp;";
+            this.publishText = jQuery(".textarea-publish")[0].innerHTML;
+        }
+        this.linkAPI();
+        document.execCommand("insertHTML", false, text);
+
+    }
+    updatePublishText($event) {
+        this.publishText = $event.path[0].innerHTML;
+        if (!this.publishText || this.publishText.length == 0) {
+            this.isEmpty = true;
+        }
+        else {
+            this.isEmpty = false;
+        }
+
+        //this.link = this.link.update(this.publishText);
+        this.linkAPI();
+        //this.linkPreview.linkAPI(this.publishText,this.link ,this.previewLink);
+        //this.link = this.linkPreview.returnerLink;
+        this.changeDetector.markForCheck();
+    }
+    resetPublishPicture() {
+        jQuery("#preview-image").attr('src', "");
+        jQuery("#preview-image").hide();
+        this.uploadedPicture = null;
+    }
+
+    resetPublish() {
+        jQuery("#file-image").val("");
+        jQuery("#file-image-gif").val("");
+        jQuery("#preview-image").attr('src', '');
+        jQuery("#preview-image").fadeOut();
+        this.uploadedPicture = null;
+        //this.form.controls.publicationTitle.updateValue('');
+        this.titleEnable = false;
+        //this.form.controls.publicationText.updateValue('');
+        //this.form.controls.publicationYoutubeLink.updateValue('');
+        this.youtubeInput = false;
+        this.youtubeLink = null;
+        jQuery(".yt-in-url").val("");
+        jQuery(".youtube-preview").html("");
+        this.loadingPublish = false;
+        jQuery(".textarea-publish").html("");
+        this.closeLinkAPI();
+        this.isEmpty = true;
+        this.changeDetector.markForCheck();
+    }
+
+    //add Publication
+    publish() {
+        if (!this.form.value.publicationText && !this.youtubeLink && !this.uploadedPicture && !this.link.isSet) {
+            this.errorMsg = "Votre publication est vide. Veuillez ecrire une publication, partager une photo/GIF ou une video Youtube.";
+            this.errorTimed();
+            return;
+        }
+        this.loadingPublish = true;
+        var data = new FormData();
+        data.append('profileId', this.user._id);
+        if (this.selectedMenuElement == 0) {
+            data.append('confidentiality', 'PUBLIC');
+        }
+        else {
+            data.append('confidentiality', 'PRIVATE');
+        }
+
+        data.append('publTitle', this.form.value.publicationTitle);
+        data.append('publText', this.form.value.publicationText);
+        data.append('publyoutubeLink', this.youtubeLink);
+        data.append('publPicture', this.uploadedPicture);
+        if (this.link.isSet) {
+            data.append('publExternalLink', this.link.url);
+        }
+        this.changeDetector.markForCheck();
+
+        this.http.post(AppSettings.SERVER_URL + 'publish', data, AppSettings.OPTIONS_POST)
+            .map((res: Response) => res.json())
+            .subscribe(
+            response => {
+                if (response.status == "0") {
+                    jQuery("#errorMsgDisplay").fadeOut(1000);
+                    this.putNewPub(response.publication, false);
+                    this.resetPublish();
+                }
+                else {
+                    this.failureMessage = response.data;
+                    this.errorMsg = response.message;
+                    this.errorTimed();
+                    this.loadingPublish = false;
+
+                }
+            },
+            err => { },
+            () => {
+            }
+            );
+    }
+
+    //Enable title post
+    enableTitlePost() {
+        this.titleEnable = !this.titleEnable;
+
+    }
+    emptyDivOnFocus() {
+        jQuery("#placehoder-publish").remove();
+    }
+    //change Menu Filter
+    changeMenuFilter(newMenufilter: string) {
+        this.menuFilter = newMenufilter;
+        localStorage.setItem('typePosts', newMenufilter);
+        this.publicationBeanList = [];
+        this.publicationBeanList = this.postService.loadFirstPosts();
+    }
+    //select Menu Home
+    enableSelectMenu() {
+        jQuery(".select-menu").toggle();
+    }
+
+    changeSelectMenu(choice) {
+        this.selectedMenuElement = choice;
+    }
+
+    //change Youtube Input
+    changeYoutubeInput() {
+        jQuery(".yt-in-url").toggle();
+    }
+
+    //error close
+    closeErrorMsg() {
+        jQuery("#errorMsgDisplay").fadeOut(1000);
+        this.errorMsg = "";
+    }
+    closeWelcomeMsg() {
+        jQuery("#welcomeMsgDisplay").fadeOut(1000);
+        this.afficheWelcome = false;
+    }
+    errorTimed() {
+        jQuery("#errorMsgDisplay").fadeIn(500);
+        setTimeout(() => {
+            jQuery("#errorMsgDisplay").fadeOut(1000);
+        }, 5000);
+        setTimeout(() => {
+            this.errorMsg = "";
+        }, 5200);
+
+    }
+
+    //uploading Photo click event
+    addPhoto() {
+        jQuery(("#file-image")).click();
+    }
+    addPhotoGIF() {
+        jQuery(("#file-image-gif")).click();
+    }
+    //uploading photo or GIF
+    uploadPhoto($event) {
+
+        var inputValue = $event.target;
+        if (inputValue != null && null != inputValue.files[0]) {
+            this.uploadedPicture = inputValue.files[0];
+            previewFile(this.uploadedPicture);
+            jQuery(".youtube-preview").html("");
+            //this.form.controls.publicationYoutubeLink.updateValue('');
+            this.closeLinkAPI();
+
+        }
+        else {
+            this.uploadedPicture = null;
+        }
+    }
+
+    uploadPhotoGIF($event) {
+        var inputValue = $event.target;
+        if (inputValue != null && null != inputValue.files[0]) {
+            this.uploadedPicture = inputValue.files[0];
+            previewFile(this.uploadedPicture);
+            jQuery(".youtube-preview").html("");
+        }
+        else {
+            this.uploadedPicture = null;
+        }
+    }
+
+    updateYoutube() {
+        a = jQuery(".yt-in-url");
+        if (a.val().indexOf("youtube.com") < 1) //invalide youtube link
+        {
+            this.errorMsg = "Votre lien Youtube est invalide! Veuillez mettre un lien Youtube Valide.";
+            this.errorTimed();
+            jQuery(".youtube-preview").html("");
+            a.val("");
+            return;
+        }
+        try {
+            var validatedLink = a.val();
+            var code = a.val();
+            var video = "";
+            var a = code.split("?");
+            var b = a[1];
+            var c = b.split("&");
+            for (var i = 0; i < c.length; i++) {
+                var d = c[i].split("=");
+                if (d[0] == "v") {
+                    video = d[1];
+                    break;
+                };
+            }
+            jQuery(".youtube-preview").html('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + video + '" frameborder="0" allowfullscreen></iframe>');
+            this.uploadedPicture = null;
+            this.closeLinkAPI();
+            this.youtubeLink = validatedLink;
+            //this.form.controls.publicationYoutubeLink.updateValue(jQuery(".yt-in-url").val());
+            jQuery("#preview-image").hide();
+
+        } catch (err) {
+            jQuery(".youtube-preview").html("");
+        }
+    }
+    closeLinkAPI() {
+        this.link.initialise();
+    }
+    linkAPI() {
+        //var linkURL = this.publishText;
+        //var linkURL = this.publishText.match(/\b(http|https)?(:\/\/)?(\S*)\.(\w{2,4})\b/ig);
+        {
+            var source = (this.publishText || '').toString();
+            var myArray = this.linkView.getListLinks(source);
+            if (!myArray.length) {
+                return 1;
+            }
+            var linkURL = myArray[0];
+            if (linkURL == this.link.url) {
+                return 1;
+            }
+            if (linkURL.search("youtube.com/watch") >= 0) {
+                jQuery(".yt-in-url").val(linkURL);
+                this.updateYoutube();
+                return 1;
+            }
+            if (linkURL.search(".gif") >= 0) {
+                var checker = linkURL.substr(linkURL.length - 13, 8);
+                if (checker.indexOf(".gif") >= 0) {
+                    this.link.image = linkURL.substring(0, linkURL.indexOf(".gif") + 4);
+                    this.link.imageWidth = 500;
+                    this.link.imageHeight = 500;
+                    this.link.isGif = true;
+                    this.link.url = linkURL.substring(0, linkURL.indexOf(".gif") + 4);
+                    this.link.title = "gif";
+                    this.link.description = "gif";
+                    this.link.isSet = true;
+                    return 1;
+                }
+            }
+            this.linkLoading = true;
+            this.http.get(
+                AppSettings.SERVER_URL + 'getOpenGraphData?url=' + linkURL, AppSettings.OPTIONS)
+                .map((res: Response) => res.json())
+                .subscribe(
+                response => {
+                    if (response.results.success) {
+                        this.resetPublishPicture();
+                        jQuery(".youtube-preview").html("");
+                        //this.form.controls.publicationYoutubeLink.updateValue('');
+                        this.link.url = linkURL.substring(0, linkURL.length - 6);
+                        this.link.title = response.results.data.ogTitle;
+                        this.link.description = response.results.data.ogDescription;
+                        if (response.results.data.ogImage) {
+                            var a = response.results.data.ogImage.url;
+                            this.link.image = response.results.data.ogImage.url;
+                            this.link.imageWidth = response.results.data.ogImage.width;
+                            this.link.imageHeight = response.results.data.ogImage.height;
+                            if (a.substring(a.length - 3, a.length) == "gif")
+                                this.link.isGif = true;
+                            else
+                                this.link.isGif = false;
+                        }
+                        else {
+                            this.link.image = null;
+                            this.link.imageWidth = 0;
+                            this.link.imageHeight = 0;
+                        }
+                        this.link.isSet = true;
+                        this.linkLoading = false;
+                        this.changeDetector.markForCheck();
+                        if (this.isEmpty) {
+                            this.publishText = "";
+                            jQuery(".textarea-publish")[0].innerHTML = "";
+                        }
+                    }
+                    else {
+                        console.error("error in link API;");
+                        this.linkLoading = false;
+                    }
+                },
+                err => {
+                    //error
+                    console.error("error in link API;");
+                    this.linkLoading = false;
+                },
+                () => {
+                    //final
+                }
+                );
+        }
+    }
+    ngOnInit() {
+        jQuery("#publishDiv").on("paste", function (e) {
+            e.preventDefault();
+            var pastedData = e.originalEvent.clipboardData.getData('text');
+            alert(pastedData);
+        });
+        jQuery("#errorMsgDisplay").hide();
+        jQuery(("#file-image")).change(function () {
+            jQuery((".file-input-holder")).show();
+            readURL(this);
+        });
+
+        jQuery(("#file-image-gif")).change(function () {
+            jQuery((".file-input-holder")).show();
+            readURL(this);
+        });
+
+        jQuery(document).click(function (e) {
+
+            if (jQuery(e.target).closest(".select-menu").length === 0 && jQuery(e.target).closest(".dropdown").length === 0) {
+                jQuery(".select-menu").hide();
+            }
+        });
+    }
+    pasteInnerHtml($event) {
+        $event.preventDefault();
+        var plainText = $event.clipboardData.getData("text/plain");
+        document.execCommand("insertHTML", false, plainText);
+    }
+}
+
+export function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = [];
+        reader.push(new FileReader());
+        reader[0].addEventListener("load", (event) => {
+
+            jQuery("#preview-image").show();
+
+        }, false);
+        if (input.files[0]) {
+            reader[0].readAsDataURL(input.files[0]);
+        }
+    }
+}
+
+
+
+
+function previewFile(uploadedFile) {
+    var preview = jQuery('#preview-image');
+    var file = uploadedFile;
+    var reader = new FileReader();
+
+    reader.addEventListener("load", function () {
+        //preview.att.src = reader.result;
+        jQuery("#preview-image").attr('src', reader.result);
+        jQuery(".file-input-holder").fadeIn(500);
+        jQuery("#preview-image").fadeIn(500);
+
+    }, false);
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}

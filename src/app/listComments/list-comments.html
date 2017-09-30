@@ -1,0 +1,27 @@
+<div *ngIf="listComments">
+
+                <comment  *ngFor="let commentBean of listComments"
+                          [commentBean]="commentBean">
+                </comment>
+
+                <!-- more comments -->
+                <div class="comment-holder plus-comment">
+                    <div class="margin-auto">afficher plus de commentaires <i class="fa fa-caret-down"></i></div>
+                </div>
+
+</div>
+<div class="comment-holder form-comment">
+        <div class="user-img for-comment" [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}"></div>
+        <form>
+			<textarea placeholder="Votre commentaire ..."></textarea>
+
+            <div class="form-more">
+
+                <i class="fa fa-camera"></i>
+                <i class="fa fa-smile-o"></i>
+
+
+                <button class="comment-publish">Publier</button>
+            </div>
+        </form>
+    </div>

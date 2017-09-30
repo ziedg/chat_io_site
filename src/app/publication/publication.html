@@ -1,0 +1,266 @@
+<div class="publications-holder" *ngIf="publicationBean" id="publication">
+	<article class="publication bordered" *ngIf="publicationBean.displayed == true">
+		<div class="date hidden-xs" [routerLink]="['/main/post',publicationBean._id]">
+			<i class="fa fa-globe" style="color:#666" *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
+			<i class="fa fa-users" style="color:#666" *ngIf="publicationBean.confidentiality=='PRIVATE'"></i> {{getPublicationTime(publicationBean.datePublication)}}
+		</div>
+		<div class="user" *ngIf="!publicationBean.isShared">
+			<div class="user-img" [routerLink]="['/main/profile',publicationBean.profileId]" *ngIf="publicationBean.profilePictureMin"
+				[ngStyle]="{'background-image': 'url(' + publicationBean.profilePictureMin + ')'}">
+			</div>
+
+			<div class="user-img" [routerLink]="['/main/profile',publicationBean.profileId]" *ngIf="!publicationBean.profilePictureMin"
+				[ngStyle]="{'background-image': 'url(' + publicationBean.profilePicture + ')'}">
+
+			</div>
+
+
+			<div class="user-name" *ngIf="publicationBean.profileId">
+				<header *ngIf="!isVisitor" ><a [routerLink]="['/main/profile',publicationBean.profileId]">{{publicationBean.profileFirstName}}  {{publicationBean.profileLastName}}</a></header>
+				<header *ngIf="isVisitor"><a>{{publicationBean.profileFirstName}}  {{publicationBean.profileLastName}}</a></header>
+				<div class="date-mobile hidden-lg hidden-md hidden-sm" [routerLink]="['/main/post',publicationBean._id]">
+					<i class="fa fa-globe" style="color:#666" *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
+					<i class="fa fa-users" style="color:#666" *ngIf="publicationBean.confidentiality=='PRIVATE'"></i> {{getPublicationTime(publicationBean.datePublication)}}
+				</div>
+			</div>
+		</div>
+		<div class="user" *ngIf="publicationBean.isShared">
+
+			<div class="user-img" *ngIf="publicationBean.profilePictureMin"
+				[ngStyle]="{'background-image': 'url(' + publicationBean.profilePictureMin + ')'}">
+			</div>
+
+			<div class="user-img" *ngIf="!publicationBean.profilePictureMin"
+				[ngStyle]="{'background-image': 'url(' + publicationBean.profilePicture + ')'}">
+			</div>
+
+			<div class="user-name" *ngIf="publicationBean.profileId">
+				<header><a style="display:inline;" [routerLink]="['/main/profile',publicationBean.profileId]">{{publicationBean.profileFirstName}}  {{publicationBean.profileLastName}} </a>a
+					partagé
+				</header>
+				<div class="date-mobile hidden-lg hidden-md hidden-sm" [routerLink]="['/main/post',publicationBean._id]">
+					<i class="fa fa-globe" style="color:#666" *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
+					<i class="fa fa-users" style="color:#666" *ngIf="publicationBean.confidentiality=='PRIVATE'"></i> {{getPublicationTime(publicationBean.datePublication)}}
+				</div>
+			</div>
+		</div>
+
+		<div class="content" *ngIf="!publicationBean.isShared">
+			<h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]">{{publicationBean.publTitle}} </h4>
+			<h6 *ngIf="publicationBean.publTitle == 'null'"></h6>
+			<span class="publication-text" *ngIf="publicationBean.publText != 'null' && publicationBean.publText != 'undefined'" [innerHTML]="linkView.transformATextHaveALink(affichePostText(publicationBean.publText))">
+            </span>
+			<div class="link-preview" *ngIf="link.isSet">
+				<div class="noPadding" *ngIf="link.image">
+					<a href="{{link.url}}" target="_blank" style="width:100%">
+						<img class="img-preview" [src]="link.image" />
+					</a>
+				</div>
+				<div class="descriptions" *ngIf="!link.isGif">
+					<a href="{{link.url}}" target="_blank">
+						<h4>{{link.title}}</h4>
+					</a>
+					<p>{{link.description}}</p>
+					<a href="{{link.url}}" target="_blank" class="subLink">{{link.url}}</a>
+				</div>
+			</div>
+			<img *ngIf="publicationBean.publPictureLink" src="http://91.121.69.130/images/{{publicationBean.publPictureLink}}">
+
+			<div class="youtube-preview-publication" *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
+				<iframe width="560" height="400" [src]="url" frameborder="0" allowfullscreen>
+				</iframe>
+			</div>
+		</div>
+
+
+		<div class="content" *ngIf="publicationBean.isShared">
+
+			<article class="publication bordered shared-publication">
+
+				<div class="user">
+
+					<div class="user-img-shared" *ngIf="publicationBean.originalProfilePictureMin" [ngStyle]="{'background-image': 'url(' + publicationBean.originalProfilePictureMin + ')'}">
+					</div>
+					<div class="user-img-shared" *ngIf="!publicationBean.originalProfilePictureMin" [ngStyle]="{'background-image': 'url(' + publicationBean.originalProfilePicture + ')'}">
+					</div>
+					<div class="user-name-shared">
+						<header><a [routerLink]="['/main/profile',publicationBean.originalProfileId]" style="display:inline;font-size:12px;">{{publicationBean.originalProfileFirstName +" "+publicationBean.originalProfileLastName }} </a></header>
+					</div>
+
+				</div>
+				<div class="content">
+					<h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]">{{publicationBean.publTitle}} </h4>
+					<h6 *ngIf="publicationBean.publTitle == 'null'"></h6>
+					<span *ngIf="publicationBean.publText != 'null' && publicationBean.publText != 'undefined'" [innerHTML]="linkView.transformATextHaveALink(affichePostText(publicationBean.publText))">
+            </span>
+					<img *ngIf="publicationBean.publPictureLink" src="http://91.121.69.130/images/{{publicationBean.publPictureLink}}">
+					<div class="youtube-preview-publication" *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
+						<iframe width="560" height="400" [src]="url" frameborder="0">
+						</iframe>
+					</div>
+				</div>
+			</article>
+
+
+
+		</div>
+
+
+		<div class="social-staff">
+			<div *ngIf="!isVisitor" class="like-dislike">
+				<div class="like-holder" (click)="addOrRemoveLike()" [class.active]="publicationBean.isLiked">
+					<button class="like"><!--i class="fa fa-smile-o"></i-->
+                    <div class="hint-social">LoL</div>
+                    <img class="social-emoji" src="assets/images/basic/smile-green.png" style="width:30px" *ngIf="publicationBean.isLiked">
+                    <img class="social-emoji desaturated" src="assets/images/basic/blush.png" style="width:30px" *ngIf="!publicationBean.isLiked"></button>
+					<span class="nbr">{{publicationBean.nbLikes}}</span>
+				</div>
+				<div class="dislike-holder" (click)="addOrRemoveDislike()" [class.active]="publicationBean.isDisliked">
+					<button class="dislike"><!--i class="fa fa-frown-o"></i-->
+                    <div class="hint-social">c nulle</div>
+                    <img class="social-emoji" src="assets/images/basic/rage.png" style="width:30px" *ngIf="publicationBean.isDisliked">
+                    <img class="social-emoji desaturated" src="assets/images/basic/expressionless.png" style="width:30px" *ngIf="!publicationBean.isDisliked">
+                    </button>
+					<span class="nbr">{{publicationBean.nbDislikes}}</span>
+				</div>
+				<div class="comment-number-holder" (click)="displayComments()">
+					<button class="comment-number"><i class="fa fa-commenting"></i>
+                    <!--div class="hint-social">commentaire</div-->
+                    </button>
+					<span class="nbr">{{nbDisplayedComments}}</span>
+				</div>
+				<div class="share-holder" (click)="sharePub(publicationBean)">
+					<button class="share"><i class="fa fa-share"></i>
+                    <div class="hint-social">Partager</div>
+                    </button>
+					<span class="nbr">{{publicationBean.nbShare}}</span>
+				</div>
+				<div style="margin-left: 10px">
+
+
+					<div data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+						<a class="fb-xfbml-parse-ignore" target="_blank" [href]="shareLink" onclick='window.open(this.href,"popupwindow", "width=800,height=500,left=200,top=5,scrollbars,toolbar=0,resizable"); return false;'>
+							<!--div class="fbShare">
+             <i class="fa fa-facebook" aria-hidden="true"></i>
+            </di-->
+							<button class="share-fb">
+            <i class="fa fa-facebook-square fbShare" aria-hidden="true"></i>
+            <div class="hint-social">Partager sur Facebook</div>
+            </button>
+
+
+						</a>
+						<span class="nbr">0</span>
+					</div>
+
+				</div>
+			</div>
+			<div *ngIf="isVisitor" class="like-dislike" style="position:absolute;right:0px;top:10px;">
+				<div data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+					<a class="fb-xfbml-parse-ignore" target="_blank" [href]="shareLink" onclick='window.open(this.href,"popupwindow", "width=800,height=500,left=200,top=5,scrollbars,toolbar=0,resizable"); return false;'>
+						<!--div class="fbShare">
+             <i class="fa fa-facebook" aria-hidden="true"></i>
+            </div-->
+						<button class="share-fb">
+            <i class="fa fa-facebook-square fbShare" aria-hidden="true"></i>
+            <div class="hint-social" style="width: 130px;right: 0px;">Partager sur Facebook</div>
+            </button>
+
+
+					</a>
+				</div>
+			</div>
+			<div class="right-side-of-likes">
+				<span class='st_facebook_hcount' displayText='Facebook'></span>
+				<span class='st_twitter_hcount' displayText='Tweet'></span>
+
+				<div *ngIf="!isVisitor" class="dots">
+
+					<span (click)="openModalPub()">
+                    <i class="fa fa-circle"></i>
+                    <i class="fa fa-circle"></i>
+                    <i class="fa fa-circle"></i>
+                    </span>
+
+					<div class="upper-arrow upper-arrow-signal" *ngIf="signalButton" style="display:block;"></div>
+					<div class="sub-menu" *ngIf="signalButton">
+						<article *ngIf="publicationBean.profileId != user._id" (click)="reportPub(publicationBean)">
+							Signaler
+						</article>
+
+						<article *ngIf="publicationBean.profileId == user._id" (click)="deletePub(publicationBean)">
+							Supprimer
+						</article>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div [class.comment-with-picture]="uploadedPictureComment">
+			<div *ngIf="!isVisitor" class="comment-holder form-comment">
+				<div class="user-img for-comment" *ngIf="user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + user.profilePictureMin + ')'}"></div>
+
+				<div class="user-img for-comment" *ngIf="!user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}"></div>
+
+				<form (ngSubmit)="publishCommentV2()" [formGroup]="formComment" #f="ngForm">
+					<textarea placeholder="Votre commentaire ..." formControlName="pubComment" style="display:none" [(ngModel)]="commentText"></textarea>
+					<textarea placeholder="Votre commentaire ..." formControlName="commentText" style="display:none"></textarea>
+					<input type="file" class="{{pubImgId}}" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
+					<div *ngIf="!isVisitor" class="textarea" id="{{commentTextareaId}}" placeholder="Votre commentaire ..." (keyup)="updateComment($event)"
+						contenteditable="true" (keydown.Enter)="publishCommentV2(commentText)" (input)="commentInputText=$event.target.textContent"></div>
+
+					<div *ngIf="isVisitor" class="textarea" placeholder="Connectez vous pour commenter.." contenteditable="true"></div>
+					<div class="form-more">
+						<i class="fa fa-camera" (click)="addPhoto()"></i>
+						<i class="fa fa-smile-o toggleEmoji" (click)="toggleEmoji()"></i>
+						<button class="comment-publish" type="submit" *ngIf="!loadingComment" [disabled]="isVisitor">Publier</button>
+						<button class="comment-publish comment-loading" *ngIf="loadingComment" disabled>
+                                <div class="loading"></div>
+                            </button>
+						<div class="emoji-hover" id="{{emojiHoverId}}">
+							<div class="emoji-header">
+								<div class="emoji-categ tooltip-emoji" id="ppl" (click)="changeEmojiTab(0)"><img src="assets/images/basic/smiley.png" /><span class="tooltiptext">Personnes<div class="arrow-tooltip"></div></span></div>
+								<div class="emoji-categ tooltip-emoji" id="ntr" (click)="changeEmojiTab(1)"><img src="assets/images/basic/evergreen_tree.png" /><span class="tooltiptext">Nature<div class="arrow-tooltip"></div></span></div>
+								<div class="emoji-categ tooltip-emoji" id="objcts" (click)="changeEmojiTab(2)"><img src="assets/images/basic/radio.png" /><span class="tooltiptext">Objets<div class="arrow-tooltip"></div></span></div>
+								<i class="fa fa-times close" aria-hidden="true" (click)="closeModalEmoji()"></i>
+							</div>
+							<div class="emoji-container" id="ppl-container" *ngIf="selectedEmojiTab==0">
+								<div *ngFor="let emoji of listEmoji[0].list" (click)="addToComment(emoji)" class="emoji-elt"><img src="assets/images/basic/{{emoji.imageName}}.png" /></div>
+							</div>
+							<div class="emoji-container" id="ntr-container" *ngIf="selectedEmojiTab==1">
+								<div *ngFor="let emoji of listEmoji[1].list" (click)="addToComment(emoji)" class="emoji-elt"><img src="assets/images/basic/{{emoji.imageName}}.png" /></div>
+
+							</div>
+							<div class="emoji-container" id="objcts-container" *ngIf="selectedEmojiTab==2">
+								<div *ngFor="let emoji of listEmoji[2].list" (click)="addToComment(emoji)" class="emoji-elt"><img src="assets/images/basic/{{emoji.imageName}}.png" /></div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<img style="display:none;width:60%;margin-top:-20px;margin-left:40px;" id="{{pubImgId}}" />
+			<i class="fa fa-times delete-photo-comment" aria-hidden="true" *ngIf="uploadedPictureComment" (click)="resetCommentPicture()"></i>
+		</div>
+		<!-- comments -->
+		<div class="comments-holder">
+
+			<comment *ngFor="let commentBean of listComments" [commentBean]="commentBean" [publicationBean]="publicationBean"
+					 [(nbDisplayedComments)]="nbDisplayedComments">
+			</comment>
+
+			<loading-bar *ngIf="afficheCommentsLoading"></loading-bar>
+			<!-- more comments -->
+			<div *ngIf="afficheMoreComments" class="comment-holder plus-comment" (click)="loadMoreComments(0)">
+				<div class="margin-auto">afficher plus de commentaires <i class="fa fa-caret-down"></i></div>
+			</div>
+
+		</div>
+	</article>
+</div>
+<div class="modal-edit-pub" *ngIf="modalPub">
+	<div class="white-box-edit">
+		<article *ngIf="publicationBean.profileId != user._id" (click)="reportPub(publicationBean)">Signaler</article>
+		<article *ngIf="publicationBean.profileId == user._id" (click)="deletePub(publicationBean)">Supprimer</article>
+		<article (click)="closeModalPub()">Annuler</article>
+	</div>
+</div>

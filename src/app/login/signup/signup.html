@@ -1,0 +1,42 @@
+
+        <form (ngSubmit)="signup()" [formGroup]="form" #f="ngForm">
+            <div class="col-xs-12">
+                <input (click)="errorMessage=null"  class="loginInput" [ngClass]="{invalidInput:(f.form.controls.lastName.touched && !f.form.controls.lastName.valid)}" name="lastName" type="text" placeholder="Nom" formControlName="lastName" />
+                <span class="glyphicon glyphicon-remove form-control-feedback" *ngIf="(f.form.controls.lastName.touched && !f.form.controls.lastName.valid)"></span>
+                <span class="glyphicon glyphicon-ok form-control-feedback" *ngIf="(f.form.controls.lastName.touched && f.form.controls.lastName.valid)"></span>
+            </div>
+            <div class="col-xs-12">
+                <input (click)="errorMessage=null"  class="loginInput" [ngClass]="{invalidInput:(f.form.controls.firstName.touched && !f.form.controls.firstName.valid)}" name="firstName" type="text" placeholder="Prénom" formControlName="firstName" />
+                <span class="glyphicon glyphicon-remove form-control-feedback" *ngIf="(f.form.controls.firstName.touched && !f.form.controls.firstName.valid)"></span>
+                <span class="glyphicon glyphicon-ok form-control-feedback" *ngIf="(f.form.controls.firstName.touched && f.form.controls.firstName.valid)"></span>
+            </div>
+            <div class="col-xs-12">
+                <input (click)="errorMessage=null"  class="loginInput" [ngClass]="{invalidInput:(f.form.controls.email.touched && !f.form.controls.email.valid)}"
+                       name="email" type="text" placeholder="Email" formControlName="email" />
+                <span class="glyphicon glyphicon-remove form-control-feedback" *ngIf="(f.form.controls.email.touched && !f.form.controls.email.valid)"></span>
+                <span class="glyphicon glyphicon-ok form-control-feedback" *ngIf="(f.form.controls.email.touched && f.form.controls.email.valid)"></span>
+            </div>
+            <div class="col-xs-12">
+                <input (click)="errorMessage=null"  class="loginInput" [ngClass]="{invalidInput:(f.form.controls.password.touched && !f.form.controls.password.valid)}" name="password" type="password" placeholder="Mot de passe" formControlName="password" />
+                <span class="glyphicon glyphicon-remove form-control-feedback" *ngIf="(f.form.controls.password.touched && !f.form.controls.password.valid)"></span>
+                <span class="glyphicon glyphicon-ok form-control-feedback" *ngIf="(f.form.controls.password.touched && f.form.controls.password.valid)"></span>
+            </div>
+            <div class="col-xs-12">
+                <button type="submit" class="loginButton" *ngIf="!loadingSign">S'inscrire</button>
+                <button type="submit" class="loginButton" *ngIf="loadingSign" disabled>
+                    <div class="loading"></div>
+                </button>
+                <p style="font-size:13px;color:#000;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;margin-top:10px;padding: 0 15px;margin-bottom:0;">
+                    En vous inscrivant, vous acceptez nos
+                    <a style="color: #3897f0;padding:0;margin:0" [routerLink]="['/support/cgu']" target="_blank">Conditions d’utilisation</a>
+                </p>
+            </div>
+
+            <div class="col-xs-12"  *ngIf="errorMessage">
+                <p class="error-msg-validation">
+                    {{errorMessage}}
+                </p>
+            </div>
+
+        </form>
+        

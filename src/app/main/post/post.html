@@ -1,0 +1,7 @@
+<div *ngIf="isVisitor && postId">
+    <offline [postId]="postId"></offline>
+</div> 
+
+<div *ngIf="!isVisitor && postId">
+    <online [postId]="postId"></online>
+</div>

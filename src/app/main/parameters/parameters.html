@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 parameters bordered">
+            <div class="row">
+                <div class="col-sm-3 col-xs-12 params-left-menu noPadding">
+                    <ul>
+                        <article
+                         style="width: 100%;
+                                font-family: 'coolvetica';
+                                color: black;
+                                padding: 10px 5px 15px 40px;
+                                font-size: 20px;
+                                border-bottom: 1px solid #e1e1e1;"><i aria-hidden="true" class="fa fa-wrench" style="font-size:16px;margin-right:10px;"></i> Modifier le Profil
+                             </article>
+                        <a [routerLink]="['/main/parameters/edit-profile']" routerLinkActive="active">
+                            modifier mon profil
+                        </a>
+                        <a [routerLink]="['/main/parameters/change-password']" routerLinkActive="active">
+                            modifier mon mot de passe
+                        </a>
+                        
+                        
+                    </ul>
+                </div>
+                <div class="col-sm-9 col-xs-12 params-main-menu">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

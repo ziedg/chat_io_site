@@ -1,0 +1,25 @@
+
+        <form onsubmit="false" (ngSubmit)="signin()" [formGroup]="form" #f="ngForm">
+            <div class="col-xs-12">
+                <input (click)="errorMessage=null" class="loginInput" [ngClass]="{invalidInput:(f.form.controls.email.touched && !f.form.controls.email.valid)}"
+                    name="email" type="text" placeholder="Email" formControlName="email" />
+            </div>
+            <div class="col-xs-12">
+                <input (click)="errorMessage=null" class="loginInput" [ngClass]="{invalidInput:(f.form.controls.password.touched && !f.form.controls.password.valid)}"
+                    name="password" type="password" placeholder="Mot de passe" formControlName="password" />
+                <a class="forgot" routerLink="/login/forget-password">Oublié?</a>
+            </div>
+
+            <div class="col-xs-12">
+                <button type="submit" class="loginButton" *ngIf="!loadingSign">Se Connecter</button>
+                <button type="submit" class="loginButton" *ngIf="loadingSign" disabled>
+                    <div class="loading"></div>
+                </button>
+            </div>
+
+            <div class="col-xs-12" *ngIf="errorMessage">
+                <p class="error-msg-validation">
+                    {{errorMessage}}
+                </p>
+            </div>
+        </form>

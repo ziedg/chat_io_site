@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-md-12" style="text-align:center">
+    <div class="user-img" style="display:inline-block;margin-right:20px;background-size:cover" [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}"></div>
+
+       <h3 style="top:-6px;margin-bottom:0;padding-bottom:0">{{user.firstName}} {{user.lastName}}</h3>
+    </div>
+    <form class="col-xs-12" style="padding-top:40px" [formGroup]="form" #f="ngForm" (ngSubmit)="saveData()">
+        <div class="col-md-4 col-xs-6 label-param">
+            Nom 
+        </div>
+        
+    <div class="col-md-8 col-xs-6 input-param">
+            <input (keyup)="checkLasttName()" value="{{user.lastName}}" formControlName="lastName"
+            [ngClass]="{'invalidInput': (errLastName && errLastName.length>0),
+             'validInput': (errLastName.length==0)}"  id="lastName"
+            />
+            <p *ngIf="errLastName && errLastName.length>0" class="msgErreur">{{errLastName}}</p>
+        </div>
+         <div class="col-md-4 col-xs-6 label-param">
+            Prénom
+        </div>
+
+<div class="col-md-8 col-xs-6 input-param">
+            <input (keyup)="checkFirstName()" value="{{user.firstName}}" formControlName="firstName"
+            [ngClass]="{'invalidInput': (errFistName && errFistName.length>0),
+             'validInput': (errFistName.length==0)}" id="firstName"
+            />
+            <p *ngIf="errFistName && errFistName.length>0" class="msgErreur">{{errFistName}}</p>
+        </div>
+
+        
+
+         <div class="col-md-4 col-xs-6 label-param-long">
+            Description 
+        </div>
+        <div class="col-md-8 col-xs-6 input-param-long ">
+            <textarea id="userDiscrip" style="border-color: #09a012!important" name='userDiscrip'>{{user.about}}</textarea>
+        </div> 
+ 
+        
+        <!--<div class="col-md-4 col-xs-6 label-param">
+            Lien Google+ <i class="fa fa-google-plus" aria-hidden="true"></i>
+        </div>
+        <div class="col-md-8 col-xs-6 input-param">
+            <input />
+        </div>-->
+        <div class="col-md-4 col-xs-6 label-param">
+            Lien Facebook <i class="fa fa-facebook" aria-hidden="true"></i>
+        </div>
+        <div class="col-md-8 col-xs-6 input-param">
+            <input (keyup)="checkFBLink()" value="{{user.facebookLink}}" placeholder="https://www.facebook.com/xxx" formControlName="linkFB"
+            [ngClass]="{'invalidInput': (errLinkFB && errLinkFB.length>0),
+             'validInput': (errLinkFB.length==0)}" id="linkFB" 
+            />
+            <p *ngIf="errLinkFB && errLinkFB.length>0" class="msgErreur">{{errLinkFB}}</p>
+
+        </div>
+        <div class="col-md-4 col-xs-6 label-param">
+            Lien Twitter <i class="fa fa-twitter" aria-hidden="true"></i>
+        </div>
+        <div class="col-md-8 col-xs-6 input-param">
+            <input (keyup)="checkTwitterLink()" (focus)="checkTwitterLink()"  placeholder="https://www.twitter.com/xxx" formControlName="linkTwitter" 
+            [ngClass]="{'invalidInput': (errLinkTwitter && errLinkTwitter.length>0),
+             'validInput': (errLinkTwitter.length==0)}" id="linkTwitter" value="{{user.twitterLink}}"
+            />
+            <p *ngIf="errLinkTwitter && errLinkTwitter.length>0" class="msgErreur">{{errLinkTwitter}}</p>
+        </div>
+        <div class="col-md-4 col-xs-6 label-param">
+            Lien Youtube <i class="fa fa-youtube" aria-hidden="true"></i>
+        </div> 
+        <div class="col-md-8 col-xs-6 input-param">
+            <input (keyup)="checkYoutubeLink()"  placeholder="https://www.youtube.com/xxx" formControlName="linkYoutube"
+            [ngClass]="{'invalidInput': (errLinkYoutube && errLinkYoutube.length>0),
+             'validInput': (errLinkYoutube.length==0)}" id="linkYoutube" value="{{user.youtubeLink}}"
+            />
+            <p *ngIf="errLinkYoutube && errLinkYoutube.length>0" class="msgErreur">{{errLinkYoutube}}</p>
+        </div>
+         <div class="col-md-12 col-xs-12 button-param centered-text">
+           <button>Valider</button>
+           <!--<a class="hidden-xs hidden-sm">Désactivez temporairement mon compte</a>-->
+        </div>
+
+    </form>
+
+</div>
