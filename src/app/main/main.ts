@@ -21,6 +21,7 @@ import { NotificationBean } from "../beans/notification-bean";
 import { Title } from "@angular/platform-browser";
 import { RecentRechService } from "../service/recentRechService";
 import { DateService } from "../service/dateService";
+import {environment} from "../../environments/environment";
 
 declare var jQuery: any;
 declare var FB: any;
@@ -75,7 +76,7 @@ export class Main {
         if (this.user && !this.isVisitor) {
             if (this.user._id) {
                 setInterval(() => {
-                    this.http.get(AppSettings.SERVER_URL + 'getNbNotificationsNotSeen?profileId=' + this.user._id, AppSettings.OPTIONS)
+                    this.http.get(environment.SERVER_URL + 'getNbNotificationsNotSeen?profileId=' + this.user._id, AppSettings.OPTIONS)
                         .map((res: Response) => res.json())
                         .subscribe(
                         response => {
@@ -150,7 +151,7 @@ export class Main {
 
     getListSearchUsers(key: string) {
         this.showRecentSearch = false;
-        this.http.get(AppSettings.SERVER_URL + 'findProfile?ProfileName=' + key, AppSettings.OPTIONS)
+        this.http.get(environment.SERVER_URL + 'findProfile?ProfileName=' + key, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
             response => {
@@ -253,7 +254,7 @@ export class Main {
         this.showButtonMoreNotif = false;
         this.showNoNotif = false;
         if (this.user && !this.isVisitor) {
-            this.http.get(AppSettings.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=', AppSettings.OPTIONS)
+            this.http.get(environment.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=', AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                 response => {
@@ -261,7 +262,7 @@ export class Main {
                         this.showNoNotif = false;
                         this.listNotif = response;
                         this.lastNotifId = response[response.length - 1]._id;
-                        this.http.get(AppSettings.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=' + this.lastNotifId, AppSettings.OPTIONS)
+                        this.http.get(environment.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=' + this.lastNotifId, AppSettings.OPTIONS)
                             .map((res: Response) => res.json())
                             .subscribe(
                             response => {
@@ -298,7 +299,7 @@ export class Main {
         if (this.user && !this.isVisitor) {
             jQuery(".notification-holder").show();
             jQuery(".upper-arrow-notification").show();
-            this.http.get(AppSettings.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=' + this.lastNotifId, AppSettings.OPTIONS)
+            this.http.get(environment.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=' + this.lastNotifId, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                 response => {
@@ -307,7 +308,7 @@ export class Main {
                             this.listNotif.push(response[i]);
                             this.lastNotifId = response[i]._id;
                         }
-                        this.http.get(AppSettings.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=' + this.lastNotifId, AppSettings.OPTIONS)
+                        this.http.get(environment.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=' + this.lastNotifId, AppSettings.OPTIONS)
                             .map((res: Response) => res.json())
                             .subscribe(
                             response => {
@@ -374,7 +375,7 @@ export class Main {
         let body = JSON.stringify({
             notificationId: notifId
         });
-        this.http.post(AppSettings.SERVER_URL + 'setNotificationSeen ', body, AppSettings.OPTIONS)
+        this.http.post(environment.SERVER_URL + 'setNotificationSeen ', body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
             response => {

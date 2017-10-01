@@ -13,6 +13,7 @@ import {User} from '../beans/user';
 
 /* Blagueur  */
 import {Blagueur} from '../beans/Blagueur';
+import {environment} from "../../environments/environment";
 
 
 
@@ -43,7 +44,7 @@ export class TopBlagueursAndDecov {
 	}
 	loadtopBlagueursList(){
 		this.http.get(
-            AppSettings.SERVER_URL + 'getBlagueursPopulaires/?ProfileId=' + this.user._id, AppSettings.OPTIONS)
+      environment.SERVER_URL + 'getBlagueursPopulaires/?ProfileId=' + this.user._id, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
             response => {
@@ -66,7 +67,7 @@ export class TopBlagueursAndDecov {
 	}
 	loadDecovList(){
 		this.http.get(
-            AppSettings.SERVER_URL + 'getProfilesDecouvert/?ProfileId=' + this.user._id, AppSettings.OPTIONS)
+      environment.SERVER_URL + 'getProfilesDecouvert/?ProfileId=' + this.user._id, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
             response => {
@@ -104,7 +105,7 @@ export class TopBlagueursAndDecov {
 			profileId: profileId
 		});
 
-		this.http.post(AppSettings.SERVER_URL + 'removeSubscribe', body, AppSettings.OPTIONS)
+		this.http.post(environment.SERVER_URL + 'removeSubscribe', body, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
@@ -136,7 +137,7 @@ export class TopBlagueursAndDecov {
 			profileId: profileId
 		});
 
-		this.http.post(AppSettings.SERVER_URL + 'subscribe', body, AppSettings.OPTIONS)
+		this.http.post(environment.SERVER_URL + 'subscribe', body, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {

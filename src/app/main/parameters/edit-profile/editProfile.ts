@@ -17,6 +17,7 @@ import {User} from '../../../beans/user';
 
 /* beans */
 import {NotFound} from "../../notFound/not-found";
+import {environment} from "../../../../environments/environment";
 
 declare var jQuery: any;
 declare var swal: any;
@@ -178,7 +179,7 @@ export class EditProfile {
                     gender: gender,
                     about: this.getDisc()
                 });
-                this.http.post(AppSettings.SERVER_URL + 'updateProfile', body, AppSettings.OPTIONS)
+                this.http.post(environment.SERVER_URL + 'updateProfile', body, AppSettings.OPTIONS)
                     .map((res: Response) => res.json())
                     .subscribe(
                     response => {

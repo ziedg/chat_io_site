@@ -11,6 +11,7 @@ import {LoginService} from '../../service/loginService';
 import {DateService} from "../../service/dateService";
 import {NotificationBean} from "../../beans/notification-bean";
 import {User} from "../../beans/user";
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -46,7 +47,7 @@ export class Notification {
         this.lastNotifId="";
         this.showNoNotif=false;
         if(this.user) {
-            this.http.get(AppSettings.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=', AppSettings.OPTIONS)
+            this.http.get(environment.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=', AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                     response => {
@@ -73,7 +74,7 @@ export class Notification {
         }
     }
     load5MoreNotif(){
-        this.http.get(AppSettings.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId='+this.lastNotifId, AppSettings.OPTIONS)
+        this.http.get(environment.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId='+this.lastNotifId, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                     response => {
@@ -137,7 +138,7 @@ export class Notification {
         let body = JSON.stringify({
             notificationId: notifId
         });
-        this.http.post(AppSettings.SERVER_URL + 'setNotificationSeen ', body, AppSettings.OPTIONS)
+        this.http.post(environment.SERVER_URL + 'setNotificationSeen ', body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
                 response => {

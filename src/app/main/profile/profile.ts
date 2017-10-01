@@ -27,6 +27,7 @@ import { PublicationBean } from '../../beans/publication-bean';
 import { NotFound } from "../notFound/not-found";
 import { Title } from "@angular/platform-browser";
 import { LinkBean } from '../../beans/linkBean';
+import {environment} from "../../../environments/environment";
 
 
 
@@ -180,7 +181,7 @@ export class Profile {
         });
 
 
-        this.http.post(AppSettings.SERVER_URL + 'subscribe', body, AppSettings.OPTIONS)
+        this.http.post(environment.SERVER_URL + 'subscribe', body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
             response => {
@@ -201,7 +202,7 @@ export class Profile {
             profileId: userDisplayed._id
         });
 
-        this.http.post(AppSettings.SERVER_URL + 'removeSubscribe', body, AppSettings.OPTIONS)
+        this.http.post(environment.SERVER_URL + 'removeSubscribe', body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
             response => {
@@ -223,7 +224,7 @@ export class Profile {
         });
 
 
-        this.http.post(AppSettings.SERVER_URL + 'subscribe', body, AppSettings.OPTIONS)
+        this.http.post(environment.SERVER_URL + 'subscribe', body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
             response => {
@@ -243,7 +244,7 @@ export class Profile {
             profileId: this.userDisplayed._id
         });
 
-        this.http.post(AppSettings.SERVER_URL + 'removeSubscribe', body, AppSettings.OPTIONS)
+        this.http.post(environment.SERVER_URL + 'removeSubscribe', body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
             response => {
@@ -261,7 +262,7 @@ export class Profile {
     getFirstListAllSub() {
         if (this.userDisplayed && this.user) {
             this.http.get(
-                AppSettings.SERVER_URL + 'getSubscribers?profileId=' + this.userDisplayed._id + '&lastSubscribeId=' + '&connectedProfileID=' + this.user._id, AppSettings.OPTIONS)
+              environment.SERVER_URL + 'getSubscribers?profileId=' + this.userDisplayed._id + '&lastSubscribeId=' + '&connectedProfileID=' + this.user._id, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                 response => {
@@ -295,7 +296,7 @@ export class Profile {
         if (this.userDisplayed && this.user) {
 
             this.http.get(
-                AppSettings.SERVER_URL + 'getSubscribers?profileId=' + this.userDisplayed._id + '&lastSubscribeId=' + this.lastSubscribeId + '&connectedProfileID=' + this.user._id, AppSettings.OPTIONS)
+              environment.SERVER_URL + 'getSubscribers?profileId=' + this.userDisplayed._id + '&lastSubscribeId=' + this.lastSubscribeId + '&connectedProfileID=' + this.user._id, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                 response => {
@@ -330,7 +331,7 @@ export class Profile {
     getFirstListSub() {
         if (this.userDisplayed && this.user) {
             this.http.get(
-                AppSettings.SERVER_URL + 'getSubscribers?profileId=' + this.userDisplayed._id + '&lastSubscribeId=' + '&connectedProfileID=' + this.user._id, AppSettings.OPTIONS)
+              environment.SERVER_URL + 'getSubscribers?profileId=' + this.userDisplayed._id + '&lastSubscribeId=' + '&connectedProfileID=' + this.user._id, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                 response => {
@@ -373,7 +374,7 @@ export class Profile {
     getProfile(userId: string) {
         if (this.user) {
             this.http.get(
-                AppSettings.SERVER_URL + 'getProfileById/?ProfileId=' + userId + '&connectedProfileId=' + this.user._id, AppSettings.OPTIONS)
+              environment.SERVER_URL + 'getProfileById/?ProfileId=' + userId + '&connectedProfileId=' + this.user._id, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                 response => {
@@ -495,7 +496,7 @@ export class Profile {
     loadFirstPosts() {
         if (this.userDisplayed) {
             this.http.get(
-                AppSettings.SERVER_URL + 'getPublicationsForOneProfileByID/?ProfileId=' + this.userDisplayed._id + '&last_publication_id=', AppSettings.OPTIONS)
+              environment.SERVER_URL + 'getPublicationsForOneProfileByID/?ProfileId=' + this.userDisplayed._id + '&last_publication_id=', AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
 
@@ -534,7 +535,7 @@ export class Profile {
     loadMorePosts() {
         if (this.userDisplayed) {
             this.http.get(
-                AppSettings.SERVER_URL + 'getPublicationsForOneProfileByID/?ProfileId=' + this.userDisplayed._id + '&last_publication_id=' + this.lastPostId, AppSettings.OPTIONS)
+              environment.SERVER_URL + 'getPublicationsForOneProfileByID/?ProfileId=' + this.userDisplayed._id + '&last_publication_id=' + this.lastPostId, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                 response => {
@@ -714,7 +715,7 @@ export class Profile {
             }
             this.linkLoading = true;
             this.http.get(
-                AppSettings.SERVER_URL + 'getOpenGraphData?url=' + linkURL, AppSettings.OPTIONS)
+              environment.SERVER_URL + 'getOpenGraphData?url=' + linkURL, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                 response => {
@@ -813,7 +814,7 @@ export class Profile {
         }
         this.changeDetector.markForCheck();
 
-        this.http.post(AppSettings.SERVER_URL + 'publish', data, AppSettings.OPTIONS_POST)
+        this.http.post(environment.SERVER_URL + 'publish', data, AppSettings.OPTIONS_POST)
             .map((res: Response) => res.json())
             .subscribe(
             response => {
@@ -886,7 +887,7 @@ export class Profile {
         data.append('profilePicture', this.uploadedProfilePicture);
         this.changeDetector.markForCheck();
         this.profilePictLoad= true;
-        this.http.post(AppSettings.SERVER_URL + 'updateProfilePicture', data, AppSettings.OPTIONS_POST)
+        this.http.post(environment.SERVER_URL + 'updateProfilePicture', data, AppSettings.OPTIONS_POST)
             .map((res: Response) => res.json())
             .subscribe(
             response => {
@@ -1019,7 +1020,7 @@ export class Profile {
             profileId: this.user._id,
             about: descriptionText
         });
-        this.http.post(AppSettings.SERVER_URL + 'updateAboutProfile', body, AppSettings.OPTIONS)
+        this.http.post(environment.SERVER_URL + 'updateAboutProfile', body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
             response => {

@@ -14,6 +14,7 @@ declare var jQuery: any;
 import {User} from '../../beans/user';
 import {Title} from "@angular/platform-browser";
 import {SocialUser} from "../../beans/social-user";
+import {environment} from "../../../environments/environment";
 
 
 declare const FB:any;
@@ -82,7 +83,7 @@ export class FacebookLogin {
             coverPicture: response.cover.source,
         });
 
-        this.http.post(AppSettings.SERVER_URL + 'signWithFacebook', body, AppSettings.OPTIONS)
+        this.http.post(environment.SERVER_URL + 'signWithFacebook', body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
                 response => {

@@ -9,6 +9,7 @@ import { Http, Response, Headers } from '@angular/http';
 import {AppSettings} from '../../conf/app-settings';
 
 import 'rxjs/add/operator/toPromise';
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ResetPasswordService {
@@ -18,7 +19,7 @@ export class ResetPasswordService {
 
   resetPassword(params: any): Promise<any> {
 
-    return this.http.post(AppSettings.SERVER_URL + 'resetPwd', JSON.stringify(params), AppSettings.OPTIONS)
+    return this.http.post(environment.SERVER_URL + 'resetPwd', JSON.stringify(params), AppSettings.OPTIONS)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError);

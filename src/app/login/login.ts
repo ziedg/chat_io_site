@@ -21,6 +21,7 @@ import {LoginService} from '../service/loginService';
 import {SocialUser} from '../beans/social-user';
 import {User} from '../beans/user';
 import {Title} from "@angular/platform-browser";
+import {environment} from "../../environments/environment";
 
 declare const FB:any;
 declare const auth2:any;
@@ -108,7 +109,7 @@ export class Login {
             profilePictureMin:responseSmallPic
         });
 
-        this.http.post(AppSettings.SERVER_URL + 'signWithFacebook', body, AppSettings.OPTIONS)
+        this.http.post(environment.SERVER_URL + 'signWithFacebook', body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
                 response => {

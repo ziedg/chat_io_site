@@ -16,6 +16,7 @@ import {AppSettings} from '../../conf/app-settings';
 import {LoginService} from '../../service/loginService';
 
 import {Title} from "@angular/platform-browser";
+import {environment} from "../../../environments/environment";
 
 @Component({
   moduleId: module.id,
@@ -23,7 +24,7 @@ import {Title} from "@angular/platform-browser";
 })
 export class ForgetPasswordComponent {
   loadingSign = false;
-  errorMessage:string = null;
+  errorMessage: string = null;
   form;
 
   constructor(private title: Title, public http: Http, private router: Router, private loginService: LoginService) {
@@ -50,9 +51,9 @@ export class ForgetPasswordComponent {
 
     this.loadingSign = true;
     let body = JSON.stringify(this.form.value);
-    this.http.post(AppSettings.SERVER_URL + 'resetPwdMail', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL + 'resetPwdMail', body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
-      .subscribe( response => this.router.navigate(['/login/sigin']));
+      .subscribe(response => this.router.navigate(['/login/sigin']));
   }
 
   RedirectTo(link: string) {

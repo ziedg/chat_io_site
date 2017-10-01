@@ -21,7 +21,7 @@ export class AppSettings {
         //headers_post_encoded.append('Accept', 'application/x-www-form-urlencoded');
         //headers_post_encoded.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
         //headers_post_encoded.append('Access-Control-Allow-Origin', '*');
-        
+
 
         return new RequestOptions({ headers: headers_post_encoded });
     }
@@ -36,10 +36,9 @@ export class AppSettings {
         return new RequestOptions({ headers: headers});
     }
 
-    public static get SERVER_URL(): string { return 'http://173.249.0.111:3000/'; }
     public static get SITE_URL(): string { return 'http://localhost:3000/'; }
     public static Redirect(route:string) {
         location.href = this.SITE_URL+"#"+route;
     }
 
-} 
+}

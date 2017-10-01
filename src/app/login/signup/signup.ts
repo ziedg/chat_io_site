@@ -15,6 +15,7 @@ import{emailValidator} from '../../utils/validationService'
 import {User} from '../../beans/user';
 import {Title} from "@angular/platform-browser";
 import {SocialUser} from "../../beans/social-user";
+import {environment} from "../../../environments/environment";
 
 declare const FB:any;
 declare const gapi:any;
@@ -85,7 +86,7 @@ export class Signup {
         }
         this.loadingSign=true;
         let body = JSON.stringify(this.form.value);
-        this.http.post(AppSettings.SERVER_URL + 'signup', body, AppSettings.OPTIONS)
+        this.http.post(environment.SERVER_URL + 'signup', body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
                 response => {

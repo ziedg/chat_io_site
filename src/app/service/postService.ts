@@ -1,13 +1,8 @@
 import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
 import { Injectable }     from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
-import {FormGroup, Validators, FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
-import {TopBlagueursAndDecov} from '../topBlagueursAndDecov/topBlagueursAndDecov';
 import 'rxjs/add/operator/map';
-
-import {Publication } from '../publication/publication';
-import {Comment} from '../comment/comment';
 
 /* conf */
 import {AppSettings} from '../conf/app-settings';
@@ -21,6 +16,7 @@ import {User} from '../beans/user';
 /* beans */
 import {PublicationBean} from '../beans/publication-bean';
 import {Title} from "@angular/platform-browser";
+import {environment} from "../../environments/environment";
 /* beans */
 
 @Injectable()
@@ -112,10 +108,10 @@ export class PostService {
             var urlAndPara="";
         //localStorage.getItem('typePosts') != 'recent' && localStorage.getItem('typePosts') != 'popular'
          if(localStorage.getItem('typePosts') == 'popular' ) {
-             urlAndPara = AppSettings.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
+             urlAndPara = environment.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
          }
          else {
-             urlAndPara = AppSettings.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
+             urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
          }
             this.http.get(
                 urlAndPara, AppSettings.OPTIONS)
@@ -145,10 +141,10 @@ export class PostService {
         if(this.user) {
             var urlAndPara="";
             if(localStorage.getItem('typePosts') == 'popular' ) {
-                urlAndPara = AppSettings.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id='+ this.lastPostId;
+                urlAndPara = environment.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id='+ this.lastPostId;
             }
             else {
-                urlAndPara = AppSettings.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id='+ this.lastPostId;
+                urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id='+ this.lastPostId;
             }
             this.http.get(
                 urlAndPara, AppSettings.OPTIONS)

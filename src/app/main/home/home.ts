@@ -25,6 +25,7 @@ import { PublicationBean } from '../../beans/publication-bean';
 import { NotFound } from "../notFound/not-found";
 import { Title } from "@angular/platform-browser";
 import { LinkBean } from '../../beans/linkBean';
+import {environment} from "../../../environments/environment";
 
 declare var jQuery: any;
 declare var $: any;
@@ -208,10 +209,10 @@ export class Home {
             var urlAndPara = "";
             //localStorage.getItem('typePosts') != 'recent' && localStorage.getItem('typePosts') != 'popular'
             if (localStorage.getItem('typePosts') == 'popular') {
-                urlAndPara = AppSettings.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
+                urlAndPara = environment.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
             }
             else {
-                urlAndPara = AppSettings.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
+                urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
             }
             this.http.get(
                 urlAndPara, AppSettings.OPTIONS)
@@ -241,10 +242,10 @@ export class Home {
             var urlAndPara = "";
             //localStorage.getItem('typePosts') != 'recent' && localStorage.getItem('typePosts') != 'popular'
             if (localStorage.getItem('typePosts') == 'popular') {
-                urlAndPara = AppSettings.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id=' + this.lastPostId;
+                urlAndPara = environment.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id=' + this.lastPostId;
             }
             else {
-                urlAndPara = AppSettings.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=' + this.lastPostId;
+                urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=' + this.lastPostId;
             }
             this.http.get(
                 urlAndPara, AppSettings.OPTIONS)
@@ -382,7 +383,7 @@ export class Home {
         }
         this.changeDetector.markForCheck();
 
-        this.http.post(AppSettings.SERVER_URL + 'publish', data, AppSettings.OPTIONS_POST)
+        this.http.post(environment.SERVER_URL + 'publish', data, AppSettings.OPTIONS_POST)
             .map((res: Response) => res.json())
             .subscribe(
             response => {
@@ -562,7 +563,7 @@ export class Home {
             }
             this.linkLoading = true;
             this.http.get(
-                AppSettings.SERVER_URL + 'getOpenGraphData?url=' + linkURL, AppSettings.OPTIONS)
+              environment.SERVER_URL + 'getOpenGraphData?url=' + linkURL, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                 response => {

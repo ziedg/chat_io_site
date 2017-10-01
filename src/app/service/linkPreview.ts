@@ -9,6 +9,7 @@ import { AppSettings } from '../conf/app-settings';
 import { LinkView } from "../service/linkView";
 /*bean*/
 import { LinkBean } from '../beans/linkBean';
+import {environment} from "../../environments/environment";
 @Injectable()
 export class LinkPreview {
     public linkToPreview: LinkBean = new LinkBean();
@@ -24,7 +25,7 @@ export class LinkPreview {
 
     }
     public callback : () =>{():LinkBean}
-    
+
     public linkAPI(publishText,oldLink:LinkBean,linksArray) {
         //var linkURL = this.publishText;
         //var linkURL = this.publishText.match(/\b(http|https)?(:\/\/)?(\S*)\.(\w{2,4})\b/ig);
@@ -41,7 +42,7 @@ export class LinkPreview {
             }
             this.linkToPreview=oldLink;
             this.http.get(
-                AppSettings.SERVER_URL + 'getOpenGraphData?url=' + linkURL, AppSettings.OPTIONS)
+              environment.SERVER_URL + 'getOpenGraphData?url=' + linkURL, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                 response => {
@@ -75,16 +76,16 @@ export class LinkPreview {
                 err => {
                     //error
                     console.error("error in link API;");
-                    
+
                 },
                 () => {
                     //final
                 }
                 );
-                
-                
+
+
         }
-        
+
     }
 public change(variabke)
 {

@@ -17,6 +17,7 @@ import {User} from '../../../beans/user';
 
 /* beans */
 import {NotFound} from "../../notFound/not-found";
+import {environment} from "../../../../environments/environment";
 
 declare var jQuery: any;
 declare var swal: any;
@@ -76,7 +77,7 @@ export class ChangePassword {
             oldPassword: oldPass,
             newPassword:newPass1
         });
-         this.http.post(AppSettings.SERVER_URL + 'updatePassword', body, AppSettings.OPTIONS)
+         this.http.post(environment.SERVER_URL + 'updatePassword', body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
             response => {

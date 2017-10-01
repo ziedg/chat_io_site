@@ -10,6 +10,7 @@ import {EmojiListBean} from "../beans/emoji-list-bean";
 import {DateService} from '../service/dateService';
 
 import 'rxjs/add/operator/map';
+import {environment} from "../../environments/environment";
 
 
 declare var emojify: any;
@@ -70,7 +71,7 @@ export class Comment {
       profileId: this.user._id
     });
 
-    this.http.post(AppSettings.SERVER_URL + 'likeComment', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL + 'likeComment', body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -127,7 +128,7 @@ export class Comment {
       profileId: this.user._id
     });
 
-    this.http.post(AppSettings.SERVER_URL + 'removeLikeComment', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL + 'removeLikeComment', body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -152,7 +153,7 @@ export class Comment {
       profileId: this.user._id
     });
 
-    this.http.post(AppSettings.SERVER_URL + 'dislikeComment', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL + 'dislikeComment', body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -213,7 +214,7 @@ export class Comment {
       publId: this.commentBean.publId,
       commentId: this.commentBean._id
     });
-    this.http.post(AppSettings.SERVER_URL + 'removeComment', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL + 'removeComment', body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -234,7 +235,7 @@ export class Comment {
       profileId: this.user._id
     });
 
-    this.http.post(AppSettings.SERVER_URL + 'removeDislikeComment', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL + 'removeDislikeComment', body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {

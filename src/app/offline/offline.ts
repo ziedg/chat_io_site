@@ -23,6 +23,7 @@ import {User} from '../beans/user';
 import {PublicationBean} from '../beans/publication-bean';
 import {NotFound} from "../main/notFound/not-found";
 import {Title} from "@angular/platform-browser";
+import {environment} from "../../environments/environment";
 declare var jQuery: any;
 
 @Component({
@@ -57,7 +58,7 @@ export class Offline {
     getPost(postId:string) {
 
         this.http.get(
-            AppSettings.SERVER_URL + 'getPublicationById/' + postId+'?profileID=57d71be929d3b42b0d000022', AppSettings.OPTIONS)
+          environment.SERVER_URL + 'getPublicationById/' + postId+'?profileID=57d71be929d3b42b0d000022', AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
 

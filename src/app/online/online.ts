@@ -23,6 +23,7 @@ import {User} from '../beans/user';
 import {PublicationBean} from '../beans/publication-bean';
 import {NotFound} from "../main/notFound/not-found";
 import {Title} from "@angular/platform-browser";
+import {environment} from "../../environments/environment";
 declare var jQuery: any;
 
 
@@ -65,7 +66,7 @@ export class Online {
     }
     getPost(postId:string) {
         this.http.get(
-            AppSettings.SERVER_URL + 'getPublicationById/' + postId+'?profileID='+this.user._id, AppSettings.OPTIONS)
+          environment.SERVER_URL + 'getPublicationById/' + postId+'?profileID='+this.user._id, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
 

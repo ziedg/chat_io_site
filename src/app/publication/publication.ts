@@ -32,6 +32,7 @@ import { EmojiListBean } from "../beans/emoji-list-bean";
 import { LinkBean } from '../beans/linkBean';
 
 import { timer } from "rxjs/observable/timer";
+import {environment} from "../../environments/environment";
 
 declare var jQuery: any;
 declare var swal: any;
@@ -194,7 +195,7 @@ export class Publication {
 			publId: this.publicationBean._id,
 			userID:this.user._id
 		});
-		this.http.post(AppSettings.SERVER_URL + 'masquerPublicationAdmin', body, AppSettings.OPTIONS)
+		this.http.post(environment.SERVER_URL + 'masquerPublicationAdmin', body, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
@@ -217,7 +218,7 @@ export class Publication {
 			publId: this.publicationBean._id,
 		});
 
-			 this.http.post(AppSettings.SERVER_URL + 'removePublication', body, AppSettings.OPTIONS)
+			 this.http.post(environment.SERVER_URL + 'removePublication', body, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
@@ -236,7 +237,7 @@ export class Publication {
 			raisonDelete:text
 		});
 
-			 this.http.post(AppSettings.SERVER_URL + 'removePublicationAdmin', body, AppSettings.OPTIONS)
+			 this.http.post(environment.SERVER_URL + 'removePublicationAdmin', body, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
@@ -377,7 +378,7 @@ export class Publication {
 		data.append('commentPicture', this.uploadedPictureComment);
 		this.changeDetector.markForCheck();
 
-		this.http.post(AppSettings.SERVER_URL + 'addComment', data, AppSettings.OPTIONS_POST)
+		this.http.post(environment.SERVER_URL + 'addComment', data, AppSettings.OPTIONS_POST)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
@@ -474,7 +475,7 @@ export class Publication {
 			publId: pubId,
 			profileId: this.user._id
 		});
-		this.http.post(AppSettings.SERVER_URL + 'sharePublication', body, AppSettings.OPTIONS)
+		this.http.post(environment.SERVER_URL + 'sharePublication', body, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
@@ -533,7 +534,7 @@ export class Publication {
 			publId: this.publicationBean._id,
 			profileId: this.user._id
 		});
-		this.http.post(AppSettings.SERVER_URL + 'signalerPublication', body, AppSettings.OPTIONS)
+		this.http.post(environment.SERVER_URL + 'signalerPublication', body, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
@@ -628,7 +629,7 @@ export class Publication {
 			publId: this.publicationBean._id,
 			profileId: this.user._id
 		});
-		this.http.post(AppSettings.SERVER_URL + 'likePublication', body, AppSettings.OPTIONS)
+		this.http.post(environment.SERVER_URL + 'likePublication', body, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
@@ -649,7 +650,7 @@ export class Publication {
 			publId: this.publicationBean._id,
 			profileId: this.user._id
 		});
-		this.http.post(AppSettings.SERVER_URL + 'removeLikePublication', body, AppSettings.OPTIONS)
+		this.http.post(environment.SERVER_URL + 'removeLikePublication', body, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
@@ -681,7 +682,7 @@ export class Publication {
 			publId: this.publicationBean._id,
 			profileId: this.user._id
 		});
-		this.http.post(AppSettings.SERVER_URL + 'dislikePublication', body, AppSettings.OPTIONS)
+		this.http.post(environment.SERVER_URL + 'dislikePublication', body, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
@@ -700,7 +701,7 @@ export class Publication {
 			publId: this.publicationBean._id,
 			profileId: this.user._id
 		});
-		this.http.post(AppSettings.SERVER_URL + 'removeDislikePublication', body, AppSettings.OPTIONS)
+		this.http.post(environment.SERVER_URL + 'removeDislikePublication', body, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
@@ -781,7 +782,7 @@ export class Publication {
             }
 
 		this.http.get(
-			AppSettings.SERVER_URL + 'getOpenGraphData?url=' + linkURL, AppSettings.OPTIONS)
+      environment.SERVER_URL + 'getOpenGraphData?url=' + linkURL, AppSettings.OPTIONS)
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
