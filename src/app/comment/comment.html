@@ -3,16 +3,16 @@
     <div class="user-img for-comment radiused-img" *ngIf="commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePictureMin + ')'}"></div>
 
     <div class="user-img for-comment radiused-img" *ngIf="!commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePicture + ')'}"></div>
- 
+
 	<div class="comment-content">
         <div class="row name-and-text-comment">
             <div class="commenter-name col-xs-12" [routerLink]="['/main/profile',commentBean.profileId]">
 			{{commentBean.profileFirstName}} {{commentBean.profileLastName}}
 			</div>
             <div class="col-xs-12 comment-text" [innerHTML]="afficheComment(commentBean.commentText)" style="margin-bottom: 5px; !important;">
-                
+
             </div>
-            <img *ngIf="commentBean.commentPicture" src="http://91.121.69.130/images/{{commentBean.commentPicture}}" style="width: 60%;margin-left: 15px;margin-bottom: 15px;"/>
+            <img *ngIf="commentBean.commentPicture" src="{{imageBaseUrl + commentBean.commentPicture}}" style="width: 60%;margin-left: 15px;margin-bottom: 15px;"/>
         </div>
        <div class="like-comment col-xs-12 ">
             <div class="like-dislike">

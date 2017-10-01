@@ -83,6 +83,8 @@ export class Publication {
 	commentTextareaId = "";
 	public link: LinkBean = new LinkBean();
 
+	imageBaseUrl = environment.IMAGE_BASE_URL;
+
 	constructor(public seoService: SeoService, private postService: PostService, private linkView: LinkView, private emojiService: EmojiService, private http: Http, private router: Router, private sanitizer: DomSanitizer, private loginService: LoginService, private changeDetector: ChangeDetectorRef, private dateService: DateService) {
 		loginService.actualize();
 

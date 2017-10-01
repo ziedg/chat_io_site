@@ -34,7 +34,9 @@ export class Comment {
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
 
-  constructor(private http: Http, private dateService: DateService, private loginService: LoginService, public emojiService: EmojiService, private changeDetector: ChangeDetectorRef) {
+  imageBasUrl = environment.IMAGE_BASE_URL;
+
+    constructor(private http: Http, private dateService: DateService, private loginService: LoginService, public emojiService: EmojiService, private changeDetector: ChangeDetectorRef) {
     loginService.actualize();
     this.user = loginService.user;
     this.listEmoji = emojiService.getEmojiList();

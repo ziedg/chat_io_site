@@ -64,7 +64,7 @@
 					<a href="{{link.url}}" target="_blank" class="subLink">{{link.url}}</a>
 				</div>
 			</div>
-			<img *ngIf="publicationBean.publPictureLink" src="http://91.121.69.130/images/{{publicationBean.publPictureLink}}">
+			<img *ngIf="publicationBean.publPictureLink" src="{{imageBaseUrl + publicationBean.publPictureLink}}">
 
 			<div class="youtube-preview-publication" *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
 				<iframe width="560" height="400" [src]="url" frameborder="0" allowfullscreen>
@@ -93,7 +93,7 @@
 					<h6 *ngIf="publicationBean.publTitle == 'null'"></h6>
 					<span *ngIf="publicationBean.publText != 'null' && publicationBean.publText != 'undefined'" [innerHTML]="linkView.transformATextHaveALink(affichePostText(publicationBean.publText))">
             </span>
-					<img *ngIf="publicationBean.publPictureLink" src="http://91.121.69.130/images/{{publicationBean.publPictureLink}}">
+					<img *ngIf="publicationBean.publPictureLink" src="{{imageBaseUrl + publicationBean.publPictureLink}}">
 					<div class="youtube-preview-publication" *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
 						<iframe width="560" height="400" [src]="url" frameborder="0">
 						</iframe>

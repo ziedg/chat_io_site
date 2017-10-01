@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 /* beans */
 import {User} from './../beans/user'
 import {SocialUser} from "../beans/social-user";
+import {environment} from "../../environments/environment";
 
 
 @Injectable()
@@ -15,7 +16,7 @@ export class LoginService {
     public user : User;
     /*Visitor User */
     public visitor=new User();
-    
+
 
     /* constructor  */
     constructor(private router:Router){
@@ -67,7 +68,7 @@ export class LoginService {
             this.user = this.getVisitor();
         }
     }
- 
+
 
     /* updateUser */
     updateUser(user:User){
@@ -92,12 +93,12 @@ export class LoginService {
         return this.user;
     }
     /*visitorUser*/
-    getVisitor():User{ 
+    getVisitor():User{
         this.visitor._id=0;
         this.visitor.firstName="Visiteur";
         this.visitor.lastName="";
-        this.visitor.profilePicture="http://91.121.69.130/speegar/assets/pictures/man.png";
-        this.visitor.profilePictureMin="http://91.121.69.130/speegar/assets/pictures/manMin.png";
+        this.visitor.profilePicture= environment.SERVER_URL + "speegar/assets/pictures/man.png";
+        this.visitor.profilePictureMin=environment.SERVER_URL + "speegar/assets/pictures/manMin.png";
         return this.visitor;
     }
     isVisitor()
@@ -112,7 +113,7 @@ export class LoginService {
         else {
             return false;
         }
-        
+
     }
 
     /* deconnexion */
@@ -153,4 +154,4 @@ export class LoginService {
 
     }
 
-} 
+}

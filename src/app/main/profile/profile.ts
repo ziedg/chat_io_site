@@ -121,7 +121,7 @@ export class Profile {
                 didInit: this.slimDidInit,
                 willSave: this.savePhotoProfile,
                 label: 'Ajouter photo',
-                service: 'http://91.121.69.130:3000/testKhalil',
+                service: environment.SERVER_URL + 'testKhalil',
                 meta: this.slimMeta
             };
             this.router.events.subscribe(route => {
