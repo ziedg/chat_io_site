@@ -36,7 +36,7 @@ export class AppSettings {
         return new RequestOptions({ headers: headers});
     }
 
-    public static get SERVER_URL(): string { return 'http://91.121.69.130:3000/'; }
+    public static get SERVER_URL(): string { return 'http://173.249.0.111:3000/'; }
     public static get SITE_URL(): string { return 'http://localhost:3000/'; }
     public static Redirect(route:string) {
         location.href = this.SITE_URL+"#"+route;
