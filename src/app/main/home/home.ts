@@ -127,7 +127,7 @@ export class Home {
         }
         this.menuFilter = localStorage.getItem('typePosts');
         jQuery("meta[property='og:url']").remove();
-        jQuery('head').append('<meta property="og:url" content="' + AppSettings.SITE_URL + '#/main/home" />');
+        jQuery('head').append('<meta property="og:url" content="' + environment.SERVER_URL  + '#/main/home" />');
     }
 
     putNewPub(pub: PublicationBean, isShared: boolean) {

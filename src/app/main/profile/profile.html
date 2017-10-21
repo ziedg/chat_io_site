@@ -38,9 +38,9 @@
                 <div class="col-md-7 header-segement name-holder col-sm-7 col-xs-8">
                     <h3 class="user-name-profile">{{userDisplayed.firstName}} {{userDisplayed.lastName}}
                         <span *ngIf="user._id!=userDisplayed._id">
-                    <button *ngIf="!isSub"  (click)="doSub()" class="sub-profile-btn-old" > 
+                    <button *ngIf="!isSub"  (click)="doSub()" class="sub-profile-btn-old" >
                         <i class="fa fa-plus"></i> s'abonner
-                    </button> 
+                    </button>
                     <button *ngIf="isSub" (click)="doNotSub()" class="sub-profile-btn-old active">
                         <i class="fa fa-check"></i> deja abonné
                     </button>
@@ -117,16 +117,6 @@
         </div>
 
         <div *ngIf="!wrongProfile" class="col-md-3 col-xs-12 margin-top-0">
-            <!--section class="widget bordered hidden-sm hidden-xs" *ngIf="userDisplayed.pictures">
-                <header>
-                    <i class="fa fa-picture-o"></i> Photos
-                </header>
-                <section class="image-thmps">
-                    <figure [ngStyle]="{'background-image': 'url(http://91.121.69.130/images/' + pic + ')'}" *ngFor="let pic of userDisplayed.pictures">
-                    </figure>
-
-                </section>
-            </section-->
 
             <section class="widget bordered hidden-sm hidden-xs">
                 <header>
@@ -144,10 +134,10 @@
 								</a></header>
                                 <div class="subscribe" *ngIf="friend._id!=user._id">
                                     <button *ngIf="!friend.isSubscribe" (click)="doSubUser(friend)">
-                                    s'abonner 
+                                    s'abonner
                                      </button>
                                     <button class="active" *ngIf="friend.isSubscribe" (click)="doNotSubUser(friend)">
-                                    <i class="fa fa-check" style="position: relative;top: 1.6px;"></i> abonné 
+                                    <i class="fa fa-check" style="position: relative;top: 1.6px;"></i> abonné
                                      </button>
                                     <div class="nbr-subscribes">
                                         {{friend.nbSuivi}}
@@ -239,13 +229,13 @@
 
 
 
-                         <input class="yt-in-url youtube-input-popup" 
+                         <input class="yt-in-url youtube-input-popup"
                                         placeholder="youtube.com/watch?v=XXXXXX"
                                         style="display:none;"
                                         (change)="updateYoutube()"
                                         formControlName="publicationYoutubeLink">
 
-                        
+
                         <i class="fa fa-youtube-play" (click)="changeYoutubeInput()"></i>
                     </span>
 
@@ -385,10 +375,10 @@
                             <div class="col-xs-8 nopadding">
                                 <div class="subscribe" *ngIf="friend._id!=user._id">
                                     <button *ngIf="!friend.isSubscribe" (click)="doSubUser(friend)">
-                                    s'abonner 
+                                    s'abonner
                                      </button>
                                     <button class="active" *ngIf="friend.isSubscribe" (click)="doNotSubUser(friend)">
-                                    <i class="fa fa-check" style="position: relative;top: 1.1px;"></i> abonné 
+                                    <i class="fa fa-check" style="position: relative;top: 1.1px;"></i> abonné
                                      </button>
                                     <div class="nbr-subscribes">
                                         {{friend.nbSuivi}}

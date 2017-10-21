@@ -1,5 +1,7 @@
 import { Headers, RequestOptions } from '@angular/http';
 
+import {environment} from "../../environments/environment";
+
 export class AppSettings {
 
 
@@ -36,9 +38,8 @@ export class AppSettings {
         return new RequestOptions({ headers: headers});
     }
 
-    public static get SITE_URL(): string { return 'http://localhost:3000/'; }
     public static Redirect(route:string) {
-        location.href = this.SITE_URL+"#"+route;
+        location.href = environment.SERVER_URL+route;
     }
 
 }

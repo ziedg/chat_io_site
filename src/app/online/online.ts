@@ -153,7 +153,7 @@ export class Online {
 
               }
               jQuery("meta[property='og:url']").remove();
-              jQuery('head').append('<meta property="og:url" content="' + AppSettings.SITE_URL + 'main/post/' + element._id + '" />');
+              jQuery('head').append('<meta property="og:url" content="' + environment.SERVER_URL + 'main/post/' + element._id + '" />');
 
               if (pubTitle == "Speegar")
                 this.title.setTitle(pubTitle);

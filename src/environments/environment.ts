@@ -7,5 +7,5 @@ export const environment = {
   production: false,
 
   SERVER_URL: 'http://173.249.0.111:3000/',
-  IMAGE_BASE_URL: 'http://173.249.0.111:3000/images/'
+  IMAGE_BASE_URL: 'http://173.249.0.111/images/'
 };

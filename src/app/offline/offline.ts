@@ -144,7 +144,7 @@ export class Offline {
                 });
               }
               jQuery("meta[property='og:url']").remove();
-              jQuery('head').append('<meta property="og:url" content="' + AppSettings.SITE_URL + 'smain/post/' + element._id + '" />');
+              jQuery('head').append('<meta property="og:url" content="' + environment.SERVER_URL + 'smain/post/' + element._id + '" />');
 
               this.changeDetector.markForCheck();
             }

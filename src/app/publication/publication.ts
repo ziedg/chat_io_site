@@ -8,7 +8,6 @@ import { LoadingBar } from '../loading/loading-bar';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
-
 /* conf */
 import { AppSettings } from '../conf/app-settings';
 
@@ -286,14 +285,8 @@ export class Publication {
 		this.commentTextareaId = "comment-" + this.publicationBean._id;
 		this.changeDetector.markForCheck();
 		if (this.publicationBean) {
-		var site_url="";
-			if(AppSettings.SITE_URL == "http://localhost:3000/") {
-				site_url= "http://www.speegar.com/speegar/"
-			}
-			else {
-				site_url=AppSettings.SITE_URL;
-			}
-			this.pubLink = urlEncode(site_url + "main/post/" + this.publicationBean._id);
+
+			this.pubLink = urlEncode(environment.SERVER_URL + "main/post/" + this.publicationBean._id);
 			this.shareLink = "https://www.facebook.com/sharer/sharer.php?u=" + this.pubLink + "&amp;src=sdkpreparse";
 
 			this.nbDisplayedComments = this.publicationBean.comments.length;
@@ -612,7 +605,6 @@ export class Publication {
 			this.fixedPublishDate = "maintenant";
 		return this.fixedPublishDate;
 	}
-
 
 	addOrRemoveLike() {
 		if (!this.isVisitor) {
