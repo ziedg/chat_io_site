@@ -21,7 +21,6 @@ import {PublicationBean} from '../../beans/publication-bean';
 import {NotFound} from "../notFound/not-found";
 import {Title} from "@angular/platform-browser";
 
-import {Offline} from '../../offline/offline';
 import {Online} from '../../online/online';
 
 declare var jQuery: any;
@@ -49,12 +48,6 @@ export class Post {
     constructor(private title:Title,private route: ActivatedRoute,private http:Http, private router:Router, private loginService:LoginService,private changeDetector: ChangeDetectorRef) {
 
         this.changeDetector.markForCheck();
-        if(this.loginService.isVisitor()){
-            this.isVisitor=true;
-        }
-        else {
-            this.isVisitor=false;
-        }
         this.router.events.subscribe(route => {
             if(this.route.snapshot.params['id']!=this.lastRouterPostId) {
                 this.lastRouterPostId=this.route.snapshot.params['id'];

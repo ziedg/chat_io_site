@@ -1,4 +1,4 @@
-<div class="main-header" *ngIf="!loginService.isVisitor()">
+<div class="main-header">
     <div class="header-left">
         <article class="logo">
             <a routerLink="/redirect">
@@ -255,24 +255,6 @@
         <article class="signout-button" class="hidden-lg hidden-md">
             <i class="fa fa-user" [routerLink]="['/main/profile',user._id]"></i>
 
-        </article>
-
-    </div>
-</div>
-<div class="main-header" *ngIf="loginService.isVisitor()">
-    <div class="header-left">
-        <article class="logo" [routerLink]="['/main/home']">
-            <img src="assets/pictures/logo.png">
-        </article>
-    </div>
-
-    <div class="header-right">
-
-
-        <article>
-            <a [routerLink]="['/login/signin']">
-                Connectez-vous
-            </a>
         </article>
 
     </div>

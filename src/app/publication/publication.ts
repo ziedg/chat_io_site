@@ -88,9 +88,6 @@ export class Publication {
 		loginService.actualize();
 
 		this.user = loginService.user;
-		if (this.loginService.isVisitor()) {
-			this.isVisitor = true;
-		}
 		this.listEmoji = emojiService.getEmojiList();
 		this.pubImgId = "imgDefault";//+this.publicationBean._id;
 		this.formComment = new FormGroup({

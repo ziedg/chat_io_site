@@ -16,8 +16,7 @@
 
 
 			<div class="user-name" *ngIf="publicationBean.profileId">
-				<header *ngIf="!isVisitor" ><a [routerLink]="['/main/profile',publicationBean.profileId]">{{publicationBean.profileFirstName}}  {{publicationBean.profileLastName}}</a></header>
-				<header *ngIf="isVisitor"><a>{{publicationBean.profileFirstName}}  {{publicationBean.profileLastName}}</a></header>
+				<header><a [routerLink]="['/main/profile',publicationBean.profileId]">{{publicationBean.profileFirstName}}  {{publicationBean.profileLastName}}</a></header>
 				<div class="date-mobile hidden-lg hidden-md hidden-sm" [routerLink]="['/main/post',publicationBean._id]">
 					<i class="fa fa-globe" style="color:#666" *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
 					<i class="fa fa-users" style="color:#666" *ngIf="publicationBean.confidentiality=='PRIVATE'"></i> {{getPublicationTime(publicationBean.datePublication)}}
@@ -107,7 +106,7 @@
 
 
 		<div class="social-staff">
-			<div *ngIf="!isVisitor" class="like-dislike">
+			<div class="like-dislike">
 				<div class="like-holder" (click)="addOrRemoveLike()" [class.active]="publicationBean.isLiked">
 					<button class="like"><!--i class="fa fa-smile-o"></i-->
                     <div class="hint-social">LoL</div>
@@ -150,26 +149,12 @@
 				</div>
         -->
 			</div>
-			<div *ngIf="isVisitor" class="like-dislike" style="position:absolute;right:0px;top:10px;">
-				<div data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small" data-mobile-iframe="true">
-					<a class="fb-xfbml-parse-ignore" target="_blank" [href]="shareLink" onclick='window.open(this.href,"popupwindow", "width=800,height=500,left=200,top=5,scrollbars,toolbar=0,resizable"); return false;'>
-						<!--div class="fbShare">
-             <i class="fa fa-facebook" aria-hidden="true"></i>
-            </div-->
-						<button class="share-fb">
-            <i class="fa fa-facebook-square fbShare" aria-hidden="true"></i>
-            <div class="hint-social" style="width: 130px;right: 0px;">Partager sur Facebook</div>
-            </button>
 
-
-					</a>
-				</div>
-			</div>
 			<div class="right-side-of-likes">
 				<span class='st_facebook_hcount' displayText='Facebook'></span>
 				<span class='st_twitter_hcount' displayText='Tweet'></span>
 
-				<div *ngIf="!isVisitor" class="dots">
+				<div class="dots">
 
 					<span (click)="openModalPub()">
                     <i class="fa fa-circle"></i>
@@ -192,7 +177,7 @@
 			</div>
 		</div>
 		<div [class.comment-with-picture]="uploadedPictureComment">
-			<div *ngIf="!isVisitor" class="comment-holder form-comment">
+			<div class="comment-holder form-comment">
 				<div class="user-img for-comment" *ngIf="user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + user.profilePictureMin + ')'}"></div>
 
 				<div class="user-img for-comment" *ngIf="!user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}"></div>
@@ -201,14 +186,13 @@
 					<textarea placeholder="Votre commentaire ..." formControlName="pubComment" style="display:none" [(ngModel)]="commentText"></textarea>
 					<textarea placeholder="Votre commentaire ..." formControlName="commentText" style="display:none"></textarea>
 					<input type="file" class="{{pubImgId}}" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
-					<div *ngIf="!isVisitor" class="textarea" id="{{commentTextareaId}}" placeholder="Votre commentaire ..." (keyup)="updateComment($event)"
+					<div class="textarea" id="{{commentTextareaId}}" placeholder="Votre commentaire ..." (keyup)="updateComment($event)"
 						contenteditable="true" (keydown.Enter)="publishCommentV2(commentText)" (input)="commentInputText=$event.target.textContent"></div>
 
-					<div *ngIf="isVisitor" class="textarea" placeholder="Connectez vous pour commenter.." contenteditable="true"></div>
-					<div class="form-more">
+          <div class="form-more">
 						<i class="fa fa-camera" (click)="addPhoto()"></i>
 						<i class="fa fa-smile-o toggleEmoji" (click)="toggleEmoji()"></i>
-						<button class="comment-publish" type="submit" *ngIf="!loadingComment" [disabled]="isVisitor">Publier</button>
+						<button class="comment-publish" type="submit" *ngIf="!loadingComment">Publier</button>
 						<button class="comment-publish comment-loading" *ngIf="loadingComment" disabled>
                                 <div class="loading"></div>
                             </button>

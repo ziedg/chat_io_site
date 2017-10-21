@@ -63,10 +63,6 @@ export class LoginService {
             this.token = localStorage.getItem('token');
             this.user= JSON.parse(localStorage.getItem('user'));
         }
-        else
-        {
-            this.user = this.getVisitor();
-        }
     }
 
 
@@ -91,29 +87,6 @@ export class LoginService {
     getUser():User{
         this.user= JSON.parse(localStorage.getItem('user'));
         return this.user;
-    }
-    /*visitorUser*/
-    getVisitor():User{
-        this.visitor._id=0;
-        this.visitor.firstName="Visiteur";
-        this.visitor.lastName="";
-        this.visitor.profilePicture= environment.SERVER_URL + "speegar/assets/pictures/man.png";
-        this.visitor.profilePictureMin=environment.SERVER_URL + "speegar/assets/pictures/manMin.png";
-        return this.visitor;
-    }
-    isVisitor()
-    {
-        this.actualize();
-        if(this.user){
-            if(this.user._id==0)
-            {return true;}
-        else
-            {return false;}
-        }
-        else {
-            return false;
-        }
-
     }
 
     /* deconnexion */

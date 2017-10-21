@@ -51,29 +51,20 @@ export class Main {
     lastNotifId = "";
     showButtonMoreNotif: Boolean = false;
     showNoNotif: Boolean = false;
-    isVisitor = true;
 
     constructor(private dateService: DateService, private http: Http, private location: Location, private router: Router,
                 private loginService: LoginService, private changeDetector: ChangeDetectorRef, private recentRechService: RecentRechService) {
         this.listNotif = [];
-
-        if (loginService.isVisitor()) {
-            this.isVisitor = true;
-            this.user = this.loginService.getVisitor();
-        }
-        else {
-            this.isVisitor = false;
-            if (!this.recentRechService.isEmptyList())
-                this.RecentSearchList = this.recentRechService.getListRecentRech();
-            this.showButtonMoreNotif = false;
-            this.listNotif = [];
-            this.user = this.loginService.getUser();
-            this.loadNotif();
-        }
+        if (!this.recentRechService.isEmptyList())
+            this.RecentSearchList = this.recentRechService.getListRecentRech();
+        this.showButtonMoreNotif = false;
+        this.listNotif = [];
+        this.user = this.loginService.getUser();
+        this.loadNotif();
     }
 
     loadNotif() {
-        if (this.user && !this.isVisitor) {
+        if (this.user) {
             if (this.user._id) {
                 setInterval(() => {
                     this.http.get(environment.SERVER_URL + 'getNbNotificationsNotSeen?profileId=' + this.user._id, AppSettings.OPTIONS)
@@ -253,7 +244,7 @@ export class Main {
         this.lastNotifId = "";
         this.showButtonMoreNotif = false;
         this.showNoNotif = false;
-        if (this.user && !this.isVisitor) {
+        if (this.user) {
             this.http.get(environment.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=', AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
@@ -296,7 +287,7 @@ export class Main {
         }
     }
     loadMoreNotif() {
-        if (this.user && !this.isVisitor) {
+        if (this.user) {
             jQuery(".notification-holder").show();
             jQuery(".upper-arrow-notification").show();
             this.http.get(environment.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=' + this.lastNotifId, AppSettings.OPTIONS)

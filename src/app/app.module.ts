@@ -20,7 +20,6 @@ import {LinkPreview} from "./service/linkPreview";
 import {PostService} from "./service/postService";
 import {SeoService} from "./service/seo-service";
 import {Main} from "./main/main";
-import {Offline} from "./offline/offline";
 import {Support} from "./support/support";
 import {Login} from "./login/login";
 import {Logout} from "./logout/logout";
@@ -60,7 +59,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  , ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule],       // module dependencies
     declarations: [Slim, AppComponent, Comment, ListComments, LoadingBar, FacebookLogin,
         Signin, Signup, Login, Logout, NotFoundPage, Home, NotFound, Notification, ChangePassword, EditProfile,
-        Parameters, Post, Profile, Main, Offline, Online, Publication, AboutUs, Cgu, Team, Support,
+        Parameters, Post, Profile, Main, Online, Publication, AboutUs, Cgu, Team, Support,
         TopBlagueursAndDecov, GoogleRecaptchaDirective, ForgetPasswordComponent, ResetPasswordComponent,
         FakeComponent],   // components and directives
     bootstrap: [AppComponent],     // root component
