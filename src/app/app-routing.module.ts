@@ -82,10 +82,6 @@ export const routes: Routes = [
         component: Logout
     },
     {
-        path: 'postonline/:id',
-        component: Online
-    },
-    {
         path: 'support',
         component: Support,
         children: [
