@@ -71,64 +71,39 @@ export class Home {
     isEmpty = true;
 
     constructor(private postService: PostService, private linkView: LinkView, private linkPreview: LinkPreview, private title: Title, private http: Http, private router: Router, private loginService: LoginService, private changeDetector: ChangeDetectorRef) {
-        //this.previewLink.push(this.link);
 
-        this.title.setTitle("Speegar");
+        this.loginService.redirect();
+        this.user = this.loginService.getUser();
         this.postService.setShowErrorConnexion(false);
 
-        if (!this.loginService.isConnected()) {
-            if (this.loginService.isWasConnectedWithFacebook()) {
-                this.router.navigate(['/login/facebook-login']);
-            }
-            else if (this.loginService.isWasConnectedWithGoogle()) {
-                this.router.navigate(['/login/google-login']);
-            }
-            else {
-                this.router.navigate(['/login/sign-in']);
-            }
-        }
-
-        this.changeDetector.markForCheck();
-        this.user = this.loginService.getUser();
         this.form = new FormGroup({
             publicationTitle: new FormControl(),
             publicationText: new FormControl('', Validators.required),
             publicationYoutubeLink: new FormControl()
         });
-        if (this.user) {
-            this.publicationBeanList = [];
+
+        this.publicationBeanList = [];
+        this.loadFirstPosts();
+        if (!this.publicationBeanList.length)
             this.loadFirstPosts();
-            if (!this.publicationBeanList.length)
-                this.loadFirstPosts();
-            this.changeDetector.markForCheck();
+        this.changeDetector.markForCheck();
+      window.scrollTo(0, 0);
 
-        }
-
-        window.scrollTo(0, 0);
-        if (localStorage.getItem('isNewInscri')) {
-            if (localStorage.getItem('isNewInscri') == "true") {
-                this.afficheWelcome = true;
-                localStorage.removeItem('isNewInscri');
-            }
-            else {
-                this.afficheWelcome = false;
-            }
-        }
-        else {
-            this.afficheWelcome = false;
-        }
-        if (localStorage.getItem('typePosts')) {
-            if (localStorage.getItem('typePosts') != 'recent' && localStorage.getItem('typePosts') != 'popular') {
-                localStorage.setItem('typePosts', 'recent');
-            }
-        }
-        else {
-            localStorage.setItem('typePosts', 'recent');
-        }
-        this.menuFilter = localStorage.getItem('typePosts');
-        jQuery("meta[property='og:url']").remove();
-        jQuery('head').append('<meta property="og:url" content="' + environment.SERVER_URL  + '#/main/home" />');
+      if (localStorage.getItem('isNewInscri')) {
+          if (localStorage.getItem('isNewInscri') == "true") {
+              this.afficheWelcome = true;
+              localStorage.removeItem('isNewInscri');
+          }
+          else {
+              this.afficheWelcome = false;
+          }
+      }
+      else {
+          this.afficheWelcome = false;
+      }
+      this.menuFilter = 'recent';
     }
+
 
     putNewPub(pub: PublicationBean, isShared: boolean) {
         var element = pub;

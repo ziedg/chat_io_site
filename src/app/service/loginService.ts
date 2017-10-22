@@ -14,9 +14,6 @@ export class LoginService {
     public token: string;
     /* User */
     public user : User;
-    /*Visitor User */
-    public visitor=new User();
-
 
     /* constructor  */
     constructor(private router:Router){
@@ -43,6 +40,16 @@ export class LoginService {
             return true;
         }
         return false;
+    }
+
+    redirect(){
+      if(!this.isConnected()){
+        if(this.isWasConnectedWithFacebook()){
+          this.router.navigate(['/login/facebook-login']);
+        }else{
+          this.router.navigate(['/login/sign-in']);
+        }
+      }
     }
 
     /* getFacebookUser */
@@ -114,17 +121,4 @@ export class LoginService {
                     this.router.navigate(['/login/sign-in']);
         }
     }
-
-    /* redirect */
-    redirect(){
-        if(!this.isConnected()){
-            if(this.isWasConnectedWithFacebook()){
-                this.router.navigate(['/login/facebook-login']);
-            }else{
-                this.router.navigate(['/login/sign-in']);
-            }
-        }
-
-    }
-
 }

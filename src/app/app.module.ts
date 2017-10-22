@@ -1,14 +1,10 @@
-/**
- * Created by chaker on 09/11/16.
- */
-
-
-import {NgModule, ChangeDetectorRef, Provider}      from '@angular/core';
+import {NgModule, ChangeDetectorRef, Provider, Injector}      from '@angular/core';
 import {CommonModule}        from '@angular/common';
 import {BrowserModule, Title} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule}         from '@angular/forms';
-import {HttpModule}    from '@angular/http';
 import {APP_BASE_HREF, PathLocationStrategy, LocationStrategy} from '@angular/common';
+import { HttpModule, Http, CookieXSRFStrategy, XSRFStrategy, RequestOptions, XHRBackend } from '@angular/http';
+
 
 import {AppComponent}  from './app.component';
 import {LoginService} from "./service/loginService";
@@ -39,7 +35,6 @@ import {ChangePassword} from "./main/parameters/change-password/changePassword";
 import {EditProfile} from "./main/parameters/edit-profile/editProfile";
 import {Parameters} from "./main/parameters/parameters";
 import {Profile} from "./main/profile/profile";
-import {Online} from "./online/online";
 import {Publication} from "./publication/publication";
 import {AboutUs} from "./support/about-us/aboutUs";
 import {Cgu} from "./support/cgu/cgu";
@@ -47,19 +42,21 @@ import {Team} from "./support/team/team";
 import {TopBlagueursAndDecov} from "./topBlagueursAndDecov/topBlagueursAndDecov";
 import {GoogleRecaptchaDirective} from "./service/googlerecaptcha";
 import {RouterModule} from '@angular/router';
-import Slim from "./utils/slim.angular2";
 import {ForgetPasswordComponent} from "./login/forget-password/forget-password.component";
 import {ResetPasswordComponent} from "./login/reset-password/reset-password.component";
 import {ResetPasswordService} from "./login/reset-password/reset-password.service";
 import {FakeComponent} from "./shared/fake.component";
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
+/** Factories */
+import { httpFactory } from './utils/factories/http.factory';
+
 
 @NgModule({
     imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  , ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule],       // module dependencies
-    declarations: [Slim, AppComponent, Comment, ListComments, LoadingBar, FacebookLogin,
+    declarations: [AppComponent, Comment, ListComments, LoadingBar, FacebookLogin,
         Signin, Signup, Login, Logout, NotFoundPage, Home, NotFound, Notification, ChangePassword, EditProfile,
-        Parameters, Post, Profile, Main, Online, Publication, AboutUs, Cgu, Team, Support,
+        Parameters, Post, Profile, Main, Publication, AboutUs, Cgu, Team, Support,
         TopBlagueursAndDecov, GoogleRecaptchaDirective, ForgetPasswordComponent, ResetPasswordComponent,
         FakeComponent],   // components and directives
     bootstrap: [AppComponent],     // root component
@@ -75,6 +72,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         PostService,
         SeoService,
         ResetPasswordService,
+        {
+          provide: Http, useFactory: httpFactory,
+          deps: [XHRBackend, RequestOptions, Injector],
+          multi: false
+        },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
         {provide: APP_BASE_HREF, useValue: '/'}
     ],

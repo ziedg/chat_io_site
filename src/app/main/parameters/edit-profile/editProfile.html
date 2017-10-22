@@ -6,9 +6,9 @@
     </div>
     <form class="col-xs-12" style="padding-top:40px" [formGroup]="form" #f="ngForm" (ngSubmit)="saveData()">
         <div class="col-md-4 col-xs-6 label-param">
-            Nom 
+            Nom
         </div>
-        
+
     <div class="col-md-8 col-xs-6 input-param">
             <input (keyup)="checkLasttName()" value="{{user.lastName}}" formControlName="lastName"
             [ngClass]="{'invalidInput': (errLastName && errLastName.length>0),
@@ -28,16 +28,16 @@
             <p *ngIf="errFistName && errFistName.length>0" class="msgErreur">{{errFistName}}</p>
         </div>
 
-        
+
 
          <div class="col-md-4 col-xs-6 label-param-long">
-            Description 
+            Description
         </div>
         <div class="col-md-8 col-xs-6 input-param-long ">
             <textarea id="userDiscrip" style="border-color: #09a012!important" name='userDiscrip'>{{user.about}}</textarea>
-        </div> 
- 
-        
+        </div>
+
+
         <!--<div class="col-md-4 col-xs-6 label-param">
             Lien Google+ <i class="fa fa-google-plus" aria-hidden="true"></i>
         </div>
@@ -50,7 +50,7 @@
         <div class="col-md-8 col-xs-6 input-param">
             <input (keyup)="checkFBLink()" value="{{user.facebookLink}}" placeholder="https://www.facebook.com/xxx" formControlName="linkFB"
             [ngClass]="{'invalidInput': (errLinkFB && errLinkFB.length>0),
-             'validInput': (errLinkFB.length==0)}" id="linkFB" 
+             'validInput': (errLinkFB.length==0)}" id="linkFB"
             />
             <p *ngIf="errLinkFB && errLinkFB.length>0" class="msgErreur">{{errLinkFB}}</p>
 
@@ -59,7 +59,7 @@
             Lien Twitter <i class="fa fa-twitter" aria-hidden="true"></i>
         </div>
         <div class="col-md-8 col-xs-6 input-param">
-            <input (keyup)="checkTwitterLink()" (focus)="checkTwitterLink()"  placeholder="https://www.twitter.com/xxx" formControlName="linkTwitter" 
+            <input (keyup)="checkTwitterLink()" (focus)="checkTwitterLink()"  placeholder="https://www.twitter.com/xxx" formControlName="linkTwitter"
             [ngClass]="{'invalidInput': (errLinkTwitter && errLinkTwitter.length>0),
              'validInput': (errLinkTwitter.length==0)}" id="linkTwitter" value="{{user.twitterLink}}"
             />
@@ -67,7 +67,7 @@
         </div>
         <div class="col-md-4 col-xs-6 label-param">
             Lien Youtube <i class="fa fa-youtube" aria-hidden="true"></i>
-        </div> 
+        </div>
         <div class="col-md-8 col-xs-6 input-param">
             <input (keyup)="checkYoutubeLink()"  placeholder="https://www.youtube.com/xxx" formControlName="linkYoutube"
             [ngClass]="{'invalidInput': (errLinkYoutube && errLinkYoutube.length>0),
@@ -75,7 +75,7 @@
             />
             <p *ngIf="errLinkYoutube && errLinkYoutube.length>0" class="msgErreur">{{errLinkYoutube}}</p>
         </div>
-         <div class="col-md-12 col-xs-12 button-param centered-text">
+         <div class="col-md-12 col-xs-12 button-param centered-text padding-bottom-50">
            <button>Valider</button>
            <!--<a class="hidden-xs hidden-sm">Désactivez temporairement mon compte</a>-->
         </div>

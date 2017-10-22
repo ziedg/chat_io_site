@@ -73,7 +73,6 @@ export class Publication {
 	listEmoji: Array<EmojiListBean> = [];
 	newCommentText: string = "";
 	uploadedPictureComment: File;
-	isVisitor = false;
 	likeAnimation = false;
 	pubImgId;
 	loadingComment = false;
@@ -96,38 +95,7 @@ export class Publication {
 		});
 
 	}
-	deletePubAdmin() {
-		swal({
-			title: "Êtes-vous sûr?",
-			text: "Que se passe-t-il ?",
-			showCancelButton: true,
-			cancelButtonColor: '#999',
-			confirmButtonColor: "#6bac6f",
-			confirmButtonText: "Oui, supprimez-le!",
-			allowOutsideClick: true,
-			input: 'textarea',
-		}).then(function (text) {
-			if(text){
-			this.doDeletePub(text);
-			this.closeModalPub();
-			swal({
-				title: "supprimé !",
-				text: "Votre publication a été supprimé.",
-				type: "success",
-				timer: 1000,
-				showConfirmButton: false
-			}).then(function () { }, function (dismiss) { });
-			this.changeDetector.markForCheck();
-		}
-		}.bind(this),
-			function (dismiss) {
-				// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-				if (dismiss === 'overlay') {
 
-				}
-			}
-			);
-	}
 	deletePub() {
 		swal({
 			title: "Êtes-vous sûr?",
@@ -151,13 +119,10 @@ export class Publication {
 
 		}.bind(this),
 			function (dismiss) {
-				// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-				if (dismiss === 'overlay') {
-
-				}
-			}
-			);
+				if (dismiss === 'overlay') {}
+			});
 	}
+
 	MaskPub() {
 		swal({
 			title: "Êtes-vous sûr?",
@@ -180,13 +145,10 @@ export class Publication {
 			this.changeDetector.markForCheck();
 		}.bind(this),
 			function (dismiss) {
-				// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-				if (dismiss === 'overlay') {
-
-				}
-			}
-			);
+				if (dismiss === 'overlay') {}
+			});
 	}
+
 	doMaskPub() {
 		this.changeDetector.markForCheck();
 		let body = JSON.stringify({
@@ -207,6 +169,7 @@ export class Publication {
 			}
 			);
 	}
+
 	doDeletePub(text) {
 		this.publicationBean.displayed = false;
 		this.changeDetector.markForCheck();
@@ -247,9 +210,8 @@ export class Publication {
 			}
 			);
 		}
-
-
 	}
+
 	displayComments() {
 		if (this.commentsDisplayed)
 			return;
@@ -271,8 +233,6 @@ export class Publication {
 
 
 	ngOnInit() {
-		if(this.isVisitor)
-			this.displayComments();
 		this.changeDetector.markForCheck();
 		if (this.publicationBean.publExternalLink) {
 			this.linkAPI();
@@ -287,7 +247,6 @@ export class Publication {
 			this.shareLink = "https://www.facebook.com/sharer/sharer.php?u=" + this.pubLink + "&amp;src=sdkpreparse";
 
 			this.nbDisplayedComments = this.publicationBean.comments.length;
-
 
 			//Youtube Loading
 			if (this.publicationBean.publyoutubeLink) {
@@ -353,9 +312,11 @@ export class Publication {
 			this.changeDetector.markForCheck();
 		}.bind(this);
 	}
+
 	checkEnter(event) {
 		console.log(event, event.keyCode, event.keyIdentifier);
 	}
+
 	publishCommentV2() {
 		if (!this.commentInputText && !this.uploadedPictureComment) {
 			return;
@@ -426,8 +387,8 @@ export class Publication {
 		jQuery("#" + this.pubImgId).hide();
 		this.uploadedPictureComment = null;
 	}
-	sharePub(post: PublicationBean) {
 
+	sharePub(post: PublicationBean) {
 		swal({
 			title: "Êtes-vous sûr?",
 			text: "voulez-vous partager cette publication ? ",
@@ -604,12 +565,10 @@ export class Publication {
 	}
 
 	addOrRemoveLike() {
-		if (!this.isVisitor) {
 			if (!this.publicationBean.isLiked)
 				this.addLike();
 			else
 				this.removeLike();
-		}
 	}
 
 	addLike() {
@@ -657,12 +616,10 @@ export class Publication {
 	}
 
 	addOrRemoveDislike() {
-		if (!this.isVisitor) {
 			if (!this.publicationBean.isDisliked)
 				this.addDislike();
 			else
 				this.removeDislike();
-		}
 	}
 
 	addDislike() {
