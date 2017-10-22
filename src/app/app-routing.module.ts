@@ -10,7 +10,6 @@ import {Parameters} from './main/parameters/parameters';
 import {Home} from './main/home/home';
 import {Notification} from './main/notification/notification';
 import {Support} from './support/support';
-import {Online} from './online/online';
 
 /* parameters components */
 import {EditProfile} from './main/parameters/edit-profile/editProfile';
