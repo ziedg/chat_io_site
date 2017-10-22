@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { TopBlagueursAndDecov } from '../../topBlagueursAndDecov/topBlagueursAndDecov';
 import 'rxjs/add/operator/map';
 
-
 import { Publication } from '../../publication/publication';
 import { Comment } from '../../comment/comment';
 
