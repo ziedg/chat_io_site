@@ -41,6 +41,7 @@ export class Post {
   private wrongPost: boolean = false;
 
     constructor(private title:Title,private route: ActivatedRoute,private http:Http, private router:Router, private loginService:LoginService,private changeDetector: ChangeDetectorRef) {
+      this.loginService.redirect();
       this.user = this.loginService.getUser();
         this.router.events.subscribe(route => {
           this.postId=this.route.snapshot.params['id'];

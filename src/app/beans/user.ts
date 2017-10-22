@@ -17,7 +17,7 @@ export class User {
 	public facebookLink:string;
 	public twitterLink:string;
 	public youtubeLink:string;
-	public profilePictureMin:string; 
+	public profilePictureMin:string;
 	public constructor(){
 		this._id=0;
 		this.firstName="";
