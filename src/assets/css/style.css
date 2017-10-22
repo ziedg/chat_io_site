@@ -1295,7 +1295,8 @@ section.widget {
   }
 }
 .comment-publish.comment-loading {
-  padding: 5px 23px !important;
+  padding: 2.5px 23px !important;
+  line-height: 20px;
 }
 button.publish-button:hover,
 .comment-publish:hover {
