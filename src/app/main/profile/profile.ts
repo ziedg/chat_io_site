@@ -4,7 +4,6 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { TopBlagueursAndDecov } from '../../topBlagueursAndDecov/topBlagueursAndDecov';
-import Slim from "../../utils/slim.angular2";
 import 'rxjs/add/operator/map';
 
 
@@ -86,44 +85,21 @@ export class Profile {
     descEnable = false;
     linkLoading = false;
     isEmpty = true;
-    wanaModifPhoto = false;
-    slimMeta;
-    slimOptions;
     profilePictLoad: boolean = false;
 
     savePhotoProfile(data, ready) {
         var newImgSrc = data.output.image;
         ready(data);
     }
-    modifPhoto() {
-        jQuery("#slimPrev").hide();
-        this.wanaModifPhoto = true;
-    }
-    slimDidInit(data) {
-        console.log(data);
-    };
+
+
     constructor(private linkView: LinkView, private linkPreview: LinkPreview, private title: Title, private route: ActivatedRoute, private http: Http, private router: Router, private loginService: LoginService, private changeDetector: ChangeDetectorRef) {
         this.noPosts = false;
 
-
-
-
-        console.log(this.slimMeta);
-        console.log(this.slimOptions);
         if (loginService.isConnected()) {
             loginService.actualize();
             this.user = loginService.user;
-            this.slimMeta = {
-                userId: this.user._id
-            }
-            this.slimOptions = {
-                ratio: '1:1',
-                didInit: this.slimDidInit,
-                willSave: this.savePhotoProfile,
-                label: 'Ajouter photo',
-                service: environment.SERVER_URL + 'testKhalil',
-                meta: this.slimMeta
-            };
+
             this.router.events.subscribe(route => {
                 this.changeDetector.markForCheck();
                 if (this.route.snapshot.params['id'] != this.lastRouterProfileId) {
