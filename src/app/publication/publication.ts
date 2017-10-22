@@ -723,12 +723,12 @@ export class Publication {
 	}
 	addToComment(emoji) {
 		if (this.commentInputText[this.commentInputText.length - 1] == " ") {
-			this.commentInputText = this.commentInputText + emoji.shortcut;
+			this.commentInputText = this.commentInputText + emoji.shortcut + " Hello";
 		}
 		else {
-			this.commentInputText = this.commentInputText + " " + emoji.shortcut;
-		}
-	}
+			this.commentInputText = this.commentInputText + " " + emoji.shortcut + " Hello";
+    }
+  }
 	updateComment($event) {
 		this.commentText = $event.path[0].innerHTML;
 		this.changeDetector.markForCheck();
