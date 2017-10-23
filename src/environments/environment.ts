@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
 
-  SERVER_URL: 'http://173.249.0.111:3000/',
-  IMAGE_BASE_URL: 'http://173.249.0.111/images/'
+  SERVER_URL: 'https://www.speegar.com:3000/',
+  IMAGE_BASE_URL: 'https://www.speegar.com/images/'
 };
