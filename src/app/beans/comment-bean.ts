@@ -12,6 +12,7 @@ export class CommentBean {
     public nbDislikes: number;
     public commentText : string;
     public commentLink : string;
+    public commentPicture : string;
     public isLiked : boolean;
     public isDisliked : boolean;
     public deleted=false;

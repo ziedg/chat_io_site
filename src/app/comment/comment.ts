@@ -34,7 +34,7 @@ export class Comment {
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
 
-  imageBasUrl = environment.IMAGE_BASE_URL;
+  imageBaseUrl = environment.IMAGE_BASE_URL;
 
     constructor(private http: Http, private dateService: DateService, private loginService: LoginService, public emojiService: EmojiService, private changeDetector: ChangeDetectorRef) {
     loginService.actualize();
