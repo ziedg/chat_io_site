@@ -273,7 +273,7 @@ export class Home {
         $event.preventDefault();
         var text = $event.clipboardData.getData("text/plain");
 
-        if (text.search("youtube.com/watch") >= 0) {
+        if (text.search("youtube.com/watch") >= 0  ||  text.search("youtu.be/") >= 0) {
             this.youtubeInput = true;
             jQuery(".yt-in-url").val(text);
             this.changeDetector.markForCheck();
