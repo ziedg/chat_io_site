@@ -466,41 +466,56 @@ export class Home {
         }
     }
 
-    updateYoutube() {
-        a = jQuery(".yt-in-url");
-        if (a.val().indexOf("youtu") < 1) //invalide youtube link
-        {
-            this.errorMsg = "Votre lien Youtube est invalide! Veuillez mettre un lien Youtube Valide.";
-            this.errorTimed();
-            jQuery(".youtube-preview").html("");
-            a.val("");
-            return;
-        }
-        try {
-            var validatedLink = a.val();
-            var code = a.val();
-            var video = "";
-            var a = code.split("?");
-            var b = a[1];
-            var c = b.split("&");
-            for (var i = 0; i < c.length; i++) {
-                var d = c[i].split("=");
-                if (d[0] == "v") {
-                    video = d[1];
-                    break;
-                };
-            }
-            jQuery(".youtube-preview").html('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + video + '" frameborder="0" allowfullscreen></iframe>');
-            this.uploadedPicture = null;
-            this.closeLinkAPI();
-            this.youtubeLink = validatedLink;
-            //this.form.controls.publicationYoutubeLink.updateValue(jQuery(".yt-in-url").val());
-            jQuery("#preview-image").hide();
 
-        } catch (err) {
-            jQuery(".youtube-preview").html("");
+   getIdYoutubeVideoId(youtubeLink) : string {
+
+     if (youtubeLink.indexOf("youtube.com") > 0) {
+       var video = "";
+       var a = youtubeLink.split("?");
+       var b = a[1];
+       var c = b.split("&");
+       for (var i = 0; i < c.length; i++) {
+         var d = c[i].split("=");
+         if (d[0] == "v") {
+           return d[1];
+         }
+       }
+     } else if (youtubeLink.indexOf("youtu.be") > 0) {
+       var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+       var match = youtubeLink.match(regExp);
+       if (match && match[2].length == 11) {
+         return match[2];
+       }
+     }
+     return 'error';
+   }
+
+  displayYoutubeLinkError(){
+    this.errorMsg = "Votre lien Youtube est invalide! Veuillez mettre un lien Youtube Valide.";
+    this.errorTimed();
+    jQuery(".youtube-preview").html("");
+  }
+
+  updateYoutube() {
+    var a = jQuery(".yt-in-url");
+    let videoId = this.getIdYoutubeVideoId(a.val());
+
+    try {
+        if(videoId == 'error'){
+          this.displayYoutubeLinkError();
+          return;
         }
+
+        jQuery(".youtube-preview").html('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>');
+        this.uploadedPicture = null;
+        this.closeLinkAPI();
+        this.youtubeLink = videoId;
+        jQuery("#preview-image").hide();
+
+    } catch (err) {
+        this.displayYoutubeLinkError();
     }
+  }
     closeLinkAPI() {
         this.link.initialise();
     }
@@ -517,7 +532,7 @@ export class Home {
             if (linkURL == this.link.url) {
                 return 1;
             }
-            if (linkURL.search("youtube.com/watch") >= 0) {
+            if (linkURL.search("youtube.com/watch") >= 0 || linkURL.search("youtu.be/")  >= 0) {
                 jQuery(".yt-in-url").val(linkURL);
                 this.updateYoutube();
                 return 1;

@@ -250,28 +250,7 @@ export class Publication {
 
 			//Youtube Loading
 			if (this.publicationBean.publyoutubeLink) {
-				a = this.publicationBean.publyoutubeLink;
-				if (a.length < 5) {
-					return;
-				};
-				try {
-					var code = a;
-					var video = "";
-					var a = code.split("?");
-					var b = a[1];
-					var c = b.split("&");
-					for (var i = 0; i < c.length; i++) {
-						var d = c[i].split("=");
-						if (d[0] == "v") {
-							video = d[1];
-							break;
-						};
-					}
-					this.linkYtb = "https://www.youtube.com/embed/" + video;
-
-				} catch (err) {
-
-				}
+        this.linkYtb = "https://www.youtube.com/embed/" + this.publicationBean.publyoutubeLink;
 				this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkYtb);
 			}
 			else {
