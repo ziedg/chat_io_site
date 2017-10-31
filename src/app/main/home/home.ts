@@ -468,7 +468,7 @@ export class Home {
 
     updateYoutube() {
         a = jQuery(".yt-in-url");
-        if (a.val().indexOf("youtube.com") < 1) //invalide youtube link
+        if (a.val().indexOf("youtu") < 1) //invalide youtube link
         {
             this.errorMsg = "Votre lien Youtube est invalide! Veuillez mettre un lien Youtube Valide.";
             this.errorTimed();
