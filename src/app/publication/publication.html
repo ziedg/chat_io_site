@@ -11,7 +11,6 @@
 
 			<div class="user-img" [routerLink]="['/main/profile',publicationBean.profileId]" *ngIf="!publicationBean.profilePictureMin"
 				[ngStyle]="{'background-image': 'url(' + publicationBean.profilePicture + ')'}">
-
 			</div>
 
 
@@ -188,7 +187,8 @@
 					<textarea placeholder="Votre commentaire ..." formControlName="commentText" style="display:none"></textarea>
 					<input type="file" class="{{pubImgId}}" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
 					<div class="textarea" id="{{commentTextareaId}}" placeholder="Votre commentaire ..." (keyup)="updateComment($event)"
-						contenteditable="true" (keydown.Enter)="publishCommentV2(commentText)" (input)="commentInputText=$event.target.textContent">
+						contenteditable="true" [innerHtml]="commentInputHtml" (keydown.Enter)="publishCommentV2(commentText)"
+               (input)="commentInputText=$event.target.textContent">
           </div>
 
           <div class="form-more">
@@ -223,7 +223,7 @@
 			<i class="fa fa-times delete-photo-comment" aria-hidden="true" *ngIf="uploadedPictureComment" (click)="resetCommentPicture()"></i>
 		</div>
 		<!-- comments -->
-		<div class="comments-holder">
+		<div class="comments-holder" *ngIf="commentsDisplayed">
 
 			<comment *ngFor="let commentBean of listComments" [commentBean]="commentBean" [publicationBean]="publicationBean"
 					 [(nbDisplayedComments)]="nbDisplayedComments">

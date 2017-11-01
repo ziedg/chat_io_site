@@ -50,10 +50,12 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 /** Factories */
 import { httpFactory } from './utils/factories/http.factory';
+import {EmojiPickerModule} from "ng-emoji-picker";
 
 
 @NgModule({
-    imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  , ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule],       // module dependencies
+    imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
+      ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule, EmojiPickerModule],       // module dependencies
     declarations: [AppComponent, Comment, ListComments, LoadingBar, FacebookLogin,
         Signin, Signup, Login, Logout, NotFoundPage, Home, NotFound, Notification, ChangePassword, EditProfile,
         Parameters, Post, Profile, Main, Publication, AboutUs, Cgu, Team, Support,

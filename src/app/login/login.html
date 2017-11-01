@@ -1,4 +1,14 @@
+
+
+
 <div class="login-body">
+  <emoji-input
+    [(model)]="bindedVariable"
+    [textArea]="{cols: 40, rows: 5}"
+    [onEnter]="onEnterFunction"
+    [popupAnchor]="'bottom'"
+    (setPopupAction)="setPopupAction($event)">
+  </emoji-input>
     <div class="Container" id="mainLogin">
         <div class="row loginCorpse">
             <div class="col-md-7 col-sm-6 hidden-xs photoLogin">
