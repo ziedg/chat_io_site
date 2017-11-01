@@ -307,6 +307,7 @@ export class Publication {
   }
 
   publishCommentV2() {
+    console.log(this.commentInputText);
     if (!this.commentInputText && !this.uploadedPictureComment) {
       return;
     }
@@ -695,15 +696,19 @@ export class Publication {
   addToComment(emoji) {
     if (this.commentInputText[this.commentInputText.length - 1] == " ") {
       this.commentInputText = this.commentInputText + emoji.shortcut;
+      this.commentInputHtml = this.commentText + this.afficheComment(emoji.shortcut);
     }
     else {
       this.commentInputText = this.commentInputText + " " + emoji.shortcut;
+      this.commentInputHtml = this.commentText + this.afficheComment(" " + emoji.shortcut);
     }
-    this.commentInputHtml = this.afficheComment(this.commentInputText);
+    this.commentText = "";
   }
 
   updateComment($event) {
+    console.log($event);
     this.commentText = $event.path[0].innerHTML;
+    this.commentInputText = $event.path[0].innerHTML;
     this.changeDetector.markForCheck();
   }
 
