@@ -43,14 +43,14 @@ export class FacebookLogin {
 
         this.facebookUser = this.loginService.getFacebookUser();
 
-        FB.init({
-            appId: '176581259425722',
-            status: true,  // enable cookies to allow the server to access
-            cookie: true,
-            xfbml: true,  // parse social plugins on this page
-            version: 'v2.5' // use graph api version 2.5
-        });
 
+        FB.init({
+              appId      : '143891162916771',
+              status: true,  // enable cookies to allow the server to access
+              cookie: true,
+              xfbml      : true,
+              version    : 'v2.10'
+            });
     }
 
     getUserFacbookConnexion(result) {
