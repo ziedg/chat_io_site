@@ -1774,8 +1774,17 @@ margin-bottom:5px;*/
   position: relative;
 }
 .comment-number-holder:hover button .fa {
-  color: #55ee55;
+  font-size: 35px;
+  margin: -6px -5px 0;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
+
+.comment-number-holder:active button .fa {
+  color: #209f11;
+}
+
 .share-holder:hover button .fa {
   font-size: 40px;
   margin: -13px -7.5px 0;
@@ -3758,6 +3767,7 @@ input.loginInput {
   transition: 0.5s ease-in-out;
 }
 .hint-social {
+  width: max-content;
   min-width: 60px;
   height: 18px;
   padding: 1px 3px;
@@ -3772,7 +3782,7 @@ input.loginInput {
   opacity: 0;
 }
 .comment-number-holder .hint-social {
-  right: -10px;
+  right: -40px;
 }
 .share-holder .hint-social {
   right: -15px;
