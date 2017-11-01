@@ -336,6 +336,7 @@ export class Publication {
               //this.formComment.controls.pubComment.updateValue('');
               this.changeDetector.markForCheck();
               this.commentInputText = "";
+              this.commentInputHtml = "";
               jQuery("#" + this.commentTextareaId).empty();
               jQuery("#" + this.pubImgId).attr('src', "");
               jQuery("#" + this.pubImgId).hide();
@@ -696,19 +697,19 @@ export class Publication {
   addToComment(emoji) {
     if (this.commentInputText[this.commentInputText.length - 1] == " ") {
       this.commentInputText = this.commentInputText + emoji.shortcut;
-      this.commentInputHtml = this.commentText + this.afficheComment(emoji.shortcut);
+      this.commentInputHtml += this.commentText + this.afficheComment(emoji.shortcut);
     }
     else {
       this.commentInputText = this.commentInputText + " " + emoji.shortcut;
-      this.commentInputHtml = this.commentText + this.afficheComment(" " + emoji.shortcut);
+      this.commentInputHtml += this.commentText + this.afficheComment(" " + emoji.shortcut);
     }
     this.commentText = "";
   }
 
   updateComment($event) {
     console.log($event);
-    this.commentText = $event.path[0].innerHTML;
-    this.commentInputText = $event.path[0].innerHTML;
+    this.commentText += $event.key;
+    this.commentInputText += $event.key;
     this.changeDetector.markForCheck();
   }
 
