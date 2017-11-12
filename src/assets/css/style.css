@@ -1775,6 +1775,7 @@ margin-bottom:5px;*/
 }
 .comment-number-holder:hover button .fa {
   font-size: 35px;
+  color: #009900 !important;
   margin: -6px -5px 0;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
@@ -1784,6 +1785,7 @@ margin-bottom:5px;*/
 .comment-number-holder:active button .fa {
   color: #209f11;
 }
+
 
 .share-holder:hover button .fa {
   font-size: 40px;
@@ -1814,6 +1816,8 @@ margin-bottom:5px;*/
   color: #ff0000;
   text-shadow: 0.5px 0.5px 2px rgba(00, 55, 55, 0.2);
 }
+
+
 .share-holder {
   margin-left: 10px;
   position: relative;

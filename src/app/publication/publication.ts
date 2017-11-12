@@ -46,7 +46,6 @@ declare var swal: any;
 export class Publication {
 
   commentContent = "";
-
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
   private publicationBean: PublicationBean;
@@ -61,7 +60,6 @@ export class Publication {
   public dateDisplay = "";
   public listLink: Array<string> = [];
   formComment;
-  formCommentV2;
   selectedEmojiTab = 0;
   emojiOpacity = 0;
   emojiToggleActive = false;
@@ -78,10 +76,11 @@ export class Publication {
   likeAnimation = false;
   pubImgId;
   loadingComment = false;
-  commentsDisplayed = false;
   emojiHoverId = "";
   commentTextareaId = "";
   public link: LinkBean = new LinkBean();
+  commentsDisplayed : boolean;
+
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
 
@@ -223,12 +222,7 @@ export class Publication {
     }
   }
 
-  displayComments() {
-    if (this.commentsDisplayed)
-      return;
-    else {
-      this.commentsDisplayed = true;
-    }
+  initComments() {
     if (this.publicationBean.comments.length > this.nbMaxAddComments) {
       this.afficheMoreComments = true;
       this.nbComments = this.nbMaxAddComments;
@@ -242,6 +236,10 @@ export class Publication {
     }
   }
 
+
+  displayComments(){
+    this.commentsDisplayed = !this.commentsDisplayed ;
+  }
 
   ngOnInit() {
     this.changeDetector.markForCheck();
@@ -301,6 +299,8 @@ export class Publication {
       this.signalButton = false;
       this.changeDetector.markForCheck();
     }.bind(this);
+
+    this.initComments();
   }
 
   checkEnter(event) {
