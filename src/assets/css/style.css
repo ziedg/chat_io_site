@@ -3903,3 +3903,35 @@ input.loginInput {
   font-size: 12px;
   font-family: lato light;
 }
+
+.display-comment-picture{
+  max-height: 200px;
+  max-width: 100%;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  border: solid 1px #ddd;
+}
+
+.upload-comment-picture{
+  max-height: 200px;
+  max-width: 100%;
+  display:none;
+  margin-top:0px;
+  margin-left:40px;
+  margin-bottom: 10px;
+}
+
+.cancel-upload-comment-picture{
+  position: absolute;
+  margin-left: 10px;
+}
+
+@media (max-width: 767px) {
+  .display-comment-picture {
+    max-width: 70vw;
+  }
+  .upload-comment-picture{
+    max-width: 70vw !important;
+  }
+}
+

@@ -12,7 +12,7 @@
             <div class="col-xs-12 comment-text" [innerHTML]="afficheComment(commentBean.commentText)" style="margin-bottom: 5px; !important;">
 
             </div>
-            <img *ngIf="commentBean.commentPicture" src="{{imageBaseUrl + commentBean.commentPicture}}" style="width: 60%;margin-left: 15px;margin-bottom: 15px;"/>
+            <img *ngIf="commentBean.commentPicture" src="{{imageBaseUrl + commentBean.commentPicture}}" class="display-comment-picture"/>
         </div>
        <div class="like-comment col-xs-12 ">
             <div class="like-dislike">

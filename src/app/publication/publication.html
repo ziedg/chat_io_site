@@ -203,8 +203,8 @@
 					</div>
 				</form>
 			</div>
-			<img style="display:none;width:60%;margin-top:-20px;margin-left:40px;" id="{{pubImgId}}" />
-			<i class="fa fa-times delete-photo-comment" aria-hidden="true" *ngIf="uploadedPictureComment" (click)="resetCommentPicture()"></i>
+			<img class="upload-comment-picture" id="{{pubImgId}}" />
+			<i class="fa fa-times delete-photo-comment cancel-upload-comment-picture" aria-hidden="true" *ngIf="uploadedPictureComment" (click)="resetCommentPicture()"></i>
 		</div>
 		<!-- comments -->
 		<div class="comments-holder" *ngIf="commentsDisplayed">
