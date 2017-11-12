@@ -44,6 +44,9 @@ declare var swal: any;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Publication {
+
+  commentContent = "";
+
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
   private publicationBean: PublicationBean;
@@ -307,7 +310,9 @@ export class Publication {
   }
 
   publishCommentV2() {
+    console.log();
     console.log(this.commentInputText);
+    let commentToSend = this.emojiService.getCommentTextFromHtml(this.commentInputHtml);
     if (!this.commentInputText && !this.uploadedPictureComment) {
       return;
     }
@@ -315,7 +320,7 @@ export class Publication {
     this.changeDetector.markForCheck();
     var data = new FormData();
 
-    data.append('commentText', this.commentInputText);
+    data.append('commentText', commentToSend);
     data.append('profileId', this.user._id);
     data.append('publId', this.publicationBean._id);
     data.append('commentPicture', this.uploadedPictureComment);

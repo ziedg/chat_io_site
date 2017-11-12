@@ -60,7 +60,6 @@ export class Main {
         this.showButtonMoreNotif = false;
         this.listNotif = [];
         this.user = this.loginService.getUser();
-        this.loadNotif();
     }
 
     loadNotif() {

@@ -13,7 +13,7 @@ export class EmojiService {
         // list people
         nvList.title="persone";
         nvList.list=[];
- 
+
         nvemoji= new EmojiBean();
         nvList.list.push(this.addtoListEmoji(":)","blush"));
         nvList.list.push(this.addtoListEmoji(":D","smile"));
@@ -154,7 +154,7 @@ export class EmojiService {
                                     textAfterEdit=textAfterEdit.replace(textAfterEdit[i],"");
                                 }
                         }
-                       
+
                         if(this.isAEmoji(this.replaceAll(textAfterEdit," ",""))){
                         newText=newText+' '+img+this.shortCutToImageName(this.replaceAll(textAfterEdit," ",""))+'.png" /> ';
                     }
@@ -165,7 +165,7 @@ export class EmojiService {
                 newText=newText+" <br> ";
             }
 
-        
+
         return newText;
     }
     replaceAll(comment,search, replacement){
@@ -190,5 +190,30 @@ export class EmojiService {
         }
           return "";
     }
+
+    imageNameToShortcut(imageName:string):string {
+      for(var i =0;i<this.listEmoji.length;i++){
+        for(var j =0;j<this.listEmoji[i].list.length;j++){
+          if(imageName===this.listEmoji[i].list[j].imageName)
+            return this.listEmoji[i].list[j].shortcut;
+        }
+      }
+      return "";
+    }
+
+    getCommentTextFromHtml(commentHtml) {
+      let firstPart = '<img class="emoji" style="align:absmiddle; top : 0;" src="assets/images/basic/';
+      let secondPart = '.png" />';
+      let context = this;
+      return(
+        commentHtml.replace(
+          new RegExp("(?:"+firstPart+")(.*?)(?:"+secondPart+")", "ig"),
+          function($1,$2,$3){
+            return context.imageNameToShortcut($2);
+          }
+        )
+      );
+    }
+
 
 }

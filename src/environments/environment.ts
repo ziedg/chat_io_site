@@ -7,5 +7,5 @@ export const environment = {
   production: false,
 
   SERVER_URL: 'https://speegar.com:3005/',
-  IMAGE_BASE_URL: 'https://www.speegar.com/images/'
+  IMAGE_BASE_URL: 'https://speegar.com/images/'
 };

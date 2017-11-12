@@ -51,6 +51,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 /** Factories */
 import { httpFactory } from './utils/factories/http.factory';
 import {EmojiPickerModule} from "ng-emoji-picker";
+import {ContenteditableModel} from "./publication/contenteditable-model";
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import {EmojiPickerModule} from "ng-emoji-picker";
         Signin, Signup, Login, Logout, NotFoundPage, Home, NotFound, Notification, ChangePassword, EditProfile,
         Parameters, Post, Profile, Main, Publication, AboutUs, Cgu, Team, Support,
         TopBlagueursAndDecov, GoogleRecaptchaDirective, ForgetPasswordComponent, ResetPasswordComponent,
-        FakeComponent],   // components and directives
+        FakeComponent, ContenteditableModel],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,

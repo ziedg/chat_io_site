@@ -186,8 +186,8 @@
           </textarea>
 					<textarea placeholder="Votre commentaire ..." formControlName="commentText" style="display:none"></textarea>
 					<input type="file" class="{{pubImgId}}" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
-					<div class="textarea" id="{{commentTextareaId}}" placeholder="Votre commentaire ..." (keyup)="updateComment($event)"
-						contenteditable="true" [innerHtml]="commentInputHtml" (keydown.Enter)="publishCommentV2()"
+					<div class="textarea" id="{{commentTextareaId}}" placeholder="Votre commentaire ..."
+						contenteditable="true" [(contenteditableModel)]="commentInputHtml" (keydown.Enter)="publishCommentV2()"
                >
           </div>
 
