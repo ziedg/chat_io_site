@@ -65,9 +65,7 @@ export class Publication {
   selectedEmojiTab = 0;
   emojiOpacity = 0;
   emojiToggleActive = false;
-  commentInputText = "";
   commentInputHtml = "";
-  commentText = "";
   public modalPub = false;
   public pubLink = "";
   public shareLink = "";
@@ -309,11 +307,9 @@ export class Publication {
     console.log(event, event.keyCode, event.keyIdentifier);
   }
 
-  publishCommentV2() {
-    console.log();
-    console.log(this.commentInputText);
+  publishComment() {
     let commentToSend = this.emojiService.getCommentTextFromHtml(this.commentInputHtml);
-    if (!this.commentInputText && !this.uploadedPictureComment) {
+    if (!commentToSend && !this.uploadedPictureComment) {
       return;
     }
     this.loadingComment = true;
@@ -340,7 +336,6 @@ export class Publication {
               this.nbDisplayedComments++;
               //this.formComment.controls.pubComment.updateValue('');
               this.changeDetector.markForCheck();
-              this.commentInputText = "";
               this.commentInputHtml = "";
               jQuery("#" + this.commentTextareaId).empty();
               jQuery("#" + this.pubImgId).attr('src', "");
@@ -700,22 +695,7 @@ export class Publication {
   }
 
   addToComment(emoji) {
-    if (this.commentInputText[this.commentInputText.length - 1] == " ") {
-      this.commentInputText = this.commentInputText + emoji.shortcut;
-      this.commentInputHtml += this.commentText + this.afficheComment(emoji.shortcut);
-    }
-    else {
-      this.commentInputText = this.commentInputText + " " + emoji.shortcut;
-      this.commentInputHtml += this.commentText + this.afficheComment(" " + emoji.shortcut);
-    }
-    this.commentText = "";
-  }
-
-  updateComment($event) {
-    console.log($event);
-    this.commentText += $event.key;
-    this.commentInputText += $event.key;
-    this.changeDetector.markForCheck();
+      this.commentInputHtml += this.afficheComment(" " + emoji.shortcut);
   }
 
   afficheComment(comment): string {

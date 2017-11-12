@@ -181,7 +181,7 @@
 
 				<div class="user-img for-comment" *ngIf="!user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}"></div>
 
-				<form (ngSubmit)="publishCommentV2()" [formGroup]="formComment" #f="ngForm">
+				<form (ngSubmit)="publishComment()" [formGroup]="formComment" #f="ngForm">
 					<textarea placeholder="Votre commentaire ..." formControlName="pubComment" style="display:none" [(ngModel)]="commentText">
           </textarea>
 					<textarea placeholder="Votre commentaire ..." formControlName="commentText" style="display:none"></textarea>
