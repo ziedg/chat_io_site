@@ -43,7 +43,6 @@ export class Home {
     form;
     uploadedPicture: File;
     isLock: boolean = false;
-    finPosts: boolean = false;
     public publicationBeanList: Array<PublicationBean> = [];
     public user: User = new User();
     public link: LinkBean = new LinkBean();
@@ -66,9 +65,10 @@ export class Home {
     afficheWelcome: Boolean;
     pubText: string;
     publishText: string;
-    showErreurConnexion = false;
     linkLoading = false;
     isEmpty = true;
+
+    showSuggestionMSG = false;
 
     constructor(private postService: PostService, private linkView: LinkView, private linkPreview: LinkPreview, private title: Title, private http: Http, private router: Router, private loginService: LoginService, private changeDetector: ChangeDetectorRef) {
 
@@ -123,9 +123,14 @@ export class Home {
         this.linkView.getListLinks(this.pubText);
     }
     putIntoList(response) {
-        if(!response.length) this.showLoading = false;
-        this.isLock = true;
-        var element;
+        if(!response.length || response.length == 0) {
+          this.showLoading = false;
+          this.isLock = false;
+          this.showSuggestionMSG = true;
+          return ;
+        }
+        this.showSuggestionMSG = false;
+        let element;
         for (var i = 0; i < response.length; i++) {
             element = response[i];
             element.displayed = true;
@@ -178,50 +183,38 @@ export class Home {
 
         }
     }
-    //load first Post
+
     loadFirstPosts() {
         if (this.user) {
-            var urlAndPara = "";
-            //localStorage.getItem('typePosts') != 'recent' && localStorage.getItem('typePosts') != 'popular'
-            if (localStorage.getItem('typePosts') == 'popular') {
-                urlAndPara = environment.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
-            }
-            else {
-                urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
-            }
+            this.isLock = true;
+            this.showLoading = true;
+            let urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
             this.http.get(
                 urlAndPara, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
                 response => {
-
                     this.publicationBeanList = [];
                     this.putIntoList(response);
                     this.changeDetector.markForCheck();
                 },
                 err => {
                     setTimeout(() => {
-                        //this.showErreurConnexion = true;
                         this.showLoading = false;
+                         this.isLock = true;
                     }, 3000);
                 },
                 () => {
-                    this.isLock = false;
                 }
                 );
         }
     }
-    //load more Posts
+
     loadMorePosts() {
         if (this.user) {
-            var urlAndPara = "";
-            //localStorage.getItem('typePosts') != 'recent' && localStorage.getItem('typePosts') != 'popular'
-            if (localStorage.getItem('typePosts') == 'popular') {
-                urlAndPara = environment.SERVER_URL + 'getPublicationPopulaireByProfileId/?profileID=' + this.user._id + '&last_publication_id=' + this.lastPostId;
-            }
-            else {
-                urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=' + this.lastPostId;
-            }
+          this.isLock = true;
+          this.showLoading = true;
+            let  urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=' + this.lastPostId;
             this.http.get(
                 urlAndPara, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
@@ -231,29 +224,20 @@ export class Home {
                     this.changeDetector.markForCheck();
                 },
                 err => {
-                    setTimeout(() => {
-                        this.showErreurConnexion = true;
-                        this.showLoading = false;
-                    }, 3000);
+                   this.isLock = false;
+                   this.showLoading = false;
                 },
                 () => {
-                    this.isLock = false;
                 }
                 );
         }
     }
+
     onScrollDown() {
-        if (this.finPosts) {
-            this.showLoading = false;
-            this.isLock = true;
-            return 0;
-        }
-        else if ((((this.lastPostId == "null") || (this.isLock)) || this.showErreurConnexion) || !$(window).scrollTop()) {
-            this.showLoading = true;
-            return 0;
+        if ((((this.lastPostId == "null") || (this.isLock)) || !$(window).scrollTop()) ){
+            return ;
         }
         else {
-            this.isLock = true;
             this.loadMorePosts();
             return 1;
         }
@@ -261,7 +245,6 @@ export class Home {
 
     reLoadposts() {
         this.showLoading = true;
-        this.showErreurConnexion = false;
         if (this.user) {
             if (this.publicationBeanList.length == 0)
                 this.loadFirstPosts();

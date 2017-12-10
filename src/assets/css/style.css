@@ -2616,7 +2616,8 @@ margin-left: 10px;*/
 }
 .widget .subscribe button:hover,
 .widget .subscribe button:active {
-  background-color: #6bac6f;
+  background-color: #009900;
+  border: 1px solid #009900;
   color: #fff;
 }
 .nbr-subscribes {

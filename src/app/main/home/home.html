@@ -55,7 +55,7 @@
 								</div>
 
 							</div>
-							
+
 							<div class="link-preview-loading" *ngIf="linkLoading">Chargement du lien</div>
 							<div class="link-preview" *ngIf="link.isSet">
 								<span>
@@ -89,16 +89,16 @@
                     </span>
 
 							<span class="youtube-video-in hidden-xs">
-                        
-                        
-                        
-                                <input class="yt-in-url youtube-input-popup" 
+
+
+
+                                <input class="yt-in-url youtube-input-popup"
                                         placeholder="youtube.com/watch?v=XXXXXX"
                                         style="display:none;"
                                         (change)="updateYoutube()"
                                         formControlName="publicationYoutubeLink">
-                            
-                        
+
+
                         <i class="fa fa-youtube-play" (click)="changeYoutubeInput()"></i>
                     </span>
 
@@ -154,8 +154,8 @@
 			</form>
 
 			<section id="publications" class="col-xs-12 noPadding" style="height: 100%">
-				<div class="filters hidden-xs">
-					<div class="filter-right">
+				<div class="filters hidden-xs" *ngIf="false">
+					<div class="filter-right" >
 						<article [class.active]="menuFilter == 'recent'" (click)="changeMenuFilter('recent')">
 							Plus recent
 						</article>
@@ -191,21 +191,16 @@
 				</div>
 
 
-				<div *ngIf="showErreurConnexion" class="col-xs-12 publication bordered">
-					<div class="erreur" style="text-align:center;color:red">
-						Oops ! pas de connexion
-						<a (click)="reLoadposts()">
-                        essayez de reconnecter ?
-                        </a>
-					</div>
-				</div>
+        <div class="col-xs-12 bordered welcome-msg typeEffect" id="suggestionMSG" *ngIf="showSuggestionMSG" style="text-align: center;">
+            <h4>Bienvenue chez Speegar !</h4>
+            Suivez des comptes pour voir leurs publications dans votre fil.
+        </div>
 
 
-
-			</section>
-		</div>
-		<div *ngIf="user" class="col-md-4 col-sm-5 hidden-xs side-home">
-			<top-blagueurs-decov></top-blagueurs-decov>
-		</div>
-	</div>
-</div>
+      </section>
+                      </div>
+                      <div *ngIf="user" class="col-md-4 col-sm-5 hidden-xs side-home">
+                          <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
+                      </div>
+                  </div>
+              </div>

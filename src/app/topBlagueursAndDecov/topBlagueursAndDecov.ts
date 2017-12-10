@@ -1,4 +1,4 @@
-import {Component, ChangeDetectorRef} from '@angular/core';
+import {Component, ChangeDetectorRef, Output, EventEmitter} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
@@ -35,6 +35,8 @@ export class TopBlagueursAndDecov {
 	nbDecovDisplayed = 0 ;
 	nbMaxElements = 3;
 	profiles;
+
+  @Output() loadPublications = new EventEmitter<any>();
 
     constructor(private http: Http, private router: Router, private loginService: LoginService,private changeDetector: ChangeDetectorRef) {
 		loginService.actualize();
@@ -141,6 +143,7 @@ export class TopBlagueursAndDecov {
 			.map((res: Response) => res.json())
 			.subscribe(
 			response => {
+        this.loadPublications.emit();
 			if(source=="Decov") {
 					if(this.nbDecovDisplayed >= this.DecovList.length) {
 
