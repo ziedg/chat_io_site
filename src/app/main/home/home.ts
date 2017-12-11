@@ -182,6 +182,10 @@ export class Home {
             }
 
         }
+
+        if(response.length < 10) {
+          this.showSuggestionMSG = true;
+        }
     }
 
     loadFirstPosts() {
