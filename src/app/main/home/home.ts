@@ -192,7 +192,7 @@ export class Home {
         if (this.user) {
             this.isLock = true;
             this.showLoading = true;
-            let urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=';
+            let urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId?last_publication_id=';
             this.http.get(
                 urlAndPara, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
@@ -218,7 +218,7 @@ export class Home {
         if (this.user) {
           this.isLock = true;
           this.showLoading = true;
-            let  urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId/?profileID=' + this.user._id + '&last_publication_id=' + this.lastPostId;
+            let  urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId?last_publication_id=' + this.lastPostId;
             this.http.get(
                 urlAndPara, AppSettings.OPTIONS)
                 .map((res: Response) => res.json())

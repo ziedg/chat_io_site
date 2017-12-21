@@ -43,9 +43,10 @@ export class HttpClient extends Http {
         return this.injector.get(Router);
     }
 
-    addCsrfHeader(url:string,method:string,options: RequestOptionsArgs):void {
-        //let myCookie = Cookie.get('CSRF');
-        //options.headers.set(EPortalUtils.CSRF, myCookie);
+    addSecurityHeaders(url:string,method:string,options: RequestOptionsArgs):void {
+      if(localStorage.getItem('token')){
+        options.headers.set(Constants.X_ACCESS_TOKEN, localStorage.getItem('token'));
+      }
     }
 
     /**
@@ -74,7 +75,7 @@ export class HttpClient extends Http {
     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
         options = this.setOptions(options);
 
-        this.addCsrfHeader(url,'GET',options);
+        this.addSecurityHeaders(url,'GET',options);
         return this.intercept(super.get(url,options));
     }
 
@@ -88,7 +89,7 @@ export class HttpClient extends Http {
     delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
         options = this.setOptions(options);
 
-        this.addCsrfHeader(url,'DELETE',options);
+        this.addSecurityHeaders(url,'DELETE',options);
         return this.intercept(super.delete(url,options));
     }
 
@@ -102,7 +103,7 @@ export class HttpClient extends Http {
      */
     post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
         options = this.setOptions(options);
-        this.addCsrfHeader(url,'POST',options);
+        this.addSecurityHeaders(url,'POST',options);
         return this.intercept(super.post(url, body, options));
     }
 
@@ -116,7 +117,7 @@ export class HttpClient extends Http {
      */
     put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
         options = this.setOptions(options);
-        this.addCsrfHeader(url,'PUT',options);
+        this.addSecurityHeaders(url,'PUT',options);
         return this.intercept(super.put(url, body, options));
     }
 
