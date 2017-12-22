@@ -22,12 +22,13 @@
                         <router-outlet></router-outlet>
 
                         <span *ngIf="!dontShowSocialNetworksLoginButtons">
-        <div class="col-xs-12 separatorBox">
+
+        <div class="col-xs-12 separatorBox" >
             <div class="semiSeparator"></div>
             Ou
             <div class="semiSeparator"></div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12" >
             <form (ngSubmit)="loginWithFacebook()" class="fb-form">
                 <button class="social-login facebook-btn" type="submit" *ngIf="!loadingFb">
                     <i class="fa fa-facebook-official" aria-hidden="true"></i>
@@ -41,14 +42,13 @@
         </div>
     </span>
                     </div>
-                    <div class="col-md-11 col-sm-12 col-xs-12 boxLogin2"   [class.marginned]="loacationPath != '/login/sign-up'"
-                    *ngIf="loacationPath=='/login/sign-in' || loacationPath=='/login/sign-up'">
+                    <div class="col-md-11 col-sm-12 col-xs-12 boxLogin2"   [class.marginned]="loacationPath != '/login/sign-up'">
                         <div class="col-xs-12" *ngIf="loacationPath=='/login/sign-in'">
                             Vous n’avez pas de compte ?
                             <a class="linkBlue" [routerLink]="['/login/sign-up']">Inscrivez-vous
             </a>
                         </div>
-                        <div class="col-xs-12" *ngIf="loacationPath=='/login/sign-up'">
+                        <div class="col-xs-12"  *ngIf="loacationPath !='/login/sign-in'">
                             Vous avez un compte ?
                             <a class="linkBlue" [routerLink]="['/login/sign-in']">Connectez-vous
             </a>

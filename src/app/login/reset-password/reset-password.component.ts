@@ -26,6 +26,7 @@ export class ResetPasswordComponent {
   loadingSign = false;
   errorMessage: string = null;
   form;
+  passwordIsUpdated = false;
 
   constructor(private title: Title, public http: Http, private router: Router,
               private loginService: LoginService, private route: ActivatedRoute,
@@ -73,11 +74,8 @@ export class ResetPasswordComponent {
             newPassword: this.form.value.password
           })
           .then(response => {
-            if (response.status == 1) {
-              localStorage.setItem('token', response.token);
-              localStorage.setItem('user', JSON.stringify(response.user));
-              this.loginService.actualize();
-              this.router.navigate(['/main/home']);
+            if (response.status == 0) {
+              this.passwordIsUpdated = true ;
               this.loadingSign = false;
             }
             else {

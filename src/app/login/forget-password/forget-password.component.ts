@@ -26,6 +26,7 @@ export class ForgetPasswordComponent {
   loadingSign = false;
   errorMessage: string = null;
   form;
+  mailIsSent = false;
 
   constructor(private title: Title, public http: Http, private router: Router, private loginService: LoginService) {
     this.title.setTitle("Connexion - Speegar");
@@ -53,11 +54,17 @@ export class ForgetPasswordComponent {
     let body = JSON.stringify(this.form.value);
     this.http.post(environment.SERVER_URL + 'resetPwdMail', body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
-      .subscribe(response => this.router.navigate(['/login/sigin']));
+      .subscribe(response =>
+          this.mailIsSent=true
+        );
   }
 
-  RedirectTo(link: string) {
-    AppSettings.Redirect(link);
+
+  resetForgetPassword(){
+    this.mailIsSent=false;
+    this.errorMessage = null;
+    this.form.value.email = "";
+    this.loadingSign=false;
   }
 
 }
