@@ -23,12 +23,12 @@
 
                         <span *ngIf="!dontShowSocialNetworksLoginButtons">
 
-        <div class="col-xs-12 separatorBox" >
+        <div class="col-xs-12 separatorBox" *ngIf="loacationPath=='/login/sign-in' || loacationPath=='/login/sign-up' ">
             <div class="semiSeparator"></div>
             Ou
             <div class="semiSeparator"></div>
         </div>
-        <div class="col-xs-12" >
+        <div class="col-xs-12" *ngIf="loacationPath=='/login/sign-in' || loacationPath=='/login/sign-up' " >
             <form (ngSubmit)="loginWithFacebook()" class="fb-form">
                 <button class="social-login facebook-btn" type="submit" *ngIf="!loadingFb">
                     <i class="fa fa-facebook-official" aria-hidden="true"></i>
@@ -40,6 +40,9 @@
             </form>
 
         </div>
+        <div class="paddingSeparator" *ngIf="loacationPath!='/login/sign-in' && loacationPath!='/login/sign-up' "></div>
+
+
     </span>
                     </div>
                     <div class="col-md-11 col-sm-12 col-xs-12 boxLogin2"   [class.marginned]="loacationPath != '/login/sign-up'">

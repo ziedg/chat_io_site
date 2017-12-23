@@ -2925,6 +2925,11 @@ margin-left: 10px;*/
 a {
   cursor: pointer;
 }
+
+.paddingSeparator{
+  display: inline-block;
+  height: 40px;
+}
 .semiSeparator {
   display: inline-block;
   width: 70px;
