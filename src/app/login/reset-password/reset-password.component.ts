@@ -1,13 +1,9 @@
-/**
- * Created by chaker on 27/11/16.
- */
-
-
 import {Component} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Validators, FormControl, FormGroup} from '@angular/forms';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import 'rxjs/add/operator/map';
+import { TranslateService } from 'ng2-translate';
 
 /* conf */
 import {AppSettings} from '../../conf/app-settings';
@@ -18,19 +14,23 @@ import {LoginService} from '../../service/loginService';
 import {Title} from "@angular/platform-browser";
 import {ResetPasswordService} from "./reset-password.service";
 
+/** Utils */
+import * as pathUtils from '../../utils/path.utils';
+
 @Component({
   moduleId: module.id,
   templateUrl: 'reset-password.component.html'
 })
 export class ResetPasswordComponent {
   loadingSign = false;
-  errorMessage: string = null;
+  errorMessage:string = null;
   form;
   passwordIsUpdated = false;
 
-  constructor(private title: Title, public http: Http, private router: Router,
-              private loginService: LoginService, private route: ActivatedRoute,
-              private resetPasswordService: ResetPasswordService) {
+  constructor(public translate:TranslateService,
+              private title:Title, public http:Http, private router:Router,
+              private loginService:LoginService, private route:ActivatedRoute,
+              private resetPasswordService:ResetPasswordService) {
     this.title.setTitle("Connexion - Speegar");
     this.form = new FormGroup({
       password: new FormControl('', Validators.required),
@@ -50,53 +50,43 @@ export class ResetPasswordComponent {
     this.form.controls.confirm_password._touched = true;
 
     if (this.form.value.password == "") {
-      this.errorMessage = "Saisissez votre Mot de passe.";
+      this.errorMessage = "SP_FV_ER_PASSWORD_EMPTY";
       return;
     }
 
     if (this.form.value.confirm_password == "") {
-      this.errorMessage = "Confirmez votre Mot de passe.";
+      this.errorMessage = "SP_FV_ER_CONFIRM_PASSWORD_EMPTY";
       return;
     }
 
     if (this.form.value.confirm_password !== this.form.value.confirm_password) {
-      this.errorMessage = "Les deux mots de passe ne se correspondent pas.";
+      this.errorMessage = "SP_FV_ER_PASSWORDS_NOT_MATCH";
+      return;
+    }
+
+    if (this.form.value.password.length < 5) {
+      this.errorMessage = "SP_FV_ER_PASSWORD_SIZE";
       return;
     }
 
     this.loadingSign = true;
     this.route.params
-    // (+) converts string 'id' to a number  +params['id']
-      .subscribe((params: Params) =>
+      .subscribe((params:Params) =>
         this.resetPasswordService.resetPassword(
           {
             randomString: params['code'],
             newPassword: this.form.value.password
           })
           .then(response => {
+            this.loadingSign = false;
+
             if (response.status == 0) {
-              this.passwordIsUpdated = true ;
-              this.loadingSign = false;
+              this.passwordIsUpdated = true;
             }
             else {
-              if (response.message == "Authentication failed. User not found.") {
-                this.errorMessage = "Le nom d’utilisateur entré n’appartient à aucun compte. Veuillez le vérifer et réessayer.";
-              }
-              else if (response.message == "Authentication failed. Wrong password.") {
-                this.errorMessage = "Votre mot de passe est incorrect. Veuillez le vérifer.";
-              }
-              else {
-                this.errorMessage = response.message;
-              }
-              this.loadingSign = false;
+              this.errorMessage = response.error;
             }
           }));
-
-
-  }
-
-  RedirectTo(link: string) {
-    AppSettings.Redirect(link);
   }
 
 

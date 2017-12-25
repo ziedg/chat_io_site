@@ -11,11 +11,15 @@ import { Comment } from '../../comment/comment';
 /* conf */
 import { AppSettings } from '../../conf/app-settings';
 
+/** Utils */
+import * as pathUtils from '../../utils/path.utils';
+
 /* services */
 import { LoginService } from '../../service/loginService';
 import { LinkView } from "../../service/linkView";
 import { LinkPreview } from "../../service/linkPreview";
 import { PostService } from "../../service/postService";
+import { TranslateService } from 'ng2-translate';
 
 /* user  */
 import { User } from '../../beans/user';
@@ -27,457 +31,436 @@ import { Title } from "@angular/platform-browser";
 import { LinkBean } from '../../beans/linkBean';
 import {environment} from "../../../environments/environment";
 
-declare var jQuery: any;
-declare var $: any;
-declare var FB: any;
-declare var auth: any;
-declare const gapi: any;
+declare var jQuery:any;
+declare var $:any;
+declare var FB:any;
+declare var auth:any;
+declare const gapi:any;
 @Component({
-    moduleId: module.id,
-    selector: 'home',
-    templateUrl: 'home.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  moduleId: module.id,
+  selector: 'home',
+  templateUrl: 'home.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class Home {
-    form;
-    uploadedPicture: File;
-    isLock: boolean = false;
-    public publicationBeanList: Array<PublicationBean> = [];
-    public user: User = new User();
-    public link: LinkBean = new LinkBean();
-    public previewLink: Array<LinkBean> = [];
+  form;
+  uploadedPicture:File;
+  isLock:boolean = false;
+  public publicationBeanList:Array<PublicationBean> = [];
+  public user:User = new User();
+  public link:LinkBean = new LinkBean();
+  public previewLink:Array<LinkBean> = [];
 
 
-    //Variables Declarations
-    titleEnable = false;
-    youtubeInput = false;
-    youtubeLink = "";
-    menuFilter = "recent";
-    selectedMenuElement = 0;
-    nbLoadedPosts = 10;
-    failureMessage;
-    showLoading = false;
-    errorMsg = "";
-    lastPostId: string = "null";
-    publication;
-    loadingPublish = false;
-    afficheWelcome: Boolean;
-    pubText: string;
-    publishText: string;
-    linkLoading = false;
-    isEmpty = true;
+  //Variables Declarations
+  titleEnable = false;
+  youtubeInput = false;
+  youtubeLink = "";
+  menuFilter = "recent";
+  selectedMenuElement = 0;
+  nbLoadedPosts = 10;
+  failureMessage;
+  showLoading = false;
+  errorMsg = "";
+  lastPostId:string = "null";
+  publication;
+  loadingPublish = false;
+  pubText:string;
+  publishText:string;
+  linkLoading = false;
+  isEmpty = true;
+  showSuggestionMSG = false;
 
-    showSuggestionMSG = false;
+  constructor(public translate:TranslateService,
+              private postService:PostService,
+              private linkView:LinkView,
+              private linkPreview:LinkPreview,
+              private title:Title,
+              private http:Http,
+              private router:Router,
+              private loginService:LoginService,
+              private changeDetector:ChangeDetectorRef) {
 
-    constructor(private postService: PostService, private linkView: LinkView, private linkPreview: LinkPreview, private title: Title, private http: Http, private router: Router, private loginService: LoginService, private changeDetector: ChangeDetectorRef) {
+    this.loginService.redirect();
+    this.user = this.loginService.getUser();
+    this.postService.setShowErrorConnexion(false);
 
-        this.loginService.redirect();
-        this.user = this.loginService.getUser();
-        this.postService.setShowErrorConnexion(false);
+    this.form = new FormGroup({
+      publicationTitle: new FormControl(),
+      publicationText: new FormControl('', Validators.required),
+      publicationYoutubeLink: new FormControl()
+    });
 
-        this.form = new FormGroup({
-            publicationTitle: new FormControl(),
-            publicationText: new FormControl('', Validators.required),
-            publicationYoutubeLink: new FormControl()
-        });
+    this.publicationBeanList = [];
+    this.loadFirstPosts();
+    if (!this.publicationBeanList.length)
+      this.loadFirstPosts();
+    this.changeDetector.markForCheck();
+    window.scrollTo(0, 0);
 
-        this.publicationBeanList = [];
-        this.loadFirstPosts();
-        if (!this.publicationBeanList.length)
-            this.loadFirstPosts();
-        this.changeDetector.markForCheck();
-      window.scrollTo(0, 0);
+    this.menuFilter = 'recent';
 
-      if (localStorage.getItem('isNewInscri')) {
-          if (localStorage.getItem('isNewInscri') == "true") {
-              this.afficheWelcome = true;
-              localStorage.removeItem('isNewInscri');
-          }
-          else {
-              this.afficheWelcome = false;
-          }
+  }
+
+  closeWelcomeMsg() {
+    jQuery("#welcomeMsgDisplay").fadeOut(1000);
+    this.user.isNewInscri = false;
+    this.loginService.updateUser(this.user);
+  }
+
+  putNewPub(pub:PublicationBean, isShared:boolean) {
+    var element = pub;
+    element.displayed = true;
+    if (isShared) {
+      element.isShared = true;
+    }
+    else {
+      element.isShared = false;
+    }
+    this.publicationBeanList.unshift(element);
+    this.changeDetector.markForCheck();
+  }
+
+  checkPreviewLink($event) {
+    this.pubText = jQuery("#pubText").val();
+    this.changeDetector.markForCheck();
+    this.linkView.getListLinks(this.pubText);
+  }
+
+  putIntoList(response) {
+    if (!response.length || response.length == 0) {
+      this.showLoading = false;
+      this.isLock = false;
+      this.showSuggestionMSG = true;
+      return;
+    }
+    this.showSuggestionMSG = false;
+    let element;
+    for (var i = 0; i < response.length; i++) {
+      element = response[i];
+      element.displayed = true;
+
+      if (response[i].isShared == "true") {
+        element.isShared = true;
       }
       else {
-          this.afficheWelcome = false;
+        element.isShared = false;
       }
-      this.menuFilter = 'recent';
+
+      if (response[i].isLiked == "true")
+        element.isLiked = true;
+      else
+        element.isLiked = false;
+
+      if (response[i].isDisliked == "true")
+        element.isDisliked = true;
+      else
+        element.isDisliked = false;
+
+      for (var j = 0; j < response[i].comments.length; j++) {
+        if (response[i].comments[j].isLiked == "true")
+          element.comments[j].isLiked = true;
+        else
+          element.comments[j].isLiked = false;
+
+        if (response[i].comments[j].isDisliked == "true")
+          element.comments[j].isDisliked = true;
+        else
+          element.comments[j].isDisliked = false;
+
+        if (j == response[i].comments.length) {
+          this.publicationBeanList.push(element);
+
+          if (i == response.length - 1) {
+            this.showLoading = false;
+            this.isLock = false;
+            this.lastPostId = response[i]._id;
+          }
+        }
+      }
+
+      this.publicationBeanList.push(element);
+      if (i == response.length - 1) {
+        this.showLoading = false;
+        this.isLock = false;
+        this.lastPostId = response[i]._id;
+      }
+
     }
 
-
-    putNewPub(pub: PublicationBean, isShared: boolean) {
-        var element = pub;
-        element.displayed = true;
-        if (isShared) {
-            element.isShared = true;
-        }
-        else {
-            element.isShared = false;
-        }
-        this.publicationBeanList.unshift(element);
-        this.changeDetector.markForCheck();
+    if (response.length < 10) {
+      this.showSuggestionMSG = true;
     }
-    checkPreviewLink($event) {
-        this.pubText = jQuery("#pubText").val();
-        this.changeDetector.markForCheck();
-        this.linkView.getListLinks(this.pubText);
-    }
-    putIntoList(response) {
-        if(!response.length || response.length == 0) {
-          this.showLoading = false;
-          this.isLock = false;
-          this.showSuggestionMSG = true;
-          return ;
-        }
-        this.showSuggestionMSG = false;
-        let element;
-        for (var i = 0; i < response.length; i++) {
-            element = response[i];
-            element.displayed = true;
+  }
 
-            if (response[i].isShared == "true") {
-                element.isShared = true;
-            }
-            else {
-                element.isShared = false;
-            }
-
-            if (response[i].isLiked == "true")
-                element.isLiked = true;
-            else
-                element.isLiked = false;
-
-            if (response[i].isDisliked == "true")
-                element.isDisliked = true;
-            else
-                element.isDisliked = false;
-
-            for (var j = 0; j < response[i].comments.length; j++) {
-                if (response[i].comments[j].isLiked == "true")
-                    element.comments[j].isLiked = true;
-                else
-                    element.comments[j].isLiked = false;
-
-                if (response[i].comments[j].isDisliked == "true")
-                    element.comments[j].isDisliked = true;
-                else
-                    element.comments[j].isDisliked = false;
-
-                if (j == response[i].comments.length) {
-                    this.publicationBeanList.push(element);
-
-                    if (i == response.length - 1) {
-                        this.showLoading = false;
-                        this.isLock = false;
-                        this.lastPostId = response[i]._id;
-                    }
-                }
-            }
-
-            this.publicationBeanList.push(element);
-            if (i == response.length - 1) {
-                this.showLoading = false;
-                this.isLock = false;
-                this.lastPostId = response[i]._id;
-            }
-
-        }
-
-        if(response.length < 10) {
-          this.showSuggestionMSG = true;
-        }
-    }
-
-    loadFirstPosts() {
-        if (this.user) {
-            this.isLock = true;
-            this.showLoading = true;
-            let urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId?last_publication_id=';
-            this.http.get(
-                urlAndPara, AppSettings.OPTIONS)
-                .map((res: Response) => res.json())
-                .subscribe(
-                response => {
-                    this.publicationBeanList = [];
-                    this.putIntoList(response);
-                    this.changeDetector.markForCheck();
-                },
-                err => {
-                    setTimeout(() => {
-                        this.showLoading = false;
-                         this.isLock = true;
-                    }, 3000);
-                },
-                () => {
-                }
-                );
-        }
-    }
-
-    loadMorePosts() {
-        if (this.user) {
-          this.isLock = true;
-          this.showLoading = true;
-            let  urlAndPara = environment.SERVER_URL + 'getPublicationByProfileId?last_publication_id=' + this.lastPostId;
-            this.http.get(
-                urlAndPara, AppSettings.OPTIONS)
-                .map((res: Response) => res.json())
-                .subscribe(
-                response => {
-                    this.putIntoList(response);
-                    this.changeDetector.markForCheck();
-                },
-                err => {
-                   this.isLock = false;
-                   this.showLoading = false;
-                },
-                () => {
-                }
-                );
-        }
-    }
-
-    onScrollDown() {
-        if ((((this.lastPostId == "null") || (this.isLock)) || !$(window).scrollTop()) ){
-            return ;
-        }
-        else {
-            this.loadMorePosts();
-            return 1;
-        }
-    }
-
-    reLoadposts() {
-        this.showLoading = true;
-        if (this.user) {
-            if (this.publicationBeanList.length == 0)
-                this.loadFirstPosts();
-            else
-                this.loadMorePosts();
-        }
-    }
-    updatePublishTextOnPaste($event) {
-        $event.preventDefault();
-        var text = $event.clipboardData.getData("text/plain");
-
-        if (text.search("youtube.com/watch") >= 0  ||  text.search("youtu.be/") >= 0) {
-            this.youtubeInput = true;
-            jQuery(".yt-in-url").val(text);
-            this.changeDetector.markForCheck();
-            this.youtubeLink = text;
-            this.updateYoutube();
-            //this.form.controls.publicationYoutubeLink.updateValue(text);
-            return 1;
-        }
-        if (this.isEmpty) {
-            jQuery(".textarea-publish")[0].innerHTML = jQuery(".textarea-publish")[0].innerHTML + "&nbsp;";
-            this.publishText = jQuery(".textarea-publish")[0].innerHTML;
-        }
-        this.linkAPI();
-        document.execCommand("insertHTML", false, text);
-
-    }
-    updatePublishText($event) {
-        this.publishText = $event.path[0].innerHTML;
-        if (!this.publishText || this.publishText.length == 0) {
-            this.isEmpty = true;
-        }
-        else {
-            this.isEmpty = false;
-        }
-
-        //this.link = this.link.update(this.publishText);
-        this.linkAPI();
-        //this.linkPreview.linkAPI(this.publishText,this.link ,this.previewLink);
-        //this.link = this.linkPreview.returnerLink;
-        this.changeDetector.markForCheck();
-    }
-    resetPublishPicture() {
-        jQuery("#preview-image").attr('src', "");
-        jQuery("#preview-image").hide();
-        this.uploadedPicture = null;
-    }
-
-    resetPublish() {
-        jQuery("#file-image").val("");
-        jQuery("#file-image-gif").val("");
-        jQuery("#preview-image").attr('src', '');
-        jQuery("#preview-image").fadeOut();
-        this.uploadedPicture = null;
-        //this.form.controls.publicationTitle.updateValue('');
-        this.titleEnable = false;
-        //this.form.controls.publicationText.updateValue('');
-        //this.form.controls.publicationYoutubeLink.updateValue('');
-        this.youtubeInput = false;
-        this.youtubeLink = null;
-        jQuery(".yt-in-url").val("");
-        jQuery(".youtube-preview").html("");
-        this.loadingPublish = false;
-        jQuery(".textarea-publish").html("");
-        this.closeLinkAPI();
-        this.isEmpty = true;
-        this.changeDetector.markForCheck();
-    }
-
-    //add Publication
-    publish() {
-        if (!this.form.value.publicationText && !this.youtubeLink && !this.uploadedPicture && !this.link.isSet) {
-            this.errorMsg = "Votre publication est vide. Veuillez ecrire une publication, partager une photo/GIF ou une video Youtube.";
-            this.errorTimed();
-            return;
-        }
-        this.loadingPublish = true;
-        var data = new FormData();
-        data.append('profileId', this.user._id);
-        if (this.selectedMenuElement == 0) {
-            data.append('confidentiality', 'PUBLIC');
-        }
-        else {
-            data.append('confidentiality', 'PRIVATE');
-        }
-
-        data.append('publTitle', this.form.value.publicationTitle);
-        data.append('publText', this.form.value.publicationText);
-        data.append('publyoutubeLink', this.youtubeLink);
-        data.append('publPicture', this.uploadedPicture);
-        if (this.link.isSet) {
-            data.append('publExternalLink', this.link.url);
-        }
-        this.changeDetector.markForCheck();
-
-        this.http.post(environment.SERVER_URL + 'publish', data, AppSettings.OPTIONS_POST)
-            .map((res: Response) => res.json())
-            .subscribe(
-            response => {
-                if (response.status == "0") {
-                    jQuery("#errorMsgDisplay").fadeOut(1000);
-                    this.putNewPub(response.publication, false);
-                    this.resetPublish();
-                }
-                else {
-                    this.failureMessage = response.data;
-                    this.errorMsg = response.message;
-                    this.errorTimed();
-                    this.loadingPublish = false;
-
-                }
-            },
-            err => { },
-            () => {
-            }
-            );
-    }
-
-    //Enable title post
-    enableTitlePost() {
-        this.titleEnable = !this.titleEnable;
-
-    }
-    emptyDivOnFocus() {
-        jQuery("#placehoder-publish").remove();
-    }
-    //change Menu Filter
-    changeMenuFilter(newMenufilter: string) {
-        this.menuFilter = newMenufilter;
-        localStorage.setItem('typePosts', newMenufilter);
+  loadFirstPosts() {
+    this.isLock = true;
+    this.showLoading = true;
+    let urlAndPara = environment.SERVER_URL + pathUtils.GET_PUBLICATIONS;
+    this.http.get(
+      urlAndPara, AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
         this.publicationBeanList = [];
-        this.publicationBeanList = this.postService.loadFirstPosts();
-    }
-    //select Menu Home
-    enableSelectMenu() {
-        jQuery(".select-menu").toggle();
-    }
-
-    changeSelectMenu(choice) {
-        this.selectedMenuElement = choice;
-    }
-
-    //change Youtube Input
-    changeYoutubeInput() {
-        jQuery(".yt-in-url").toggle();
-    }
-
-    //error close
-    closeErrorMsg() {
-        jQuery("#errorMsgDisplay").fadeOut(1000);
-        this.errorMsg = "";
-    }
-    closeWelcomeMsg() {
-        jQuery("#welcomeMsgDisplay").fadeOut(1000);
-        this.afficheWelcome = false;
-    }
-    errorTimed() {
-        jQuery("#errorMsgDisplay").fadeIn(500);
+        this.putIntoList(response);
+        this.changeDetector.markForCheck();
+      },
+        err => {
         setTimeout(() => {
-            jQuery("#errorMsgDisplay").fadeOut(1000);
-        }, 5000);
-        setTimeout(() => {
-            this.errorMsg = "";
-        }, 5200);
+          this.showLoading = false;
+          this.isLock = true;
+        }, 3000);
+      },
+      () => {
+      }
+    );
 
+  }
+
+  loadMorePosts() {
+    this.isLock = true;
+    this.showLoading = true;
+    let urlAndPara = environment.SERVER_URL
+      + pathUtils.GET_PUBLICATIONS + this.lastPostId;
+    this.http.get(
+      urlAndPara, AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        this.putIntoList(response);
+        this.changeDetector.markForCheck();
+      },
+        err => {
+        this.isLock = false;
+        this.showLoading = false;
+      },
+      () => {
+      }
+    );
+
+  }
+
+  onScrollDown() {
+    if ((((this.lastPostId == "null") || (this.isLock)) || !$(window).scrollTop())) {
+      return;
+    }
+    else {
+      this.loadMorePosts();
+      return 1;
+    }
+  }
+
+  reLoadposts() {
+    this.showLoading = true;
+    if (this.user) {
+      if (this.publicationBeanList.length == 0)
+        this.loadFirstPosts();
+      else
+        this.loadMorePosts();
+    }
+  }
+
+  updatePublishTextOnPaste($event) {
+    $event.preventDefault();
+    var text = $event.clipboardData.getData("text/plain");
+
+    if (text.search("youtube.com/watch") >= 0 || text.search("youtu.be/") >= 0) {
+      this.youtubeInput = true;
+      jQuery(".yt-in-url").val(text);
+      this.changeDetector.markForCheck();
+      this.youtubeLink = text;
+      this.updateYoutube();
+      return 1;
+    }
+    this.analyzeLink(text);
+    document.execCommand("insertHTML", false, text);
+  }
+
+
+  resetPublishPicture() {
+    jQuery("#preview-image").attr('src', "");
+    jQuery("#preview-image").hide();
+    this.uploadedPicture = null;
+  }
+
+  resetPublish() {
+    jQuery("#file-image").val("");
+    jQuery("#file-image-gif").val("");
+    jQuery("#preview-image").attr('src', '');
+    jQuery("#preview-image").fadeOut();
+    this.uploadedPicture = null;
+    this.titleEnable = false;
+    this.youtubeInput = false;
+    this.youtubeLink = null;
+    jQuery(".yt-in-url").val("");
+    jQuery(".youtube-preview").html("");
+    this.loadingPublish = false;
+    jQuery(".textarea-publish").html("");
+    this.closeLinkAPI();
+    this.isEmpty = true;
+    this.changeDetector.markForCheck();
+  }
+
+  publish() {
+    this.form.value.publicationText = jQuery("#publishDiv").text();
+    if (!this.form.value.publicationText && !this.youtubeLink && !this.uploadedPicture && !this.link.isSet) {
+      this.errorMsg = "SP_FV_ER_PUBLICATION_EMPTY";
+      this.errorTimed();
+      return;
+    }
+    this.loadingPublish = true;
+    var data = new FormData();
+    data.append('profileId', this.user._id);
+    if (this.selectedMenuElement == 0) {
+      data.append('confidentiality', 'PUBLIC');
+    }
+    else {
+      data.append('confidentiality', 'PRIVATE');
     }
 
-    //uploading Photo click event
-    addPhoto() {
-        jQuery(("#file-image")).click();
+    data.append('publTitle', this.form.value.publicationTitle);
+    data.append('publText', this.form.value.publicationText);
+    data.append('publyoutubeLink', this.youtubeLink);
+    data.append('publPicture', this.uploadedPicture);
+    if (this.link.isSet) {
+      data.append('publExternalLink', this.link.url);
     }
-    addPhotoGIF() {
-        jQuery(("#file-image-gif")).click();
-    }
-    //uploading photo or GIF
-    uploadPhoto($event) {
-
-        var inputValue = $event.target;
-        if (inputValue != null && null != inputValue.files[0]) {
-            this.uploadedPicture = inputValue.files[0];
-            previewFile(this.uploadedPicture);
-            jQuery(".youtube-preview").html("");
-            //this.form.controls.publicationYoutubeLink.updateValue('');
-            this.closeLinkAPI();
-
+    this.changeDetector.markForCheck();
+    this.http.post(environment.SERVER_URL + pathUtils.PUBLISH, data, AppSettings.OPTIONS_POST)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        if (response.status == "0") {
+          jQuery("#errorMsgDisplay").fadeOut(1000);
+          this.putNewPub(response.publication, false);
+          this.resetPublish();
         }
         else {
-            this.uploadedPicture = null;
+          this.errorMsg = response.error;
+          this.errorTimed();
         }
+      },
+        err => {
+        this.errorMsg = "SP_ER_TECHNICAL_ERROR";
+      },
+      () => {
+        this.loadingPublish = false;
+      }
+    );
+  }
+
+  enableTitlePost() {
+    this.titleEnable = !this.titleEnable;
+  }
+
+  emptyDivOnFocus() {
+    jQuery("#placehoder-publish").remove();
+  }
+
+  //change Menu Filter
+  changeMenuFilter(newMenufilter:string) {
+    this.menuFilter = newMenufilter;
+    localStorage.setItem('typePosts', newMenufilter);
+    this.publicationBeanList = [];
+    this.publicationBeanList = this.postService.loadFirstPosts();
+  }
+
+  //select Menu Home
+  enableSelectMenu() {
+    jQuery(".select-menu").toggle();
+  }
+
+  changeSelectMenu(choice) {
+    this.selectedMenuElement = choice;
+  }
+
+  //change Youtube Input
+  changeYoutubeInput() {
+    jQuery(".yt-in-url").toggle();
+  }
+
+  //error close
+  closeErrorMsg() {
+    jQuery("#errorMsgDisplay").fadeOut(1000);
+    this.errorMsg = "";
+  }
+
+  errorTimed() {
+    jQuery("#errorMsgDisplay").fadeIn(500);
+    setTimeout(() => {
+      jQuery("#errorMsgDisplay").fadeOut(1000);
+    }, 5000);
+    setTimeout(() => {
+      this.errorMsg = "";
+    }, 5200);
+
+  }
+
+  //uploading Photo click event
+  addPhoto() {
+    jQuery(("#file-image")).click();
+  }
+
+  addPhotoGIF() {
+    jQuery(("#file-image-gif")).click();
+  }
+
+  //uploading photo or GIF
+  uploadPhoto($event) {
+
+    var inputValue = $event.target;
+    if (inputValue != null && null != inputValue.files[0]) {
+      this.uploadedPicture = inputValue.files[0];
+      previewFile(this.uploadedPicture);
+      jQuery(".youtube-preview").html("");
+      //this.form.controls.publicationYoutubeLink.updateValue('');
+      this.closeLinkAPI();
+
     }
-
-    uploadPhotoGIF($event) {
-        var inputValue = $event.target;
-        if (inputValue != null && null != inputValue.files[0]) {
-            this.uploadedPicture = inputValue.files[0];
-            previewFile(this.uploadedPicture);
-            jQuery(".youtube-preview").html("");
-        }
-        else {
-            this.uploadedPicture = null;
-        }
+    else {
+      this.uploadedPicture = null;
     }
+  }
+
+  uploadPhotoGIF($event) {
+    var inputValue = $event.target;
+    if (inputValue != null && null != inputValue.files[0]) {
+      this.uploadedPicture = inputValue.files[0];
+      previewFile(this.uploadedPicture);
+      jQuery(".youtube-preview").html("");
+    }
+    else {
+      this.uploadedPicture = null;
+    }
+  }
 
 
-   getIdYoutubeVideoId(youtubeLink) : string {
+  getIdYoutubeVideoId(youtubeLink):string {
 
-     if (youtubeLink.indexOf("youtube.com") > 0) {
-       var video = "";
-       var a = youtubeLink.split("?");
-       var b = a[1];
-       var c = b.split("&");
-       for (var i = 0; i < c.length; i++) {
-         var d = c[i].split("=");
-         if (d[0] == "v") {
-           return d[1];
-         }
-       }
-     } else if (youtubeLink.indexOf("youtu.be") > 0) {
-       var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-       var match = youtubeLink.match(regExp);
-       if (match && match[2].length == 11) {
-         return match[2];
-       }
-     }
-     return 'error';
-   }
+    if (youtubeLink.indexOf("youtube.com") > 0) {
+      var video = "";
+      var a = youtubeLink.split("?");
+      var b = a[1];
+      var c = b.split("&");
+      for (var i = 0; i < c.length; i++) {
+        var d = c[i].split("=");
+        if (d[0] == "v") {
+          return d[1];
+        }
+      }
+    } else if (youtubeLink.indexOf("youtu.be") > 0) {
+      var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      var match = youtubeLink.match(regExp);
+      if (match && match[2].length == 11) {
+        return match[2];
+      }
+    }
+    return 'error';
+  }
 
-  displayYoutubeLinkError(){
+  displayYoutubeLinkError() {
     this.errorMsg = "Votre lien Youtube est invalide! Veuillez mettre un lien Youtube Valide.";
     this.errorTimed();
     jQuery(".youtube-preview").html("");
@@ -488,171 +471,172 @@ export class Home {
     let videoId = this.getIdYoutubeVideoId(a.val());
 
     try {
-        if(videoId == 'error'){
-          this.displayYoutubeLinkError();
-          return;
-        }
+      if (videoId == 'error') {
+        this.displayYoutubeLinkError();
+        return;
+      }
 
-        jQuery(".youtube-preview").html('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>');
-        this.uploadedPicture = null;
-        this.closeLinkAPI();
-        this.youtubeLink = videoId;
-        jQuery("#preview-image").hide();
+      jQuery(".youtube-preview").html('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>');
+      this.uploadedPicture = null;
+      this.closeLinkAPI();
+      this.youtubeLink = videoId;
+      jQuery("#preview-image").hide();
 
     } catch (err) {
-        this.displayYoutubeLinkError();
+      this.displayYoutubeLinkError();
     }
   }
-    closeLinkAPI() {
-        this.link.initialise();
-    }
-    linkAPI() {
-        //var linkURL = this.publishText;
-        //var linkURL = this.publishText.match(/\b(http|https)?(:\/\/)?(\S*)\.(\w{2,4})\b/ig);
-        {
-            var source = (this.publishText || '').toString();
-            var myArray = this.linkView.getListLinks(source);
-            if (!myArray.length) {
-                return 1;
-            }
-            var linkURL = myArray[0];
-            if (linkURL == this.link.url) {
-                return 1;
-            }
-            if (linkURL.search("youtube.com/watch") >= 0 || linkURL.search("youtu.be/")  >= 0) {
-                jQuery(".yt-in-url").val(linkURL);
-                this.updateYoutube();
-                return 1;
-            }
-            if (linkURL.search(".gif") >= 0) {
-                var checker = linkURL.substr(linkURL.length - 13, 8);
-                if (checker.indexOf(".gif") >= 0) {
-                    this.link.image = linkURL.substring(0, linkURL.indexOf(".gif") + 4);
-                    this.link.imageWidth = 500;
-                    this.link.imageHeight = 500;
-                    this.link.isGif = true;
-                    this.link.url = linkURL.substring(0, linkURL.indexOf(".gif") + 4);
-                    this.link.title = "gif";
-                    this.link.description = "gif";
-                    this.link.isSet = true;
-                    return 1;
-                }
-            }
-            this.linkLoading = true;
-            this.http.get(
-              environment.SERVER_URL + 'getOpenGraphData?url=' + linkURL, AppSettings.OPTIONS)
-                .map((res: Response) => res.json())
-                .subscribe(
-                response => {
-                    if (response.results.success) {
-                        this.resetPublishPicture();
-                        jQuery(".youtube-preview").html("");
-                        //this.form.controls.publicationYoutubeLink.updateValue('');
-                        this.link.url = linkURL.substring(0, linkURL.length - 6);
-                        this.link.title = response.results.data.ogTitle;
-                        this.link.description = response.results.data.ogDescription;
-                        if (response.results.data.ogImage) {
-                            var a = response.results.data.ogImage.url;
-                            this.link.image = response.results.data.ogImage.url;
-                            this.link.imageWidth = response.results.data.ogImage.width;
-                            this.link.imageHeight = response.results.data.ogImage.height;
-                            if (a.substring(a.length - 3, a.length) == "gif")
-                                this.link.isGif = true;
-                            else
-                                this.link.isGif = false;
-                        }
-                        else {
-                            this.link.image = null;
-                            this.link.imageWidth = 0;
-                            this.link.imageHeight = 0;
-                        }
-                        this.link.isSet = true;
-                        this.linkLoading = false;
-                        this.changeDetector.markForCheck();
-                        if (this.isEmpty) {
-                            this.publishText = "";
-                            jQuery(".textarea-publish")[0].innerHTML = "";
-                        }
-                    }
-                    else {
-                        console.error("error in link API;");
-                        this.linkLoading = false;
-                    }
-                },
-                err => {
-                    //error
-                    console.error("error in link API;");
-                    this.linkLoading = false;
-                },
-                () => {
-                    //final
-                }
-                );
+
+  closeLinkAPI() {
+    this.link.initialise();
+  }
+
+
+  linkAPI() {
+    var source = (this.publishText || '').toString();
+    //this.analyzeLink(source);
+  }
+
+
+  analyzeLink(source) {
+    {
+      console.log("analyse" + source);
+      var myArray = this.linkView.getListLinks(source);
+      if (!myArray.length) {
+        return 1;
+      }
+      var linkURL = myArray[0];
+      if (linkURL == this.link.url) {
+        return 1;
+      }
+      if (linkURL.search("youtube.com/watch") >= 0 || linkURL.search("youtu.be/") >= 0) {
+        jQuery(".yt-in-url").val(linkURL);
+        this.updateYoutube();
+        return 1;
+      }
+      if (linkURL.search(".gif") >= 0) {
+        var checker = linkURL.substr(linkURL.length - 13, 8);
+        if (checker.indexOf(".gif") >= 0) {
+          this.link.image = linkURL.substring(0, linkURL.indexOf(".gif") + 4);
+          this.link.imageWidth = 500;
+          this.link.imageHeight = 500;
+          this.link.isGif = true;
+          this.link.url = linkURL.substring(0, linkURL.indexOf(".gif") + 4);
+          this.link.title = "gif";
+          this.link.description = "gif";
+          this.link.isSet = true;
+          return 1;
         }
-    }
-    ngOnInit() {
-        jQuery("#publishDiv").on("paste", function (e) {
-            e.preventDefault();
-            var pastedData = e.originalEvent.clipboardData.getData('text');
-            alert(pastedData);
-        });
-        jQuery("#errorMsgDisplay").hide();
-        jQuery(("#file-image")).change(function () {
-            jQuery((".file-input-holder")).show();
-            readURL(this);
-        });
-
-        jQuery(("#file-image-gif")).change(function () {
-            jQuery((".file-input-holder")).show();
-            readURL(this);
-        });
-
-        jQuery(document).click(function (e) {
-
-            if (jQuery(e.target).closest(".select-menu").length === 0 && jQuery(e.target).closest(".dropdown").length === 0) {
-                jQuery(".select-menu").hide();
+      }
+      this.linkLoading = true;
+      this.http.get(
+        environment.SERVER_URL
+        + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
+        AppSettings.OPTIONS)
+        .map((res:Response) => res.json())
+        .subscribe(
+          response => {
+          if (response.results.success) {
+            this.resetPublishPicture();
+            jQuery(".youtube-preview").html("");
+            //this.form.controls.publicationYoutubeLink.updateValue('');
+            this.link.url = linkURL.substring(0, linkURL.length - 6);
+            this.link.title = response.results.data.ogTitle;
+            this.link.description = response.results.data.ogDescription;
+            if (response.results.data.ogImage) {
+              var a = response.results.data.ogImage.url;
+              this.link.image = response.results.data.ogImage.url;
+              this.link.imageWidth = response.results.data.ogImage.width;
+              this.link.imageHeight = response.results.data.ogImage.height;
+              if (a.substring(a.length - 3, a.length) == "gif")
+                this.link.isGif = true;
+              else
+                this.link.isGif = false;
             }
-        });
+            else {
+              this.link.image = null;
+              this.link.imageWidth = 0;
+              this.link.imageHeight = 0;
+            }
+            this.link.isSet = true;
+            this.linkLoading = false;
+            this.changeDetector.markForCheck();
+
+          }
+        },
+          err => {
+          console.error("error in link API;");
+        },
+        () => {
+          this.linkLoading = false;
+        }
+      );
     }
-    pasteInnerHtml($event) {
-        $event.preventDefault();
-        var plainText = $event.clipboardData.getData("text/plain");
-        document.execCommand("insertHTML", false, plainText);
-    }
+  }
+
+  ngOnInit() {
+    jQuery("#publishDiv").on("paste", function (e) {
+      e.preventDefault();
+      var pastedData = e.originalEvent.clipboardData.getData('text');
+      alert(pastedData);
+    });
+
+    jQuery("#errorMsgDisplay").hide();
+    jQuery(("#file-image")).change(function () {
+      jQuery((".file-input-holder")).show();
+      readURL(this);
+    });
+
+    jQuery(("#file-image-gif")).change(function () {
+      jQuery((".file-input-holder")).show();
+      readURL(this);
+    });
+
+    jQuery(document).click(function (e) {
+
+      if (jQuery(e.target).closest(".select-menu").length === 0 && jQuery(e.target).closest(".dropdown").length === 0) {
+        jQuery(".select-menu").hide();
+      }
+    });
+  }
+
+  pasteInnerHtml($event) {
+    $event.preventDefault();
+    var plainText = $event.clipboardData.getData("text/plain");
+    document.execCommand("insertHTML", false, plainText);
+  }
 }
 
 export function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = [];
-        reader.push(new FileReader());
-        reader[0].addEventListener("load", (event) => {
+  if (input.files && input.files[0]) {
+    var reader = [];
+    reader.push(new FileReader());
+    reader[0].addEventListener("load", (event) => {
 
-            jQuery("#preview-image").show();
+      jQuery("#preview-image").show();
 
-        }, false);
-        if (input.files[0]) {
-            reader[0].readAsDataURL(input.files[0]);
-        }
+    }, false);
+    if (input.files[0]) {
+      reader[0].readAsDataURL(input.files[0]);
     }
+  }
 }
 
 
-
-
 function previewFile(uploadedFile) {
-    var preview = jQuery('#preview-image');
-    var file = uploadedFile;
-    var reader = new FileReader();
+  var preview = jQuery('#preview-image');
+  var file = uploadedFile;
+  var reader = new FileReader();
 
-    reader.addEventListener("load", function () {
-        //preview.att.src = reader.result;
-        jQuery("#preview-image").attr('src', reader.result);
-        jQuery(".file-input-holder").fadeIn(500);
-        jQuery("#preview-image").fadeIn(500);
+  reader.addEventListener("load", function () {
+    //preview.att.src = reader.result;
+    jQuery("#preview-image").attr('src', reader.result);
+    jQuery(".file-input-holder").fadeIn(500);
+    jQuery("#preview-image").fadeIn(500);
 
-    }, false);
+  }, false);
 
-    if (file) {
-        reader.readAsDataURL(file);
-    }
+  if (file) {
+    reader.readAsDataURL(file);
+  }
 }

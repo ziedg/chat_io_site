@@ -1,84 +1,80 @@
-
-
 <div class="login-body">
-    <div class="Container" id="mainLogin">
-        <div class="row loginCorpse">
-            <div class="col-md-7 col-sm-6 hidden-xs photoLogin">
-                <img class="logoLoginSmall" src="assets/pictures/logo_transparent.png" />permet de partager vos meilleures
-                blagues <br class="hidden-sm">et vidéos avec votre entourage
-                <img src="assets/pictures/people_c.png" class="LeftPhoto" />
+  <div class="Container" id="mainLogin">
+    <div class="row loginCorpse">
+      <div class="col-md-7 col-sm-6 hidden-xs photoLogin">
+        <img class="logoLoginSmall" src="assets/pictures/logo_transparent.png"/> {{'login_speegar_description' |
+        translate }}
+        <img src="assets/pictures/people_c.png" class="LeftPhoto"/>
+      </div>
+      <div class="col-md-5 col-sm-6 col-xs-12">
+        <div id="signin-content">
+          <div class="col-md-11 col-sm-12 col-xs-12 boxLogin" [class.signup-box]="loacationPath == '/login/sign-up'">
+
+            <div class="col-xs-12">
+              <img class="logo-login" src="assets/pictures/logo.png"/>
+
+              <div class="hidden-lg hidden-md hidden-sm underLogo">
+                {{'login_message' | translate }}
+              </div>
             </div>
-            <div class="col-md-5 col-sm-6 col-xs-12">
-                <div id="signin-content" >
-                    <div class="col-md-11 col-sm-12 col-xs-12 boxLogin" [class.signup-box]="loacationPath == '/login/sign-up'">
 
-                        <div class="col-xs-12">
-
-                            <!--span class="mainTitle hidden-xs">CONNECTEZ VOUS POUR <br>RIGOLER ENSEMBLE</span-->
-                            <img class="logo-login" src="assets/pictures/logo.png" />
-                            <div class="hidden-lg hidden-md hidden-sm underLogo">Connectez vous pour partager vos meilleures blagues et vidéos avec votre entourage</div>
-                        </div>
-
-                        <router-outlet></router-outlet>
+            <router-outlet></router-outlet>
 
                         <span *ngIf="!dontShowSocialNetworksLoginButtons">
 
         <div class="col-xs-12 separatorBox" *ngIf="loacationPath=='/login/sign-in' || loacationPath=='/login/sign-up' ">
-            <div class="semiSeparator"></div>
-            Ou
-            <div class="semiSeparator"></div>
+          <div class="semiSeparator"></div>
+          Ou
+          <div class="semiSeparator"></div>
         </div>
-        <div class="col-xs-12" *ngIf="loacationPath=='/login/sign-in' || loacationPath=='/login/sign-up' " >
-            <form (ngSubmit)="loginWithFacebook()" class="fb-form">
-                <button class="social-login facebook-btn" type="submit" *ngIf="!loadingFb">
-                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
-                    Se connecter avec Facebook
-                </button>
-                <button class="social-login facebook-btn loading-mode" type="button" *ngIf="loadingFb" disabled>
-                    <div class="loading"></div>
-                </button>
-            </form>
+        <div class="col-xs-12" *ngIf="loacationPath=='/login/sign-in' || loacationPath=='/login/sign-up' ">
+          <form (ngSubmit)="loginWithFacebook()" class="fb-form">
+            <button class="social-login facebook-btn" type="submit" *ngIf="!loadingFb">
+              <i class="fa fa-facebook-official" aria-hidden="true"></i>
+              {{'login_button_facebook_login' | translate }}
+            </button>
+            <button class="social-login facebook-btn loading-mode" type="button" *ngIf="loadingFb" disabled>
+              <div class="loading"></div>
+            </button>
+          </form>
 
         </div>
         <div class="paddingSeparator" *ngIf="loacationPath!='/login/sign-in' && loacationPath!='/login/sign-up' "></div>
 
 
     </span>
-                    </div>
-                    <div class="col-md-11 col-sm-12 col-xs-12 boxLogin2"   [class.marginned]="loacationPath != '/login/sign-up'">
-                        <div class="col-xs-12" *ngIf="loacationPath=='/login/sign-in'">
-                            Vous n’avez pas de compte ?
-                            <a class="linkBlue" [routerLink]="['/login/sign-up']">Inscrivez-vous
-            </a>
-                        </div>
-                        <div class="col-xs-12"  *ngIf="loacationPath !='/login/sign-in'">
-                            Vous avez un compte ?
-                            <a class="linkBlue" [routerLink]="['/login/sign-in']">Connectez-vous
-            </a>
-                        </div>
-                        <div class="col-xs-12" *ngIf="loacationPath=='/login/reset-password'">
-                            <a class="linkBlue" [routerLink]="['/login/sign-in']"> <button class="btn btn-lg">Retour</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-
-
+          </div>
+          <div class="col-md-11 col-sm-12 col-xs-12 boxLogin2" [class.marginned]="loacationPath != '/login/sign-up'">
+            <div class="col-xs-12" *ngIf="loacationPath=='/login/sign-in'">
+              {{'login_link_sign_up_text' | translate }}
+              <a class="linkBlue" [routerLink]="['/login/sign-up']">
+                {{'login_link_sign_up' | translate }}
+              </a>
             </div>
-        </div>
-
-        <div class="row footer hidden-xs">
-            <div class="footerContainer">
-                <a [routerLink]="['/support/about-us']">A propos de nous</a>
-                <a [routerLink]="['/support/cgu']">Conditions</a>
-                <a [routerLink]="['/support/team']">L'equipe</a>
-                <span class="pull-right copyrightSignature">
-					© 2016 Speegar
-				</span>
+            <div class="col-xs-12" *ngIf="loacationPath !='/login/sign-in'">
+              {{'login_link_sign_in_text' | translate }}
+              <a class="linkBlue" [routerLink]="['/login/sign-in']">
+                {{'login_link_sign_in' | translate }}
+              </a>
             </div>
+
+          </div>
         </div>
+      </div>
     </div>
+
+
+    <div class="row footer hidden-xs">
+      <div class="footerContainer">
+        <a [routerLink]="['/support/about-us']">{{'footer_about' | translate }}</a>
+        <a [routerLink]="['/support/cgu']">{{'footer_cgu' | translate }}</a>
+        <a [routerLink]="['/support/team']">{{'footer_team' | translate }}</a>
+                <span class="pull-right copyrightSignature">
+                  {{'footer_copyright' | translate }}
+				</span>
+      </div>
+    </div>
+  </div>
 
 
 </div>

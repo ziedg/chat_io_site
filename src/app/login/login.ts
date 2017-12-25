@@ -1,10 +1,12 @@
 import {Location} from '@angular/common';
 import 'rxjs/add/operator/map';
+import { TranslateService } from 'ng2-translate';
 
 /* Login components */
 import {Signin} from './signin/signin';
 import {Signup} from './signup/signup';
 import {FacebookLogin} from './facebookLogin/facebookLogin';
+
 
 import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
@@ -45,7 +47,7 @@ export class Login {
   loadingFb = false;
   public loacationPath: string = "/login/sign-in";
 
-  constructor(private _loc: Location, private title: Title, public http: Http, private router: Router, private loginService: LoginService, private changeDetector: ChangeDetectorRef) {
+  constructor(public translate: TranslateService,private _loc: Location, private title: Title, public http: Http, private router: Router, private loginService: LoginService, private changeDetector: ChangeDetectorRef) {
     this.title.setTitle("Connexion - Speegar");
     this.form = new FormGroup({
       email: new FormControl('', Validators.required),

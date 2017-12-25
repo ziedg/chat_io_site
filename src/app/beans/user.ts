@@ -18,6 +18,7 @@ export class User {
 	public twitterLink:string;
 	public youtubeLink:string;
 	public profilePictureMin:string;
+  public isNewInscri : boolean;
 	public constructor(){
 		this._id=0;
 		this.firstName="";

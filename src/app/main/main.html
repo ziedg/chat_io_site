@@ -1,262 +1,228 @@
 <div class="main-header">
-    <div class="header-left">
-        <article class="logo">
-            <a routerLink="/redirect">
-                <img src="assets/pictures/logo.png">
-            </a>
+  <div class="header-left">
+    <article class="logo">
+      <a routerLink="/redirect">
+        <img src="assets/pictures/logo.png">
+      </a>
+    </article>
+  </div>
+  <div class="header-center hidden-xs">
+    <input class="search"
+           placeholder="{{ 'main_search_placeholder' | translate }}"
+           [(ngModel)]="searchValue"
+           (ngModelChange)="onChange($event)"
+           (focus)="checkAutoComplete()">
+    <i class="fa fa-search" aria-hidden="true"></i>
+
+    <div class="upper-arrow-search upper-arrow"></div>
+    <div class="recherche-results-holder"
+         style="display:none;" *ngIf="listSearshUsers">
+      <div class="recherche-results" *ngIf="!showRecentSearch">
+        <article *ngFor="let result of listSearshUsers"
+                 (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
+          <div class="user-img" *ngIf="result.profilePictureMin"
+               [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
+          </div>
+          <div class="user-img" *ngIf="!result.profilePictureMin"
+               [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
+          </div>
+          <div class="">
+            {{result.firstName}} {{result.lastName}}
+          </div>
         </article>
+      </div>
+      <div class="recherche-results" *ngIf="showRecentSearch">
+        <article *ngFor="let result of RecentSearchList"
+                 (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
+          <div class="user-img" *ngIf="result.profilePictureMin"
+               [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
+
+          <div class="user-img" *ngIf="!result.profilePictureMin"
+               [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
+
+          <div class="">
+            {{result.firstName}} {{result.lastName}}
+          </div>
+        </article>
+      </div>
     </div>
-    <div class="header-center hidden-xs">
-        <input class="search" placeholder="Rechercher" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)"
-               (focus)="checkAutoComplete()">
-        <i class="fa fa-search" aria-hidden="true"></i>
-        <div class="upper-arrow-search upper-arrow"></div>
-        <div class="recherche-results-holder" style="display:none;" *ngIf="listSearshUsers">
-            <div class="recherche-results" *ngIf="!showRecentSearch">
-                <article *ngFor="let result of listSearshUsers"
-                         (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
-                    <div class="user-img" *ngIf="result.profilePictureMin"
-                         [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
+  </div>
+  <div id="notifSound">
+  </div>
+  <div class="header-right">
+    <article *ngIf="user">
+      <a class="hidden-sm hidden-xs"
+         [routerLink]="['/main/profile',user._id]">
+        <div class="user-img img-header"
+             *ngIf="user.profilePictureMin"
+             [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePictureMin + ')'}"
+             style="position:absolute;top:-5px;left:-35px;"></div>
+        <div class="user-img img-header"
+             *ngIf="!user.profilePictureMin"
+             [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePicture + ')'}"
+             style="position:absolute;top:-5px;left:-35px;"></div>
+        {{loginService.getUser().firstName}} {{loginService.getUser().lastName}}
+      </a>
+    </article>
 
-                    <div class="user-img" *ngIf="!result.profilePictureMin"
-                         [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
-
-
-                    <div class="">
-                        {{result.firstName}} {{result.lastName}}
-                    </div>
-                </article>
-            </div>
-            <div class="recherche-results" *ngIf="showRecentSearch">
-                <article *ngFor="let result of RecentSearchList"
-                         (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
-                    <div class="user-img" *ngIf="result.profilePictureMin"
-                         [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
-
-                    <div class="user-img" *ngIf="!result.profilePictureMin"
-                         [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
-
-                    <div class="">
-                        {{result.firstName}} {{result.lastName}}
-                    </div>
-                </article>
-            </div>
+    <article class="notification-box" [routerLink]="['/main/notification']"
+             class="notification-parent hidden-lg hidden-md hidden-sm">
+      <div class="noPadding">
+        <div class="cercle-notice" *ngIf="nbNewNotifications">
+          {{nbNewNotifications}}
         </div>
-    </div>
-    <div id="notifSound">
-    </div>
-    <div class="header-right">
-        <article *ngIf="user">
-            <a class="hidden-sm hidden-xs" [routerLink]="['/main/profile',user._id]">
-                <div class="user-img img-header" *ngIf="user.profilePictureMin"
-                     [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePictureMin + ')'}"
-                     style="position:absolute;top:-5px;left:-35px;"></div>
-                <div class="user-img img-header" *ngIf="!user.profilePictureMin"
-                     [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePicture + ')'}"
-                     style="position:absolute;top:-5px;left:-35px;"></div>
-                {{loginService.getUser().firstName}} {{loginService.getUser().lastName}}
-            </a>
-        </article>
+        <i class="fa fa-bell"></i>
+      </div>
+    </article>
 
-        <article class="notification-box" [routerLink]="['/main/notification']"
-                 class="notification-parent hidden-lg hidden-md hidden-sm">
-            <div class="noPadding">
-                <div class="cercle-notice" *ngIf="nbNoSeenNotif">
-                    {{nbNoSeenNotif}}
-                </div>
-                <i class="fa fa-bell"></i>
-            </div>
-        </article>
+    <article class="notification-box" class="notification-parent hidden-xs">
+      <div class="noPadding">
+        <div class="cercle-notice" (click)="loadFirstNotifactions()" *ngIf="nbNewNotifications">
+          {{nbNewNotifications}}
+        </div>
+        <i (click)="loadFirstNotifactions()" class="fa fa-bell"></i>
 
-        <article class="notification-box" class="notification-parent hidden-xs">
-            <div class="noPadding">
-                <div class="cercle-notice" (click)="showFirstNotif()" *ngIf="nbNoSeenNotif" P>
-                    {{nbNoSeenNotif}}
-                </div>
-                <i (click)="showFirstNotif()" class="fa fa-bell"></i>
-                <div class="upper-arrow upper-arrow-notification"></div>
-                <div class="notification-holder" style="display:none">
-                    <div class="notifcations">
+        <div class="upper-arrow upper-arrow-notification"></div>
+        <div class="notification-holder" style="display:none">
+          <div class="notifcations">
 
                         <span *ngFor="let notif of listNotif">
                          <article [class.unseen-notification]="notif.isSeen=='false'"
-                                  *ngIf="notif.isSeen=='false' && notif.type !='subscribe'"
+                                  *ngIf="notif.type !='subscribe'"
                                   (click)="goTo('post',notif.publId,notif._id)">
-                            <div class="user-img for-notif"
-                                 *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePictureMin"
-                                 [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePictureMin + ')'}"></div>
+                           <div class="user-img for-notif"
+                                *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePictureMin"
+                                [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePictureMin + ')'}"></div>
 
-                            <div class="user-img for-notif"
-                                 *ngIf="notif.profiles && !notif.profiles[notif.profiles.length-1].profilePictureMin"
-                                 [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
+                           <div class="user-img for-notif"
+                                *ngIf="notif.profiles && !notif.profiles[notif.profiles.length-1].profilePictureMin"
+                                [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
 
 
-
-                            <div class="notif-content">
-                                <div *ngIf="notif.type =='comment'" class="comment-text"
-                                     (click)="goTo('post',notif.publId,notif._id)">
+                           <div class="notif-content">
+                             <div *ngIf="notif.type =='comment'" class="comment-text"
+                                  (click)="goTo('post',notif.publId,notif._id)">
                                     <span *ngIf="notif.profiles &&notif.profiles.length==1">
-                                        <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
-                                        a commenté à votre publication
+                                        <span class="notif-a">
+                                          {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
+                                        </span>
+                                      {{ 'main_comment_notification' | translate }}
                                     </span>
                                     <span *ngIf="notif.profiles &&notif.profiles.length>1">
-                                        <span *ngIf="notif.profiles.length==2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles[1].firstName}} </span>
-                                        <span *ngIf="notif.profiles.length>2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles.length-1}} autres personnes </span>
-                                        ont commenté à votre publication
+                                        <span *ngIf="notif.profiles.length==2" class="notif-a">
+                                          {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName} }}
+                                        </span>
+                                        <span *ngIf="notif.profiles.length>2" class="notif-a">
+                                          {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1 } }}
+                                        </span>
+                                      {{ 'main_comments_notification' | translate }}
                                     </span>
-                                </div>
-                                <div *ngIf="notif.type =='like'" class="comment-text"
-                                     (click)="goTo('post',notif.publId,notif._id)">
+                             </div>
+                             <div *ngIf="notif.type =='like'" class="comment-text"
+                                  (click)="goTo('post',notif.publId,notif._id)">
                                     <span *ngIf="notif.profiles.length==1">
-                                        <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
-                                        aime votre publication
+                                        <span class="notif-a">
+                                          {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
+                                        </span>
+                                      {{ 'main_like_notification' | translate }}
                                     </span>
                                     <span *ngIf=" notif.profiles && notif.profiles.length>1">
-                                        <span *ngIf="notif.profiles.length==2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles[1].firstName}} </span>
-                                        <span *ngIf="notif.profiles.length>2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles.length-1}} autres personnes </span>
-                                        ont aimés votre publication
+                                        <span *ngIf="notif.profiles.length==2" class="notif-a">
+                                          {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName} }}
+                                        </span>
+                                        <span *ngIf="notif.profiles.length>2" class="notif-a">
+                                          {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1 } }}
+                                        </span>
+                                        {{ 'main_likes_notification' | translate}}
                                     </span>
-                                </div>
-                                <div *ngIf="notif.type =='dislike'" class="comment-text"
-                                     (click)="goTo('post',notif.publId,notif._id)">
+                             </div>
+                             <div *ngIf="notif.type =='dislike'" class="comment-text"
+                                  (click)="goTo('post',notif.publId,notif._id)">
                                     <span *ngIf="notif.profiles && notif.profiles.length==1">
-                                        <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
-                                        n'aime pas votre publication
+                                        <span class="notif-a">
+                                          {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
+                                        </span>
+                                      {{ 'main_dislike_notification' | translate }}
                                     </span>
                                     <span *ngIf="notif.profiles &&notif.profiles.length>1">
-                                        <span *ngIf="notif.profiles && notif.profiles.length==2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles[1].firstName}} </span>
-                                        <span *ngIf="notif.profiles && notif.profiles.length>2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles.length-1}} autres personnes </span>
-                                        n'ont pas aimé votre publication
+                                        <span *ngIf="notif.profiles && notif.profiles.length==2" class="notif-a">
+                                          {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName} }}
+                                        </span>
+                                        <span *ngIf="notif.profiles && notif.profiles.length>2" class="notif-a">
+                                          {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1 } }}
+                                        </span>
+                                      {{ 'main_dislikes_notification' | translate }}
                                     </span>
-                                </div>
+                             </div>
 
+                             <div class="time-notif ">
+                               {{getNotificationTime(notif.date_notification)}}
+                             </div>
+                           </div>
 
-                                <div class="time-notif ">
-                                    {{getNotificationTime(notif.date_notification)}}
-                                </div>
-                            </div>
-                        </article>
+                         </article>
                         <article [class.unseen-notification]="notif.isSeen=='false'"
-                                 *ngIf="notif.isSeen=='false' && notif.type =='subscribe'"
+                                 *ngIf=" notif.type =='subscribe'"
                                  (click)="goTo('profile',notif.profiles[0]._id,notif._id)">
-                            <div class="user-img for-notif"
-                                 *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePicture"
-                                 [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
-                            <div class="notif-content">
-                                <div *ngIf="notif.type =='subscribe'" class="comment-text">
-                                    <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
-                                    a commencé a vous suivre
-                                </div>
-                                <div class="time-notif ">
-                                    {{getNotificationTime(notif.date_notification)}}
-                                </div>
+                          <div class="user-img for-notif"
+                               *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePicture"
+                               [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
+                          <div class="notif-content">
+                            <div *ngIf="notif.type =='subscribe'" class="comment-text">
+                              <span
+                                class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
+                              {{ 'main_subscribe_notification' | translate }}
                             </div>
-                        </article>
-                        <article *ngIf="notif.isSeen=='true' && notif.type !='subscribe'"
-                                 (click)="goTo('post',notif.publId,notif._id)">
-                            <div class="user-img for-notif"
-                                 *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePicture"
-                                 [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
-                            <div class="notif-content">
-                                <div *ngIf="notif.type =='comment'" class="comment-text"
-                                     (click)="goTo('post',notif.publId,notif._id)">
-                                    <span *ngIf="notif.profiles &&notif.profiles.length==1">
-                                        <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
-                                        a commenté à votre publication
-                                    </span>
-                                    <span *ngIf="notif.profiles &&notif.profiles.length>1">
-                                        <span *ngIf="notif.profiles.length==2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles[1].firstName}} </span>
-                                        <span *ngIf="notif.profiles.length>2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles.length-1}} autres personnes </span>
-                                        ont commenté à votre publication
-                                    </span>
-                                </div>
-                                <div *ngIf="notif.type =='like'" class="comment-text"
-                                     (click)="goTo('post',notif.publId,notif._id)">
-                                    <span *ngIf="notif.profiles.length==1">
-                                        <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
-                                        aime votre publication
-                                    </span>
-                                    <span *ngIf=" notif.profiles && notif.profiles.length>1">
-                                        <span *ngIf="notif.profiles.length==2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles[1].firstName}} </span>
-                                        <span *ngIf="notif.profiles.length>2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles.length-1}} autres personnes </span>
-                                        ont aimés votre publication
-                                    </span>
-                                </div>
-                                <div *ngIf="notif.type =='dislike'" class="comment-text"
-                                     (click)="goTo('post',notif.publId,notif._id)">
-                                    <span *ngIf="notif.profiles && notif.profiles.length==1">
-                                        <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
-                                        n'aime pas votre publication
-                                    </span>
-                                    <span *ngIf="notif.profiles &&notif.profiles.length>1">
-                                        <span *ngIf="notif.profiles && notif.profiles.length==2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles[1].firstName}} </span>
-                                        <span *ngIf="notif.profiles && notif.profiles.length>2" class="notif-a">{{notif.profiles[0].firstName}} et {{notif.profiles.length-1}} autres personnes </span>
-                                        n'ont pas aimé votre publication
-                                    </span>
-                                </div>
-
-
-                                <div class="time-notif ">
-                                    {{getNotificationTime(notif.date_notification)}}
-                                </div>
+                            <div class="time-notif ">
+                              {{getNotificationTime(notif.date_notification)}}
                             </div>
-                        </article>
-                        <article *ngIf="notif.isSeen=='true' && notif.type =='subscribe'"
-                                 (click)="goTo('profile',notif.profiles[0]._id,notif._id)">
-                            <div class="user-img for-notif"
-                                 *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePicture"
-                                 [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
-                            <div class="notif-content">
-                                <div *ngIf="notif.type =='subscribe'" class="comment-text">
-                                    <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
-                                    a commencé a vous suivre
-                                </div>
-                                <div class="time-notif ">
-                                    {{getNotificationTime(notif.date_notification)}}
-                                </div>
-                            </div>
+                          </div>
                         </article>
 
                     </span>
 
-                    </div>
-                    <div style="text-align: center;" *ngIf="showButtonMoreNotif" (click)="loadMoreNotif()">
-                        <a class="btn more-not" style="width: 100%">
-                            Plus des notifications
-                        </a>
-                    </div>
+          </div>
+          <div style="text-align: center;" *ngIf="showButtonMoreNotif" (click)="getNotifications()">
+            <a class="btn more-not" style="width: 100%">
+              {{ 'main_more_notifications' | translate }}
+            </a>
+          </div>
 
-                    <div *ngIf="showNoNotif" style="text-align: center;margin-top: 14px;">
-                        Pas de notifications
-                    </div>
+          <div *ngIf="showNoNotif" style="text-align: center;">
+            <a class="btn more-not" style="width: 100%">
+              {{ 'main_no_notification' | translate }}
+            </a>
+          </div>
 
 
-                </div>
-            </div>
+        </div>
+      </div>
+    </article>
+
+
+    <article class="signout-button" class="hidden-sm hidden-xs">
+      <i class="fa fa-sort-desc" (click)="enableProfile()"
+         style="font-size: 19px;position: relative;bottom: 2px;"></i>
+      <img src="assets/pictures/arrow-up.png" class="upper-arrow-profile" style="display: none;">
+
+      <div class="profile-hover" style="display:none;">
+        <article [routerLink]="['/main/parameters']"><i class="fa fa-wrench" aria-hidden="true"></i>
+          {{ 'main_menu_update_profile' | translate }}
         </article>
-
-
-        <article class="signout-button" class="hidden-sm hidden-xs">
-            <i class="fa fa-sort-desc" (click)="enableProfile()"
-               style="font-size: 19px;position: relative;bottom: 2px;"></i>
-            <!--div class="upper-arrow-profile upper-arrow"></div-->
-            <img src="assets/pictures/arrow-up.png" class="upper-arrow-profile" style="display: none;">
-            <div class="profile-hover" style="display:none;">
-                <!--div style="font-size: 12px;padding: 2px 5px;font-weight: 600;">Menu</div-->
-                <article [routerLink]="['/main/parameters']"><i class="fa fa-wrench" aria-hidden="true"></i> Modifier le
-                    profil
-                </article>
-                <article [routerLink]="['/support']"><i class="fa fa-info" aria-hidden="true"></i> Support</article>
-                <article [routerLink]="['/logout']"><i class="fa fa-sign-out" aria-hidden="true"></i> Deconnexion
-                </article>
-            </div>
-
+        <article [routerLink]="['/support']"><i class="fa fa-info" aria-hidden="true"></i>
+          {{ 'main_menu_support' | translate }}
         </article>
-        <article class="signout-button" class="hidden-lg hidden-md">
-            <i class="fa fa-user" [routerLink]="['/main/profile',user._id]"></i>
-
+        <article [routerLink]="['/logout']"><i class="fa fa-sign-out" aria-hidden="true"></i>
+          {{ 'main_menu_log_out' | translate }}
         </article>
+      </div>
 
-    </div>
+    </article>
+    <article class="signout-button" class="hidden-lg hidden-md">
+      <i class="fa fa-user" [routerLink]="['/main/profile',user._id]"></i>
+
+    </article>
+
+  </div>
 </div>
 <router-outlet></router-outlet>

@@ -4,7 +4,7 @@ import {BrowserModule, Title} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule}         from '@angular/forms';
 import {APP_BASE_HREF, PathLocationStrategy, LocationStrategy} from '@angular/common';
 import { HttpModule, Http, CookieXSRFStrategy, XSRFStrategy, RequestOptions, XHRBackend } from '@angular/http';
-
+import {TranslateModule, TranslateLoader, TranslateStaticLoader} from 'ng2-translate';
 
 import {AppComponent}  from './app.component';
 import {LoginService} from "./service/loginService";
@@ -53,10 +53,14 @@ import { httpFactory } from './utils/factories/http.factory';
 import {EmojiPickerModule} from "ng-emoji-picker";
 import {ContenteditableModel} from "./publication/contenteditable-model";
 
-
 @NgModule({
     imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
-      ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule, EmojiPickerModule],       // module dependencies
+      ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule, EmojiPickerModule,
+      TranslateModule.forRoot({
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [Http]
+      })],       // module dependencies
     declarations: [AppComponent, Comment, ListComments, LoadingBar, FacebookLogin,
         Signin, Signup, Login, Logout, NotFoundPage, Home, NotFound, Notification, ChangePassword, EditProfile,
         Parameters, Post, Profile, Main, Publication, AboutUs, Cgu, Team, Support,
@@ -86,4 +90,9 @@ import {ContenteditableModel} from "./publication/contenteditable-model";
 
 })
 export class AppModule {
+}
+
+
+export function createTranslateLoader(http: Http) {
+  return new TranslateStaticLoader(http, './assets/translations', '.json');
 }

@@ -1,13 +1,9 @@
-/**
- * Created by chaker on 20/11/16.
- */
-
-
 import {Component} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Validators, FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import 'rxjs/add/operator/map';
+import { TranslateService } from 'ng2-translate';
 
 /* conf */
 import {AppSettings} from '../../conf/app-settings';
@@ -18,17 +14,20 @@ import {LoginService} from '../../service/loginService';
 import {Title} from "@angular/platform-browser";
 import {environment} from "../../../environments/environment";
 
+/** Utils */
+import * as pathUtils from '../../utils/path.utils';
+
 @Component({
   moduleId: module.id,
   templateUrl: 'forget-password.component.html'
 })
 export class ForgetPasswordComponent {
   loadingSign = false;
-  errorMessage: string = null;
+  errorMessage:string = null;
   form;
   mailIsSent = false;
 
-  constructor(private title: Title, public http: Http, private router: Router, private loginService: LoginService) {
+  constructor(public translate:TranslateService, private title:Title, public http:Http, private router:Router, private loginService:LoginService) {
     this.title.setTitle("Connexion - Speegar");
     this.form = new FormGroup({
       email: new FormControl('', Validators.required)
@@ -46,25 +45,37 @@ export class ForgetPasswordComponent {
     this.form.controls.email._touched = true;
 
     if (this.form.value.email == "") {
-      this.errorMessage = "Saisissez votre Email.";
+      this.errorMessage = "SP_FV_ER_EMAIL_EMPTY";
       return;
     }
 
     this.loadingSign = true;
     let body = JSON.stringify(this.form.value);
-    this.http.post(environment.SERVER_URL + 'resetPwdMail', body, AppSettings.OPTIONS)
-      .map((res: Response) => res.json())
-      .subscribe(response =>
-          this.mailIsSent=true
-        );
+    this.http.post(environment.SERVER_URL + pathUtils.FORGET_PASSWORD,
+      body, AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(response => {
+        if (response.status == "0") {
+          this.mailIsSent = true
+        }
+        else {
+          this.errorMessage = response.error;
+        }
+      },
+        err => {
+        this.errorMessage = "SP_ER_TECHNICAL_ERROR"
+      },
+      () => {
+        this.loadingSign = false;
+      }
+    );
   }
 
-
-  resetForgetPassword(){
-    this.mailIsSent=false;
+  resetForgetPassword() {
+    this.mailIsSent = false;
     this.errorMessage = null;
     this.form.value.email = "";
-    this.loadingSign=false;
+    this.loadingSign = false;
   }
 
 }

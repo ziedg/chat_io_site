@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
+import { TranslateService } from 'ng2-translate';
 
 /* conf */
 import {AppSettings} from '../../conf/app-settings';
@@ -31,7 +32,7 @@ export class FacebookLogin {
     facebookUser : SocialUser;
     loadingSign=false;
 
-    constructor(private title:Title,public http:Http, private router:Router, private loginService:LoginService) {
+    constructor(public translate: TranslateService, private title:Title,public http:Http, private router:Router, private loginService:LoginService) {
         this.title.setTitle("Connexion - Speegar");
         if(!loginService.isWasConnectedWithFacebook()){
             this.router.navigate(['/login/sign-in']);

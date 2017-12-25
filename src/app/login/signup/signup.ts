@@ -3,6 +3,7 @@ import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {FormGroup, Validators, FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
+import { TranslateService } from 'ng2-translate';
 
 /* conf */
 import {AppSettings} from '../../conf/app-settings';
@@ -17,11 +18,8 @@ import {Title} from "@angular/platform-browser";
 import {SocialUser} from "../../beans/social-user";
 import {environment} from "../../../environments/environment";
 
-declare const FB:any;
-declare const gapi:any;
-declare const auth2:any;
-declare const attachSignin:any;
-declare const emptyFunction:any;
+/** Utils */
+import * as pathUtils from '../../utils/path.utils';
 
 @Component({
   moduleId: module.id,
@@ -34,12 +32,10 @@ export class Signup {
 
     form;
     errorMessage:string = null;
-    facebookUser : SocialUser;
-    googleUser : SocialUser;
     loadingSign=false;
 
     /* constructor */
-    constructor(private title:Title,private http: Http, private router: Router, private loginService: LoginService) {
+    constructor(public translate: TranslateService, private title:Title,private http: Http, private router: Router, private loginService: LoginService) {
         this.title.setTitle("Inscription - Speegar");
         if(this.loginService.isConnected()){
             this.router.navigate(['/main/home']);
@@ -60,38 +56,38 @@ export class Signup {
         this.form.controls.lastName._touched = true;
         this.form.controls.email._touched = true;
         this.form.controls.password._touched = true;
+
         if(this.form.value.lastName == ""){
-            this.errorMessage ="Le nom est obligatoire.";
+            this.errorMessage ="SP_FV_ER_LAST_NAME_SBN_EMPTY";
             return ;
         }
         if(this.form.value.firstName == ""){
-            this.errorMessage ="Le prenom est obligatoire.";
+            this.errorMessage ="SP_FV_ER_FIRST_NAME_SBN_EMPTY";
             return ;
         }
         if(this.form.value.email == ""){
-            this.errorMessage ="L'email est obligatoire.";
+            this.errorMessage ="SP_FV_ER_EMAIL_SBN_EMPTY";
             return ;
         }
         if(emailValidator(this.form.controls.email)){
-            this.errorMessage ="L'email saisi est invalide.";
+            this.errorMessage ="SP_FV_ER_EMAIL_NOT_VALID";
             return ;
         }
         if(this.form.value.password == ""){
-            this.errorMessage ="Le mot de passe est obligatoire.";
+            this.errorMessage ="SP_FV_ER_PASSWORD_SBN_EMPTY";
             return ;
         }
         if(this.form.value.password.length<5){
-            this.errorMessage ="Créez un mot de passe d’au moins 5 caractères.";
+            this.errorMessage ="SP_FV_ER_PASSWORD_SIZE";
             return ;
         }
         this.loadingSign=true;
         let body = JSON.stringify(this.form.value);
-        this.http.post(environment.SERVER_URL + 'signup', body, AppSettings.OPTIONS)
+        this.http.post(environment.SERVER_URL + pathUtils.SIGN_UP, body, AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
                 response => {
                 if (response.status == "0") {
-
                     localStorage.setItem('token', response.token);
                     localStorage.setItem('user', JSON.stringify(response.user));
                     if(response.user.isNewInscri == "true"){
@@ -99,29 +95,19 @@ export class Signup {
                     }
                     this.loginService.actualize();
                     this.router.navigate(['/main/home']);
-                    this.loadingSign=false;
                 }
                 else {
-                    if(response.message=="Email existe deja"){
-                            this.errorMessage = "Un autre compte utilise "+this.form.value.email;
-                    }else {
-                            this.errorMessage= response.message ;
-                    }
-                    this.loadingSign=false;
+                     this.errorMessage= response.error ;
                 }
             },
                 err => {
-                console.error(err);
-                this.errorMessage="Erreur technique."
-                this.loadingSign=false;
+                  this.errorMessage = "SP_ER_TECHNICAL_ERROR";
             },
             () => {
+              this.loadingSign=false;
             }
         );
     }
-
-
-
 }
 
 
