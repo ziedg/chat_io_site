@@ -49,7 +49,6 @@ export class Main {
   searchValue:string;
   showRecentSearch:Boolean;
   RecentSearchList;
-  nbNotificationsNotSeen;
   lastNotifId = "";
   showButtonMoreNotif:Boolean = false;
   showNoNotif:Boolean = false;

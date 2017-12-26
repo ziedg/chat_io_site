@@ -10,8 +10,7 @@ import { Title }  from '@angular/platform-browser';
 
 
 export class NotFoundPage {
-    constructor(private title:Title){
-        this.title.setTitle("Page introuvable");
+    constructor(){
     }
 
 }

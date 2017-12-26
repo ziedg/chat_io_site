@@ -40,6 +40,7 @@
   "reset_password_button" : "Envoyer",
 
 
+
   "main_search_placeholder" :"Rechercher",
 
   "main_notification_from_two_profiles":"{{first}} et {{second}}",
@@ -59,6 +60,47 @@
   "main_more_notifications" :"Voir tout",
   "main_no_notification" :"Pas de notifications",
 
+  "publication_shared_text" : "a partagé",
+  "publication_like":"LOL",
+  "publication_dislike": "Nulle",
+  "publication_display_comments": "Afficher les commentaires",
+  "publication_hide_comments": "Masquer les commentaires",
+
+
+  "publication_report": "Signaler",
+  "publication_delete": "Supprimer",
+  "publication_comment_button": "Publier",
+  "publication_cancel": "Annuler",
+
+  "publication_emoticon_people": "Personnes",
+  "publication_emoticon_nature": "Nature",
+  "publication_emoticon_objects": "Objets",
+  "publication_display_more_comments": "afficher plus de commentaires",
+
+
+  "publication_popup_cancel_button":"Annuler",
+  "publication_popup_confirmation_title": "Êtes-vous sûr ?",
+  "publication_popup_confirmation_delete_text": "Vous ne serez pas en mesure de récupérer cette publication !",
+  "publication_popup_confirmation_delete_button":  "Oui, supprimez-le!",
+
+
+  "publication_popup_notification_delete_title":  "Supprimée !",
+  "publication_popup_notification_delete_text": "Votre publication a été supprimée.",
+
+  "publication_popup_confirmation_share_text": "Voulez-vous partager cette publication ?",
+  "publication_popup_YES":  "Oui",
+  "publication_popup_NO":  "Non",
+
+  "publication_popup_notification_share_title":  "Paratgée !",
+  "publication_popup_notification_share_text": "Votre publication a été partagée.",
+
+  "publication_popup_report_title": "Signaler cette publication",
+  "publication_popup_report_text": "Que se passe-t-il ?",
+  "publication_popup_confirm":  "Confirmer",
+
+
+  "publication_popup_notification_report_title":  "Signalée !",
+  "publication_popup_notification_report_text": "Cette publication a été Signalée.",
 
   "prefix_date_yesterday" :"hier",
   "prefix_date_now" :"maintenant",
@@ -86,7 +128,21 @@
   "home_suggestion_message":"Suivez des comptes pour voir leurs publications dans votre fil.",
 
 
-    "SP_FV_ER_EMAIL_EMPTY" : "Saisissez votre Email.",
+  "not_found_title_post" : "publication introvable",
+  "not_found_title_profile" : "profile introvable",
+  "not_found_title_page" : "Page introvable",
+  "not_found_post" : "Publication n'existe pas",
+  "not_found_profile" : "Profil n'existe pas",
+  "not_found_page" : "Page n'existe pas ",
+
+
+  "update_password_success" :"Votre mot de passe est modifié avec succes !",
+  "update_password_old_password" :"Ancien mot de passe",
+  "update_password_new_password" :"Nouveau mot de passe ",
+  "update_password_confirm_password" :"Confirmer le nouveau mot de passe",
+  "update_password_button" :"Modifier",
+
+  "SP_FV_ER_EMAIL_EMPTY" : "Saisissez votre Email.",
     "SP_FV_ER_PASSWORD_EMPTY" : "Saisissez votre mot de passe.",
     "SP_FV_ER_CONFIRM_PASSWORD_EMPTY" : "Confirmez votre Mot de passe.",
     "SP_FV_ER_PASSWORDS_NOT_MATCH" : "Les deux mots de passe ne se correspondent pas.",
@@ -97,10 +153,12 @@
     "SP_FV_ER_EMAIL_NOT_VALID" : "L'email saisi est invalide.",
     "SP_FV_ER_PASSWORD_SIZE" : "Créez un mot de passe d’au moins 5 caractères.",
 
-  "SP_FV_ER_PUBLICATION_EMPTY" : "Votre publication est vide. Veuillez ecrire une publication, partager une photo/GIF ou une video Youtube.",
+    "SP_FV_ER_NEW_PASSWORD_NOT_VALID" : "Le nouveau mot de passe n'est pas valide",
+
+    "SP_FV_ER_PUBLICATION_EMPTY" : "Votre publication est vide. Veuillez ecrire une publication, partager une photo/GIF ou une video Youtube.",
 
 
-  "SP_ER_PROFILE_NOT_FOUND" : "Profil non trouvé",
+    "SP_ER_PROFILE_NOT_FOUND" : "Profil non trouvé",
     "SP_ER_TECHNICAL_ERROR" : "Erreur technique",
     "SP_ER_USER_NOT_FOUND" : "Le nom d’utilisateur entré n’appartient à aucun compte. Veuillez le vérifer et réessayer.",
     "SP_ER_WRONG_PASSWORD" : "Votre mot de passe est incorrect. Veuillez le vérifer.",
@@ -108,6 +166,7 @@
     "SP_ER_FP_USER_NOT_FOUND": "Cette adresse mail n'appartient à aucun compte.",
     "SP_ER_RESET_LINK_EXPIRED" : "Le lien de renitialisation est expiré.",
     "SP_ER_EMAIL_NOT_VALID": "Cette adresse mail n'est pas valide"
+
 
 
     }

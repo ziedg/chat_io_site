@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 
 /* conf */
 import {AppSettings} from '../../conf/app-settings';
+import { TranslateService } from 'ng2-translate';
 
 /* services */
 import {LoginService} from '../../service/loginService';
@@ -13,13 +14,13 @@ import {NotificationBean} from "../../beans/notification-bean";
 import {User} from "../../beans/user";
 import {environment} from "../../../environments/environment";
 
+/** Utils */
+import * as pathUtils from '../../utils/path.utils';
 
 @Component({
-  moduleId: module.id,
     selector: 'notification',
     templateUrl: 'notification.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-
 })
 
 
@@ -27,127 +28,126 @@ export class Notification {
     lastNotifId="";
     showButtonMoreNotif:Boolean=false;
     showNoNotif:Boolean=false;
-    listNotif : Array <NotificationBean>;
+    listNotif : Array <NotificationBean> = [];
     user:User = new User();
     noMoreNotif:Boolean=false;
-    constructor(private dateService:DateService,private http:Http, private router:Router, private loginService:LoginService,private changeDetector: ChangeDetectorRef) {
+
+    constructor(public translate:TranslateService,
+                private dateService:DateService,
+                private http:Http,
+                private router:Router,
+                private loginService:LoginService,
+                private changeDetector: ChangeDetectorRef) {
         this.listNotif=[];
 
-        if(!this.loginService.isConnected()){
-            if(this.loginService.isWasConnectedWithFacebook()){
-                this.router.navigate(['/login/facebook-login']);
-            }else{
-                this.router.navigate(['/login/sign-in']);
-            }
-        }
-        this.user = this.loginService.getUser();
-        this.loadFirstNotification();
+      this.loginService.redirect();
+      this.user = this.loginService.getUser();
+
+        this.loadFirstNotifactions();
     }
-    loadFirstNotification(){
-        this.lastNotifId="";
-        this.showNoNotif=false;
-        if(this.user) {
-            this.http.get(environment.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId=', AppSettings.OPTIONS)
-                .map((res: Response) => res.json())
-                .subscribe(
-                    response => {
-                        if(response.length){
-                            this.listNotif=response;
-                            this.changeDetector.markForCheck();
-                            this.showNoNotif=false;
-                            this.lastNotifId=response[response.length-1]._id;
-                            this.load5MoreNotif();
-                        }
-                        else {
-                            this.showNoNotif=true;
-                        }
-                    },
-                    err => {
-                    },
-                    () => {
-                        this.changeDetector.markForCheck();
-                        if(!this.noMoreNotif){
-                            this.load5MoreNotif();
-                        }
-                    }
-                );
+
+  loadFirstNotifactions() {
+    this.lastNotifId = "";
+    this.listNotif = [];
+    this.getNotifications();
+  }
+
+
+  getNotifications() {
+    this.http.get(
+      environment.SERVER_URL + pathUtils.GET_NOTIFICATIONS + this.lastNotifId,
+      AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        if (response.length != 0) {
+          this.showNoNotif = false;
+          for (var i = 0; i < response.length; i++) {
+            this.listNotif.push(response[i]);
+            this.lastNotifId = response[i]._id;
+          }
+          if (response.length == 5)
+            this.showButtonMoreNotif = true;
+          else
+            this.showButtonMoreNotif = false;
+        } else {
+          this.showNoNotif = true;
+          this.showButtonMoreNotif = false;
         }
-    }
-    load5MoreNotif(){
-        this.http.get(environment.SERVER_URL + 'getNotifications?profileId=' + this.user._id + '&lastNotificationId='+this.lastNotifId, AppSettings.OPTIONS)
-                .map((res: Response) => res.json())
-                .subscribe(
-                    response => {
-                        if(response.length){
-                           this.noMoreNotif=false;
-                           for(var i=0;i<response.length;i++){
-                               this.listNotif.push(response[i]);
-                               this.lastNotifId=response[i]._id;
-                               this.changeDetector.markForCheck();
-                           }
-                        }
-                        else {
-                            this.noMoreNotif=true;
-                        }
-                    },
-                    err => {
-                    },
-                    () => {
-                        this.changeDetector.markForCheck();
-                    }
-        );
-    }
-    onScrollDown(){
-        if(this.showNoNotif || this.noMoreNotif){
-               return 0;
-        }
-        this.load5MoreNotif();
+      },
+        err => {
+      },
+      () => {
         this.changeDetector.markForCheck();
+      }
+    );
+  }
+
+  onScrollDown(){
+    if(this.showNoNotif || this.noMoreNotif){
+      return ;
     }
-    getNotificationTime(publishDateString: string): string {
+    this.getNotifications();
+  }
 
 
-        let date = new Date();
-        let currentDate = new Date(date.valueOf() + date.getTimezoneOffset() * 60000);
-        let publishDate = this.dateService.convertIsoToDate(publishDateString);
-        var displayedDate="";
+  getNotificationTime(publishDateString:string):string {
+    let date = new Date();
+    let currentDate = new Date(date.valueOf() + date.getTimezoneOffset() * 60000);
+    let publishDate = this.dateService.convertIsoToDate(publishDateString);
+    var displayedDate = "";
 
-        let diffDate = this.dateService.getdiffDate(publishDate, currentDate);
-        if (diffDate.day > 28) {
-            displayedDate = this.dateService.convertPublishDate(publishDate);
-        }
-        else if (diffDate.day &&  diffDate.day == 1) {
-            displayedDate = "hier";
-        }
-        else if (diffDate.day > 0) {
-            displayedDate = diffDate.day + " jour(s)";
-        }
-        else if ((diffDate.hour) && (diffDate.hour == 1)) {
-            displayedDate =  "1 h";
-        }
-        else if ((diffDate.hour) && (diffDate.hour > 0)) {
-            displayedDate = diffDate.hour + " h";
-        }
-        else if ((diffDate.min) && (diffDate.min > 1))
-            displayedDate = diffDate.min + " min(s)";
-        else
-            displayedDate = "maintenant";
-        return displayedDate;
+    let diffDate = this.dateService.getdiffDate(publishDate, currentDate);
+    if (diffDate.day > 28) {
+      displayedDate = this.dateService.convertPublishDate(publishDate);
     }
-    goTo(source,parm,notifId){
-        let body = JSON.stringify({
-            notificationId: notifId
-        });
-        this.http.post(environment.SERVER_URL + 'setNotificationSeen ', body, AppSettings.OPTIONS)
-            .map((res: Response) => res.json())
-            .subscribe(
-                response => {
-                },
-                err => { },
-                () => {});
-        this.router.navigate(["/main/"+source,parm]);
-
+    else if (diffDate.day && diffDate.day == 1) {
+      displayedDate = this.translateCode("prefix_date_yesterday");
     }
+    else if (diffDate.day > 0) {
+      displayedDate = diffDate.day + this.translateCode("prefix_date_days");
+    }
+    else if ((diffDate.hour) && (diffDate.hour == 1)) {
+      displayedDate = this.translateCode("prefix_date_one_hour");
+    }
+    else if ((diffDate.hour) && (diffDate.hour > 0)) {
+      displayedDate = diffDate.hour + this.translateCode("prefix_date_hours");
+    }
+    else if ((diffDate.min) && (diffDate.min > 1))
+      displayedDate = diffDate.min + this.translateCode("prefix_date_minutes");
+    else
+      displayedDate = this.translateCode("prefix_date_now");
+    return displayedDate;
+  }
+
+
+  goTo(source, parm, notifId) {
+    this.markView(notifId);
+    this.router.navigate(["/main/" + source, parm]);
+  }
+
+  markView(notifId) {
+    let body = JSON.stringify({
+      notificationId: notifId
+    });
+    this.http.post(environment.SERVER_URL + pathUtils.MARK_VIEW, body, AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+      },
+        err => {
+      },
+      () => {
+      });
+  }
+
+  translateCode(code) {
+    let message;
+    this.translate.get(code).subscribe((resTranslate:string) => {
+      message = resTranslate;
+    });
+    return message;
+  }
 }
 
 

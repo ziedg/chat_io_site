@@ -18,6 +18,10 @@ import {EmojiService} from "../service/emojiService";
 import {LinkView} from "../service/linkView";
 import {PostService} from "../service/postService";
 import {SeoService} from '../service/seo-service';
+import { TranslateService } from 'ng2-translate';
+
+/** Utils */
+import * as pathUtils from '../utils/path.utils';
 
 
 /* beans */
@@ -84,12 +88,22 @@ export class Publication {
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
 
-  constructor(public seoService: SeoService, private postService: PostService, private linkView: LinkView, private emojiService: EmojiService, private http: Http, private router: Router, private sanitizer: DomSanitizer, private loginService: LoginService, private changeDetector: ChangeDetectorRef, private dateService: DateService) {
+  constructor(public translate:TranslateService,
+              public seoService: SeoService,
+              private postService: PostService,
+              private linkView: LinkView,
+              private emojiService: EmojiService,
+              private http: Http,
+              private router: Router,
+              private sanitizer: DomSanitizer,
+              private loginService: LoginService,
+              private changeDetector: ChangeDetectorRef,
+              private dateService: DateService) {
     loginService.actualize();
 
     this.user = loginService.user;
     this.listEmoji = emojiService.getEmojiList();
-    this.pubImgId = "imgDefault";//+this.publicationBean._id;
+    this.pubImgId = "imgDefault";
     this.formComment = new FormGroup({
       pubComment: new FormControl('', Validators.required),
       commentText: new FormControl('', Validators.required)
@@ -99,19 +113,20 @@ export class Publication {
 
   deletePub() {
     swal({
-      title: "Êtes-vous sûr?",
-      text: "Vous ne serez pas en mesure de récupérer cette publication!",
+      title: this.translateCode("publication_popup_confirmation_title"),
+      text: this.translateCode("publication_popup_confirmation_delete_text"),
       showCancelButton: true,
       cancelButtonColor: '#999',
       confirmButtonColor: "#6bac6f",
-      confirmButtonText: "Oui, supprimez-le!",
+      confirmButtonText: this.translateCode("publication_popup_confirmation_delete_button"),
+      cancelButtonText: this.translateCode("publication_popup_cancel_button"),
       allowOutsideClick: true,
     }).then(function () {
-        this.doDeletePub("sU");
+        this.doDeletePub();
         this.closeModalPub();
         swal({
-          title: "supprimé !",
-          text: "Votre publication a été supprimé.",
+          title: this.translateCode("publication_popup_notification_delete_title"),
+          text: this.translateCode("publication_popup_notification_delete_text"),
           type: "success",
           timer: 1000,
           showConfirmButton: false
@@ -127,71 +142,18 @@ export class Publication {
       });
   }
 
-  MaskPub() {
-    swal({
-      title: "Êtes-vous sûr?",
-      text: "Vous pouvez masquer cette publication ? ",
-      showCancelButton: true,
-      cancelButtonColor: '#999',
-      confirmButtonColor: "#6bac6f",
-      confirmButtonText: "Oui, masquer-le!",
-      allowOutsideClick: true
-    }).then(function () {
-        this.doMaskPub();
-        this.closeModalPub();
-        swal({
-          title: "Masqué !",
-          text: "Votre publication a été masqué.",
-          type: "success",
-          timer: 1000,
-          showConfirmButton: false
-        }).then(function () {
-        }, function (dismiss) {
-        });
-        this.changeDetector.markForCheck();
-      }.bind(this),
-      function (dismiss) {
-        if (dismiss === 'overlay') {
-        }
-      });
-  }
-
-  doMaskPub() {
-    this.changeDetector.markForCheck();
-    let body = JSON.stringify({
-      publId: this.publicationBean._id,
-      userID: this.user._id
-    });
-    this.http.post(environment.SERVER_URL + 'masquerPublicationAdmin', body, AppSettings.OPTIONS)
-      .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-          this.publicationBean.confidentiality = "PRIVATE";
-          console.log(response);
-          this.changeDetector.markForCheck();
-        },
-        err => {
-        },
-        () => {
-          this.changeDetector.markForCheck();
-        }
-      );
-  }
-
-  doDeletePub(text) {
+  doDeletePub() {
     this.publicationBean.displayed = false;
     this.changeDetector.markForCheck();
     var body;
-    if (text = "sU") {
       body = JSON.stringify({
         publId: this.publicationBean._id,
       });
 
-      this.http.post(environment.SERVER_URL + 'removePublication', body, AppSettings.OPTIONS)
+      this.http.post(environment.SERVER_URL +  pathUtils.REMOVE_PUBLICATION , body, AppSettings.OPTIONS)
         .map((res: Response) => res.json())
         .subscribe(
           response => {
-            this.changeDetector.markForCheck();
           },
           err => {
           },
@@ -199,27 +161,6 @@ export class Publication {
             this.changeDetector.markForCheck();
           }
         );
-
-    }
-    else {
-      body = JSON.stringify({
-        publId: this.publicationBean._id,
-        raisonDelete: text
-      });
-
-      this.http.post(environment.SERVER_URL + 'removePublicationAdmin', body, AppSettings.OPTIONS)
-        .map((res: Response) => res.json())
-        .subscribe(
-          response => {
-            this.changeDetector.markForCheck();
-          },
-          err => {
-          },
-          () => {
-            this.changeDetector.markForCheck();
-          }
-        );
-    }
   }
 
   initComments() {
@@ -322,7 +263,7 @@ export class Publication {
     data.append('commentPicture', this.uploadedPictureComment);
     this.changeDetector.markForCheck();
 
-    this.http.post(environment.SERVER_URL + 'addComment', data, AppSettings.OPTIONS_POST)
+    this.http.post(environment.SERVER_URL + pathUtils.ADD_COMMENT, data, AppSettings.OPTIONS_POST)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -385,18 +326,18 @@ export class Publication {
 
   sharePub(post: PublicationBean) {
     swal({
-      title: "Êtes-vous sûr?",
-      text: "voulez-vous partager cette publication ? ",
+      title: this.translateCode("publication_popup_confirmation_title"),
+      text: this.translateCode("publication_popup_confirmation_share_text"),
       showCancelButton: true,
       confirmButtonColor: "#6bac6f",
-      confirmButtonText: "oui",
-      cancelButtonText: "non",
+      confirmButtonText: this.translateCode("publication_popup_YES"),
+      cancelButtonText: this.translateCode("publication_popup_NO"),
       cancelButtonColor: '#999',
       allowOutsideClick: true
     }).then(function () {
         swal({
-          title: "paratgé !",
-          text: "Votre publication a été partagé.",
+          title: this.translateCode("publication_popup_notification_share_title"),
+          text:  this.translateCode("publication_popup_notification_share_text"),
           type: "success",
           timer: 1000,
           showConfirmButton: false
@@ -426,7 +367,7 @@ export class Publication {
       publId: pubId,
       profileId: this.user._id
     });
-    this.http.post(environment.SERVER_URL + 'sharePublication', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL + pathUtils.SHARE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -447,23 +388,21 @@ export class Publication {
   }
 
   reportPub(post: PublicationBean) {
-    //alert("you wana report this post ? : "+post.publText+" with id : "+post._id);
-
-
     swal({
-      title: "Signaler cette publication",
-      text: "Que se passe-t-il ?",
+      title: this.translateCode("publication_popup_report_title"),
+      text: this.translateCode("publication_popup_report_text"),
       showCancelButton: true,
       cancelButtonColor: '#999',
       confirmButtonColor: "#6bac6f",
-      confirmButtonText: "confirmer",
+      confirmButtonText: this.translateCode("publication_popup_confirm"),
+      cancelButtonText: this.translateCode("publication_popup_cancel_button"),
       input: 'textarea',
     }).then(function (text) {
         if (text) {
           this.doReportPub(text);
           swal({
-            title: "Signalé !",
-            text: "Cette publication a été Signalé.",
+            title: this.translateCode("publication_popup_notification_report_title"),
+            text: this.translateCode("publication_popup_notification_report_text"),
             type: "success",
             timer: 1000,
             showConfirmButton: false
@@ -475,10 +414,7 @@ export class Publication {
 
       }.bind(this),
       function (dismiss) {
-        // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-        if (dismiss === 'overlay') {
-
-        }
+        if (dismiss === 'overlay') {}
       }
     );
     this.closeModalPub();
@@ -490,7 +426,7 @@ export class Publication {
       publId: this.publicationBean._id,
       profileId: this.user._id
     });
-    this.http.post(environment.SERVER_URL + 'signalerPublication', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL +  pathUtils.REPORT_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -503,10 +439,6 @@ export class Publication {
       );
   }
 
-  modifPub(post: PublicationBean) {
-    alert("you wana modify this post ? : " + post.publText + " with id : " + post._id);
-    console.log(post);
-  }
 
   loadMoreComments(i: number) {
     this.afficheCommentsLoading = true;
@@ -548,25 +480,25 @@ export class Publication {
       this.isFixedPublishDate = true;
     }
     else if (diffDate.day && diffDate.day == 1) {
-      this.fixedPublishDate = "hier";
+      this.fixedPublishDate =this.translateCode("prefix_date_yesterday");
       this.isFixedPublishDate = true;
     }
     else if (diffDate.day > 0) {
-      this.fixedPublishDate = diffDate.day + " jours";
+      this.fixedPublishDate = diffDate.day + this.translateCode("prefix_date_days");;
       this.isFixedPublishDate = true;
     }
     else if ((diffDate.hour) && (diffDate.hour == 1)) {
-      this.fixedPublishDate = "1 hr";
+      this.fixedPublishDate = this.translateCode("prefix_date_one_hour");
       this.isFixedPublishDate = true;
     }
     else if ((diffDate.hour) && (diffDate.hour > 0)) {
-      this.fixedPublishDate = diffDate.hour + " hrs";
+      this.fixedPublishDate = diffDate.hour + this.translateCode("prefix_date_hours");
       this.isFixedPublishDate = true;
     }
     else if ((diffDate.min) && (diffDate.min > 1))
-      this.fixedPublishDate = diffDate.min + " mins";
+      this.fixedPublishDate = diffDate.min +  this.translateCode("prefix_date_minutes");
     else
-      this.fixedPublishDate = "maintenant";
+      this.fixedPublishDate = this.translateCode("prefix_date_now");
     return this.fixedPublishDate;
   }
 
@@ -585,7 +517,7 @@ export class Publication {
       publId: this.publicationBean._id,
       profileId: this.user._id
     });
-    this.http.post(environment.SERVER_URL + 'likePublication', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL + pathUtils.LIKE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -607,7 +539,7 @@ export class Publication {
       publId: this.publicationBean._id,
       profileId: this.user._id
     });
-    this.http.post(environment.SERVER_URL + 'removeLikePublication', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL +  pathUtils.REMOVE_LIKE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -638,7 +570,7 @@ export class Publication {
       publId: this.publicationBean._id,
       profileId: this.user._id
     });
-    this.http.post(environment.SERVER_URL + 'dislikePublication', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL +  pathUtils.DISLIKE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -659,7 +591,7 @@ export class Publication {
       publId: this.publicationBean._id,
       profileId: this.user._id
     });
-    this.http.post(environment.SERVER_URL + 'removeDislikePublication', body, AppSettings.OPTIONS)
+    this.http.post(environment.SERVER_URL +   pathUtils.REMOVE_DISLIKE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -743,7 +675,7 @@ export class Publication {
     }
 
     this.http.get(
-      environment.SERVER_URL + 'getOpenGraphData?url=' + linkURL, AppSettings.OPTIONS)
+      environment.SERVER_URL +  pathUtils.GET_OPEN_GRAPH_DATA, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -786,6 +718,14 @@ export class Publication {
         }
       );
   }
+
+  translateCode(code) {
+    let message;
+    this.translate.get(code).subscribe((resTranslate:string) => {
+      message = resTranslate;
+    });
+    return message;
+  }
 }
 
 
@@ -817,4 +757,6 @@ function previewFile(uploadedFile, elementId) {
   if (file) {
     reader.readAsDataURL(file);
   }
+
+
 }

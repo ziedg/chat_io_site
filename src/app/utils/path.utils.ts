@@ -20,6 +20,20 @@ export const PUBLISH:string = 'publish';
 
 export const GET_PUBLICATIONS:string = 'getPublications?last_publication_id=';
 
+export const REMOVE_PUBLICATION:string = 'removePublication';
 
+export const ADD_COMMENT:string = 'addComment';
 
+export const SHARE_PUBLICATION:string = 'sharePublication';
 
+export const REPORT_PUBLICATION:string = 'reportPublication';
+
+export const LIKE_PUBLICATION:string = 'likePublication';
+
+export const REMOVE_LIKE_PUBLICATION:string = 'removeLikePublication';
+
+export const DISLIKE_PUBLICATION:string = 'dislikePublication';
+
+export const REMOVE_DISLIKE_PUBLICATION:string = 'removeDislikePublication';
+
+export const UPDATE_PASSWORD:string = 'updatePass';

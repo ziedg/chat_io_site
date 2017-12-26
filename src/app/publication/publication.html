@@ -1,12 +1,15 @@
 <div class="publications-holder" *ngIf="publicationBean" id="publication">
   <article class="publication bordered" *ngIf="publicationBean.displayed == true">
     <div class="date hidden-xs" [routerLink]="['/main/post',publicationBean._id]">
-      <i class="fa fa-globe" style="color:#666" *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
-      <i class="fa fa-users" style="color:#666" *ngIf="publicationBean.confidentiality=='PRIVATE'"></i>
+      <i class="fa fa-globe" style="color:#666"
+         *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
+      <i class="fa fa-users" style="color:#666"
+         *ngIf="publicationBean.confidentiality=='PRIVATE'"></i>
       {{getPublicationTime(publicationBean.datePublication)}}
     </div>
     <div class="user" *ngIf="!publicationBean.isShared">
-      <div class="user-img" [routerLink]="['/main/profile',publicationBean.profileId]"
+      <div class="user-img"
+           [routerLink]="['/main/profile',publicationBean.profileId]"
            *ngIf="publicationBean.profilePictureMin"
            [ngStyle]="{'background-image': 'url(' + publicationBean.profilePictureMin + ')'}">
       </div>
@@ -18,8 +21,12 @@
 
 
       <div class="user-name" *ngIf="publicationBean.profileId">
-        <header><a [routerLink]="['/main/profile',publicationBean.profileId]">{{publicationBean.profileFirstName}}
-          {{publicationBean.profileLastName}}</a></header>
+        <header>
+          <a [routerLink]="['/main/profile',publicationBean.profileId]">
+          {{publicationBean.profileFirstName}}
+          {{publicationBean.profileLastName}}
+        </a>
+        </header>
         <div class="date-mobile hidden-lg hidden-md hidden-sm" [routerLink]="['/main/post',publicationBean._id]">
           <i class="fa fa-globe" style="color:#666" *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
           <i class="fa fa-users" style="color:#666" *ngIf="publicationBean.confidentiality=='PRIVATE'"></i>
@@ -38,9 +45,10 @@
       </div>
 
       <div class="user-name" *ngIf="publicationBean.profileId">
-        <header><a style="display:inline;" [routerLink]="['/main/profile',publicationBean.profileId]">{{publicationBean.profileFirstName}}
-          {{publicationBean.profileLastName}} </a>a
-          partagé
+        <header><a style="display:inline;" [routerLink]="['/main/profile',publicationBean.profileId]">
+          {{publicationBean.profileFirstName}}
+          {{publicationBean.profileLastName}} </a>
+             {{ 'publication_shared_text' | translate }}
         </header>
         <div class="date-mobile hidden-lg hidden-md hidden-sm" [routerLink]="['/main/post',publicationBean._id]">
           <i class="fa fa-globe" style="color:#666" *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
@@ -69,13 +77,12 @@
           <a href="{{link.url}}" target="_blank">
             <h4>{{link.title}}</h4>
           </a>
-
           <p>{{link.description}}</p>
           <a href="{{link.url}}" target="_blank" class="subLink">{{link.url}}</a>
         </div>
       </div>
-      <img *ngIf="publicationBean.publPictureLink" src="{{imageBaseUrl + publicationBean.publPictureLink}}">
-
+      <img *ngIf="publicationBean.publPictureLink"
+           src="{{imageBaseUrl + publicationBean.publPictureLink}}">
       <div class="youtube-preview-publication"
            *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
         <iframe width="560" height="400" [src]="url" frameborder="0" allowfullscreen>
@@ -95,9 +102,13 @@
                [ngStyle]="{'background-image': 'url(' + publicationBean.originalProfilePicture + ')'}">
           </div>
           <div class="user-name-shared">
-            <header><a [routerLink]="['/main/profile',publicationBean.originalProfileId]"
-                       style="display:inline;font-size:12px;">{{publicationBean.originalProfileFirstName +"
-              "+publicationBean.originalProfileLastName }} </a></header>
+            <header>
+              <a [routerLink]="['/main/profile',publicationBean.originalProfileId]"
+                       style="display:inline;font-size:12px;">
+              {{publicationBean.originalProfileFirstName +"
+              "+publicationBean.originalProfileLastName }}
+            </a>
+            </header>
           </div>
 
         </div>
@@ -126,19 +137,27 @@
       <div class="like-dislike">
         <div class="like-holder" (click)="addOrRemoveLike()" [class.active]="publicationBean.isLiked">
           <button class="like">
-            <div class="hint-social">LOL</div>
-            <img class="social-emoji" src="assets/images/basic/smile-green.png" style="width:30px"
+            <div class="hint-social">
+              {{ 'publication_like' | translate }}
+            </div>
+            <img class="social-emoji" src="assets/images/basic/smile-green.png"
+                 style="width:30px"
                  *ngIf="publicationBean.isLiked">
-            <img class="social-emoji desaturated" src="assets/images/basic/blush.png" style="width:30px"
+            <img class="social-emoji desaturated"
+                 src="assets/images/basic/blush.png" style="width:30px"
                  *ngIf="!publicationBean.isLiked"></button>
           <span class="nbr">{{publicationBean.nbLikes}}</span>
         </div>
+
         <div class="dislike-holder" (click)="addOrRemoveDislike()" [class.active]="publicationBean.isDisliked">
           <button class="dislike">
-            <div class="hint-social">Nulle</div>
+            <div class="hint-social">
+               {{ 'publication_dislike' | translate }}
+            </div>
             <img class="social-emoji" src="assets/images/basic/rage.png" style="width:30px"
                  *ngIf="publicationBean.isDisliked">
-            <img class="social-emoji desaturated" src="assets/images/basic/expressionless.png" style="width:30px"
+            <img class="social-emoji desaturated"
+                 src="assets/images/basic/expressionless.png" style="width:30px"
                  *ngIf="!publicationBean.isDisliked">
           </button>
           <span class="nbr">{{publicationBean.nbDislikes}}</span>
@@ -146,14 +165,20 @@
         <div class="comment-number-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
           <button class="comment-number"><i class="fa fa-commenting"></i>
           </button>
-          <div class="hint-social" *ngIf="!commentsDisplayed">Afficher les commentaires</div>
-          <div class="hint-social" *ngIf="commentsDisplayed">Masquer les commentaires</div>
+          <div class="hint-social" *ngIf="!commentsDisplayed">
+            {{ 'publication_display_comments' | translate }}
+          </div>
+          <div class="hint-social" *ngIf="commentsDisplayed">
+            {{ 'publication_hide_comments' | translate }}
+          </div>
           <span class="nbr">{{nbDisplayedComments}}</span>
         </div>
         <div class="share-holder" (click)="sharePub(publicationBean)">
           <button class="share"><i class="fa fa-share"></i>
 
-            <div class="hint-social">Partager</div>
+            <div class="hint-social">
+              Partager
+            </div>
           </button>
           <span class="nbr">{{publicationBean.nbShare}}</span>
         </div>
@@ -174,11 +199,11 @@
           <div class="upper-arrow upper-arrow-signal" *ngIf="signalButton" style="display:block;"></div>
           <div class="sub-menu" *ngIf="signalButton">
             <article *ngIf="publicationBean.profileId != user._id" (click)="reportPub(publicationBean)">
-              Signaler
+                {{ 'publication_report' | translate }}
             </article>
 
             <article *ngIf="publicationBean.profileId == user._id" (click)="deletePub(publicationBean)">
-              Supprimer
+                {{ 'publication_delete' | translate }}
             </article>
           </div>
 
@@ -208,34 +233,46 @@
           <div class="form-more">
             <i class="fa fa-camera" (click)="addPhoto()"></i>
             <i class="fa fa-smile-o toggleEmoji" (click)="toggleEmoji()"></i>
-            <button class="comment-publish" type="submit" *ngIf="!loadingComment">Publier</button>
+            <button class="comment-publish" type="submit" *ngIf="!loadingComment">
+                 {{ 'publication_comment_button' | translate }}
+            </button>
             <button class="comment-publish comment-loading" *ngIf="loadingComment" disabled>
               <div class="loading"></div>
             </button>
             <div class="emoji-hover" id="{{emojiHoverId}}">
               <div class="emoji-header">
                 <div class="emoji-categ tooltip-emoji" id="ppl" (click)="changeEmojiTab(0)"><img
-                  src="assets/images/basic/smiley.png"/><span class="tooltiptext">Personnes<div
+                  src="assets/images/basic/smiley.png"/>
+                  <span class="tooltiptext">
+                        {{ 'publication_emoticon_people' | translate }}
+                    <div
                   class="arrow-tooltip"></div></span></div>
                 <div class="emoji-categ tooltip-emoji" id="ntr" (click)="changeEmojiTab(1)"><img
-                  src="assets/images/basic/evergreen_tree.png"/><span class="tooltiptext">Nature<div
+                  src="assets/images/basic/evergreen_tree.png"/><span class="tooltiptext">
+                        {{ 'publication_emoticon_nature' | translate }}
+                  <div
                   class="arrow-tooltip"></div></span></div>
                 <div class="emoji-categ tooltip-emoji" id="objcts" (click)="changeEmojiTab(2)"><img
-                  src="assets/images/basic/radio.png"/><span class="tooltiptext">Objets<div class="arrow-tooltip"></div></span>
+                  src="assets/images/basic/radio.png"/><span class="tooltiptext">
+                        {{ 'publication_emoticon_objects' | translate }}
+                  <div class="arrow-tooltip"></div></span>
                 </div>
                 <i class="fa fa-times close" aria-hidden="true" (click)="closeModalEmoji()"></i>
               </div>
               <div class="emoji-container" id="ppl-container" *ngIf="selectedEmojiTab==0">
-                <div *ngFor="let emoji of listEmoji[0].list" (click)="addToComment(emoji)" class="emoji-elt"><img
+                <div *ngFor="let emoji of listEmoji[0].list"
+                     (click)="addToComment(emoji)" class="emoji-elt"><img
                   src="assets/images/basic/{{emoji.imageName}}.png"/></div>
               </div>
               <div class="emoji-container" id="ntr-container" *ngIf="selectedEmojiTab==1">
-                <div *ngFor="let emoji of listEmoji[1].list" (click)="addToComment(emoji)" class="emoji-elt"><img
+                <div *ngFor="let emoji of listEmoji[1].list" (click)="addToComment(emoji)"
+                     class="emoji-elt"><img
                   src="assets/images/basic/{{emoji.imageName}}.png"/></div>
 
               </div>
               <div class="emoji-container" id="objcts-container" *ngIf="selectedEmojiTab==2">
-                <div *ngFor="let emoji of listEmoji[2].list" (click)="addToComment(emoji)" class="emoji-elt"><img
+                <div *ngFor="let emoji of listEmoji[2].list" (click)="addToComment(emoji)"
+                     class="emoji-elt"><img
                   src="assets/images/basic/{{emoji.imageName}}.png"/></div>
               </div>
             </div>
@@ -249,23 +286,33 @@
     <!-- comments -->
     <div class="comments-holder" *ngIf="commentsDisplayed">
 
-      <comment *ngFor="let commentBean of listComments" [commentBean]="commentBean" [publicationBean]="publicationBean"
+      <comment *ngFor="let commentBean of listComments" [commentBean]="commentBean"
+               [publicationBean]="publicationBean"
                [(nbDisplayedComments)]="nbDisplayedComments">
       </comment>
 
       <loading-bar *ngIf="afficheCommentsLoading"></loading-bar>
       <!-- more comments -->
-      <div *ngIf="afficheMoreComments" class="comment-holder plus-comment" (click)="loadMoreComments(0)">
-        <div class="margin-auto"> afficher plus de commentaires <i class="fa fa-caret-down"></i></div>
+      <div *ngIf="afficheMoreComments"
+           class="comment-holder plus-comment"
+           (click)="loadMoreComments(0)">
+        <div class="margin-auto">
+          {{ 'publication_display_more_comments' | translate }}
+          <i class="fa fa-caret-down"></i></div>
       </div>
-
     </div>
   </article>
 </div>
 <div class="modal-edit-pub" *ngIf="modalPub">
   <div class="white-box-edit">
-    <article *ngIf="publicationBean.profileId != user._id" (click)="reportPub(publicationBean)">Signaler</article>
-    <article *ngIf="publicationBean.profileId == user._id" (click)="deletePub(publicationBean)">Supprimer</article>
-    <article (click)="closeModalPub()">Annuler</article>
+    <article *ngIf="publicationBean.profileId != user._id" (click)="reportPub(publicationBean)">
+        {{ 'publication_report' | translate }}
+    </article>
+    <article *ngIf="publicationBean.profileId == user._id" (click)="deletePub(publicationBean)">
+        {{ 'publication_delete' | translate }}
+    </article>
+    <article (click)="closeModalPub()">
+      {{ 'publication_cancel' | translate }}
+    </article>
   </div>
 </div>

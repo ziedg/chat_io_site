@@ -1,7 +1,16 @@
 <div style="text-align: center; padding-top:30px;">
-                <h1>404 not found </h1>
-                <img style="margin: 0 auto" src="assets/pictures/sad.png"/>
-                <p *ngIf="type=='profile'">Profile n'exsite pas</p>
-                <p *ngIf="type=='page'">Page n'exsite pas</p>
-                <p *ngIf="type=='post'">Post n'exsite pas</p>
+  <h1>404 </h1>
+  <img style="margin: 0 auto" src="assets/pictures/sad.png"/>
+
+  <p *ngIf="type=='profile'">
+     {{ 'not_found_profile' | translate }}
+  </p>
+
+  <p *ngIf="type=='page'">
+    {{ 'not_found_page' | translate }}
+  </p>
+
+  <p *ngIf="type=='post'">
+     {{ 'not_found_post' | translate }}
+  </p>
 </div>

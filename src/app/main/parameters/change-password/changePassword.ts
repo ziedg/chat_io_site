@@ -4,106 +4,124 @@ import {FormGroup, Validators, FormControl} from '@angular/forms';
 import { Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
-
-
 /* conf */
 import {AppSettings} from '../../../conf/app-settings';
 
 /* services */
 import {LoginService} from '../../../service/loginService';
+import { TranslateService } from 'ng2-translate';
 
 /* user  */
 import {User} from '../../../beans/user';
+
+/** Utils */
+import * as pathUtils from '../../../utils/path.utils';
 
 /* beans */
 import {NotFound} from "../../notFound/not-found";
 import {environment} from "../../../../environments/environment";
 
-declare var jQuery: any;
-declare var swal: any;
+declare var jQuery:any;
+declare var swal:any;
 
 
 @Component({
-  moduleId: module.id,
-    selector: 'change-password',
-    templateUrl: 'changePassword.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'change-password',
+  templateUrl: 'changePassword.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 
 })
+
 export class ChangePassword {
-    public user: User = new User();
-	errNewPass2="";
-    errNewPass1="";
-    errOldPass="";
-        form;
-    constructor(private changeDetector: ChangeDetectorRef,private route: ActivatedRoute,private http:Http, private router:Router, private loginService:LoginService) {
+  public user:User = new User();
+  errNewPass2 = "";
+  errNewPass1 = "";
+  errOldPass = "";
+  form;
+  errorMessage="";
+  successfullyMessage="";
+  success : boolean = false;
 
-		if (loginService.isConnected()) {
-            loginService.actualize();
-            this.user = loginService.user
-        }
-        else {
-            this.router.navigate(['/login/sign-in']);
-        }
-        this.form = new FormGroup({
-            oldPass: new FormControl('', Validators.required),
-            newPass1: new FormControl('', Validators.required),
-            newPass2: new FormControl('', Validators.required),
-        });
+  constructor(
+    public translate:TranslateService,
+    private changeDetector:ChangeDetectorRef,
+    private route:ActivatedRoute, private http:Http,
+    private router:Router,
+    private loginService:LoginService) {
 
+    this.loginService.redirect();
+
+    this.form = new FormGroup({
+      oldPass: new FormControl('', Validators.required),
+      newPass1: new FormControl('',  Validators.required),
+      newPass2: new FormControl('', Validators.required),
+    });
+    window.scrollTo(0, 0);
+  }
+
+  saveData() {
+    this.reset();
+    let oldPass = this.form.value.oldPass;
+    let newPass1 = this.form.value.newPass1;
+    var newPass2 = this.form.value.newPass2;
+
+    if (oldPass < 1) {
+      this.errOldPass = this.translateCode("SP_FV_ER_PASSWORD_EMPTY");
+      return;
     }
-    saveData(){
-        var oldPass = this.form.value.oldPass;
-        var newPass1 = this.form.value.newPass1;
-        var newPass2 = this.form.value.newPass2;
 
-        if(newPass1<5){
-            this.errNewPass1="Créez un mot de passe d’au moins 5 caractères.";
-            return;
+    if (newPass1 < 5) {
+      this.errNewPass1 =  this.translateCode("SP_FV_ER_PASSWORD_SIZE");
+      return;
+    }
+
+    if (newPass1 != newPass2) {
+      this.errNewPass2 = this.translateCode("SP_FV_ER_PASSWORDS_NOT_MATCH");
+      return;
+    }
+
+    this.changeDetector.markForCheck();
+    let body = JSON.stringify({
+      oldPassword: oldPass,
+      newPassword: newPass1
+    });
+    this.http.post(environment.SERVER_URL +
+      pathUtils.UPDATE_PASSWORD, body, AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        if (response.status == 0) {
+          this.success=true;
         }
         else {
-            this.errNewPass1="";
+          this.errorMessage = response.error;
         }
-        if(newPass2<5 || newPass1!=newPass2){
-            this.errNewPass2="Les deux mots de passe ne sont pas identiques.";
-            return;
-        }
-        else {
-            this.errNewPass2="";
-        }
+      },
+        err => {
+          this.errorMessage = "SP_ER_TECHNICAL_ERROR"
+      },
+      () => {
         this.changeDetector.markForCheck();
-        let body = JSON.stringify({
-            profileId: this.user._id,//user._id
-            oldPassword: oldPass,
-            newPassword:newPass1
-        });
-         this.http.post(environment.SERVER_URL + 'updatePassword', body, AppSettings.OPTIONS)
-            .map((res: Response) => res.json())
-            .subscribe(
-            response => {
-                if(response.status==0){
-                    this.errOldPass="Mot de passe irroné";
-                    this.changeDetector.markForCheck();
-                }
-                else {
-                    this.errOldPass="";
-                    swal({
-                            title: "Modifié!",
-                            text: "votre mot de passe a éte actualisé",
-                            type: "success",
-                            timer: 2000,
-                            showConfirmButton: false
-                    }).then(function(){},function(dismiss){});
-                }
-            },
-            err => {},
-            () => {
-                this.changeDetector.markForCheck();
-            }
-            );
+      }
+    );
 
-    }
+  }
 
+  translateCode(code) {
+    let message;
+    this.translate.get(code).subscribe((resTranslate:string) => {
+      message = resTranslate;
+    });
+    return message;
+  }
+
+  reset(){
+    this.errOldPass="";
+    this.errNewPass1="";
+    this.errNewPass2="";
+    this.errorMessage="";
+    this.success=false;
+  }
 
 }
 
