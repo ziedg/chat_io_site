@@ -79,7 +79,7 @@ export class Signin {
         }
       },
         err => {
-        this.errorMessage = "SP_ER_TECHNICAL_ERROR"
+        this.errorMessage = "SP_ER_TECHNICAL_ERROR";
       },
       () => {
         this.loadingSign = false;

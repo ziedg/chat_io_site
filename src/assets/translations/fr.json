@@ -57,6 +57,9 @@
   "main_menu_support" :"Support",
   "main_menu_log_out" :"Deconnexion",
 
+  "parameters_update_profile":"modifier mon profil ",
+  "parameters_update_password":"modifier mon mot de passe ",
+
   "main_more_notifications" :"Voir tout",
   "main_no_notification" :"Pas de notifications",
 
@@ -142,7 +145,18 @@
   "update_password_confirm_password" :"Confirmer le nouveau mot de passe",
   "update_password_button" :"Modifier",
 
-  "SP_FV_ER_EMAIL_EMPTY" : "Saisissez votre Email.",
+  "update_profile_last_name":"Nom",
+  "update_profile_first_name":"Prénom",
+  "update_profile_description":"Description",
+  "update_profile_facebook_link":"Lien Facebook",
+  "update_profile_youtube_link":"Lien Youtube",
+  "update_profile_twitter_link":"Lien Twitter",
+  "update_profile_button":"Valider",
+
+  "edit_profile_popup_notification_update_title":"Modifié!",
+  "edit_profile_popup_notification_update_text":"Votre profil a été modifié",
+
+    "SP_FV_ER_EMAIL_EMPTY" : "Saisissez votre Email.",
     "SP_FV_ER_PASSWORD_EMPTY" : "Saisissez votre mot de passe.",
     "SP_FV_ER_CONFIRM_PASSWORD_EMPTY" : "Confirmez votre Mot de passe.",
     "SP_FV_ER_PASSWORDS_NOT_MATCH" : "Les deux mots de passe ne se correspondent pas.",
@@ -152,6 +166,12 @@
     "SP_FV_ER_PASSWORD_SBN_EMPTY" : "Le mot de passe est obligatoire.",
     "SP_FV_ER_EMAIL_NOT_VALID" : "L'email saisi est invalide.",
     "SP_FV_ER_PASSWORD_SIZE" : "Créez un mot de passe d’au moins 5 caractères.",
+
+  "SP_FV_ER_FB_LINK_NOT_VALID":"Lien facebook erroné",
+  "SP_FV_ER_YOUTUBE_LINK_NOT_VALID":"Lien youtube erroné",
+  "SP_FV_ER_FB_TWITTER_NOT_VALID":"Lien twitter erroné",
+
+
 
     "SP_FV_ER_NEW_PASSWORD_NOT_VALID" : "Le nouveau mot de passe n'est pas valide",
 

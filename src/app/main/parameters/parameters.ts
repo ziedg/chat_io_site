@@ -13,6 +13,7 @@ import {AppSettings} from '../../conf/app-settings';
 
 /* services */
 import {LoginService} from '../../service/loginService';
+import { TranslateService } from 'ng2-translate';
 
 /* user  */
 import {User} from '../../beans/user';
@@ -36,7 +37,7 @@ declare var jQuery: any;
 export class Parameters {
     public user: User = new User();
 	public page;
-    constructor(private title:Title,private route: ActivatedRoute,private http:Http, private router:Router, private loginService:LoginService,private changeDetector: ChangeDetectorRef) {
+    constructor(public translate:TranslateService, private title:Title,private route: ActivatedRoute,private http:Http, private router:Router, private loginService:LoginService,private changeDetector: ChangeDetectorRef) {
         this.title.setTitle("Modifier profile - Speegar");
 		if (loginService.isConnected()) {
             loginService.actualize();

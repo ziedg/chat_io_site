@@ -268,7 +268,7 @@ export class Publication {
       .subscribe(
         response => {
           this.changeDetector.markForCheck();
-          if (response.status == "1") {
+          if (response.status == "0") {
             if (response.comment) {
               if (!this.publicationBean.comments.length)
                 this.publicationBean.comments.unshift(response.comment);
@@ -372,7 +372,7 @@ export class Publication {
       .subscribe(
         response => {
           if (response) {
-            if (response.status) {
+            if (response.status = "0") {
               var element: PublicationBean = response.publication;
               this.postService.putNewPub(element, true);
               this.changeDetector.markForCheck();
@@ -675,7 +675,8 @@ export class Publication {
     }
 
     this.http.get(
-      environment.SERVER_URL +  pathUtils.GET_OPEN_GRAPH_DATA, AppSettings.OPTIONS)
+      environment.SERVER_URL +  pathUtils.GET_OPEN_GRAPH_DATA + linkURL
+      , AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {

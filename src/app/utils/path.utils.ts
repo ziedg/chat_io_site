@@ -37,3 +37,7 @@ export const DISLIKE_PUBLICATION:string = 'dislikePublication';
 export const REMOVE_DISLIKE_PUBLICATION:string = 'removeDislikePublication';
 
 export const UPDATE_PASSWORD:string = 'updatePass';
+
+export const UPDATE_PROFILE:string = 'updateProfile';
+
+
