@@ -18,11 +18,6 @@ export class AppSettings {
     }
     public static get OPTIONS_POST_ENCODED(): RequestOptions {
         let headers_post_encoded = new Headers();
-        //headers_post_encoded.append('Accept', 'application/x-www-form-urlencoded');
-        //headers_post_encoded.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        //headers_post_encoded.append('Access-Control-Allow-Origin', '*');
-
-
         return new RequestOptions({ headers: headers_post_encoded });
     }
 	 public static get OPTIONSFB(): RequestOptions {

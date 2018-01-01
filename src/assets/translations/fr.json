@@ -156,7 +156,32 @@
   "edit_profile_popup_notification_update_title":"Modifié!",
   "edit_profile_popup_notification_update_text":"Votre profil a été modifié",
 
-    "SP_FV_ER_EMAIL_EMPTY" : "Saisissez votre Email.",
+
+  "comment_popup_confirmation_delete_title": "Êtes-vous sûr ?",
+  "publication_popup_confirmation_delete_text": "Vous ne serez pas en mesure de récupérer ce commentaire !",
+  "comment_popup_confirmation_delete_button":  "Oui, supprimez-le!",
+  "comment_popup_cancel_delete_button":"Annuler",
+  "comment_popup_notification_delete_title":  "Supprimé !",
+  "comment_popup_notification_delete_text": "Votre commentaire a été supprimé.",
+
+  "profile_update_picture_popup_notification_title":"Photo de profil !",
+  "profile_update_picture_popup_notification_text":"Votre photo de profil a été modifiée",
+
+
+  "profile_already_subscribed" : "deja abonné ",
+  "profile_subscribe" : "s'abonner",
+  "profile_description_empty" : "Pas de description",
+  "profile_description_button_save" : "Enregistrer",
+  "profile_description__button_cancel" : "Annuler",
+  "profile_menu_followers" : "Abonnés",
+  "profile_menu_followed" : "Suivis",
+  "profile_menu_publications" : "Publications",
+  "profile_label_registration_date" :"Date d'inscription",
+  "profile_menu_update_profile" : "Modifier le profil",
+  "profile_menu_log_out" : "Deconnexion",
+  "profile_menu_cancel" : "Annuler",
+
+  "SP_FV_ER_EMAIL_EMPTY" : "Saisissez votre Email.",
     "SP_FV_ER_PASSWORD_EMPTY" : "Saisissez votre mot de passe.",
     "SP_FV_ER_CONFIRM_PASSWORD_EMPTY" : "Confirmez votre Mot de passe.",
     "SP_FV_ER_PASSWORDS_NOT_MATCH" : "Les deux mots de passe ne se correspondent pas.",

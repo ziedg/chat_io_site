@@ -14,6 +14,7 @@ export class User {
 	public googleId:string;
 	public about:string;
 	public isSubscribe:boolean;
+  public isFollowed:boolean;
 	public facebookLink:string;
 	public twitterLink:string;
 	public youtubeLink:string;

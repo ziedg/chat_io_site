@@ -36,8 +36,28 @@ export const DISLIKE_PUBLICATION:string = 'dislikePublication';
 
 export const REMOVE_DISLIKE_PUBLICATION:string = 'removeDislikePublication';
 
-export const UPDATE_PASSWORD:string = 'updatePass';
+export const UPDATE_PASSWORD:string = 'updatePassword';
 
 export const UPDATE_PROFILE:string = 'updateProfile';
 
+export const LIKE_COMMENT:string = 'likeComment';
 
+export const REMOVE_LIKE_COMMENT:string = 'removeLikeComment';
+
+export const DISLIKE_COMMENT:string = 'dislikeComment';
+
+export const REMOVE_DISLIKE_COMMENT:string = 'removeLikeComment';
+
+export const REMOVE_COMMENT:string = 'removeComment';
+
+export const GET_PROFILE:string = 'getProfile/?ProfileId=';
+
+export const SUBSCRIBE:string = 'subscribe';
+
+export const UNSUBSCRIBE:string = 'unsubscribe';
+
+export const GET_PROFILE_PUBLICATIONS:string = 'getProfilePublications?ProfileId=PROFILE_ID&last_publication_id=';
+
+export const UPDATE_PROFILE_DESCRIPTION:string = 'updateProfileDescription';
+
+export const UPDATE_PROFILE_PICTURE:string = 'updateProfilePicture';

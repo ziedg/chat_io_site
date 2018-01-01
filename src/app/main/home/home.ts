@@ -243,7 +243,8 @@ export class Home {
   }
 
   onScrollDown() {
-    if ((((this.lastPostId == "null") || (this.isLock)) || !$(window).scrollTop())) {
+    if ((((this.lastPostId == "null")
+      || (this.isLock)) || !$(window).scrollTop())) {
       return;
     }
     else {

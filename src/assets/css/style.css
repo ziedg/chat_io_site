@@ -690,7 +690,6 @@ section.widget {
   font-size: 25px;
 }
 .header-segement.social-holder .score {
-  font-family: lato;
   font-size: 16px;
 }
 .header-segement.social-holder .score-mobile {
@@ -2282,7 +2281,6 @@ margin-bottom:5px;*/
 }
 .profile-edit .three-dots {
   width: 45px;
-  font-size: 20px;
   cursor: pointer;
 }
 .profile-edit .three-dots .fa {
