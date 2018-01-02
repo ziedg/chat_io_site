@@ -66,7 +66,7 @@ export class Profile {
 
 
   showLoading = false;
-  lastPostId:string = "null";
+  lastPostId:string = "";
 
   lastRouterProfileId;
   editModal = false;
@@ -95,6 +95,11 @@ export class Profile {
               private changeDetector:ChangeDetectorRef) {
 
     this.loginService.redirect();
+
+    console.log("constructeur");
+    this.lastPostId = "";
+    this.publicationBeanList = [];
+
     this.user = this.loginService.user;
 
     this.router.events.subscribe(route => {

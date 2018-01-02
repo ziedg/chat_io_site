@@ -56,7 +56,7 @@ export const SUBSCRIBE:string = 'subscribe';
 
 export const UNSUBSCRIBE:string = 'unsubscribe';
 
-export const GET_PROFILE_PUBLICATIONS:string = 'getProfilePublications?ProfileId=PROFILE_ID&last_publication_id=';
+export const GET_PROFILE_PUBLICATIONS:string = 'getProfilePublications?profileId=PROFILE_ID&last_publication_id=';
 
 export const UPDATE_PROFILE_DESCRIPTION:string = 'updateProfileDescription';
 
