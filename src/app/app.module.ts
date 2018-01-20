@@ -23,7 +23,6 @@ import {Post} from "./main/post/post";
 import {NotFoundPage} from "./main/404/404";
 import {AppRoutingModule} from "./app-routing.module";
 import {Comment} from "./comment/comment";
-import {ListComments} from "./listComments/listComments";
 import {LoadingBar} from "./loading/loading-bar";
 import {FacebookLogin} from "./login/facebookLogin/facebookLogin";
 import {Signin} from "./login/signin/signin";
@@ -61,7 +60,7 @@ import {ContenteditableModel} from "./publication/contenteditable-model";
         useFactory: (createTranslateLoader),
         deps: [Http]
       })],       // module dependencies
-    declarations: [AppComponent, Comment, ListComments, LoadingBar, FacebookLogin,
+    declarations: [AppComponent, Comment, LoadingBar, FacebookLogin,
         Signin, Signup, Login, Logout, NotFoundPage, Home, NotFound, Notification, ChangePassword, EditProfile,
         Parameters, Post, Profile, Main, Publication, AboutUs, Cgu, Team, Support,
         TopBlagueursAndDecov, GoogleRecaptchaDirective, ForgetPasswordComponent, ResetPasswordComponent,
