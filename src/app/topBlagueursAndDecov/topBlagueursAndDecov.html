@@ -1,67 +1,69 @@
-	   <section class="widget bordered" *ngIf="user">
-                <header>
-                    Blagueurs populaires
-                </header>
-                <article *ngFor="let blag of topBlagueursDisplayList">
-                    <div>
-                        <div class="user">
-<div class="user-img" *ngIf="blag.profilePictureMin"
-     [ngStyle]="{'background-image': 'url(' + blag.profilePictureMin + ')'}" >
-</div>
-<div class="user-img" *ngIf="!blag.profilePictureMin"
-     [ngStyle]="{'background-image': 'url(' + blag.profilePicture + ')'}" >
-</div>
-                            <div class="user-name">
-                                <header><a [routerLink]="['/main/profile',blag._id]">
-								{{blag.firstName}} {{blag.lastName}}
-								</a></header>
-                                <div class="subscribe">
-                                    <button *ngIf="!blag.isSubscribed"
-                                            (click)=" subscribe(blag)">
-                                            s'abonner
-                                     </button>
-                                     <button class="active"  *ngIf="blag.isSubscribed"
-                                    (click)="doNotSubscribeUser('Bpopulaires',blag.position,blag._id,blag)">
-                                    <i class="fa fa-check" style="position: relative;top: 1.1px;"></i>
-                                       abonné
-                                     </button>
+<section class="widget bordered" *ngIf="user">
+  <header>
+    Blagueurs populaires
+  </header>
+  <article *ngFor="let blag of topBlagueursDisplayList">
+    <div>
+      <div class="user">
+        <div class="user-img" *ngIf="blag.profilePictureMin"
+             [ngStyle]="{'background-image': 'url(' + blag.profilePictureMin + ')'}">
+        </div>
+        <div class="user-img" *ngIf="!blag.profilePictureMin"
+             [ngStyle]="{'background-image': 'url(' + blag.profilePicture + ')'}">
+        </div>
+        <div class="user-name">
+          <header><a [routerLink]="['/main/profile',blag._id]">
+            {{blag.firstName}} {{blag.lastName}}
+          </a></header>
+          <div class="subscribe">
+            <button *ngIf="!blag.isSubscribed"
+                    (click)=" subscribe(blag)">
+              s'abonner
+            </button>
+            <button class="active" *ngIf="blag.isSubscribed"
+                    (click)="doNotSubscribeUser('Bpopulaires',blag.position,blag._id,blag)">
+              <i class="fa fa-check" style="position: relative;top: 1.1px;"></i>
+              abonné
+            </button>
 
-                                    <div class="nbr-subscribes">
-                                       {{blag.nbSuivi}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            <div class="nbr-subscribes">
+              {{blag.nbSuivi}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
 
-            </section>
+</section>
 
-            <section *ngIf="false" class="widget bordered">
-                <header>
-                    Faites des découvertes
-                </header>
-                <article *ngFor="let blag of DecovDisplayList">
-                    <div>
-                        <div class="user">
-<div class="user-img" *ngIf="blag.profilePictureMin" [ngStyle]="{'background-image': 'url(' + blag.profilePictureMin + ')'}" >
-</div>
-<div class="user-img" *ngIf="!blag.profilePictureMin" [ngStyle]="{'background-image': 'url(' + blag.profilePicture + ')'}" >
-</div>
-                            <div class="user-name">
-                                <header><a [routerLink]="['/main/profile',blag._id]">
-								{{blag.firstName}} {{blag.lastName}}
-								</a></header>
-                                <div class="subscribe">
-								<button [class.active]="blag.isSubscribed" (click)="subscribeUser('Decov',blag.position,blag._id, blag)">
-                                    s'abonner
-                                </button>
-                                    <div class="nbr-subscribes">
-                                        {{blag.nbSuivi}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </section>
+<section *ngIf="false" class="widget bordered">
+  <header>
+    Faites des découvertes
+  </header>
+  <article *ngFor="let blag of DecovDisplayList">
+    <div>
+      <div class="user">
+        <div class="user-img" *ngIf="blag.profilePictureMin"
+             [ngStyle]="{'background-image': 'url(' + blag.profilePictureMin + ')'}">
+        </div>
+        <div class="user-img" *ngIf="!blag.profilePictureMin"
+             [ngStyle]="{'background-image': 'url(' + blag.profilePicture + ')'}">
+        </div>
+        <div class="user-name">
+          <header><a [routerLink]="['/main/profile',blag._id]">
+            {{blag.firstName}} {{blag.lastName}}
+          </a></header>
+          <div class="subscribe">
+            <button [class.active]="blag.isSubscribed" (click)="subscribeUser('Decov',blag.position,blag._id, blag)">
+              s'abonner
+            </button>
+            <div class="nbr-subscribes">
+              {{blag.nbSuivi}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

@@ -49,12 +49,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 /** Factories */
 import { httpFactory } from './utils/factories/http.factory';
-import {EmojiPickerModule} from "ng-emoji-picker";
 import {ContenteditableModel} from "./publication/contenteditable-model";
 
 @NgModule({
     imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
-      ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule, EmojiPickerModule,
+      ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule,
       TranslateModule.forRoot({
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),
