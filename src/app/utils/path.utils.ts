@@ -61,3 +61,7 @@ export const GET_PROFILE_PUBLICATIONS:string = 'getProfilePublications?profileId
 export const UPDATE_PROFILE_DESCRIPTION:string = 'updateProfileDescription';
 
 export const UPDATE_PROFILE_PICTURE:string = 'updateProfilePicture';
+
+export const GET_POPULAR_PROFILES :string = 'getPopularProfiles';
+
+export const GET_PROFILES_SUGGESTIONS:string = 'getProfilesSuggestions';
