@@ -1,65 +1,70 @@
-<section class="widget bordered" *ngIf="user">
+<section class="widget bordered">
   <header>
-    Blagueurs populaires
+    {{ 'popular_profiles_title' | translate }}
   </header>
-  <article *ngFor="let blag of topBlagueursDisplayList">
-    <div>
+  <article *ngFor="let profile of popularProfiles;  let i=index">
+    <div *ngIf="i< displayedNumberPopularProfiles">
       <div class="user">
-        <div class="user-img" *ngIf="blag.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + blag.profilePictureMin + ')'}">
+        <div class="user-img" *ngIf="profile.profilePictureMin"
+             [ngStyle]="{'background-image': 'url(' + profile.profilePictureMin + ')'}">
         </div>
-        <div class="user-img" *ngIf="!blag.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + blag.profilePicture + ')'}">
+        <div class="user-img" *ngIf="!profile.profilePictureMin"
+             [ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
         </div>
         <div class="user-name">
-          <header><a [routerLink]="['/main/profile',blag._id]">
-            {{blag.firstName}} {{blag.lastName}}
+          <header><a [routerLink]="['/main/profile',profile._id]">
+            {{profile.firstName}} {{profile.lastName}}
           </a></header>
           <div class="subscribe">
-            <button *ngIf="!blag.isSubscribed"
-                    (click)=" subscribe(blag)">
-              s'abonner
+            <button *ngIf="!profile.isSubscribed"
+                    (click)="subscribe(profile)">
+              {{ 'profile_subscribe' | translate }}
             </button>
-            <button class="active" *ngIf="blag.isSubscribed"
-                    (click)="doNotSubscribeUser('Bpopulaires',blag.position,blag._id,blag)">
+            <button class="active" *ngIf="profile.isFollowed"
+                    (click)="unsubscribe(profile)">
               <i class="fa fa-check" style="position: relative;top: 1.1px;"></i>
-              abonné
+              {{ 'profile_already_subscribed' | translate }}
             </button>
 
             <div class="nbr-subscribes">
-              {{blag.nbSuivi}}
+              {{profile.nbSuivi}}
             </div>
           </div>
         </div>
       </div>
     </div>
   </article>
-
 </section>
 
-<section *ngIf="false" class="widget bordered">
+
+<section *ngIf="true" class="widget bordered">
   <header>
-    Faites des découvertes
+    {{ 'profile_suggestions_title' | translate }}
   </header>
-  <article *ngFor="let blag of DecovDisplayList">
-    <div>
+  <article *ngFor="let profile of profileSuggestions;  let i=index">
+    <div *ngIf="i< displayedNumberProfileSuggestions;">
       <div class="user">
-        <div class="user-img" *ngIf="blag.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + blag.profilePictureMin + ')'}">
+        <div class="user-img" *ngIf="profile.profilePictureMin"
+             [ngStyle]="{'background-image': 'url(' + profile.profilePictureMin + ')'}">
         </div>
-        <div class="user-img" *ngIf="!blag.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + blag.profilePicture + ')'}">
+        <div class="user-img" *ngIf="!profile.profilePictureMin"
+             [ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
         </div>
         <div class="user-name">
-          <header><a [routerLink]="['/main/profile',blag._id]">
-            {{blag.firstName}} {{blag.lastName}}
+          <header><a [routerLink]="['/main/profile',profile._id]">
+            {{profile.firstName}} {{profile.lastName}}
           </a></header>
           <div class="subscribe">
-            <button [class.active]="blag.isSubscribed" (click)="subscribeUser('Decov',blag.position,blag._id, blag)">
-              s'abonner
+            <button [class.active]="profile.isFollowed" (click)="subscribe(profile)">
+              {{ 'profile_subscribe' | translate }}
+            </button>
+            <button class="active" *ngIf="profile.isFollowed"
+                    (click)="unsubscribe(profile)">
+              <i class="fa fa-check" style="position: relative;top: 1.1px;"></i>
+              {{ 'profile_already_subscribed' | translate }}
             </button>
             <div class="nbr-subscribes">
-              {{blag.nbSuivi}}
+              {{profile.nbSuivi}}
             </div>
           </div>
         </div>

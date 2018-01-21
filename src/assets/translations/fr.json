@@ -182,9 +182,13 @@
   "profile_menu_log_out" : "Deconnexion",
   "profile_menu_cancel" : "Annuler",
 
+  "popular_profiles_title" : "Profils populaires",
+
+  "profile_suggestions_title" : "Faites des découvertes",
+
   "SP_FV_ER_EMAIL_EMPTY" : "Saisissez votre Email.",
-    "SP_FV_ER_PASSWORD_EMPTY" : "Saisissez votre mot de passe.",
-    "SP_FV_ER_CONFIRM_PASSWORD_EMPTY" : "Confirmez votre Mot de passe.",
+  "SP_FV_ER_PASSWORD_EMPTY" : "Saisissez votre mot de passe.",
+  "SP_FV_ER_CONFIRM_PASSWORD_EMPTY" : "Confirmez votre Mot de passe.",
     "SP_FV_ER_PASSWORDS_NOT_MATCH" : "Les deux mots de passe ne se correspondent pas.",
     "SP_FV_ER_LAST_NAME_SBN_EMPTY" : "Le nom est obligatoire.",
     "SP_FV_ER_FIRST_NAME_SBN_EMPTY" : "Le prénom est obligatoire.",
