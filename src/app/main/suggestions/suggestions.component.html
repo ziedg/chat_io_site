@@ -1,0 +1,27 @@
+<header class="suggestions-header"><b>Suggérés pour vous</b></header>
+<section class="suggestions-box widget bordered row">
+
+   <div class="user col-xs-12" *ngFor="let user of users">
+     <div class="user-img-shared" *ngIf="user.profilePictureMin"
+          [ngStyle]="{'background-image': 'url('+user.profilePictureMin+')'}">
+     </div>
+     <div class="user-img-shared" *ngIf="!user.profilePictureMin"
+          [ngStyle]="{'background-image': 'url('+user.profilePicture+')'}">
+     </div>
+     <div class="user-name">
+       <header><a>
+         {{user.firstName}} {{user.lastName}}
+       </a></header>
+       <div class="nbr-subscribers">
+         {{user.nbSubscribers}} Abonnés
+       </div>
+     </div>
+       <div class="subscribe-no-number">
+         <button>
+           S'abonner
+         </button>
+       </div>
+
+   </div>
+  </section>
+

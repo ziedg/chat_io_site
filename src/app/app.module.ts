@@ -50,6 +50,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 /** Factories */
 import { httpFactory } from './utils/factories/http.factory';
 import {ContenteditableModel} from "./publication/contenteditable-model";
+import { SuggestionsComponent } from './main/suggestions/suggestions.component';
 
 @NgModule({
     imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
@@ -63,7 +64,7 @@ import {ContenteditableModel} from "./publication/contenteditable-model";
         Signin, Signup, Login, Logout, NotFoundPage, Home, NotFound, Notification, ChangePassword, EditProfile,
         Parameters, Post, Profile, Main, Publication, AboutUs, Cgu, Team, Support,
         TopBlagueursAndDecov, GoogleRecaptchaDirective, ForgetPasswordComponent, ResetPasswordComponent,
-        FakeComponent, ContenteditableModel],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,
