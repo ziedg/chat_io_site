@@ -118,8 +118,8 @@ export class Login {
   getUserFacbookConnexion(result) {
 
     if (result.authResponse) {
-      FB.api('/me?fields=picture.witdh(70).height(70)', ( responseSmallPic => {
-        FB.api('/me/?fields=picture.width(1000).height(1000)', ( responsePic => {
+      FB.api('/me?fields=picture.witdh(70).height(70){url}', ( responseSmallPic => {
+        FB.api('/me/?fields=picture.width(1000).height(1000){url}', ( responsePic => {
           FB.api('/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location', ( response => {
             this.getUserInformations(response, responsePic, responseSmallPic);
             this.loadingFb = false;
@@ -136,7 +136,7 @@ export class Login {
     let body = {};
     console.log(JSON.stringify(response))
     body = JSON.stringify({
-      profilePicture: responsePic.picture?responsePic.picture.data.url:'',
+      profilePicture:responsePic.picture.data.url,
       firstName: response.first_name,
       lastName: response.last_name,
       email: response.email,
@@ -144,7 +144,7 @@ export class Login {
       birthday: response.birthday,
       gender: response.gender,
       //coverPicture: response.cover.source,
-      profilePictureMin: responseSmallPic
+      profilePictureMin: responseSmallPic.picture.data.url
     });
 
     this.http.post(environment.SERVER_URL + 'signWithFacebook', body, AppSettings.OPTIONS)
