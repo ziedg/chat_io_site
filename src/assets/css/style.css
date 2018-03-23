@@ -94,16 +94,22 @@ a {
   box-sizing: border-box;
   border-bottom: solid 1px #edeeee;
   z-index: 8;
+  /*
   -webkit-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
   transition: 1s ease-in-out;
+  modified
+  */
 }
 @media (max-width: 767px) {
   .main-header {
     padding: 20px 5px !important;
+    /*
     -webkit-transition: 1s ease-in-out;
     -moz-transition: 1s ease-in-out;
     transition: 1s ease-in-out;
+    modified
+    */
   }
 }
 .header-left {
@@ -271,16 +277,22 @@ a {
   position: absolute;
   left: 800px;
   top: 20px;
+  /*
+  modified
   transition: 1s ease-in-out;
   -webkit-transition: 1s ease-in-out;
+  */
 }
 @media (max-width: 1800px) {
   .header-center {
     position: absolute;
     left: 600px;
     top: 20px;
+    /*
     transition: 1s ease-in-out;
     -webkit-transition: 1s ease-in-out;
+    modified
+    */
   }
 }
 @media (max-width: 1600px) {
@@ -288,8 +300,11 @@ a {
     position: absolute;
     left: 500px;
     top: 20px;
+    /*
     transition: 1s ease-in-out;
     -webkit-transition: 1s ease-in-out;
+    modified
+    */
   }
 }
 @media (max-width: 1400px) {
@@ -297,8 +312,11 @@ a {
     position: absolute;
     left: 450px;
     top: 20px;
+    /*
     transition: 1s ease-in-out;
     -webkit-transition: 1s ease-in-out;
+    modified
+    */
   }
 }
 @media (max-width: 1200px) {
@@ -306,8 +324,11 @@ a {
     position: absolute;
     left: 400px;
     top: 20px;
+    /*
     transition: 1s ease-in-out;
     -webkit-transition: 1s ease-in-out;
+    modified
+    */
   }
 }
 @media (max-width: 1100px) {
@@ -315,29 +336,41 @@ a {
     position: absolute;
     left: 300px;
     top: 20px;
+    /*
     transition: 1s ease-in-out;
     -webkit-transition: 1s ease-in-out;
+    modified
+    */
   }
 }
 @media (max-width: 1100px) {
   .header-center {
     left: 300px;
+    /*
     transition: 1s ease-in-out;
     -webkit-transition: 1s ease-in-out;
+    modified
+    */
   }
 }
 @media (max-width: 1000px) {
   .header-center {
     left: 300px;
+    /*
     transition: 1s ease-in-out;
     -webkit-transition: 1s ease-in-out;
+    modified
+    */
   }
 }
 @media (max-width: 900px) {
   .header-center {
     left: 300px;
+    /*
     transition: 1s ease-in-out;
     -webkit-transition: 1s ease-in-out;
+    modified
+    */
   }
 }
 .main-header> div> article .notification-holder,
@@ -548,18 +581,23 @@ a {
   right: 100px;
   top: 20px;
   padding-top: 5px;
+  /*
   -webkit-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
   transition: 1s ease-in-out;
+  */
 }
 @media (max-width: 767px) {
   .header-right {
     position: absolute;
     right: 20px;
     top: 20px;
+    /*
     -webkit-transition: 1s ease-in-out;
     -moz-transition: 1s ease-in-out;
     transition: 1s ease-in-out;
+    modified
+    */
   }
 }
 .header-right form {
@@ -632,23 +670,57 @@ a {
   .side-home {
     padding: 30px 15px 0 !important;
   }
+  /*modified*/
+  .profile-photo {
+    /*left: auto!important;*/
+    left: 20%!important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn-edit-profile-1 {
+    left: auto!important;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 section.widget {
   margin: 0 0 10px 0;
+  /*
+  modified
+  */
   box-sizing: border-box;
   position: relative;
 }
 section.widget {
   width: 100%;
   background-color: white;
-  padding: 10px 20px;
+  /*
+  padding: 6px 10px 6px 6px;
+  2_modified
+  */
+  /*modified*/
 }
 .widget> header {
   font-size: 17px;
   padding: 6px 0;
 }
 .header-Profile {
-  margin: 25px 0 15px;
+  margin: 25px 0 25px;
+  /*modified*/
+}
+
+/*modified*/
+.header-Profile .btn-edit-profile
+{
+  background-color: white;border: 1px solid #e1e1e1;
+  border-radius: 3px;height: 28px;
+  font-weight: bold;line-height: 28px;
+  margin-top: 10px;
+  margin-right: 10px;
+  width: 70%;
+  margin: 10px auto;
+  display: block;
+  cursor: pointer;
 }
 
 .header-segement {
@@ -661,6 +733,11 @@ section.widget {
   text-align: left;
   letter-spacing: 2px;
   font-size: 14px;
+  /*
+  padding-left: 0;
+  padding-right: 20px;
+  modified
+  */
 }
 .header-segement.description-holder .fa-pencil {
   opacity: 0.6;
@@ -685,26 +762,41 @@ section.widget {
 }
 .header-segement.social-holder {
   margin-top: 10px;
+  padding-left: 0;
+  padding-right: 0;
 }
 .header-segement.social-holder .fa {
   font-size: 25px;
 }
 .header-segement.social-holder .score {
   font-size: 16px;
+  /*modified*/
+  font-family:arial;
 }
 .header-segement.social-holder .score-mobile {
   padding: 5px 5px !important;
   font-size: 15px;
   font-family: lato medium;
   line-height: 19px;
+  /*
   border-left: 1px solid #e1e1e1;
+  modified
+  */
 }
+/*
 .header-segement.social-holder .score-mobile:first-child {
   border-left: none;
 }
+modified
+*/
 .header-segement.social-holder .score b {
   font-family: lato medium;
 }
+/*modified*/
+.edit-profile-mobile{
+  display: inline;
+}
+/*
 .header-segement.edit-profile-mobile button {
   border: 1px solid #ccc;
   background-color: transparent;
@@ -714,6 +806,8 @@ section.widget {
   border-radius: 3px;
   padding: 5px 6px;
 }
+modified
+*/
 .sub-profile-btn-old,
 .sub-profile-btn-old.active:hover {
   background-color: #fafafa;
@@ -780,8 +874,6 @@ section.widget {
 }
 .profile-photo .fa-upload {
   position: absolute;
-  bottom: 30px;
-  right: 10px;
   color: white;
   background-color: rgba(55,55,55,0.5);
   padding:8px;
@@ -790,11 +882,18 @@ section.widget {
   text-shadow: 2px 1px 5px #999;
   display: none;
   cursor: pointer;
+  width: 36px;
+  height: 36px;
+  /*
   -webkit-transition: 1s linear 1s;
   -moz-transition: 1s linear 1s;
   transition: 1s linear 1s;
-  width: 36px;
-  height: 36px;
+  bottom: 30px;
+  right: 10px;
+  modified
+  */
+  bottom: 10%;
+  right: 14%;
 }
 .profile-photo .fa-floppy-o {
   position: absolute;
@@ -834,9 +933,14 @@ section.widget {
   padding: 25% 0 !important;
   background-size: cover !important;
   width: calc(50% + 10px) !important;
-  margin: 0 auto 20px !important;
-  left: 20%;
   border-radius: 50%;
+  /*
+  left: 20%;
+  margin: 0 auto 20px !important;
+  modified
+  */
+  left: 36%;
+  margin-bottom: 10px;
 }
 @media (max-width: 768px) {
   .profile-photo {
@@ -844,7 +948,8 @@ section.widget {
     width: calc(100% + 10px) !important;
     float: none !important;
     margin: 0 auto !important;
-    left: 0%;
+    /*left: 0%;*/
+    left: auto !important
   }
   .user-name-profile {
     margin-top: 0 !important;
@@ -881,6 +986,12 @@ section.widget {
   display: inline-block;
   font-size: 32px;
   position: relative;
+  margin-right: 12px;
+  /*modified*/
+  display:inline;
+  padding-right: 25px;
+  margin-right: 0!important;
+  margin-left: 0!important;
 }
 .welcome-msg {
   font-weight: 500;
@@ -1210,7 +1321,7 @@ section.widget {
   margin-top: 1px;
   padding-top: 0;
   padding-bottom: 0;
-  height: 36px;
+  height: 32px;
 }
 .publish-button.loading-button:hover {
   background-color: #55aa55;
@@ -1255,7 +1366,7 @@ section.widget {
 .comment-with-picture {
   margin: 0 -10px;
   border: 1px solid #e1e1e1;
-  padding: 0 10px 15;
+  padding: 0 10px 15px;
 }
 .comment-publish {
   -webkit-box-sizing: content-box;
@@ -1622,9 +1733,19 @@ margin-bottom:5px;*/
   display: -webkit-flex;
 }
 .suggestions-box .user{
+  /*
   margin-bottom: 5px;
   border-bottom: 1px solid #edeeee;
   padding: 10px 50px;
+  modified*/
+  /*
+  padding: 8px 4px;
+  2_modified
+  */
+  padding: 8px 14px 8px 10px;
+  display: flex;
+  align-items: center;
+  background-color: white;
 
 }
 .friend {
@@ -1646,8 +1767,12 @@ margin-bottom:5px;*/
   border-radius: 50%;
 }
 .user-img-shared {
-  width: 50px;
-  height: 50px;
+  --w: 56px;
+  width: var(--w);
+  height: var(--w);
+  min-width: var(--w);
+  min-height: var(--w);
+  /*modified*/
   background-size: cover;
   background-position: center;
   border-radius: 50%;
@@ -1684,6 +1809,7 @@ margin-bottom:5px;*/
 .user-name {
   margin-left: 10px;
   margin-top: 0px;
+  min-width: 80px;
 }
 .user-name-shared {
   margin-left: 10px;
@@ -1691,7 +1817,11 @@ margin-bottom:5px;*/
 }
 .user-name a,
 .user-name-shared a {
+  /*
   color: #365899 !important;
+  modified
+  */
+  color: #000!important;
 }
 .widget> article> div> .user> .user-name {
   margin-top: 0px !important;
@@ -1703,6 +1833,8 @@ margin-bottom:5px;*/
 .user-name header,
 .user-name-shared header {
   font-weight: bold;
+  /*modified*/
+  font-size: 13px;
 }
 .content p {
   font-size: 14px;
@@ -2277,7 +2409,16 @@ margin-bottom:5px;*/
   width: 100%;
   text-align: inherit;
   position: relative;
+  /*modified*/
+  padding-left: 10px!important;
 }
+/*modified*/
+.header-segement .btn-edit-profile{
+  display: block;
+  width: 100%!important;
+  margin-bottom: 10px;
+}
+
 .profile-edit {
   width: 0;
   height: 0;
@@ -2288,6 +2429,11 @@ margin-bottom:5px;*/
 .profile-edit .three-dots {
   width: 45px;
   cursor: pointer;
+  /*modified*/
+  top: -23px;
+  display: block;
+  position: absolute;
+  font-size:22px
 }
 .profile-edit .three-dots .fa {
   margin-right: 1.5px;
@@ -2571,16 +2717,20 @@ margin-left: 10px;*/
   text-align: right;
 }
 .subscribe-no-number button{
+  /*
   border: 1px solid #ccc;
+  modified
+  */
   background-color: #090;
   color: white;
-  font-size: 12px !important;
   width: auto !important;
-  padding: 5px 15px;
   font-weight: bold;
-  height: 30px;
   box-sizing: border-box;
   border-radius: 3px;
+  /*modified*/
+  height: 26px;
+  font-size: 13px !important;
+  padding: 5px 10px;
 }
 .subscribe-btn {
   background-color: #d71e17 !important;
@@ -2966,6 +3116,20 @@ a {
   .separatorBox {
     font-size: 12px;
   }
+
+  /*modified*/
+  /*
+  .bordered
+  {
+    border-radius: 0!important;
+  }
+  */
+  .header-right
+  {
+    font-size: 18px!important;
+  }
+
+
 }
 .separatorBox {
   margin-top: 15px;
@@ -2983,7 +3147,7 @@ a {
   color: #fff;
   border: 1px solid #009900;
   border-radius: 3px;
-  line-height: 25px;
+  line-height: 31px;
   font-size: 14px;
   font-weight: 600;
 }
@@ -3656,10 +3820,11 @@ input.loginInput {
   }
 }
 .loading {
-  display: inline-block;
+  /*display: inline-block;*/
+  margin: 4px auto;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  width: 21px;
+  height: 21px;
   border: .25rem solid rgba(255, 255, 255, 0.2);
   border-top-color: white;
   animation: spin 750ms infinite linear;
@@ -3798,17 +3963,21 @@ input.loginInput {
 .hint-social {
   width: max-content;
   min-width: 60px;
-  height: 18px;
   padding: 1px 3px;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   font-size: 11px;
   text-align: center;
   position: absolute;
-  top: -27px;
   right: -2px;
   border-radius: 3px;
   opacity: 0;
+  /*
+  height: 18px;
+  top: -27px;
+  modified
+  */
+  bottom: 46px;
 }
 .comment-number-holder .hint-social {
   right: -40px;
@@ -3850,13 +4019,21 @@ input.loginInput {
 
   color: #ccc;
 }
+/*modified*/
+.edit-decription button {
+  width: 49%;
+  border-radius: 3px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
 .edit-decription textarea {
   border-radius: 5px;
   padding: 5px;
   border: 1px solid #ccc !important;
   background: white;
   resize: none;
-  width: 50%;
+  width: 100%;
 }
 .invalidInput {
   border-color: #ee9999!important;
@@ -3963,8 +4140,8 @@ input.loginInput {
 
 .suggestions-box{
   background-color: #fff;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  /*padding-left: 0 !important;
+  padding-right: 0 !important;*/
 }
 .suggestions-header{
   margin-left: 10px;
@@ -3988,6 +4165,86 @@ input.loginInput {
 }
 .nbr-subscribers{
   color:#999;
-  font-size: 12px;
   font-weight: bold;
+
+  /*modified*/
+  font-size: 11px;
 }
+
+/*modified*/
+.description-holder-2 {
+  display:none;
+}
+
+.btn-edit-profile-1 {
+  position: relative;
+  left: 12%;
+}
+
+top-blagueurs-decov section.widget{
+  padding: 10px 20px;
+}
+
+@media(max-width:500px){
+  .header-segement.description-holder{
+    float: left;
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .description-holder-1 {
+    display:none;
+  }
+  .description-holder-2 {
+    display: block;
+  }
+
+  .edit-decription button {
+    width: 100%!important;
+  }
+}
+
+/*-----------blagueurs-populaires-glissement-start-----------*/
+.draggable {
+  /*min-width: 100%;*/
+  /*background-color: red;*/
+  /*display: inline-block;*/
+ /*width: 900px;*/
+  /*min-width: 500px;*/
+}
+
+.container-draggable {
+  margin:auto;
+  position: relative;
+  /*width: 500px;
+  height: 100px;*/
+  overflow: hidden;
+  transition-duration: 0.4s;
+  transition-property: opacity;
+  transition-timing-function: ease-out;
+  box-sizing: border-box;
+  /*margin-bottom: 5px;*/
+  display: flex;
+}
+
+.msg-draggable {
+  width: 0;
+  height: inherit;
+  display: inline-block;
+  background-color: orangered;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*border-right: 4px solid black;*/
+}
+
+.msg-bye {
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in;
+  min-width: 100%!important;
+}
+
+.on-drag {
+  background-color: #edeeee!important;
+}
+/*-----------blagueurs-populaires-glissement-end-------------*/
