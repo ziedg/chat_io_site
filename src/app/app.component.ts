@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
   ngOnInit(){
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : '309359882922670',
+        appId      : '963422573811438',
         xfbml      : true,
-        version    : 'v2.12'
+        version    : 'v2.11'
       });
       FB.AppEvents.logPageView();
     };
