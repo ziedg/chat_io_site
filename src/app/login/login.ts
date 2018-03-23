@@ -116,9 +116,10 @@ export class Login {
   }
 
   getUserFacbookConnexion(result) {
+
     if (result.authResponse) {
-      FB.api('/me/picture?height=70&width=70', ( responseSmallPic => {
-        FB.api('/me/picture?height=1000&width=1000', ( responsePic => {
+      FB.api('/me?fields=picture.witdh(70).height(70)', ( responseSmallPic => {
+        FB.api('/me/?fields=picture.width(1000).height(1000)', ( responsePic => {
           FB.api('/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location', ( response => {
             this.getUserInformations(response, responsePic, responseSmallPic);
             this.loadingFb = false;
@@ -135,7 +136,7 @@ export class Login {
     let body = {};
     console.log(JSON.stringify(response))
     body = JSON.stringify({
-      profilePicture: '',
+      profilePicture: responsePic.picture?responsePic.picture.data.url:'',
       firstName: response.first_name,
       lastName: response.last_name,
       email: response.email,
