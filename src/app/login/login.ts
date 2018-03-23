@@ -25,7 +25,8 @@ import {User} from '../beans/user';
 import {Title} from "@angular/platform-browser";
 import {environment} from "../../environments/environment";
 
-declare const FB: any;
+declare var FB: any;
+declare var window:any
 declare const auth2: any;
 declare const attachSignin: any;
 declare const emptyFunction: any;
@@ -49,6 +50,30 @@ export class Login {
 
   constructor(public translate: TranslateService,private _loc: Location, private title: Title, public http: Http, private router: Router, private loginService: LoginService, private changeDetector: ChangeDetectorRef) {
     this.title.setTitle("Connexion - Speegar");
+
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = '//connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+  window.fbAsyncInit = () => {
+      console.log("fbasyncinit")
+
+      FB.init({
+        appId      : '963422573811438', //'143891116771',
+        status: true,  // enable cookies to allow the server to access
+        cookie: true,
+        xfbml      : true,
+        oauth:true,
+        version    : 'v2.11'
+      });
+     };
+
+
     this.form = new FormGroup({
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -62,13 +87,8 @@ export class Login {
       this.changeDetector.markForCheck();
     });
 
-    FB.init({
-          appId      : '143891162916771',
-          status: true,  // enable cookies to allow the server to access
-          cookie: true,
-          xfbml      : true,
-          version    : 'v2.10'
-        });
+
+
 
   }
 
@@ -90,7 +110,7 @@ export class Login {
       FB.api('/me/picture?height=70&width=70', ( responseSmallPic => {
         FB.api('/me/picture?height=1000&width=1000', ( responsePic => {
           FB.api('/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location', ( response => {
-            this.getUserInformations(response, responsePic, responseSmallPic.data.url);
+            this.getUserInformations(response, responsePic, responseSmallPic);
             this.loadingFb = false;
           }));
         }));
@@ -103,8 +123,9 @@ export class Login {
 
   getUserInformations(response, responsePic, responseSmallPic) {
     let body = {};
+    console.log(JSON.stringify(response))
     body = JSON.stringify({
-      profilePicture: responsePic.data.url,
+      profilePicture: '',
       firstName: response.first_name,
       lastName: response.last_name,
       email: response.email,
@@ -152,8 +173,13 @@ export class Login {
   loginWithFacebook() {
     this.loadingFb = true;
     FB.login(result => {
+      if(result)
+      console.log(result)
+      else
+      console.log("err")
+
       this.getUserFacbookConnexion(result);
-    }, {scope: 'email,user_photos,user_videos,public_profile,user_birthday,user_location'});
+    },{scope:'email'});//{scope: 'email,user_photos,user_videos,public_profile,user_birthday,user_location'});
   }
 
 

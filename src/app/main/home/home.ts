@@ -614,7 +614,7 @@ export function readURL(input) {
     reader.push(new FileReader());
     reader[0].addEventListener("load", (event) => {
 
-      jQuery("#preview-image").show();
+   jQuery("#preview-image").show();
 
     }, false);
     if (input.files[0]) {
