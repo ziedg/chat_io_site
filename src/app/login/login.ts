@@ -135,6 +135,7 @@ export class Login {
   getUserInformations(response, responsePic, responseSmallPic) {
     let body = {};
     console.log(JSON.stringify(response))
+    console.log(JSON.stringify(responsePic))
     body = JSON.stringify({
       profilePicture:responsePic.picture.data.url,
       firstName: response.first_name,
