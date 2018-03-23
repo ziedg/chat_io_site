@@ -64,7 +64,7 @@ export class Login {
       console.log("fbasyncinit")
 
       FB.init({
-        appId      : '963422573811438', //'143891116771',
+        appId      : '963422573811438',
         status: true,  // enable cookies to allow the server to access
         cookie: true,
         xfbml      : true,
