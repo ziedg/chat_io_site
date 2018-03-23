@@ -6,13 +6,10 @@
 export const environment = {
   production: false,
 
-//<<<<<<< HEAD
-  SERVER_URL: 'http://localhost:3001/',
-  IMAGE_BASE_URL: 'https://speegar.com/images/'
+  //SERVER_URL: 'http://localhost:3001/',
+  //IMAGE_BASE_URL: 'https://speegar.com/images/'
 
-//=======
-//>>>>>>> 198f762611dceade4feed1c2aac8b89964e3af3a
 
-  //SERVER_URL: 'http://speegar.com:3002/',
-  //IMAGE_BASE_URL: 'http://speegar.com/images/'
+  SERVER_URL: 'http://speegar.com:3002/',
+  IMAGE_BASE_URL: 'http://speegar.com/images/'
 };
