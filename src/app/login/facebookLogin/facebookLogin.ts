@@ -75,7 +75,7 @@ export class FacebookLogin {
         let body={};
         console.log(response)
         body = JSON.stringify({
-           profilePicture : response.picture.data.url && response.picture ||'',
+           profilePicture : !!response.picture?response.picture.data.url:'',
 
             firstName: response.first_name,
             lastName: response.last_name,
