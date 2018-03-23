@@ -63,11 +63,11 @@ export class Login {
     });
 
     FB.init({
-          appId      : '143891162916771',
+          appId      : '963422573811438',
           status: true,  // enable cookies to allow the server to access
           cookie: true,
           xfbml      : true,
-          version    : 'v2.10'
+          version    : 'v2.12'
         });
 
   }
