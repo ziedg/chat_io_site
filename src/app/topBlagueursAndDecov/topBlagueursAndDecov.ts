@@ -26,9 +26,7 @@ import * as pathUtils from '../utils/path.utils';
 export class TopBlagueursAndDecov {
 
   public popularProfiles:Array <User> = [];
-  public profileSuggestions:Array <User> = [];
   displayedNumberPopularProfiles = 2;
-  displayedNumberProfileSuggestions = 3;
 
   public user:User = new User();
 
@@ -42,7 +40,6 @@ export class TopBlagueursAndDecov {
     loginService.redirect();
     this.user = loginService.user;
     this.loadPopularProfiles();
-    this.loadProfileSuggestions();
   }
 
   loadPopularProfiles() {
@@ -63,23 +60,6 @@ export class TopBlagueursAndDecov {
     );
   }
 
-  loadProfileSuggestions() {
-    this.http.get(
-      environment.SERVER_URL
-      + pathUtils.GET_PROFILES_SUGGESTIONS,
-      AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
-      .subscribe(
-        response => {
-        this.profileSuggestions = response.profiles;
-      },
-        err => {
-      },
-      () => {
-        this.changeDetector.markForCheck();
-      }
-    );
-  }
 
   subscribe(user:User) {
     let body = JSON.stringify({
@@ -96,7 +76,31 @@ export class TopBlagueursAndDecov {
         response => {
         if (response.status == 0) {
           this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
-          this.profileSuggestions.splice(this.profileSuggestions.indexOf(user), 1);
+        }
+      },
+        err => {
+      },
+      () => {
+        this.changeDetector.markForCheck();
+      }
+    );
+  }
+
+  ignore(user:User) {
+    let body = JSON.stringify({
+      profileId: user._id
+    });
+
+    this.http.post(
+      environment.SERVER_URL + pathUtils.IGNORE,
+      body,
+      AppSettings.OPTIONS
+    )
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        if (response.status == 0) {
+          this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
         }
       },
         err => {

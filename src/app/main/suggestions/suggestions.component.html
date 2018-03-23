@@ -1,10 +1,10 @@
 <!-- modified
 <header class="suggestions-header"><b>Suggérés pour vous</b></header>
 -->
-<section class="suggestions-box widget bordered row">
-  <div class="container-draggable" *ngFor="let user of users">
+<section class="suggestions-box widget row">
+  <div class="container-draggable" *ngFor="let user of popularProfiles">
+
     <div class="msg-draggable">
-      <span><i class="fa fa-angle-double-right"></i></span>
     </div>
     <div class="user col-xs-12 draggable">
       <div class="user-img-shared" *ngIf="user.profilePictureMin"
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="subscribe-no-number">
-        <button>
+        <button (click)="subscribe(user)">
           S'abonner
         </button>
       </div>

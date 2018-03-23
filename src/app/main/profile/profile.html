@@ -29,7 +29,7 @@
                 <div class="three-dots" (click)="openModal()">
                   <i class="fa fa-cogs" aria-hidden="true" style="position: relative;top: 2px; left: 10px"></i>
                 </div>
-              </div>            
+              </div>
             <span *ngIf="user._id!=userDisplayed._id">
                     <button *ngIf="!userDisplayed.isFollowed" (click)="subscribe(userDisplayed)"
                             class="sub-profile-btn-old">
@@ -39,6 +39,12 @@
                     <button *ngIf="userDisplayed.isFollowed" (click)="unsubscribe(userDisplayed)"
                             class="sub-profile-btn-old active">
                       <i class="fa fa-check"></i>
+                      {{ 'profile_already_subscribed' | translate }}
+                    </button>
+
+                    <button *ngIf="userDisplayed.isFollowed" (click)="unsubscribe(userDisplayed)"
+                            class="sub-profile-btn-old active">
+                      <i class="fa fa-close"></i>
                       {{ 'profile_already_subscribed' | translate }}
                     </button>
                 </span>
@@ -136,7 +142,7 @@
         </div>
       </div>
 
-          
+
 
 
 
@@ -164,7 +170,7 @@
         </div>
 
       </div>
-    
+
 
     <div class="col-md-3 col-xs-12 margin-top-0">
     </div>

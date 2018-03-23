@@ -4211,6 +4211,15 @@ top-blagueurs-decov section.widget{
   /*display: inline-block;*/
  /*width: 900px;*/
   /*min-width: 500px;*/
+  border-left: 1px solid #edeeee;
+  border-right: 1px solid #edeeee;
+}
+.draggable:first-child {
+  border-top: 1px solid #edeeee;
+}
+
+.draggable:last-child {
+  border-bottom: 1px solid #edeeee
 }
 
 .container-draggable {
@@ -4230,22 +4239,36 @@ top-blagueurs-decov section.widget{
 .msg-draggable {
   width: 0;
   height: inherit;
-  background-color: rgba(255, 5, 5, 0.8);
+  background-color: #fafafa;
   display: flex;
   justify-content: center;
   align-items: center;
   /*border-right: 4px solid black;*/
-  font-size: 2.5em;
+  font-size: 0.6em;
 
 }
 
 .msg-bye {
-  transition-duration: 0.5s;
-  transition-timing-function: ease-in;
+  transition-duration: 0.6s;
+  transition-timing-function: ease-out;
   min-width: 100%!important;
 }
 
+/*
 .on-drag {
   background-color: #edeeee!important;
-}
+}*/
 /*-----------blagueurs-populaires-glissement-end-------------*/
+
+
+.top-blagueurs-ignore {
+  /*width: 20px;
+  height: 20px;*/
+  font-size: 2em;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left:20px;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}

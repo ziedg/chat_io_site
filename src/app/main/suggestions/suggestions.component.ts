@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {User} from "../../beans/user";
+import {environment} from "../../../environments/environment";
+import {AppSettings} from "../../conf/app-settings";
+import * as pathUtils from "../../utils/path.utils";
+
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
+
+
 
 @Component({
   selector: 'app-suggestions',
   templateUrl: './suggestions.component.html'
 })
 export class SuggestionsComponent implements OnInit {
-  users:Array<User> = [];
+  popularProfiles:Array<User> = [];
 
-  constructor() {
-    var user = new User();
-    user.firstName="Rafaa";
-    user.lastName="Seddik";
-    user.nbSubscribers=5;
-    user.profilePicture = user.profilePictureMin = "assets/pictures/man.png";
-    this.users.push(user);
-    this.users.push(user);
-    this.users.push(user);
-    this.users.push(user);
+  constructor(private changeDetector:ChangeDetectorRef,
+              private http:Http) {
+    this.loadPopularProfiles();
+    console.log("populaire profiles" + this.popularProfiles);
   }
 
   ngOnInit() {
@@ -28,6 +29,7 @@ export class SuggestionsComponent implements OnInit {
         const obj = nodeList[i];
         obj.setAttribute('verif', '0');
         obj.setAttribute('old_x', '0');
+
         obj.addEventListener('touchmove',
           function(event){SuggestionsComponent.onTouchMove(event, obj)}, false);
 
@@ -40,8 +42,25 @@ export class SuggestionsComponent implements OnInit {
           false);
       }
     },1000);
-
   }
+
+  loadPopularProfiles() {
+    this.http.get(
+      environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES,
+      AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        this.popularProfiles = response.profiles;
+      },
+        err => {
+      },
+      () => {
+        this.changeDetector.markForCheck();
+      }
+    );
+  }
+
 
   static onTouchMove(event, obj){
     var obj_src = obj;
@@ -123,7 +142,59 @@ export class SuggestionsComponent implements OnInit {
     obj.classList.add('disappear');
     el.classList.add('msg-bye');
     cont.style.setProperty('opacity', 0);
-    setInterval(function(){cont.style.display = 'none';}, 500);
+    setInterval(function(){cont.style.display = 'none';}, 650);
+    //this.ignore(user);
+  }
+
+  subscribe(user:User) {
+    let body = JSON.stringify({
+      profileId: user._id
+    });
+
+    this.http.post(
+      environment.SERVER_URL + pathUtils.SUBSCRIBE,
+      body,
+      AppSettings.OPTIONS
+    )
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        if (response.status == 0) {
+          this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
+        }
+      },
+        err => {
+      },
+      () => {
+        this.changeDetector.markForCheck();
+      }
+    );
+  }
+
+  ignore(user:User) {
+    let body = JSON.stringify({
+      profileId: user._id
+    });
+
+    this.http.post(
+      environment.SERVER_URL + pathUtils.IGNORE,
+      body,
+      AppSettings.OPTIONS
+    )
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        if (response.status == 0) {
+          this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
+        }
+      },
+        err => {
+      },
+      () => {
+        this.changeDetector.markForCheck();
+      }
+    );
+
   }
 
 }
