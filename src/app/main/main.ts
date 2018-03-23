@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
 
+
 /* Main components */
 import { Home } from './home/home';
 import { Parameters } from './parameters/parameters';
@@ -26,6 +27,7 @@ import { Title } from "@angular/platform-browser";
 import { RecentRechService } from "../service/recentRechService";
 import { DateService } from "../service/dateService";
 import {environment} from "../../environments/environment";
+import { AppComponent } from '../app.component';
 
 declare var jQuery:any;
 declare var FB:any;
