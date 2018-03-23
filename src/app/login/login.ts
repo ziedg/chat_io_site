@@ -87,8 +87,18 @@ export class Login {
       this.changeDetector.markForCheck();
     });
 
+<<<<<<< HEAD
 
 
+=======
+    FB.init({
+          appId      : '963422573811438',
+          status: true,  // enable cookies to allow the server to access
+          cookie: true,
+          xfbml      : true,
+          version    : 'v2.12'
+        });
+>>>>>>> fd99e3797a95ce620046e296e08819ee527b821d
 
   }
 
