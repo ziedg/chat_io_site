@@ -4230,12 +4230,13 @@ top-blagueurs-decov section.widget{
 .msg-draggable {
   width: 0;
   height: inherit;
-  display: inline-block;
-  background-color: orangered;
+  background-color: rgba(255, 5, 5, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   /*border-right: 4px solid black;*/
+  font-size: 2.5em;
+
 }
 
 .msg-bye {

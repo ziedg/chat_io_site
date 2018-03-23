@@ -68,6 +68,7 @@ export class SuggestionsComponent implements OnInit {
     obj_src.setAttribute('old_x', touch.pageX);
     event.preventDefault();
     obj_src.classList.add('on-drag');
+    obj_src.style.setProperty('min-width', getComputedStyle(obj_src).width);
   }
 
   static onTouchEnd(event, obj) {
@@ -80,8 +81,8 @@ export class SuggestionsComponent implements OnInit {
     var cont = obj_src.parentNode;
     var el = cont.querySelector('.msg-draggable');
     var drag_h = parseInt(getComputedStyle(obj_src).height, 10);
-    console.log(drag_h);
-    if((touch.pageX - old_x)>2*drag_h) {
+    var drag_h_2 = 90;
+    if((touch.pageX - old_x)>drag_h+drag_h_2) {
         SuggestionsComponent.disappear(obj_src, cont, el);
     }
     else {
@@ -93,10 +94,11 @@ export class SuggestionsComponent implements OnInit {
       else {
         el.style.setProperty('min-width', '0px');
         obj_src.classList.remove('on-drag');
+        obj_src.style.setProperty('min-width', 'auto');
         }
       }
     else {
-      if((touch.pageX - old_x)>drag_h) {
+      if((touch.pageX - old_x)>drag_h_2) {
         SuggestionsComponent.disappear(obj_src, cont, el);
       }
       else if((touch.pageX - old_x)<0) {
@@ -104,6 +106,7 @@ export class SuggestionsComponent implements OnInit {
         //console.log(el.style);
         el.style.setProperty('min-width', '0px');
         obj_src.classList.remove('on-drag');
+        obj_src.style.setProperty('min-width', 'auto');
       }
       else {
         el.style.setProperty('min-width', drag_h+'px');
