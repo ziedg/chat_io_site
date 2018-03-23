@@ -137,8 +137,6 @@ export class Login {
   getUserInformations(response, responsePic, responseSmallPic) {
     let body = {};
     console.log(JSON.stringify(response))
-    console.log(JSON.stringify(responsePic))
-    console.log(JSON.stringify(responseSmallPic))
 
 
     body = JSON.stringify({
@@ -161,6 +159,7 @@ export class Login {
           if (response.status == "0") {
             let user: User = response.user;
 
+            console.log(JSON.stringify(user));
             this.loginService.updateUser(user);
             this.loginService.setToken(response.token);
             if (response.user.isNewInscri == "true") {
