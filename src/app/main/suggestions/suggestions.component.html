@@ -21,8 +21,8 @@
           {{user.nbSubscribers}} abonnés
         </div>
       </div>
-      <div class="subscribe-no-number">
-        <button (click)="subscribe(user)">
+      <div class="subscribe-no-number" style="min-width:12px">
+        <button (click)="subscribeClick($event, user)" style="float:none">
           s'abonner
         </button>
       </div>

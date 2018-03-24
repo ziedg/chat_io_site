@@ -1840,6 +1840,10 @@ margin-bottom:5px;*/
   color: #365899 !important;
   modified
   */
+
+  /*font-size: 1.1em;*/
+
+
   color: #000!important;
 }
 .widget> article> div> .user> .user-name {
@@ -1853,7 +1857,7 @@ margin-bottom:5px;*/
 .user-name-shared header {
   font-weight: bold;
   /*modified*/
-  font-size: 13px;
+  /*font-size: 13px;*/
 }
 .content p {
   font-size: 14px;
@@ -2747,11 +2751,11 @@ margin-left: 10px;*/
   box-sizing: border-box;
   border-radius: 3px;
   /*modified*/
-  height: 26px;
-  font-size: 13px !important;
+  height: 30px;
+  font-size: 14px !important;
   padding: 5px 10px;
   margin-bottom: 6px;
-  font-family: 'Roboto', sans-serif;
+  /*font-family: 'Roboto', sans-serif;*/
 }
 .subscribe-btn {
   background-color: #d71e17 !important;
