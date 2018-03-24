@@ -20,8 +20,7 @@ export class SuggestionsComponent implements OnInit {
     /*for(var i=0;i<5; i++) {
       this.popularProfiles.push()
     }*/
-    this.loadPopularProfiles("null");
-    console.log("populaire profiles" + this.popularProfiles);
+    this.loadPopularProfiles();
   }
 
   ngOnInit() {
@@ -51,21 +50,22 @@ export class SuggestionsComponent implements OnInit {
           false);
       }
     }, 1000);
-
-    window.onscroll = this.onScroll;
+    
+    window.onscroll = this.onScroll.bind(this);
   }
 
   onScroll(event) {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      console.log(this.popularProfiles);
       this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length -1]._id);
     }
   }
 
   
 
-  loadPopularProfiles(Id_Profile:string) {
+  loadPopularProfiles(Id_Profile?:string) {
 
-    if(this.popularProfiles.length == 30)
+    if(this.popularProfiles.length === 30)
       return;
 
     var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/'+ Id_Profile;

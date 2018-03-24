@@ -45,7 +45,7 @@ export class TopBlagueursAndDecov {
   loadPopularProfiles() {
     this.http.get(
       environment.SERVER_URL
-      + pathUtils.GET_POPULAR_PROFILES+"/null",
+      + pathUtils.GET_POPULAR_PROFILES,
       AppSettings.OPTIONS)
       .map((res:Response) => res.json())
       .subscribe(
