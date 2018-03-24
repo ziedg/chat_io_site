@@ -26,7 +26,7 @@ import * as pathUtils from '../utils/path.utils';
 export class TopBlagueursAndDecov {
 
   public popularProfiles:Array <User> = [];
-  displayedNumberPopularProfiles = 2;
+  displayedNumberPopularProfiles = 4;
 
   public user:User = new User();
 
@@ -45,7 +45,7 @@ export class TopBlagueursAndDecov {
   loadPopularProfiles() {
     this.http.get(
       environment.SERVER_URL
-      + pathUtils.GET_POPULAR_PROFILES,
+      + pathUtils.GET_POPULAR_PROFILES+"/null",
       AppSettings.OPTIONS)
       .map((res:Response) => res.json())
       .subscribe(
