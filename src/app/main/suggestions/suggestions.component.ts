@@ -7,22 +7,25 @@ import * as pathUtils from "../../utils/path.utils";
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
 
-
 @Component({
   selector: 'app-suggestions',
   templateUrl: './suggestions.component.html'
 })
 export class SuggestionsComponent implements OnInit {
-  popularProfiles:Array<User> = [];
+  popularProfiles: Array<User> = [];
+  last_index:number = 0;
 
-  constructor(private changeDetector:ChangeDetectorRef,
-              private http:Http) {
-    this.loadPopularProfiles();
+  constructor(private changeDetector: ChangeDetectorRef,
+              private http: Http) {
+    /*for(var i=0;i<5; i++) {
+      this.popularProfiles.push()
+    }*/
+    this.loadPopularProfiles(null);
     console.log("populaire profiles" + this.popularProfiles);
   }
 
   ngOnInit() {
-    setTimeout(function() {
+    setTimeout(function () {
       var nodeList = document.getElementsByClassName('draggable');
       for (var i = 0; i < nodeList.length; i++) {
         //var obj = nodeList[0];w
@@ -31,54 +34,82 @@ export class SuggestionsComponent implements OnInit {
         obj.setAttribute('old_x', '0');
 
         obj.addEventListener('touchmove',
-          function(event){SuggestionsComponent.onTouchMove(event, obj)}, false);
+          function (event) {
+            SuggestionsComponent.onTouchMove(event, obj)
+          }, true);
 
         obj.addEventListener('touchstart',
-          function(event){SuggestionsComponent.onTouchStart(event, obj)},
-          false);
+          function (event) {
+            SuggestionsComponent.onTouchStart(event, obj)
+          },
+          true);
 
         obj.addEventListener('touchend',
-          function(event){SuggestionsComponent.onTouchEnd(event, obj)},
+          function (event) {
+            SuggestionsComponent.onTouchEnd(event, obj)
+          },
           false);
       }
-    },1000);
+    }, 1000);
+
+    setTimeout(window.onscroll = this.onScroll, 10000);
   }
 
-  loadPopularProfiles() {
-    this.http.get(
-      environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES,
-      AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
+  onScroll(event) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      alert("end of body reached");
+      this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);
+    }
+  }
+
+  loadPopularProfiles(Id_Profile:string) {
+    alert("popular profiles show");
+    if(this.popularProfiles.length == 30)
+      return;
+
+    let headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json; charset=UTF-8');
+    let myParams = new URLSearchParams();
+    myParams.append('lastId', Id_Profile);
+    let options = new RequestOptions({ headers: headers, params: myParams });
+
+    var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES;
+    //this.http.get(url, {headers: headers})
+    this.http.get(url,
+      options)
+      .map((res: Response) => res.json())
       .subscribe(
         response => {
-        this.popularProfiles = response.profiles;
-      },
+          //this.popularProfiles = response.profiles;
+          Array.prototype.push.apply(this.popularProfiles, response.profiles);
+        },
         err => {
-      },
-      () => {
-        this.changeDetector.markForCheck();
-      }
-    );
+        },
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
   }
 
 
-  static onTouchMove(event, obj){
+  static onTouchMove(event, obj) {
     var obj_src = obj;
     var touch = event.targetTouches[0];
     var old_x = parseInt(obj_src.getAttribute('old_x'));
     var w = touch.pageX - old_x;
     var verif = parseInt(obj_src.getAttribute('verif'));
-    if(verif) {
+    if (verif) {
       w = 100 + touch.pageX - old_x;
     }
-    if(w > 0) {
+    if (w > 0) {
       var el = obj_src.parentNode.querySelector('.msg-draggable');
 
-      el.style.setProperty('min-width', w+'px');
+      el.style.setProperty('min-width', w + 'px');
       //bla.innerHTML = touch.pageX - old_x;
     }
-    event.preventDefault();
-   }
+    //event.preventDefault();
+  }
 
   static onTouchStart(event, obj) {
     console.log('touch start');
@@ -101,38 +132,38 @@ export class SuggestionsComponent implements OnInit {
     var el = cont.querySelector('.msg-draggable');
     var drag_h = parseInt(getComputedStyle(obj_src).height, 10);
     var drag_h_2 = 90;
-    if((touch.pageX - old_x)>drag_h+drag_h_2) {
-        SuggestionsComponent.disappear(obj_src, cont, el);
+    if ((touch.pageX - old_x) > drag_h + drag_h_2) {
+      SuggestionsComponent.disappear(obj_src, cont, el);
     }
     else {
-    if(!verif) {
-      if((touch.pageX - old_x)>drag_h){
-        el.style.setProperty('min-width', drag_h+'px');
-        obj_src.setAttribute('verif', '1');
-      }
-      else {
-        el.style.setProperty('min-width', '0px');
-        obj_src.classList.remove('on-drag');
-        obj_src.style.setProperty('min-width', 'auto');
+      if (!verif) {
+        if ((touch.pageX - old_x) > drag_h) {
+          el.style.setProperty('min-width', drag_h + 'px');
+          obj_src.setAttribute('verif', '1');
+        }
+        else {
+          el.style.setProperty('min-width', '0px');
+          obj_src.classList.remove('on-drag');
+          obj_src.style.setProperty('min-width', 'auto');
         }
       }
-    else {
-      if((touch.pageX - old_x)>drag_h_2) {
-        SuggestionsComponent.disappear(obj_src, cont, el);
-      }
-      else if((touch.pageX - old_x)<0) {
-        obj_src.setAttribute('verif', '0');
-        //console.log(el.style);
-        el.style.setProperty('min-width', '0px');
-        obj_src.classList.remove('on-drag');
-        obj_src.style.setProperty('min-width', 'auto');
-      }
       else {
-        el.style.setProperty('min-width', drag_h+'px');
+        if ((touch.pageX - old_x) > drag_h_2) {
+          SuggestionsComponent.disappear(obj_src, cont, el);
+        }
+        else if ((touch.pageX - old_x) < 0) {
+          obj_src.setAttribute('verif', '0');
+          //console.log(el.style);
+          el.style.setProperty('min-width', '0px');
+          obj_src.classList.remove('on-drag');
+          obj_src.style.setProperty('min-width', 'auto');
+        }
+        else {
+          el.style.setProperty('min-width', drag_h + 'px');
+        }
       }
     }
-    }
-        event.preventDefault();
+    //event.preventDefault();
   }
 
   static disappear(obj, cont, el) {
@@ -142,11 +173,13 @@ export class SuggestionsComponent implements OnInit {
     obj.classList.add('disappear');
     el.classList.add('msg-bye');
     cont.style.setProperty('opacity', 0);
-    setInterval(function(){cont.style.display = 'none';}, 650);
+    setInterval(function () {
+      cont.style.display = 'none';
+    }, 650);
     //this.ignore(user);
   }
 
-  subscribe(user:User) {
+  subscribe(user: User) {
     let body = JSON.stringify({
       profileId: user._id
     });
@@ -156,22 +189,22 @@ export class SuggestionsComponent implements OnInit {
       body,
       AppSettings.OPTIONS
     )
-      .map((res:Response) => res.json())
+      .map((res: Response) => res.json())
       .subscribe(
         response => {
-        if (response.status == 0) {
-          this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
-        }
-      },
+          if (response.status == 0) {
+            this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
+          }
+        },
         err => {
-      },
-      () => {
-        this.changeDetector.markForCheck();
-      }
-    );
+        },
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
   }
 
-  ignore(user:User) {
+  ignore(user: User) {
     let body = JSON.stringify({
       profileId: user._id
     });
@@ -181,20 +214,47 @@ export class SuggestionsComponent implements OnInit {
       body,
       AppSettings.OPTIONS
     )
-      .map((res:Response) => res.json())
+      .map((res: Response) => res.json())
       .subscribe(
         response => {
-        if (response.status == 0) {
-          this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
-        }
-      },
+          if (response.status == 0) {
+            this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
+          }
+        },
         err => {
-      },
-      () => {
-        this.changeDetector.markForCheck();
-      }
-    );
+        },
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
 
   }
+
+  loadProfileSuggestions(/*Id_Profile:string*/) {
+    /*
+    if  (popularprofiles.length) ==30 return ;
+    if (Id_Profile){
+    2ème fois : loadProfileSuggestions(popularProfiles[9]._id);
+    3ème fois : loadProfileSuggestions(popularProfiles[19]._id);
+    AppSettings.append('lastId',Id_Profile);
+        }
+        */
+    this.http.get(
+      environment.SERVER_URL
+      + pathUtils.GET_PROFILES_SUGGESTIONS,
+      AppSettings.OPTIONS)
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+          this.popularProfiles = response.profiles;
+        },
+        err => {
+        },
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
+  }
+
 
 }
