@@ -26,7 +26,7 @@ import * as pathUtils from '../utils/path.utils';
 export class TopBlagueursAndDecov {
 
   public popularProfiles:Array <User> = [];
-  displayedNumberPopularProfiles = 2;
+  displayedNumberPopularProfiles = 4;
 
   public user:User = new User();
 

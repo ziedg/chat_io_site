@@ -24,8 +24,27 @@
 }
 @font-face {
   font-family: "lato black";
-  src: url(../fonts/lato/Lato-Black_0);
+  src: url(../fonts/lato/Lato-Black_0.ttf);
 }
+
+
+/*--------roboto---------*/
+@font-face {
+  font-family: "roboto";
+  src: url(../fonts/roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: "roboto";
+  src: url(../fonts/roboto/Roboto-Regular.ttf);
+}
+
+
+@font-face {
+  font-family: "roboto bold";
+  src: url(../fonts/roboto/Roboto-Bold.ttf);
+}
+
 * {
   outline: none;
 }
@@ -2731,6 +2750,8 @@ margin-left: 10px;*/
   height: 26px;
   font-size: 13px !important;
   padding: 5px 10px;
+  margin-bottom: 6px;
+  font-family: 'Roboto', sans-serif;
 }
 .subscribe-btn {
   background-color: #d71e17 !important;
@@ -4214,12 +4235,12 @@ top-blagueurs-decov section.widget{
   border-left: 1px solid #edeeee;
   border-right: 1px solid #edeeee;
 }
-.draggable:first-child {
+.suggestions-box .container-draggable:first-child .user {
   border-top: 1px solid #edeeee;
 }
 
-.draggable:last-child {
-  border-bottom: 1px solid #edeeee
+.suggestions-box .container-draggable:last-child .user{
+  border-bottom: 1px solid #edeeee;
 }
 
 .container-draggable {
