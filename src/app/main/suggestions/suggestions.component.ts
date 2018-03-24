@@ -55,36 +55,19 @@ export class SuggestionsComponent implements OnInit {
 
   onScroll(event) {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-<<<<<<< HEAD
-      console.log(this.popularProfiles);
-=======
-<<<<<<< HEAD
-      console.log("end of body reached");
+
       this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);
-=======
->>>>>>> 580f1887ad60b01ee0c78d4b4d253b2db9870cc4
-      this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length -1]._id);
->>>>>>> 50c62eb7743c2fd3070c98c2ce64e323e8bbf456
+
     }
   }
 
   
 
-<<<<<<< HEAD
   loadPopularProfiles(Id_Profile?:string) {
 
     if(this.popularProfiles.length === 30)
-=======
-  loadPopularProfiles(Id_Profile:string) {
-<<<<<<< HEAD
-    console.log("popular profiles show");
-=======
-
->>>>>>> 50c62eb7743c2fd3070c98c2ce64e323e8bbf456
-    if(this.popularProfiles.length == 30)
->>>>>>> 580f1887ad60b01ee0c78d4b4d253b2db9870cc4
       return;
-
+      
     var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/'+ Id_Profile;
     this.http.get(url,
       AppSettings.OPTIONS)
@@ -92,7 +75,6 @@ export class SuggestionsComponent implements OnInit {
       .subscribe(
         response => {
           Array.prototype.push.apply(this.popularProfiles, response.profiles);
-          console.log(this.popularProfiles);
         },
         err => {
         },
