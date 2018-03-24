@@ -29,7 +29,6 @@ export class SuggestionsComponent implements OnInit {
       for (var i = 0; i < nodeList.length; i++) {
         //var obj = nodeList[0];w
         const obj = nodeList[i];
-        obj.setAttribute('verif', '0');
         obj.setAttribute('old_x', '0');
 
         obj.addEventListener('touchmove',
@@ -47,7 +46,7 @@ export class SuggestionsComponent implements OnInit {
           function (event) {
             SuggestionsComponent.onTouchEnd(event, obj)
           },
-          false);
+          true);
       }
     }, 1000);
     
@@ -56,16 +55,34 @@ export class SuggestionsComponent implements OnInit {
 
   onScroll(event) {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+<<<<<<< HEAD
       console.log(this.popularProfiles);
+=======
+<<<<<<< HEAD
+      console.log("end of body reached");
+      this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);
+=======
+>>>>>>> 580f1887ad60b01ee0c78d4b4d253b2db9870cc4
       this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length -1]._id);
+>>>>>>> 50c62eb7743c2fd3070c98c2ce64e323e8bbf456
     }
   }
 
   
 
+<<<<<<< HEAD
   loadPopularProfiles(Id_Profile?:string) {
 
     if(this.popularProfiles.length === 30)
+=======
+  loadPopularProfiles(Id_Profile:string) {
+<<<<<<< HEAD
+    console.log("popular profiles show");
+=======
+
+>>>>>>> 50c62eb7743c2fd3070c98c2ce64e323e8bbf456
+    if(this.popularProfiles.length == 30)
+>>>>>>> 580f1887ad60b01ee0c78d4b4d253b2db9870cc4
       return;
 
     var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/'+ Id_Profile;
@@ -91,17 +108,10 @@ export class SuggestionsComponent implements OnInit {
     var touch = event.targetTouches[0];
     var old_x = parseInt(obj_src.getAttribute('old_x'));
     var w = touch.pageX - old_x;
-    var verif = parseInt(obj_src.getAttribute('verif'));
-    if (verif) {
-      w = 100 + touch.pageX - old_x;
-    }
     if (w > 0) {
       var el = obj_src.parentNode.querySelector('.msg-draggable');
-
       el.style.setProperty('min-width', w + 'px');
-      //bla.innerHTML = touch.pageX - old_x;
     }
-    //event.preventDefault();
   }
 
   static onTouchStart(event, obj) {
@@ -109,8 +119,6 @@ export class SuggestionsComponent implements OnInit {
     var obj_src = obj;
     var touch = event.targetTouches[0];
     obj_src.setAttribute('old_x', touch.pageX);
-    event.preventDefault();
-    obj_src.classList.add('on-drag');
     obj_src.style.setProperty('min-width', getComputedStyle(obj_src).width);
   }
 
@@ -119,45 +127,16 @@ export class SuggestionsComponent implements OnInit {
     var obj_src = obj;
     var touch = event.changedTouches[0];
     var old_x = parseInt(obj_src.getAttribute('old_x'));
-    var verif = parseInt(obj_src.getAttribute('verif'));
-
     var cont = obj_src.parentNode;
     var el = cont.querySelector('.msg-draggable');
-    var drag_h = parseInt(getComputedStyle(obj_src).height, 10);
-    var drag_h_2 = 90;
-    if ((touch.pageX - old_x) > drag_h + drag_h_2) {
+    if ((touch.pageX - old_x) > 100) {
       SuggestionsComponent.disappear(obj_src, cont, el);
     }
-    else {
-      if (!verif) {
-        if ((touch.pageX - old_x) > drag_h) {
-          el.style.setProperty('min-width', drag_h + 'px');
-          obj_src.setAttribute('verif', '1');
-        }
         else {
           el.style.setProperty('min-width', '0px');
-          obj_src.classList.remove('on-drag');
           obj_src.style.setProperty('min-width', 'auto');
         }
       }
-      else {
-        if ((touch.pageX - old_x) > drag_h_2) {
-          SuggestionsComponent.disappear(obj_src, cont, el);
-        }
-        else if ((touch.pageX - old_x) < 0) {
-          obj_src.setAttribute('verif', '0');
-          //console.log(el.style);
-          el.style.setProperty('min-width', '0px');
-          obj_src.classList.remove('on-drag');
-          obj_src.style.setProperty('min-width', 'auto');
-        }
-        else {
-          el.style.setProperty('min-width', drag_h + 'px');
-        }
-      }
-    }
-    //event.preventDefault();
-  }
 
   static disappear(obj, cont, el) {
     console.log('disappear');
