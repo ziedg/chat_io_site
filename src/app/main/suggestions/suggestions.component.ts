@@ -20,7 +20,7 @@ export class SuggestionsComponent implements OnInit {
     /*for(var i=0;i<5; i++) {
       this.popularProfiles.push()
     }*/
-    this.loadPopularProfiles(null);
+    this.loadPopularProfiles("null");
     console.log("populaire profiles" + this.popularProfiles);
   }
 
@@ -52,37 +52,30 @@ export class SuggestionsComponent implements OnInit {
       }
     }, 1000);
 
-    setTimeout(window.onscroll = this.onScroll, 10000);
+    window.onscroll = this.onScroll;
   }
 
   onScroll(event) {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      alert("end of body reached");
-      this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);
+      this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length -1]._id);
     }
   }
 
+  
+
   loadPopularProfiles(Id_Profile:string) {
-    alert("popular profiles show");
+
     if(this.popularProfiles.length == 30)
       return;
 
-    let headers = new Headers();
-    headers.append('Accept', 'application/json');
-    headers.append('Content-Type', 'application/json; charset=UTF-8');
-    let myParams = new URLSearchParams();
-    myParams.append('lastId', Id_Profile);
-    let options = new RequestOptions({ headers: headers, params: myParams });
-
-    var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES;
-    //this.http.get(url, {headers: headers})
+    var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/'+ Id_Profile;
     this.http.get(url,
-      options)
+      AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-          //this.popularProfiles = response.profiles;
           Array.prototype.push.apply(this.popularProfiles, response.profiles);
+          console.log(this.popularProfiles);
         },
         err => {
         },
@@ -230,31 +223,6 @@ export class SuggestionsComponent implements OnInit {
 
   }
 
-  loadProfileSuggestions(/*Id_Profile:string*/) {
-    /*
-    if  (popularprofiles.length) ==30 return ;
-    if (Id_Profile){
-    2ème fois : loadProfileSuggestions(popularProfiles[9]._id);
-    3ème fois : loadProfileSuggestions(popularProfiles[19]._id);
-    AppSettings.append('lastId',Id_Profile);
-        }
-        */
-    this.http.get(
-      environment.SERVER_URL
-      + pathUtils.GET_PROFILES_SUGGESTIONS,
-      AppSettings.OPTIONS)
-      .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-          this.popularProfiles = response.profiles;
-        },
-        err => {
-        },
-        () => {
-          this.changeDetector.markForCheck();
-        }
-      );
-  }
 
 
 }
