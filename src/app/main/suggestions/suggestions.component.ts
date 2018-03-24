@@ -30,7 +30,6 @@ export class SuggestionsComponent implements OnInit {
       for (var i = 0; i < nodeList.length; i++) {
         //var obj = nodeList[0];w
         const obj = nodeList[i];
-        obj.setAttribute('verif', '0');
         obj.setAttribute('old_x', '0');
 
         obj.addEventListener('touchmove',
@@ -48,7 +47,7 @@ export class SuggestionsComponent implements OnInit {
           function (event) {
             SuggestionsComponent.onTouchEnd(event, obj)
           },
-          false);
+          true);
       }
     }, 1000);
 
@@ -57,13 +56,13 @@ export class SuggestionsComponent implements OnInit {
 
   onScroll(event) {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      alert("end of body reached");
+      console.log("end of body reached");
       this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);
     }
   }
 
   loadPopularProfiles(Id_Profile:string) {
-    alert("popular profiles show");
+    console.log("popular profiles show");
     if(this.popularProfiles.length == 30)
       return;
 
@@ -98,17 +97,10 @@ export class SuggestionsComponent implements OnInit {
     var touch = event.targetTouches[0];
     var old_x = parseInt(obj_src.getAttribute('old_x'));
     var w = touch.pageX - old_x;
-    var verif = parseInt(obj_src.getAttribute('verif'));
-    if (verif) {
-      w = 100 + touch.pageX - old_x;
-    }
     if (w > 0) {
       var el = obj_src.parentNode.querySelector('.msg-draggable');
-
       el.style.setProperty('min-width', w + 'px');
-      //bla.innerHTML = touch.pageX - old_x;
     }
-    //event.preventDefault();
   }
 
   static onTouchStart(event, obj) {
@@ -116,8 +108,6 @@ export class SuggestionsComponent implements OnInit {
     var obj_src = obj;
     var touch = event.targetTouches[0];
     obj_src.setAttribute('old_x', touch.pageX);
-    event.preventDefault();
-    obj_src.classList.add('on-drag');
     obj_src.style.setProperty('min-width', getComputedStyle(obj_src).width);
   }
 
@@ -126,45 +116,16 @@ export class SuggestionsComponent implements OnInit {
     var obj_src = obj;
     var touch = event.changedTouches[0];
     var old_x = parseInt(obj_src.getAttribute('old_x'));
-    var verif = parseInt(obj_src.getAttribute('verif'));
-
     var cont = obj_src.parentNode;
     var el = cont.querySelector('.msg-draggable');
-    var drag_h = parseInt(getComputedStyle(obj_src).height, 10);
-    var drag_h_2 = 90;
-    if ((touch.pageX - old_x) > drag_h + drag_h_2) {
+    if ((touch.pageX - old_x) > 100) {
       SuggestionsComponent.disappear(obj_src, cont, el);
     }
-    else {
-      if (!verif) {
-        if ((touch.pageX - old_x) > drag_h) {
-          el.style.setProperty('min-width', drag_h + 'px');
-          obj_src.setAttribute('verif', '1');
-        }
         else {
           el.style.setProperty('min-width', '0px');
-          obj_src.classList.remove('on-drag');
           obj_src.style.setProperty('min-width', 'auto');
         }
       }
-      else {
-        if ((touch.pageX - old_x) > drag_h_2) {
-          SuggestionsComponent.disappear(obj_src, cont, el);
-        }
-        else if ((touch.pageX - old_x) < 0) {
-          obj_src.setAttribute('verif', '0');
-          //console.log(el.style);
-          el.style.setProperty('min-width', '0px');
-          obj_src.classList.remove('on-drag');
-          obj_src.style.setProperty('min-width', 'auto');
-        }
-        else {
-          el.style.setProperty('min-width', drag_h + 'px');
-        }
-      }
-    }
-    //event.preventDefault();
-  }
 
   static disappear(obj, cont, el) {
     console.log('disappear');
