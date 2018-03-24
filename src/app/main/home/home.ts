@@ -320,11 +320,25 @@ export class Home {
     else {
       data.append('confidentiality', 'PRIVATE');
     }
-
+    console.log(this.uploadedPicture)
     data.append('publTitle', this.form.value.publicationTitle);
     data.append('publText', this.form.value.publicationText);
     data.append('publyoutubeLink', this.youtubeLink);
-    data.append('publPicture', this.uploadedPicture);
+    data.append('publPicture',this.uploadedPicture);
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
     if (this.link.isSet) {
       data.append('publExternalLink', this.link.url);
     }
@@ -333,6 +347,7 @@ export class Home {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
+          console.log(response)
         if (response.status == "0") {
           jQuery("#errorMsgDisplay").fadeOut(1000);
           this.putNewPub(response.publication, false);
@@ -344,6 +359,7 @@ export class Home {
         }
       },
         err => {
+          console.log(err)
         this.errorMsg = "SP_ER_TECHNICAL_ERROR";
       },
       () => {
@@ -412,16 +428,23 @@ export class Home {
   uploadPhoto($event) {
 
     var inputValue = $event.target;
+
     if (inputValue != null && null != inputValue.files[0]) {
+
+
       this.uploadedPicture = inputValue.files[0];
+
+
       previewFile(this.uploadedPicture);
       jQuery(".youtube-preview").html("");
       //this.form.controls.publicationYoutubeLink.updateValue('');
       this.closeLinkAPI();
+      return this.uploadedPicture;
 
     }
     else {
       this.uploadedPicture = null;
+      return null;
     }
   }
 
