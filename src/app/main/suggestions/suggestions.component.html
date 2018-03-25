@@ -14,7 +14,7 @@
            [ngStyle]="{'background-image': 'url('+user.profilePicture+')'}">
       </div>
       <div class="user-name">
-        <header><a>
+        <header><a [routerLink]="['/main/profile', user._id]">
           {{user.firstName}} {{user.lastName}}
         </a></header>
         <div class="nbr-subscribers">
