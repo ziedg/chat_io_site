@@ -1,15 +1,16 @@
-import { Injectable, EventEmitter }     from '@angular/core';
+import { Injectable}     from '@angular/core';
 import { Router } from '@angular/router';
 
 /* beans */
 import {User} from './../beans/user'
 import {SocialUser} from "../beans/social-user";
 import {environment} from "../../environments/environment";
+import { Subject } from 'rxjs';
 
 
 @Injectable()
 export class LoginService {
-   LoggedIn =new EventEmitter<User>();
+   LoggedIn =new Subject<User>();
     /* token */
     public token: string;
     /* User */
@@ -74,7 +75,7 @@ export class LoginService {
 /*give user */  
 giveUser (user :User){
     console.log(user);
-    this.LoggedIn.emit(user);
+    this.LoggedIn.next(user);
 }
     /* updateUser */
     updateUser(user:User){

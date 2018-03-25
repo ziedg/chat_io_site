@@ -1,4 +1,4 @@
- <!-- <div class="container" *ngIf="user">
+ <div class="container" *ngIf="user">
   <div class="row">
     <div *ngIf="user" class="col-md-8 col-sm-7 col-xs-12">
       <div class="col-xs-12 bordered error-msg"
@@ -7,7 +7,7 @@
         {{errorMsg | translate }}
         <i class="fa fa-times" aria-hidden="true" (click)="closeErrorMsg()"></i>
       </div>
-      <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri" >
+      <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri">
         <h3>{{ 'home_welcome' | translate }}</h3>
         {{ 'home_welcome_text_first_part' | translate }}
         <br>
@@ -193,7 +193,7 @@
 
 
         <!-- Loading-->
-        <!-- <div class="publications-holder" id="publication" *ngIf="showLoading">
+        <div class="publications-holder" id="publication" *ngIf="showLoading">
           <article class="publication bordered">
 
             <div class="user">
@@ -231,9 +231,4 @@
   </div>
 </div>
 
-  -->
 
-  <ul>
-    <li>{{user.firstName}}</li>
-    <li>{{user.name}}</li>
-  </ul>
