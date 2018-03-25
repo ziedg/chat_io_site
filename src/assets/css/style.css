@@ -1733,7 +1733,6 @@ margin-bottom:5px;*/
 }
 .date {
   position: absolute;
-  top: 25px;
   right: 20px;
   color: #666;
 }
@@ -4298,4 +4297,17 @@ top-blagueurs-decov section.widget{
   padding: 0;
   width: 20px;
   height: 20px;
+}
+
+
+
+publication .user-name {
+  display: flex;
+  flex-direction: column;
+}
+
+
+publication .user {
+  dispaly: flex;
+  align-items: center;
 }

@@ -1,13 +1,14 @@
 <div class="publications-holder" *ngIf="publicationBean" id="publication">
   <article class="publication bordered" *ngIf="publicationBean.displayed == true">
-    <div class="date hidden-xs" [routerLink]="['/main/post',publicationBean._id]">
-      <i class="fa fa-globe" style="color:#666"
-         *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
-      <i class="fa fa-users" style="color:#666"
-         *ngIf="publicationBean.confidentiality=='PRIVATE'"></i>
-      {{getPublicationTime(publicationBean.datePublication)}}
-    </div>
+
     <div class="user" *ngIf="!publicationBean.isShared">
+        <div class="date hidden-xs" [routerLink]="['/main/post',publicationBean._id]">
+          <i class="fa fa-globe" style="color:#666"
+             *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
+          <i class="fa fa-users" style="color:#666"
+             *ngIf="publicationBean.confidentiality=='PRIVATE'"></i>
+          {{getPublicationTime(publicationBean.datePublication)}}
+        </div>
       <div class="user-img"
            [routerLink]="['/main/profile',publicationBean.profileId]"
            *ngIf="publicationBean.profilePictureMin"
