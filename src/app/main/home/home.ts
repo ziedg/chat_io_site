@@ -52,6 +52,8 @@ export class Home implements OnInit {
   public link:LinkBean = new LinkBean();
   public previewLink:Array<LinkBean> = [];
 
+  public user$ ;
+
 
   //Variables Declarations
   titleEnable = false;
@@ -83,14 +85,9 @@ export class Home implements OnInit {
               private changeDetector:ChangeDetectorRef) {
 
     this.loginService.redirect();
-    this.loginService.LoggedIn.subscribe((user)=>{
-      console.log(user);
-    this.user=user;
-    console.log(this.user);
-    this.changeDetector.markForCheck();
-    });
+    this.user$=this.loginService.LoggedIn;
 
-    //this.user = this.loginService.getUser();
+    this.user = this.loginService.getUser();
 
     this.postService.setShowErrorConnexion(false);
 
