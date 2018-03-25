@@ -87,6 +87,7 @@ export class Home implements OnInit {
       console.log(user);
     this.user=user;
     console.log(this.user);
+    this.changeDetector.markForCheck();
     });
 
     //this.user = this.loginService.getUser();
@@ -103,7 +104,6 @@ export class Home implements OnInit {
     this.loadFirstPosts();
     if (!this.publicationBeanList.length)
     this.loadFirstPosts();
-    this.changeDetector.markForCheck();
     window.scrollTo(0, 0);
 
     this.menuFilter = 'recent';
