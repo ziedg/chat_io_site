@@ -87,8 +87,8 @@ export class Home implements OnInit {
     this.user=user;
     });
 
-    /*this.user = this.loginService.getUser();
-        console.log(this.user);*/
+    /*this.user = this.loginService.getUser();*/
+        console.log(this.user);
 
     this.postService.setShowErrorConnexion(false);
 
