@@ -7,7 +7,7 @@
         {{errorMsg | translate }}
         <i class="fa fa-times" aria-hidden="true" (click)="closeErrorMsg()"></i>
       </div>
-      <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri">
+      <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri" >
         <h3>{{ 'home_welcome' | translate }}</h3>
         {{ 'home_welcome_text_first_part' | translate }}
         <br>

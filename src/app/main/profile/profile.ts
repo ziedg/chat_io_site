@@ -420,6 +420,7 @@ export class Profile {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
+          console.log(response)
         this.editDescriptionEnable = false;
       },
         err => {
@@ -432,6 +433,7 @@ export class Profile {
 
   updateProfilePicture($event) {
     var inputValue = $event.target;
+
     if (inputValue != null && null != inputValue.files[0]) {
       this.uploadedProfilePicture = inputValue.files[0];
       previewProfilePicture(this.uploadedProfilePicture);
@@ -445,6 +447,7 @@ export class Profile {
     if (!this.uploadedProfilePicture) {
       return;
     }
+
     this.changeDetector.markForCheck();
     var data = new FormData();
     data.append('profilePicture', this.uploadedProfilePicture);
@@ -456,6 +459,8 @@ export class Profile {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
+         
+          console.log(response.profile)
         if (response.status == "0") {
           localStorage.setItem('user', JSON.stringify(response.profile));
           this.loginService.actualize();
