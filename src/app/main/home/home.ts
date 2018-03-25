@@ -89,7 +89,7 @@ export class Home implements OnInit {
     console.log(this.user);
     });
 
-    /*this.user = this.loginService.getUser();*/
+    this.user = this.loginService.getUser();
 
     this.postService.setShowErrorConnexion(false);
 
