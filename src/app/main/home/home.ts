@@ -85,9 +85,13 @@ export class Home implements OnInit {
               private changeDetector:ChangeDetectorRef) {
 
     this.loginService.redirect();
-    this.user$=this.loginService.LoggedIn;
+    this.loginService.LoggedIn.subscribe((user)=>{
+      console.log(user);
+    this.user=user;
+    console.log(this.user);
+    });
 
-    this.user = this.loginService.getUser();
+    //this.user = this.loginService.getUser();
 
     this.postService.setShowErrorConnexion(false);
 
