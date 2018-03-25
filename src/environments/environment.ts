@@ -8,13 +8,11 @@ export const environment = {
 
 
 
-<<<<<<< HEAD
 
-   SERVER_URL: 'http://speegar.com:3002/',
-  IMAGE_BASE_URL: 'http://speegar.com/images/'
-=======
+
+
   SERVER_URL: 'https://speegar.com:3005/',
   IMAGE_BASE_URL: 'https://speegar.com/images/'
->>>>>>> 2f72591415d4536cb711a7d24b51e8a4feebe0f9
+
 
 };
