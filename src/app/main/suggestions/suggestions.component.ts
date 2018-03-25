@@ -13,21 +13,17 @@ import {Http, Response, Headers, RequestOptions} from '@angular/http';
 })
 export class SuggestionsComponent implements OnInit {
   popularProfiles: Array<User> = [];
-  last_index:number = 0;
 
   constructor(private changeDetector: ChangeDetectorRef,
               private http: Http) {
-    /*for(var i=0;i<5; i++) {
-      this.popularProfiles.push()
-    }*/
     this.loadPopularProfiles();
   }
 
   ngOnInit() {
+    /*
     setTimeout(function () {
       var nodeList = document.getElementsByClassName('draggable');
       for (var i = 0; i < nodeList.length; i++) {
-        //var obj = nodeList[0];w
         const obj = nodeList[i];
         obj.setAttribute('old_x', '0');
 
@@ -48,27 +44,26 @@ export class SuggestionsComponent implements OnInit {
           },
           true);
       }
-    }, 1000);
-    
+    }, 1000);*/
+
     window.onscroll = this.onScroll.bind(this);
   }
 
   onScroll(event) {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-
-      this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);
-
+      console.log('reach end of body');
+      if(this.popularProfiles)
+      {this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);}
     }
   }
-
-  
 
   loadPopularProfiles(Id_Profile?:string) {
 
     if(this.popularProfiles.length === 30)
       return;
-      
-    var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/'+ Id_Profile;
+
+    var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/';
+    if(Id_Profile){ url+= Id_Profile}
     this.http.get(url,
       AppSettings.OPTIONS)
       .map((res: Response) => res.json())
@@ -124,7 +119,6 @@ export class SuggestionsComponent implements OnInit {
     console.log('disappear');
     obj.style.setProperty('width', '0', 'important');
     obj.style.setProperty('flex-grow', '0', 'important');
-    obj.classList.add('disappear');
     el.classList.add('msg-bye');
     cont.style.setProperty('opacity', 0);
     setInterval(function () {
@@ -158,6 +152,22 @@ export class SuggestionsComponent implements OnInit {
       );
   }
 
+  subscribeClick(event, user:User) {
+    console.log(event);
+    var obj = event.target;
+    var obj_del = obj.parentNode.parentNode.parentNode;
+
+    obj_del.style.opacity = '0';
+
+    setTimeout(function(){obj_del.parentNode.removeChild(obj_del);}, 500);
+
+    if(this.popularProfiles.length<5){
+      this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);
+    }
+
+    this.subscribe(user);
+  }
+
   ignore(user: User) {
     let body = JSON.stringify({
       profileId: user._id
@@ -185,5 +195,7 @@ export class SuggestionsComponent implements OnInit {
   }
 
 
+  disapear2(obj) {
 
+  }
 }

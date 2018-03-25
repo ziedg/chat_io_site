@@ -137,8 +137,6 @@ export class Login {
   getUserInformations(response, responsePic, responseSmallPic) {
     let body = {};
     console.log(JSON.stringify(response))
-
-
     body = JSON.stringify({
       profilePicture:responsePic.picture.data.url,
       firstName: response.first_name,
@@ -149,7 +147,9 @@ export class Login {
       gender: response.gender,
       //coverPicture: response.cover.source,
       profilePictureMin: responseSmallPic.picture.data.url
+
     });
+    this.changeDetector.markForCheck()
 
     this.http.post(environment.SERVER_URL + 'signWithFacebook', body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
@@ -171,6 +171,9 @@ export class Login {
             this.facebookUser.profilePicture = user.profilePicture;
 
             localStorage.setItem('facebookUser', JSON.stringify(this.facebookUser));
+
+            this.changeDetector.markForCheck();
+
 
             this.router.navigate(['/main/home']);
           }

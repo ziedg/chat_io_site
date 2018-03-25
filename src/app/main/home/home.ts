@@ -1,4 +1,4 @@
-import { Input, Output, EventEmitter, Component, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Input, Output, EventEmitter, Component, ChangeDetectorRef, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
@@ -43,7 +43,7 @@ declare const gapi:any;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class Home {
+export class Home implements OnInit {
   form;
   uploadedPicture:File;
   isLock:boolean = false;
@@ -102,6 +102,7 @@ export class Home {
     this.menuFilter = 'recent';
 
   }
+
 
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
@@ -603,6 +604,7 @@ export class Home {
       e.preventDefault();
       var pastedData = e.originalEvent.clipboardData.getData('text');
       alert(pastedData);
+
     });
 
     jQuery("#errorMsgDisplay").hide();
@@ -622,6 +624,8 @@ export class Home {
         jQuery(".select-menu").hide();
       }
     });
+    this.changeDetector.markForCheck();
+
   }
 
   pasteInnerHtml($event) {

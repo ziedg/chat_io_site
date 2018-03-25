@@ -2,7 +2,7 @@
 <header class="suggestions-header"><b>Suggérés pour vous</b></header>
 -->
 <section class="suggestions-box widget row">
-  <div class="container-draggable" *ngFor="let user of popularProfiles">
+  <div class="container-draggable"  *ngFor="let user of popularProfiles">
 
     <div class="msg-draggable">
     </div>
@@ -14,15 +14,15 @@
            [ngStyle]="{'background-image': 'url('+user.profilePicture+')'}">
       </div>
       <div class="user-name">
-        <header><a>
+        <header><a [routerLink]="['/main/profile', user._id]">
           {{user.firstName}} {{user.lastName}}
         </a></header>
         <div class="nbr-subscribers">
           {{user.nbSubscribers}} abonnés
         </div>
       </div>
-      <div class="subscribe-no-number">
-        <button (click)="subscribe(user)">
+      <div class="subscribe-no-number" style="min-width:12px">
+        <button (click)="subscribeClick($event, user)" style="float:none">
           s'abonner
         </button>
       </div>

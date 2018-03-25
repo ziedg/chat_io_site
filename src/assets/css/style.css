@@ -1840,6 +1840,10 @@ margin-bottom:5px;*/
   color: #365899 !important;
   modified
   */
+
+  /*font-size: 1.1em;*/
+
+
   color: #000!important;
 }
 .widget> article> div> .user> .user-name {
@@ -1853,7 +1857,7 @@ margin-bottom:5px;*/
 .user-name-shared header {
   font-weight: bold;
   /*modified*/
-  font-size: 13px;
+  /*font-size: 13px;*/
 }
 .content p {
   font-size: 14px;
@@ -2747,11 +2751,11 @@ margin-left: 10px;*/
   box-sizing: border-box;
   border-radius: 3px;
   /*modified*/
-  height: 26px;
-  font-size: 13px !important;
+  height: 30px;
+  font-size: 14px !important;
   padding: 5px 10px;
   margin-bottom: 6px;
-  font-family: 'Roboto', sans-serif;
+  /*font-family: 'Roboto', sans-serif;*/
 }
 .subscribe-btn {
   background-color: #d71e17 !important;
@@ -4234,6 +4238,8 @@ top-blagueurs-decov section.widget{
   /*min-width: 500px;*/
   border-left: 1px solid #edeeee;
   border-right: 1px solid #edeeee;
+  transition-duration: 400ms;
+  transition-property: opacity;
 }
 .suggestions-box .container-draggable:first-child .user {
   border-top: 1px solid #edeeee;
