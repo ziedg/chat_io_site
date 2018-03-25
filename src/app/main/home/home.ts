@@ -84,6 +84,7 @@ export class Home implements OnInit {
 
     this.loginService.redirect();
     this.user = this.loginService.getUser();
+        console.log(this.user);
     this.postService.setShowErrorConnexion(false);
 
     this.form = new FormGroup({
