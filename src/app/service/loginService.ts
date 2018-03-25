@@ -73,6 +73,7 @@ export class LoginService {
     }
 /*give user */  
 giveUser (user :User){
+    console.log(user);
     this.LoggedIn.emit(user);
 }
     /* updateUser */
