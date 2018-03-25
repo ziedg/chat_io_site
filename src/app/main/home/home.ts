@@ -592,6 +592,7 @@ export class Home implements OnInit {
   }
 
   ngOnInit() {
+    console.log("zied lebna");
     console.log(this.user);
     jQuery("#publishDiv").on("paste", function (e) {
       e.preventDefault();
