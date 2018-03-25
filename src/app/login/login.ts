@@ -178,7 +178,9 @@ export class Login {
 
             localStorage.setItem('facebookUser', JSON.stringify(this.facebookUser));
 
-            this.changeDetector.markForCheck();
+            //this.changeDetector.markForCheck();
+            setTimeout(function(){
+            },10);
 
             this.router.navigate(['/main/home']);
           }
