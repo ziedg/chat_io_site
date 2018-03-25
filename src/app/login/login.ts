@@ -48,7 +48,12 @@ export class Login {
   loadingFb = false;
   public loacationPath: string = "/login/sign-in";
 
-  constructor(public translate: TranslateService,private _loc: Location, private title: Title, public http: Http, private router: Router, private loginService: LoginService, private changeDetector: ChangeDetectorRef) {
+  constructor(public translate: TranslateService,
+    private _loc: Location, 
+    private title: Title,
+     public http: Http, private router: Router, 
+     private loginService: LoginService, 
+     private changeDetector: ChangeDetectorRef) {
     this.title.setTitle("Connexion - Speegar");
 
     (function(d, s, id){
@@ -158,6 +163,7 @@ export class Login {
             let user: User = response.user;
 
             console.log(JSON.stringify(user));
+             this.loginService.giveUser(user);
             this.loginService.updateUser(user);
             this.loginService.setToken(response.token);
             if (response.user.isNewInscri == "true") {

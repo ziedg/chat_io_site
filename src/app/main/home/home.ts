@@ -83,7 +83,10 @@ export class Home implements OnInit {
               private changeDetector:ChangeDetectorRef) {
 
     this.loginService.redirect();
-    this.user = this.loginService.getUser();
+    //this.user = this.loginService.getUser();
+    this.loginService.LoggedIn.subscribe((user)=>{
+    this.user=user;
+    });
     this.postService.setShowErrorConnexion(false);
 
     this.form = new FormGroup({
@@ -95,7 +98,7 @@ export class Home implements OnInit {
     this.publicationBeanList = [];
     this.loadFirstPosts();
     if (!this.publicationBeanList.length)
-      this.loadFirstPosts();
+    this.loadFirstPosts();
     this.changeDetector.markForCheck();
     window.scrollTo(0, 0);
 

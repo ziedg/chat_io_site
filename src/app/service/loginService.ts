@@ -1,4 +1,4 @@
-import { Injectable }     from '@angular/core';
+import { Injectable, EventEmitter }     from '@angular/core';
 import { Router } from '@angular/router';
 
 /* beans */
@@ -9,7 +9,7 @@ import {environment} from "../../environments/environment";
 
 @Injectable()
 export class LoginService {
-
+   LoggedIn =new EventEmitter<User>();
     /* token */
     public token: string;
     /* User */
@@ -71,8 +71,10 @@ export class LoginService {
             this.user= JSON.parse(localStorage.getItem('user'));
         }
     }
-
-
+/*give user */  
+giveUser (user :User){
+    this.LoggedIn.emit(user);
+}
     /* updateUser */
     updateUser(user:User){
             this.user=user;
