@@ -52,9 +52,6 @@ export class Home implements OnInit {
   public link:LinkBean = new LinkBean();
   public previewLink:Array<LinkBean> = [];
 
-  public user$ ;
-
-
   //Variables Declarations
   titleEnable = false;
   youtubeInput = false;
@@ -335,19 +332,6 @@ export class Home implements OnInit {
     data.append('publyoutubeLink', this.youtubeLink);
     data.append('publPicture',this.uploadedPicture);
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
     if (this.link.isSet) {
       data.append('publExternalLink', this.link.url);
     }
@@ -608,6 +592,7 @@ export class Home implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.user);
     jQuery("#publishDiv").on("paste", function (e) {
       e.preventDefault();
       var pastedData = e.originalEvent.clipboardData.getData('text');
