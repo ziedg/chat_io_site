@@ -40,7 +40,7 @@ declare const gapi:any;
   moduleId: module.id,
   selector: 'home',
   templateUrl: 'home.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class Home implements OnInit {
@@ -109,7 +109,7 @@ export class Home implements OnInit {
   }
 
   ngOnInit() {
-    
+
     console.log("zied lebna");
     console.log(this.user);
     /*jQuery("#publishDiv").on("paste", function (e) {
