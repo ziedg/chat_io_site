@@ -141,7 +141,7 @@ export class Login {
 
   getUserInformations(response, responsePic, responseSmallPic) {
     let body = {};
-    console.log(JSON.stringify(response))
+    console.log(JSON.stringify(response));
     body = JSON.stringify({
       profilePicture:responsePic.picture.data.url,
       firstName: response.first_name,
@@ -179,7 +179,6 @@ export class Login {
             localStorage.setItem('facebookUser', JSON.stringify(this.facebookUser));
 
             this.changeDetector.markForCheck();
-
 
             this.router.navigate(['/main/home']);
           }

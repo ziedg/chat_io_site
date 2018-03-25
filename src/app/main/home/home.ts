@@ -108,6 +108,37 @@ export class Home implements OnInit {
 
   }
 
+  ngOnInit() {
+    console.log("zied lebna");
+    console.log(this.user);
+    /*jQuery("#publishDiv").on("paste", function (e) {
+      e.preventDefault();
+      var pastedData = e.originalEvent.clipboardData.getData('text');
+      alert(pastedData);
+
+    });
+
+    jQuery("#errorMsgDisplay").hide();
+    jQuery(("#file-image")).change(function () {
+      jQuery((".file-input-holder")).show();
+      readURL(this);
+    });
+
+    jQuery(("#file-image-gif")).change(function () {
+      jQuery((".file-input-holder")).show();
+      readURL(this);
+    });
+
+    jQuery(document).click(function (e) {
+
+      if (jQuery(e.target).closest(".select-menu").length === 0 && jQuery(e.target).closest(".dropdown").length === 0) {
+        jQuery(".select-menu").hide();
+      }
+    });
+    this.changeDetector.markForCheck();*/
+
+  }
+
 
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
@@ -591,36 +622,7 @@ export class Home implements OnInit {
     }
   }
 
-  ngOnInit() {
-    console.log("zied lebna");
-    console.log(this.user);
-    jQuery("#publishDiv").on("paste", function (e) {
-      e.preventDefault();
-      var pastedData = e.originalEvent.clipboardData.getData('text');
-      alert(pastedData);
-
-    });
-
-    jQuery("#errorMsgDisplay").hide();
-    jQuery(("#file-image")).change(function () {
-      jQuery((".file-input-holder")).show();
-      readURL(this);
-    });
-
-    jQuery(("#file-image-gif")).change(function () {
-      jQuery((".file-input-holder")).show();
-      readURL(this);
-    });
-
-    jQuery(document).click(function (e) {
-
-      if (jQuery(e.target).closest(".select-menu").length === 0 && jQuery(e.target).closest(".dropdown").length === 0) {
-        jQuery(".select-menu").hide();
-      }
-    });
-    this.changeDetector.markForCheck();
-
-  }
+  
 
   pasteInnerHtml($event) {
     $event.preventDefault();
