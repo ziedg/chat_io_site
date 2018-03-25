@@ -4238,6 +4238,8 @@ top-blagueurs-decov section.widget{
   /*min-width: 500px;*/
   border-left: 1px solid #edeeee;
   border-right: 1px solid #edeeee;
+  transition-duration: 400ms;
+  transition-property: opacity;
 }
 .suggestions-box .container-draggable:first-child .user {
   border-top: 1px solid #edeeee;

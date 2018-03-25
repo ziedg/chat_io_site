@@ -52,7 +52,8 @@ export class SuggestionsComponent implements OnInit {
   onScroll(event) {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
       console.log('reach end of body');
-      this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);
+      if(this.popularProfiles)
+      {this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);}
     }
   }
 
@@ -152,10 +153,19 @@ export class SuggestionsComponent implements OnInit {
   }
 
   subscribeClick(event, user:User) {
-    var obj = event.srcElement;
+    console.log(event);
+    var obj = event.target;
+    var obj_del = obj.parentNode.parentNode.parentNode;
+
+    obj_del.style.opacity = '0';
+
+    setTimeout(function(){obj_del.parentNode.removeChild(obj_del);}, 500);
+
+    if(this.popularProfiles.length<5){
+      this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);
+    }
 
     this.subscribe(user);
-    //this.disapear2()
   }
 
   ignore(user: User) {
