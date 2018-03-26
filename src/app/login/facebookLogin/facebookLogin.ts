@@ -40,6 +40,7 @@ export class FacebookLogin {
         console.log("facebookLoginConstrctor")
 
         if(loginService.isConnected()){
+           console.log("main redirect")
             this.router.navigate(['/main/home']);
         }
 
