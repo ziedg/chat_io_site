@@ -80,8 +80,10 @@ export class Home implements OnInit {
               private router:Router,
               private loginService:LoginService,
               private changeDetector:ChangeDetectorRef) {
-   
-    this.loginService.redirect();
+
+    //this.loginService.redirect(); test
+    this.router.navigate(['/login/facebook-login']);
+
     this.loginService.LoggedIn.subscribe((user)=>{
       console.log(user);
     this.user=user;
@@ -623,7 +625,7 @@ export class Home implements OnInit {
     }
   }
 
-  
+
 
   pasteInnerHtml($event) {
     $event.preventDefault();

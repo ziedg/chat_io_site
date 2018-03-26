@@ -38,6 +38,7 @@ declare const gapi:any;
   moduleId: module.id,
   selector: 'main',
   templateUrl: 'main.html',
+
 })
 
 export class Main {
@@ -55,13 +56,13 @@ export class Main {
   showButtonMoreNotif:Boolean = false;
   showNoNotif:Boolean = false;
 
-  constructor(public translate:TranslateService, 
-              private dateService:DateService, 
-              private http:Http, 
+  constructor(public translate:TranslateService,
+              private dateService:DateService,
+              private http:Http,
               private location:Location,
               private router:Router,
-              private loginService:LoginService, 
-              private changeDetector:ChangeDetectorRef, 
+              private loginService:LoginService,
+              private changeDetector:ChangeDetectorRef,
               private recentRechService:RecentRechService,
               private appRef :ApplicationRef) {
     if (!this.recentRechService.isEmptyList())
@@ -69,7 +70,7 @@ export class Main {
     this.showButtonMoreNotif = false;
     this.listNotif = [];
     this.user = this.loginService.getUser();
-    this.appRef.tick();
+ 
   }
 
   ngOnInit() {
