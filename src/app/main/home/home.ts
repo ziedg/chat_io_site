@@ -51,8 +51,8 @@ export class Home implements OnInit {
   uploadedPicture:File;
   isLock:boolean = false;
   public publicationBeanList:Array<PublicationBean> = [];
- // public user:User = new User();
-  user;
+ public user:User = new User();
+ 
   public link:LinkBean = new LinkBean();
   public previewLink:Array<LinkBean> = [];
 
@@ -90,7 +90,7 @@ export class Home implements OnInit {
 
     this.loginService.LoggedIn.subscribe((user)=>{
       console.log(user);
-    this.user=Immutable.Map(user);
+    this.user=user;
     console.log(this.user);
     });
 
