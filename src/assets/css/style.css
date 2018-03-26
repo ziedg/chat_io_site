@@ -4341,3 +4341,14 @@ publication .user {
   dispaly: flex;
   align-items: center;
 }
+
+@media(max-width:400px) {
+  .user-name {
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .user-name header {
+    display:inline;
+  }
+}
