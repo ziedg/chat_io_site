@@ -38,8 +38,6 @@ declare const gapi:any;
   moduleId: module.id,
   selector: 'main',
   templateUrl: 'main.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
-
 })
 
 export class Main {
