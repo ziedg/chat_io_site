@@ -39,10 +39,11 @@ export class FacebookLogin {
         }
         console.log("facebookLoginConstrctor")
 
-
+        if(loginService.isConnected()){
 
             this.router.navigate(['/main/home']);
-        
+        }
+
         this.facebookUser = this.loginService.getFacebookUser();
 
 
