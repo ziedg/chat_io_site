@@ -4,7 +4,8 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
-const { Map } = require('immutable')
+
+import Immutable = require('immutable');
 
 
 import { Publication } from '../../publication/publication';
@@ -89,7 +90,7 @@ export class Home implements OnInit {
 
     this.loginService.LoggedIn.subscribe((user)=>{
       console.log(user);
-    this.user=Map(user);
+    this.user=Immutable.Map(user);
     console.log(this.user);
     });
 
