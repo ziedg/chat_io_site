@@ -43,7 +43,7 @@ export class LoginService {
         return false;
     }
 
-    /*
+    
     redirect(){
       if(!this.isConnected()){
         if(this.isWasConnectedWithFacebook()){
@@ -53,7 +53,7 @@ export class LoginService {
           this.router.navigate(['/login/sign-in']);
         }
       }
-    }*/
+    }
 
     /* getFacebookUser */
     getFacebookUser(): SocialUser{
