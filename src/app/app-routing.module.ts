@@ -61,7 +61,7 @@ export const routes: Routes = [
         component: Main,
         children: [
             {path: '', redirectTo: 'home', pathMatch: 'full'},
-            {path: 'home', component: Home , canActivate:[HomeGuardService]},
+            {path: 'home', component: Home },
             {path: 'profile/:id', component: Profile},
             {
                 path: 'parameters', component: Parameters,

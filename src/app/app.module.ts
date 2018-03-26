@@ -87,7 +87,6 @@ import { HomeGuardService } from './service/home-guard.service';
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
         {provide: APP_BASE_HREF, useValue: '/'},
-        HomeGuardService
     ],
 
 })
