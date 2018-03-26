@@ -8,7 +8,7 @@ import {Signup} from './signup/signup';
 import {FacebookLogin} from './facebookLogin/facebookLogin';
 
 
-import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectorRef, ChangeDetectionStrategy, NgZone} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {FormGroup, Validators, FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -51,9 +51,11 @@ export class Login {
   constructor(public translate: TranslateService,
     private _loc: Location, 
     private title: Title,
-     public http: Http, private router: Router, 
+     public http: Http, 
+     private router: Router, 
      private loginService: LoginService, 
-     private changeDetector: ChangeDetectorRef) {
+     private changeDetector: ChangeDetectorRef,
+     private zone : NgZone) {
     this.title.setTitle("Connexion - Speegar");
 
     (function(d, s, id){
@@ -178,11 +180,8 @@ export class Login {
 
             localStorage.setItem('facebookUser', JSON.stringify(this.facebookUser));
 
-            //this.changeDetector.markForCheck();
-            setTimeout(function(){
-            },10);
-
-            this.router.navigate(['/main/home']);
+            this.zone.run(() => this.router.navigate(['/main/home']));
+            
           }
           else {
             this.errorMessage = response.message;
