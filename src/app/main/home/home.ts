@@ -4,6 +4,8 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
+const { Map } = require('immutable')
+
 
 import { Publication } from '../../publication/publication';
 import { Comment } from '../../comment/comment';
@@ -48,7 +50,8 @@ export class Home implements OnInit {
   uploadedPicture:File;
   isLock:boolean = false;
   public publicationBeanList:Array<PublicationBean> = [];
-  public user:User = new User();
+ // public user:User = new User();
+  user;
   public link:LinkBean = new LinkBean();
   public previewLink:Array<LinkBean> = [];
 
@@ -81,12 +84,12 @@ export class Home implements OnInit {
               private loginService:LoginService,
               private changeDetector:ChangeDetectorRef) {
 
-    this.loginService.redirect(); 
+    this.loginService.redirect();
 
 
     this.loginService.LoggedIn.subscribe((user)=>{
       console.log(user);
-    this.user=user;
+    this.user=Map(user);
     console.log(this.user);
     });
 
