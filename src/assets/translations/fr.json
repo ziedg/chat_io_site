@@ -181,6 +181,9 @@
   "profile_menu_update_profile" : "Modifier le profil",
   "profile_menu_log_out" : "Deconnexion",
   "profile_menu_cancel" : "Annuler",
+  "profile_menu_bloquer" : "Bloquer",
+  "profile_menu_signaler" : "Signaler",
+
 
   "popular_profiles_title" : "Profils populaires",
 

@@ -1,12 +1,10 @@
 <div class="container" *ngIf="user">
-  <div *ngIf="!isNotFound" class="row">
+  <div *ngIf="!isNotFound" class="row header-Profile">
 
     <!--heder Profile-->
-    <div class="col-xs-12 header-Profile">
-      <div class="row">
-        <div *ngIf="user && userDisplayed" class="col-md-4 col-sm-4 col-xs-4">
+        <div *ngIf="user && userDisplayed" class="col-md-3 col-sm-4 col-xs-4">
           <section class="widget bordered-white profile-photo centered-text" style="position:relative;"
-                   [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}">
+                   [ngStyle]="{'background-image': 'url(' + userDisplayed.profilePicture + ')'}">
             <div class="profile-picture-loading" *ngIf="profilePictLoad"></div>
             <i class="fa fa-upload" aria-hidden="true" *ngIf="user._id==userDisplayed._id" (click)="changePhoto()"></i>
             <i class="fa fa-floppy-o" aria-hidden="true" *ngIf="uploadedProfilePicture"
@@ -16,33 +14,32 @@
             <input type="file" id="file-profile" style="display:none" accept="image/*"
                    (change)="updateProfilePicture($event)">
           </section>
+          <!--
           <button class="btn-edit-profile btn-edit-profile-1 hidden-xs" [routerLink]="['/main/parameters']">
             {{ 'profile_menu_update_profile' | translate }}
           </button>
+          -->
 
         </div>
 
 
-        <div class="col-md-7 header-segement name-holder col-sm-7 col-xs-8">
+        <div class="col-md-6 header-segement name-holder col-sm-7 col-xs-8">
           <h3 class="user-name-profile"><span>{{userDisplayed.firstName}} {{userDisplayed.lastName}}</span><div class="profile-edit hidden-lg hidden-md hidden-sm" *ngIf="user._id==userDisplayed._id">
                 <div class="three-dots" (click)="openModal()">
-                  <i class="fa fa-cogs" aria-hidden="true" style="position: relative;top: 2px; left: 10px"></i>
+                  <span class=" glyphicon glyphicon-option-horizontal"></span>
                 </div>
               </div>
-            <span *ngIf="user._id!=userDisplayed._id">
+          </h3>
+                      <span *ngIf="user._id!=userDisplayed._id">
                     <button *ngIf="!userDisplayed.isFollowed" (click)="subscribe(userDisplayed)"
                             class="sub-profile-btn-old">
-                      <i class="fa fa-plus"></i>
                       {{ 'profile_subscribe' | translate }}
                     </button>
                     <button *ngIf="userDisplayed.isFollowed" (click)="unsubscribe(userDisplayed)"
                             class="sub-profile-btn-old active">
-                      <i class="fa fa-check"></i>
                       {{ 'profile_already_subscribed' | translate }}
                     </button>
                 </span>
-
-          </h3>
           <div class="header-segement edit-profile-mobile hidden-lg hidden-md hidden-sm"
           *ngIf="user._id==userDisplayed._id">
        <button class="btn-edit-profile" [routerLink]="['/main/parameters']">
@@ -50,15 +47,53 @@
        </button>
 
      </div>
-          <div class="profile-edit hidden-xs" *ngIf="user._id==userDisplayed._id">
-            <div class="three-dots" (click)="openModal()">
-              <i class="fa fa-cog" aria-hidden="true"></i>
+          <div class="profile-edit hidden-xs" >
+            <div *ngIf="user._id!=userDisplayed._id" class="three-dots" (click)="openModalOtherProfile()">
+              <span class=" glyphicon glyphicon-option-horizontal"></span>
+            </div>
+            <div *ngIf="user._id==userDisplayed._id" class="three-dots" (click)="openModal()">
+              <span class="glyphicon glyphicon-option-horizontal"></span>
             </div>
           </div>
-          <div class="header-segement description-holder description-holder-1">
+
+<div class="header-segement social-holder hidden-xs">
+
+  <div class="score">
+    <span [ngClass]="{'zero-value' : userDisplayed.nbSubscribers===0}">
+      <b>{{userDisplayed.nbSubscribers}} </b>
+      {{ 'profile_menu_followers' | translate }}
+    </span>
+    <span class="empty"> </span>
+    <span [ngClass]="{'zero-value' : userDisplayed.nbSuivi===0}">
+      <b>{{userDisplayed.nbSuivi}} </b>
+      {{ 'profile_menu_followed' | translate }}
+    </span>
+    <span class="empty"> </span>
+    <span [ngClass]="{'zero-value' : userDisplayed.nbPublications===0}">
+      <b>{{userDisplayed.nbPublications}} </b>
+      {{ 'profile_menu_publications' | translate }}
+    </span>
+  </div>
+  <div class="social-btns ">
+    <article *ngIf="userDisplayed.facebookLink" class="facebook-btn">
+      <img src="assets/pictures/fb.png" (click)="goFB()" class="fb">
+    </article>
+    <article *ngIf="userDisplayed.twitterLink" class="twitter-btn">
+      <img src="assets/pictures/twitter.png" (click)="goTW()" class="tw">
+    </article>
+    <article *ngIf="userDisplayed.youtubeLink" class="youtube-btn">
+      <img src="assets/pictures/yt.png" (click)="goYT()" class="yt">
+    </article>
+  </div>
+
+
+</div>
+
+
+                    <div class="header-segement description-holder description-holder-1">
             <span *ngIf="!editDescriptionEnable">
             <span *ngIf="userDisplayed.about">{{userDisplayed.about}}</span>
-            <span *ngIf="!userDisplayed.about">
+            <span *ngIf="!userDisplayed.about && user._id==userDisplayed._id">
               {{ 'profile_description_empty' | translate }}
             </span>
 
@@ -81,29 +116,6 @@
       </form>
   </div>
   </div>
-
-</div>
-<div class="header-segement social-holder hidden-xs">
-
-  <div class="score"><b>{{userDisplayed.nbSubscribers}} </b>
-    {{ 'profile_menu_followers' | translate }}
-    <span class="empty"> </span><b>{{userDisplayed.nbSuivi}} </b>
-    {{ 'profile_menu_followed' | translate }}
-    <span class="empty"> </span><b>{{userDisplayed.nbPublications}} </b>
-    {{ 'profile_menu_publications' | translate }}
-  </div>
-  <div class="social-btns ">
-    <article *ngIf="userDisplayed.facebookLink" class="facebook-btn">
-      <img src="assets/pictures/fb.png" (click)="goFB()" class="fb">
-    </article>
-    <article *ngIf="userDisplayed.twitterLink" class="twitter-btn">
-      <img src="assets/pictures/twitter.png" (click)="goTW()" class="tw">
-    </article>
-    <article *ngIf="userDisplayed.youtubeLink" class="youtube-btn">
-      <img src="assets/pictures/yt.png" (click)="goYT()" class="yt">
-    </article>
-  </div>
-
 
 </div>
         </div>
@@ -133,7 +145,6 @@
           </div>
 
         </div>
-      </div>
 
 
 
@@ -162,9 +173,24 @@
 
         </div>
 
-      </div>
 
 
+    <!---------------------------------------------------------------------------------------->
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+<hr style="margin-top:10px; margin-bottom:40px;"/>
+
+<div class="container" *ngIf="user">
+  <div *ngIf="!isNotFound" class="row">
     <div class="col-md-3 col-xs-12 margin-top-0">
     </div>
 
@@ -223,6 +249,8 @@
   </div>
 
 </div>
+
+
 <div class="modal-edit-profile" style="display:none">
   <div class="white-box-edit">
     <article [routerLink]="['/main/parameters/edit-profile']">
@@ -236,3 +264,23 @@
     </article>
   </div>
 </div>
+
+
+<div class="modal-other-profile-options" style="display:none">
+  <div class="white-box-edit">
+    <article>
+      {{ 'profile_menu_bloquer' | translate }}
+    </article>
+    <article>
+      {{ 'profile_menu_signaler' | translate }}
+    </article>
+    <article (click)="ModalOtherProfile()">
+      {{ 'profile_menu_cancel' | translate }}
+    </article>
+  </div>
+</div>
+
+
+
+
+

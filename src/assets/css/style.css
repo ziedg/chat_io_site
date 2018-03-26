@@ -724,7 +724,9 @@ section.widget {
   padding: 6px 0;
 }
 .header-Profile {
-  margin: 25px 0 25px;
+  margin: 20px 0 0 0;
+  display: flex;
+  align-items: end;
   /*modified*/
 }
 
@@ -747,12 +749,14 @@ section.widget {
 }
 .header-segement.name-holder {
   text-align: left;
+  padding-left:0;
+  padding-right:0;
 }
 .header-segement.description-holder {
   text-align: left;
-  letter-spacing: 2px;
   font-size: 14px;
   /*
+  letter-spacing: 2px;
   padding-left: 0;
   padding-right: 20px;
   modified
@@ -780,9 +784,11 @@ section.widget {
   cursor: pointer;
 }
 .header-segement.social-holder {
-  margin-top: 10px;
+  margin-top: 4px;
   padding-left: 0;
   padding-right: 0;
+
+  height: 35px;
 }
 .header-segement.social-holder .fa {
   font-size: 25px;
@@ -792,6 +798,11 @@ section.widget {
   /*modified*/
   font-family:arial;
 }
+
+.header-segement.social-holder .score .zero-value {
+  color: #888
+}
+
 .header-segement.social-holder .score-mobile {
   padding: 5px 5px !important;
   font-size: 15px;
@@ -827,8 +838,8 @@ modified
 }
 modified
 */
-.sub-profile-btn-old,
-.sub-profile-btn-old.active:hover {
+.sub-profile-btn-old
+/*.sub-profile-btn-old.active:hover*/ {
   background-color: #fafafa;
   color: #12a012;
   box-shadow: none;
@@ -845,19 +856,34 @@ modified
   text-transform: capitalize;
   bottom: 6px;
   position: relative;
-}
-.sub-profile-btn-old:hover,
-.sub-profile-btn-old.active {
-  background-color: #6bac6f;
-  border-color: #47b14d;
+  /*modified*/
+  width: 140px;
+  background-color: #12a012;
+  border: 0;
   color: white;
+  font-size: 15px;
+  height: 28px;
+  border-radius: 3px;
+  line-height: 30px;
+  margin-right: 8px;
 }
+.sub-profile-btn-old:hover
+/*.sub-profile-btn-old.active*/ {
+  background-color: #2cba2c;
+}
+
+.sub-profile-btn-old.active {
+  background-color: white;
+  border: 1px solid #edeeee;
+  color: #333333;
+}
+/*
 .sub-profile-btn-old.active:hover {
   background-color: #fafafa;
   color: #12a012;
   box-shadow: none;
   border: solid 1px #ccc;
-}
+}*/
 .sub-profile-btn {
   background-color: transparent !important;
   border: 1px solid #999999 !important;
@@ -949,16 +975,16 @@ modified
   height: 36px;
 }
 .profile-photo {
-  padding: 25% 0 !important;
+  padding: 28% 0 !important;
   background-size: cover !important;
-  width: calc(50% + 10px) !important;
+  width: calc(56% + 10px) !important;
   border-radius: 50%;
+  margin: auto!important;
   /*
   left: 20%;
   margin: 0 auto 20px !important;
   modified
-  */
-  left: 36%;
+  left: 36%;*/
   margin-bottom: 10px;
 }
 @media (max-width: 768px) {
@@ -1002,13 +1028,11 @@ modified
 .user-name-profile {
   margin-top: 20px;
   margin-bottom: 5px;
-  display: inline-block;
   font-size: 32px;
   position: relative;
-  margin-right: 12px;
   /*modified*/
   display:inline;
-  padding-right: 25px;
+  padding-right: 4px;
   margin-right: 0!important;
   margin-left: 0!important;
 }
@@ -2431,8 +2455,6 @@ margin-bottom:5px;*/
   width: 100%;
   text-align: inherit;
   position: relative;
-  /*modified*/
-  padding-left: 10px!important;
 }
 /*modified*/
 .header-segement .btn-edit-profile{
@@ -2455,11 +2477,17 @@ margin-bottom:5px;*/
   top: -23px;
   display: block;
   position: absolute;
-  font-size:22px
+  font-size:22px;
 }
+
+/*modified*/
+.profile-edit .three-dots span{
+  vertical-align: middle;
+}
+
 .profile-edit .three-dots .fa {
   margin-right: 1.5px;
-}
+}.profile-edit .three-dots
 .profile-edit .three-dots .fa:hover {
   color: #009900;
 }
@@ -2473,7 +2501,8 @@ margin-bottom:5px;*/
   padding: 0;
 }
 .modal-edit-profile,
-.modal-edit-pub {
+.modal-edit-pub,
+.modal-other-profile-options{
   width: 100%;
   height: 100%;
   position: fixed;
@@ -2596,7 +2625,8 @@ margin-bottom:5px;*/
   z-index: 101;
 }
 .modal-edit-profile article,
-.modal-edit-pub article {
+.modal-edit-pub article,
+.modal-other-profile-options article{
   padding: 14px;
   font-size: 16px;
   text-align: center;

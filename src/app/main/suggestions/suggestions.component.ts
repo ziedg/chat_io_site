@@ -52,7 +52,7 @@ export class SuggestionsComponent implements OnInit {
   onScroll(event) {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
       console.log('reach end of body');
-      if(this.popularProfiles)
+      if(this.popularProfiles.length > 0)
       {this.loadPopularProfiles(this.popularProfiles[this.popularProfiles.length-1]._id);}
     }
   }

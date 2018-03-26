@@ -344,6 +344,14 @@ export class Profile {
     jQuery(".modal-edit-profile").fadeOut(300);
   }
 
+  openModalOtherProfile() {
+    jQuery(".modal-other-profile-options").fadeIn(500);
+  }
+
+  closeModalOtherProfile() {
+    jQuery(".modal-other-profile-options").fadeOut(300);
+  }
+
   openModalFriends() {
     jQuery(".modal-friends").fadeIn(500);
   }
@@ -358,6 +366,13 @@ export class Profile {
         jQuery(".modal-edit-profile").fadeOut(300);
       }
     });
+
+        jQuery(document).click(function (e) {
+      if (jQuery(e.target).closest(".white-box-edit").length === 0 && jQuery(e.target).closest(".profile-edit").length === 0) {
+        jQuery(".modal-other-profile-options").fadeOut(300);
+      }
+    });
+
     jQuery(document).click(function (e) {
 
       if (jQuery(e.target).closest(".select-menu").length === 0 && jQuery(e.target).closest(".dropdown").length === 0) {
@@ -459,7 +474,7 @@ export class Profile {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-         
+
           console.log(response.profile)
         if (response.status == "0") {
           localStorage.setItem('user', JSON.stringify(response.profile));
