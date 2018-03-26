@@ -5,8 +5,6 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
-import * as Immutable from 'immutable';
-
 
 import { Publication } from '../../publication/publication';
 import { Comment } from '../../comment/comment';
@@ -86,13 +84,6 @@ export class Home implements OnInit {
               private changeDetector:ChangeDetectorRef) {
 
     this.loginService.redirect();
-
-
-   /* this.loginService.LoggedIn.subscribe((user)=>{
-      console.log(user);
-    this.user=user;
-    console.log(this.user);
-    });*/
 
     this.user = this.loginService.getUser();
 

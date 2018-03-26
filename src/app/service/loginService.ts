@@ -5,12 +5,10 @@ import { Router } from '@angular/router';
 import {User} from './../beans/user'
 import {SocialUser} from "../beans/social-user";
 import {environment} from "../../environments/environment";
-import { Subject } from 'rxjs';
 
 
 @Injectable()
 export class LoginService {
-   LoggedIn =new Subject<User>();
     /* token */
     public token: string;
     /* User */
@@ -77,11 +75,7 @@ export class LoginService {
 
         }
     }
-/*give user 
-giveUser (user :User){
-    console.log(user);
-    this.LoggedIn.next(user);
-}*/
+
     /* updateUser */
     updateUser(user:User){
             this.user=user;

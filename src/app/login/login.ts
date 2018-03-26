@@ -167,7 +167,6 @@ export class Login {
             let user: User = response.user;
 
             console.log(JSON.stringify(user));
-            // this.loginService.giveUser(user);
             this.loginService.updateUser(user);
             this.loginService.setToken(response.token);
             if (response.user.isNewInscri == "true") {
