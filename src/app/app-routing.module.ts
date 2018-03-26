@@ -33,12 +33,14 @@ import {Team} from './support/team/team'
 import {ForgetPasswordComponent} from "./login/forget-password/forget-password.component";
 import {ResetPasswordComponent} from "./login/reset-password/reset-password.component";
 import {FakeComponent} from "./shared/fake.component";
+import { HomeGuardService } from './service/home-guard.service';
 
 export const routes: Routes = [
     {path: 'redirect', component: FakeComponent},
     {
         path: '',
         redirectTo: '/main/home',
+        canActivate:[HomeGuardService],
         pathMatch: 'full'
         //terminal: true
     },
@@ -60,7 +62,7 @@ export const routes: Routes = [
         component: Main,
         children: [
             {path: '', redirectTo: 'home', pathMatch: 'full'},
-            {path: 'home', component: Home},
+            {path: 'home', component: Home , canActivate[HomeGuardService]},
             {path: 'profile/:id', component: Profile},
             {
                 path: 'parameters', component: Parameters,
