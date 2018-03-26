@@ -40,7 +40,6 @@ export const routes: Routes = [
     {
         path: '',
         redirectTo: '/main/home',
-        canActivate:[HomeGuardService],
         pathMatch: 'full'
         //terminal: true
     },
