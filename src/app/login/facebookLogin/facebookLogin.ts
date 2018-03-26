@@ -38,9 +38,9 @@ export class FacebookLogin {
             this.router.navigate(['/login/sign-in']);
         }
         console.log("facebookLoginConstrctor")
-
+         console.log(loginService.isConnected())
         if(loginService.isConnected()){
-           console.log("main redirect")
+
             this.router.navigate(['/main/home']);
         }
 
