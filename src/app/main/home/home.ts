@@ -88,13 +88,13 @@ export class Home implements OnInit {
     //this.loginService.redirect();
 
 
-    this.loginService.LoggedIn.subscribe((user)=>{
+   /* this.loginService.LoggedIn.subscribe((user)=>{
       console.log(user);
     this.user=user;
     console.log(this.user);
-    });
+    });*/
 
-    //this.user = this.loginService.getUser();
+    this.user = this.loginService.getUser();
 
     this.postService.setShowErrorConnexion(false);
 
