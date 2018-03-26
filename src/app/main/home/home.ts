@@ -81,8 +81,8 @@ export class Home implements OnInit {
               private loginService:LoginService,
               private changeDetector:ChangeDetectorRef) {
 
-    //this.loginService.redirect(); test
-    this.router.navigate(['/login/facebook-login']);
+    this.loginService.redirect(); 
+
 
     this.loginService.LoggedIn.subscribe((user)=>{
       console.log(user);
