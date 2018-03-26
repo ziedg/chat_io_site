@@ -37,6 +37,7 @@ export class FacebookLogin {
         if(!loginService.isWasConnectedWithFacebook()){
             this.router.navigate(['/login/sign-in']);
         }
+        console.log("facebookLoginConstrctor")
 
         if(loginService.isConnected()){
             this.router.navigate(['/main/home']);
