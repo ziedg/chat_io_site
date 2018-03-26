@@ -975,9 +975,9 @@ modified
   height: 36px;
 }
 .profile-photo {
-  padding: 28% 0 !important;
+  padding: 26% 0 !important;
   background-size: cover !important;
-  width: calc(56% + 10px) !important;
+  width: calc(52% + 10px) !important;
   border-radius: 50%;
   margin: auto!important;
   /*
