@@ -37,8 +37,10 @@ export class FacebookLogin {
         if(!loginService.isWasConnectedWithFacebook()){
             this.router.navigate(['/login/sign-in']);
         }
+        console.log("facebookLoginConstrctor")
 
         if(loginService.isConnected()){
+
             this.router.navigate(['/main/home']);
         }
 
@@ -94,6 +96,8 @@ export class FacebookLogin {
 
                     this.loginService.updateUser(user);
                     localStorage.setItem('user', JSON.stringify(response.user));
+                    console.log("from facebook component")
+                    console.log(response)
                     this.loginService.setToken(response.token);
                     this.loginService.actualize();
                     this.router.navigate(['/main/home']);
