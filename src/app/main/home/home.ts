@@ -5,7 +5,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
-import Immutable = require('immutable');
+import * as Immutable from 'immutable';
 
 
 import { Publication } from '../../publication/publication';
