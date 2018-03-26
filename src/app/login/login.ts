@@ -180,7 +180,8 @@ export class Login {
 
             localStorage.setItem('facebookUser', JSON.stringify(this.facebookUser));
 
-            this.zone.run(() => this.router.navigate(['/main/home']));
+            //this.zone.run(() => 
+            this.router.navigate(['/main/home'])/*)*/;
             
           }
           else {
