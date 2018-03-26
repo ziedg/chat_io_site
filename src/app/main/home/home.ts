@@ -40,7 +40,7 @@ declare const gapi:any;
   moduleId: module.id,
   selector: 'home',
   templateUrl: 'home.html',
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class Home implements OnInit {
