@@ -52,7 +52,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { httpFactory } from './utils/factories/http.factory';
 import {ContenteditableModel} from "./publication/contenteditable-model";
 import { SuggestionsComponent } from './main/suggestions/suggestions.component';
-import { HomeGuardService } from './service/home-guard.service';
 
 @NgModule({
     imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,

@@ -77,11 +77,11 @@ export class LoginService {
 
         }
     }
-/*give user */
+/*give user 
 giveUser (user :User){
     console.log(user);
     this.LoggedIn.next(user);
-}
+}*/
     /* updateUser */
     updateUser(user:User){
             this.user=user;

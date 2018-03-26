@@ -33,7 +33,6 @@ import {Team} from './support/team/team'
 import {ForgetPasswordComponent} from "./login/forget-password/forget-password.component";
 import {ResetPasswordComponent} from "./login/reset-password/reset-password.component";
 import {FakeComponent} from "./shared/fake.component";
-import { HomeGuardService } from './service/home-guard.service';
 
 export const routes: Routes = [
     {path: 'redirect', component: FakeComponent},
