@@ -38,12 +38,11 @@ export class FacebookLogin {
             this.router.navigate(['/login/sign-in']);
         }
         console.log("facebookLoginConstrctor")
-         console.log(loginService.isConnected())
-        if(loginService.isConnected()){
+
+
 
             this.router.navigate(['/main/home']);
-        }
-
+        
         this.facebookUser = this.loginService.getFacebookUser();
 
 
