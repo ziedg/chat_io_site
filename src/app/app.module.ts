@@ -85,7 +85,7 @@ import { SuggestionsComponent } from './main/suggestions/suggestions.component';
           multi: false
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
-        {provide: APP_BASE_HREF, useValue: '/'}
+        {provide: APP_BASE_HREF, useValue: '/'},
     ],
 
 })

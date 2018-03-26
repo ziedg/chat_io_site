@@ -8,7 +8,7 @@ import {Signup} from './signup/signup';
 import {FacebookLogin} from './facebookLogin/facebookLogin';
 
 
-import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectorRef, ChangeDetectionStrategy, NgZone} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {FormGroup, Validators, FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -48,7 +48,14 @@ export class Login {
   loadingFb = false;
   public loacationPath: string = "/login/sign-in";
 
-  constructor(public translate: TranslateService,private _loc: Location, private title: Title, public http: Http, private router: Router, private loginService: LoginService, private changeDetector: ChangeDetectorRef) {
+  constructor(public translate: TranslateService,
+    private _loc: Location, 
+    private title: Title,
+     public http: Http, 
+     private router: Router, 
+     private loginService: LoginService, 
+     private changeDetector: ChangeDetectorRef,
+     private zone : NgZone) {
     this.title.setTitle("Connexion - Speegar");
 
     (function(d, s, id){
@@ -136,7 +143,7 @@ export class Login {
 
   getUserInformations(response, responsePic, responseSmallPic) {
     let body = {};
-    console.log(JSON.stringify(response))
+    console.log(JSON.stringify(response));
     body = JSON.stringify({
       profilePicture:responsePic.picture.data.url,
       firstName: response.first_name,
@@ -172,10 +179,8 @@ export class Login {
 
             localStorage.setItem('facebookUser', JSON.stringify(this.facebookUser));
 
-            this.changeDetector.markForCheck();
-
-
-            this.router.navigate(['/main/home']);
+            this.zone.run(() => this.router.navigate(['/main/home']));
+            
           }
           else {
             this.errorMessage = response.message;

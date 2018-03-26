@@ -5,6 +5,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
+
 import { Publication } from '../../publication/publication';
 import { Comment } from '../../comment/comment';
 
@@ -48,10 +49,10 @@ export class Home implements OnInit {
   uploadedPicture:File;
   isLock:boolean = false;
   public publicationBeanList:Array<PublicationBean> = [];
-  public user:User = new User();
+ public user:User = new User();
+ 
   public link:LinkBean = new LinkBean();
   public previewLink:Array<LinkBean> = [];
-
 
   //Variables Declarations
   titleEnable = false;
@@ -83,7 +84,9 @@ export class Home implements OnInit {
               private changeDetector:ChangeDetectorRef) {
 
     this.loginService.redirect();
+
     this.user = this.loginService.getUser();
+
     this.postService.setShowErrorConnexion(false);
 
     this.form = new FormGroup({
@@ -95,11 +98,42 @@ export class Home implements OnInit {
     this.publicationBeanList = [];
     this.loadFirstPosts();
     if (!this.publicationBeanList.length)
-      this.loadFirstPosts();
-    this.changeDetector.markForCheck();
+    this.loadFirstPosts();
     window.scrollTo(0, 0);
 
     this.menuFilter = 'recent';
+
+  }
+
+  ngOnInit() {
+
+    console.log("zied lebna");
+    console.log(this.user);
+    /*jQuery("#publishDiv").on("paste", function (e) {
+      e.preventDefault();
+      var pastedData = e.originalEvent.clipboardData.getData('text');
+      alert(pastedData);
+
+    });
+
+    jQuery("#errorMsgDisplay").hide();
+    jQuery(("#file-image")).change(function () {
+      jQuery((".file-input-holder")).show();
+      readURL(this);
+    });
+
+    jQuery(("#file-image-gif")).change(function () {
+      jQuery((".file-input-holder")).show();
+      readURL(this);
+    });
+
+    jQuery(document).click(function (e) {
+
+      if (jQuery(e.target).closest(".select-menu").length === 0 && jQuery(e.target).closest(".dropdown").length === 0) {
+        jQuery(".select-menu").hide();
+      }
+    });
+    this.changeDetector.markForCheck();*/
 
   }
 
@@ -326,19 +360,6 @@ export class Home implements OnInit {
     data.append('publText', this.form.value.publicationText);
     data.append('publyoutubeLink', this.youtubeLink);
     data.append('publPicture',this.uploadedPicture);
-
-  
-
-
-
-
-
-
-
-
-
-
-
 
     if (this.link.isSet) {
       data.append('publExternalLink', this.link.url);
@@ -599,34 +620,7 @@ export class Home implements OnInit {
     }
   }
 
-  ngOnInit() {
-    jQuery("#publishDiv").on("paste", function (e) {
-      e.preventDefault();
-      var pastedData = e.originalEvent.clipboardData.getData('text');
-      alert(pastedData);
 
-    });
-
-    jQuery("#errorMsgDisplay").hide();
-    jQuery(("#file-image")).change(function () {
-      jQuery((".file-input-holder")).show();
-      readURL(this);
-    });
-
-    jQuery(("#file-image-gif")).change(function () {
-      jQuery((".file-input-holder")).show();
-      readURL(this);
-    });
-
-    jQuery(document).click(function (e) {
-
-      if (jQuery(e.target).closest(".select-menu").length === 0 && jQuery(e.target).closest(".dropdown").length === 0) {
-        jQuery(".select-menu").hide();
-      }
-    });
-    this.changeDetector.markForCheck();
-
-  }
 
   pasteInnerHtml($event) {
     $event.preventDefault();

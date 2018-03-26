@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, ApplicationRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
@@ -37,7 +37,8 @@ declare const gapi:any;
 @Component({
   moduleId: module.id,
   selector: 'main',
-  templateUrl: 'main.html'
+  templateUrl: 'main.html',
+
 })
 
 export class Main {
@@ -55,13 +56,21 @@ export class Main {
   showButtonMoreNotif:Boolean = false;
   showNoNotif:Boolean = false;
 
-  constructor(public translate:TranslateService, private dateService:DateService, private http:Http, private location:Location, private router:Router,
-              private loginService:LoginService, private changeDetector:ChangeDetectorRef, private recentRechService:RecentRechService) {
+  constructor(public translate:TranslateService,
+              private dateService:DateService,
+              private http:Http,
+              private location:Location,
+              private router:Router,
+              private loginService:LoginService,
+              private changeDetector:ChangeDetectorRef,
+              private recentRechService:RecentRechService,
+              private appRef :ApplicationRef) {
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
     this.listNotif = [];
     this.user = this.loginService.getUser();
+ 
   }
 
   ngOnInit() {
