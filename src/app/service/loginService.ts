@@ -70,7 +70,10 @@ export class LoginService {
     actualize(){
         if(this.isConnected()){
             this.token = localStorage.getItem('token');
+
             this.user= JSON.parse(localStorage.getItem('user'));
+            console.log(this.user);
+
         }
     }
 /*give user */
