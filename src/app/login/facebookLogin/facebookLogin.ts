@@ -95,7 +95,7 @@ export class FacebookLogin {
                     this.loginService.updateUser(user);
                     localStorage.setItem('user', JSON.stringify(response.user));
                     console.log("from facebook component")
-                    console.log(response.user)
+                    console.log(response)
                     this.loginService.setToken(response.token);
                     this.loginService.actualize();
                     this.router.navigate(['/main/home']);
