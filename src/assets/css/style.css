@@ -697,9 +697,7 @@ a {
     margin-right: auto;
   }
   .btn-edit-profile-1 {
-    left: auto!important;
-    margin-left: auto;
-    margin-right: auto;
+    width:100%;
   }
 }
 section.widget {
@@ -724,24 +722,28 @@ section.widget {
   padding: 6px 0;
 }
 .header-Profile {
-  margin: 20px 0 0 0;
+  margin: 20px 0 10px 0;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   /*modified*/
 }
 
 /*modified*/
 .header-Profile .btn-edit-profile
 {
-  background-color: white;border: 1px solid #e1e1e1;
-  border-radius: 3px;height: 28px;
-  font-weight: bold;line-height: 28px;
+  background-color: white;
+  border: 1px solid #e1e1e1;
+  border-radius: 3px;
+  /*height: 28px;*/
+  font-weight: bold;
+  line-height: 28px;
   margin-top: 10px;
   margin-right: 10px;
   width: 70%;
   margin: 10px auto;
   display: block;
   cursor: pointer;
+  height:36px;
 }
 
 .header-segement {
@@ -755,6 +757,7 @@ section.widget {
 .header-segement.description-holder {
   text-align: left;
   font-size: 14px;
+  width: 100%;
   /*
   letter-spacing: 2px;
   padding-left: 0;
@@ -787,8 +790,6 @@ section.widget {
   margin-top: 4px;
   padding-left: 0;
   padding-right: 0;
-
-  height: 35px;
 }
 .header-segement.social-holder .fa {
   font-size: 25px;
@@ -799,7 +800,7 @@ section.widget {
   font-family:arial;
 }
 
-.header-segement.social-holder .score .zero-value {
+.zero-value {
   color: #888
 }
 
@@ -808,6 +809,9 @@ section.widget {
   font-size: 15px;
   font-family: lato medium;
   line-height: 19px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
   /*
   border-left: 1px solid #e1e1e1;
   modified
@@ -851,9 +855,7 @@ modified
   border-width: 1px;
   font-size: 13px;
   font-weight: 600;
-  height: 30px;
   box-sizing: border-box;
-  text-transform: capitalize;
   bottom: 6px;
   position: relative;
   /*modified*/
@@ -862,7 +864,7 @@ modified
   border: 0;
   color: white;
   font-size: 15px;
-  height: 28px;
+  height: 34px;
   border-radius: 3px;
   line-height: 30px;
   margin-right: 8px;
@@ -975,9 +977,9 @@ modified
   height: 36px;
 }
 .profile-photo {
-  padding: 26% 0 !important;
+  padding: 28% 0 !important;
   background-size: cover !important;
-  width: calc(52% + 10px) !important;
+  width: calc(56% + 10px) !important;
   border-radius: 50%;
   margin: auto!important;
   /*
@@ -989,8 +991,8 @@ modified
 }
 @media (max-width: 768px) {
   .profile-photo {
-    padding: 50% 0 !important;
-    width: calc(100% + 10px) !important;
+    padding: 60px 0 !important;
+    width: calc(130px + 10px) !important;
     float: none !important;
     margin: 0 auto !important;
     /*left: 0%;*/
@@ -1007,10 +1009,12 @@ modified
     display: block !important;
   }
   .sub-profile-btn-old {
-    font-size: 12px !important;
+    font-size: 15wpx !important;
     font-weight: 600 !important;
-    height: 20px !important;
     margin-top: 10px;
+  }
+  .header-Profile {
+    align-items: center!important;
   }
 }
 .widget button:hover {
@@ -1035,6 +1039,7 @@ modified
   padding-right: 4px;
   margin-right: 0!important;
   margin-left: 0!important;
+  margin-bottom: 10px;
 }
 .welcome-msg {
   font-weight: 500;
@@ -1222,6 +1227,11 @@ modified
   .change-privacy {
     color: #999;
     top: 9px;
+  }
+
+  .profile-photo {
+    padding: 60px 0 !important;
+    width: calc(120px + 10px) !important;
   }
 }
 .dropdown header {
@@ -1499,6 +1509,7 @@ textarea:focus {
   .upper-form-add {
     font-size: 14px !important;
   }
+
 }
 @media (max-width: 302px) {
   .upper-form-add {
@@ -2337,6 +2348,9 @@ margin-bottom:5px;*/
     font-size: 12px;
     text-align: center;
   }
+  .btn-edit-profile-1 {
+    width: 100%!important; 
+  }
 }
 @media (max-width: 300px) {
   .social-login {
@@ -2429,6 +2443,13 @@ margin-bottom:5px;*/
   .profil-name {
     margin: 25px 0 10px;
   }
+  .sub-profile-btn-old {
+    display: none!important;
+  }
+
+  .user-name-profile .three-dots {
+    margin-left: -4px;
+  }
 }
 .profil-name .subscribe {
   position: absolute;
@@ -2468,7 +2489,6 @@ margin-bottom:5px;*/
   height: 0;
   display: inline-block;
   position: relative;
-  bottom: 3px;
 }
 .profile-edit .three-dots {
   width: 45px;
@@ -2561,6 +2581,15 @@ margin-bottom:5px;*/
 @media (max-width: 400px) {
   .friend-hover-box {
     width: 100% !important;
+  }
+
+  .user-name-profile span{
+    display: inline-block;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 70%;
+    white-space: unset!important;
+    overflow: hidden;
   }
 }
 .friend-hover {
@@ -3850,6 +3879,9 @@ input.loginInput {
   .emoji-hover {
     left: -120px;
   }
+  .profile-photo {
+    margin-left: -30px!important;
+  }
 }
 @media (max-width: 768px) {
   .emoji-hover {
@@ -3861,6 +3893,9 @@ input.loginInput {
   }
   .emoji-container {
     width: 100%;
+  }
+  .profile-photo {
+    margin-left: auto!important;
   }
 }
 /******Loader*******/
@@ -4230,11 +4265,6 @@ input.loginInput {
   display:none;
 }
 
-.btn-edit-profile-1 {
-  position: relative;
-  left: 12%;
-}
-
 top-blagueurs-decov section.widget{
   padding: 10px 20px;
 }
@@ -4243,8 +4273,10 @@ top-blagueurs-decov section.widget{
   .header-segement.description-holder{
     float: left;
     width: 100%;
+    /*
     padding-left: 16px;
     padding-right: 16px;
+    */
   }
   .description-holder-1 {
     display:none;
@@ -4255,6 +4287,11 @@ top-blagueurs-decov section.widget{
 
   .edit-decription button {
     width: 100%!important;
+  }
+
+  .profile-photo{
+    padding: 50% 0!important;
+    width: calc(100% + 10px)!important;
   }
 }
 
@@ -4343,7 +4380,7 @@ publication .user {
 }
 
 @media(max-width:400px) {
-  .user-name {
+  .suggestions-box .user-name {
     max-width: 80px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -4351,4 +4388,29 @@ publication .user {
   .user-name header {
     display:inline;
   }
+}
+
+
+.btn-edit-profile-1 {
+  position: relative;
+  left: 12%;
+  height: 36px;
+}
+
+
+.btn-edit-profile-1:hover,
+.sub-profile-btn-old.active:hover{
+  background-color: #e4e4e4;
+}
+
+
+.header-segement.social-holder .row{
+  border: 1px solid #e1e1e1;
+  margin: 10px 15px;
+  background-color: white;
+}
+
+.user-name-profile span {
+  white-space: nowrap;
+  margin-right: 10px;
 }
