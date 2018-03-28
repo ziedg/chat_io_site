@@ -28,7 +28,7 @@
 
 
         <div class="col-md-6 header-segement name-holder col-sm-6 col-xs-8"
-             [ngStyle]="{display:'flex', flexDirection:'column', alignItems:'flex-start', marginLeft:'16px'}">
+             [ngStyle]="{display:'flex', flexDirection:'column', alignItems:'flex-start'}">
           <h3 class="user-name-profile"><span>{{userDisplayed.firstName}} {{userDisplayed.lastName}}</span><div
                  class="three-dots hidden-lg hidden-md hidden-sm"
                  style="display: inline;"><span *ngIf="user._id==userDisplayed._id" class="glyphicon glyphicon-option-horizontal"
@@ -118,12 +118,15 @@
             <span *ngIf="!editDescriptionEnable">
             <span *ngIf="userDisplayed.about">{{userDisplayed.about}}</span>
             <span *ngIf="!userDisplayed.about && user._id==userDisplayed._id"
-                  (click)="editDescription()">
+                  (click)="editDescription()"
+                  class="hidden-sm hidden-xs">
               {{ 'profile_description_empty' | translate }}
             </span>
 
 
-            <i *ngIf="user._id==userDisplayed._id" class="fa fa-pencil" aria-hidden="true"
+            <i *ngIf="user._id==userDisplayed._id"
+                class="fa fa-pencil hidden-sm hidden-xs"
+                aria-hidden="true"
                (click)="editDescription()"></i></span>
 
   <div class="edit-decription row" *ngIf="editDescriptionEnable">
@@ -144,7 +147,7 @@
 
 </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <button
             class="btn-edit-profile btn-edit-profile-1 hidden-xs"
             [routerLink]="['/main/parameters']"
