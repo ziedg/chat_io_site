@@ -4414,3 +4414,39 @@ publication .user {
   white-space: nowrap;
   margin-right: 10px;
 }
+
+
+top-blagueurs-decov .user {
+  display: flex;
+  align-items: flex-start;
+}
+
+.top-blagueurs-ignore {
+    flex-grow: 1;
+    padding: 0;
+    align-items: center;
+    display: flex;
+    flex-direction:  column;
+    height: 100%;
+    font-size: 16px;
+    margin: 8px 0 0 0;
+}
+
+
+
+top-blagueurs-decov .user-name header {
+  width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media(max-width:1200px){
+  top-blagueurs-decov .user-name header {
+    width: 145px;
+  }
+
+  .top-blagueurs-ignore {
+    align-items: flex-end;    
+  }
+}
