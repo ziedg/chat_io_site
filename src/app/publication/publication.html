@@ -64,7 +64,7 @@
         {{publicationBean.publTitle}} </h4>
       <h6 *ngIf="publicationBean.publTitle == 'null'"></h6>
 			<span class="publication-text"
-            *ngIf="publicationBean.publText != 'null' && publicationBean.publText != 'undefined'"
+            *ngIf="publicationBean.publText !== 'null' && publicationBean.publText !== 'undefined' "
             [innerHTML]="linkView.transformATextHaveALink(affichePostText(publicationBean.publText))">
             </span>
 
