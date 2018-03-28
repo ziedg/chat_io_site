@@ -63,8 +63,8 @@
       <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]">
         {{publicationBean.publTitle}} </h4>
       <h6 *ngIf="publicationBean.publTitle == 'null'"></h6>
-			<span class="publication-text"
-            *ngIf="publicationBean.publText !== 'null' && publicationBean.publText !== 'undefined' "
+      <span *ngIf="publicationBean.publText !== 'null' && publicationBean.publText !=='undefined' "
+      class="publication-text"
             [innerHTML]="linkView.transformATextHaveALink(affichePostText(publicationBean.publText))">
             </span>
 
