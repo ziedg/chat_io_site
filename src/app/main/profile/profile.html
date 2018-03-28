@@ -30,7 +30,7 @@
         <div class="col-md-6 header-segement name-holder col-sm-6 col-xs-8"
              [ngStyle]="{display:'flex', flexDirection:'column', alignItems:'flex-start'}">
           <h3 class="user-name-profile"><span>{{userDisplayed.firstName}} {{userDisplayed.lastName}}</span><div
-                 class="three-dots hidden-lg hidden-md hidden-sm"
+                 class="profile-edit three-dots hidden-lg hidden-md hidden-sm"
                  style="display: inline;"><span *ngIf="user._id==userDisplayed._id" class="glyphicon glyphicon-option-horizontal"
 					[ngStyle]="{verticalAlign:'top', cursor:'pointer'}"
                     (click)="openModal()"></span><span *ngIf="user._id!=userDisplayed._id" class="glyphicon glyphicon-option-horizontal"
