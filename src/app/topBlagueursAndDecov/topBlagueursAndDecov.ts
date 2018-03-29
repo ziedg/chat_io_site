@@ -42,24 +42,6 @@ export class TopBlagueursAndDecov {
     this.loadPopularProfiles();
   }
 
-  /*loadPopularProfiles() {
-    this.http.get(
-      environment.SERVER_URL
-      + pathUtils.GET_POPULAR_PROFILES,
-      AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
-      .subscribe(
-        response => {
-        this.popularProfiles = response.profiles;
-      },
-        err => {
-      },
-      () => {
-        this.changeDetector.markForCheck();
-      }
-    );
-  }*/
-
   loadPopularProfiles(Id_Profile?:string) {
 
     var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/';
