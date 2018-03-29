@@ -59,7 +59,7 @@ export class TopBlagueursAndDecov {
       }
     );
   }*/
-  
+
   loadPopularProfiles(Id_Profile?:string) {
 
     var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/';
@@ -71,7 +71,9 @@ export class TopBlagueursAndDecov {
         response => {
           Array.prototype.push.apply(this.popularProfiles, response.profiles);
 //changes
+if (response.profiles){
           this.lastPopularProfileID = response.profiles[response.profiles.length-1]._id;
+}
 //
         },
         err => {
