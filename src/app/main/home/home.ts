@@ -431,7 +431,7 @@ export class Home implements OnInit {
   errorTimed() {
     jQuery("#errorMsgDisplay").fadeIn(500);
     $('html, body').scrollTop(
-      $("#errorMsgDisplay").offset().top - $(".main-header").height() - $(".main-header").innerHeight()
+      $("#errorMsgDisplay").offset().top - $(".main-header").innerHeight() - 10
     );
     //document.querySelector("#errorMsgDisplay").scroll; //.scrollIntoView({ behavior: 'smooth' });
     setTimeout(() => {
