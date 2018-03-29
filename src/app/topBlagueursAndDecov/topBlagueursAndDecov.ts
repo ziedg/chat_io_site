@@ -27,7 +27,7 @@ export class TopBlagueursAndDecov {
 
   public popularProfiles:Array <User> = [];
   displayedNumberPopularProfiles = 4;
-
+  lastPopularProfileID;
   public user:User = new User();
 
   @Output() loadPublications = new EventEmitter<any>();
@@ -42,7 +42,7 @@ export class TopBlagueursAndDecov {
     this.loadPopularProfiles();
   }
 
-  loadPopularProfiles() {
+  /*loadPopularProfiles() {
     this.http.get(
       environment.SERVER_URL
       + pathUtils.GET_POPULAR_PROFILES,
@@ -58,14 +58,45 @@ export class TopBlagueursAndDecov {
         this.changeDetector.markForCheck();
       }
     );
+  }*/
+  
+  loadPopularProfiles(Id_Profile?:string) {
+
+    var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/';
+    if(Id_Profile){ url+= Id_Profile}
+    this.http.get(url,
+      AppSettings.OPTIONS)
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+          Array.prototype.push.apply(this.popularProfiles, response.profiles);
+//changes
+          this.lastPopularProfileID = response.profiles[response.profiles.length-1]._id;
+//
+        },
+        err => {
+        },
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
   }
+
+//changes
+  loadMore(){
+if (this.popularProfiles.length==4){
+  this.loadPopularProfiles(this.lastPopularProfileID);
+}
+
+  }
+//
 
 
   subscribe(user:User) {
     let body = JSON.stringify({
       profileId: user._id
     });
-
+    
     this.http.post(
       environment.SERVER_URL + pathUtils.SUBSCRIBE,
       body,
@@ -84,6 +115,9 @@ export class TopBlagueursAndDecov {
         this.changeDetector.markForCheck();
       }
     );
+    //changes
+    this.loadMore();
+    //
   }
 
   ignore(user:User) {
@@ -109,6 +143,9 @@ export class TopBlagueursAndDecov {
         this.changeDetector.markForCheck();
       }
     );
+    //changes
+    this.loadMore();
+    //
   }
 
   unsubscribe(user : User) {
