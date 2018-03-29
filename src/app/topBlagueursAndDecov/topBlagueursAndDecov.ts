@@ -27,7 +27,9 @@ export class TopBlagueursAndDecov {
 
   public popularProfiles:Array <User> = [];
   displayedNumberPopularProfiles = 4;
+  //changes
   lastPopularProfileID;
+  //
   public user:User = new User();
 
   @Output() loadPublications = new EventEmitter<any>();
@@ -68,7 +70,7 @@ if (response.profiles){
 
 //changes
   loadMore(){
-if (this.popularProfiles.length==4){
+if (this.popularProfiles.length==6){
   this.loadPopularProfiles(this.lastPopularProfileID);
 }
 
