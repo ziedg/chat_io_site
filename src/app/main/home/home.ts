@@ -278,8 +278,8 @@ export class Home implements OnInit {
   }
 
   onScrollDown() {
-    if ((((this.lastPostId == "null") || (this.lastPostId)
-      || (this.isLock)) /*|| !$(window).scrollTop()*/)) {
+    if ((((this.lastPostId == "null") || (!this.lastPostId)
+      || (this.isLock)) || !$(window).scrollTop())) {
       return;
     }
     else {
@@ -430,7 +430,10 @@ export class Home implements OnInit {
 
   errorTimed() {
     jQuery("#errorMsgDisplay").fadeIn(500);
-    document.querySelector("#errorMsgDisplay").scrollIntoView({ behavior: 'smooth' });
+    $('html, body').scrollTop(
+      $("#errorMsgDisplay").offset().top - $(".main-header").height() - $(".main-header").innerHeight()
+    );
+    //document.querySelector("#errorMsgDisplay").scroll; //.scrollIntoView({ behavior: 'smooth' });
     setTimeout(() => {
       jQuery("#errorMsgDisplay").fadeOut(1000);
     }, 5000);
