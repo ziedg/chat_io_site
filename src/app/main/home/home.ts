@@ -50,7 +50,7 @@ export class Home implements OnInit {
   isLock:boolean = false;
   public publicationBeanList:Array<PublicationBean> = [];
  public user:User = new User();
- 
+
   public link:LinkBean = new LinkBean();
   public previewLink:Array<LinkBean> = [];
 
@@ -107,8 +107,8 @@ export class Home implements OnInit {
 
   ngOnInit() {
 
-    console.log("zied lebna");
-    console.log(this.user);
+    /*console.log("zied lebna");
+    console.log(this.user);*/
     /*jQuery("#publishDiv").on("paste", function (e) {
       e.preventDefault();
       var pastedData = e.originalEvent.clipboardData.getData('text');
@@ -278,8 +278,8 @@ export class Home implements OnInit {
   }
 
   onScrollDown() {
-    if ((((this.lastPostId == "null")
-      || (this.isLock)) || !$(window).scrollTop())) {
+    if ((((this.lastPostId == "null") || (this.lastPostId)
+      || (this.isLock)) /*|| !$(window).scrollTop()*/)) {
       return;
     }
     else {
@@ -355,11 +355,13 @@ export class Home implements OnInit {
     else {
       data.append('confidentiality', 'PRIVATE');
     }
-    console.log(this.uploadedPicture)
     data.append('publTitle', this.form.value.publicationTitle);
     data.append('publText', this.form.value.publicationText);
     data.append('publyoutubeLink', this.youtubeLink);
     data.append('publPicture',this.uploadedPicture);
+
+    // clear title value
+    this.form.reset();
 
     if (this.link.isSet) {
       data.append('publExternalLink', this.link.url);
