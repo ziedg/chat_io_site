@@ -27,7 +27,9 @@ export class TopBlagueursAndDecov {
 
   public popularProfiles:Array <User> = [];
   displayedNumberPopularProfiles = 4;
-
+  //changes
+  lastPopularProfileID;
+  //
   public user:User = new User();
 
   @Output() loadPublications = new EventEmitter<any>();
@@ -42,30 +44,45 @@ export class TopBlagueursAndDecov {
     this.loadPopularProfiles();
   }
 
-  loadPopularProfiles() {
-    this.http.get(
-      environment.SERVER_URL
-      + pathUtils.GET_POPULAR_PROFILES,
+  loadPopularProfiles(Id_Profile?:string) {
+
+    var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/';
+    if(Id_Profile){ url+= Id_Profile}
+    this.http.get(url,
       AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
+      .map((res: Response) => res.json())
       .subscribe(
         response => {
-        this.popularProfiles = response.profiles;
-      },
+          Array.prototype.push.apply(this.popularProfiles, response.profiles);
+//changes
+if (response.profiles){
+          this.lastPopularProfileID = response.profiles[response.profiles.length-1]._id;
+}
+//
+        },
         err => {
-      },
-      () => {
-        this.changeDetector.markForCheck();
-      }
-    );
+        },
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
   }
+
+//changes
+  loadMore(){
+if (this.popularProfiles.length==6){
+  this.loadPopularProfiles(this.lastPopularProfileID);
+}
+
+  }
+//
 
 
   subscribe(user:User) {
     let body = JSON.stringify({
       profileId: user._id
     });
-
+    
     this.http.post(
       environment.SERVER_URL + pathUtils.SUBSCRIBE,
       body,
@@ -84,6 +101,9 @@ export class TopBlagueursAndDecov {
         this.changeDetector.markForCheck();
       }
     );
+    //changes
+    this.loadMore();
+    //
   }
 
   ignore(user:User) {
@@ -109,6 +129,9 @@ export class TopBlagueursAndDecov {
         this.changeDetector.markForCheck();
       }
     );
+    //changes
+    this.loadMore();
+    //
   }
 
   unsubscribe(user : User) {
