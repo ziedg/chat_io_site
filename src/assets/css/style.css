@@ -4205,9 +4205,17 @@ input.loginInput {
 }
 
 .upload-comment-picture{
+  display:none;
+  max-height: 200px;
+  max-width: 100%!important;
+}
+
+.upload-comment-picture-cont {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
   max-height: 200px;
   max-width: 100%;
-  display:none;
   margin-top:0px;
   margin-left:40px;
   margin-bottom: 10px;
@@ -4221,9 +4229,6 @@ input.loginInput {
 @media (max-width: 767px) {
   .display-comment-picture {
     max-width: 70vw;
-  }
-  .upload-comment-picture{
-    max-width: 70vw !important;
   }
 }
 
