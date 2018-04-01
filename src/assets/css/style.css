@@ -4464,3 +4464,11 @@ top-blagueurs-decov .user-name header {
     padding: 0 10px 10px 10px;
   }
 }
+
+.publication-text {
+  margin-top: 10px;
+}
+
+.shared-publication .user{
+  margin-top: 8px;
+}
