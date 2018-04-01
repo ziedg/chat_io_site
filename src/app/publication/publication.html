@@ -36,7 +36,11 @@
       </div>
     </div>
     <div class="user" *ngIf="publicationBean.isShared">
-
+        <div class="date hidden-xs" [routerLink]="['/main/post',publicationBean._id]">
+          <i class="fa fa-globe" style="color:#666"
+             *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
+          {{getPublicationTime(publicationBean.datePublication)}}
+        </div>
       <div class="user-img" *ngIf="publicationBean.profilePictureMin"
            [ngStyle]="{'background-image': 'url(' + publicationBean.profilePictureMin + ')'}">
       </div>
@@ -288,9 +292,11 @@
           </div>
         </form>
       </div>
-      <img class="upload-comment-picture" id="{{pubImgId}}"/>
-      <i class="fa fa-times delete-photo-comment cancel-upload-comment-picture" aria-hidden="true"
-         *ngIf="uploadedPictureComment" (click)="resetCommentPicture()"></i>
+      <div class="upload-comment-picture" style="positio: relative; display: inline-block; margin-right: 10px;">
+        <img id="{{pubImgId}}"/>
+        <i class="fa fa-times delete-photo-comment cancel-upload-comment-picture" aria-hidden="true"
+          *ngIf="uploadedPictureComment" (click)="resetCommentPicture()" style="top:-2px; right: -12px;"></i>
+      </div>
     </div>
     <!-- comments -->
     <div class="comments-holder" *ngIf="commentsDisplayed">

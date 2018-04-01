@@ -4472,3 +4472,9 @@ top-blagueurs-decov .user-name header {
 .shared-publication .user{
   margin-top: 8px;
 }
+
+@media(min-width: 766px){
+  publication .user-name {
+    max-width: 65%;
+  }
+}
