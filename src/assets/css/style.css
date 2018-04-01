@@ -4450,3 +4450,13 @@ top-blagueurs-decov .user-name header {
     align-items: flex-end;    
   }
 }
+
+@media(max-width:500px){
+  .swal2-modal button.styled {
+    min-width: 200px;
+  }
+
+  .swal2-modal button.swal2-confirm {
+    margin-bottom: 10px;
+  }
+}
