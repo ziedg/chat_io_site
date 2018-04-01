@@ -1754,10 +1754,11 @@ margin-bottom:5px;*/
 }
 .shared-publication {
   background-color: white;
-  padding: 10px 40px 10px 20px;
+  padding: 0 15px 15px 35px;
   margin: 10px 0 20px;
   position: relative;
   width: 100%;
+  background-color: #f9f9f9;
 }
 .hashtag {
   cursor: pointer;
@@ -1820,7 +1821,7 @@ margin-bottom:5px;*/
   border-radius: 50%;
 }
 .user-img-shared {
-  --w: 56px;
+  --w: 40px;
   width: var(--w);
   height: var(--w);
   min-width: var(--w);
@@ -1883,7 +1884,6 @@ margin-bottom:5px;*/
 .widget> article> div> .user> .user-name {
   margin-top: 0px !important;
 }
-.user header:hover,
 .user-name-shared header:hover {
   text-decoration: underline;
 }
@@ -4458,5 +4458,9 @@ top-blagueurs-decov .user-name header {
 
   .swal2-modal button.swal2-confirm {
     margin-bottom: 10px;
+  }
+
+  .shared-publication {
+    padding: 0 10px 10px 10px;
   }
 }

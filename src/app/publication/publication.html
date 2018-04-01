@@ -48,8 +48,14 @@
       <div class="user-name" *ngIf="publicationBean.profileId">
         <header><a style="display:inline;" [routerLink]="['/main/profile',publicationBean.profileId]">
           {{publicationBean.profileFirstName}}
-          {{publicationBean.profileLastName}} </a>
+          {{publicationBean.profileLastName}}</a>
              {{ 'publication_shared_text' | translate }}
+             <a [routerLink]="['/main/profile',publicationBean.originalProfileId]"
+                       style="display:inline;">
+              {{publicationBean.originalProfileFirstName +"
+              "+publicationBean.originalProfileLastName }}
+            </a>
+
         </header>
         <div class="date-mobile hidden-lg hidden-md hidden-sm" [routerLink]="['/main/post',publicationBean._id]">
           <i class="fa fa-globe" style="color:#666" *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
