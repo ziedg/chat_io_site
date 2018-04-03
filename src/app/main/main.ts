@@ -71,7 +71,7 @@ export class Main {
     this.showButtonMoreNotif = false;
     this.listNotif = [];
     this.user = this.loginService.getUser();
- 
+
   }
 
   ngOnInit() {
@@ -225,6 +225,7 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
+          console.log(response)
         if (response.length != 0) {
           this.showNoNotif = false;
           for (var i = 0; i < response.length; i++) {
@@ -311,6 +312,7 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
+          console.log(response)
         if (response.status == 0) {
           this.nbNewNotifications = response.nbNewNotifications;
           if (this.nbNewNotifications > 0) {

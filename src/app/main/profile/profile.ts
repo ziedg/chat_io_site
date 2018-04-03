@@ -437,7 +437,7 @@ export class Profile {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-          console.log(response)
+
         this.editDescriptionEnable = false;
       },
         err => {
@@ -477,7 +477,6 @@ export class Profile {
       .subscribe(
         response => {
 
-          console.log(response.profile)
         if (response.status == "0") {
           localStorage.setItem('user', JSON.stringify(response.profile));
           this.loginService.actualize();

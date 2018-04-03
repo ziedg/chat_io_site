@@ -108,6 +108,33 @@ export class Home implements OnInit {
 
   ngOnInit() {
 
+   jQuery("#publishDiv").on("paste", function (e) {
+      e.preventDefault();
+      var pastedData = e.originalEvent.clipboardData.getData('text');
+      alert(pastedData);
+
+    });
+
+    jQuery("#errorMsgDisplay").hide();
+    jQuery(("#file-image")).change(function () {
+      jQuery((".file-input-holder")).show();
+      readURL(this);
+    });
+
+    jQuery(("#file-image-gif")).change(function () {
+      jQuery((".file-input-holder")).show();
+      readURL(this);
+    });
+
+    jQuery(document).click(function (e) {
+
+      if (jQuery(e.target).closest(".select-menu").length === 0 && jQuery(e.target).closest(".dropdown").length === 0) {
+        jQuery(".select-menu").hide();
+      }
+    });
+    this.changeDetector.markForCheck();
+
+
   }
 
 
@@ -341,7 +368,7 @@ export class Home implements OnInit {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-          console.log(response)
+
         if (response.status == "0") {
           jQuery("#errorMsgDisplay").fadeOut(1000);
           this.putNewPub(response.publication, false);

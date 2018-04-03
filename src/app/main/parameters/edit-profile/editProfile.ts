@@ -68,7 +68,7 @@ export class EditProfile {
     this.loginService.actualize();
     this.user = this.loginService.getUser();
     this.changeDetector.markForCheck();
-    console.log(this.user);
+
   }
 
   getFirstName():string {
@@ -195,7 +195,7 @@ export class EditProfile {
         .map((res:Response) => res.json())
         .subscribe(
           response => {
-          console.log(response.profile);
+        
           if (response.status == 0) {
             this.loginService.updateUser(response.profile);
             this.loginService.actualize();

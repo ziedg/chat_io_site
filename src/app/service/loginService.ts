@@ -41,7 +41,7 @@ export class LoginService {
         return false;
     }
 
-    
+
     redirect(){
       if(!this.isConnected()){
         if(this.isWasConnectedWithFacebook()){
@@ -71,8 +71,7 @@ export class LoginService {
             this.token = localStorage.getItem('token');
 
             this.user= JSON.parse(localStorage.getItem('user'));
-            console.log(this.user);
-
+          
         }
     }
 
