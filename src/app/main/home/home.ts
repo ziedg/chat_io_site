@@ -107,9 +107,8 @@ export class Home implements OnInit {
 
   ngOnInit() {
 
-    /*console.log("zied lebna");
-    console.log(this.user);*/
-    /*jQuery("#publishDiv").on("paste", function (e) {
+
+   jQuery("#publishDiv").on("paste", function (e) {
       e.preventDefault();
       var pastedData = e.originalEvent.clipboardData.getData('text');
       alert(pastedData);
@@ -133,7 +132,7 @@ export class Home implements OnInit {
         jQuery(".select-menu").hide();
       }
     });
-    this.changeDetector.markForCheck();*/
+    this.changeDetector.markForCheck();
 
   }
 
@@ -371,7 +370,7 @@ export class Home implements OnInit {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-          console.log(response)
+
         if (response.status == "0") {
           jQuery("#errorMsgDisplay").fadeOut(1000);
           this.putNewPub(response.publication, false);
