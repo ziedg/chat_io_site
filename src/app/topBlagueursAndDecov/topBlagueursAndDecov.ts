@@ -55,7 +55,7 @@ export class TopBlagueursAndDecov {
         response => {
           Array.prototype.push.apply(this.popularProfiles, response.profiles);
 //changes
-if (response.profiles){
+if (response.profiles && response.profiles.length ){
           this.lastPopularProfileID = response.profiles[response.profiles.length-1]._id;
 }
 //

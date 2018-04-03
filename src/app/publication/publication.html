@@ -106,24 +106,6 @@
     <div class="content" *ngIf="publicationBean.isShared">
 
       <article class="publication bordered shared-publication">
-        <div class="user">
-          <div class="user-img-shared" *ngIf="publicationBean.originalProfilePictureMin"
-               [ngStyle]="{'background-image': 'url(' + publicationBean.originalProfilePictureMin + ')'}">
-          </div>
-          <div class="user-img-shared" *ngIf="!publicationBean.originalProfilePictureMin"
-               [ngStyle]="{'background-image': 'url(' + publicationBean.originalProfilePicture + ')'}">
-          </div>
-          <div class="user-name-shared">
-            <header>
-              <a [routerLink]="['/main/profile',publicationBean.originalProfileId]"
-                       style="display:inline;font-size:12px;">
-              {{publicationBean.originalProfileFirstName +"
-              "+publicationBean.originalProfileLastName }}
-            </a>
-            </header>
-          </div>
-
-        </div>
         <div class="content">
           <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]">
             {{publicationBean.publTitle}} </h4>
@@ -224,7 +206,7 @@
       </div>
     </div>
     <div [class.comment-with-picture]="uploadedPictureComment">
-      <div class="comment-holder form-comment">
+      <div *ngIf="commentsDisplayed" class="comment-holder form-comment">
         <div class="user-img for-comment" *ngIf="user.profilePictureMin"
              [ngStyle]="{'background-image': 'url(' + user.profilePictureMin + ')'}"></div>
 
@@ -318,7 +300,7 @@
     </div>
   </article>
 </div>
-<div class="modal-edit-pub" *ngIf="modalPub">
+<div class="modal-edit-pub" *ngIf="modalPub" (click)="closeModalPub()">
   <div class="white-box-edit">
     <article *ngIf="publicationBean.profileId != user._id" (click)="reportPub(publicationBean)">
         {{ 'publication_report' | translate }}

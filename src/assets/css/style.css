@@ -1754,7 +1754,7 @@ margin-bottom:5px;*/
 }
 .shared-publication {
   background-color: white;
-  padding: 0 15px 15px 35px;
+  padding: 15px;
   margin: 10px 0 20px;
   position: relative;
   width: 100%;
@@ -2442,9 +2442,6 @@ margin-bottom:5px;*/
 @media(max-width:400px) {
   .profil-name {
     margin: 25px 0 10px;
-  }
-  .sub-profile-btn-old {
-    display: none!important;
   }
 
   .user-name-profile .three-dots {
@@ -4468,6 +4465,10 @@ top-blagueurs-decov .user-name header {
   .shared-publication {
     padding: 0 10px 10px 10px;
   }
+
+  .dots {
+    right: 2px;
+  }
 }
 
 .publication-text {
@@ -4482,4 +4483,8 @@ top-blagueurs-decov .user-name header {
   publication .user-name {
     max-width: 65%;
   }
+}
+
+.shared-publication .content img {
+  margin-top: 0;
 }
