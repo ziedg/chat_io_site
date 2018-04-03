@@ -55,6 +55,7 @@ export class Main {
   lastNotifId = "";
   showButtonMoreNotif:Boolean = false;
   showNoNotif:Boolean = false;
+  showSearchMobile = false;
 
   constructor(public translate:TranslateService,
               private dateService:DateService,
@@ -349,6 +350,10 @@ export class Main {
       message = resTranslate;
     });
     return message;
+  }
+
+  toggleSearchMobile() {
+    this.showSearchMobile = !this.showSearchMobile;
   }
 }
 

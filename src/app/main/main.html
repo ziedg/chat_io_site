@@ -65,6 +65,17 @@
       </a>
     </article>
 
+
+    <article class="hidden-lg hidden-md hidden-sm" >
+      <div class="noPadding"
+          (click)="toggleSearchMobile()">
+        <img
+            class="search-icon-img"
+            [ngClass]="{'search-icon-img-clicked' : showSearchMobile}"
+            src="assets/images/new/search.png">
+      </div>
+    </article>
+
     <article class="notification-box" [routerLink]="['/main/notification']"
              class="notification-parent hidden-lg hidden-md hidden-sm">
       <div class="noPadding">
@@ -228,7 +239,8 @@
 </div>
 
 
-<div class="col-xs-12 bordered welcome-msg typeEffect hidden-lg hidden-md hidden-sm"
+<div *ngIf="showSearchMobile"
+    class="search-mobile col-xs-12 bordered welcome-msg typeEffect hidden-lg hidden-md hidden-sm"
     style="padding: 16px; padding-left: 15px!important; padding-right: 15px!important;">
   <div class="header-center" style="position: unset;max-width: 350px;margin: auto;">
     <input class="search"
@@ -236,7 +248,7 @@
            [(ngModel)]="searchValue"
            (ngModelChange)="onChange($event)"
            (focus)="checkAutoComplete()"
-           style="width:100%; background-color: #f9f9f9; border-radius: 0">
+           style="width:100%; background-color: #f9f9f9; /*border-radius: 0*/">
     <i class="fa fa-search" aria-hidden="true"></i>
   </div>
   <div class="recherche-results-holder"

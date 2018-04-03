@@ -4240,3 +4240,14 @@ top-blagueurs-decov .user-name header {
 .shared-publication .content img {
   margin-top: 0;
 }
+
+.search-icon-img {
+  width: 25px;
+  height: 25px;
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+
+.search-icon-img-clicked {
+  opacity: 1;
+}
