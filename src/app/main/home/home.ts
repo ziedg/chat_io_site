@@ -72,6 +72,7 @@ export class Home implements OnInit {
   linkLoading = false;
   isEmpty = true;
   showSuggestionMSG = false;
+  keepLoading = true;
 
   constructor(public translate:TranslateService,
               private postService:PostService,
@@ -97,9 +98,9 @@ export class Home implements OnInit {
 
     this.publicationBeanList = [];
     this.loadFirstPosts();
-    if (!this.publicationBeanList.length)
-    this.loadFirstPosts();
-    window.scrollTo(0, 0);
+    // if (!this.publicationBeanList.length)
+    // this.loadFirstPosts();
+    // window.scrollTo(0, 0);
 
     this.menuFilter = 'recent';
 
@@ -107,6 +108,7 @@ export class Home implements OnInit {
 
   ngOnInit() {
 
+<<<<<<< HEAD
 
    jQuery("#publishDiv").on("paste", function (e) {
       e.preventDefault();
@@ -134,6 +136,8 @@ export class Home implements OnInit {
     });
     this.changeDetector.markForCheck();
 
+=======
+>>>>>>> f9f8a18ed80dbb88c6202a50c7d8a43cd3458aed
   }
 
 
@@ -163,10 +167,11 @@ export class Home implements OnInit {
   }
 
   putIntoList(response) {
-    if (!response.length || response.length == 0) {
+    if (!response.length || response.length < 10) {
       this.showLoading = false;
       this.isLock = false;
       this.showSuggestionMSG = true;
+      this.keepLoading = false;
       return;
     }
     this.showSuggestionMSG = false;
@@ -237,7 +242,7 @@ export class Home implements OnInit {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-        this.publicationBeanList = [];
+        //this.publicationBeanList = [];
         this.putIntoList(response);
         this.changeDetector.markForCheck();
       },
@@ -245,6 +250,8 @@ export class Home implements OnInit {
         setTimeout(() => {
           this.showLoading = false;
           this.isLock = true;
+          this.keepLoading = false;
+          this.changeDetector.markForCheck();
         }, 3000);
       },
       () => {
@@ -254,26 +261,30 @@ export class Home implements OnInit {
   }
 
   loadMorePosts() {
-    this.isLock = true;
-    this.showLoading = true;
-    let urlAndPara = environment.SERVER_URL
-      + pathUtils.GET_PUBLICATIONS + this.lastPostId;
-    this.http.get(
-      urlAndPara, AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
-      .subscribe(
-        response => {
-        this.putIntoList(response);
-        this.changeDetector.markForCheck();
-      },
-        err => {
-        this.isLock = false;
-        this.showLoading = false;
-      },
-      () => {
-      }
-    );
-
+    if(this.keepLoading) {
+      this.isLock = true;
+      this.showLoading = true;
+      let urlAndPara = environment.SERVER_URL
+        + pathUtils.GET_PUBLICATIONS + this.lastPostId;
+      this.http.get(
+        urlAndPara, AppSettings.OPTIONS)
+        .map((res:Response) => res.json())
+        .subscribe(
+          response => {
+          this.putIntoList(response);
+          this.changeDetector.markForCheck();
+        },
+          err => {
+            setTimeout(() => {
+              this.showLoading = false;
+              this.isLock = true;
+              this.keepLoading = false;
+            }, 3000);
+          },
+        () => {
+        }
+      );
+    }
   }
 
   onScrollDown() {
@@ -284,16 +295,6 @@ export class Home implements OnInit {
     else {
       this.loadMorePosts();
       return 1;
-    }
-  }
-
-  reLoadposts() {
-    this.showLoading = true;
-    if (this.user) {
-      if (this.publicationBeanList.length == 0)
-        this.loadFirstPosts();
-      else
-        this.loadMorePosts();
     }
   }
 
