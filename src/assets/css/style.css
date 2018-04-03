@@ -409,6 +409,17 @@ a {
   z-index: 5;
   background-color: white;
 }
+
+.recherche-results-2 article {
+  border-left: 1px solid #e1e8ed;
+  border-right: 1px solid #e1e8ed;
+  border-bottom: 1px solid #e1e8ed;
+}
+
+.recherche-results-2 article:first-child {
+  border-top: 1px solid #e1e8ed
+}
+
 .recherche-results article:hover {
   background-color: #009999 !important;
   color: white;

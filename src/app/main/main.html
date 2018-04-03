@@ -226,6 +226,54 @@
 
   </div>
 </div>
+
+
+<div class="col-xs-12 bordered welcome-msg typeEffect hidden-lg hidden-md hidden-sm"
+    style="padding: 16px; padding-left: 15px!important; padding-right: 15px!important;">
+  <div class="header-center" style="position: unset;max-width: 350px;margin: auto;">
+    <input class="search"
+           placeholder="{{ 'main_search_placeholder' | translate }}"
+           [(ngModel)]="searchValue"
+           (ngModelChange)="onChange($event)"
+           (focus)="checkAutoComplete()"
+           style="width:100%; background-color: #f9f9f9; border-radius: 0">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </div>
+  <div class="recherche-results-holder"
+         style="display:none; margin: auto; max-width: 350px; width: auto; position:unset; box-shadow:unset"
+         *ngIf="listSearshUsers">
+      <div class="recherche-results recherche-results-2"
+          style="max-width:285px"
+          *ngIf="!showRecentSearch">
+        <article *ngFor="let result of listSearshUsers"
+                 (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
+          <div class="user-img" *ngIf="result.profilePictureMin"
+               [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
+          </div>
+          <div class="user-img" *ngIf="!result.profilePictureMin"
+               [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
+          </div>
+          <div class="">
+            {{result.firstName}} {{result.lastName}}
+          </div>
+        </article>
+      </div>
+      <div class="recherche-results" *ngIf="showRecentSearch">
+        <article *ngFor="let result of RecentSearchList"
+                 (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
+          <div class="user-img" *ngIf="result.profilePictureMin"
+               [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
+  
+          <div class="user-img" *ngIf="!result.profilePictureMin"
+               [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
+  
+          <div class="">
+            {{result.firstName}} {{result.lastName}}
+          </div>
+        </article>
+      </div>
+    </div>
+</div>
  <router-outlet></router-outlet> 
 
 
