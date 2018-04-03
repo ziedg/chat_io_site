@@ -108,8 +108,6 @@ export class Home implements OnInit {
 
   ngOnInit() {
 
-<<<<<<< HEAD
-
    jQuery("#publishDiv").on("paste", function (e) {
       e.preventDefault();
       var pastedData = e.originalEvent.clipboardData.getData('text');
@@ -136,8 +134,7 @@ export class Home implements OnInit {
     });
     this.changeDetector.markForCheck();
 
-=======
->>>>>>> f9f8a18ed80dbb88c6202a50c7d8a43cd3458aed
+
   }
 
 
