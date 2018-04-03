@@ -98,9 +98,9 @@ export class Home implements OnInit {
 
     this.publicationBeanList = [];
     this.loadFirstPosts();
-    if (!this.publicationBeanList.length)
-    this.loadFirstPosts();
-    window.scrollTo(0, 0);
+    // if (!this.publicationBeanList.length)
+    // this.loadFirstPosts();
+    // window.scrollTo(0, 0);
 
     this.menuFilter = 'recent';
 
@@ -212,7 +212,7 @@ export class Home implements OnInit {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-        this.publicationBeanList = [];
+        //this.publicationBeanList = [];
         this.putIntoList(response);
         this.changeDetector.markForCheck();
       },
@@ -221,6 +221,7 @@ export class Home implements OnInit {
           this.showLoading = false;
           this.isLock = true;
           this.keepLoading = false;
+          this.changeDetector.markForCheck();
         }, 3000);
       },
       () => {
