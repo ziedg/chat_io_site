@@ -65,17 +65,6 @@
       </a>
     </article>
 
-
-    <article class="hidden-lg hidden-md hidden-sm" >
-      <div class="noPadding"
-          (click)="toggleSearchMobile()">
-        <img
-            class="search-icon-img"
-            [ngClass]="{'search-icon-img-clicked' : showSearchMobile}"
-            src="assets/images/new/search.png">
-      </div>
-    </article>
-
     <article class="notification-box" [routerLink]="['/main/notification']"
              class="notification-parent hidden-lg hidden-md hidden-sm">
       <div class="noPadding">
@@ -237,23 +226,23 @@
 
   </div>
 </div>
-<<<<<<< HEAD
 
 
 <div *ngIf="showSearchMobile"
-    class="search-mobile col-xs-12 bordered welcome-msg typeEffect hidden-lg hidden-md hidden-sm"
-    style="padding: 16px; padding-left: 15px!important; padding-right: 15px!important;">
-  <div class="header-center" style="position: unset;max-width: 350px;margin: auto;">
-    <input class="search"
-           placeholder="{{ 'main_search_placeholder' | translate }}"
-           [(ngModel)]="searchValue"
-           (ngModelChange)="onChange($event)"
-           (focus)="checkAutoComplete()"
-           style="width:100%; background-color: #f9f9f9; /*border-radius: 0*/">
-    <i class="fa fa-search" aria-hidden="true"></i>
+    class="search-mobile col-xs-12 typeEffect hidden-lg hidden-md hidden-sm"
+    style="padding: 0">
+  <div class="mobile-header-center">
+    <div class="header-center" style="position: unset;max-width: 350px;margin: auto;">
+      <input class="search"
+            placeholder="{{ 'main_search_placeholder' | translate }}"
+            [(ngModel)]="searchValue"
+            (ngModelChange)="onChange($event)"
+            (focus)="checkAutoComplete()"
+            style="width:100%; background-color: #f9f9f9b3; border: none;">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </div>
   </div>
   <div class="recherche-results-holder"
-         style="display:none; margin: auto; max-width: 350px; width: auto; position:unset; box-shadow:unset"
          *ngIf="listSearshUsers">
       <div class="recherche-results recherche-results-2"
           style="max-width:285px"
@@ -288,9 +277,5 @@
     </div>
 </div>
  <router-outlet></router-outlet> 
-=======
- <router-outlet></router-outlet>
->>>>>>> da92ff7615ef595a8e61f1997cb2fb84876b7bc5
 
-
-
+ 

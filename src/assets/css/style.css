@@ -167,7 +167,6 @@ a {
   font-size: 14px;
   line-height: 1;
   color: #292f33;
-  opacity: .8;
   border: 1px solid #e1e8ed;
   border-radius: 21px;
   transition: all .2s ease-in-out;
@@ -183,7 +182,7 @@ a {
   text-shadow: none;
   background-color: #fff;
   box-shadow: none;
-  opacity: 1;
+  background-color: white!important;
 }
 .fa-search {
   margin-top: 5px;
@@ -410,14 +409,24 @@ a {
   background-color: white;
 }
 
+.recherche-results-2 {
+  --b-r: 20px;
+}
+
 .recherche-results-2 article {
   border-left: 1px solid #e1e8ed;
   border-right: 1px solid #e1e8ed;
-  border-bottom: 1px solid #e1e8ed;
 }
 
 .recherche-results-2 article:first-child {
-  border-top: 1px solid #e1e8ed
+  border-top: 1px solid #e1e8ed;
+  border-top-right-radius: var(--b-r);
+  border-top-left-radius: var(--b-r);
+}
+.recherche-results-2 article:last-child {
+  border-bottom: 1px solid #e1e8ed;
+  border-bottom-right-radius: var(--b-r);
+  border-bottom-left-radius: var(--b-r);
 }
 
 .recherche-results article:hover {
@@ -4250,4 +4259,20 @@ top-blagueurs-decov .user-name header {
 
 .search-icon-img-clicked {
   opacity: 1;
+}
+
+.mobile-header-center {
+  width: 100%;
+  background-color: #006d00;
+  padding: 10px 16px;
+}
+
+.search-mobile .recherche-results-holder {
+  display:none;
+  margin: auto;
+  max-width: 350px;
+  width: auto;
+  position:unset;
+  box-shadow:unset;
+  background:none;
 }
