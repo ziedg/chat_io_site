@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Ng2ImgToolsService } from 'ng2-img-tools';
 import 'rxjs/add/operator/map';
 
 
@@ -82,7 +83,8 @@ export class Home implements OnInit {
               private http:Http,
               private router:Router,
               private loginService:LoginService,
-              private changeDetector:ChangeDetectorRef) {
+              private changeDetector:ChangeDetectorRef,
+              private ng2ImgToolsService: Ng2ImgToolsService) {
 
     this.loginService.redirect();
 
@@ -455,17 +457,25 @@ export class Home implements OnInit {
     var inputValue = $event.target;
 
     if (inputValue != null && null != inputValue.files[0]) {
+      //change
 
 
       this.uploadedPicture = inputValue.files[0];
-
-
+      this.ng2ImgToolsService.compress([this.uploadedPicture], 0.3).subscribe( result =>{
+      this.uploadedPicture=result;
       previewFile(this.uploadedPicture);
       jQuery(".youtube-preview").html("");
       //this.form.controls.publicationYoutubeLink.updateValue('');
       this.closeLinkAPI();
       return this.uploadedPicture;
+      });
 
+      //previewFile(this.uploadedPicture);
+     /* jQuery(".youtube-preview").html("");
+      //this.form.controls.publicationYoutubeLink.updateValue('');
+      this.closeLinkAPI();
+      return this.uploadedPicture;*/
+//change
     }
     else {
       this.uploadedPicture = null;
