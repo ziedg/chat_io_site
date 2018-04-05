@@ -457,18 +457,21 @@ export class Home implements OnInit {
     var inputValue = $event.target;
 
     if (inputValue != null && null != inputValue.files[0]) {
-      //change
-
-
+      
       this.uploadedPicture = inputValue.files[0];
-      this.ng2ImgToolsService.compress([this.uploadedPicture], 0.3).subscribe( result =>{
-      this.uploadedPicture=result;
-      previewFile(this.uploadedPicture);
-      jQuery(".youtube-preview").html("");
-      //this.form.controls.publicationYoutubeLink.updateValue('');
-      this.closeLinkAPI();
-      return this.uploadedPicture;
-      });
+      //change
+      this.ng2ImgToolsService.resize([this.uploadedPicture], 1000, 600).subscribe( result =>{
+      this.ng2ImgToolsService.compress([result], 0.5).subscribe( result =>{
+        this.uploadedPicture=result;
+
+        previewFile(this.uploadedPicture);
+        jQuery(".youtube-preview").html("");
+        //this.form.controls.publicationYoutubeLink.updateValue('');
+        this.closeLinkAPI();
+        return this.uploadedPicture;
+        });
+        });    
+          //this.uploadedPicture=result;
 
       //previewFile(this.uploadedPicture);
      /* jQuery(".youtube-preview").html("");
