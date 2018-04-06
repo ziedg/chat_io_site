@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Ng2ImgToolsService } from 'ng2-img-tools';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 import 'rxjs/add/operator/map';
 
 
@@ -84,7 +84,7 @@ export class Home implements OnInit {
               private router:Router,
               private loginService:LoginService,
               private changeDetector:ChangeDetectorRef,
-              private ng2ImgToolsService: Ng2ImgToolsService) {
+              private ng2ImgMaxService: Ng2ImgMaxService) {
 
     this.loginService.redirect();
 
@@ -460,8 +460,8 @@ export class Home implements OnInit {
       
       this.uploadedPicture = inputValue.files[0];
       //change
-      this.ng2ImgToolsService.resize([this.uploadedPicture], 900, 600).subscribe( result =>{
-      this.ng2ImgToolsService.compress([result], 0.5).subscribe( result =>{
+      this.ng2ImgMaxService.resize([this.uploadedPicture], 900, 600).subscribe( result =>{
+      this.ng2ImgMaxService.compress([result], 0.5).subscribe( result =>{
         this.uploadedPicture=result;
 
         previewFile(this.uploadedPicture);
