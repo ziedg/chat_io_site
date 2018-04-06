@@ -239,9 +239,9 @@
 </div>
 
 
-<div *ngIf="showSearchMobile"
+<div *ngIf="globalService.showSearchMobile"
     class="search-mobile col-xs-12 typeEffect hidden-lg hidden-md hidden-sm"
-    style="padding: 0">
+    style="padding: 0; position:fixed; z-index: 10">
   <div class="mobile-header-center">
     <div class="header-center" style="position: unset;max-width: 350px;margin: auto;">
       <input class="search"

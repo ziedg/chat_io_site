@@ -28,6 +28,7 @@ import { RecentRechService } from "../service/recentRechService";
 import { DateService } from "../service/dateService";
 import {environment} from "../../environments/environment";
 import { AppComponent } from '../app.component';
+import { GlobalService } from "../service/globalService"
 
 declare var jQuery:any;
 declare var FB:any;
@@ -55,7 +56,6 @@ export class Main {
   lastNotifId = "";
   showButtonMoreNotif:Boolean = false;
   showNoNotif:Boolean = false;
-  showSearchMobile = false;
 
   constructor(public translate:TranslateService,
               private dateService:DateService,
@@ -65,7 +65,8 @@ export class Main {
               private loginService:LoginService,
               private changeDetector:ChangeDetectorRef,
               private recentRechService:RecentRechService,
-              private appRef :ApplicationRef) {
+              private appRef :ApplicationRef,
+              private globalService: GlobalService) {
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
@@ -355,7 +356,7 @@ export class Main {
   }
 
   toggleSearchMobile() {
-    this.showSearchMobile = !this.showSearchMobile;
+    this.globalService.showSearchMobile = !this.globalService.showSearchMobile;
   }
 }
 

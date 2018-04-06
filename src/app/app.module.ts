@@ -46,6 +46,7 @@ import {ResetPasswordComponent} from "./login/reset-password/reset-password.comp
 import {ResetPasswordService} from "./login/reset-password/reset-password.service";
 import {FakeComponent} from "./shared/fake.component";
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {GlobalService} from "./service/globalService";
 
 
 /** Factories */
@@ -86,6 +87,7 @@ import { SuggestionsComponent } from './main/suggestions/suggestions.component';
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
         {provide: APP_BASE_HREF, useValue: '/'},
+        GlobalService,
     ],
 
 })

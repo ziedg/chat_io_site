@@ -32,6 +32,8 @@ import { Title } from "@angular/platform-browser";
 import { LinkBean } from '../../beans/linkBean';
 import {environment} from "../../../environments/environment";
 
+import { GlobalService } from "../../service/globalService"
+
 declare var jQuery:any;
 declare var $:any;
 declare var FB:any;
@@ -73,6 +75,8 @@ export class Home implements OnInit {
   isEmpty = true;
   showSuggestionMSG = false;
   keepLoading = true;
+  // ontouch start position
+  touch_start_position:number;
 
   constructor(public translate:TranslateService,
               private postService:PostService,
@@ -82,7 +86,8 @@ export class Home implements OnInit {
               private http:Http,
               private router:Router,
               private loginService:LoginService,
-              private changeDetector:ChangeDetectorRef) {
+              private changeDetector:ChangeDetectorRef,
+              private globalService:GlobalService) {
 
     this.loginService.redirect();
 
@@ -135,6 +140,28 @@ export class Home implements OnInit {
     this.changeDetector.markForCheck();
 
 
+  }
+
+  onTouchStart(event) {
+    var touch_pos:number = +event.targetTouches[0].screenY;
+    this.touch_start_position = touch_pos;
+  }
+
+  onTouchEnd(event) {
+    // marge to show search mobile
+    var marge:number = 50;
+    var touch_pos:number = +event.changedTouches[0].screenY;
+    if(this.touch_start_position -touch_pos > marge) {
+      this.globalService.showSearchMobile = true;
+      console.log("show search mobile");
+    }
+    else if(-(this.touch_start_position -touch_pos) > marge) {
+      this.globalService.showSearchMobile = false;
+      console.log("hide search mobile");
+    }
+  }
+
+  onTouchMove(event) {
   }
 
 

@@ -84,6 +84,11 @@ export class Publication {
   commentTextareaId = "";
   public link: LinkBean = new LinkBean();
   commentsDisplayed : boolean;
+  /* long publication settings */
+  private longPubText: boolean = false;
+  private firstPubText: string = "";
+  private lastPubText: string = "";
+  pub_text:string = "";
 
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
@@ -183,6 +188,31 @@ export class Publication {
   }
 
   ngOnInit() {
+    var max_words:number = 50;
+    var max_letters:number = 300;
+    var txt = this.publicationBean.publText;
+    var parts = txt.split(' ');
+    if(txt !== 'null' && txt !=='undefined' && txt.length > 0) {
+      if(parts.length > max_words){
+        this.longPubText = true;
+        this.firstPubText = parts.slice(0, max_words).join(' ');
+        this.lastPubText = parts.slice(max_words, parts.length -1).join(' ');;
+      }
+      else if(txt.length > max_letters) {
+        this.longPubText = true;
+        var cut_end:number = txt.slice(0, max_letters).lastIndexOf(' ');
+        this.firstPubText = txt.slice(0, cut_end);
+        this.lastPubText = txt.slice(cut_end);
+      }
+      else {
+        this.firstPubText = txt;
+      }
+      console.log("long text : " + this.longPubText);
+    }
+    
+    //onsole.log(this.publicationBean);
+
+
     this.changeDetector.markForCheck();
     if (this.publicationBean.publExternalLink) {
       this.linkAPI();
