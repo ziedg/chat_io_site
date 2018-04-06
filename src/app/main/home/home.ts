@@ -460,7 +460,7 @@ export class Home implements OnInit {
       
       this.uploadedPicture = inputValue.files[0];
       //change
-      this.ng2ImgToolsService.resize([this.uploadedPicture], 1000, 600).subscribe( result =>{
+      this.ng2ImgToolsService.resize([this.uploadedPicture], 900, 600).subscribe( result =>{
       this.ng2ImgToolsService.compress([result], 0.5).subscribe( result =>{
         this.uploadedPicture=result;
 
