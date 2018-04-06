@@ -46,8 +46,7 @@ import {ResetPasswordComponent} from "./login/reset-password/reset-password.comp
 import {ResetPasswordService} from "./login/reset-password/reset-password.service";
 import {FakeComponent} from "./shared/fake.component";
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { Ng2ImgToolsModule } from 'ng2-img-tools'; 
-
+import { Ng2ImgToolsModule } from 'ng2-img-tools';
 /** Factories */
 import { httpFactory } from './utils/factories/http.factory';
 import {ContenteditableModel} from "./publication/contenteditable-model";
