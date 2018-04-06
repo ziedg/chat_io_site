@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 import 'rxjs/add/operator/map';
 
 
@@ -46,7 +47,7 @@ declare const gapi:any;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class Home implements OnInit {
+export class Home {
   form;
   uploadedPicture:File;
   isLock:boolean = false;
@@ -87,7 +88,8 @@ export class Home implements OnInit {
               private router:Router,
               private loginService:LoginService,
               private changeDetector:ChangeDetectorRef,
-              private globalService:GlobalService) {
+              private globalService:GlobalService,
+              private ng2ImgMaxService: Ng2ImgMaxService) {
 
     this.loginService.redirect();
 
@@ -482,17 +484,28 @@ export class Home implements OnInit {
     var inputValue = $event.target;
 
     if (inputValue != null && null != inputValue.files[0]) {
-
-
+      
       this.uploadedPicture = inputValue.files[0];
+      //change
+      this.ng2ImgMaxService.resize([this.uploadedPicture], 900, 600).subscribe( result =>{
+      this.ng2ImgMaxService.compress([result], 0.5).subscribe( result =>{
+        this.uploadedPicture=result;
 
+        previewFile(this.uploadedPicture);
+        jQuery(".youtube-preview").html("");
+        //this.form.controls.publicationYoutubeLink.updateValue('');
+        this.closeLinkAPI();
+        return this.uploadedPicture;
+        });
+        });    
+          //this.uploadedPicture=result;
 
-      previewFile(this.uploadedPicture);
-      jQuery(".youtube-preview").html("");
+      //previewFile(this.uploadedPicture);
+     /* jQuery(".youtube-preview").html("");
       //this.form.controls.publicationYoutubeLink.updateValue('');
       this.closeLinkAPI();
-      return this.uploadedPicture;
-
+      return this.uploadedPicture;*/
+//change
     }
     else {
       this.uploadedPicture = null;
