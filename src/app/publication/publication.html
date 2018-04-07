@@ -76,7 +76,9 @@
                   && publicationBean.publText !=='undefined'
                   && publicationBean.publText.length > 0"
       class="publication-text"
-            [innerHTML]="linkView.transformATextHaveALink(affichePostText(publicationBean.publText))">
+            [innerHTML]="firstPubText">
+            </span>
+            <span *ngIf="longPubText" [innerHTML]="lastPubText">
             </span>
 
       <div class="link-preview" *ngIf="link.isSet">
