@@ -67,7 +67,7 @@ export class Home implements OnInit {
   errorMsg = "";
   lastPostId:string = "null";
   publication;
-  loadingPublish = false;
+  loadingPublish= false;
   pubText:string;
   publishText:string;
   linkLoading = false;
@@ -340,6 +340,7 @@ export class Home implements OnInit {
 
   publish() {
     this.form.value.publicationText = jQuery("#publishDiv").text();
+    console.log(this.form.value.publicationText);
     if (!this.form.value.publicationText && !this.youtubeLink && !this.uploadedPicture && !this.link.isSet) {
       this.errorMsg = "SP_FV_ER_PUBLICATION_EMPTY";
       this.errorTimed();
@@ -373,6 +374,7 @@ export class Home implements OnInit {
 
         if (response.status == "0") {
           jQuery("#errorMsgDisplay").fadeOut(1000);
+          console.log(response.publication);
           this.putNewPub(response.publication, false);
           this.resetPublish();
         }
@@ -460,7 +462,7 @@ export class Home implements OnInit {
       
       this.uploadedPicture = inputValue.files[0];
       //change
-      this.ng2ImgMaxService.resize([this.uploadedPicture], 900, 600).subscribe( result =>{
+      this.ng2ImgMaxService.resize([this.uploadedPicture], 1000, 700).subscribe( result =>{
       this.ng2ImgMaxService.compress([result], 0.5).subscribe( result =>{
         this.uploadedPicture=result;
 
