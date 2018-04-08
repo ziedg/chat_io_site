@@ -489,8 +489,8 @@ export class Home {
       
       this.uploadedPicture = inputValue.files[0];
       //change
-      this.ng2ImgMaxService.resize([this.uploadedPicture], 1000, 700).subscribe( result =>{
-      this.ng2ImgMaxService.compress([result], 0.5).subscribe( result =>{
+      
+      this.ng2ImgMaxService.compress([this.uploadedPicture], 0.5).subscribe( result =>{
         this.uploadedPicture=result;
 
         previewFile(this.uploadedPicture);
@@ -499,7 +499,7 @@ export class Home {
         this.closeLinkAPI();
         return this.uploadedPicture;
         });
-        });    
+        
           //this.uploadedPicture=result;
 
       //previewFile(this.uploadedPicture);

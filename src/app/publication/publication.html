@@ -114,7 +114,7 @@
             <span *ngIf="publicationBean.publText !== 'null'
             && publicationBean.publText !=='undefined'
             && publicationBean.publText.length > 0"
-                [innerHTML]="linkView.transformATextHaveALink(affichePostText(publicationBean.publText))">
+                [innerHTML]="linkView.transformATextHaveALink(publicationBean.publText)">
             </span>
           <img *ngIf="publicationBean.publPictureLink" src="{{imageBaseUrl + publicationBean.publPictureLink}}">
 
