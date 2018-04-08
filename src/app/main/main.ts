@@ -313,14 +313,14 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-          console.log(response)
-        if (response.status == 0) {
+        //change : remove notification sound 
+          /*if (response.status == 0) {
           this.nbNewNotifications = response.nbNewNotifications;
           if (this.nbNewNotifications > 0) {
             var snd = new Audio('./assets/music/notification.mp3');
             snd.play();
           }
-        }
+        }*/
       },
         err => {
       },
