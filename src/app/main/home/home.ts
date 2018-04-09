@@ -76,8 +76,9 @@ export class Home {
   isEmpty = true;
   showSuggestionMSG = false;
   keepLoading = true;
-  // ontouch start position
+
   touch_start_position:number;
+  isSearchMobileVisible:boolean = false;
 
   constructor(public translate:TranslateService,
               private postService:PostService,
@@ -145,36 +146,46 @@ export class Home {
   }
 
   onTouchStart(event) {
-    console.log("touch start:");
-    console.log(event);
-    console.log(event.targetTouches[0]);
     var touch_pos:number = +event.targetTouches[0].screenY;
     this.touch_start_position = touch_pos;
+    if(! this.globalService.showSearchMobile) {
+      this.isSearchMobileVisible = false;
+    }
+    else {
+      this.isSearchMobileVisible = true;
+    }
+    this.globalService.showSearchMobile = true;
+    
   }
 
   onTouchEnd(event) {
-    console.log("touch end:");
-    console.log(event);
-    console.log(event.changedTouches[0]);
     // marge to show search mobile
-    var marge:number = 50;
     var touch_pos:number = +event.changedTouches[0].screenY;
-    if(touch_pos - this.touch_start_position > marge) {
+    var delta_scroll:number = touch_pos - this.touch_start_position;
+    if(delta_scroll > -this.globalService.initSerachMobileOffset) {
       this.globalService.showSearchMobile = true;
+      this.globalService.searchMobileOffset = 0;
       console.log("show search mobile");
     }
-    else if(-(touch_pos - this.touch_start_position) > marge) {
-      this.globalService.showSearchMobile = false;
+    else if(delta_scroll < this.globalService.initSerachMobileOffset) {
+      this.globalService.hideSearchMobile();
       console.log("hide search mobile");
     }
   }
 
   onTouchMove(event) {
-    /*
-    console.log("touch move:");
-    console.log(event);
-    console.log(event.targetTouches[0]);
-    */
+    var touch_pos:number = +event.targetTouches[0].screenY;
+    var delta_scroll:number = touch_pos - this.touch_start_position;
+    if (this.isSearchMobileVisible) {
+      if( delta_scroll <= 0 &&  delta_scroll >= this.globalService.initSerachMobileOffset) {
+        this.globalService.searchMobileOffset = delta_scroll;
+      }
+    }
+    else {
+      if( delta_scroll >= 0 &&  delta_scroll <= -this.globalService.initSerachMobileOffset) {
+        this.globalService.searchMobileOffset = this.globalService.initSerachMobileOffset + delta_scroll;
+      }
+    }
   }
 
 

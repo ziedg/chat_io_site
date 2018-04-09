@@ -4285,11 +4285,11 @@ top-blagueurs-decov .user-name header {
 
 .search-mobile {
   padding:0;
-  position: absolute;
+  position: fixed!important;
   z-index: 10;
   height: inherit;
   margin-top:0;
-  border-bottom: solid 1px #edeeee
+  border-bottom: solid 1px #edeeee;
 }
 
 .search-mobile .header-center {

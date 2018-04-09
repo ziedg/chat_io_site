@@ -1,7 +1,9 @@
 <div class="main-header">
-  <div *ngIf="globalService.showSearchMobile" class="search-mobile col-xs-12 typeEffect hidden-lg hidden-md hidden-sm" style="padding: 0; position:fixed; z-index: 10">
+  <div *ngIf="globalService.showSearchMobile"
+        class="search-mobile col-xs-12 typeEffect hidden-lg hidden-md hidden-sm"
+        [ngStyle]="{marginTop: globalService.searchMobileOffset+'px'}">
     <div class="mobile-header-center">
-      <div class="header-center">
+      <div class="header-center" style="margin-left:10px;">
         <input class="search"
                 placeholder="{{ 'main_search_placeholder' | translate }}"
                 [(ngModel)]="searchValue"
@@ -10,8 +12,10 @@
         <i class="fa fa-search" aria-hidden="true"></i>
         <!--<i class="fa fa-times" aria-hidden="true"></i>-->
       </div>
-      <span (click)="globalService.showSearchMobile=false"
-            style="margin-left: 20px; margin-right: 20px;">
+      <span (click)="globalService.hideSearchMobile()"
+            style="margin-left: 20px;
+                    margin-right: 10px;
+                    font-weight: bold">
         {{ 'Annuler' | translate }}
       </span>
     </div>
