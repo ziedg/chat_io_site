@@ -145,25 +145,36 @@ export class Home {
   }
 
   onTouchStart(event) {
+    console.log("touch start:");
+    console.log(event);
+    console.log(event.targetTouches[0]);
     var touch_pos:number = +event.targetTouches[0].screenY;
     this.touch_start_position = touch_pos;
   }
 
   onTouchEnd(event) {
+    console.log("touch end:");
+    console.log(event);
+    console.log(event.changedTouches[0]);
     // marge to show search mobile
     var marge:number = 50;
     var touch_pos:number = +event.changedTouches[0].screenY;
-    if(this.touch_start_position -touch_pos > marge) {
+    if(touch_pos - this.touch_start_position > marge) {
       this.globalService.showSearchMobile = true;
       console.log("show search mobile");
     }
-    else if(-(this.touch_start_position -touch_pos) > marge) {
+    else if(-(touch_pos - this.touch_start_position) > marge) {
       this.globalService.showSearchMobile = false;
       console.log("hide search mobile");
     }
   }
 
   onTouchMove(event) {
+    /*
+    console.log("touch move:");
+    console.log(event);
+    console.log(event.targetTouches[0]);
+    */
   }
 
 
