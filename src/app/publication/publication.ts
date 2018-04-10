@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {Comment} from '../comment/comment';
 import {LoadingBar} from '../loading/loading-bar';
 import {Injectable} from '@angular/core';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 import 'rxjs/add/operator/map';
 
 /* conf */
@@ -103,7 +104,8 @@ export class Publication {
               private sanitizer: DomSanitizer,
               private loginService: LoginService,
               private changeDetector: ChangeDetectorRef,
-              private dateService: DateService) {
+              private dateService: DateService,
+             private ng2ImgMaxService:Ng2ImgMaxService) {
     loginService.actualize();
 
     this.user = loginService.user;
@@ -340,8 +342,13 @@ export class Publication {
     var inputValue = $event.target;
     if (inputValue != null && null != inputValue.files[0]) {
       this.uploadedPictureComment = inputValue.files[0];
-      previewFile(this.uploadedPictureComment, this.pubImgId);
-
+      this.ng2ImgMaxService.compress([this.uploadedPictureComment], 0.5).subscribe((compressedImage)=>{
+        this.ng2ImgMaxService.resize([compressedImage], 2000, 1000).subscribe((result)=>{
+       this.uploadedPictureComment=result;
+       previewFile(this.uploadedPictureComment, this.pubImgId);
+      })
+      });
+      
     }
     else {
       this.uploadedPictureComment = null;
