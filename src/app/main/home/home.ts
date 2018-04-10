@@ -76,7 +76,6 @@ export class Home {
   isEmpty = true;
   showSuggestionMSG = false;
   keepLoading = true;
-  // ontouch start position
   touch_start_position:number;
 
   constructor(public translate:TranslateService,
@@ -153,11 +152,12 @@ export class Home {
     // marge to show search mobile
     var marge:number = 50;
     var touch_pos:number = +event.changedTouches[0].screenY;
-    if(this.touch_start_position -touch_pos > marge) {
+    var delta_scroll:number = touch_pos - this.touch_start_position;
+    if(!this.globalService.showSearchMobile && delta_scroll > marge) {
       this.globalService.showSearchMobile = true;
       console.log("show search mobile");
     }
-    else if(-(this.touch_start_position -touch_pos) > marge) {
+    else if(this.globalService.showSearchMobile && delta_scroll < -marge) {
       this.globalService.showSearchMobile = false;
       console.log("hide search mobile");
     }

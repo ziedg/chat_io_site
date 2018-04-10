@@ -180,9 +180,7 @@ a {
   color: #292f33;
   border: 1px solid #d1d8dd;
   text-shadow: none;
-  background-color: #fff;
   box-shadow: none;
-  background-color: white!important;
 }
 .fa-search {
   margin-top: 5px;
@@ -4263,8 +4261,12 @@ top-blagueurs-decov .user-name header {
 
 .mobile-header-center {
   width: 100%;
-  background-color: #aeaeae;
+  background-color: white;
   padding: 10px 16px;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1px #edeeee
 }
 
 .search-mobile .recherche-results-holder {
@@ -4278,3 +4280,48 @@ top-blagueurs-decov .user-name header {
 }
 
  
+
+.search-mobile {
+  padding:0;
+  position: fixed!important;
+  z-index: 10;
+  height: inherit;
+  margin-top:0;
+  border-bottom: solid 1px #edeeee;
+}
+
+.search-mobile .header-center {
+  position: unset!important;
+  flex-grow: 1;
+}
+
+.search-mobile .search {
+  width:100%;
+  border: none;
+  background-color: #fafafa;
+  border: 1px solid #e0e7ed;
+}
+
+@media(max-width:768px) {
+  .header-left {
+    margin-top: 20px;
+    margin-left: 5px!important;
+  }
+
+  .main-header {
+    padding: 0!important;
+  }
+}
+
+.notification-parent {
+  position:relative;
+  margin-right: 20px;
+}
+
+.search-mobile .search-mobile-annuler {
+  padding-left: 20px;
+  padding-right: 10px;
+  font-weight: bold;
+  height: 100%;
+  line-height: 56px;
+}
