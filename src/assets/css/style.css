@@ -93,7 +93,8 @@ a {
   color: #333;
   padding: 20px 10% !important;
   box-sizing: border-box;
-  border-bottom: solid 1px #edeeee;
+  /*border-bottom: solid 1px #edeeee;*/
+  outline: solid 1px #edeeee;
   z-index: 8;
 }
 @media (max-width: 767px) {
@@ -314,7 +315,7 @@ a {
     left: 300px;
   }
 }
-.main-header> div> article .notification-holder,
+.main-header .notification-holder,
 .recherche-results-holder {
 
   position: absolute;
@@ -408,23 +409,19 @@ a {
 }
 
 .recherche-results-2 {
-  --b-r: 20px;
 }
 
 .recherche-results-2 article {
-  border-left: 1px solid #e1e8ed;
-  border-right: 1px solid #e1e8ed;
+  background-color: none;
+  border-bottom: 1px solid #e1e8ed;
+  background-color: unset;
+  height: 60px;
 }
 
-.recherche-results-2 article:first-child {
-  border-top: 1px solid #e1e8ed;
-  border-top-right-radius: var(--b-r);
-  border-top-left-radius: var(--b-r);
-}
-.recherche-results-2 article:last-child {
-  border-bottom: 1px solid #e1e8ed;
-  border-bottom-right-radius: var(--b-r);
-  border-bottom-left-radius: var(--b-r);
+
+.recherche-results-2 article .user-img {
+  width: 40px;
+  height: 40px;
 }
 
 .recherche-results article:hover {
@@ -4266,17 +4263,21 @@ top-blagueurs-decov .user-name header {
   height: inherit;
   display: flex;
   align-items: center;
-  border-bottom: solid 1px #edeeee
 }
 
-.search-mobile .recherche-results-holder {
+.recherche-results-holder-2 {
   display:none;
-  margin: auto;
-  max-width: 350px;
-  width: auto;
-  position:unset;
   box-shadow:unset;
   background:none;
+  position: fixed;
+  height: 100%;
+  margin: 0!important;
+  width: 100%;
+  top: unset;
+  right: unset;
+  padding: 0;
+  background-color: #fafafa;
+  max-height: 100%;
 }
 
  
@@ -4287,7 +4288,6 @@ top-blagueurs-decov .user-name header {
   z-index: 10;
   height: inherit;
   margin-top:0;
-  border-bottom: solid 1px #edeeee;
 }
 
 .search-mobile .header-center {
