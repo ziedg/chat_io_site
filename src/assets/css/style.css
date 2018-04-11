@@ -4328,7 +4328,7 @@ top-blagueurs-decov .user-name header {
 }
 
 .search-mobile .search-mobile-annuler {
-  padding-left: 20px;
+  padding-left: 12px;
   padding-right: 10px;
   height: 100%;
   line-height: 56px;
@@ -4340,5 +4340,6 @@ top-blagueurs-decov .user-name header {
 }
 
 .search-mobile .mobile-header-center .fa-search {
-  margin-left: -314px;
+  margin-left: -322px;
+  margin-top: 10px;
 }
