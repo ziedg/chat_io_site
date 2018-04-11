@@ -147,7 +147,7 @@ export class Home {
     this.touch_start_position = touch_pos;
   }
 
-  onTouchEnd(event, marge:number=120) {
+  onTouchEnd(event, marge:number=60) {
     // marge to show search mobile
     if(this.globalService.showSearchMobile) {
       this.globalService.showSearchMobile = false;
