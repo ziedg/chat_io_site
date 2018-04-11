@@ -23,7 +23,7 @@ import { AppSettings } from "../conf/app-settings";
 import { Response, Http } from "@angular/http";
 import { Post } from "./post/post";
 import { NotificationBean } from "../beans/notification-bean";
-import { Title } from "@angular/platform-browser";
+import { Title, Meta } from "@angular/platform-browser";
 import { RecentRechService } from "../service/recentRechService";
 import { DateService } from "../service/dateService";
 import {environment} from "../../environments/environment";
@@ -56,6 +56,7 @@ export class Main {
   lastNotifId = "";
   showButtonMoreNotif:Boolean = false;
   showNoNotif:Boolean = false;
+  noSearchResults:Boolean = false;
 
   constructor(public translate:TranslateService,
               private dateService:DateService,
@@ -66,7 +67,8 @@ export class Main {
               private changeDetector:ChangeDetectorRef,
               private recentRechService:RecentRechService,
               private appRef :ApplicationRef,
-              private globalService: GlobalService) {
+              private globalService: GlobalService,
+              private meta: Meta) {
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
@@ -76,6 +78,8 @@ export class Main {
   }
 
   ngOnInit() {
+    // meta tag to fix view on iDevices (like iPohne)
+    this.meta.addTag({ name: 'viewport', content: 'width=device-width; initial-scale=1.0;' });
     this.checkNewNotifications();
     jQuery((".recherche-results-holder")).blur(function () {
       jQuery((".file-input-holder")).hide();
@@ -157,7 +161,8 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-        this.listSearshUsers = [];
+        this.listSearshUsers= [];
+        this.noSearchResults = false;
         this.changeDetector.markForCheck();
         for (var i = 0; i < this.listSearshUsers.length; i++) {
           this.listSearshUsers.pop();
@@ -172,10 +177,15 @@ export class Main {
         }
       },
         err => {
+          this.noSearchResults = true;
       },
       () => {
         if (this.listSearshUsers.length == 0) {
           this.disableAutocomplete();
+          this.noSearchResults = true;
+        }
+        else {
+          this.noSearchResults = false;
         }
         this.changeDetector.markForCheck();
       }
@@ -199,7 +209,7 @@ export class Main {
   }
 
   disableAutocomplete() {
-    jQuery(".recherche-results-holder").hide();
+    jQuery(".recherche-results-holder-1").hide();
     jQuery(".upper-arrow-search").hide();
 }
 
@@ -360,6 +370,8 @@ export class Main {
   @ViewChild('searchMobileInput') searchInput: ElementRef;
   clearSearchMobile() {
     this.searchInput.nativeElement.value = "";
+    this.listSearshUsers.length = 0;
+    this.noSearchResults = false;
   }
 }
 

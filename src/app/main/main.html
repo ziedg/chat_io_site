@@ -39,7 +39,7 @@
       <i class="fa fa-search" aria-hidden="true"></i>
 
       <div class="upper-arrow-search upper-arrow"></div>
-      <div class="recherche-results-holder"
+      <div class="recherche-results-holder recherche-results-holder-1"
             style="display:none;"
             *ngIf="listSearshUsers">
         <div class="recherche-results" *ngIf="!showRecentSearch">
@@ -236,32 +236,39 @@
 
 <div *ngIf="globalService.showSearchMobile"
       class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm"
-      (click)="globalService.showSearchMobile=false">
-  <div class="recherche-results recherche-results-2" *ngIf="listSearshUsers && !showRecentSearch">
-    <article *ngFor="let result of listSearshUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
-      <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
-      </div>
-      <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
-      </div>
-      <div class="">
-        {{result.firstName}} {{result.lastName}}
-      </div>
-    </article>
-  </div>
-  <div class="recherche-results recherche-results-2" *ngIf="listSearshUsers && showRecentSearch">
-    <article *ngFor="let result of RecentSearchList" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
-      <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
+      (click)="globalService.showSearchMobile=false"
+      style="display:block!important">
+  <div class="recherche-results recherche-results-2" style="display:block!important">
 
-      <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
+    <div *ngIf="listSearshUsers && !showRecentSearch">
+      <article *ngFor="let result of listSearshUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
+        <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
+        </div>
+        <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
+        </div>
+        <div class="">
+          {{result.firstName}} {{result.lastName}}
+        </div>
+      </article>
+    </div>
 
-      <div class="">
-        {{result.firstName}} {{result.lastName}}
-      </div>
-    </article>
+    <div *ngIf="listSearshUsers && showRecentSearch">
+        <article *ngFor="let result of RecentSearchList" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
+          <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
+    
+          <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
+    
+          <div class="">
+            {{result.firstName}} {{result.lastName}}
+          </div>
+        </article>
+    </div>
+    <div *ngIf="noSearchResults">
+        NO RESULTS SHOWEN HERE!
+    </div>
+
   </div>
-  <div class="recherche-results recherche-results-2 blablabla" *ngIf="!listSearshUsers">
-    NO RESULTS SHOWEN HERE!
-  </div>
+  
 </div>
 
 
