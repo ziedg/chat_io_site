@@ -1,4 +1,4 @@
-import { Input, Output, EventEmitter, Component, ChangeDetectorRef, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Input, Output, EventEmitter, Component, ChangeDetectorRef, ChangeDetectionStrategy, OnInit} from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
@@ -113,7 +113,6 @@ export class Home {
   }
 
   ngOnInit() {
-
    jQuery("#publishDiv").on("paste", function (e) {
       e.preventDefault();
       var pastedData = e.originalEvent.clipboardData.getData('text');
@@ -148,18 +147,15 @@ export class Home {
     this.touch_start_position = touch_pos;
   }
 
-  onTouchEnd(event) {
+  onTouchEnd(event, marge:number=230) {
     // marge to show search mobile
-    var marge:number = 230;
-    var touch_pos:number = +event.changedTouches[0].screenY;
-    var delta_scroll:number = touch_pos - this.touch_start_position;
-    if(!this.globalService.showSearchMobile && delta_scroll > marge) {
-      this.globalService.showSearchMobile = true;
-      console.log("show search mobile");
-    }
-    else if(this.globalService.showSearchMobile && -delta_scroll > marge/2) {
+    if(this.globalService.showSearchMobile) {
       this.globalService.showSearchMobile = false;
       console.log("hide search mobile");
+    }
+    else if(event.changedTouches[0].screenY - this.touch_start_position > marge) {
+      this.globalService.showSearchMobile = true;
+      console.log("show search mobile");
     }
   }
 
