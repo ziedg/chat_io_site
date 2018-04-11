@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, ApplicationRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, ApplicationRef, ElementRef, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
@@ -357,8 +357,9 @@ export class Main {
     return message;
   }
 
-  toggleSearchMobile() {
-    this.globalService.showSearchMobile = !this.globalService.showSearchMobile;
+  @ViewChild('searchMobileInput') searchInput: ElementRef;
+  clearSearchMobile() {
+    this.searchInput.nativeElement.value = "";
   }
 }
 
