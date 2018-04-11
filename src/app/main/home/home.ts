@@ -150,7 +150,7 @@ export class Home {
 
   onTouchEnd(event) {
     // marge to show search mobile
-    var marge:number = 50;
+    var marge:number = 80;
     var touch_pos:number = +event.changedTouches[0].screenY;
     var delta_scroll:number = touch_pos - this.touch_start_position;
     if(!this.globalService.showSearchMobile && delta_scroll > marge) {

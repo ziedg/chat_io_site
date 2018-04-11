@@ -4263,6 +4263,7 @@ top-blagueurs-decov .user-name header {
   height: inherit;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .recherche-results-holder-2 {
@@ -4340,6 +4341,7 @@ top-blagueurs-decov .user-name header {
 }
 
 .search-mobile .mobile-header-center .fa-search {
-  margin-left: -322px;
-  margin-top: 10px;
+  margin-top: 11px;
+  left: 60px;
+  position: absolute
 }
