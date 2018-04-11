@@ -4300,6 +4300,10 @@ top-blagueurs-decov .user-name header {
   border: none;
   background-color: #fafafa;
   border: 1px solid #e0e7ed;
+  border-radius: 10px;
+  font-size: 18px;
+  height: 40px;
+  padding-left: 35px;
 }
 
 @media(max-width:768px) {
@@ -4318,10 +4322,23 @@ top-blagueurs-decov .user-name header {
   margin-right: 20px;
 }
 
+.search-mobile {
+  padding-left:0!important;
+  padding-right: 0!important;
+}
+
 .search-mobile .search-mobile-annuler {
   padding-left: 20px;
   padding-right: 10px;
-  font-weight: bold;
   height: 100%;
   line-height: 56px;
+  font-size: 17px;
+}
+
+.search-mobile .mobile-header-center .fa {
+  margin-top: 12px;
+}
+
+.search-mobile .mobile-header-center .fa-search {
+  margin-left: -314px;
 }

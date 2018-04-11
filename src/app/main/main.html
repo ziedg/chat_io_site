@@ -8,8 +8,8 @@
                 [(ngModel)]="searchValue"
                 (ngModelChange)="onChange($event)"
           (focus)="checkAutoComplete()">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
         <i class="fa fa-search" aria-hidden="true"></i>
-        <!--<i class="fa fa-times" aria-hidden="true"></i>-->
       </div>
       <span (click)="globalService.showSearchMobile=false"
             class="search-mobile-annuler">
