@@ -343,7 +343,7 @@ export class Publication {
     if (inputValue != null && null != inputValue.files[0]) {
       this.uploadedPictureComment = inputValue.files[0];
       this.ng2ImgMaxService.compress([this.uploadedPictureComment], 0.5).subscribe((compressedImage)=>{
-        this.ng2ImgMaxService.resize([compressedImage], 2000, 1000).subscribe((result)=>{
+        this.ng2ImgMaxService.resize([compressedImage], 360, 200).subscribe((result)=>{
        this.uploadedPictureComment=result;
        previewFile(this.uploadedPictureComment, this.pubImgId);
       })
