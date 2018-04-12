@@ -53,7 +53,7 @@
         <header><a style="display:inline;" [routerLink]="['/main/profile',publicationBean.profileId]">
           {{publicationBean.profileFirstName}}
           {{publicationBean.profileLastName}}</a>
-             {{ 'publication_shared_text' | translate }}
+             <span style="font-weight: normal">{{ 'publication_shared_text' | translate }}</span>
              <a [routerLink]="['/main/profile',publicationBean.originalProfileId]"
                        style="display:inline;">
               {{publicationBean.originalProfileFirstName +"
