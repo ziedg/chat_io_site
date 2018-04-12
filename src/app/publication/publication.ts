@@ -198,7 +198,7 @@ export class Publication {
       if(parts.length > max_words){
         this.longPubText = true;
         this.firstPubText = parts.slice(0, max_words).join(' ');
-        this.lastPubText = parts.slice(max_words, parts.length -1).join(' ');;
+        this.lastPubText = parts.slice(max_words, parts.length ).join(' ');;
       }
       else if(txt.length > max_letters) {
         this.longPubText = true;
