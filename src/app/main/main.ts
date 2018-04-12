@@ -57,6 +57,11 @@ export class Main {
   showButtonMoreNotif:Boolean = false;
   showNoNotif:Boolean = false;
   noSearchResults:Boolean = false;
+  searchMobileHidden = true;
+
+
+  @ViewChild('searchResults2') searchRes2 : ElementRef;
+  @ViewChild('searchMobileInput') searchInput: ElementRef;
 
   constructor(public translate:TranslateService,
               private dateService:DateService,
@@ -137,6 +142,14 @@ export class Main {
       }
     }
     this.changeDetector.markForCheck();
+  }
+
+  
+  onFocus() {
+    console.log("this is on focus");
+    this.searchRes2.nativeElement.style.display="block!important";
+    this.onChange(this.searchInput.nativeElement.value);
+    this.checkAutoComplete();
   }
 
   showRecentSearchUsers() {
@@ -367,7 +380,6 @@ export class Main {
     return message;
   }
 
-  @ViewChild('searchMobileInput') searchInput: ElementRef;
   clearSearchMobile() {
     this.searchInput.nativeElement.value = "";
     this.listSearshUsers.length = 0;

@@ -7,13 +7,13 @@
                 placeholder="{{ 'main_search_placeholder' | translate }}"
                 [(ngModel)]="searchValue"
                 (ngModelChange)="onChange($event)"
-                (focus)="checkAutoComplete()"
+                (focus)="onFocus()"
                 #searchMobileInput>
         <i class="fa fa-times-circle"
             aria-hidden="true"
             (click)="clearSearchMobile()"></i>
         <i class="fa fa-search"
-            style="padding: 12px;margin-top: 0;margin-left: -38px;"
+            style="padding: 12px;margin-top: 0;margin-left: -36px;"
             aria-hidden="true"></i>
       </div>
       <span (click)="globalService.showSearchMobile=false"
@@ -237,8 +237,8 @@
 <div *ngIf="globalService.showSearchMobile"
       class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm"
       (click)="globalService.showSearchMobile=false"
-      style="display:block!important">
-  <div class="recherche-results recherche-results-2" style="display:block!important">
+      #searchResults2>
+  <div class="recherche-results recherche-results-2">
 
     <div *ngIf="listSearshUsers && !showRecentSearch">
       <article *ngFor="let result of listSearshUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
