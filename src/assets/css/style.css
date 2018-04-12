@@ -1254,9 +1254,9 @@ section.widget {
   text-shadow: 2px 2px 3px #eeeeee;
 }
 .comment-with-picture {
-  margin: 0 -10px;
   border: 1px solid #e1e1e1;
-  padding: 0 10px 15px;
+  padding: 10px 10px 5px 15px;
+  margin-bottom: 12px
 }
 .comment-publish {
   -webkit-box-sizing: content-box;
@@ -1735,7 +1735,7 @@ textarea:focus {
   justify-content: space-between;
   border-top: solid 1px #ddd;
   padding-top: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 12px;
   width: 100%;
   position: relative;
 }
@@ -1900,10 +1900,15 @@ textarea:focus {
   display: inline-flex;
   display: -webkit-box;
   display: -ms-flexbox;
-  margin: 7px 2px;
+  margin: 0 2px 7px 2px;
   align-items: flex-start;
   width: 100%;
 }
+
+.publication .form-comment {
+  margin-bottom: 20px;
+}
+
 .comments-holder .comment-holder {
   padding-bottom: 5px;
   border-bottom: 0.5px solid #efefef;
@@ -1959,8 +1964,8 @@ textarea:focus {
   display: inline-block;
 }
 .form-comment {
-  margin-top: 0px;
-  padding: 10px 0px 5px 0px;
+  margin-top: 0;
+  padding: 0;
 }
 .comment-holder form {
   width: 90%;
@@ -4344,4 +4349,8 @@ top-blagueurs-decov .user-name header {
   margin-top: 11px;
   left: 60px;
   position: absolute
+}
+
+.comment-with-picture .form-comment {
+  margin-left: 0;
 }
