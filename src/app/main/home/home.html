@@ -37,7 +37,7 @@
 
           </div>
           <div class="col-md-12 col-xs-12 add-head noPadding" id="pub-holder">
-            <div style="display: flex;align-items: flex-start; padding: 10px 13px 16px 17px">
+            <div style="display: flex;align-items: flex-start; padding: 10px 13px 16px 17px; flex-wrap: wrap">
               <div class="user-img for-add" *ngIf="user.profilePictureMin"
                    [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
               </div>
@@ -54,7 +54,8 @@
               <div class="textarea-publish" id="publishDiv"
                    (paste)="updatePublishTextOnPaste($event)"
                    contenteditable="true"
-                   placeholder="Votre blague ici.."></div>
+                   placeholder="Votre blague ici.."
+                   style="width: 86%"></div>
 
 
               <div class="file-input-holder">
