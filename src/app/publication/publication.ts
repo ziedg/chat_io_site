@@ -190,8 +190,10 @@ export class Publication {
   }
 
   ngOnInit() {
+    /*
     console.log("publication info:")
     console.log(this.publicationBean);
+    */
     var max_words:number = 50;
     var max_letters:number = 300;
     var txt = this.publicationBean.publText;
