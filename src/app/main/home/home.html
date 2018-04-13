@@ -37,9 +37,9 @@
 
           </div>
           <div class="col-md-12 col-xs-12 add-head noPadding" id="pub-holder">
-            <div class="col-md-12 col-sm-12 col-xs-12 noPadding">
+            <div style="display: flex;align-items: flex-start; padding: 10px 13px 16px 17px">
               <div class="user-img for-add" *ngIf="user.profilePictureMin"
-                   [ngStyle]="{'background-image': 'url(' + user.profilePictureMin + ')'}">
+                   [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
               </div>
 
               <div class="user-img for-add" *ngIf="!user.profilePictureMin"
@@ -97,8 +97,8 @@
             </div>
 
           </div>
-          <div class="col-md-12 col-xs-12 add-head noPadding">
-            <div class="col-md-5 col-xs-8 add-buttons">
+          <div class="col-md-12 col-xs-12 add-head" style="padding: 4px 15px;display: flex;">
+            <div class="col-md-5 col-xs-6 add-buttons noPadding">
 
 
 							<span class="picture-pub-in" (click)="addPhoto()">
@@ -125,7 +125,7 @@
               <input type="file" id="file-image-gif" style="display:none" accept=".gif"
                      (change)="uploadPhotoGIF($event)">
             </div>
-            <div class="col-md-7 col-xs-4 share-button">
+            <div class="col-md-7 col-xs-6 share-button" style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
 
               <div class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
                 <div>
@@ -156,9 +156,10 @@
                 </div>
                 <i class="fa fa-caret-down"></i>
               </div>
-              <div class="change-privacy hidden-lg hidden-md hidden-sm">
-                <i class="fa fa-globe" [class.hide]="selectedMenuElement!=0" (click)="changeSelectMenu(1)"></i>
-                <i class="fa fa-users" [class.hide]="selectedMenuElement!=1" (click)="changeSelectMenu(0)"></i>
+              <div class="change-privacy hidden-lg hidden-md"
+                  style="position:unset; margin-right: 12px">
+                <i class="fa fa-globe" style="vertical-align: middle" [class.hide]="selectedMenuElement!=0" (click)="changeSelectMenu(1)"></i>
+                <i class="fa fa-users" style="vertical-align: middle" [class.hide]="selectedMenuElement!=1" (click)="changeSelectMenu(0)"></i>
 
               </div>
               <button class="publish-button" type="submit" *ngIf="!loadingPublish">
