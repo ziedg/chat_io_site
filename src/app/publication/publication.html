@@ -143,7 +143,7 @@
             <img class="social-emoji desaturated"
                  src="assets/images/basic/blush.png" style="width:30px"
                  *ngIf="!publicationBean.isLiked"></button>
-          <span class="nbr">{{publicationBean.nbLikes}}</span>
+          <span class="nbr">{{shortNumber(publicationBean.nbLikes)}}</span>
         </div>
 
         <div class="dislike-holder" (click)="addOrRemoveDislike()" [class.active]="publicationBean.isDisliked">
@@ -157,7 +157,7 @@
                  src="assets/images/basic/expressionless.png" style="width:30px"
                  *ngIf="!publicationBean.isDisliked">
           </button>
-          <span class="nbr">{{publicationBean.nbDislikes}}</span>
+          <span class="nbr">{{shortNumber(publicationBean.nbDislikes)}}</span>
         </div>
         <div class="comment-number-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
           <button class="comment-number"><i class="fa fa-commenting"></i>
@@ -168,7 +168,7 @@
           <div class="hint-social" *ngIf="commentsDisplayed">
             {{ 'publication_hide_comments' | translate }}
           </div>
-          <span class="nbr">{{nbDisplayedComments}}</span>
+          <span class="nbr">{{shortNumber(nbDisplayedComments)}}</span>
         </div>
         <div class="share-holder" (click)="sharePub(publicationBean)">
           <button class="share"><i class="fa fa-share"></i>
@@ -177,7 +177,7 @@
               Partager
             </div>
           </button>
-          <span class="nbr">{{publicationBean.nbShare}}</span>
+          <span class="nbr">{{shortNumber(publicationBean.nbShare)}}</span>
         </div>
       </div>
 
