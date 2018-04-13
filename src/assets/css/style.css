@@ -4372,3 +4372,7 @@ top-blagueurs-decov .user-name header {
   height: 50vmin;
   filter: grayscale(100);
 }
+
+.swal2-textarea {
+  border: 1px solid #e0e7ed;
+}
