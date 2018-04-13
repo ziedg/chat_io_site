@@ -4355,3 +4355,20 @@ top-blagueurs-decov .user-name header {
     line-height: 32px;
   }
 }
+
+.search-2-no-results-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+  justify-content: space-around
+}
+
+.search-2-no-results-img {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  width: 50vmin;
+  height: 50vmin;
+  filter: grayscale(100);
+}
