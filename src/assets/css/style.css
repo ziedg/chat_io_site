@@ -1713,7 +1713,7 @@ textarea:focus {
   margin-top: 10px;
 }
 .social-staff {
-  margin-top: 20px;
+margin-top: 16px;
   display: flex;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1721,8 +1721,8 @@ textarea:focus {
   align-items: center;
   justify-content: space-between;
   border-top: solid 1px #ddd;
-  padding-top: 10px;
-  margin-bottom: 12px;
+  padding-top: 8px;
+  margin-bottom: 8px;
   width: 100%;
   position: relative;
 }
@@ -1893,7 +1893,7 @@ textarea:focus {
 }
 
 .publication .form-comment {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .comments-holder .comment-holder {
@@ -4322,7 +4322,7 @@ top-blagueurs-decov .user-name header {
 
 .search-mobile .search-mobile-annuler {
   padding-left: 12px;
-  padding-right: 10px;
+  padding-right: 4px;
   height: 100%;
   line-height: 56px;
   font-size: 17px;

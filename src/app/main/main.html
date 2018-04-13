@@ -2,7 +2,7 @@
   <div *ngIf="globalService.showSearchMobile"
         class="search-mobile col-xs-12 typeEffect hidden-lg hidden-md hidden-sm">
     <div class="mobile-header-center">
-      <div class="header-center" style="margin-left:10px;">
+      <div class="header-center">
         <input class="search"
                 placeholder="{{ 'main_search_placeholder' | translate }}"
                 [(ngModel)]="searchValue"
@@ -13,7 +13,7 @@
             aria-hidden="true"
             (click)="clearSearchMobile()"></i>
         <i class="fa fa-search"
-            style="padding: 12px;margin-top: 0;margin-left: -36px;"
+            style="padding: 12px;margin-top: 0;margin-left: -46px;"
             aria-hidden="true"></i>
       </div>
       <span (click)="globalService.showSearchMobile=false"
