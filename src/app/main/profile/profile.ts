@@ -525,11 +525,6 @@ export class Profile {
     return message;
   }
 
-  shortNumber(n:number):string {
-    return n < 1000 ? n+"" : (n/1000+"k").replace(".", ",");
-  }
-
-
 }
 
 function previewFile(uploadedFile) {
