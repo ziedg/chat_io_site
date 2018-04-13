@@ -190,6 +190,8 @@ export class Publication {
   }
 
   ngOnInit() {
+    console.log("publication info:")
+    console.log(this.publicationBean);
     var max_words:number = 50;
     var max_letters:number = 300;
     var txt = this.publicationBean.publText;
@@ -764,6 +766,10 @@ export class Publication {
     });
     return message;
   }
+
+  shortNumber(n:number):string {
+    return n < 1000 ? n+"" : (n/1000+"k").replace(".", ",");
+  }
 }
 
 
@@ -794,10 +800,6 @@ function previewFile(uploadedFile, elementId) {
 
   if (file) {
     reader.readAsDataURL(file);
-  }
-
-  function shortNumber(n:number):string {
-    return n < 1000 ? n+"" : (n/1000+"k").replace(".", ",");
   }
 
 

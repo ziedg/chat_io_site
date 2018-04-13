@@ -525,6 +525,10 @@ export class Profile {
     return message;
   }
 
+  shortNumber(n:number):string {
+    return n < 1000 ? n+"" : (n/1000+"k").replace(".", ",");
+  }
+
 
 }
 
@@ -558,10 +562,5 @@ function previewProfilePicture(uploadedFile) {
 
   if (file) {
     reader.readAsDataURL(file);
-  }
-
-
-  function shortNumber(n:number):string {
-    return n < 1000 ? n+"" : (n/1000+"k").replace(".", ",");
   }
 }
