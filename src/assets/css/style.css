@@ -1219,11 +1219,9 @@ section.widget {
 }
 .publish-button.loading-button {
   position: relative;
-  top: 1.5px;
-  margin-top: 1px;
   padding-top: 0;
   padding-bottom: 0;
-  height: 32px;
+  height: 35px;
 }
 .publish-button.loading-button:hover {
   background-color: #55aa55;
