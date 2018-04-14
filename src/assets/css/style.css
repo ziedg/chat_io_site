@@ -1711,6 +1711,7 @@ textarea:focus {
   border: solid 1px #ddd;
   padding: 1px;
   margin-top: 10px;
+  display: block;
 }
 .social-staff {
 margin-top: 16px;

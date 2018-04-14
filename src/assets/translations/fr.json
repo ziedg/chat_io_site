@@ -217,7 +217,10 @@
     "SP_ER_EMAIL_ALREADY_EXISTS" : "Cette adresse mail est déjà utilisé",
     "SP_ER_FP_USER_NOT_FOUND": "Cette adresse mail n'appartient à aucun compte.",
     "SP_ER_RESET_LINK_EXPIRED" : "Le lien de renitialisation est expiré.",
-    "SP_ER_EMAIL_NOT_VALID": "Cette adresse mail n'est pas valide"
+    "SP_ER_EMAIL_NOT_VALID": "Cette adresse mail n'est pas valide",
+
+
+    "publication_open_last_part": "... Lire la suit"
 
 
 

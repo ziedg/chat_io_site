@@ -75,11 +75,17 @@
       <span *ngIf="publicationBean.publText !== 'null'
                   && publicationBean.publText !=='undefined'
                   && publicationBean.publText.length > 0"
-      class="publication-text"
-            [innerHTML]="firstPubText">
+            class="publication-text"
+            >
+            <span [innerHTML]="firstPubText"></span>
+            <a *ngIf="longPubText && !longPubTextShow"
+                (click)="longPubTextShow=true"
+                style="margin-top: 0">
+                {{"publication_open_last_part" | translate }}</a>
+            <span *ngIf="longPubText && longPubTextShow" [innerHTML]="lastPubText">
             </span>
-            <span *ngIf="longPubText" [innerHTML]="lastPubText">
             </span>
+            
 
       <div class="link-preview" *ngIf="link.isSet">
         <div class="noPadding" *ngIf="link.image">
