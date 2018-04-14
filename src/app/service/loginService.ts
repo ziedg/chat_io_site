@@ -95,6 +95,9 @@ export class LoginService {
     /* getUser */
     getUser():User{
         this.user= JSON.parse(localStorage.getItem('user'));
+        if (!this.user){ 
+            this.logout()
+        }
         return this.user;
     }
 
