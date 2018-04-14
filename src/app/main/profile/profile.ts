@@ -525,7 +525,6 @@ export class Profile {
     return message;
   }
 
-
 }
 
 function previewFile(uploadedFile) {

@@ -1063,14 +1063,11 @@ section.widget {
   width: 200px;
   height: 35px;
   align-items: center;
-  position: absolute;
   box-sizing: border-box;
   cursor: pointer;
   color: #333;
   display: inline-block;
   text-align: left;
-  right: 105px;
-  top: 14px;
 }
 .change-privacy {
   position: absolute;
@@ -1216,19 +1213,15 @@ section.widget {
 }
 .publish-button {
   position: relative;
-  top: 1.5px;
-  margin-top: 1px;
   padding: 0;
-  height: 36px;
+  height: 35px;
   width: 90px;
 }
 .publish-button.loading-button {
   position: relative;
-  top: 1.5px;
-  margin-top: 1px;
   padding-top: 0;
   padding-bottom: 0;
-  height: 32px;
+  height: 35px;
 }
 .publish-button.loading-button:hover {
   background-color: #55aa55;
@@ -1254,9 +1247,9 @@ section.widget {
   text-shadow: 2px 2px 3px #eeeeee;
 }
 .comment-with-picture {
-  margin: 0 -10px;
   border: 1px solid #e1e1e1;
-  padding: 0 10px 15px;
+  padding: 10px 10px 5px 15px;
+  margin-bottom: 12px
 }
 .comment-publish {
   -webkit-box-sizing: content-box;
@@ -1473,9 +1466,7 @@ textarea:focus {
   position: relative;
 }
 .user-img.for-add {
-  position: absolute;
-  top: 10px;
-  left: 17px;
+  margin-right: 13px;
 }
 .add-buttons {
   padding: 8px 5px;
@@ -1516,8 +1507,6 @@ textarea:focus {
   padding: 30px 13px 13px 0;
   margin-left: 90px;
   font-size: 14px;
-  width: 100%;
-  max-width: 100%;
 }
 #pub-holder input {
   margin: 0;
@@ -1525,7 +1514,6 @@ textarea:focus {
   box-shadow: none;
   font: inherit;
   padding: 30px 13px 13px 0;
-  margin-left: 90px;
   font-size: 14px;
   width: 60%;
   height: 40px;
@@ -1533,11 +1521,10 @@ textarea:focus {
 }
 #pub-holder textarea,
 #pub-holder .textarea-publish {
-  padding: 30px 13px 13px 90px;
+  padding: 0;
   margin-left: 0px;
-}
-#pub-holder .textarea-publish {
-  min-height: 103px;
+  flex-grow: 1;
+  margin-top: 20px;
 }
 #pub-holder input {
   padding: 2px 2px 2px 0;
@@ -1724,9 +1711,10 @@ textarea:focus {
   border: solid 1px #ddd;
   padding: 1px;
   margin-top: 10px;
+  display: block;
 }
 .social-staff {
-  margin-top: 20px;
+margin-top: 16px;
   display: flex;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1734,8 +1722,8 @@ textarea:focus {
   align-items: center;
   justify-content: space-between;
   border-top: solid 1px #ddd;
-  padding-top: 10px;
-  margin-bottom: 5px;
+  padding-top: 8px;
+  margin-bottom: 8px;
   width: 100%;
   position: relative;
 }
@@ -1900,10 +1888,15 @@ textarea:focus {
   display: inline-flex;
   display: -webkit-box;
   display: -ms-flexbox;
-  margin: 7px 2px;
+  margin: 0 2px 7px 2px;
   align-items: flex-start;
   width: 100%;
 }
+
+.publication .form-comment {
+  margin-bottom: 12px;
+}
+
 .comments-holder .comment-holder {
   padding-bottom: 5px;
   border-bottom: 0.5px solid #efefef;
@@ -1959,8 +1952,8 @@ textarea:focus {
   display: inline-block;
 }
 .form-comment {
-  margin-top: 0px;
-  padding: 10px 0px 5px 0px;
+  margin-top: 0;
+  padding: 0;
 }
 .comment-holder form {
   width: 90%;
@@ -4330,7 +4323,7 @@ top-blagueurs-decov .user-name header {
 
 .search-mobile .search-mobile-annuler {
   padding-left: 12px;
-  padding-right: 10px;
+  padding-right: 4px;
   height: 100%;
   line-height: 56px;
   font-size: 17px;
@@ -4344,4 +4337,43 @@ top-blagueurs-decov .user-name header {
   margin-top: 11px;
   left: 60px;
   position: absolute
+}
+
+.comment-with-picture .form-comment {
+  margin-left: 0;
+}
+
+.publish-button {
+  margin: 0;
+}
+
+@media(max-width: 768px) {
+  .add-buttons .fa-picture-o {
+    font-size: 28px;
+    vertical-align: middle;
+  }
+  .add-buttons {
+    line-height: 32px;
+  }
+}
+
+.search-2-no-results-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+  justify-content: space-around
+}
+
+.search-2-no-results-img {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  width: 50vmin;
+  height: 50vmin;
+  filter: grayscale(100);
+}
+
+.swal2-textarea {
+  border: 1px solid #e0e7ed;
 }

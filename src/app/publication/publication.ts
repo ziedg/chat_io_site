@@ -87,6 +87,7 @@ export class Publication {
   commentsDisplayed : boolean;
   /* long publication settings */
   private longPubText: boolean = false;
+  private longPubTextShow: boolean = false;
   private firstPubText: string = "";
   private lastPubText: string = "";
   pub_text:string = "";
@@ -190,21 +191,44 @@ export class Publication {
   }
 
   ngOnInit() {
-    var max_words:number = 50;
-    var max_letters:number = 300;
-    var txt = this.publicationBean.publText;
-    var parts = txt.split(' ');
+    /*
+    console.log("publication info:")
+    console.log(this.publicationBean);
+    */
+    
+    const word_letters = 5;
+
+    const words_max:number = 100;
+    const words_marge:number = 10;
+
+    const letters_max:number = words_max * word_letters;
+    const letters_marge:number = words_marge * word_letters;
+
+    const txt = this.publicationBean.publText;
+    const parts = txt.split(' ');
     if(txt !== 'null' && txt !=='undefined' && txt.length > 0) {
-      if(parts.length > max_words){
+      if(parts.length > words_max){
         this.longPubText = true;
-        this.firstPubText = parts.slice(0, max_words).join(' ');
-        this.lastPubText = parts.slice(max_words, parts.length ).join(' ');;
+
+        let words_cut:number;
+        if(parts.length - words_max < words_marge) words_cut = parts.length - words_marge;
+        else words_cut = words_max;
+
+        this.firstPubText = parts.slice(0, words_cut).join(' ');
+        this.lastPubText = parts.slice(words_cut, parts.length ).join(' ');
+        console.log("cut words");
       }
-      else if(txt.length > max_letters) {
+      else if(txt.length > letters_max) {
         this.longPubText = true;
-        var cut_end:number = txt.slice(0, max_letters).lastIndexOf(' ');
+
+        let letters_cut:number;
+        if(txt.length - letters_max < letters_marge) letters_cut = txt.length - letters_marge;
+        else letters_cut = letters_max;
+
+        var cut_end:number = txt.slice(0, letters_cut).lastIndexOf(' ');
         this.firstPubText = txt.slice(0, cut_end);
         this.lastPubText = txt.slice(cut_end);
+        console.log("cut letters");
       }
       else {
         this.firstPubText = txt;
@@ -763,6 +787,10 @@ export class Publication {
       message = resTranslate;
     });
     return message;
+  }
+
+  shortNumber(n:number):string {
+    return n < 1000 ? n+"" : (n/1000+"k").replace(".", ",");
   }
 }
 
