@@ -2055,9 +2055,11 @@ margin-top: 16px;
 }
 .for-comment {
   border-radius: 0;
-  height: 35px;
-  width: 35px;
-  min-width: 35px;
+  --img-w: 35px!important;
+  height: var(--img-w);
+  width: var(--img-w);
+  max-height: var(--img-w);
+  max-width: var(--img-w);
   margin: 0;
 }
 .radiused-img {
