@@ -183,7 +183,13 @@
               Partager
             </div>
           </button>
+          <!-- <div *ngIf="publicationBean.isShared";then normalNbShare else customNbShare ></div>
+          <ng-template #normalNbShare> -->
           <span class="nbr">{{shortNumber(publicationBean.nbShare)}}</span>
+        <!-- </ng-template>
+        <ng-template #customNbShare>
+          <span class="nbr">{{shortNumber(originalPublication.nbShare)}}</span>
+        </ng-template> -->
         </div>
       </div>
 
