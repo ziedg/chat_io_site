@@ -662,6 +662,7 @@ section.widget {
   display: block;
   cursor: pointer;
   height:36px;
+  min-width: 140px;
 }
 
 .header-segement {
