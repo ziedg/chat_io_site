@@ -520,8 +520,11 @@ a {
   background-color: #33adff;
 }
 .img-header {
-  width: 30px !important;
-  height: 30px !important;
+  --img-w: 30px !important;
+  width: var(--img-w);
+  height: var(--img-w);
+  min-width: var(--img-w);
+  min-height: var(--img-w);
   margin-right: 10px;
   display: flex;
   display: -webkit-box;
@@ -1625,8 +1628,11 @@ textarea:focus {
   background-position: center;
 }
 .user-img {
-  width: 60px;
-  height: 60px;
+  --img-w: 60px;
+  width: var(--img-w);
+  height: var(--img-w);
+  min-width: var(--img-w);
+  min-height: var(--img-w);
   background-size: cover;
   background-position: center;
   border-radius: 50%;
@@ -4376,4 +4382,8 @@ top-blagueurs-decov .user-name header {
 
 .swal2-textarea {
   border: 1px solid #e0e7ed;
+}
+
+.m-t-12px {
+  margin-top: 12px!important;
 }

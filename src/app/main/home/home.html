@@ -51,11 +51,12 @@
                      *ngIf="titleEnable"
                      formControlName="publicationTitle">
 
-              <div class="textarea-publish" id="publishDiv"
-                   (paste)="updatePublishTextOnPaste($event)"
-                   contenteditable="true"
-                   placeholder="Votre blague ici.."
-                   style="width: 86%"></div>
+              <div  id="publishDiv"
+                    [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true}"
+                    (paste)="updatePublishTextOnPaste($event)"
+                    contenteditable="true"
+                    placeholder="Votre blague ici.."
+                    style="width: calc(100% - 80px)"></div>
 
 
               <div class="file-input-holder">
