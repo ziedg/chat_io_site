@@ -1018,9 +1018,8 @@ section.widget {
   font-size: 30px;
 }
 #preview-image {
-  height: 400px;
-  width: auto;
-  max-width: 100%;
+  max-width: 400px;
+  max-height: 700px;
   border: solid 1px #ddd;
   padding: 2px;
 }
