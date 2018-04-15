@@ -1628,7 +1628,9 @@ textarea:focus {
   background-position: center;
 }
 
-.publication .user .user-img, top-blagueurs-decov .user .user-img {
+.publication .user .user-img,
+top-blagueurs-decov .user .user-img,
+#pub-holder .user-img {
   --user-img-w: 60px;
   width: var(--user-img-w);
   height: var(--user-img-w);
