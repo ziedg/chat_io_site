@@ -94,7 +94,7 @@ a {
   padding: 20px 10% !important;
   box-sizing: border-box;
   /*border-bottom: solid 1px #edeeee;*/
-  outline: solid 1px #edeeee;
+  border: solid 1px #edeeee;
   z-index: 8;
 }
 @media (max-width: 767px) {
@@ -4329,6 +4329,7 @@ top-blagueurs-decov .user-name header {
 .notification-parent {
   position:relative;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .search-mobile {
