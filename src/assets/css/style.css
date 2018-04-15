@@ -3404,7 +3404,10 @@ input.loginInput {
 }
 .button-param {
   height: 34px;
+  margin-bottom: 30px;
+  /*
   margin-top: 20px;
+  */
 }
 .button-param button {
   border: 2px solid #009900;
@@ -4392,4 +4395,16 @@ top-blagueurs-decov .user-name header {
 
 .m-t-12px {
   margin-top: 12px!important;
+}
+
+@media(max-width: 768px) {
+  .label-param, .label-param-long {
+    text-align: left;
+    margin-bottom: 4px;
+  }
+}
+
+
+change-password .input-param input {
+  border-color: #09a012;
 }
