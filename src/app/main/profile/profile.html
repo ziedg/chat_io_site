@@ -6,7 +6,7 @@
       <section class="widget bordered-white profile-photo centered-text" style="position:relative;" [ngStyle]="{'background-image': 'url(' + userDisplayed.profilePicture + ')',
                   minWidth: '80px', minHeight:'80px'}">
         <div class="profile-picture-loading" *ngIf="profilePictLoad"></div>
-        <i class="fa fa-upload" aria-hidden="true" *ngIf="user._id==userDisplayed._id" (click)="changePhoto()"></i>
+        <i class="fa fa-upload" aria-hidden="true" *ngIf="user._id==userDisplayed._id && !uploadedProfilePicture" (click)="changePhoto()"></i>
         <i class="fa fa-floppy-o" aria-hidden="true" *ngIf="uploadedProfilePicture" [ngStyle]="{left:'14%', bottom: '10%'}" (click)="changePhotoUpload()"></i>
         <i class="fa fa-times" aria-hidden="true" *ngIf="uploadedProfilePicture" [ngStyle]="{left:'2%', bottom: '46%'}" (click)="changePhotoCancel()"></i>
         <input type="file" id="file-profile" style="display:none" accept="image/*" (change)="updateProfilePicture($event)">

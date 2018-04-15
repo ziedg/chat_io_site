@@ -1626,12 +1626,16 @@ textarea:focus {
   background-size: cover;
   background-position: center;
 }
-.user-img {
-  --img-w: 60px;
-  width: var(--img-w);
-  height: var(--img-w);
-  min-width: var(--img-w);
-  min-height: var(--img-w);
+
+.publication .user .user-img {
+  --user-img-w: 60px;
+  width: var(--user-img-w);
+  height: var(--user-img-w);
+  min-width: var(--user-img-w);
+  min-height: var(--user-img-w);
+}
+
+.user-img {  
   background-size: cover;
   background-position: center;
   border-radius: 50%;
