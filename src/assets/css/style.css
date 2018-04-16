@@ -1019,7 +1019,7 @@ section.widget {
   font-size: 30px;
 }
 #preview-image {
-  max-width: 700px;
+  max-width: cacl(100% - 10px);
   max-height: 400px;
   border: solid 1px #ddd;
   padding: 2px;
