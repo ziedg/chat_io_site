@@ -428,7 +428,7 @@ export class Publication {
     }
     let body = JSON.stringify({
       publId: pubId,
-      alreadySharedPubId ,
+      alreadySharedPubId : alreadySharedPubId,
       profileId: this.user._id
     });
     this.http.post(environment.SERVER_URL + pathUtils.SHARE_PUBLICATION, body, AppSettings.OPTIONS)
