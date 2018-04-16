@@ -93,8 +93,7 @@ a {
   color: #333;
   padding: 20px 10% !important;
   box-sizing: border-box;
-  /*border-bottom: solid 1px #edeeee;*/
-  border: solid 1px #edeeee;
+  border-bottom: solid 1px #edeeee;
   z-index: 8;
 }
 @media (max-width: 767px) {
@@ -4275,6 +4274,7 @@ top-blagueurs-decov .user-name header {
   display: flex;
   align-items: center;
   position: relative;
+  border-bottom: solid 1px #edeeee;
 }
 
 .recherche-results-holder-2 {
