@@ -418,17 +418,17 @@ export class Publication {
 
   doSharePub(post) {
     var pubId;
-    //var alreadySharedPubId;
+    var alreadySharedPubId;
     if (post.isShared) {
       pubId = post.originalPublicationId;
-     // alreadySharedPubId =this.publicationBean._id;
+     alreadySharedPubId =this.publicationBean._id || '1';
     }
     else {
       pubId = this.publicationBean._id;
     }
     let body = JSON.stringify({
       publId: pubId,
-      //alreadySharedPubId ,
+      alreadySharedPubId ,
       profileId: this.user._id
     });
     this.http.post(environment.SERVER_URL + pathUtils.SHARE_PUBLICATION, body, AppSettings.OPTIONS)
