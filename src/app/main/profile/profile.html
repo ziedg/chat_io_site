@@ -106,7 +106,7 @@
           <i *ngIf="user._id==userDisplayed._id" class="fa fa-pencil hidden-sm hidden-xs" aria-hidden="true" (click)="editDescription()"></i>
         </span>
 
-        <div class="edit-decription row" *ngIf="editDescriptionEnable">
+        <div class="edit-decription row" *ngIf="editDescriptionEnable && user._id==userDisplayed._id">
           <div class="col-lg-9 col-md-8 col-sm-12">
             <form>
               <textarea id="descEdit" style="display:block" (keydown.Enter)="saveDescriptionWithEnter($event)">{{userDisplayed.about}}</textarea>
