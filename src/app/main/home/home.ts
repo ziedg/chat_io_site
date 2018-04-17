@@ -333,6 +333,7 @@ export class Home {
       return 1;
     }
     this.analyzeLink(text);
+    text = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
     document.execCommand("insertHTML", false, text);
   }
 
@@ -362,7 +363,7 @@ export class Home {
   }
 
   publish() {
-    this.form.value.publicationText = jQuery("#publishDiv").text();
+    this.form.value.publicationText = jQuery("#publishDiv").html();
     console.log(this.form.value.publicationText);
     if (!this.form.value.publicationText && !this.youtubeLink && !this.uploadedPicture && !this.link.isSet) {
       this.errorMsg = "SP_FV_ER_PUBLICATION_EMPTY";

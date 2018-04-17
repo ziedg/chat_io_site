@@ -247,8 +247,8 @@ a {
   z-index: 3;
   width: 9px;
   height: 9px;
-  top: 124%;
-  right: 5.1px;
+  top: 30px;
+  right: 7px;
   transform: rotate(45deg);
 }
 .upper-arrow-profile {
@@ -4411,4 +4411,22 @@ top-blagueurs-decov .user-name header {
 
 change-password .input-param input {
   border-color: #09a012;
+}
+
+.mobile-header-center .search {
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
+}
+
+.mobile-header-center .fa-search {
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+}
+
+.mobile-header-center .search:focus ~ .fa-search {
+  opacity: 0;
+}
+
+.mobile-header-center .search:focus {
+  padding-left: 12px;
 }
