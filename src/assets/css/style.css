@@ -4412,3 +4412,21 @@ top-blagueurs-decov .user-name header {
 change-password .input-param input {
   border-color: #09a012;
 }
+
+.mobile-header-center .search {
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
+}
+
+.mobile-header-center .fa-search {
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+}
+
+.mobile-header-center .search:focus ~ .fa-search {
+  opacity: 0;
+}
+
+.mobile-header-center .search:focus {
+  padding-left: 12px;
+}

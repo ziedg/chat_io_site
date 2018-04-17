@@ -9,12 +9,12 @@
                 (ngModelChange)="onChange($event)"
                 (focus)="onFocus()"
                 #searchMobileInput>
-        <i class="fa fa-times-circle"
-            aria-hidden="true"
-            (click)="clearSearchMobile()"></i>
         <i class="fa fa-search"
             style="padding: 12px;margin-top: 0;margin-left: -46px;"
             aria-hidden="true"></i>
+        <i class="fa fa-times-circle"
+            aria-hidden="true"
+            (click)="clearSearchMobile()"></i>
       </div>
       <span (click)="globalService.showSearchMobile=false"
             class="search-mobile-annuler">
