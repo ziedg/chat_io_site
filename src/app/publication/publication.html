@@ -102,7 +102,7 @@
         </div>
       </div>
       <img *ngIf="publicationBean.publPictureLink"
-           src="{{imageBaseUrl+ publicationBean.publPictureLink}}">
+           src="{{'https://speegar2.com/'+ publicationBean.publPictureLink}}">
       <div class="youtube-preview-publication"
            *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
         <iframe width="560" height="400" [src]="url" frameborder="0" allowfullscreen>
