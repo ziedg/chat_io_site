@@ -78,7 +78,7 @@
               <div class="link-preview" *ngIf="link.isSet">
 								<span>
 										<i class="fa fa-times" aria-hidden="true" (click)="closeLinkAPI()"></i>
-									</span>
+								</span>
 
                 <div class="noPadding" *ngIf="link.image">
                   <img class="img-preview" [src]="link.image"/>
@@ -88,9 +88,12 @@
                     <h4>{{link.title}}</h4></a>
 
                   <p>{{link.description}}</p>
+                  <img src="{{link.url}}">
+                  <!--
                   <a href="{{link.url}}" target="_blank" class="subLink">
                     {{link.url}}
                   </a>
+                  -->
                 </div>
               </div>
               <div class="youtube-preview">

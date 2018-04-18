@@ -33,7 +33,7 @@ import { Title } from "@angular/platform-browser";
 import { LinkBean } from '../../beans/linkBean';
 import {environment} from "../../../environments/environment";
 
-import { GlobalService } from "../../service/globalService"
+import { GlobalService } from "../../service/globalService";
 
 declare var jQuery:any;
 declare var $:any;
@@ -493,15 +493,15 @@ export class Home {
         this.closeLinkAPI();
         return this.uploadedPicture;
         });
-        
-          //this.uploadedPicture=result;
 
-      //previewFile(this.uploadedPicture);
-     /* jQuery(".youtube-preview").html("");
-      //this.form.controls.publicationYoutubeLink.updateValue('');
-      this.closeLinkAPI();
-      return this.uploadedPicture;*/
-//change
+        //this.uploadedPicture=result;
+
+        //previewFile(this.uploadedPicture);
+        /* jQuery(".youtube-preview").html("");
+        //this.form.controls.publicationYoutubeLink.updateValue('');
+        this.closeLinkAPI();
+        return this.uploadedPicture;*/
+        //change
     }
     else {
       this.uploadedPicture = null;
@@ -585,7 +585,7 @@ export class Home {
 
   analyzeLink(source) {
     {
-      console.log("analyse" + source);
+      console.log("analyse " + source);
       var myArray = this.linkView.getListLinks(source);
       if (!myArray.length) {
         return 1;
@@ -600,13 +600,16 @@ export class Home {
         return 1;
       }
       if (linkURL.search(".gif") >= 0) {
+        console.log("this is a gif!");
+        console.log(linkURL);
         var checker = linkURL.substr(linkURL.length - 13, 8);
+        console.log(linkURL);
         if (checker.indexOf(".gif") >= 0) {
-          this.link.image = linkURL.substring(0, linkURL.indexOf(".gif") + 4);
+          this.link.image = linkURL;//.substring(0, linkURL.indexOf(".gif") + 4);
           this.link.imageWidth = 500;
           this.link.imageHeight = 500;
           this.link.isGif = true;
-          this.link.url = linkURL.substring(0, linkURL.indexOf(".gif") + 4);
+          this.link.url = linkURL;//.substring(0, linkURL.indexOf(".gif") + 4);
           this.link.title = "gif";
           this.link.description = "gif";
           this.link.isSet = true;

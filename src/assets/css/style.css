@@ -3082,6 +3082,25 @@ input.loginInput {
   position: relative;
   width: 90% !important;
 }
+
+@media(max-width: 768px) {
+  .params-main-menu {
+    padding-bottom: 55px;
+  }
+
+}
+
+@media(min-width: 992px ) {
+  .parameters .params-left-menu,
+  .parameters .params-main-menu {
+    height: 470px
+  }
+}
+
+.parameters .params-main-menu {
+  border-left: 1px solid #dbdbdb;
+}
+
 .params-left-menu {
   padding: 0;
   padding-left: 0 !important;
@@ -3105,10 +3124,6 @@ input.loginInput {
 }
 .params-left-menu a:visited {
   color: black;
-}
-.params-main-menu {
-  border-left: 1px solid #dbdbdb;
-  padding-top: 35px;
 }
 .left-param {
   text-align: right;
@@ -3211,10 +3226,12 @@ input.loginInput {
   padding-bottom: 50px ;
 }
 
+.params-main-menu {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 992px) {
-  .params-main-menu {
-    padding-top: 0;
-  }
   .input-param input {
     width: 100%;
   }
