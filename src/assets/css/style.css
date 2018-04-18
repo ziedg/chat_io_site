@@ -843,7 +843,7 @@ section.widget {
   padding: 10px 30px 20px;
   padding-left: 30px !important;
   padding-right: 30px !important;
-  margin: 30px 0%;
+  margin-top: 30px;
   width: 100%;
   flex-direction: column;
   box-sizing: border-box;
@@ -4141,6 +4141,10 @@ change-password .input-param input {
   padding-left: 12px;
 }
 
+.youtube-preview {
+  width: 100%;
+}
+
 
 /*------------------------------all-hover-effects-begin-------------------*/
 @media(min-width: 767px) {
@@ -4498,4 +4502,4 @@ change-password .input-param input {
     background-color: #e4e4e4;
   }
 }
-/*------------------------------all-hover-effects-begin-------------------*/
+/*------------------------------all-hover-effects-end-------------------*/
