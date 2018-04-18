@@ -484,7 +484,7 @@ export class Home {
       this.uploadedPicture = inputValue.files[0];
       //change
       
-      this.ng2ImgMaxService.compress([this.uploadedPicture], 0.5).subscribe( result =>{
+      this.ng2ImgMaxService.compress([this.uploadedPicture], 0.3).subscribe( result =>{
         this.uploadedPicture=result;
 
         previewFile(this.uploadedPicture);
