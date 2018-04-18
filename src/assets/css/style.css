@@ -1519,6 +1519,10 @@ top-blagueurs-decov .user .user-img,
   min-height: var(--user-img-w);
 }
 
+.publication .user .user-img {
+  --user-img-w: 46px;
+}
+
 .user-img {  
   background-size: cover;
   background-position: center;
@@ -1604,7 +1608,7 @@ top-blagueurs-decov .user .user-img,
   display: block;
 }
 .social-staff {
-margin-top: 16px;
+  margin-top: 10px;
   display: flex;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3593,7 +3597,7 @@ input.loginInput {
   right: -2px;
   border-radius: 3px;
   opacity: 0;
-  bottom: 46px;
+  bottom: 44px;
 }
 .comment-number-holder .hint-social {
   right: -40px;
@@ -3947,10 +3951,6 @@ top-blagueurs-decov .user-name header {
   }
 }
 
-.publication-text {
-  margin-top: 10px;
-}
-
 .shared-publication .user{
   margin-top: 8px;
 }
@@ -4143,6 +4143,10 @@ change-password .input-param input {
 
 .youtube-preview {
   width: 100%;
+}
+
+.publication .content {
+  margin-top: 14px;
 }
 
 
