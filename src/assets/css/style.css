@@ -1523,7 +1523,7 @@ top-blagueurs-decov .user .user-img,
   --user-img-w: 40px;
 }
 
-.add-pub .user-img {
+#pub-holder .user-img {
   --user-img-w: 46px;
 }
 
