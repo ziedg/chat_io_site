@@ -421,7 +421,7 @@ export class Publication {
     var alreadySharedPubId;
     if (post.isShared) {
       pubId = post.originalPublicationId;
-     alreadySharedPubId =this.publicationBean._id || '1';
+     alreadySharedPubId =this.publicationBean._id ;
     }
     else {
       pubId = this.publicationBean._id;
@@ -437,6 +437,7 @@ export class Publication {
         response => {
           if (response) {
             if (response.status = "0") {
+              console.log(response.publication);
               var element: PublicationBean = response.publication;
               this.postService.putNewPub(element, true);
               this.changeDetector.markForCheck();

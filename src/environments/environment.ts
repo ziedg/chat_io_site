@@ -12,7 +12,7 @@ export const environment = {
 
 
   SERVER_URL: 'https://speegar.com:3005/',
-  IMAGE_BASE_URL: 'https://speegar.com/images/'
+  IMAGE_BASE_URL: '173.249.14.90/images/'
 
 
 };

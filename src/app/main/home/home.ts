@@ -364,7 +364,6 @@ export class Home {
 
   publish() {
     this.form.value.publicationText = jQuery("#publishDiv").html();
-    console.log(this.form.value.publicationText);
     if (!this.form.value.publicationText && !this.youtubeLink && !this.uploadedPicture && !this.link.isSet) {
       this.errorMsg = "SP_FV_ER_PUBLICATION_EMPTY";
       this.errorTimed();
@@ -383,7 +382,6 @@ export class Home {
     data.append('publText', this.form.value.publicationText);
     data.append('publyoutubeLink', this.youtubeLink);
     data.append('publPicture',this.uploadedPicture);
-
     // clear title value
     this.form.reset();
 
@@ -398,7 +396,6 @@ export class Home {
 
         if (response.status == "0") {
           jQuery("#errorMsgDisplay").fadeOut(1000);
-          console.log(response.publication);
           this.putNewPub(response.publication, false);
           this.resetPublish();
         }
@@ -487,7 +484,7 @@ export class Home {
       this.uploadedPicture = inputValue.files[0];
       //change
       
-      this.ng2ImgMaxService.compress([this.uploadedPicture], 0.5).subscribe( result =>{
+      this.ng2ImgMaxService.compress([this.uploadedPicture], 0.7).subscribe( result =>{
         this.uploadedPicture=result;
 
         previewFile(this.uploadedPicture);
