@@ -382,7 +382,6 @@ export class Home {
     data.append('publText', this.form.value.publicationText);
     data.append('publyoutubeLink', this.youtubeLink);
     data.append('publPicture',this.uploadedPicture);
-    console.log(this.uploadedPicture);
     // clear title value
     this.form.reset();
 
