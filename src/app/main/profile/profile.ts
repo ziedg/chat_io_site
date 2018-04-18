@@ -479,10 +479,10 @@ export class Profile {
 
         if (response.status == "0") {
 
-          if (this.loginService.isWasConnectedWithFacebook){
-            localStorage.setItem('facebookUser',response.profile);
-          }
-          
+          // if (this.loginService.isWasConnectedWithFacebook){
+          //   localStorage.setItem('facebookUser',response.profile);
+          // }
+
           localStorage.setItem('user', JSON.stringify(response.profile));
           this.loginService.actualize();
           this.changePhotoCancel();
