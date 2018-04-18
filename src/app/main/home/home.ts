@@ -635,10 +635,13 @@ export class Home {
               this.link.image = response.results.data.ogImage.url;
               this.link.imageWidth = response.results.data.ogImage.width;
               this.link.imageHeight = response.results.data.ogImage.height;
-              if (a.substring(a.length - 3, a.length) == "gif")
+              if (a.search(/(\.gif)$/i)>0) {
                 this.link.isGif = true;
-              else
+                this.link.url = this.link.image;
+              }
+              else {
                 this.link.isGif = false;
+              }
             }
             else {
               this.link.image = null;

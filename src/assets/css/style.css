@@ -1520,7 +1520,11 @@ top-blagueurs-decov .user .user-img,
 }
 
 .publication .user .user-img {
-  --user-img-w: 46px;
+  --user-img-w: 40px;
+}
+
+.add-pub .user-img {
+  --user-img-w: 50px;
 }
 
 .user-img {  
