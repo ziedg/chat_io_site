@@ -70,12 +70,6 @@ a {
 .fb-xfbml-parse-ignore {
   display: inline-block;
 }
-.fbShare:hover {
-  color: #2266ff;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
-}
 .main-header {
   position: fixed;
   height: 77px;
@@ -153,12 +147,6 @@ a {
   color: #000000;
   font-weight: 500;
 }
-.main-header a:hover {
-  text-decoration: underline;
-}
-.main-header a:hover .user-img {
-  opacity: .9;
-}
 .search {
   box-sizing: border-box;
   height: 32px;
@@ -202,9 +190,6 @@ a {
 .main-header .fa {
   font-size: 1.6em;
   color: #666;
-}
-.main-header .fa:hover {
-  color: #000;
 }
 .cercle-notice {
   position: absolute;
@@ -356,16 +341,6 @@ a {
 .profile-hover article:last-child {
   border-bottom: none !important;
 }
-.profile-hover article:hover {
-  background-color: #009999 !important;
-  color: white;
-  z-index: 3;
-}
-.sign-out:hover {
-  background-color: #009999 !important;
-  color: white;
-  z-index: 3;
-}
 .sign-out .fa {
   color: inherit;
 }
@@ -375,10 +350,6 @@ a {
   color: inherit;
   cursor: pointer;
   white-space: pre;
-}
-.sign-out a:hover {
-  text-decoration: none;
-  color: inherit;
 }
 .recherche-results-holder {
   width: 259px;
@@ -422,11 +393,6 @@ a {
   width: 40px;
   height: 40px;
 }
-
-.recherche-results article:hover {
-  background-color: #009999 !important;
-  color: white;
-}
 .recherche-results .user-img {
   width: 32px;
   height: 32px;
@@ -450,18 +416,10 @@ a {
   border-bottom: 1px solid #edeeee;
   margin-right: 0 !important;
 }
-.notification-holder article:hover {
-  background: #eee;
-  cursor: pointer;
-  z-index: 4;
-}
 .notif-a {
   font-weight: bold;
   color: #125688;
   cursor: pointer;
-}
-.notif-a:hover {
-  color: #024678;
 }
 .time-notif {
   position: absolute;
@@ -488,11 +446,6 @@ a {
   display: inline-block !important;
   font-weight: 600 !important;
 }
-.more-not:hover {
-  text-decoration: none !important;
-  background-color: #009999 !important;
-  color: white !important;
-}
 .notif-content {
   margin-left: 10px;
   padding-right: 50px;
@@ -514,9 +467,6 @@ a {
   font-weight: 800;
   margin-left: 10px;
   background-color: #09f;
-}
-.btn-primary:hover {
-  background-color: #33adff;
 }
 .img-header {
   --img-w: 30px !important;
@@ -684,9 +634,6 @@ section.widget {
   position: relative;
   top: -3px;
 }
-.header-segement.description-holder .fa-pencil:hover {
-  opacity: 1;
-}
 .widget button {
   box-shadow: none;
   background-color: #3B5998;
@@ -755,9 +702,6 @@ section.widget {
   line-height: 30px;
   margin-right: 8px;
 }
-.sub-profile-btn-old:hover {
-  background-color: #2cba2c;
-}
 
 .sub-profile-btn-old.active {
   background-color: white;
@@ -776,10 +720,6 @@ section.widget {
   margin-left: 5px;
   height: 35px;
 }
-.sub-profile-btn:hover {
-  background-color: #999 !important;
-  color: white !important;
-}
 .profile-picture-loading
 {
   position: absolute;
@@ -792,11 +732,6 @@ section.widget {
     border-radius: 50%;
     -webkit-animation: spin 1s infinite linear;
     animation: spin 0.5s infinite linear;
-}
-.profile-photo:hover .fa-upload,
-.profile-photo:hover .fa-floppy-o,
-.profile-photo:hover .fa-times {
-  display: inline;
 }
 .profile-photo .fa-upload {
   position: absolute;
@@ -881,9 +816,6 @@ section.widget {
   .header-Profile {
     align-items: center!important;
   }
-}
-.widget button:hover {
-  opacity: .8;
 }
 .widget button i {
   width: 30px;
@@ -1009,13 +941,6 @@ section.widget {
 }
 .ajout-img-holder .close {
   display: none;
-}
-.ajout-img-holder:hover .close {
-  display: block;
-  position: absolute;
-  left: 100px;
-  top: 180px;
-  font-size: 30px;
 }
 #preview-image {
   max-width: cacl(100% - 10px);
@@ -1157,10 +1082,6 @@ section.widget {
 .clicked-dropdown article {
   padding: 10px 7px;
 }
-.clicked-dropdown article:hover {
-  background-color: #3B5998;
-  color: white;
-}
 .select-menu {
   position: absolute;
   top: 0px;
@@ -1178,10 +1099,6 @@ section.widget {
   padding: 10px 7px;
   height: 40px;
   background-color: #edeeee;
-}
-.select-choice:hover {
-  background-color: #009999;
-  color: white;
 }
 .clicked-dropdown> div .hide {
   display: flex;
@@ -1225,9 +1142,6 @@ section.widget {
   padding-bottom: 0;
   height: 35px;
 }
-.publish-button.loading-button:hover {
-  background-color: #55aa55;
-}
 
 .ajout-img-holder {
   position: relative
@@ -1242,11 +1156,6 @@ section.widget {
   padding: 3px;
   border-radius: 5px;
   cursor: pointer;
-}
-.delete-photo-post:hover {
-  background-color: white;
-  color: #008800;
-  text-shadow: 2px 2px 3px #eeeeee;
 }
 .comment-with-picture {
   border: 1px solid #e1e1e1;
@@ -1292,11 +1201,6 @@ section.widget {
 .comment-publish.comment-loading {
   padding: 2.5px 23px !important;
   line-height: 20px;
-}
-button.publish-button:hover,
-.comment-publish:hover {
-  color: rgba(255, 255, 255, 1);
-  background: #55aa55;
 }
 @media (max-width: 760px) {
   button.publish-button {
@@ -1361,9 +1265,6 @@ textarea:focus {
   position: absolute;
   right: 5px;
 }
-.title-checkbox:hover {
-  color: #333;
-}
 .title-checkbox i {
   width: 20px;
   margin: 2px 10px 0 7px;
@@ -1395,9 +1296,6 @@ textarea:focus {
   .image-add-btn div {
     font-size: 20px;
   }
-}
-.image-add-btn div:hover {
-  color: #666;
 }
 .image-add-btn div .fa-picture-o {
   color: inherit;
@@ -1461,9 +1359,6 @@ textarea:focus {
 .upper-form-add div.not-btn {
   cursor: default;
 }
-.upper-form-add div.not-btn:hover {
-  text-decoration: none;
-}
 #pub-holder {
   position: relative;
 }
@@ -1493,11 +1388,6 @@ textarea:focus {
 .add-buttons .fa.fa-youtube-play {
   position: relative;
   font-size: 20px;
-}
-.add-buttons .fa:hover,
-.add-buttons .gif-btn:hover {
-  color: #666;
-  cursor: pointer;
 }
 #pub-holder textarea,
 #pub-holder .textarea-publish {
@@ -1586,17 +1476,10 @@ textarea:focus {
   cursor: pointer;
   color: #3897f0;
 }
-.hashtag:hover {
-  text-decoration: underline;
-}
 .date {
   position: absolute;
   right: 20px;
   color: #666;
-}
-.date:hover {
-  cursor: pointer;
-  text-decoration: underline;
 }
 .date-mobile {
   font-size: 11px;
@@ -1697,9 +1580,6 @@ top-blagueurs-decov .user .user-img,
 .widget> article> div> .user> .user-name {
   margin-top: 0px !important;
 }
-.user-name-shared header:hover {
-  text-decoration: underline;
-}
 .user-name header,
 .user-name-shared header {
   font-weight: bold;
@@ -1779,38 +1659,13 @@ margin-top: 16px;
   cursor: pointer !important;
   position: relative;
 }
-.comment-number-holder:hover button .fa {
-  font-size: 35px;
-  color: #009900 !important;
-  margin: -6px -5px 0;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
-}
 
 .comment-number-holder:active button .fa {
   color: #209f11;
 }
-
-
-.share-holder:hover button .fa {
-  font-size: 40px;
-  margin: -13px -7.5px 0;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
-}
 .like-holder,
 .dislike-holder {
   position: relative;
-}
-.like-comment .like-holder:hover,
-.like-comment .like-holder:hover button {
-  color: #009900 !important;
-}
-.like-comment .dislike-holder:hover,
-.like-comment .dislike-holder:hover button {
-  color: #ff0000 !important;
 }
 .like-holder.active,
 .like-holder.active button {
@@ -1828,9 +1683,6 @@ margin-top: 16px;
   margin-left: 10px;
   position: relative;
 }
-.share-holder:hover button {
-  color: #539ddc !important;
-}
 .right-side-of-likes {
   display: flex;
   display: -webkit-box;
@@ -1839,9 +1691,6 @@ margin-top: 16px;
   align-items: center;
   color: #666;
   cursor: pointer;
-}
-.right-side-of-likes:hover {
-  color: #333;
 }
 .fa.fa-circle {
   font-size: 6px;
@@ -1883,15 +1732,6 @@ margin-top: 16px;
   z-index: 2;
   color: #333;
   font-weight: 600;
-}
-.sub-menu:hover {
-  color: white;
-  background-color: #009999;
-  z-index: 3;
-}
-.sub-menu article:hover {
-  color: white;
-  background-color: #009999;
 }
 .comment-holder {
   position: relative;
@@ -1948,10 +1788,6 @@ margin-top: 16px;
     font-size: 12px;
   }
 }
-.plus-comment:hover {
-  color: #333;
-  background-color: #eee;
-}
 .plus-comment i {
   margin-top: -3px;
   font-size: .8em;
@@ -1993,9 +1829,6 @@ margin-top: 16px;
 .form-more .fa {
   margin-right: 5px;
   cursor: pointer;
-}
-.form-more .fa:hover {
-  color: #666;
 }
 @media (max-width: 325px) {
   .form-more .fa {
@@ -2048,9 +1881,6 @@ margin-top: 16px;
   font-weight: bold;
   color: #3b5998;
   cursor: pointer;
-}
-.commenter-name:hover {
-  color: #1b3978;
 }
 .like-comment {
   margin-left: 5px;
@@ -2189,21 +2019,11 @@ margin-top: 16px;
 .social-login.google-btn {
   color: #DD4B39;
 }
-.social-login.facebook-btn:hover {
-  color: white;
-  border: 1px solid #3B5998;
-  background-color: #3B5998;
-}
 .social-login.facebook-btn.loading-mode {
   color: white;
   border: 1px solid #3B5998;
   background-color: #3B5998;
   text-align: center;
-}
-.social-login.google-btn:hover {
-  color: white;
-  border: 1px solid #DD4B39;
-  background-color: #DD4B39;
 }
 .social-login.google-btn.loading-mode {
   color: white;
@@ -2231,18 +2051,6 @@ margin-top: 16px;
   height: 35px;
   cursor: pointer;
   border-radius: 50%;
-}
-.social-btns img.fb:hover {
-  opacity: .8;
-  box-shadow: 1px 1px 5px #3c5a99;
-}
-.social-btns img.yt:hover {
-  opacity: .8;
-  box-shadow: 1px 1px 5px #ca4638;
-}
-.social-btns img.tw:hover {
-  opacity: .8;
-  box-shadow: 1px 1px 5px #55acee;
 }
 .twitter-btn {
   margin: 0 5px 0 5px;
@@ -2318,9 +2126,6 @@ margin-top: 16px;
 
 .profile-edit .three-dots .fa {
   margin-right: 1.5px;
-}.profile-edit .three-dots
-.profile-edit .three-dots .fa:hover {
-  color: #009900;
 }
 .modal-friends {
   width: 100%;
@@ -2376,9 +2181,6 @@ margin-top: 16px;
   top: 10px;
   cursor: pointer;
 }
-.white-box-friends header .fa-times:hover {
-  opacity: 0.7;
-}
 .white-box-friends .friends-corpse-hover {
   padding: 15px 5px 5px;
   max-height: 420px;
@@ -2433,9 +2235,6 @@ margin-top: 16px;
   height: 26px;
   box-sizing: border-box;
 }
-.friend-hover .subscribe button:hover {
-  background-color: #ccc;
-}
 .friend-hover .subscribe button.active {
   background-color: #eee;
   color: #333;
@@ -2453,10 +2252,6 @@ margin-top: 16px;
   border-radius: 3px !important;
   padding: 5px 6px !important;
   text-align: center !important;
-}
-.more-friends:hover {
-  background-color: #6bac6f !important;
-  color: white !important;
 }
 .white-box-edit {
   background-color: white;
@@ -2477,10 +2272,6 @@ margin-top: 16px;
 }
 .white-box-edit:last-child {
   border-bottom: none;
-}
-.white-box-edit article:hover {
-  background-color: #e1e1e1;
-  font-weight: 600;
 }
 @media (max-width: 768px) {
   .white-box-edit {
@@ -2646,10 +2437,6 @@ margin-top: 16px;
   box-sizing: border-box;
   text-transform: capitalize;
 }
-.subscribe button:hover {
-  opacity: .9;
-  cursor: pointer;
-}
 .subscribe button i {
   margin-right: 5px;
   width: 13px !important;
@@ -2669,12 +2456,6 @@ margin-top: 16px;
   border-bottom-right-radius: 0;
   height: 28px;
   box-sizing: border-box;
-}
-.widget .subscribe button:hover,
-.widget .subscribe button:active {
-  background-color: #009900;
-  border: 1px solid #009900;
-  color: #fff;
 }
 .nbr-subscribes {
   color: #555;
@@ -3048,9 +2829,6 @@ a {
   color: #365899;
   cursor: pointer;
 }
-.change-account:hover {
-  color: #4668a9;
-}
 input.loginInput {
   margin-bottom: 12px;
   background: 0 0;
@@ -3322,12 +3100,6 @@ input.loginInput {
   padding-left: 38px;
   text-decoration: none;
 }
-.params-left-menu a:hover {
-  border-left: 3px solid #ccc;
-  color: black;
-  padding-left: 38px;
-  text-decoration: none;
-}
 .params-left-menu a:visited {
   color: black;
 }
@@ -3422,10 +3194,6 @@ input.loginInput {
   background-color: white;
   font-family: lato semibold;
 }
-.button-param button:hover {
-  color: white;
-  background-color: #009900;
-}
 .button-param a {
   position: absolute;
   bottom: 5px;
@@ -3511,12 +3279,6 @@ input.loginInput {
 .support-left-menu a.active {
   font-weight: 600;
   border-left: 3px solid black !important;
-  padding-left: 38px;
-  text-decoration: none;
-}
-.support-left-menu a:hover {
-  border-left: 3px solid #ccc;
-  color: black;
   padding-left: 38px;
   text-decoration: none;
 }
@@ -3652,9 +3414,6 @@ input.loginInput {
   width: 20px;
   height: 20px;
 }
-.emoji-categ img:hover {
-  opacity: 0.8;
-}
 .emoji-container {
   width: 225px;
   padding: 2px 0 5px;
@@ -3667,9 +3426,6 @@ input.loginInput {
 .emoji-elt img {
   width: 30px;
   height: 30px;
-}
-.emoji-elt img:hover {
-  opacity: 0.7;
 }
 @media (max-width: 992px) {
   .emoji-hover {
@@ -3791,11 +3547,6 @@ input.loginInput {
   top: -28px;
   left: 0;
 }
-/* Show the tooltip text when you mouse over the tooltip container */
-
-.tooltip-emoji:hover .tooltiptext {
-  visibility: visible;
-}
 .arrow-tooltip {
   position: absolute;
   bottom: -1px;
@@ -3823,17 +3574,6 @@ input.loginInput {
   -webkit-transition: 0.5s ease-in-out;
   -moz-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
-}
-.like-holder:hover .social-emoji,
-.dislike-holder:hover .social-emoji {
-  width: 40px !important;
-  margin-top: -5px;
-  margin-bottom: -5px;
-  margin-left: -5px;
-  margin-right: -5px;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
 }
 .social-emoji.desaturated {
   -webkit-filter: grayscale(100%);
@@ -3864,16 +3604,6 @@ input.loginInput {
 }
 .fb-xfbml-parse-ignore .hint-social {
   right: -35px;
-}
-.like-holder:hover .hint-social,
-.dislike-holder:hover .hint-social,
-.comment-number-holder:hover .hint-social,
-.share-holder:hover .hint-social,
-.fb-xfbml-parse-ignore:hover .hint-social {
-  opacity: 1;
-  -webkit-transition: 0.2s linear 0.2s;
-  -moz-transition: 0.2s linear 0.2s;
-  transition: 0.2s linear 0.2s;
 }
 .msgErreur {
   color: red;
@@ -3940,9 +3670,6 @@ input.loginInput {
   width: 100%;
   margin-top: 0 !important;
 }
-.content .img-preview:hover {
-  opacity: 0.8;
-}
 .link-preview .fa-times {
   position: absolute;
   top: 10px;
@@ -3952,15 +3679,9 @@ input.loginInput {
   text-shadow: 2px 2px 2px #333;
   font-size: 20px;
 }
-.link-preview .fa-times:hover {
-  color: #26A658;
-}
 .link-preview a {
   padding: 0;
   color: black;
-}
-.link-preview a:hover {
-  text-decoration: none;
 }
 .link-preview .descriptions {
   padding: 10px;
@@ -4037,10 +3758,6 @@ input.loginInput {
   height: 11px;
   text-align: center;
   line-height: 10px;
-}
-.remove-times:hover{
-  color:white;
-  background-color:  #6bac6f;
 }
 .nbr-subscribers{
   color:#999;
@@ -4163,12 +3880,6 @@ publication .user {
   position: relative;
   left: 12%;
   height: 36px;
-}
-
-
-.btn-edit-profile-1:hover,
-.sub-profile-btn-old.active:hover{
-  background-color: #e4e4e4;
 }
 
 
@@ -4430,3 +4141,362 @@ change-password .input-param input {
 .mobile-header-center .search:focus {
   padding-left: 12px;
 }
+
+
+/*------------------------------all-hover-effects-begin-------------------*/
+@media(min-width: 767px) {
+  .fbShare:hover {
+    color: #2266ff;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+  }
+
+  .main-header a:hover {
+    text-decoration: underline;
+  }
+
+  .main-header a:hover .user-img {
+    opacity: .9;
+  }
+
+  .main-header .fa:hover {
+    color: #000;
+  }
+
+  .profile-hover article:hover {
+    background-color: #009999 !important;
+    color: white;
+    z-index: 3;
+  }
+
+  .sign-out:hover {
+    background-color: #009999 !important;
+    color: white;
+    z-index: 3;
+  }
+
+  .sign-out a:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+
+
+  .recherche-results article:hover {
+    background-color: #009999 !important;
+    color: white;
+  }
+
+  .notification-holder article:hover {
+    background: #eee;
+    cursor: pointer;
+    z-index: 4;
+  }
+
+  .notif-a:hover {
+    color: #024678;
+  }
+
+  .more-not:hover {
+    text-decoration: none !important;
+    background-color: #009999 !important;
+    color: white !important;
+  }
+
+  .btn-primary:hover {
+    background-color: #33adff;
+  }
+
+  .header-segement.description-holder .fa-pencil:hover {
+    opacity: 1;
+  }
+
+  .sub-profile-btn-old:hover {
+    background-color: #2cba2c;
+  }
+
+  .sub-profile-btn:hover {
+    background-color: #999 !important;
+    color: white !important;
+  }
+
+  .profile-photo:hover .fa-upload,
+  .profile-photo:hover .fa-floppy-o,
+  .profile-photo:hover .fa-times {
+    display: inline;
+  }
+
+  .widget button:hover {
+    opacity: .8;
+  }
+
+  .ajout-img-holder:hover .close {
+    display: block;
+    position: absolute;
+    left: 100px;
+    top: 180px;
+    font-size: 30px;
+  }
+
+  .clicked-dropdown article:hover {
+    background-color: #3B5998;
+    color: white;
+  }
+
+  .select-choice:hover {
+    background-color: #009999;
+    color: white;
+  }
+
+  .publish-button.loading-button:hover {
+    background-color: #55aa55;
+  }
+
+  .delete-photo-post:hover {
+    background-color: white;
+    color: #008800;
+    text-shadow: 2px 2px 3px #eeeeee;
+  }
+
+  button.publish-button:hover,
+  .comment-publish:hover {
+    color: rgba(255, 255, 255, 1);
+    background: #55aa55;
+  }
+
+  .title-checkbox:hover {
+    color: #333;
+  }
+
+  .image-add-btn div:hover {
+    color: #666;
+  }
+
+  .upper-form-add div.not-btn:hover {
+    text-decoration: none;
+  }
+
+  .add-buttons .fa:hover,
+  .add-buttons .gif-btn:hover {
+    color: #666;
+    cursor: pointer;
+  }
+
+  .hashtag:hover {
+    text-decoration: underline;
+  }
+
+  .date:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .user-name-shared header:hover {
+    text-decoration: underline;
+  }
+
+  .comment-number-holder:hover button .fa {
+    font-size: 35px;
+    color: #009900 !important;
+    margin: -6px -5px 0;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+  }
+
+
+
+  .share-holder:hover button .fa {
+    font-size: 40px;
+    margin: -13px -7.5px 0;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+  }
+
+  .like-comment .like-holder:hover,
+  .like-comment .like-holder:hover button {
+    color: #009900 !important;
+  }
+
+  .like-comment .dislike-holder:hover,
+  .like-comment .dislike-holder:hover button {
+    color: #ff0000 !important;
+  }
+
+  .share-holder:hover button {
+    color: #539ddc !important;
+  }
+
+  .right-side-of-likes:hover {
+    color: #333;
+  }
+
+  .sub-menu:hover {
+    color: white;
+    background-color: #009999;
+    z-index: 3;
+  }
+
+  .sub-menu article:hover {
+    color: white;
+    background-color: #009999;
+  }
+
+  .plus-comment:hover {
+    color: #333;
+    background-color: #eee;
+  }
+
+  .form-more .fa:hover {
+    color: #666;
+  }
+
+  .commenter-name:hover {
+    color: #1b3978;
+  }
+
+  .social-login.facebook-btn:hover {
+    color: white;
+    border: 1px solid #3B5998;
+    background-color: #3B5998;
+  }
+
+  .social-login.google-btn:hover {
+    color: white;
+    border: 1px solid #DD4B39;
+    background-color: #DD4B39;
+  }
+
+  .social-btns img.fb:hover {
+    opacity: .8;
+    box-shadow: 1px 1px 5px #3c5a99;
+  }
+
+  .social-btns img.yt:hover {
+    opacity: .8;
+    box-shadow: 1px 1px 5px #ca4638;
+  }
+
+  .social-btns img.tw:hover {
+    opacity: .8;
+    box-shadow: 1px 1px 5px #55acee;
+  }
+  .profile-edit .three-dots
+  .profile-edit .three-dots .fa:hover {
+    color: #009900;
+  }
+
+  .white-box-friends header .fa-times:hover {
+    opacity: 0.7;
+  }
+
+  .friend-hover .subscribe button:hover {
+    background-color: #ccc;
+  }
+
+  .more-friends:hover {
+    background-color: #6bac6f !important;
+    color: white !important;
+  }
+
+  .white-box-edit article:hover {
+    background-color: #e1e1e1;
+    font-weight: 600;
+  }
+
+  .subscribe button:hover {
+    opacity: .9;
+    cursor: pointer;
+  }
+
+  .widget .subscribe button:hover,
+  .widget .subscribe button:active {
+    background-color: #009900;
+    border: 1px solid #009900;
+    color: #fff;
+  }
+
+  .change-account:hover {
+    color: #4668a9;
+  }
+
+  .params-left-menu a:hover {
+    border-left: 3px solid #ccc;
+    color: black;
+    padding-left: 38px;
+    text-decoration: none;
+  }
+
+  .button-param button:hover {
+    color: white;
+    background-color: #009900;
+  }
+
+  .support-left-menu a:hover {
+    border-left: 3px solid #ccc;
+    color: black;
+    padding-left: 38px;
+    text-decoration: none;
+  }
+
+  .emoji-categ img:hover {
+    opacity: 0.8;
+  }
+
+  .emoji-elt img:hover {
+    opacity: 0.7;
+  }
+
+  /* Show the tooltip text when you mouse over the tooltip container */
+
+  .tooltip-emoji:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .like-holder:hover .social-emoji,
+  .dislike-holder:hover .social-emoji {
+    width: 40px !important;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    margin-left: -5px;
+    margin-right: -5px;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+  }
+
+  .like-holder:hover .hint-social,
+  .dislike-holder:hover .hint-social,
+  .comment-number-holder:hover .hint-social,
+  .share-holder:hover .hint-social,
+  .fb-xfbml-parse-ignore:hover .hint-social {
+    opacity: 1;
+    -webkit-transition: 0.2s linear 0.2s;
+    -moz-transition: 0.2s linear 0.2s;
+    transition: 0.2s linear 0.2s;
+  }
+
+  .content .img-preview:hover {
+    opacity: 0.8;
+  }
+
+  .link-preview .fa-times:hover {
+    color: #26A658;
+  }
+
+  .link-preview a:hover {
+    text-decoration: none;
+  }
+
+  .remove-times:hover{
+    color:white;
+    background-color:  #6bac6f;
+  }
+
+  .btn-edit-profile-1:hover,
+  .sub-profile-btn-old.active:hover{
+    background-color: #e4e4e4;
+  }
+}
+/*------------------------------all-hover-effects-begin-------------------*/
