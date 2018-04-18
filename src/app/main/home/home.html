@@ -100,12 +100,12 @@
 
           </div>
           <div class="col-md-12 col-xs-12 add-head" style="padding: 4px 15px;display: flex;">
-            <div class="col-md-5 col-xs-6 add-buttons noPadding">
-
+            <div  class="col-md-5 col-xs-6 add-buttons noPadding"
+                  style="display: flex; align-items: center">
 
 							<span class="picture-pub-in" (click)="addPhoto()">
                         <i class="fa fa-picture-o"></i>
-                    </span>
+              </span>
 
 							<span class="hidden-xs" (click)="addPhotoGIF()">
                   <b class="gif-btn">{{ 'home_publish_GIF' | translate }}</b>
@@ -120,15 +120,27 @@
 
 
                         <i class="fa fa-youtube-play" (click)="changeYoutubeInput()"></i>
-                    </span>
-
+              </span>
 
               <input type="file" id="file-image" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
-              <input type="file" id="file-image-gif" style="display:none" accept=".gif"
+              <input type="file" id="file-image-gif"
+                      style="display:none" accept=".gif"
                      (change)="uploadPhotoGIF($event)">
-            </div>
-            <div class="col-md-7 col-xs-6 share-button" style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
 
+              <div  class="change-privacy hidden-lg hidden-md hidden-sm"
+                    style="position:unset; margin-right: 12px; font-size: 26px">
+              <i  class="fa fa-globe"
+                  style="vertical-align: middle; font-size: inherit"
+                  [class.hide]="selectedMenuElement!=0"
+                  (click)="changeSelectMenu(1)"></i>
+              <i  class="fa fa-users"
+                  style="vertical-align: middle; font-size: inherit"
+                  [class.hide]="selectedMenuElement!=1"
+                  (click)="changeSelectMenu(0)"></i>
+              </div>
+            </div>
+            <div  class="col-md-7 col-xs-6 share-button"
+                  style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
               <div class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
                 <div>
                   <header (click)="disableSelectMenu()">
@@ -158,11 +170,15 @@
                 </div>
                 <i class="fa fa-caret-down"></i>
               </div>
-              <div class="change-privacy hidden-lg hidden-md"
+              <div class="change-privacy hidden-lg hidden-md hidden-xs"
                   style="position:unset; margin-right: 12px">
-                <i class="fa fa-globe" style="vertical-align: middle" [class.hide]="selectedMenuElement!=0" (click)="changeSelectMenu(1)"></i>
-                <i class="fa fa-users" style="vertical-align: middle" [class.hide]="selectedMenuElement!=1" (click)="changeSelectMenu(0)"></i>
-
+                <i class="fa fa-globe"
+                  style="vertical-align: middle"
+                  [class.hide]="selectedMenuElement!=0"
+                  (click)="changeSelectMenu(1)"></i>
+                <i class="fa fa-users"
+                  style="vertical-align: middle"
+                  [class.hide]="selectedMenuElement!=1" (click)="changeSelectMenu(0)"></i>
               </div>
               <button class="publish-button" type="submit" *ngIf="!loadingPublish">
                  {{ 'home_publish_button' | translate }}

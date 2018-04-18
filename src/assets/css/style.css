@@ -1381,7 +1381,6 @@ textarea:focus {
 @media (max-width: 768px) {
   .add-buttons .fa {
     font-size: 20px;
-    top: 5px;
     position: relative;
   }
 }
