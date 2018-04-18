@@ -599,12 +599,12 @@ export class Home {
         this.updateYoutube();
         return 1;
       }
-      if (linkURL.search(".gif") >= 0) {
+      if(linkURL.search(/(\.gif|\.jpg|\.png)$/i)>0) {
         console.log("this is a gif!");
         console.log(linkURL);
-        var checker = linkURL.substr(linkURL.length - 13, 8);
+        //var checker = linkURL.substr(linkURL.length - 13, 8);
         console.log(linkURL);
-        if (checker.indexOf(".gif") >= 0) {
+        //if (checker.indexOf(".gif") >= 0) {
           this.link.image = linkURL;//.substring(0, linkURL.indexOf(".gif") + 4);
           this.link.imageWidth = 500;
           this.link.imageHeight = 500;
@@ -614,7 +614,7 @@ export class Home {
           this.link.description = "gif";
           this.link.isSet = true;
           return 1;
-        }
+        //}
       }
       this.linkLoading = true;
       this.http.get(
