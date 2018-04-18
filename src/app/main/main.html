@@ -72,11 +72,13 @@
     <div class="header-right">
       <article *ngIf="user">
         <a class="hidden-sm hidden-xs" [routerLink]="['/main/profile',user._id]">
-          <div class="user-img img-header" *ngIf="user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePictureMin + ')'}"
-            style="position:absolute;top:-5px;left:-35px;"></div>
-          <div class="user-img img-header" *ngIf="!user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePicture + ')'}"
-            style="position:absolute;top:-5px;left:-35px;"></div>
-          {{loginService.getUser().firstName}} {{loginService.getUser().lastName}}
+          <div  class="user-img img-header"
+                *ngIf="user.profilePictureMin"
+                [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePictureMin + ')'}"></div>
+          <div  class="user-img img-header"
+                *ngIf="!user.profilePictureMin"
+                [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePicture + ')'}"></div>
+          <span style="margin-top: 4px;">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</span>
         </a>
       </article>
 
