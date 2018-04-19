@@ -1415,7 +1415,7 @@ textarea:focus {
   padding: 0;
   margin-left: 0px;
   flex-grow: 1;
-  margin-top: 13px;
+  margin-top: 15px;
 }
 #pub-holder input {
   padding: 2px 2px 2px 0;
@@ -1519,12 +1519,10 @@ top-blagueurs-decov .user .user-img,
   min-height: var(--user-img-w);
 }
 
+
+#pub-holder .user-img,
 .publication .user .user-img {
   --user-img-w: 40px;
-}
-
-#pub-holder .user-img {
-  --user-img-w: 46px;
 }
 
 .user-img {  
