@@ -363,7 +363,16 @@ export class Home {
   }
 
   publish() {
-    this.form.value.publicationText = jQuery("#publishDiv").html();
+    console.log("publish()");
+    var txt = jQuery("#publishDiv").html();
+    if(txt.endsWith("<br>")) {
+      this.form.value.publicationText = txt.substring(0, txt.lastIndexOf("<br>"));
+      console.log("it ends with <br>!!!")
+    }
+    else {
+      this.form.value.publicationText = txt;
+    }
+    console.log(this.form.value.publicationText);
     if (!this.form.value.publicationText && !this.youtubeLink && !this.uploadedPicture && !this.link.isSet) {
       this.errorMsg = "SP_FV_ER_PUBLICATION_EMPTY";
       this.errorTimed();
