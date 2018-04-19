@@ -107,7 +107,7 @@
 
   "prefix_date_yesterday" :"hier",
   "prefix_date_now" :"maintenant",
-  "prefix_date_days" :" jours",
+  "prefix_date_days" :" jrs",
   "prefix_date_hours" :" hrs",
   "prefix_date_minutes" :" mins",
   "prefix_date_one_hour" :" 1 h",
