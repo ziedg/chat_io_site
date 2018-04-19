@@ -1320,14 +1320,13 @@ textarea:focus {
   display: block;
   position: absolute;
   height: 36px !important;
-  top: -10px;
+  top: 2px;
   left: -5px;
   padding: 8px 7px 8px 32px;
   border: solid 1px #ddd;
   border-radius: 3px;
   margin-right: 0;
   width: 260px;
-  height: inherit;
 }
 @media (max-width: 1198px) {
   .youtube-input-popup {
@@ -1378,9 +1377,26 @@ textarea:focus {
   line-height: 20px;
   margin-right: 10px;
 }
-@media (max-width: 768px) {
+
+@media(max-width: 767px) {
+  .add-pub .add-head {
+    padding-top: 6px!important;
+    padding-bottom: 6px!important;
+  }
+  .add-pub .picture-pub-in {
+    line-height: 20px!important;
+  }
+}
+
+@media(min-width: 768px) {
+  .add-pub .add-buttons {
+    padding-top: 3px!important
+  }
+}
+
+@media(max-width: 768px) {
   .add-buttons .fa {
-    font-size: 22px;
+    font-size: 22px !important;
     position: relative;
   }
 }
