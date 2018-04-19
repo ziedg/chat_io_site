@@ -478,6 +478,13 @@ export class Profile {
         response => {
 
         if (response.status == "0") {
+
+          if (this.loginService.isWasConnectedWithFacebook){
+            let fuser = this.loginService.getFacebookUser();
+            fuser.profilePicture=response.profile.profilePicture;
+             localStorage.setItem('facebookUser',JSON.stringify(fuser));
+          }
+
           localStorage.setItem('user', JSON.stringify(response.profile));
           this.loginService.actualize();
           this.changePhotoCancel();
