@@ -360,6 +360,11 @@ a {
   padding-bottom: calc( 14.14px / 2);
   z-index: 3;
 }
+
+.recherche-results article {
+  cursor: pointer;
+}
+
 .header-center .upper-arrow-search {
   top: 109%;
   left: 50%;
