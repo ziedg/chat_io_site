@@ -1,11 +1,4 @@
 <div class="row">
-  <div class="col-md-12" style="text-align:center">
-    <div class="user-img" style="display:inline-block;margin-right:20px;background-size:cover"
-         [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}"></div>
-
-    <h3 style="top:-6px;margin-bottom:0;padding-bottom:0">
-      {{user.firstName}} {{user.lastName}}</h3>
-  </div>
   <form class="col-xs-12" style="padding-top:40px" [formGroup]="form" #f="ngForm" (ngSubmit)="saveData()">
 
     <div class="col-md-4 col-sm-4 col-xs-12 label-param">
