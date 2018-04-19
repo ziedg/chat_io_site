@@ -11,7 +11,7 @@
     "footer_about" : "A propos de nous",
     "footer_cgu" : "Conditions",
     "footer_team" : "L'equipe",
-    "footer_copyright" : "© 2016 Speegar ",
+    "footer_copyright" : "© 2018 Speegar ",
 
     "sign_in_email_placeholder" : "Email",
     "sign_in_password_placeholder" : "Mot de passe",
@@ -220,7 +220,7 @@
     "SP_ER_EMAIL_NOT_VALID": "Cette adresse mail n'est pas valide",
 
 
-    "publication_open_last_part": "... Lire la suite"
+    "publication_open_last_part": "Lire la suite ..."
 
 
 
