@@ -1380,7 +1380,7 @@ textarea:focus {
 }
 @media (max-width: 768px) {
   .add-buttons .fa {
-    font-size: 20px;
+    font-size: 22px;
     position: relative;
   }
 }
@@ -1415,7 +1415,7 @@ textarea:focus {
   padding: 0;
   margin-left: 0px;
   flex-grow: 1;
-  margin-top: 15px;
+  margin-top: 13px;
 }
 #pub-holder input {
   padding: 2px 2px 2px 0;
@@ -4097,7 +4097,6 @@ top-blagueurs-decov .user-name header {
 
 @media(max-width: 768px) {
   .add-buttons .fa-picture-o {
-    font-size: 28px;
     vertical-align: middle;
   }
   .add-buttons {
