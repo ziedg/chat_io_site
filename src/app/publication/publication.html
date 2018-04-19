@@ -12,12 +12,12 @@
       <div class="user-img"
            [routerLink]="['/main/profile',publicationBean.profileId]"
            *ngIf="publicationBean.profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePictureMin + ')'}">
+           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePictureMin + ')', cursor: 'pointer'}">
       </div>
 
       <div class="user-img" [routerLink]="['/main/profile',publicationBean.profileId]"
            *ngIf="!publicationBean.profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePicture + ')'}">
+           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePicture + ')', cursor: 'pointer'}">
       </div>
 
 
