@@ -91,6 +91,7 @@ export class Publication {
   private firstPubText: string = "";
   private lastPubText: string = "";
   pub_text:string = "";
+  arabicText:boolean = false;
 
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
@@ -195,10 +196,26 @@ export class Publication {
     console.log("publication info:")
     console.log(this.publicationBean);
     */
+
+    const arabic:RegExp = /[\u0600-\u06FF]/;
+
+    var pub_txt
+    if(this.publicationBean.isShared) {
+      pub_txt = this.publicationBean.publText;
+    }
+    else {
+      pub_txt = this.publicationBean.publText;
+    }
+    if(pub_txt !== null
+        && pub_txt.length) {
+      this.arabicText = arabic.test(pub_txt[0]);
+      console.log("arabic text!");
+    }
+
     
     const word_letters = 5;
 
-    const words_max:number = 100;
+    const words_max:number = 45;
     const words_marge:number = 10;
 
     const letters_max:number = words_max * word_letters;

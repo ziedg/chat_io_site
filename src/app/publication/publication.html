@@ -15,7 +15,8 @@
            [ngStyle]="{'background-image': 'url(' + publicationBean.profilePictureMin + ')', cursor: 'pointer'}">
       </div>
 
-      <div class="user-img" [routerLink]="['/main/profile',publicationBean.profileId]"
+      <div class="user-img"
+            [routerLink]="['/main/profile',publicationBean.profileId]"
            *ngIf="!publicationBean.profilePictureMin"
            [ngStyle]="{'background-image': 'url(' + publicationBean.profilePicture + ')', cursor: 'pointer'}">
       </div>
@@ -75,7 +76,7 @@
       <span *ngIf="publicationBean.publText !== 'null'
                   && publicationBean.publText !=='undefined'
                   && publicationBean.publText.length > 0"
-            class="publication-text"
+            [ngClass]="{'publication-text': true, 'arabic-text': arabicText}"
             >
             <span [innerHTML]="firstPubText"></span>
             <a *ngIf="longPubText && !longPubTextShow"
@@ -114,13 +115,20 @@
     <div class="content" *ngIf="publicationBean.isShared">
 
       <article class="publication bordered shared-publication">
-        <div class="content">
+        <div [ngClass]="{'content' : true, 'arabic-text': arabicText}">
           <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]">
             {{publicationBean.publTitle}} </h4>
             <span *ngIf="publicationBean.publText !== 'null'
-            && publicationBean.publText !=='undefined'
-            && publicationBean.publText.length > 0"
-                [innerHTML]="linkView.transformATextHaveALink(publicationBean.publText)">
+                  && publicationBean.publText !=='undefined'
+                  && publicationBean.publText.length > 0">
+                <!--[innerHTML]="linkView.transformATextHaveALink(publicationBean.publText)">-->
+                <span [innerHTML]="firstPubText"></span>
+                <a *ngIf="longPubText && !longPubTextShow"
+                    (click)="longPubTextShow=true"
+                    style="margin-top: 0; display:block">
+                    {{"publication_open_last_part" | translate }}</a>
+                <span *ngIf="longPubText && longPubTextShow" [innerHTML]="lastPubText">
+                </span>
             </span>
           <img *ngIf="publicationBean.publPictureLink" src="{{'http://'+imageBaseUrl + publicationBean.publPictureLink}}">
 

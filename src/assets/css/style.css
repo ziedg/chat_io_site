@@ -27,6 +27,365 @@
   src: url(../fonts/lato/Lato-Black_0.ttf);
 }
 
+
+/*------------------------------all-hover-effects-begin-------------------*/
+@media(min-width: 767px) {
+  .fbShare:hover {
+    color: #2266ff;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+  }
+
+  .main-header a:hover {
+    text-decoration: underline;
+  }
+
+  .main-header a:hover .user-img {
+    opacity: .9;
+  }
+
+  .main-header .fa:hover {
+    color: #000;
+  }
+
+  .profile-hover article:hover {
+    background-color: #009999 !important;
+    color: white;
+    z-index: 3;
+  }
+
+  .sign-out:hover {
+    background-color: #009999 !important;
+    color: white;
+    z-index: 3;
+  }
+
+  .sign-out a:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+
+
+  .recherche-results article:hover {
+    background-color: #009999 !important;
+    color: white;
+  }
+
+  .notification-holder article:hover {
+    background: #eee;
+    cursor: pointer;
+    z-index: 4;
+  }
+
+  .notif-a:hover {
+    color: #024678;
+  }
+
+  .more-not:hover {
+    text-decoration: none !important;
+    background-color: #009999 !important;
+    color: white !important;
+  }
+
+  .btn-primary:hover {
+    background-color: #33adff;
+  }
+
+  .header-segement.description-holder .fa-pencil:hover {
+    opacity: 1;
+  }
+
+  .sub-profile-btn-old:hover {
+    background-color: #2cba2c;
+  }
+
+  .sub-profile-btn:hover {
+    background-color: #999 !important;
+    color: white !important;
+  }
+
+  .profile-photo:hover .fa-upload,
+  .profile-photo:hover .fa-floppy-o,
+  .profile-photo:hover .fa-times {
+    display: inline;
+  }
+
+  .widget button:hover {
+    opacity: .8;
+  }
+
+  .ajout-img-holder:hover .close {
+    display: block;
+    position: absolute;
+    left: 100px;
+    top: 180px;
+    font-size: 30px;
+  }
+
+  .clicked-dropdown article:hover {
+    background-color: #3B5998;
+    color: white;
+  }
+
+  .select-choice:hover {
+    background-color: #009999;
+    color: white;
+  }
+
+  .publish-button.loading-button:hover {
+    background-color: #55aa55;
+  }
+
+  .delete-photo-post:hover {
+    background-color: white;
+    color: #008800;
+    text-shadow: 2px 2px 3px #eeeeee;
+  }
+
+  button.publish-button:hover,
+  .comment-publish:hover {
+    color: rgba(255, 255, 255, 1);
+    background: #55aa55;
+  }
+
+  .title-checkbox:hover {
+    color: #333;
+  }
+
+  .image-add-btn div:hover {
+    color: #666;
+  }
+
+  .upper-form-add div.not-btn:hover {
+    text-decoration: none;
+  }
+
+  .add-buttons .fa:hover,
+  .add-buttons .gif-btn:hover {
+    color: #666;
+    cursor: pointer;
+  }
+
+  .hashtag:hover {
+    text-decoration: underline;
+  }
+
+  .date:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .user-name-shared header:hover {
+    text-decoration: underline;
+  }
+
+  .comment-number-holder:hover button .fa {
+    font-size: 35px;
+    color: #009900 !important;
+    margin: -6px -5px 0;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+  }
+
+
+
+  .share-holder:hover button .fa {
+    font-size: 40px;
+    margin: -13px -7.5px 0;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+  }
+
+  .like-comment .like-holder:hover,
+  .like-comment .like-holder:hover button {
+    color: #009900 !important;
+  }
+
+  .like-comment .dislike-holder:hover,
+  .like-comment .dislike-holder:hover button {
+    color: #ff0000 !important;
+  }
+
+  .share-holder:hover button {
+    color: #539ddc !important;
+  }
+
+  .right-side-of-likes:hover {
+    color: #333;
+  }
+
+  .sub-menu:hover {
+    color: white;
+    background-color: #009999;
+    z-index: 3;
+  }
+
+  .sub-menu article:hover {
+    color: white;
+    background-color: #009999;
+  }
+
+  .plus-comment:hover {
+    color: #333;
+    background-color: #eee;
+  }
+
+  .form-more .fa:hover {
+    color: #666;
+  }
+
+  .commenter-name:hover {
+    color: #1b3978;
+  }
+
+  .social-login.facebook-btn:hover {
+    color: white;
+    border: 1px solid #3B5998;
+    background-color: #3B5998;
+  }
+
+  .social-login.google-btn:hover {
+    color: white;
+    border: 1px solid #DD4B39;
+    background-color: #DD4B39;
+  }
+
+  .social-btns img.fb:hover {
+    opacity: .8;
+    box-shadow: 1px 1px 5px #3c5a99;
+  }
+
+  .social-btns img.yt:hover {
+    opacity: .8;
+    box-shadow: 1px 1px 5px #ca4638;
+  }
+
+  .social-btns img.tw:hover {
+    opacity: .8;
+    box-shadow: 1px 1px 5px #55acee;
+  }
+  .profile-edit .three-dots
+  .profile-edit .three-dots .fa:hover {
+    color: #009900;
+  }
+
+  .white-box-friends header .fa-times:hover {
+    opacity: 0.7;
+  }
+
+  .friend-hover .subscribe button:hover {
+    background-color: #ccc;
+  }
+
+  .more-friends:hover {
+    background-color: #6bac6f !important;
+    color: white !important;
+  }
+
+  .white-box-edit article:hover {
+    background-color: #e1e1e1;
+    font-weight: 600;
+  }
+
+  .subscribe button:hover {
+    opacity: .9;
+    cursor: pointer;
+  }
+
+  .widget .subscribe button:hover,
+  .widget .subscribe button:active {
+    background-color: #009900;
+    border: 1px solid #009900;
+    color: #fff;
+  }
+
+  .change-account:hover {
+    color: #4668a9;
+  }
+
+  .params-left-menu a:hover {
+    border-left: 3px solid #ccc;
+    color: black;
+    padding-left: 38px;
+    text-decoration: none;
+  }
+
+  .button-param button:hover {
+    color: white;
+    background-color: #009900;
+  }
+
+  .support-left-menu a:hover {
+    border-left: 3px solid #ccc;
+    color: black;
+    padding-left: 38px;
+    text-decoration: none;
+  }
+
+  .emoji-categ img:hover {
+    opacity: 0.8;
+  }
+
+  .emoji-elt img:hover {
+    opacity: 0.7;
+  }
+
+  /* Show the tooltip text when you mouse over the tooltip container */
+
+  .tooltip-emoji:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .like-holder:hover .social-emoji,
+  .dislike-holder:hover .social-emoji {
+    width: 40px !important;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    margin-left: -5px;
+    margin-right: -5px;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+  }
+
+  .like-holder:hover .hint-social,
+  .dislike-holder:hover .hint-social,
+  .comment-number-holder:hover .hint-social,
+  .share-holder:hover .hint-social,
+  .fb-xfbml-parse-ignore:hover .hint-social {
+    opacity: 1;
+    -webkit-transition: 0.2s linear 0.2s;
+    -moz-transition: 0.2s linear 0.2s;
+    transition: 0.2s linear 0.2s;
+  }
+
+  .content .img-preview:hover {
+    opacity: 0.8;
+  }
+
+  .link-preview .fa-times:hover {
+    color: #26A658;
+  }
+
+  .link-preview a:hover {
+    text-decoration: none;
+  }
+
+  .remove-times:hover{
+    color:white;
+    background-color:  #6bac6f;
+  }
+
+  .btn-edit-profile-1:hover,
+  .sub-profile-btn-old.active:hover{
+    background-color: #e4e4e4;
+  }
+}
+/*------------------------------all-hover-effects-end-------------------*/
+
 * {
   outline: none;
 }
@@ -1548,7 +1907,7 @@ top-blagueurs-decov .user .user-img,
 .publication .user .user-img {
   --user-img-w: 50px;
   border: 2px solid #fff;
-  box-shadow: 0 0 0 2px #ccc;
+  box-shadow: 0 0 0 2px #e1e1e1;
 }
 
 .user-img {  
@@ -4194,360 +4553,7 @@ change-password .input-param input {
 }
 
 
-/*------------------------------all-hover-effects-begin-------------------*/
-@media(min-width: 767px) {
-  .fbShare:hover {
-    color: #2266ff;
-    -webkit-transition: 0.3s ease-in-out;
-    -moz-transition: 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
-  }
-
-  .main-header a:hover {
-    text-decoration: underline;
-  }
-
-  .main-header a:hover .user-img {
-    opacity: .9;
-  }
-
-  .main-header .fa:hover {
-    color: #000;
-  }
-
-  .profile-hover article:hover {
-    background-color: #009999 !important;
-    color: white;
-    z-index: 3;
-  }
-
-  .sign-out:hover {
-    background-color: #009999 !important;
-    color: white;
-    z-index: 3;
-  }
-
-  .sign-out a:hover {
-    text-decoration: none;
-    color: inherit;
-  }
-
-
-  .recherche-results article:hover {
-    background-color: #009999 !important;
-    color: white;
-  }
-
-  .notification-holder article:hover {
-    background: #eee;
-    cursor: pointer;
-    z-index: 4;
-  }
-
-  .notif-a:hover {
-    color: #024678;
-  }
-
-  .more-not:hover {
-    text-decoration: none !important;
-    background-color: #009999 !important;
-    color: white !important;
-  }
-
-  .btn-primary:hover {
-    background-color: #33adff;
-  }
-
-  .header-segement.description-holder .fa-pencil:hover {
-    opacity: 1;
-  }
-
-  .sub-profile-btn-old:hover {
-    background-color: #2cba2c;
-  }
-
-  .sub-profile-btn:hover {
-    background-color: #999 !important;
-    color: white !important;
-  }
-
-  .profile-photo:hover .fa-upload,
-  .profile-photo:hover .fa-floppy-o,
-  .profile-photo:hover .fa-times {
-    display: inline;
-  }
-
-  .widget button:hover {
-    opacity: .8;
-  }
-
-  .ajout-img-holder:hover .close {
-    display: block;
-    position: absolute;
-    left: 100px;
-    top: 180px;
-    font-size: 30px;
-  }
-
-  .clicked-dropdown article:hover {
-    background-color: #3B5998;
-    color: white;
-  }
-
-  .select-choice:hover {
-    background-color: #009999;
-    color: white;
-  }
-
-  .publish-button.loading-button:hover {
-    background-color: #55aa55;
-  }
-
-  .delete-photo-post:hover {
-    background-color: white;
-    color: #008800;
-    text-shadow: 2px 2px 3px #eeeeee;
-  }
-
-  button.publish-button:hover,
-  .comment-publish:hover {
-    color: rgba(255, 255, 255, 1);
-    background: #55aa55;
-  }
-
-  .title-checkbox:hover {
-    color: #333;
-  }
-
-  .image-add-btn div:hover {
-    color: #666;
-  }
-
-  .upper-form-add div.not-btn:hover {
-    text-decoration: none;
-  }
-
-  .add-buttons .fa:hover,
-  .add-buttons .gif-btn:hover {
-    color: #666;
-    cursor: pointer;
-  }
-
-  .hashtag:hover {
-    text-decoration: underline;
-  }
-
-  .date:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-
-  .user-name-shared header:hover {
-    text-decoration: underline;
-  }
-
-  .comment-number-holder:hover button .fa {
-    font-size: 35px;
-    color: #009900 !important;
-    margin: -6px -5px 0;
-    -webkit-transition: 0.3s ease-in-out;
-    -moz-transition: 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
-  }
-
-
-
-  .share-holder:hover button .fa {
-    font-size: 40px;
-    margin: -13px -7.5px 0;
-    -webkit-transition: 0.3s ease-in-out;
-    -moz-transition: 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
-  }
-
-  .like-comment .like-holder:hover,
-  .like-comment .like-holder:hover button {
-    color: #009900 !important;
-  }
-
-  .like-comment .dislike-holder:hover,
-  .like-comment .dislike-holder:hover button {
-    color: #ff0000 !important;
-  }
-
-  .share-holder:hover button {
-    color: #539ddc !important;
-  }
-
-  .right-side-of-likes:hover {
-    color: #333;
-  }
-
-  .sub-menu:hover {
-    color: white;
-    background-color: #009999;
-    z-index: 3;
-  }
-
-  .sub-menu article:hover {
-    color: white;
-    background-color: #009999;
-  }
-
-  .plus-comment:hover {
-    color: #333;
-    background-color: #eee;
-  }
-
-  .form-more .fa:hover {
-    color: #666;
-  }
-
-  .commenter-name:hover {
-    color: #1b3978;
-  }
-
-  .social-login.facebook-btn:hover {
-    color: white;
-    border: 1px solid #3B5998;
-    background-color: #3B5998;
-  }
-
-  .social-login.google-btn:hover {
-    color: white;
-    border: 1px solid #DD4B39;
-    background-color: #DD4B39;
-  }
-
-  .social-btns img.fb:hover {
-    opacity: .8;
-    box-shadow: 1px 1px 5px #3c5a99;
-  }
-
-  .social-btns img.yt:hover {
-    opacity: .8;
-    box-shadow: 1px 1px 5px #ca4638;
-  }
-
-  .social-btns img.tw:hover {
-    opacity: .8;
-    box-shadow: 1px 1px 5px #55acee;
-  }
-  .profile-edit .three-dots
-  .profile-edit .three-dots .fa:hover {
-    color: #009900;
-  }
-
-  .white-box-friends header .fa-times:hover {
-    opacity: 0.7;
-  }
-
-  .friend-hover .subscribe button:hover {
-    background-color: #ccc;
-  }
-
-  .more-friends:hover {
-    background-color: #6bac6f !important;
-    color: white !important;
-  }
-
-  .white-box-edit article:hover {
-    background-color: #e1e1e1;
-    font-weight: 600;
-  }
-
-  .subscribe button:hover {
-    opacity: .9;
-    cursor: pointer;
-  }
-
-  .widget .subscribe button:hover,
-  .widget .subscribe button:active {
-    background-color: #009900;
-    border: 1px solid #009900;
-    color: #fff;
-  }
-
-  .change-account:hover {
-    color: #4668a9;
-  }
-
-  .params-left-menu a:hover {
-    border-left: 3px solid #ccc;
-    color: black;
-    padding-left: 38px;
-    text-decoration: none;
-  }
-
-  .button-param button:hover {
-    color: white;
-    background-color: #009900;
-  }
-
-  .support-left-menu a:hover {
-    border-left: 3px solid #ccc;
-    color: black;
-    padding-left: 38px;
-    text-decoration: none;
-  }
-
-  .emoji-categ img:hover {
-    opacity: 0.8;
-  }
-
-  .emoji-elt img:hover {
-    opacity: 0.7;
-  }
-
-  /* Show the tooltip text when you mouse over the tooltip container */
-
-  .tooltip-emoji:hover .tooltiptext {
-    visibility: visible;
-  }
-
-  .like-holder:hover .social-emoji,
-  .dislike-holder:hover .social-emoji {
-    width: 40px !important;
-    margin-top: -5px;
-    margin-bottom: -5px;
-    margin-left: -5px;
-    margin-right: -5px;
-    -webkit-transition: 0.3s ease-in-out;
-    -moz-transition: 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
-  }
-
-  .like-holder:hover .hint-social,
-  .dislike-holder:hover .hint-social,
-  .comment-number-holder:hover .hint-social,
-  .share-holder:hover .hint-social,
-  .fb-xfbml-parse-ignore:hover .hint-social {
-    opacity: 1;
-    -webkit-transition: 0.2s linear 0.2s;
-    -moz-transition: 0.2s linear 0.2s;
-    transition: 0.2s linear 0.2s;
-  }
-
-  .content .img-preview:hover {
-    opacity: 0.8;
-  }
-
-  .link-preview .fa-times:hover {
-    color: #26A658;
-  }
-
-  .link-preview a:hover {
-    text-decoration: none;
-  }
-
-  .remove-times:hover{
-    color:white;
-    background-color:  #6bac6f;
-  }
-
-  .btn-edit-profile-1:hover,
-  .sub-profile-btn-old.active:hover{
-    background-color: #e4e4e4;
-  }
+.arabic-text {
+  text-align: right!important;
+  direction: rtl;
 }
-/*------------------------------all-hover-effects-end-------------------*/
