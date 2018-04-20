@@ -40,6 +40,7 @@ declare var $:any;
 declare var FB:any;
 declare var auth:any;
 declare const gapi:any;
+declare var window :any;
 @Component({
   moduleId: module.id,
   selector: 'home',
@@ -77,6 +78,7 @@ export class Home {
   showSuggestionMSG = false;
   keepLoading = true;
   touch_start_position:number;
+  online:any;
 
   constructor(public translate:TranslateService,
               private postService:PostService,
@@ -88,8 +90,11 @@ export class Home {
               private loginService:LoginService,
               private changeDetector:ChangeDetectorRef,
               private globalService:GlobalService,
+
+
               private ng2ImgMaxService: Ng2ImgMaxService) {
 
+    this.online = window.navigator.onLine;
     this.loginService.redirect();
 
     this.user = this.loginService.getUser();
@@ -398,6 +403,9 @@ export class Home {
       data.append('publExternalLink', this.link.url);
     }
     this.changeDetector.markForCheck();
+    if(this.online
+    )
+    {
     this.http.post(environment.SERVER_URL + pathUtils.PUBLISH, data, AppSettings.OPTIONS_POST)
       .map((res:Response) => res.json())
       .subscribe(
@@ -420,7 +428,11 @@ export class Home {
       () => {
         this.loadingPublish = false;
       }
-    );
+    );}
+    else
+    {
+      console.log("connection Failed")
+    }
   }
 
   enableTitlePost() {
@@ -489,10 +501,10 @@ export class Home {
     var inputValue = $event.target;
 
     if (inputValue != null && null != inputValue.files[0]) {
-      
+
       this.uploadedPicture = inputValue.files[0];
       //change
-      
+
       this.ng2ImgMaxService.compress([this.uploadedPicture], 0.7).subscribe( result =>{
         this.uploadedPicture=result;
 
