@@ -94,7 +94,6 @@ export class Home {
 
               private ng2ImgMaxService: Ng2ImgMaxService) {
 
-    this.online = window.navigator.onLine;
     this.loginService.redirect();
 
     this.user = this.loginService.getUser();
@@ -368,6 +367,8 @@ export class Home {
   }
 
   publish() {
+
+    this.online = window.navigator.onLine;
     console.log("publish()");
     var txt = jQuery("#publishDiv").html();
     if(txt.endsWith("<br>")) {
@@ -428,7 +429,7 @@ export class Home {
       () => {
         this.loadingPublish = false;
       }
-    );}
+    );3}
     else
     {
       console.log("connection Failed")
