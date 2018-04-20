@@ -436,6 +436,7 @@ export class Home {
     {
       console.log("failed to connect")
       jQuery("#errorMsgDisplay").fadeOut(1000);
+      this.resetPublish();
 
     }
   }
