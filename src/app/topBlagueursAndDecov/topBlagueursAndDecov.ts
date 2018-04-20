@@ -74,7 +74,7 @@ if (response.profiles && response.profiles.length ){
 
 //changes
   loadMore(){
-if (this.popularProfiles.length>6){
+if (this.popularProfiles.length<6){
   this.loadPopularProfiles(this.lastPopularProfileID);
 }
 
