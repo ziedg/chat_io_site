@@ -43,6 +43,10 @@ export class TopBlagueursAndDecov {
     this.user = loginService.user;
     this.loadPopularProfiles();
   }
+  
+  loadMoreProfiles(){
+    this.displayedNumberPopularProfiles=this.displayedNumberPopularProfiles+4;
+  }
 
   loadPopularProfiles(Id_Profile?:string) {
 
@@ -76,6 +80,8 @@ if (this.popularProfiles.length==6){
 
   }
 //
+
+
 
 
   subscribe(user:User) {
