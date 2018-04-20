@@ -434,7 +434,8 @@ export class Home {
     );3}
     else
     {
-      console.log("connection Failed")
+      jQuery("#connetcionFailed").fadeOut(1000);
+
     }
   }
 
