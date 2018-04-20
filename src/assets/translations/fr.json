@@ -5,8 +5,8 @@
     "login_button_facebook_login" : "Se connecter avec Facebook",
     "login_link_sign_up" : "Inscrivez-vous",
     "login_link_sign_up_text" : "Vous n’avez pas de compte ?",
-    "login_link_sign_in" : "Connectez-vous",
-    "login_link_sign_in_text" : "Vous avez un compte ?",
+    "login_link_sign_in" : "Inscrivez-vous",
+    "login_link_sign_in_text" : "Vous n'avez pas un compte ?",
 
     "footer_about" : "A propos de nous",
     "footer_cgu" : "Conditions",

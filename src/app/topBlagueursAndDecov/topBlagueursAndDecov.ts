@@ -44,6 +44,10 @@ export class TopBlagueursAndDecov {
     this.loadPopularProfiles();
   }
 
+  loadMoreProfiles(){
+    this.displayedNumberPopularProfiles=this.displayedNumberPopularProfiles+4;
+  }
+
   loadPopularProfiles(Id_Profile?:string) {
 
     var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/';
@@ -70,12 +74,14 @@ if (response.profiles && response.profiles.length ){
 
 //changes
   loadMore(){
-if (this.popularProfiles.length==6){
+if (this.popularProfiles.length<6){
   this.loadPopularProfiles(this.lastPopularProfileID);
 }
 
   }
 //
+
+
 
 
   subscribe(user:User) {
