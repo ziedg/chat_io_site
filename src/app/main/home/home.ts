@@ -384,7 +384,7 @@ export class Home {
       this.errorTimed();
       return;
     }
-    this.loadingPublish = true;
+
     var data = new FormData();
     data.append('profileId', this.user._id);
     if (this.selectedMenuElement == 0) {
@@ -405,8 +405,10 @@ export class Home {
     }
     this.changeDetector.markForCheck();
     if(this.online
+
     )
     {
+      this.loadingPublish = true;
     this.http.post(environment.SERVER_URL + pathUtils.PUBLISH, data, AppSettings.OPTIONS_POST)
       .map((res:Response) => res.json())
       .subscribe(
