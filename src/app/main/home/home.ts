@@ -426,15 +426,16 @@ export class Home {
       },
         err => {
           console.log(err)
-        this.errorMsg = "SP_ER_TECHNICAL_ERROR";
+         this.errorMsg = "SP_ER_TECHNICAL_ERROR";
       },
       () => {
         this.loadingPublish = false;
       }
-    );3}
+    )}
     else
     {
       console.log("failed to connect")
+      this.errorMsg="Intenet Connection Failed"
       jQuery("#errorMsgDisplay").fadeOut(1000);
       this.resetPublish();
 
