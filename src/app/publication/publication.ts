@@ -215,7 +215,7 @@ export class Publication {
     
     const word_letters = 5;
 
-    const words_max:number = 45;
+    const words_max:number = 70;
     const words_marge:number = 10;
 
     const letters_max:number = words_max * word_letters;
