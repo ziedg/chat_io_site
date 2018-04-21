@@ -1141,6 +1141,7 @@ section.widget {
   border-radius: 50%;
   margin: auto!important;
   margin-bottom: 10px;
+  background-position: center center;
 }
 @media (max-width: 768px) {
   .profile-photo {
