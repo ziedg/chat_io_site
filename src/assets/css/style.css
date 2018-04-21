@@ -184,19 +184,13 @@
     font-size: 35px;
     color: #009900 !important;
     margin: -6px -5px 0;
-    -webkit-transition: 0.3s ease-in-out;
-    -moz-transition: 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
   }
 
 
 
   .share-holder:hover button .fa {
-    font-size: 40px;
-    margin: -13px -7.5px 0;
-    -webkit-transition: 0.3s ease-in-out;
-    -moz-transition: 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
+    font-size: 35px;
+    margin: -13px -5px 0;
   }
 
   .like-comment .like-holder:hover,
@@ -346,9 +340,6 @@
     margin-bottom: -5px;
     margin-left: -5px;
     margin-right: -5px;
-    -webkit-transition: 0.3s ease-in-out;
-    -moz-transition: 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
   }
 
   .like-holder:hover .hint-social,
@@ -357,9 +348,6 @@
   .share-holder:hover .hint-social,
   .fb-xfbml-parse-ignore:hover .hint-social {
     opacity: 1;
-    -webkit-transition: 0.2s linear 0.2s;
-    -moz-transition: 0.2s linear 0.2s;
-    transition: 0.2s linear 0.2s;
   }
 
   .content .img-preview:hover {
@@ -3973,16 +3961,10 @@ input.loginInput {
 .social-emoji {
   border: 0 !important;
   width: 30px;
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
 }
 .social-emoji.desaturated {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
 }
 .hint-social {
   width: max-content;
@@ -4552,3 +4534,14 @@ change-password .input-param input {
   text-align: right!important;
   direction: rtl;
 }
+
+/*-----------publication-buttons-animation-begin----------------*/
+.social-emoji.desaturated,
+.social-emoji.desaturated,
+.comment-number-holder button .fa,
+.share-holder button .fa {
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+/*-----------publication-buttons-animation-end------------------*/
