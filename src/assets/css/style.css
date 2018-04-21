@@ -1893,6 +1893,12 @@ top-blagueurs-decov .user .user-img,
   --user-img-w: 40px;
 }
 
+@media(max-width: 767px) {
+  #pub-holder .user-img {
+    --user-img-w: 50px;
+  }
+}
+
 .user-img {  
   background-size: cover;
   background-position: center;
@@ -4535,7 +4541,7 @@ change-password .input-param input {
   direction: rtl;
 }
 
-/*-----------publication-buttons-animation-begin----------------*/
+/*-----------publication-icons-animation-begin----------------*/
 .social-emoji.desaturated,
 .social-emoji.desaturated,
 .comment-number-holder button .fa,
@@ -4544,4 +4550,4 @@ change-password .input-param input {
   -moz-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-/*-----------publication-buttons-animation-end------------------*/
+/*-----------publication-icons-animation-end------------------*/
