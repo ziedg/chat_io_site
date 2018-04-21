@@ -336,10 +336,7 @@
   .like-holder:hover .social-emoji,
   .dislike-holder:hover .social-emoji {
     width: 40px !important;
-    margin-top: -5px;
-    margin-bottom: -5px;
-    margin-left: -5px;
-    margin-right: -5px;
+    margin: -5px -4.9px;
   }
 
   .like-holder:hover .hint-social,
