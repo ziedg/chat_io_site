@@ -1,4 +1,4 @@
-import { Injectable }     from '@angular/core';
+import { Injectable}     from '@angular/core';
 import { Router } from '@angular/router';
 
 /* beans */
@@ -9,7 +9,6 @@ import {environment} from "../../environments/environment";
 
 @Injectable()
 export class LoginService {
-
     /* token */
     public token: string;
     /* User */
@@ -42,9 +41,11 @@ export class LoginService {
         return false;
     }
 
+
     redirect(){
       if(!this.isConnected()){
         if(this.isWasConnectedWithFacebook()){
+          console.log("/login/facebook-login")
           this.router.navigate(['/login/facebook-login']);
         }else{
           this.router.navigate(['/login/sign-in']);
@@ -68,10 +69,11 @@ export class LoginService {
     actualize(){
         if(this.isConnected()){
             this.token = localStorage.getItem('token');
+
             this.user= JSON.parse(localStorage.getItem('user'));
+          
         }
     }
-
 
     /* updateUser */
     updateUser(user:User){

@@ -68,7 +68,7 @@ export class EditProfile {
     this.loginService.actualize();
     this.user = this.loginService.getUser();
     this.changeDetector.markForCheck();
-    console.log(this.user);
+
   }
 
   getFirstName():string {
@@ -120,7 +120,7 @@ export class EditProfile {
     return jQuery("#linkTwitter").val();
   }
 
-  checkLasttName():boolean {
+  checkLastName():boolean {
     if (this.getLastName() && this.getLastName().length > 1) {
       this.errLastName = "";
       return true;
@@ -178,7 +178,7 @@ export class EditProfile {
 
   saveData() {
     this.errorMessage=null;
-    if (this.checkFBLink() && this.checkFirstName() && this.checkLasttName() && this.checkTwitterLink() && this.checkYoutubeLink() && this.checkFBLink()) {
+    if (this.checkFirstName() && this.checkLastName() /*&& this.checkTwitterLink() && this.checkYoutubeLink() && this.checkFBLink()*/) {
 
       let body = JSON.stringify({
         profileId: this.user._id,
@@ -195,7 +195,7 @@ export class EditProfile {
         .map((res:Response) => res.json())
         .subscribe(
           response => {
-          console.log(response.profile);
+        
           if (response.status == 0) {
             this.loginService.updateUser(response.profile);
             this.loginService.actualize();

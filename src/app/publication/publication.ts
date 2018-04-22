@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {Comment} from '../comment/comment';
 import {LoadingBar} from '../loading/loading-bar';
 import {Injectable} from '@angular/core';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 import 'rxjs/add/operator/map';
 
 /* conf */
@@ -84,6 +85,13 @@ export class Publication {
   commentTextareaId = "";
   public link: LinkBean = new LinkBean();
   commentsDisplayed : boolean;
+  /* long publication settings */
+  private longPubText: boolean = false;
+  private longPubTextShow: boolean = false;
+  private firstPubText: string = "";
+  private lastPubText: string = "";
+  pub_text:string = "";
+  arabicText:boolean = false;
 
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
@@ -98,7 +106,8 @@ export class Publication {
               private sanitizer: DomSanitizer,
               private loginService: LoginService,
               private changeDetector: ChangeDetectorRef,
-              private dateService: DateService) {
+              private dateService: DateService,
+             private ng2ImgMaxService:Ng2ImgMaxService) {
     loginService.actualize();
 
     this.user = loginService.user;
@@ -183,6 +192,70 @@ export class Publication {
   }
 
   ngOnInit() {
+    /*
+    console.log("publication info:")
+    console.log(this.publicationBean);
+    */
+
+    const arabic:RegExp = /[\u0600-\u06FF]/;
+
+    var pub_txt
+    if(this.publicationBean.isShared) {
+      pub_txt = this.publicationBean.publText;
+    }
+    else {
+      pub_txt = this.publicationBean.publText;
+    }
+    if(pub_txt !== null
+        && pub_txt.length) {
+      this.arabicText = arabic.test(pub_txt[0]);
+      console.log("arabic text!");
+    }
+
+    
+    const word_letters = 5;
+
+    const words_max:number = 70;
+    const words_marge:number = 10;
+
+    const letters_max:number = words_max * word_letters;
+    const letters_marge:number = words_marge * word_letters;
+
+    const txt = this.publicationBean.publText;
+    const parts = txt.split(' ');
+    if(txt !== 'null' && txt !=='undefined' && txt.length > 0) {
+      if(parts.length > words_max){
+        this.longPubText = true;
+
+        let words_cut:number;
+        if(parts.length - words_max < words_marge) words_cut = parts.length - words_marge;
+        else words_cut = words_max;
+
+        this.firstPubText = parts.slice(0, words_cut).join(' ');
+        this.lastPubText = parts.slice(words_cut, parts.length ).join(' ');
+        console.log("cut words");
+      }
+      else if(txt.length > letters_max) {
+        this.longPubText = true;
+
+        let letters_cut:number;
+        if(txt.length - letters_max < letters_marge) letters_cut = txt.length - letters_marge;
+        else letters_cut = letters_max;
+
+        var cut_end:number = txt.slice(0, letters_cut).lastIndexOf(' ');
+        this.firstPubText = txt.slice(0, cut_end);
+        this.lastPubText = txt.slice(cut_end);
+        console.log("cut letters");
+      }
+      else {
+        this.firstPubText = txt;
+      }
+      console.log("long text : " + this.longPubText);
+    }
+    
+    //onsole.log(this.publicationBean);
+
+
     this.changeDetector.markForCheck();
     if (this.publicationBean.publExternalLink) {
       this.linkAPI();
@@ -310,8 +383,13 @@ export class Publication {
     var inputValue = $event.target;
     if (inputValue != null && null != inputValue.files[0]) {
       this.uploadedPictureComment = inputValue.files[0];
-      previewFile(this.uploadedPictureComment, this.pubImgId);
-
+      this.ng2ImgMaxService.compress([this.uploadedPictureComment], 0.5).subscribe((compressedImage)=>{
+        this.ng2ImgMaxService.resize([compressedImage], 360, 200).subscribe((result)=>{
+       this.uploadedPictureComment=result;
+       previewFile(this.uploadedPictureComment, this.pubImgId);
+      })
+      });
+      
     }
     else {
       this.uploadedPictureComment = null;
@@ -357,14 +435,17 @@ export class Publication {
 
   doSharePub(post) {
     var pubId;
+    var alreadySharedPubId;
     if (post.isShared) {
       pubId = post.originalPublicationId;
+     alreadySharedPubId =this.publicationBean._id ;
     }
     else {
       pubId = this.publicationBean._id;
     }
     let body = JSON.stringify({
       publId: pubId,
+      alreadySharedPubId : alreadySharedPubId,
       profileId: this.user._id
     });
     this.http.post(environment.SERVER_URL + pathUtils.SHARE_PUBLICATION, body, AppSettings.OPTIONS)
@@ -373,6 +454,7 @@ export class Publication {
         response => {
           if (response) {
             if (response.status = "0") {
+              console.log(response.publication);
               var element: PublicationBean = response.publication;
               this.postService.putNewPub(element, true);
               this.changeDetector.markForCheck();
@@ -726,6 +808,10 @@ export class Publication {
       message = resTranslate;
     });
     return message;
+  }
+
+  shortNumber(n:number):string {
+    return n < 1000 ? n+"" : (n/1000+"k").replace(".", ",");
   }
 }
 

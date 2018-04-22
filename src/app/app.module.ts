@@ -46,7 +46,8 @@ import {ResetPasswordComponent} from "./login/reset-password/reset-password.comp
 import {ResetPasswordService} from "./login/reset-password/reset-password.service";
 import {FakeComponent} from "./shared/fake.component";
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-
+import {GlobalService} from "./service/globalService";
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 /** Factories */
 import { httpFactory } from './utils/factories/http.factory';
 import {ContenteditableModel} from "./publication/contenteditable-model";
@@ -54,7 +55,7 @@ import { SuggestionsComponent } from './main/suggestions/suggestions.component';
 
 @NgModule({
     imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
-      ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule,
+      ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule,Ng2ImgMaxModule,
       TranslateModule.forRoot({
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),
@@ -84,7 +85,8 @@ import { SuggestionsComponent } from './main/suggestions/suggestions.component';
           multi: false
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
-        {provide: APP_BASE_HREF, useValue: '/'}
+        {provide: APP_BASE_HREF, useValue: '/'},
+        GlobalService,
     ],
 
 })

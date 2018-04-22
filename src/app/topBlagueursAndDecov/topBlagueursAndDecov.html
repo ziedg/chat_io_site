@@ -31,13 +31,20 @@
             </div>
           </div>
         </div>
+        <div class="top-blagueurs-ignore">
+          <span
+            (click)="ignore(profile)"
+            class="fa fa-times">
+          </span>
+        </div>
       </div>
     </div>
   </article>
+  <a (click)="loadMoreProfiles()" *ngIf="displayedNumberPopularProfiles<12"> Afficher plus </a>
 </section>
 
-
-<section *ngIf="true" class="widget bordered">
+<!-- This section is hidden temporarely-->
+<section *ngIf="false" class="widget bordered">
   <header>
     {{ 'profile_suggestions_title' | translate }}
   </header>

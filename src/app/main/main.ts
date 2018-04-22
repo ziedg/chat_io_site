@@ -1,7 +1,8 @@
-import { Component, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, ApplicationRef, ElementRef, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
+
 
 /* Main components */
 import { Home } from './home/home';
@@ -22,10 +23,12 @@ import { AppSettings } from "../conf/app-settings";
 import { Response, Http } from "@angular/http";
 import { Post } from "./post/post";
 import { NotificationBean } from "../beans/notification-bean";
-import { Title } from "@angular/platform-browser";
+import { Title, Meta } from "@angular/platform-browser";
 import { RecentRechService } from "../service/recentRechService";
 import { DateService } from "../service/dateService";
 import {environment} from "../../environments/environment";
+import { AppComponent } from '../app.component';
+import { GlobalService } from "../service/globalService"
 
 declare var jQuery:any;
 declare var FB:any;
@@ -35,7 +38,8 @@ declare const gapi:any;
 @Component({
   moduleId: module.id,
   selector: 'main',
-  templateUrl: 'main.html'
+  templateUrl: 'main.html',
+
 })
 
 export class Main {
@@ -52,17 +56,35 @@ export class Main {
   lastNotifId = "";
   showButtonMoreNotif:Boolean = false;
   showNoNotif:Boolean = false;
+  noSearchResults:Boolean = false;
+  searchMobileHidden = true;
 
-  constructor(public translate:TranslateService, private dateService:DateService, private http:Http, private location:Location, private router:Router,
-              private loginService:LoginService, private changeDetector:ChangeDetectorRef, private recentRechService:RecentRechService) {
+
+  @ViewChild('searchResults2') searchRes2 : ElementRef;
+  @ViewChild('searchMobileInput') searchInput: ElementRef;
+
+  constructor(public translate:TranslateService,
+              private dateService:DateService,
+              private http:Http,
+              private location:Location,
+              private router:Router,
+              private loginService:LoginService,
+              private changeDetector:ChangeDetectorRef,
+              private recentRechService:RecentRechService,
+              private appRef :ApplicationRef,
+              private globalService: GlobalService,
+              private meta: Meta) {
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
     this.listNotif = [];
     this.user = this.loginService.getUser();
+
   }
 
   ngOnInit() {
+    // meta tag to fix view on iDevices (like iPohne)
+    this.meta.addTag({ name: 'viewport', content: 'width=device-width; initial-scale=1.0;' });
     this.checkNewNotifications();
     jQuery((".recherche-results-holder")).blur(function () {
       jQuery((".file-input-holder")).hide();
@@ -122,6 +144,14 @@ export class Main {
     this.changeDetector.markForCheck();
   }
 
+  
+  onFocus() {
+    console.log("this is on focus");
+    this.searchRes2.nativeElement.style.display="block!important";
+    this.onChange(this.searchInput.nativeElement.value);
+    this.checkAutoComplete();
+  }
+
   showRecentSearchUsers() {
     if (this.recentRechService.isEmptyList()) {
       this.disableAutocomplete();
@@ -144,7 +174,8 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-        this.listSearshUsers = [];
+        this.listSearshUsers= [];
+        this.noSearchResults = false;
         this.changeDetector.markForCheck();
         for (var i = 0; i < this.listSearshUsers.length; i++) {
           this.listSearshUsers.pop();
@@ -159,10 +190,15 @@ export class Main {
         }
       },
         err => {
+          this.noSearchResults = true;
       },
       () => {
         if (this.listSearshUsers.length == 0) {
           this.disableAutocomplete();
+          this.noSearchResults = true;
+        }
+        else {
+          this.noSearchResults = false;
         }
         this.changeDetector.markForCheck();
       }
@@ -186,7 +222,7 @@ export class Main {
   }
 
   disableAutocomplete() {
-    jQuery(".recherche-results-holder").hide();
+    jQuery(".recherche-results-holder-1").hide();
     jQuery(".upper-arrow-search").hide();
 }
 
@@ -213,6 +249,7 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
+          console.log(response)
         if (response.length != 0) {
           this.showNoNotif = false;
           for (var i = 0; i < response.length; i++) {
@@ -299,12 +336,15 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-        if (response.status == 0) {
+          if (response.status == 0) {
           this.nbNewNotifications = response.nbNewNotifications;
+    
+          //change : remove notification sound 
+/*
           if (this.nbNewNotifications > 0) {
             var snd = new Audio('./assets/music/notification.mp3');
             snd.play();
-          }
+          }*/
         }
       },
         err => {
@@ -339,8 +379,14 @@ export class Main {
     });
     return message;
   }
+
+  clearSearchMobile() {
+    this.searchInput.nativeElement.value = "";
+    this.listSearshUsers.length = 0;
+    this.noSearchResults = false;
+  }
 }
 
 
 
-
+ 

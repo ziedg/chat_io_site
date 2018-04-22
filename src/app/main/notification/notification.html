@@ -38,13 +38,13 @@
                                       {{ 'main_comments_notification' | translate }}
                                     </span>
                              </div>
-                             <div *ngIf="notif.type =='like'" class="comment-text"
+                             <div *ngIf="notif.type =='reagir'" class="comment-text"
                                   (click)="goTo('post',notif.publId,notif._id)">
                                     <span *ngIf="notif.profiles.length==1">
                                         <span class="notif-a">
                                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
                                         </span>
-                                      {{ 'main_like_notification' | translate }}
+                                      {{ 'main_reagir_notification' | translate }}
                                     </span>
                                     <span *ngIf=" notif.profiles && notif.profiles.length>1">
                                         <span *ngIf="notif.profiles.length==2" class="notif-a">
@@ -53,10 +53,10 @@
                                         <span *ngIf="notif.profiles.length>2" class="notif-a">
                                           {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1 } }}
                                         </span>
-                                        {{ 'main_likes_notification' | translate}}
+                                        {{ 'main_reagirs_notification' | translate}}
                                     </span>
                              </div>
-                             <div *ngIf="notif.type =='dislike'" class="comment-text"
+                             <!-- <div *ngIf="notif.type =='dislike'" class="comment-text"
                                   (click)="goTo('post',notif.publId,notif._id)">
                                     <span *ngIf="notif.profiles && notif.profiles.length==1">
                                         <span class="notif-a">
@@ -73,7 +73,7 @@
                                         </span>
                                       {{ 'main_dislikes_notification' | translate }}
                                     </span>
-                             </div>
+                             </div> -->
 
                              <div class="time-notif ">
                                {{getNotificationTime(notif.date_notification)}}

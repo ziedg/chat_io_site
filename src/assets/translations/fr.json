@@ -5,13 +5,13 @@
     "login_button_facebook_login" : "Se connecter avec Facebook",
     "login_link_sign_up" : "Inscrivez-vous",
     "login_link_sign_up_text" : "Vous n’avez pas de compte ?",
-    "login_link_sign_in" : "Connectez-vous",
-    "login_link_sign_in_text" : "Vous avez un compte ?",
+    "login_link_sign_in" : "Inscrivez-vous",
+    "login_link_sign_in_text" : "Vous n'avez pas un compte ?",
 
     "footer_about" : "A propos de nous",
     "footer_cgu" : "Conditions",
     "footer_team" : "L'equipe",
-    "footer_copyright" : "© 2016 Speegar ",
+    "footer_copyright" : "© 2018 Speegar ",
 
     "sign_in_email_placeholder" : "Email",
     "sign_in_password_placeholder" : "Mot de passe",
@@ -42,17 +42,16 @@
 
 
   "main_search_placeholder" :"Rechercher",
+  "search_result_no_result" : "Nous n'avons trouvé aucun résultat pour",
 
   "main_notification_from_two_profiles":"{{first}} et {{second}}",
   "main_notification_from_many_profiles":"{{first}} et {{number}} autres personnes",
 
-  "main_like_notification" :"aime votre publication",
-  "main_likes_notification" :"ont aimés votre publication",
-  "main_comment_notification" :"a commenté à votre publication",
-  "main_comments_notification" :" ont commenté à votre publication",
-  "main_dislike_notification" :"n'aime pas votre publication",
-  "main_dislikes_notification" :"n'ont pas aimé votre publication",
-  "main_subscribe_notification" :"a commencé a vous suivre",
+  "main_reagir_notification" :"a réagi à votre publication",
+  "main_reagirs_notification" :"ont réagi  à votre publication",
+  "main_comment_notification" :"a commenté votre publication",
+  "main_comments_notification" :" ont commenté  votre publication",
+  "main_subscribe_notification" :"a commencé à vous suivre",
   "main_menu_update_profile" :"Modifier le profil",
   "main_menu_support" :"Support",
   "main_menu_log_out" :"Deconnexion",
@@ -60,10 +59,10 @@
   "parameters_update_profile":"modifier mon profil ",
   "parameters_update_password":"modifier mon mot de passe ",
 
-  "main_more_notifications" :"Voir tout",
+  "main_more_notifications" :"Voir plus",
   "main_no_notification" :"Pas de notifications",
 
-  "publication_shared_text" : "a partagé",
+  "publication_shared_text" : " a partagé la publication de ",
   "publication_like":"LOL",
   "publication_dislike": "Nulle",
   "publication_display_comments": "Afficher les commentaires",
@@ -108,7 +107,7 @@
 
   "prefix_date_yesterday" :"hier",
   "prefix_date_now" :"maintenant",
-  "prefix_date_days" :" jours",
+  "prefix_date_days" :" jrs",
   "prefix_date_hours" :" hrs",
   "prefix_date_minutes" :" mins",
   "prefix_date_one_hour" :" 1 h",
@@ -169,8 +168,8 @@
   "profile_update_picture_popup_notification_text":"Votre photo de profil a été modifiée",
 
 
-  "profile_already_subscribed" : "deja abonné ",
-  "profile_subscribe" : "s'abonner",
+  "profile_already_subscribed" : "Abonné(e)",
+  "profile_subscribe" : "S'abonner",
   "profile_description_empty" : "Pas de description",
   "profile_description_button_save" : "Enregistrer",
   "profile_description__button_cancel" : "Annuler",
@@ -181,6 +180,9 @@
   "profile_menu_update_profile" : "Modifier le profil",
   "profile_menu_log_out" : "Deconnexion",
   "profile_menu_cancel" : "Annuler",
+  "profile_menu_bloquer" : "Bloquer",
+  "profile_menu_signaler" : "Signaler",
+
 
   "popular_profiles_title" : "Profils populaires",
 
@@ -215,7 +217,10 @@
     "SP_ER_EMAIL_ALREADY_EXISTS" : "Cette adresse mail est déjà utilisé",
     "SP_ER_FP_USER_NOT_FOUND": "Cette adresse mail n'appartient à aucun compte.",
     "SP_ER_RESET_LINK_EXPIRED" : "Le lien de renitialisation est expiré.",
-    "SP_ER_EMAIL_NOT_VALID": "Cette adresse mail n'est pas valide"
+    "SP_ER_EMAIL_NOT_VALID": "Cette adresse mail n'est pas valide",
+
+
+    "publication_open_last_part": "... Lire la suite"
 
 
 

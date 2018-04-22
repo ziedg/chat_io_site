@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Router } from '@angular/router';
@@ -24,7 +25,7 @@ import * as pathUtils from '../../utils/path.utils';
 })
 
 
-export class Notification {
+export class Notification implements OnInit {
     lastNotifId="";
     showButtonMoreNotif:Boolean=false;
     showNoNotif:Boolean=false;
@@ -60,6 +61,7 @@ export class Notification {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
+          console.log(response)
         if (response.length != 0) {
           this.showNoNotif = false;
           for (var i = 0; i < response.length; i++) {
@@ -134,6 +136,7 @@ export class Notification {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
+          console.log(response)
       },
         err => {
       },
@@ -147,6 +150,10 @@ export class Notification {
       message = resTranslate;
     });
     return message;
+  }
+
+  ngOnInit(){
+  
   }
 }
 

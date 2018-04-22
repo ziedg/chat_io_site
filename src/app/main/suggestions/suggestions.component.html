@@ -1,27 +1,33 @@
+<!-- modified
 <header class="suggestions-header"><b>Suggérés pour vous</b></header>
-<section class="suggestions-box widget bordered row">
+-->
+<section class="suggestions-box widget row">
+  <div class="container-draggable"  *ngFor="let user of popularProfiles">
 
-   <div class="user col-xs-12" *ngFor="let user of users">
-     <div class="user-img-shared" *ngIf="user.profilePictureMin"
-          [ngStyle]="{'background-image': 'url('+user.profilePictureMin+')'}">
-     </div>
-     <div class="user-img-shared" *ngIf="!user.profilePictureMin"
-          [ngStyle]="{'background-image': 'url('+user.profilePicture+')'}">
-     </div>
-     <div class="user-name">
-       <header><a>
-         {{user.firstName}} {{user.lastName}}
-       </a></header>
-       <div class="nbr-subscribers">
-         {{user.nbSubscribers}} Abonnés
-       </div>
-     </div>
-       <div class="subscribe-no-number">
-         <button>
-           S'abonner
-         </button>
-       </div>
+    <div class="msg-draggable">
+    </div>
+    <div class="user col-xs-12 draggable">
+      <div class="user-img-shared" *ngIf="user.profilePictureMin"
+           [ngStyle]="{'background-image': 'url('+user.profilePictureMin+')'}">
+      </div>
+      <div class="user-img-shared" *ngIf="!user.profilePictureMin"
+           [ngStyle]="{'background-image': 'url('+user.profilePicture+')'}">
+      </div>
+      <div class="user-name">
+        <header><a [routerLink]="['/main/profile', user._id]">
+          {{user.firstName}} {{user.lastName}}
+        </a></header>
+        <div class="nbr-subscribers">
+          {{user.nbSubscribers}} abonnés
+        </div>
+      </div>
+      <div class="subscribe-no-number" style="min-width:12px">
+        <button (click)="subscribeClick($event, user)" style="float:none">
+            {{ 'profile_subscribe' | translate }}
+        </button>
+      </div>
+    </div>
 
-   </div>
-  </section>
+  </div>
+</section>
 

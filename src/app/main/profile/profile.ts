@@ -337,11 +337,21 @@ export class Profile {
 
 
   openModal() {
+    console.log("hello from openmodal profile");
     jQuery(".modal-edit-profile").fadeIn(500);
   }
 
   closeModal() {
     jQuery(".modal-edit-profile").fadeOut(300);
+  }
+
+  openModalOtherProfile() {
+    console.log("hello from openmodal other profile");
+    jQuery(".modal-other-profile-options").fadeIn(500);
+  }
+
+  closeModalOtherProfile() {
+    jQuery(".modal-other-profile-options").fadeOut(300);
   }
 
   openModalFriends() {
@@ -358,6 +368,13 @@ export class Profile {
         jQuery(".modal-edit-profile").fadeOut(300);
       }
     });
+
+        jQuery(document).click(function (e) {
+      if (jQuery(e.target).closest(".white-box-edit").length === 0 && jQuery(e.target).closest(".profile-edit").length === 0) {
+        jQuery(".modal-other-profile-options").fadeOut(300);
+      }
+    });
+
     jQuery(document).click(function (e) {
 
       if (jQuery(e.target).closest(".select-menu").length === 0 && jQuery(e.target).closest(".dropdown").length === 0) {
@@ -420,6 +437,7 @@ export class Profile {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
+
         this.editDescriptionEnable = false;
       },
         err => {
@@ -432,6 +450,7 @@ export class Profile {
 
   updateProfilePicture($event) {
     var inputValue = $event.target;
+
     if (inputValue != null && null != inputValue.files[0]) {
       this.uploadedProfilePicture = inputValue.files[0];
       previewProfilePicture(this.uploadedProfilePicture);
@@ -445,6 +464,7 @@ export class Profile {
     if (!this.uploadedProfilePicture) {
       return;
     }
+
     this.changeDetector.markForCheck();
     var data = new FormData();
     data.append('profilePicture', this.uploadedProfilePicture);
@@ -456,7 +476,15 @@ export class Profile {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
+
         if (response.status == "0") {
+
+          if (this.loginService.isWasConnectedWithFacebook){
+            let fuser = this.loginService.getFacebookUser();
+            fuser.profilePicture=response.profile.profilePicture;
+             localStorage.setItem('facebookUser',JSON.stringify(fuser));
+          }
+
           localStorage.setItem('user', JSON.stringify(response.profile));
           this.loginService.actualize();
           this.changePhotoCancel();
@@ -503,7 +531,6 @@ export class Profile {
     });
     return message;
   }
-
 
 }
 

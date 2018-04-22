@@ -54,6 +54,8 @@ export const GET_PROFILE:string = 'getProfile/?ProfileId=';
 
 export const SUBSCRIBE:string = 'subscribe';
 
+export const IGNORE:string = 'ignore';
+
 export const UNSUBSCRIBE:string = 'unsubscribe';
 
 export const GET_PROFILE_PUBLICATIONS:string = 'getProfilePublications?profileId=PROFILE_ID&last_publication_id=';

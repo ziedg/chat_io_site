@@ -38,7 +38,9 @@ export class FacebookLogin {
             this.router.navigate(['/login/sign-in']);
         }
 
+
         if(loginService.isConnected()){
+
             this.router.navigate(['/main/home']);
         }
 
@@ -46,17 +48,17 @@ export class FacebookLogin {
 
 
         FB.init({
-              appId      : '143891162916771',
+              appId      : '963422573811438',
               status: true,  // enable cookies to allow the server to access
               cookie: true,
               xfbml      : true,
-              version    : 'v2.10'
+              version    : 'v2.11'
             });
     }
 
     getUserFacbookConnexion(result) {
         if (result.authResponse) {
-            FB.api('/me/picture?height=1000&width=1000', ( responsePic => {
+            FB.api('/me?fields=picture.witdh(1000).height(1000){url}', ( responsePic => {
                 FB.api('/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location', ( response => {
                     this.getUserInformations(response, responsePic);
                 }));
@@ -73,8 +75,9 @@ export class FacebookLogin {
 
     getUserInformations(response, responsePic) {
         let body={};
+
         body = JSON.stringify({
-            profilePicture : responsePic.data.url,
+            profilePicture : !!response.picture?responsePic.picture.data.url:'url',
             firstName: response.first_name,
             lastName: response.last_name,
             email: response.email,
@@ -93,6 +96,7 @@ export class FacebookLogin {
 
                     this.loginService.updateUser(user);
                     localStorage.setItem('user', JSON.stringify(response.user));
+    
                     this.loginService.setToken(response.token);
                     this.loginService.actualize();
                     this.router.navigate(['/main/home']);
