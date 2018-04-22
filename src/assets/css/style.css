@@ -4540,8 +4540,7 @@ change-password .input-param input {
 }
 
 /*-----------publication-icons-animation-begin----------------*/
-.social-emoji.desaturated,
-.social-emoji.desaturated,
+.social-emoji,
 .comment-number-holder button .fa,
 .share-holder button .fa {
   -webkit-transition: 0.3s ease-in-out;
