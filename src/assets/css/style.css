@@ -4549,3 +4549,8 @@ change-password .input-param input {
   transition: 0.3s ease-in-out;
 }
 /*-----------publication-icons-animation-end------------------*/
+
+
+.comment-showed {
+  color: #009900 !important
+}

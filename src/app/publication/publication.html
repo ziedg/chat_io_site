@@ -174,7 +174,7 @@
           <span class="nbr">{{shortNumber(publicationBean.nbDislikes)}}</span>
         </div>
         <div class="comment-number-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
-          <button class="comment-number"><i class="fa fa-commenting"></i>
+          <button class="comment-number"><i [ngClass]="{'fa': true, 'fa-commenting': true, 'comment-showed': commentsDisplayed}"></i>
           </button>
           <div class="hint-social" *ngIf="!commentsDisplayed">
             {{ 'publication_display_comments' | translate }}
