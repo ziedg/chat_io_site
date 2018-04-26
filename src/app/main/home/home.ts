@@ -121,6 +121,7 @@ export class Home {
   }
 
   ngOnInit() {
+    console.log(this.publicationBeanList);
     jQuery("#publishDiv").on("paste", function(e) {
       e.preventDefault();
       var pastedData = e.originalEvent.clipboardData.getData("text");
@@ -263,7 +264,6 @@ export class Home {
       .subscribe(
         response => {
           //this.publicationBeanList = [];
-          console.log(response);
           this.putIntoList(response);
           this.changeDetector.markForCheck();
         },
@@ -290,7 +290,6 @@ export class Home {
         .map((res: Response) => res.json())
         .subscribe(
           response => {
-            console.log(response);
             this.putIntoList(response);
             this.changeDetector.markForCheck();
           },
