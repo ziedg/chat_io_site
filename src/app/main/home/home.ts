@@ -121,7 +121,6 @@ export class Home {
   }
 
   ngOnInit() {
-    console.log(this.publicationBeanList);
     jQuery("#publishDiv").on("paste", function(e) {
       e.preventDefault();
       var pastedData = e.originalEvent.clipboardData.getData("text");
@@ -248,7 +247,7 @@ export class Home {
         this.lastPostId = response[i]._id;
       }
     }
-
+    console.log(this.publicationBeanList);
     if (response.length < 10) {
       this.showSuggestionMSG = true;
     }
