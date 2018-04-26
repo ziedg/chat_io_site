@@ -38,7 +38,8 @@ export class Post {
   public postId;
   public publicationBeanList: Array<PublicationBean> = [];
   public user: User = new User();
-  private wrongPost: boolean = false;
+  public wrongPost: boolean = false;
+	// TODO: check wrongPost access
 
     constructor(private title:Title,private route: ActivatedRoute,private http:Http, private router:Router, private loginService:LoginService,private changeDetector: ChangeDetectorRef) {
       this.loginService.redirect();
@@ -175,6 +176,3 @@ export class Post {
 
 
 }
-
-
-
