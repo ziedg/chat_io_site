@@ -195,6 +195,7 @@ export class Home {
   }
 
   putIntoList(response) {
+    console.log(this.publicationBeanList);
     if (!response.length || response.length < 10) {
       this.showLoading = false;
       this.isLock = false;
