@@ -290,6 +290,7 @@ export class Home {
         .map((res: Response) => res.json())
         .subscribe(
           response => {
+            console.log(response);
             this.putIntoList(response);
             this.changeDetector.markForCheck();
           },
