@@ -263,6 +263,7 @@ export class Home {
       .subscribe(
         response => {
           //this.publicationBeanList = [];
+          console.log(response);
           this.putIntoList(response);
           this.changeDetector.markForCheck();
         },
