@@ -209,7 +209,7 @@ export class Publication {
     if(pub_txt !== null
         && pub_txt.length) {
       this.arabicText = arabic.test(pub_txt[0]);
-      console.log("arabic text!");
+      //console.log("arabic text!");
     }
 
     
@@ -233,7 +233,7 @@ export class Publication {
 
         this.firstPubText = parts.slice(0, words_cut).join(' ');
         this.lastPubText = parts.slice(words_cut, parts.length ).join(' ');
-        console.log("cut words");
+        //console.log("cut words");
       }
       else if(txt.length > letters_max) {
         this.longPubText = true;
@@ -245,12 +245,12 @@ export class Publication {
         var cut_end:number = txt.slice(0, letters_cut).lastIndexOf(' ');
         this.firstPubText = txt.slice(0, cut_end);
         this.lastPubText = txt.slice(cut_end);
-        console.log("cut letters");
+        //console.log("cut letters");
       }
       else {
         this.firstPubText = txt;
       }
-      console.log("long text : " + this.longPubText);
+      //console.log("long text : " + this.longPubText);
     }
     
     //onsole.log(this.publicationBean);

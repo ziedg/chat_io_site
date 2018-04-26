@@ -365,27 +365,25 @@ export class Home {
   publish() {
     this.online = window.navigator.onLine;
     console.log("publish()");
-    var txt = jQuery("#publishDiv").html();
-    if (txt.endsWith("<br>")) {
-      this.form.value.publicationText = txt.substring(
-        0,
-        txt.lastIndexOf("<br>")
-      );
-      console.log("it ends with <br>!!!");
-    } else {
-      this.form.value.publicationText = txt;
-    }
-    console.log(this.form.value.publicationText);
+    var txt:string = jQuery("#publishDiv").html();
+
+    var white_space_regex:RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
     if (
-      !this.form.value.publicationText &&
-      !this.youtubeLink &&
-      !this.uploadedPicture &&
-      !this.link.isSet
-    ) {
+      //!this.form.value.publicationText &&
+      white_space_regex.test(txt)
+      && !this.youtubeLink
+      && !this.uploadedPicture
+      &&!this.link.isSet) {
       this.errorMsg = "SP_FV_ER_PUBLICATION_EMPTY";
       this.errorTimed();
       return;
     }
+    
+    txt = txt.replace(/(\&nbsp;|\ )+/g, ' ')
+              .replace(/(\<.?br\>)+/g, '<br>')
+              .replace(/^\<.?br\>|\<.?br\>$/g,'');
+
+    this.form.value.publicationText = txt;
 
     var data = new FormData();
     data.append("profileId", this.user._id);
