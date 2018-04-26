@@ -247,10 +247,11 @@ export class Home {
         this.lastPostId = response[i]._id;
       }
     }
-    console.log(this.publicationBeanList);
     if (response.length < 10) {
       this.showSuggestionMSG = true;
     }
+    console.log(this.publicationBeanList);
+
   }
 
   loadFirstPosts() {
@@ -263,6 +264,7 @@ export class Home {
       .subscribe(
         response => {
           //this.publicationBeanList = [];
+          console.log(response);
           this.putIntoList(response);
           this.changeDetector.markForCheck();
         },
