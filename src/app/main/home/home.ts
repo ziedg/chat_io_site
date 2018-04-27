@@ -195,7 +195,7 @@ export class Home {
   }
 
   putIntoList(response) {
-    if (!response.length || response.length < 10) {
+    if (!response.length ) {
       this.showLoading = false;
       this.isLock = false;
       this.showSuggestionMSG = true;
@@ -247,10 +247,10 @@ export class Home {
         this.lastPostId = response[i]._id;
       }
     }
-
     if (response.length < 10) {
       this.showSuggestionMSG = true;
     }
+
   }
 
   loadFirstPosts() {
@@ -263,6 +263,7 @@ export class Home {
       .subscribe(
         response => {
           //this.publicationBeanList = [];
+          console.log(response);
           this.putIntoList(response);
           this.changeDetector.markForCheck();
         },

@@ -53,7 +53,8 @@ export class Publication {
   commentContent = "";
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
-  private publicationBean: PublicationBean;
+  public publicationBean: PublicationBean;
+	// TODO: check publicationBean access
   private afficheCommentsLoading = false;
   private afficheMoreComments = false;
   public signalButton = false;
@@ -212,7 +213,7 @@ export class Publication {
       //console.log("arabic text!");
     }
 
-    
+
     const word_letters = 5;
 
     const words_max:number = 70;
@@ -252,7 +253,7 @@ export class Publication {
       }
       //console.log("long text : " + this.longPubText);
     }
-    
+
     //onsole.log(this.publicationBean);
 
 
@@ -389,7 +390,7 @@ export class Publication {
        previewFile(this.uploadedPictureComment, this.pubImgId);
       })
       });
-      
+
     }
     else {
       this.uploadedPictureComment = null;
