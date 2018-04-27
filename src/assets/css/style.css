@@ -105,12 +105,6 @@
     color: white !important;
   }
 
-  .profile-photo:hover .fa-upload,
-  .profile-photo:hover .fa-floppy-o,
-  .profile-photo:hover .fa-times {
-    display: inline;
-  }
-
   .widget button:hover {
     opacity: .8;
   }
@@ -370,6 +364,13 @@
   }
 }
 /*------------------------------all-hover-effects-end-------------------*/
+
+.profile-photo:hover .fa-upload,
+.profile-photo:hover .fa-floppy-o,
+.profile-photo:hover .fa-times {
+	display: inline;
+}
+
 
 * {
   outline: none;
@@ -1897,7 +1898,7 @@ top-blagueurs-decov .user .user-img,
   }
 }
 
-.user-img {  
+.user-img {
   background-size: cover;
   background-position: center;
   border-radius: 50%;
@@ -2373,7 +2374,7 @@ top-blagueurs-decov .user .user-img,
     text-align: center;
   }
   .btn-edit-profile-1 {
-    width: 100%!important; 
+    width: 100%!important;
   }
 }
 @media (max-width: 300px) {
@@ -4314,7 +4315,7 @@ top-blagueurs-decov .user-name header {
   }
 
   .top-blagueurs-ignore {
-    align-items: flex-end;    
+    align-items: flex-end;
   }
 }
 
@@ -4387,7 +4388,7 @@ top-blagueurs-decov .user-name header {
   max-height: 100%;
 }
 
- 
+
 
 .search-mobile {
   padding:0;
