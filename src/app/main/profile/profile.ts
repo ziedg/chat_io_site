@@ -482,7 +482,7 @@ export class Profile {
         if (response.status == "0") {
 
 
-           console.log(response)
+
 
           if (this.loginService.isWasConnectedWithFacebook){
             let fuser = this.loginService.getFacebookUser();
@@ -496,7 +496,8 @@ export class Profile {
 
           this.uploadedProfilePicture = null;
           jQuery("#file-profile").val("");
-          jQuery(".profile-photo").css('background-image', 'url(' + ')');
+          this.profilePictLoad = false;
+          jQuery(".profile-photo").css('background-image', 'url(' +response.profile.profilePicture || ""+')');
           this.profilePictLoad = false;
           swal({
             title: this.translateCode("profile_update_picture_popup_notification_title"),
