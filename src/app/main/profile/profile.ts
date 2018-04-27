@@ -1,3 +1,4 @@
+
 import { Component, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
@@ -479,8 +480,9 @@ export class Profile {
         response => {
 
         if (response.status == "0") {
-          console.log('_____________')
-           console.log(response)
+
+           const url = response.profile.profilePicture
+           console.log(url)
 
           if (this.loginService.isWasConnectedWithFacebook){
             let fuser = this.loginService.getFacebookUser();
@@ -491,9 +493,10 @@ export class Profile {
           localStorage.setItem('user', JSON.stringify(response.profile));
           this.loginService.actualize();
           this.changePhotoCancel();
+
           this.uploadedProfilePicture = null;
           jQuery("#file-profile").val("");
-          jQuery(".profile-photo").css('background-image', 'url(' + response.profile.profilePicture + ')');
+          jQuery(".profile-photo").css('background-image', 'url(' + url + ')');
           this.profilePictLoad = false;
           swal({
             title: this.translateCode("profile_update_picture_popup_notification_title"),
