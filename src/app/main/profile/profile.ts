@@ -478,7 +478,8 @@ export class Profile {
         response => {
 
         if (response.status == "0") {
-          this.profilePictLoad = false;
+          console.log('_____________')
+           console.log(response)
 
           if (this.loginService.isWasConnectedWithFacebook){
             let fuser = this.loginService.getFacebookUser();
