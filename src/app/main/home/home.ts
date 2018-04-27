@@ -195,8 +195,7 @@ export class Home {
   }
 
   putIntoList(response) {
-    console.log(this.publicationBeanList);
-    if (!response.length || response.length < 10) {
+    if (!response.length ) {
       this.showLoading = false;
       this.isLock = false;
       this.showSuggestionMSG = true;
@@ -251,7 +250,6 @@ export class Home {
     if (response.length < 10) {
       this.showSuggestionMSG = true;
     }
-    console.log(this.publicationBeanList);
 
   }
 
