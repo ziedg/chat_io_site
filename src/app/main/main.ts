@@ -72,7 +72,8 @@ export class Main {
               private changeDetector:ChangeDetectorRef,
               private recentRechService:RecentRechService,
               private appRef :ApplicationRef,
-              private globalService: GlobalService,
+              public globalService: GlobalService,
+							// TODO: check globalService access
               private meta: Meta) {
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
@@ -144,7 +145,7 @@ export class Main {
     this.changeDetector.markForCheck();
   }
 
-  
+
   onFocus() {
     console.log("this is on focus");
     this.searchRes2.nativeElement.style.display="block!important";
@@ -338,8 +339,8 @@ export class Main {
         response => {
           if (response.status == 0) {
           this.nbNewNotifications = response.nbNewNotifications;
-    
-          //change : remove notification sound 
+
+          //change : remove notification sound
 /*
           if (this.nbNewNotifications > 0) {
             var snd = new Audio('./assets/music/notification.mp3');
@@ -386,7 +387,3 @@ export class Main {
     this.noSearchResults = false;
   }
 }
-
-
-
- 

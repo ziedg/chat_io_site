@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-md-8 col-sm-8 col-xs-12 input-param">
-      <input (keyup)="checkLasttName()" value="{{user.lastName}}" formControlName="lastName"
+      <input (keyup)="checkLastName()" value="{{user.lastName}}" formControlName="lastName"
              [ngClass]="{'invalidInput': (errLastName && errLastName.length>0),
              'validInput': (errLastName.length==0)}" id="lastName"
         />

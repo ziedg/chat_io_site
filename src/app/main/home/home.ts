@@ -85,6 +85,9 @@ export class Home {
   keepLoading = true;
   touch_start_position: number;
   online: any;
+	public pubInputHtml: string = "";
+	public arabicText: boolean = false;
+	arabicRegex:RegExp = /[\u0600-\u06FF]/;
 
   constructor(
     public translate: TranslateService,
@@ -97,7 +100,7 @@ export class Home {
     private loginService: LoginService,
     private changeDetector: ChangeDetectorRef,
     private globalService: GlobalService,
-    private ng2ImgMaxService: Ng2ImgMaxService
+    private ng2ImgMaxService: Ng2ImgMaxService,
   ) {
     this.loginService.redirect();
 
@@ -194,8 +197,13 @@ export class Home {
     this.linkView.getListLinks(this.pubText);
   }
 
+	checkArabic(firstLetter) {
+		this.arabicText = this.arabicRegex.test(firstLetter);
+
+	}
+
   putIntoList(response) {
-    if (!response.length || response.length < 10) {
+    if (!response.length ) {
       this.showLoading = false;
       this.isLock = false;
       this.showSuggestionMSG = true;
@@ -247,10 +255,10 @@ export class Home {
         this.lastPostId = response[i]._id;
       }
     }
-
     if (response.length < 10) {
       this.showSuggestionMSG = true;
     }
+
   }
 
   loadFirstPosts() {
@@ -263,6 +271,7 @@ export class Home {
       .subscribe(
         response => {
           //this.publicationBeanList = [];
+          console.log(response);
           this.putIntoList(response);
           this.changeDetector.markForCheck();
         },
@@ -378,7 +387,7 @@ export class Home {
       this.errorTimed();
       return;
     }
-    
+
     txt = txt.replace(/(\&nbsp;|\ )+/g, ' ')
               .replace(/(\<.?br\>)+/g, '<br>')
               .replace(/^\<.?br\>|\<.?br\>$/g,'');
