@@ -486,8 +486,10 @@ export class Profile {
 
           if (this.loginService.isWasConnectedWithFacebook){
             let fuser = this.loginService.getFacebookUser();
-             fuser.profilePicture=response.profile.profilePicture?response.profile.profilePicture:'';
+            if(fuser.profilePicture)
+            { fuser.profilePicture=response.profile.profilePicture
              localStorage.setItem('facebookUser',JSON.stringify(fuser));
+            }
           }
           let user = this.loginService.getUser();
           user.profilePicture=response.profile.profilePicture
