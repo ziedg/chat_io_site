@@ -125,6 +125,7 @@ export class Profile {
           response => {
 
           if (response.status == "0") {
+            console.log(response.user);
             this.userDisplayed = response.user;
             this.title.setTitle(this.userDisplayed.firstName + " " + this.userDisplayed.lastName);
             this.loadFirstPosts();
