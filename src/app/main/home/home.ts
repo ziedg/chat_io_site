@@ -121,6 +121,7 @@ export class Home {
     // window.scrollTo(0, 0);
 
     this.menuFilter = "recent";
+		this.title.setTitle("Speegar");
   }
 
   ngOnInit() {
