@@ -40,7 +40,9 @@
       </div>
     </div>
   </article>
-  <a (click)="loadMoreProfiles()" *ngIf="displayedNumberPopularProfiles<12"> Afficher plus </a>
+  <a (click)="loadMoreProfiles()" *ngIf="displayedNumberPopularProfiles<12">
+		{{ 'top_blagueurs_show_more' | translate }}
+	</a>
 </section>
 
 <!-- This section is hidden temporarely-->
@@ -52,9 +54,11 @@
     <div *ngIf="i< displayedNumberProfileSuggestions;">
       <div class="user">
         <div class="user-img" *ngIf="profile.profilePictureMin"
+						 [routerLink]="['/main/profile',profile._id]"
              [ngStyle]="{'background-image': 'url(' + profile.profilePictureMin + ')'}">
         </div>
         <div class="user-img" *ngIf="!profile.profilePictureMin"
+						 [routerLink]="['/main/profile',profile._id]"
              [ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
         </div>
         <div class="user-name">

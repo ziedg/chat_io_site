@@ -371,6 +371,10 @@
 	display: inline;
 }
 
+.profile-hover > article {
+	cursor: pointer;
+}
+
 
 * {
   outline: none;
@@ -4058,6 +4062,7 @@ input.loginInput {
 .img-preview {
   width: 100%;
   margin-top: 0 !important;
+	object-fit: cover;
 }
 .link-preview .fa-times {
   position: absolute;
