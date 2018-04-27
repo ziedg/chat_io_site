@@ -489,7 +489,8 @@ export class Profile {
             fuser.profilePicture=response.profile.profilePicture;
              localStorage.setItem('facebookUser',JSON.stringify(fuser));
           }
-
+          let user = this.loginService.getUser();
+          user.profilePicture=response.profile.profilePicture
           localStorage.setItem('user', JSON.stringify(response.profile));
           this.loginService.actualize();
           this.changePhotoCancel();
