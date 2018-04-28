@@ -105,12 +105,6 @@
     color: white !important;
   }
 
-  .profile-photo:hover .fa-upload,
-  .profile-photo:hover .fa-floppy-o,
-  .profile-photo:hover .fa-times {
-    display: inline;
-  }
-
   .widget button:hover {
     opacity: .8;
   }
@@ -370,6 +364,17 @@
   }
 }
 /*------------------------------all-hover-effects-end-------------------*/
+
+.profile-photo:hover .fa-upload,
+.profile-photo:hover .fa-floppy-o,
+.profile-photo:hover .fa-times {
+	display: inline;
+}
+
+.profile-hover > article {
+	cursor: pointer;
+}
+
 
 * {
   outline: none;
@@ -1897,7 +1902,7 @@ top-blagueurs-decov .user .user-img,
   }
 }
 
-.user-img {  
+.user-img {
   background-size: cover;
   background-position: center;
   border-radius: 50%;
@@ -2373,7 +2378,7 @@ top-blagueurs-decov .user .user-img,
     text-align: center;
   }
   .btn-edit-profile-1 {
-    width: 100%!important; 
+    width: 100%!important;
   }
 }
 @media (max-width: 300px) {
@@ -4056,7 +4061,9 @@ input.loginInput {
 }
 .img-preview {
   width: 100%;
+	max-height: 400px;
   margin-top: 0 !important;
+	object-fit: cover;
 }
 .link-preview .fa-times {
   position: absolute;
@@ -4314,7 +4321,7 @@ top-blagueurs-decov .user-name header {
   }
 
   .top-blagueurs-ignore {
-    align-items: flex-end;    
+    align-items: flex-end;
   }
 }
 
@@ -4387,7 +4394,7 @@ top-blagueurs-decov .user-name header {
   max-height: 100%;
 }
 
- 
+
 
 .search-mobile {
   padding:0;
