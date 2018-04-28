@@ -416,12 +416,16 @@ export class Home {
 												&& !this.uploadedPicture
 												&& !this.link.isSet;
 
+		var img_src:string = jQuery('#preview-image').attr('src');
 		if(this.imageFromLink) {
+			this.imageFromLink = false;
+			if(img_src && img_src.length) {
 			console.log("in publish, image from link is set!");
 			let br:string = txt.length ? '<br>' : "";
-			txt += `${br}<img src="${jQuery('#preview-image').attr('src')}" class='image-from-link'>`
-			this.imageFromLink = false;
+			txt += `${br}<img src="${img_src}" class='image-from-link'>`;
+			}
 		}
+
 
 		if(this.youtubeLink){ jQuery(".yt-in-url").hide(); }
 
