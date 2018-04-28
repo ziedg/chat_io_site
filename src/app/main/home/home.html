@@ -72,7 +72,7 @@
                   <div class="ajout-img-holder">
                     <img id="preview-image">
                     <i class="fa fa-times delete-photo-post" aria-hidden="true"
-                       *ngIf="uploadedPicture"
+                       *ngIf="uploadedPicture || imageFromLink"
                        (click)="resetPublishPicture()"></i>
 
                   </div>

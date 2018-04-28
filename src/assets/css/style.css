@@ -4061,6 +4061,7 @@ input.loginInput {
 }
 .img-preview {
   width: 100%;
+	max-height: 400px;
   margin-top: 0 !important;
 	object-fit: cover;
 }
