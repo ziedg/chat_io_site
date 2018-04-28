@@ -82,7 +82,7 @@ export class Profile {
   linkLoading = false;
   isEmpty = true;
   profilePictLoad:boolean = false;
-
+  loadMore =true;
 
 
   constructor(public translate:TranslateService,
@@ -290,6 +290,7 @@ export class Profile {
         this.publicationBeanList = [];
         this.putIntoList(response);
         this.changeDetector.markForCheck();
+        if(response.length === 0){this.loadMore=false}
       },
         err => {
         setTimeout(() => {
@@ -316,6 +317,7 @@ export class Profile {
         response => {
         this.putIntoList(response);
         this.changeDetector.markForCheck();
+        if(response.length === 0){this.loadMore=false}
       },
         err => {
         this.isLock = false;
@@ -332,7 +334,7 @@ export class Profile {
       return;
     }
     else {
-      this.loadMorePosts();
+      if(this.loadMore){this.loadMorePosts()}
       return 1;
     }
   }
