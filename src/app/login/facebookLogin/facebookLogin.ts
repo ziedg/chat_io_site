@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
@@ -32,7 +32,8 @@ export class FacebookLogin {
     facebookUser : SocialUser;
     loadingSign=false;
 
-    constructor(public translate: TranslateService, private title:Title,public http:Http, private router:Router, private loginService:LoginService) {
+    constructor(public translate: TranslateService, private title:Title,public http:Http, private router:Router, private loginService:LoginService,
+        private ngZone: NgZone) {
         this.title.setTitle("Connexion - Speegar");
         if(!loginService.isWasConnectedWithFacebook()){
             this.router.navigate(['/login/sign-in']);
@@ -99,7 +100,9 @@ export class FacebookLogin {
     
                     this.loginService.setToken(response.token);
                     this.loginService.actualize();
-                    this.router.navigate(['/main/home']);
+                    this.ngZone.run(()=>{
+                        this.router.navigate(['/main/home']);
+                    });
 
                 }
                 else {
