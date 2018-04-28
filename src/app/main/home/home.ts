@@ -398,7 +398,10 @@ export class Home {
               .replace(/(\<.?br\>)+/g, '<br>')
               .replace(/^\<.?br\>|\<.?br\>$/g,'');
 
-		if(this.imageFromLink) {
+		if(this.imageFromLink
+			&& !this.youtubeLink
+			&& !this.uploadedPicture
+			&& !this.link.isSet) {
 			console.log("in publish, image from link is set!");
 			let br:string = txt.length ? '<br>' : "";
 			txt += `${br}<img src="${jQuery('#preview-image').attr('src')}">`
@@ -521,7 +524,6 @@ export class Home {
 
   //uploading photo or GIF
   uploadPhoto($event) {
-	this.imageFromLink = false;
     var inputValue = $event.target;
 
     if (inputValue != null && null != inputValue.files[0]) {
@@ -555,7 +557,6 @@ export class Home {
   }
 
   uploadPhotoGIF($event) {
-		this.imageFromLink = false;
     var inputValue = $event.target;
     if (inputValue != null && null != inputValue.files[0]) {
       this.uploadedPicture = inputValue.files[0];
