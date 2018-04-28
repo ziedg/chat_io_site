@@ -1,4 +1,3 @@
-
 import { Component, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
@@ -82,7 +81,7 @@ export class Profile {
   linkLoading = false;
   isEmpty = true;
   profilePictLoad:boolean = false;
-
+  loadMore =true;
 
 
   constructor(public translate:TranslateService,
@@ -289,6 +288,7 @@ export class Profile {
         response => {
         this.publicationBeanList = [];
         this.putIntoList(response);
+        if(response.length === 0){this.loadMore=false}
         this.changeDetector.markForCheck();
       },
         err => {
@@ -315,6 +315,7 @@ export class Profile {
       .subscribe(
         response => {
         this.putIntoList(response);
+        if(response.length === 0){this.loadMore=false}
         this.changeDetector.markForCheck();
       },
         err => {
@@ -332,7 +333,7 @@ export class Profile {
       return;
     }
     else {
-      this.loadMorePosts();
+       if(this.loadMore){this.loadMorePosts()}
       return 1;
     }
   }
