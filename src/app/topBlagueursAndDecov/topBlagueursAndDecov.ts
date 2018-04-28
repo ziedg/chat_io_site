@@ -49,27 +49,26 @@ export class TopBlagueursAndDecov {
   }
 
   loadPopularProfiles(Id_Profile?:string) {
-
-    var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/';
-    if(Id_Profile){ url+= Id_Profile}
-    this.http.get(url,
-      AppSettings.OPTIONS)
-      .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-          Array.prototype.push.apply(this.popularProfiles, response.profiles);
-//changes
-if (response.profiles && response.profiles.length ){
-          this.lastPopularProfileID = response.profiles[response.profiles.length-1]._id;
-}
-//
-        },
-        err => {
-        },
-        () => {
-          this.changeDetector.markForCheck();
-        }
-      );
+	var url: string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES + '/';
+	if (Id_Profile) { url += Id_Profile }
+	this.http.get(url,
+	  AppSettings.OPTIONS)
+	  .map((res: Response) => res.json())
+	  .subscribe(
+	    response => {
+	      Array.prototype.push.apply(this.popularProfiles, response.profiles);
+	      //changes
+	      if (response.profiles && response.profiles.length) {
+	        this.lastPopularProfileID = response.profiles[response.profiles.length - 1]._id;
+	      }
+	      //
+	    },
+	    err => {
+	    },
+	    () => {
+	      this.changeDetector.markForCheck();
+	    }
+	  );
   }
 
 //changes
@@ -88,7 +87,7 @@ if (this.popularProfiles.length<6){
     let body = JSON.stringify({
       profileId: user._id
     });
-    
+
     this.http.post(
       environment.SERVER_URL + pathUtils.SUBSCRIBE,
       body,

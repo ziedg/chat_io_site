@@ -105,12 +105,6 @@
     color: white !important;
   }
 
-  .profile-photo:hover .fa-upload,
-  .profile-photo:hover .fa-floppy-o,
-  .profile-photo:hover .fa-times {
-    display: inline;
-  }
-
   .widget button:hover {
     opacity: .8;
   }
@@ -370,6 +364,17 @@
   }
 }
 /*------------------------------all-hover-effects-end-------------------*/
+
+.profile-photo:hover .fa-upload,
+.profile-photo:hover .fa-floppy-o,
+.profile-photo:hover .fa-times {
+	display: inline;
+}
+
+.profile-hover > article {
+	cursor: pointer;
+}
+
 
 * {
   outline: none;
@@ -797,7 +802,7 @@ a {
 }
 .notif-content {
   margin-left: 10px;
-  padding-right: 50px;
+  padding-right: 80px;
 }
 .for-notif {
   width: 28px !important;
@@ -1199,7 +1204,7 @@ section.widget {
   box-sizing: border-box;
   color: black;
   align-content: center;
-  font-size: 13px;
+  font-size: 14px;
 }
 .welcome-msg h3 {
   font-family: 'coolvetica';
@@ -1670,7 +1675,7 @@ textarea:focus {
   display: block;
   position: absolute;
   height: 36px !important;
-  top: 2px;
+  top: -6px;
   left: -5px;
   padding: 8px 7px 8px 32px;
   border: solid 1px #ddd;
@@ -1897,7 +1902,7 @@ top-blagueurs-decov .user .user-img,
   }
 }
 
-.user-img {  
+.user-img {
   background-size: cover;
   background-position: center;
   border-radius: 50%;
@@ -2373,7 +2378,7 @@ top-blagueurs-decov .user .user-img,
     text-align: center;
   }
   .btn-edit-profile-1 {
-    width: 100%!important; 
+    width: 100%!important;
   }
 }
 @media (max-width: 300px) {
@@ -4056,7 +4061,9 @@ input.loginInput {
 }
 .img-preview {
   width: 100%;
+	max-height: 400px;
   margin-top: 0 !important;
+	object-fit: cover;
 }
 .link-preview .fa-times {
   position: absolute;
@@ -4094,7 +4101,7 @@ input.loginInput {
 
 .display-comment-picture{
   max-height: 200px;
-  max-width: 100%;
+  max-width: calc(100% - 30px);
   margin-left: 15px;
   margin-bottom: 15px;
   border: solid 1px #ddd;
@@ -4120,12 +4127,6 @@ input.loginInput {
 .cancel-upload-comment-picture{
   position: absolute;
   margin-left: 10px;
-}
-
-@media (max-width: 767px) {
-  .display-comment-picture {
-    max-width: 70vw;
-  }
 }
 
 .suggestions-box{
@@ -4314,7 +4315,7 @@ top-blagueurs-decov .user-name header {
   }
 
   .top-blagueurs-ignore {
-    align-items: flex-end;    
+    align-items: flex-end;
   }
 }
 
@@ -4387,7 +4388,7 @@ top-blagueurs-decov .user-name header {
   max-height: 100%;
 }
 
- 
+
 
 .search-mobile {
   padding:0;
@@ -4552,4 +4553,10 @@ change-password .input-param input {
 
 .comment-showed {
   color: #009900 !important
+}
+
+
+/*------------ugly-and-bad-bug-fix----------*/
+img[src="undefined"] {
+	display:none;
 }

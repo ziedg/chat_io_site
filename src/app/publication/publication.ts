@@ -213,8 +213,9 @@ export class Publication {
       //console.log("arabic text!");
     }
 
+		const txt = this.publicationBean.publText;
 
-    const word_letters = 5;
+		const word_letters:number = 5;
 
     const words_max:number = 70;
     const words_marge:number = 10;
@@ -222,35 +223,45 @@ export class Publication {
     const letters_max:number = words_max * word_letters;
     const letters_marge:number = words_marge * word_letters;
 
-    const txt = this.publicationBean.publText;
-    const parts = txt.split(' ');
+
+		const lines_max:number = 4;
+
     if(txt !== 'null' && txt !=='undefined' && txt.length > 0) {
-      if(parts.length > words_max){
-        this.longPubText = true;
+			var parts = txt.split('<br>');
+			if(parts.length > lines_max ){
+				this.firstPubText = parts.slice(0, lines_max).join('<br>');
+				this.lastPubText = parts.slice(lines_max, parts.length ).join('<br>');
+				this.longPubText = true;
+			}
+			else {
+				var parts = txt.split(' ');
+	      if(parts.length > words_max){
+	        this.longPubText = true;
 
-        let words_cut:number;
-        if(parts.length - words_max < words_marge) words_cut = parts.length - words_marge;
-        else words_cut = words_max;
+	        let words_cut:number;
+	        if(parts.length - words_max < words_marge) words_cut = parts.length - words_marge;
+	        else words_cut = words_max;
 
-        this.firstPubText = parts.slice(0, words_cut).join(' ');
-        this.lastPubText = parts.slice(words_cut, parts.length ).join(' ');
-        //console.log("cut words");
-      }
-      else if(txt.length > letters_max) {
-        this.longPubText = true;
+	        this.firstPubText = parts.slice(0, words_cut).join(' ');
+	        this.lastPubText = parts.slice(words_cut, parts.length ).join(' ');
+	        //console.log("cut words");
+	      }
+	      else if(txt.length > letters_max) {
+	        this.longPubText = true;
 
-        let letters_cut:number;
-        if(txt.length - letters_max < letters_marge) letters_cut = txt.length - letters_marge;
-        else letters_cut = letters_max;
+	        let letters_cut:number;
+	        if(txt.length - letters_max < letters_marge) letters_cut = txt.length - letters_marge;
+	        else letters_cut = letters_max;
 
-        var cut_end:number = txt.slice(0, letters_cut).lastIndexOf(' ');
-        this.firstPubText = txt.slice(0, cut_end);
-        this.lastPubText = txt.slice(cut_end);
-        //console.log("cut letters");
-      }
-      else {
-        this.firstPubText = txt;
-      }
+	        var cut_end:number = txt.slice(0, letters_cut).lastIndexOf(' ');
+	        this.firstPubText = txt.slice(0, cut_end);
+	        this.lastPubText = txt.slice(cut_end);
+	        //console.log("cut letters");
+	      }
+	      else {
+	        this.firstPubText = txt;
+	      }
+			}
       //console.log("long text : " + this.longPubText);
     }
 
@@ -323,10 +334,19 @@ export class Publication {
   }
 
   publishComment() {
-    let commentToSend = this.emojiService.getCommentTextFromHtml(this.commentInputHtml);
-    if (!commentToSend && !this.uploadedPictureComment) {
+		var txt:string = this.commentInputHtml;
+		txt = txt.replace(/(\&nbsp;|\ )+/g, ' ')
+							.replace(/(\<.?br\>)+/g, '<br>')
+							.replace(/^\<.?br\>|\<.?br\>$/g,'');
+
+		var white_space_regex:RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
+		var white_space_only = white_space_regex.test(txt);
+    if (!commentToSend && white_space_only && !this.uploadedPictureComment) {
       return;
     }
+
+		var commentToSend = this.emojiService.getCommentTextFromHtml(txt);
+
     this.loadingComment = true;
     this.changeDetector.markForCheck();
     var data = new FormData();

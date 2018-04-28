@@ -85,6 +85,10 @@ export class Home {
   keepLoading = true;
   touch_start_position: number;
   online: any;
+	public pubInputHtml: string = "";
+	public arabicText: boolean = false;
+	arabicRegex:RegExp = /[\u0600-\u06FF]/;
+	public imageFromLink:boolean = false;
 
   constructor(
     public translate: TranslateService,
@@ -97,7 +101,7 @@ export class Home {
     private loginService: LoginService,
     private changeDetector: ChangeDetectorRef,
     private globalService: GlobalService,
-    private ng2ImgMaxService: Ng2ImgMaxService
+    private ng2ImgMaxService: Ng2ImgMaxService,
   ) {
     this.loginService.redirect();
 
@@ -118,6 +122,7 @@ export class Home {
     // window.scrollTo(0, 0);
 
     this.menuFilter = "recent";
+		this.title.setTitle("Speegar");
   }
 
   ngOnInit() {
@@ -193,6 +198,11 @@ export class Home {
     this.changeDetector.markForCheck();
     this.linkView.getListLinks(this.pubText);
   }
+
+	checkArabic(firstLetter) {
+		this.arabicText = this.arabicRegex.test(firstLetter);
+
+	}
 
   putIntoList(response) {
     if (!response.length ) {
@@ -334,6 +344,18 @@ export class Home {
       this.updateYoutube();
       return 1;
     }
+		if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
+			console.log("image detected");
+			jQuery("#preview-image").attr("src", text);
+			jQuery(".file-input-holder").show();
+			jQuery("#preview-image").show();
+			this.imageFromLink = true;
+			this.youtubeLink = null;
+			this.uploadedPicture = null;
+			jQuery(".youtube-preview").html("");
+			this.link.isSet = false;
+			return 1;
+		}
     this.analyzeLink(text);
     text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
     document.execCommand("insertHTML", false, text);
@@ -342,6 +364,7 @@ export class Home {
   resetPublishPicture() {
     jQuery("#preview-image").attr("src", "");
     jQuery("#preview-image").hide();
+		this.imageFromLink = false;
     this.uploadedPicture = null;
   }
 
@@ -364,6 +387,8 @@ export class Home {
   }
 
   publish() {
+
+
     this.online = window.navigator.onLine;
     console.log("publish()");
     var txt:string = jQuery("#publishDiv").html();
@@ -374,15 +399,35 @@ export class Home {
       white_space_regex.test(txt)
       && !this.youtubeLink
       && !this.uploadedPicture
-      &&!this.link.isSet) {
+      &&!this.link.isSet
+			&& !this.imageFromLink) {
       this.errorMsg = "SP_FV_ER_PUBLICATION_EMPTY";
       this.errorTimed();
       return;
     }
-    
+
     txt = txt.replace(/(\&nbsp;|\ )+/g, ' ')
               .replace(/(\<.?br\>)+/g, '<br>')
               .replace(/^\<.?br\>|\<.?br\>$/g,'');
+
+		// when image form link is passed
+		this.imageFromLink = this.imageFromLink
+												&& !this.youtubeLink
+												&& !this.uploadedPicture
+												&& !this.link.isSet;
+
+		var img_src:string = jQuery('#preview-image').attr('src');
+		if(this.imageFromLink) {
+			this.imageFromLink = false;
+			if(img_src && img_src.length) {
+			console.log("in publish, image from link is set!");
+			let br:string = txt.length ? '<br>' : "";
+			txt += `${br}<img src="${img_src}" class='image-from-link'>`;
+			}
+		}
+
+
+		if(this.youtubeLink){ jQuery(".yt-in-url").hide(); }
 
     this.form.value.publicationText = txt;
 
@@ -624,6 +669,7 @@ export class Home {
         this.updateYoutube();
         return 1;
       }
+			/*
       if (linkURL.search(/(\.gif)$/i) > 0) {
         console.log("this is a gif!");
         console.log(linkURL);
@@ -640,50 +686,55 @@ export class Home {
         return 1;
         //}
       }
-      this.linkLoading = true;
-      this.http
-        .get(
-          environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
-          AppSettings.OPTIONS
-        )
-        .map((res: Response) => res.json())
-        .subscribe(
-          response => {
-            if (response.results.success) {
-              this.resetPublishPicture();
-              jQuery(".youtube-preview").html("");
-              //this.form.controls.publicationYoutubeLink.updateValue('');
-              this.link.url = linkURL.substring(0, linkURL.length - 6);
-              this.link.title = response.results.data.ogTitle;
-              this.link.description = response.results.data.ogDescription;
-              if (response.results.data.ogImage) {
-                var a = response.results.data.ogImage.url;
-                this.link.image = response.results.data.ogImage.url;
-                this.link.imageWidth = response.results.data.ogImage.width;
-                this.link.imageHeight = response.results.data.ogImage.height;
-                if (a.search(/(\.gif)$/i) > 0) {
-                  this.link.isGif = true;
-                  this.link.url = this.link.image;
-                } else {
-                  this.link.isGif = false;
-                }
-              } else {
-                this.link.image = null;
-                this.link.imageWidth = 0;
-                this.link.imageHeight = 0;
-              }
-              this.link.isSet = true;
-              this.linkLoading = false;
-              this.changeDetector.markForCheck();
-            }
-          },
-          err => {
-            console.error("error in link API;");
-          },
-          () => {
-            this.linkLoading = false;
-          }
-        );
+			*/
+			if(this.imageFromLink) { return 1 }
+	      this.linkLoading = true;
+	      this.http
+	        .get(
+	          environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
+	          AppSettings.OPTIONS
+	        )
+	        .map((res: Response) => res.json())
+	        .subscribe(
+	          response => {
+	            if (response.results.success) {
+	              this.resetPublishPicture();
+	              jQuery(".youtube-preview").html("");
+	              //this.form.controls.publicationYoutubeLink.updateValue('');
+	              this.link.url = linkURL.substring(0, linkURL.length - 6);
+	              this.link.title = response.results.data.ogTitle;
+	              this.link.description = response.results.data.ogDescription;
+	              if (response.results.data.ogImage) {
+	                var a = response.results.data.ogImage.url;
+	                this.link.image = response.results.data.ogImage.url;
+	                this.link.imageWidth = response.results.data.ogImage.width;
+	                this.link.imageHeight = response.results.data.ogImage.height;
+									/*
+	                if (a.search(/(\.gif)$/i) > 0) {
+	                  this.link.isGif = true;
+	                  this.link.url = this.link.image;
+	                } else {
+	                  this.link.isGif = false;
+										this.linkLoading = false;
+	                }*/
+	              } else {
+	                this.link.image = null;
+	                this.link.imageWidth = 0;
+	                this.link.imageHeight = 0;
+	              }
+	              this.link.isSet = true;
+	              this.linkLoading = false;
+	              this.changeDetector.markForCheck();
+	            }
+							this.linkLoading = false;
+	          },
+	          err => {
+	            console.error("error in link API;");
+	          },
+	          () => {
+	            this.linkLoading = false;
+	          }
+	        );
     }
   }
 
