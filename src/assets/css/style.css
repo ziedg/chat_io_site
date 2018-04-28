@@ -802,7 +802,7 @@ a {
 }
 .notif-content {
   margin-left: 10px;
-  padding-right: 50px;
+  padding-right: 80px;
 }
 .for-notif {
   width: 28px !important;
@@ -1204,7 +1204,7 @@ section.widget {
   box-sizing: border-box;
   color: black;
   align-content: center;
-  font-size: 13px;
+  font-size: 14px;
 }
 .welcome-msg h3 {
   font-family: 'coolvetica';
