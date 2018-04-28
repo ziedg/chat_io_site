@@ -88,7 +88,7 @@ export class Home {
 	public pubInputHtml: string = "";
 	public arabicText: boolean = false;
 	arabicRegex:RegExp = /[\u0600-\u06FF]/;
-	public imageFromLink:boolean = true;
+	public imageFromLink:boolean = false;
 
   constructor(
     public translate: TranslateService,
@@ -419,7 +419,7 @@ export class Home {
 		if(this.imageFromLink) {
 			console.log("in publish, image from link is set!");
 			let br:string = txt.length ? '<br>' : "";
-			txt += `${br}<img src="${jQuery('#preview-image').attr('src')}">`
+			txt += `${br}<img src="${jQuery('#preview-image').attr('src')}" class='image-from-link'>`
 			this.imageFromLink = false;
 		}
 
