@@ -4554,3 +4554,9 @@ change-password .input-param input {
 .comment-showed {
   color: #009900 !important
 }
+
+
+/*------------ugly-and-bad-bug-fix----------*/
+img[src="undefined"] {
+	display:none;
+}
