@@ -334,10 +334,19 @@ export class Publication {
   }
 
   publishComment() {
-    let commentToSend = this.emojiService.getCommentTextFromHtml(this.commentInputHtml);
-    if (!commentToSend && !this.uploadedPictureComment) {
+		var txt:string = this.commentInputHtml;
+		txt = txt.replace(/(\&nbsp;|\ )+/g, ' ')
+							.replace(/(\<.?br\>)+/g, '<br>')
+							.replace(/^\<.?br\>|\<.?br\>$/g,'');
+
+		var white_space_regex:RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
+		var white_space_only = white_space_regex.test(txt);
+    if (!commentToSend && white_space_only && !this.uploadedPictureComment) {
       return;
     }
+
+		var commentToSend = this.emojiService.getCommentTextFromHtml(txt);
+
     this.loadingComment = true;
     this.changeDetector.markForCheck();
     var data = new FormData();

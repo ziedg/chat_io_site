@@ -4101,7 +4101,7 @@ input.loginInput {
 
 .display-comment-picture{
   max-height: 200px;
-  max-width: 100%;
+  max-width: calc(100% - 30px);
   margin-left: 15px;
   margin-bottom: 15px;
   border: solid 1px #ddd;
@@ -4127,12 +4127,6 @@ input.loginInput {
 .cancel-upload-comment-picture{
   position: absolute;
   margin-left: 10px;
-}
-
-@media (max-width: 767px) {
-  .display-comment-picture {
-    max-width: 70vw;
-  }
 }
 
 .suggestions-box{

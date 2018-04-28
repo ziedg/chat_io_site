@@ -65,7 +65,13 @@ export class Comment {
   }
 
   afficheComment(comment):string {
-    return this.emojiService.AfficheWithEmoji(comment);
+		var white_space_regex:RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
+		if(!white_space_regex.test(comment)){
+    	return this.emojiService.AfficheWithEmoji(comment);
+		}
+		else {
+			return '';
+		}
   }
 
   addOrRemoveDislike() {
