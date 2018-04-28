@@ -344,6 +344,18 @@ export class Home {
       this.updateYoutube();
       return 1;
     }
+		if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
+			console.log("image detected");
+			jQuery("#preview-image").attr("src", text);
+			jQuery(".file-input-holder").show();
+			jQuery("#preview-image").show();
+			this.imageFromLink = true;
+			this.youtubeLink = null;
+			this.uploadedPicture = null;
+			jQuery(".youtube-preview").html("");
+			this.link.isSet = false;
+			return 1;
+		}
     this.analyzeLink(text);
     text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
     document.execCommand("insertHTML", false, text);
@@ -398,12 +410,20 @@ export class Home {
               .replace(/(\<.?br\>)+/g, '<br>')
               .replace(/^\<.?br\>|\<.?br\>$/g,'');
 
+		// when image form link is passed
+		this.imageFromLink = this.imageFromLink
+												&& !this.youtubeLink
+												&& !this.uploadedPicture
+												&& !this.link.isSet;
+
 		if(this.imageFromLink) {
 			console.log("in publish, image from link is set!");
 			let br:string = txt.length ? '<br>' : "";
 			txt += `${br}<img src="${jQuery('#preview-image').attr('src')}">`
 			this.imageFromLink = false;
 		}
+
+		if(this.youtubeLink){ jQuery(".yt-in-url").hide(); }
 
     this.form.value.publicationText = txt;
 
@@ -521,7 +541,6 @@ export class Home {
 
   //uploading photo or GIF
   uploadPhoto($event) {
-	this.imageFromLink = false;
     var inputValue = $event.target;
 
     if (inputValue != null && null != inputValue.files[0]) {
@@ -555,7 +574,6 @@ export class Home {
   }
 
   uploadPhotoGIF($event) {
-		this.imageFromLink = false;
     var inputValue = $event.target;
     if (inputValue != null && null != inputValue.files[0]) {
       this.uploadedPicture = inputValue.files[0];
@@ -647,13 +665,6 @@ export class Home {
         this.updateYoutube();
         return 1;
       }
-			if (linkURL.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
-				console.log("image detected");
-				jQuery("#preview-image").attr("src", linkURL);
-				jQuery(".file-input-holder").show();
-				jQuery("#preview-image").show();
-				this.imageFromLink = true;
-			}
 			/*
       if (linkURL.search(/(\.gif)$/i) > 0) {
         console.log("this is a gif!");
@@ -672,7 +683,7 @@ export class Home {
         //}
       }
 			*/
-			if(!this.imageFromLink) {
+			if(this.imageFromLink) { return 1 }
 	      this.linkLoading = true;
 	      this.http
 	        .get(
@@ -720,7 +731,6 @@ export class Home {
 	            this.linkLoading = false;
 	          }
 	        );
-			}
     }
   }
 
