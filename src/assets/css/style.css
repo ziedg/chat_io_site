@@ -1675,7 +1675,7 @@ textarea:focus {
   display: block;
   position: absolute;
   height: 36px !important;
-  top: 2px;
+  top: -6px;
   left: -5px;
   padding: 8px 7px 8px 32px;
   border: solid 1px #ddd;
