@@ -148,7 +148,7 @@ export class Main {
 
 
   onFocus() {
-    console.log("this is on focus");
+   
     this.searchRes2.nativeElement.style.display="block!important";
     this.onChange(this.searchInput.nativeElement.value);
     this.checkAutoComplete();
@@ -251,7 +251,7 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-          
+
         if (response.length != 0) {
           this.showNoNotif = false;
 

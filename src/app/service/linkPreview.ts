@@ -36,7 +36,7 @@ export class LinkPreview {
                 return 1;
             }
             var linkURL = myArray[0];
-            console.log(linkURL);
+          
             if (linkURL == this.linkToPreview.url) {
                 return 1;
             }
@@ -62,7 +62,7 @@ export class LinkPreview {
                         }
                         this.linkToPreview.isSet = true;
 
-                  
+
                         this.returnerLink = this.linkToPreview;
                         linksArray.push(this.linkToPreview);
                         console.error(response);
