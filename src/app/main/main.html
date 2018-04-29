@@ -143,15 +143,15 @@
 
                       {{getNotificationTime(notif.date_notification)}}
 
-
-                      <!-- <span *ngIf="!notif.isSeen; else seen2">
+                      <span [hidden]="notif.isSeen ">
                           <i class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
                       </span>
-                      <ng-template #seen2>
 
+                          <span [hidden]="!notif.isSeen">
                           <i  class="fa fa-eye fa-sm text-muted"  aria-hidden="true"></i>
-                      </ng-template> -->
-                           {{notif.isSeen}}
+                          </span>
+
+              
 
                     </span>
                     </div>
@@ -173,14 +173,15 @@
 
                     <span>
                    {{getNotificationTime(notif.date_notification)}}
-                   <!-- <span *ngIf="!notif.isSeen ; else seen1">
+
+                    <span [hidden]="notif.isSeen ">
                       <i class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
                   </span>
-                  <ng-template #seen1>
 
+                      <span [hidden]="!notif.isSeen">
                       <i  class="fa fa-eye fa-sm text-muted"  aria-hidden="true"></i>
-                  </ng-template> -->
-                  {{notif.isSeen}}
+                      </span>
+
 
 
                       </span>
