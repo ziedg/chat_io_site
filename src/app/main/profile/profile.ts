@@ -1,4 +1,3 @@
-
 import { Component, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
@@ -289,6 +288,7 @@ export class Profile {
         response => {
         this.publicationBeanList = [];
         this.putIntoList(response);
+        if(response.length === 0){this.loadMore=false}
         this.changeDetector.markForCheck();
         if(response.length === 0){this.loadMore=false}
       },
@@ -316,6 +316,7 @@ export class Profile {
       .subscribe(
         response => {
         this.putIntoList(response);
+        if(response.length === 0){this.loadMore=false}
         this.changeDetector.markForCheck();
         if(response.length === 0){this.loadMore=false}
       },
