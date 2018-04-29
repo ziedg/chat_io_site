@@ -43,7 +43,7 @@ export class SuggestionsComponent implements OnInit {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-          Array.prototype.push.apply(this.popularProfiles, response.profiles);
+        if(response.profiles.length>0) {this.popularProfiles.push(...response.profiles)} 
         },
         err => {
         },
