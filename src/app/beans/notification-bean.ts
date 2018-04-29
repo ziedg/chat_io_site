@@ -6,8 +6,8 @@ export class NotificationBean {
     public type : string;
     public publId  : string;
     public profiles : Array <User>= [];
-    public isSeen : boolean;
+    public isSeen : string;
     public date_notification: string;
     public profileId : string;
-    
+
 }
