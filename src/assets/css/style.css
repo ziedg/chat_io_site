@@ -787,8 +787,8 @@ a {
   right: 15px;
   color: #666;
 }
-.unseen-notification {
-  background-color: rgba(192, 192, 192, 0.1);
+.seen-notification {
+  background-color: rgb(223, 223, 213)
   color: black;
   z-index: 4;
 }
