@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, Appli
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
+import * as _ from 'lodash';
 
 
 /* Main components */
@@ -253,6 +254,8 @@ export class Main {
           console.log(response)
         if (response.length != 0) {
           this.showNoNotif = false;
+          //remove duplicate ..
+          this.listNotif=[]
           for (var i = 0; i < response.length; i++) {
             this.listNotif.push(response[i]);
             this.lastNotifId = response[i]._id;
