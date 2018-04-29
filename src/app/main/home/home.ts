@@ -163,13 +163,12 @@ export class Home {
     // marge to show search mobile
     if (this.globalService.showSearchMobile) {
       this.globalService.showSearchMobile = false;
-      console.log("hide search mobile");
+
     } else if (
       event.changedTouches[0].screenY - this.touch_start_position >
       marge
     ) {
-      this.globalService.showSearchMobile = true;
-      console.log("show search mobile");
+      this.globalService.showSearchMobile = true
     }
   }
 
@@ -273,7 +272,7 @@ export class Home {
       .subscribe(
         response => {
           //this.publicationBeanList = [];
-          console.log(response);
+
           this.putIntoList(response);
           this.changeDetector.markForCheck();
         },
@@ -390,7 +389,7 @@ export class Home {
 
 
     this.online = window.navigator.onLine;
-    console.log("publish()");
+  
     var txt:string = jQuery("#publishDiv").html();
 
     var white_space_regex:RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
@@ -420,7 +419,7 @@ export class Home {
 		if(this.imageFromLink) {
 			this.imageFromLink = false;
 			if(img_src && img_src.length) {
-			console.log("in publish, image from link is set!");
+
 			let br:string = txt.length ? '<br>' : "";
 			txt += `${br}<img src="${img_src}" class='image-from-link'>`;
 			}
@@ -652,7 +651,7 @@ export class Home {
 
   analyzeLink(source) {
     {
-      console.log("analyse " + source);
+
       var myArray = this.linkView.getListLinks(source);
       if (!myArray.length) {
         return 1;

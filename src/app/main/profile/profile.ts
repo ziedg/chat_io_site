@@ -96,7 +96,7 @@ export class Profile {
 
     this.loginService.redirect();
 
-    console.log("constructeur");
+
     this.lastPostId = "";
     this.publicationBeanList = [];
 
@@ -125,7 +125,7 @@ export class Profile {
           response => {
 
           if (response.status == "0") {
-            console.log(response.user);
+
             this.userDisplayed = response.user;
             this.title.setTitle(this.userDisplayed.firstName + " " + this.userDisplayed.lastName);
             this.loadFirstPosts();
@@ -342,7 +342,7 @@ export class Profile {
 
 
   openModal() {
-    console.log("hello from openmodal profile");
+
     jQuery(".modal-edit-profile").fadeIn(500);
   }
 
@@ -351,7 +351,7 @@ export class Profile {
   }
 
   openModalOtherProfile() {
-    console.log("hello from openmodal other profile");
+
     jQuery(".modal-other-profile-options").fadeIn(500);
   }
 

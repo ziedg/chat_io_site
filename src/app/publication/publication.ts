@@ -193,10 +193,7 @@ export class Publication {
   }
 
   ngOnInit() {
-    /*
-    console.log("publication info:")
-    console.log(this.publicationBean);
-    */
+
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 
@@ -330,7 +327,7 @@ export class Publication {
   }
 
   checkEnter(event) {
-    console.log(event, event.keyCode, event.keyIdentifier);
+
   }
 
   publishComment() {
@@ -475,7 +472,7 @@ export class Publication {
         response => {
           if (response) {
             if (response.status = "0") {
-              console.log(response.publication);
+
               var element: PublicationBean = response.publication;
               this.postService.putNewPub(element, true);
               this.changeDetector.markForCheck();
@@ -533,7 +530,7 @@ export class Publication {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-          console.log(response);
+        
         },
         err => {
         },
