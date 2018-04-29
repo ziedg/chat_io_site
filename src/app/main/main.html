@@ -115,8 +115,10 @@
                         <span class="notif-a">
                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
                         </span>
-                        {{ 'main_comment_notification' | translate }}
+
                       </span>
+                      {{ 'main_comment_notification' | translate }}
+                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash" aria-hidden="true"></i>
                       <span *ngIf="notif.profiles &&notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
                           {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName}
@@ -128,6 +130,8 @@
                         </span>
                         {{ 'main_comments_notification' | translate }}
                       </span>
+                      {{ 'main_comment_notification' | translate }}
+                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash" aria-hidden="true"></i>
                     </div>
                     <div *ngIf="notif.type =='reagir'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
                       <span *ngIf="notif.profiles.length==1">
@@ -136,6 +140,8 @@
                         </span>
                         {{ 'main_reagir_notification' | translate }}
                       </span>
+                      {{ 'main_comment_notification' | translate }}
+                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash" aria-hidden="true"></i>
                       <span *ngIf=" notif.profiles && notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
                           {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName}
@@ -259,9 +265,9 @@
     <div *ngIf="listSearshUsers && showRecentSearch">
         <article *ngFor="let result of RecentSearchList" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
           <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
-    
+
           <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
-    
+
           <div class="">
             {{result.firstName}} {{result.lastName}}
           </div>
@@ -278,7 +284,7 @@
     </div>
 
   </div>
-  
+
 </div>
 
 
