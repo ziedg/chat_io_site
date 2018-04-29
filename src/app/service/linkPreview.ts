@@ -61,8 +61,8 @@ export class LinkPreview {
                             this.linkToPreview.imageHeight = 0;
                         }
                         this.linkToPreview.isSet = true;
-                        //console.log(response.results.data);
-                        console.log(JSON.stringify(this.linkToPreview));
+
+                  
                         this.returnerLink = this.linkToPreview;
                         linksArray.push(this.linkToPreview);
                         console.error(response);

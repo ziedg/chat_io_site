@@ -45,7 +45,7 @@ export class LoginService {
     redirect(){
       if(!this.isConnected()){
         if(this.isWasConnectedWithFacebook()){
-          console.log("/login/facebook-login")
+      
           this.router.navigate(['/login/facebook-login']);
         }else{
           this.router.navigate(['/login/sign-in']);
@@ -71,7 +71,7 @@ export class LoginService {
             this.token = localStorage.getItem('token');
 
             this.user= JSON.parse(localStorage.getItem('user'));
-          
+
         }
     }
 

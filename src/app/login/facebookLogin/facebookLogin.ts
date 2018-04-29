@@ -67,7 +67,7 @@ export class FacebookLogin {
             this.loadingSign=false;
         }
         else {
-            console.log('User cancelled login or did not fully authorize.');
+          
             this.loadingSign=false;
         }
     }
@@ -97,7 +97,7 @@ export class FacebookLogin {
 
                     this.loginService.updateUser(user);
                     localStorage.setItem('user', JSON.stringify(response.user));
-    
+
                     this.loginService.setToken(response.token);
                     this.loginService.actualize();
                     this.ngZone.run(()=>{

@@ -61,7 +61,7 @@ export class Notification implements OnInit {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-          console.log(response)
+
         if (response.length != 0) {
           this.showNoNotif = false;
           for (var i = 0; i < response.length; i++) {
@@ -136,7 +136,7 @@ export class Notification implements OnInit {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-          console.log(response)
+      
       },
         err => {
       },
@@ -153,7 +153,7 @@ export class Notification implements OnInit {
   }
 
   ngOnInit(){
-  
+
   }
 }
 

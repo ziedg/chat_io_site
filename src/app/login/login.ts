@@ -178,7 +178,7 @@ export class Login {
           if (response.status == "0") {
             let user: User = response.user;
 
-           
+
             this.loginService.updateUser(user);
             this.loginService.setToken(response.token);
             if (response.user.isNewInscri == "true") {
@@ -210,8 +210,7 @@ export class Login {
     this.loadingFb = true;
     FB.login(
       result => {
-        if (result) console.log(result);
-        else console.log("err");
+    
 
         this.getUserFacbookConnexion(result);
       },
