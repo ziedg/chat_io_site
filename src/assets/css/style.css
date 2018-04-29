@@ -73,7 +73,7 @@
   }
 
   .notification-holder article:hover {
-    background: rgb(196, 193, 193);
+    background: rgb(226, 223, 223);
     cursor: pointer;
     z-index: 4;
   }
