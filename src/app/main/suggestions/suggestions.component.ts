@@ -37,13 +37,14 @@ export class SuggestionsComponent implements OnInit {
       return;
 
     var url:string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES +'/';
-    if(Id_Profile){ url+= Id_Profile}
+    if(Id_Profile){ url=url+Id_Profile}
     this.http.get(url,
       AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-          Array.prototype.push.apply(this.popularProfiles, response.profiles);
+         // Array.prototype.push.apply(this.popularProfiles, response.profiles);
+         this.popularProfiles.push(...response.profiles);
         },
         err => {
         },
