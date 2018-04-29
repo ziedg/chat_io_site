@@ -83,8 +83,8 @@
             <div class="notifcations">
 
               <span *ngFor="let notif of listNotif">
-              
-                <article [class.unseen-notification]="notif.isSeen=='false'" *ngIf="notif.type !='subscribe'" (click)="goTo('post',notif.publId,notif._id)">
+
+                <article [class.unseen-notification]="!notif.isSeen" *ngIf="notif.type !='subscribe'" (click)="goTo('post',notif.publId,notif._id)">
                   <div class="user-img for-notif" *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePictureMin" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePictureMin + ')'}"></div>
 
                   <div class="user-img for-notif" *ngIf="notif.profiles && !notif.profiles[notif.profiles.length-1].profilePictureMin" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
@@ -141,12 +141,13 @@
                         <span>
                       {{getNotificationTime(notif.date_notification)}}
                       <i  *ngIf="notif.isSeen" class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
+                      <i class="fa fa-eye fa-sm text-muted"  *ngIf="!notif.isSeen" aria-hidden="true"></i>
                     </span>
                     </div>
                   </div>
 
                 </article>
-                <article [class.unseen-notification]="notif.isSeen=='false'" *ngIf=" notif.type =='subscribe'" (click)="goTo('profile',notif.profiles[0]._id,notif._id)">
+                <article [class.unseen-notification]="!notif.isSeen" *ngIf=" notif.type =='subscribe'" (click)="goTo('profile',notif.profiles[0]._id,notif._id)">
                   <div class="user-img for-notif" *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePicture" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
                   <div class="notif-content">
                     <div *ngIf="notif.type =='subscribe'" class="comment-text">
@@ -162,6 +163,7 @@
 
                    {{getNotificationTime(notif.date_notification)}}
                    <i  *ngIf="notif.isSeen" class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
+                   <i class="fa fa-eye fa-sm text-muted"  *ngIf="!notif.isSeen" aria-hidden="true"></i>
 
                       </span>
                     </div>
