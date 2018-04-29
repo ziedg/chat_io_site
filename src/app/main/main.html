@@ -95,7 +95,7 @@
                         <span class="notif-a">
                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
                         {{ 'main_comment_notification' | translate }}
-                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash text-muted  pr-2" aria-hidden="true"></i>
+
 
                       </span>
                       <span *ngIf="notif.profiles &&notif.profiles.length>1">
@@ -108,7 +108,7 @@
                           } }}
                         </span>
                         {{ 'main_comments_notification' | translate }}
-                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash  pr-2 text-muted" aria-hidden="true"></i>
+
                       </span>
                     </div>
                     <div *ngIf="notif.type =='reagir'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
@@ -117,27 +117,29 @@
                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
                         </span>
                         {{ 'main_reagir_notification' | translate }}
-                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash text-muted" aria-hidden="true"></i>
+
                       </span>
                       <span *ngIf=" notif.profiles && notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
                           {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName}
 
                           }}
-                          <i  *ngIf="notif.isSeen" class="fa fa-eye-slash pr-2  text-success" aria-hidden="true"></i>
+                    >
                         </span>
                         <span *ngIf="notif.profiles.length>2" class="notif-a">
                           {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1
                           } }}
                         </span>
                         {{ 'main_reagirs_notification' | translate}}
-                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash pr-2 text-muted" aria-hidden="true"></i>
+
                       </span>
                     </div>
 
 
                     <div class="time-notif ">
+                      <span>  <i  *ngIf="notif.isSeen" class="fa fa-eye-slash text-muted" aria-hidden="true"></i>
                       {{getNotificationTime(notif.date_notification)}}
+                    </span>
                     </div>
                   </div>
 
@@ -149,11 +151,13 @@
                       <span>
                       <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
                       {{ 'main_subscribe_notification' | translate }}
-                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash pr-2 text-muted" aria-hidden="true"></i>
+                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash text-muted" aria-hidden="true"></i>
                     </span>
                     </div>
                     <div class="time-notif ">
-                      {{getNotificationTime(notif.date_notification)}}
+                   <span>   {{getNotificationTime(notif.date_notification)}}
+                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash text-muted" aria-hidden="true"></i>
+                      </span>
                     </div>
                   </div>
                 </article>
