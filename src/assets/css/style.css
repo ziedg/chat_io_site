@@ -802,7 +802,7 @@ a {
 }
 .notif-content {
   margin-left: 10px;
-  padding-right: 50px;
+  padding-right: 80px;
 }
 .for-notif {
   width: 28px !important;
@@ -1204,7 +1204,7 @@ section.widget {
   box-sizing: border-box;
   color: black;
   align-content: center;
-  font-size: 13px;
+  font-size: 14px;
 }
 .welcome-msg h3 {
   font-family: 'coolvetica';
@@ -4101,7 +4101,7 @@ input.loginInput {
 
 .display-comment-picture{
   max-height: 200px;
-  max-width: 100%;
+  max-width: calc(100% - 30px);
   margin-left: 15px;
   margin-bottom: 15px;
   border: solid 1px #ddd;
@@ -4127,12 +4127,6 @@ input.loginInput {
 .cancel-upload-comment-picture{
   position: absolute;
   margin-left: 10px;
-}
-
-@media (max-width: 767px) {
-  .display-comment-picture {
-    max-width: 70vw;
-  }
 }
 
 .suggestions-box{
@@ -4559,4 +4553,10 @@ change-password .input-param input {
 
 .comment-showed {
   color: #009900 !important
+}
+
+
+/*------------ugly-and-bad-bug-fix----------*/
+img[src="undefined"] {
+	display:none;
 }

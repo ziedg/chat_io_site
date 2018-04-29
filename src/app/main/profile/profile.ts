@@ -290,6 +290,7 @@ export class Profile {
         this.putIntoList(response);
         if(response.length === 0){this.loadMore=false}
         this.changeDetector.markForCheck();
+        if(response.length === 0){this.loadMore=false}
       },
         err => {
         setTimeout(() => {
@@ -317,6 +318,7 @@ export class Profile {
         this.putIntoList(response);
         if(response.length === 0){this.loadMore=false}
         this.changeDetector.markForCheck();
+        if(response.length === 0){this.loadMore=false}
       },
         err => {
         this.isLock = false;
@@ -333,7 +335,7 @@ export class Profile {
       return;
     }
     else {
-       if(this.loadMore){this.loadMorePosts()}
+      if(this.loadMore){this.loadMorePosts()}
       return 1;
     }
   }

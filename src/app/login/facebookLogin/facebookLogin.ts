@@ -33,7 +33,7 @@ export class FacebookLogin {
     loadingSign=false;
 
     constructor(public translate: TranslateService, private title:Title,public http:Http, private router:Router, private loginService:LoginService,
-     private ngZone: NgZone) {
+        private ngZone: NgZone) {
         this.title.setTitle("Connexion - Speegar");
         if(!loginService.isWasConnectedWithFacebook()){
             this.router.navigate(['/login/sign-in']);
@@ -103,7 +103,6 @@ export class FacebookLogin {
                     this.ngZone.run(()=>{
                         this.router.navigate(['/main/home']);
                     });
-
 
                 }
                 else {
