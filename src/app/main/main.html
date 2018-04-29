@@ -95,7 +95,7 @@
                         <span class="notif-a">
                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
                         {{ 'main_comment_notification' | translate }}
-                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash success" aria-hidden="true"></i>
+                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash bg-success pr-2" aria-hidden="true"></i>
 
                       </span>
                       <span *ngIf="notif.profiles &&notif.profiles.length>1">
@@ -108,7 +108,7 @@
                           } }}
                         </span>
                         {{ 'main_comments_notification' | translate }}
-                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash success" aria-hidden="true"></i>
+                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash  pr-2 bg-success" aria-hidden="true"></i>
                       </span>
                     </div>
                     <div *ngIf="notif.type =='reagir'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
@@ -117,7 +117,7 @@
                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
                         </span>
                         {{ 'main_reagir_notification' | translate }}
-                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash success" aria-hidden="true"></i>
+                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash pr-2  bg-success" aria-hidden="true"></i>
                       </span>
                       <span *ngIf=" notif.profiles && notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
