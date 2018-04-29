@@ -83,6 +83,7 @@
             <div class="notifcations">
 
               <span *ngFor="let notif of listNotif">
+              
                 <article [class.unseen-notification]="notif.isSeen=='false'" *ngIf="notif.type !='subscribe'" (click)="goTo('post',notif.publId,notif._id)">
                   <div class="user-img for-notif" *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePictureMin" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePictureMin + ')'}"></div>
 
@@ -137,7 +138,7 @@
 
 
                     <div class="time-notif ">
-                        <span> 
+                        <span>
                       {{getNotificationTime(notif.date_notification)}}
                       <i  *ngIf="notif.isSeen" class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
                     </span>
