@@ -137,8 +137,9 @@
 
 
                     <div class="time-notif ">
-                      <span>  <i  *ngIf="notif.isSeen" class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
+                        <span> 
                       {{getNotificationTime(notif.date_notification)}}
+                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
                     </span>
                     </div>
                   </div>
@@ -148,7 +149,7 @@
                   <div class="user-img for-notif" *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePicture" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
                   <div class="notif-content">
                     <div *ngIf="notif.type =='subscribe'" class="comment-text">
-                    
+
                       <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
                       {{ 'main_subscribe_notification' | translate }}
                     </span>
@@ -157,8 +158,9 @@
                     <div class="time-notif ">
                       <span>
 
-                   <i  *ngIf="notif.isSeen" class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
+
                    {{getNotificationTime(notif.date_notification)}}
+                   <i  *ngIf="notif.isSeen" class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
 
                       </span>
                     </div>
