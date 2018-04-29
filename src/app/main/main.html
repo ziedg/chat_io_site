@@ -1,23 +1,13 @@
 <div class="main-header">
-  <div *ngIf="globalService.showSearchMobile"
-        class="search-mobile col-xs-12 typeEffect hidden-lg hidden-md hidden-sm">
+  <div *ngIf="globalService.showSearchMobile" class="search-mobile col-xs-12 typeEffect hidden-lg hidden-md hidden-sm">
     <div class="mobile-header-center">
       <div class="header-center">
-        <input class="search"
-                placeholder="{{ 'main_search_placeholder' | translate }}"
-                [(ngModel)]="searchValue"
-                (ngModelChange)="onChange($event)"
-                (focus)="onFocus()"
-                #searchMobileInput>
-        <i class="fa fa-search"
-            style="padding: 12px;margin-top: 0;margin-left: -46px;"
-            aria-hidden="true"></i>
-        <i class="fa fa-times-circle"
-            aria-hidden="true"
-            (click)="clearSearchMobile()"></i>
+        <input class="search" placeholder="{{ 'main_search_placeholder' | translate }}" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)"
+          (focus)="onFocus()" #searchMobileInput>
+        <i class="fa fa-search" style="padding: 12px;margin-top: 0;margin-left: -46px;" aria-hidden="true"></i>
+        <i class="fa fa-times-circle" aria-hidden="true" (click)="clearSearchMobile()"></i>
       </div>
-      <span (click)="globalService.showSearchMobile=false"
-            class="search-mobile-annuler">
+      <span (click)="globalService.showSearchMobile=false" class="search-mobile-annuler">
         {{ 'Annuler' | translate }}
       </span>
     </div>
@@ -31,20 +21,14 @@
       </article>
     </div>
     <div class="header-center hidden-xs">
-      <input class="search"
-              placeholder="{{ 'main_search_placeholder' | translate }}"
-              [(ngModel)]="searchValue"
-              (ngModelChange)="onChange($event)"
+      <input class="search" placeholder="{{ 'main_search_placeholder' | translate }}" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)"
         (focus)="checkAutoComplete()">
       <i class="fa fa-search" aria-hidden="true"></i>
 
       <div class="upper-arrow-search upper-arrow"></div>
-      <div class="recherche-results-holder recherche-results-holder-1"
-            style="display:none;"
-            *ngIf="listSearshUsers">
+      <div class="recherche-results-holder recherche-results-holder-1" style="display:none;" *ngIf="listSearshUsers">
         <div class="recherche-results" *ngIf="!showRecentSearch">
-          <article *ngFor="let result of listSearshUsers"
-                    (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
+          <article *ngFor="let result of listSearshUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
             <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
             </div>
             <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
@@ -72,12 +56,8 @@
     <div class="header-right">
       <article *ngIf="user">
         <a class="hidden-sm hidden-xs" [routerLink]="['/main/profile',user._id]">
-          <div  class="user-img img-header"
-                *ngIf="user.profilePictureMin"
-                [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePictureMin + ')'}"></div>
-          <div  class="user-img img-header"
-                *ngIf="!user.profilePictureMin"
-                [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePicture + ')'}"></div>
+          <div class="user-img img-header" *ngIf="user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePictureMin + ')'}"></div>
+          <div class="user-img img-header" *ngIf="!user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePicture + ')'}"></div>
           <span style="margin-top: 4px;">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</span>
         </a>
       </article>
@@ -113,12 +93,11 @@
                     <div *ngIf="notif.type =='comment'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
                       <span *ngIf="notif.profiles &&notif.profiles.length==1">
                         <span class="notif-a">
-                          {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
-                        </span>
+                          {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
+                        {{ 'main_comment_notification' | translate }}
+                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash success" aria-hidden="true"></i>
 
                       </span>
-                      {{ 'main_comment_notification' | translate }}
-                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash" aria-hidden="true"></i>
                       <span *ngIf="notif.profiles &&notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
                           {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName}
@@ -129,9 +108,8 @@
                           } }}
                         </span>
                         {{ 'main_comments_notification' | translate }}
+                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash success" aria-hidden="true"></i>
                       </span>
-                      {{ 'main_comment_notification' | translate }}
-                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash" aria-hidden="true"></i>
                     </div>
                     <div *ngIf="notif.type =='reagir'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
                       <span *ngIf="notif.profiles.length==1">
@@ -139,9 +117,8 @@
                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
                         </span>
                         {{ 'main_reagir_notification' | translate }}
+                        <i  *ngIf="notif.isSeen" class="fa fa-eye-slash success" aria-hidden="true"></i>
                       </span>
-                      {{ 'main_comment_notification' | translate }}
-                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash" aria-hidden="true"></i>
                       <span *ngIf=" notif.profiles && notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
                           {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName}
@@ -214,9 +191,7 @@
 
 
       <article class="signout-button" class="hidden-sm hidden-xs">
-        <i class="fa fa-sort-desc"
-            (click)="enableProfile()"
-            style="font-size: 19px;position: relative;bottom: 2px; cursor: pointer"></i>
+        <i class="fa fa-sort-desc" (click)="enableProfile()" style="font-size: 19px;position: relative;bottom: 2px; cursor: pointer"></i>
         <img src="assets/pictures/arrow-up.png" class="upper-arrow-profile" style="display: none;">
 
         <div class="profile-hover" style="display:none;">
@@ -244,10 +219,8 @@
   </div>
 </div>
 
-<div *ngIf="globalService.showSearchMobile"
-      class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm"
-      (click)="globalService.showSearchMobile=false"
-      #searchResults2>
+<div *ngIf="globalService.showSearchMobile" class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm"
+  (click)="globalService.showSearchMobile=false" #searchResults2>
   <div class="recherche-results recherche-results-2">
 
     <div *ngIf="listSearshUsers && !showRecentSearch">
@@ -263,24 +236,22 @@
     </div>
 
     <div *ngIf="listSearshUsers && showRecentSearch">
-        <article *ngFor="let result of RecentSearchList" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
-          <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
+      <article *ngFor="let result of RecentSearchList" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
+        <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
 
-          <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
+        <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
 
-          <div class="">
-            {{result.firstName}} {{result.lastName}}
-          </div>
-        </article>
+        <div class="">
+          {{result.firstName}} {{result.lastName}}
+        </div>
+      </article>
     </div>
     <div *ngIf="noSearchResults" class="search-2-no-results-cont">
-        <div class="search-2-no-results-img"
-            style="background-image: url(assets/images/new/search.png);"></div>
-        <h4 class="search-2-no-results-msg text-center">
-          {{'search_result_no_result' | translate }}
-          <br>
-          {{ searchValue }}
-        </h4>
+      <div class="search-2-no-results-img" style="background-image: url(assets/images/new/search.png);"></div>
+      <h4 class="search-2-no-results-msg text-center">
+        {{'search_result_no_result' | translate }}
+        <br> {{ searchValue }}
+      </h4>
     </div>
 
   </div>
