@@ -44,7 +44,7 @@ export class SuggestionsComponent implements OnInit {
       .subscribe(
         response => {
          // Array.prototype.push.apply(this.popularProfiles, response.profiles);
-         this.popularProfiles.push(...response.profiles);
+         if(response.profiles.length>0) {this.popularProfiles.push(...response.profiles);}
         },
         err => {
         },
