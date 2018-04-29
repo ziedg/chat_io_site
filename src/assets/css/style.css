@@ -652,7 +652,7 @@ a {
 .recherche-results-holder {
 
   position: absolute;
-  background-color: white;
+  background-color:white;
   width: 486px;
   max-height: 400px;
   overflow-y: scroll;
