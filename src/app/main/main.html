@@ -140,8 +140,8 @@
                     <div class="time-notif ">
                         <span>
                       {{getNotificationTime(notif.date_notification)}}
-                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
-                      <i class="fa fa-eye fa-sm text-muted"  *ngIf="!notif.isSeen" aria-hidden="true"></i>
+                      <i  *ngIf="!notif.isSeen" class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
+                      <i class="fa fa-eye fa-sm text-muted"  *ngIf="notif.isSeen" aria-hidden="true"></i>
                     </span>
                     </div>
                   </div>
@@ -162,8 +162,8 @@
 
 
                    {{getNotificationTime(notif.date_notification)}}
-                   <i  *ngIf="notif.isSeen" class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
-                   <i class="fa fa-eye fa-sm text-muted"  *ngIf="!notif.isSeen" aria-hidden="true"></i>
+                   <i  *ngIf="!notif.isSeen" class="fa fa-eye-slash fa-sm text-muted" aria-hidden="true"></i>
+                   <i class="fa fa-eye fa-sm text-muted"  *ngIf="notif.isSeen" aria-hidden="true"></i>
 
                       </span>
                     </div>
