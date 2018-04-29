@@ -151,13 +151,13 @@
                       <span>
                       <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
                       {{ 'main_subscribe_notification' | translate }}
-                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash text-muted" aria-hidden="true"></i>
+
                     </span>
                     </div>
                     <div class="time-notif ">
-                   <span>   {{getNotificationTime(notif.date_notification)}}
-                      <i  *ngIf="notif.isSeen" class="fa fa-eye-slash text-muted" aria-hidden="true"></i>
-                      </span>
+                   {{getNotificationTime(notif.date_notification)}}
+
+                
                     </div>
                   </div>
                 </article>
