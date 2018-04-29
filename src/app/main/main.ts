@@ -148,7 +148,7 @@ export class Main {
 
 
   onFocus() {
-   
+
     this.searchRes2.nativeElement.style.display="block!important";
     this.onChange(this.searchInput.nativeElement.value);
     this.checkAutoComplete();
@@ -251,7 +251,7 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-
+           console.log(response)
         if (response.length != 0) {
           this.showNoNotif = false;
 
@@ -262,6 +262,7 @@ export class Main {
           }
           //remove duplicate if exist
           this.listNotif=_.uniqWith(this.listNotif, _.isEqual);
+          console.log(this.listNotif)
           if (response.length == 5)
             this.showButtonMoreNotif = true;
           else
@@ -345,12 +346,7 @@ export class Main {
           if (response.status == 0) {
           this.nbNewNotifications = response.nbNewNotifications;
 
-          //change : remove notification sound
-/*
-          if (this.nbNewNotifications > 0) {
-            var snd = new Audio('./assets/music/notification.mp3');
-            snd.play();
-          }*/
+
         }
       },
         err => {

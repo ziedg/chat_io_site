@@ -73,7 +73,7 @@
   }
 
   .notification-holder article:hover {
-    background: #eee;
+    background: rgb(226, 223, 223);
     cursor: pointer;
     z-index: 4;
   }
@@ -652,7 +652,7 @@ a {
 .recherche-results-holder {
 
   position: absolute;
-  background-color: white;
+  background-color:white;
   width: 486px;
   max-height: 400px;
   overflow-y: scroll;
@@ -787,8 +787,8 @@ a {
   right: 15px;
   color: #666;
 }
-.unseen-notification {
-  background-color: rgba(192, 192, 192, 0.1);
+.seen-notification {
+  background-color: #f5f5ea;
   color: black;
   z-index: 4;
 }
