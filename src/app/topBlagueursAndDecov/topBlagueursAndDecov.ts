@@ -98,6 +98,7 @@ if (this.popularProfiles.length<6){
         response => {
         if (response.status == 0) {
           this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
+          this.loadMore();
         }
       },
         err => {
@@ -106,9 +107,7 @@ if (this.popularProfiles.length<6){
         this.changeDetector.markForCheck();
       }
     );
-    //changes
-    this.loadMore();
-    //
+    
   }
 
   ignore(user:User) {
@@ -126,6 +125,7 @@ if (this.popularProfiles.length<6){
         response => {
         if (response.status == 0) {
           this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
+          this.loadMore();
         }
       },
         err => {
@@ -134,9 +134,8 @@ if (this.popularProfiles.length<6){
         this.changeDetector.markForCheck();
       }
     );
-    //changes
-    this.loadMore();
-    //
+    
+
   }
 
   unsubscribe(user : User) {
