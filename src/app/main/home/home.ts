@@ -88,7 +88,10 @@ export class Home {
 	public pubInputHtml: string = "";
 	public arabicText: boolean = false;
 	arabicRegex:RegExp = /[\u0600-\u06FF]/;
-	public imageFromLink:boolean = false;
+  public imageFromLink:boolean = false;
+
+  //check if there is more post to retreive from server
+  morePosts=true;
 
   constructor(
     public translate: TranslateService,
@@ -272,8 +275,8 @@ export class Home {
       .subscribe(
         response => {
           //this.publicationBeanList = [];
-
           this.putIntoList(response);
+          if (response.length==0){this.morePosts=false}
           this.changeDetector.markForCheck();
         },
         err => {
@@ -300,6 +303,7 @@ export class Home {
         .subscribe(
           response => {
             this.putIntoList(response);
+            if (response.length==0){this.morePosts=false}
             this.changeDetector.markForCheck();
           },
           err => {

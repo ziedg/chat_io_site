@@ -215,7 +215,7 @@
           <h4> {{ 'home_welcome' | translate }}</h4>
           {{ 'home_suggestion_message' | translate }}
         </div>
-        <app-suggestions class="col-xs-12 noPadding hidden-lg hidden-md hidden-sm"></app-suggestions>
+        <app-suggestions *ngIf="!morePosts" class="col-xs-12 noPadding hidden-lg hidden-md hidden-sm"></app-suggestions>
 
 
       </section>
