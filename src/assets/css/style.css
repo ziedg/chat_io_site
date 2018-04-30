@@ -1552,6 +1552,10 @@ section.widget {
   .comment-publish.comment-loading {
     padding: 5px 20px !important;
   }
+
+	.header-right .fa {
+		font-size: 1.4em!important;
+	}
 }
 .comment-publish.comment-loading {
   padding: 2.5px 23px !important;
@@ -4427,9 +4431,16 @@ top-blagueurs-decov .user-name header {
 
 .notification-parent {
   position:relative;
-  margin-right: 20px;
   cursor: pointer;
 }
+
+.header-right .notification-parent,
+.header-right .profile-icon {
+	margin-right: 12px;
+}
+
+
+
 
 .search-mobile {
   padding-left:0!important;

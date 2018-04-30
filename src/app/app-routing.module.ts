@@ -34,6 +34,8 @@ import {ForgetPasswordComponent} from "./login/forget-password/forget-password.c
 import {ResetPasswordComponent} from "./login/reset-password/reset-password.component";
 import {FakeComponent} from "./shared/fake.component";
 
+import { SuggestionsComponent } from "./main/suggestions/suggestions.component"
+
 export const routes: Routes = [
     {path: 'redirect', component: FakeComponent},
     {
@@ -70,10 +72,11 @@ export const routes: Routes = [
                     {path: 'change-password', component: ChangePassword}
                 ]
             },
+						{ path: 'suggestions', component: SuggestionsComponent },
             {path: 'post/:id', component: Post},
             {path: 'notification', component: Notification},
             {path: '404', component: NotFoundPage},
-            {path: '**', redirectTo: '404'}
+            {path: '**', redirectTo: '404'},
         ]
     },
     {
@@ -102,4 +105,3 @@ export const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
-

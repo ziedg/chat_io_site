@@ -143,7 +143,7 @@
 
                       {{getNotificationTime(notif.date_notification)}}
 
-                      
+
 
 
 
@@ -217,9 +217,12 @@
         </div>
 
       </article>
-      <article class="signout-button" class="hidden-lg hidden-md">
+      <article class="profile-icon signout-button hidden-lg hidden-md">
         <i class="fa fa-user" [routerLink]="['/main/profile',user._id]"></i>
+      </article>
 
+			<article class="suggestions-icon hidden-lg hidden-md">
+        <i class="fa fa-users" [routerLink]="['/main/suggestions']"></i>
       </article>
 
     </div>
