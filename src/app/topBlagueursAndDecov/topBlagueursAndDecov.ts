@@ -107,8 +107,7 @@ if (this.popularProfiles.length<6){
         this.changeDetector.markForCheck();
       }
     );
-    //changes
-    //
+    
   }
 
   ignore(user:User) {
@@ -135,8 +134,8 @@ if (this.popularProfiles.length<6){
         this.changeDetector.markForCheck();
       }
     );
-    //changes
-    //
+    
+
   }
 
   unsubscribe(user : User) {
