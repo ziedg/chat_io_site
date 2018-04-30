@@ -162,7 +162,7 @@ export class Home {
     this.touch_start_position = touch_pos;
   }
 
-  onTouchEnd(event, marge: number = 60) {
+  onTouchEnd(event, marge: number = 20) {
     // marge to show search mobile
     if (this.globalService.showSearchMobile) {
       this.globalService.showSearchMobile = false;
@@ -393,7 +393,7 @@ export class Home {
 
 
     this.online = window.navigator.onLine;
-  
+
     var txt:string = jQuery("#publishDiv").html();
 
     var white_space_regex:RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
