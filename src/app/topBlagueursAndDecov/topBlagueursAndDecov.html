@@ -6,10 +6,12 @@
     <div *ngIf="i< displayedNumberPopularProfiles">
       <div class="user">
         <div class="user-img" *ngIf="profile.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + profile.profilePictureMin + ')'}">
+							[routerLink]="['/main/profile',profile._id]"
+							[ngStyle]="{'background-image': 'url(' + profile.profilePictureMin + ')'}">
         </div>
         <div class="user-img" *ngIf="!profile.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
+							[routerLink]="['/main/profile',profile._id]"
+             	[ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
         </div>
         <div class="user-name">
           <header><a [routerLink]="['/main/profile',profile._id]">

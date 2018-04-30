@@ -4571,6 +4571,17 @@ change-password .input-param input {
 }
 
 
+top-blagueurs-decov user-img {
+	cursor: pointer;
+}
+
+.suggestions-icon .fa-user {
+	text-shadow: -3px 0px 0px white, -12px 0px 0 #9b9999;
+	padding-left: 12px;
+}
+
+
+
 /*------------ugly-and-bad-bug-fix----------*/
 img[src="undefined"] {
 	display:none;

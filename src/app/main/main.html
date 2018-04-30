@@ -62,6 +62,13 @@
         </a>
       </article>
 
+
+			<article class="suggestions-icon hidden-lg hidden-md hidden-sm">
+				<i class="fa fa-user" [routerLink]="['/main/suggestions']"></i>
+			</article>
+
+
+
       <article class="notification-box" [routerLink]="['/main/notification']" class="notification-parent hidden-lg hidden-md hidden-sm">
         <div class="noPadding">
           <div class="cercle-notice" *ngIf="nbNewNotifications">
@@ -168,9 +175,6 @@
                     <span>
                    {{getNotificationTime(notif.date_notification)}}
 
-
-
-
                 </span>
                     </div>
                   </div>
@@ -219,10 +223,6 @@
       </article>
       <article class="profile-icon signout-button hidden-lg hidden-md">
         <i class="fa fa-user" [routerLink]="['/main/profile',user._id]"></i>
-      </article>
-
-			<article class="suggestions-icon hidden-lg hidden-md">
-        <i class="fa fa-users" [routerLink]="['/main/suggestions']"></i>
       </article>
 
     </div>
