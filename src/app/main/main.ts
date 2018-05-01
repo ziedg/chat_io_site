@@ -251,7 +251,7 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-           console.log(response)
+
         if (response.length != 0) {
           this.showNoNotif = false;
 
@@ -262,6 +262,14 @@ export class Main {
           }
           //remove duplicate if exist
           this.listNotif=_.uniqWith(this.listNotif, _.isEqual);
+          //remove duplicate in case of many users
+          this.listNotif = _.reverse(this.listNotif);
+          this.listNotif=_.uniqBy(this.listNotif,(notif)=>{
+            notif.id
+          })
+          this.listNotif = _.reverse(this.listNotif);
+
+
           console.log(this.listNotif)
           if (response.length == 5)
             this.showButtonMoreNotif = true;
