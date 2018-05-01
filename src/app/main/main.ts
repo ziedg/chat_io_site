@@ -251,7 +251,7 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-
+         console.log(response)
         if (response.length != 0) {
           this.showNoNotif = false;
 
