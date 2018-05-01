@@ -261,11 +261,7 @@ export class Main {
 
             this.lastNotifId = response[i]._id;
           }
-          this.listNotif.sort(function compare(a, b) {
-            const dateA = Date.parse(a.date_notification);
-             const dateB =  Date.parse(b.date_notification);
-            return dateB - dateA;
-      });
+        
 
           //remove duplicate if exist
           this.listNotif=_.uniqWith(this.listNotif, _.isEqual);
