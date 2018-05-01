@@ -46,14 +46,16 @@ export class Post {
       this.user = this.loginService.getUser();
         this.router.events.subscribe(route => {
           this.route.params.subscribe((params)=>{
-            this.postId=params['id']
+            this.postId=params['id'];
+            this.getPost(this.postId);
+
           })
       });
     }
 
 
   ngOnInit() {
-    this.getPost(this.postId);
+    //this.getPost(this.postId);
     this.changeDetector.markForCheck();
   }
 
