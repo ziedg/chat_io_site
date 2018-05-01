@@ -391,7 +391,7 @@ export class Home {
 
   publish() {
 
-
+		this.arabicText = false;
     this.online = window.navigator.onLine;
 
     var txt:string = jQuery("#publishDiv").html();
