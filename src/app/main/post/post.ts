@@ -44,19 +44,19 @@ export class Post {
     constructor(private title:Title,private route: ActivatedRoute,private http:Http, private router:Router, private loginService:LoginService,private changeDetector: ChangeDetectorRef) {
       this.loginService.redirect();
       this.user = this.loginService.getUser();
-        this.router.events.subscribe(route => {
+        //this.router.events.subscribe(route => {
           this.route.params.subscribe((params)=>{
             this.postId=params['id'];
             this.getPost(this.postId);
-
+            this.changeDetector.markForCheck();
           })
-      });
+     // });
     }
 
 
   ngOnInit() {
     //this.getPost(this.postId);
-    this.changeDetector.markForCheck();
+    //this.changeDetector.markForCheck();
   }
 
   getPost(postId: string) {
