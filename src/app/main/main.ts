@@ -269,17 +269,17 @@ export class Main {
             for (var i = 0; i < response.length; i++) {
               //uniqness test before push
 
-              this.listNotif.push(response[i]);
+              this.listNotif.unshift(response[i]);
 
               this.lastNotifId = response[i]._id;
 
             }
-            this.listNotif= _.reverse(this.listNotif);
+
             this.listNotif = _.uniqWith(this.listNotif, _.isEqual);
             this.listNotif = _.uniqBy(this.listNotif, notif => {
               return notif._id;
             });
-            this.listNotif= _.reverse(this.listNotif);
+
             this.showNotif=true
             console.log(this.listNotif);
 
