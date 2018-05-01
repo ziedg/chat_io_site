@@ -257,7 +257,7 @@ export class Main {
 
 
           for (var i = 0; i < response.length; i++) {
-            this.listNotif.unshift(response[i]);
+            this.listNotif.push(response[i]);
 
             this.lastNotifId = response[i]._id;
           }
