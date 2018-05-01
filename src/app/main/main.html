@@ -87,7 +87,7 @@
 
           <div class="upper-arrow upper-arrow-notification"></div>
           <div class="notification-holder" style="display:none">
-            <div class="notifcations">
+            <div  *ngIf="showNotif"  class="notifcations">
 
               <span *ngFor="let notif of listNotif">
 
