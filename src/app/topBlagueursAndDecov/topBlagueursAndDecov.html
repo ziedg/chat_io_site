@@ -3,7 +3,7 @@
     {{ 'popular_profiles_title' | translate }}
   </header>
   <article *ngFor="let profile of popularProfiles;  let i=index">
-    <div *ngIf="i< displayedNumberPopularProfiles">
+    <div *ngIf="i < displayedNumberPopularProfiles">
       <div class="user">
         <div class="user-img" *ngIf="profile.profilePictureMin"
 							[routerLink]="['/main/profile',profile._id]"
@@ -42,7 +42,9 @@
       </div>
     </div>
   </article>
-  <a (click)="loadMoreProfiles()" *ngIf="displayedNumberPopularProfiles<12">
+  <a 	class="show-more"
+			*ngIf="displayShowMore"
+			(click)="loadMoreProfiles()">
 		{{ 'top_blagueurs_show_more' | translate }}
 	</a>
 </section>
