@@ -251,6 +251,7 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
+          console.log('__________')
          console.log(response)
         if (response.length != 0) {
           this.showNoNotif = false;
@@ -265,7 +266,8 @@ export class Main {
           //remove duplicate in case of many users
           this.listNotif = _.reverse(this.listNotif);
           this.listNotif=_.uniqBy(this.listNotif,(notif)=>{
-            notif._id;
+           return  notif._id;
+
           })
           this.listNotif = _.reverse(this.listNotif);
 
