@@ -262,25 +262,25 @@ export class Main {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-          this.showNotif=false;
+
           if (response.length != 0) {
             this.showNoNotif = false;
 
             for (var i = 0; i < response.length; i++) {
               //uniqness test before push
 
-              this.listNotif.unshift(response[i]);
+              this.listNotif.push(response[i]);
 
               this.lastNotifId = response[i]._id;
 
             }
-
+          
             this.listNotif = _.uniqWith(this.listNotif, _.isEqual);
             this.listNotif = _.uniqBy(this.listNotif, notif => {
               return notif._id;
             });
+             this.listNotif.reverse()
 
-            this.showNotif=true
             console.log(this.listNotif);
 
             if (response.length == 5) this.showButtonMoreNotif = true;
