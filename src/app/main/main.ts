@@ -251,8 +251,7 @@ export class Main {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-          console.log('__________')
-         console.log(response)
+
         if (response.length != 0) {
           this.showNoNotif = false;
 
@@ -269,10 +268,15 @@ export class Main {
            return  notif._id;
 
           })
-          this.listNotif = _.reverse(this.listNotif);
+          this.listNotif.sort(function compare(a, b) {
+                 const dateA = Date.parse(a.date_notification);
+                  const dateB =  Date.parse(b.date_notification);
+                 return dateB - dateA;
+  });
 
 
-          console.log(this.listNotif)
+
+
           if (response.length == 5)
             this.showButtonMoreNotif = true;
           else
