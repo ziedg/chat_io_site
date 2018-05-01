@@ -263,12 +263,13 @@ export class Main {
           }
 
 
-    
+
           this.listNotif=_.uniqWith(this.listNotif, _.isEqual);
           this.listNotif=_.uniqBy(this.listNotif,(notif)=>{
            return  notif._id;
 
           })
+          console.log(this.listNotif)
 
 
 
