@@ -265,7 +265,7 @@ export class Main {
           //remove duplicate in case of many users
           this.listNotif = _.reverse(this.listNotif);
           this.listNotif=_.uniqBy(this.listNotif,(notif)=>{
-            notif.id
+            notif._id;
           })
           this.listNotif = _.reverse(this.listNotif);
 
