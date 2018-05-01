@@ -64,6 +64,7 @@ export class Main {
   showNoNotif: Boolean = false;
   noSearchResults: Boolean = false;
   searchMobileHidden = true;
+  public showNotif:boolean=true;
 
   @ViewChild("searchResults2") searchRes2: ElementRef;
   @ViewChild("searchMobileInput") searchInput: ElementRef;
@@ -79,6 +80,7 @@ export class Main {
     private recentRechService: RecentRechService,
     private appRef: ApplicationRef,
     public globalService: GlobalService,
+
     // TODO: check globalService access
     private meta: Meta
   ) {
@@ -130,6 +132,7 @@ export class Main {
       _id: _id,
       firstName: firstName,
       lastName: lastName,
+
       profilePicture: profilePicture,
       profilePictureMin: profilePictureMin
     });
@@ -259,24 +262,25 @@ export class Main {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
+          this.showNotif=false;
           if (response.length != 0) {
             this.showNoNotif = false;
 
             for (var i = 0; i < response.length; i++) {
               //uniqness test before push
 
-              this.listNotif.push(response[i]);
+              this.listNotif.unshift(response[i]);
 
               this.lastNotifId = response[i]._id;
-              this.listNotif.sort((notif1,notif2)=>{
-                  return  Date.parse(notif1.date_notification) - Date.parse(notif2.date_notification)
-              })
+
             }
 
             this.listNotif = _.uniqWith(this.listNotif, _.isEqual);
             this.listNotif = _.uniqBy(this.listNotif, notif => {
               return notif._id;
             });
+
+            this.showNotif=true
             console.log(this.listNotif);
 
             if (response.length == 5) this.showButtonMoreNotif = true;
