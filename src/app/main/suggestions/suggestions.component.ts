@@ -43,7 +43,14 @@ export class SuggestionsComponent implements OnInit {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-        if(response.profiles.length>0) {this.popularProfiles.push(...response.profiles)} 
+        if(response.profiles.length>0) {
+					if(this.popularProfiles.length
+						&& this.popularProfiles[this.popularProfiles.length-1] == response.profiles[0]) {
+							response.profiles.shift();
+							console.log("duplication in populaire profiles");
+						}
+					this.popularProfiles.push(...response.profiles)
+				}
         },
         err => {
         },
@@ -80,7 +87,7 @@ export class SuggestionsComponent implements OnInit {
   }
 
   subscribeClick(event, user:User) {
-  
+
     var obj = event.target;
     var obj_del = obj.parentNode.parentNode.parentNode;
 

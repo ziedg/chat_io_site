@@ -4263,7 +4263,7 @@ publication .user {
 
 @media(max-width:400px) {
   .suggestions-box .user-name {
-    max-width: 80px;
+    max-width: 104px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -4580,7 +4580,9 @@ top-blagueurs-decov user-img {
 	padding-left: 12px;
 }
 
-
+top-blagueurs-decov .user-img {
+	cursor: pointer;
+}
 
 /*------------ugly-and-bad-bug-fix----------*/
 img[src="undefined"] {
