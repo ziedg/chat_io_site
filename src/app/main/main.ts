@@ -265,21 +265,22 @@ export class Main {
 
           if (response.length != 0) {
             this.showNoNotif = false;
-
+            let arr = this.listNotif;
             for (var i = 0; i < response.length; i++) {
               //uniqness test before push
 
-              this.listNotif.push(response[i]);
+              arr.push(response[i]);
 
               this.lastNotifId = response[i]._id;
 
             }
-          
-            this.listNotif = _.uniqWith(this.listNotif, _.isEqual);
-            this.listNotif = _.uniqBy(this.listNotif, notif => {
+
+            arr = _.uniqWith(this.listNotif, _.isEqual);
+            arr = _.uniqBy(this.listNotif, notif => {
               return notif._id;
             });
-             this.listNotif.reverse()
+
+             this.listNotif = arr;
 
             console.log(this.listNotif);
 
