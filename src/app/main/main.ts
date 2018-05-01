@@ -258,6 +258,11 @@ export class Main {
 
           for (var i = 0; i < response.length; i++) {
             this.listNotif.push(response[i]);
+            this.listNotif.sort(function compare(a, b) {
+              const dateA = Date.parse(a.date_notification);
+               const dateB =  Date.parse(b.date_notification);
+              return dateB - dateA;
+        });
             this.lastNotifId = response[i]._id;
           }
           //remove duplicate if exist
@@ -268,11 +273,7 @@ export class Main {
            return  notif._id;
 
           })
-          this.listNotif.sort(function compare(a, b) {
-                 const dateA = Date.parse(a.date_notification);
-                  const dateB =  Date.parse(b.date_notification);
-                 return dateB - dateA;
-  });
+
 
 
 
