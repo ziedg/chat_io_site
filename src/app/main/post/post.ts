@@ -45,7 +45,9 @@ export class Post {
       this.loginService.redirect();
       this.user = this.loginService.getUser();
         this.router.events.subscribe(route => {
-          this.postId=this.route.snapshot.params['id'];
+          this.route.params.subscribe((params)=>{
+            this.postId=params['id']
+          })
       });
     }
 
