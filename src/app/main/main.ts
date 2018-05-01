@@ -271,6 +271,8 @@ export class Main {
            return  notif._id;
 
           })
+          this.listNotif = _.reverse(this.listNotif);
+
 
 
 
