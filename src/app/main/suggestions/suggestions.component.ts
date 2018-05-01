@@ -3,6 +3,7 @@ import {User} from "../../beans/user";
 import {environment} from "../../../environments/environment";
 import {AppSettings} from "../../conf/app-settings";
 import * as pathUtils from "../../utils/path.utils";
+import * as _ from "lodash";
 
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
@@ -44,12 +45,12 @@ export class SuggestionsComponent implements OnInit {
       .subscribe(
         response => {
         if(response.profiles.length>0) {
-					if(this.popularProfiles.length
-						&& this.popularProfiles[this.popularProfiles.length-1] == response.profiles[0]) {
-							response.profiles.shift();
-							console.log("duplication in populaire profiles");
-						}
-					this.popularProfiles.push(...response.profiles)
+        let profiles=this.popularProfiles.slice();
+        Array.prototype.push.apply(profiles,response.profiles);
+       profiles= _.uniqBy(profiles,function(profile){
+          return profile._id;
+        })
+				this.popularProfiles=profiles;
 				}
         },
         err => {
