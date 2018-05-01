@@ -282,8 +282,6 @@ export class Main {
 
              this.listNotif = arr;
 
-            console.log(this.listNotif);
-
             if (response.length == 5) this.showButtonMoreNotif = true;
             else this.showButtonMoreNotif = false;
           } else {
