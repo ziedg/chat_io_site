@@ -102,7 +102,7 @@
                       <span *ngIf="notif.profiles &&notif.profiles.length==1">
                         <span class="notif-a">
                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
-                        {{ 'main_comment_notification' | translate }}
+                        <span>{{ 'main_comment_notification' | translate }}</span>
 
 
                       </span>
@@ -115,7 +115,7 @@
                           {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1
                           } }}
                         </span>
-                        {{ 'main_comments_notification' | translate }}
+                        <span>{{ 'main_comments_notification' | translate }}</span>
 
                       </span>
                     </div>
@@ -124,21 +124,19 @@
                         <span class="notif-a">
                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
                         </span>
-                        {{ 'main_reagir_notification' | translate }}
+                        <span>{{ 'main_reagir_notification' | translate }}</span>
 
                       </span>
                       <span *ngIf=" notif.profiles && notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
-                          {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName}
-
-                          }}
+                          {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName}  }}
                     >
                         </span>
                         <span *ngIf="notif.profiles.length>2" class="notif-a">
                           {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1
                           } }}
                         </span>
-                        {{ 'main_reagirs_notification' | translate}}
+                        <span>{{ 'main_reagirs_notification' | translate}}</span>
 
                       </span>
                     </div>
@@ -164,9 +162,8 @@
                   <div class="notif-content">
                     <div *ngIf="notif.type =='subscribe'" class="comment-text">
 
-                      <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
-                      {{ 'main_subscribe_notification' | translate }}
-                    </span>
+                      <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}</span>
+                      <span>{{ 'main_subscribe_notification' | translate }} </span>
 
                     </div>
                     <div class="time-notif ">

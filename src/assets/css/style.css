@@ -78,9 +78,6 @@
     z-index: 4;
   }
 
-  .notif-a:hover {
-    color: #024678;
-  }
 
   .more-not:hover {
     text-decoration: none !important;
@@ -761,7 +758,7 @@ a {
   flex-direction: column;
 }
 .notification-holder article {
-  padding: 15px 10px;
+  padding: 12px 15px 12px 10px;
   position: relative;
   display: flex;
   display: -webkit-box;
@@ -772,15 +769,21 @@ a {
 }
 .notif-a {
   font-weight: bold;
-  color: #125688;
+  color: #000;
   cursor: pointer;
 }
 .time-notif {
-  position: absolute;
-  top: 15px;
-  right: 15px;
   color: #666;
+	min-width: 55px;
+	text-align: right;
 }
+
+.time-notif > span {
+	text-align: right;
+	width: 100%;
+	display: inline-block;
+}
+
 .time-notif-mobile {
   position: absolute;
   bottom: 15px;
@@ -802,13 +805,16 @@ a {
 }
 .notif-content {
   margin-left: 10px;
-  padding-right: 80px;
+	display: flex;
+	align-items: center;
+	width:100%
 }
 .for-notif {
-  width: 28px !important;
-  height: 28px !important;
-  min-width: 28px;
-  min-width: 28px;
+	--w: 40px;
+  width: var(--w) !important;
+  height: var(--w) !important;
+  min-height: var(--w);
+  min-width: var(--w);
 }
 .btn-primary {
   color: #fff;
@@ -4582,6 +4588,18 @@ top-blagueurs-decov user-img {
 
 top-blagueurs-decov .user-img {
 	cursor: pointer;
+}
+
+.publication .content {
+	margin-right: 11px;
+}
+
+.right-side-of-likes .dots {
+	right: 4px;
+}
+
+.publication .date {
+	right: 28px;
 }
 
 /*------------ugly-and-bad-bug-fix----------*/
