@@ -257,11 +257,11 @@ export class Main {
 
 
           for (var i = 0; i < response.length; i++) {
-            this.listNotif.push(response[i]);
+            this.listNotif.unshift(response[i]);
 
             this.lastNotifId = response[i]._id;
           }
-        
+
 
           //remove duplicate if exist
           this.listNotif=_.uniqWith(this.listNotif, _.isEqual);
