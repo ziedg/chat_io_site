@@ -64,6 +64,7 @@ export class Signin {
       this.errorMessage = "SP_FV_ER_PASSWORD_EMPTY";
       return;
     }
+    this.form.value.email.trim().toLowerCase();
     this.loadingSign = true;
     let body = JSON.stringify(this.form.value);
     this.http
