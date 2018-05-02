@@ -81,7 +81,7 @@ export class Signup {
             this.errorMessage ="SP_FV_ER_PASSWORD_SIZE";
             return ;
         }
-        this.form.value.email.trim().toLowerCase();
+        this.form.value.email=this.form.value.email.trim().toLowerCase();
         this.loadingSign=true;
         let body = JSON.stringify(this.form.value);
         this.http.post(environment.SERVER_URL + pathUtils.SIGN_UP, body, AppSettings.OPTIONS)
