@@ -573,7 +573,7 @@ a {
 .upper-arrow {
   display: none;
   position: absolute;
-  background-color: #F2F2F2;
+  background-color: white;
   border-top: solid 1px rgba(0, 0, 0, 0.3);
   border-left: solid 1px rgba(0, 0, 0, 0.3);
   z-index: 3;
@@ -3584,8 +3584,7 @@ input.loginInput {
   border-radius: 3px;
   width: 60%;
   font-size: 16px;
-  padding-left: 20px;
-  text-transform: uppercase;
+  padding-left: 6px 15px;
   resize: none;
 }
 .button-param {
