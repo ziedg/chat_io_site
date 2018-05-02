@@ -210,7 +210,7 @@ export class Publication {
       //console.log("arabic text!");
     }
 
-		const txt = this.publicationBean.publText;
+		var txt = this.publicationBean.publText;
 
 		const word_letters:number = 5;
 
@@ -223,11 +223,19 @@ export class Publication {
 
 		const lines_max:number = 4;
 
+
+		var regex_url:RegExp = /(^|br>|\s)\s?((https?:\/\/)?([a-z0-9]{1,12}\.){1,2}[a-z]{2,3}(\/[^\s<]*)?\s?(?=(\s|<br|$)))/gim;
+		txt = txt.replace(regex_url, '$1<a href="$2">$2</a>');
+
+		var regex_long_url:RegExp = /(>[^<]{30})([^<]{10,})(<\/a>)/gi;
+		txt = txt.replace(regex_long_url, ' $1...$3')
+
+
     if(txt !== 'null' && txt !=='undefined' && txt.length > 0) {
-			var parts = txt.split('<br>');
-			if(parts.length > lines_max ){
-				this.firstPubText = parts.slice(0, lines_max).join('<br>');
-				this.lastPubText = parts.slice(lines_max, parts.length ).join('<br>');
+			var line_parts = txt.split('<br>');
+			if(line_parts.length > lines_max ){
+				this.firstPubText = line_parts.slice(0, lines_max).join('<br>');
+				this.lastPubText = line_parts.slice(lines_max, line_parts.length ).join('<br>');
 				this.longPubText = true;
 			}
 			else {
@@ -530,7 +538,7 @@ export class Publication {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-        
+
         },
         err => {
         },

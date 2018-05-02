@@ -336,6 +336,7 @@
   .share-holder:hover .hint-social,
   .fb-xfbml-parse-ignore:hover .hint-social {
     opacity: 1;
+		display: block;
   }
 
   .content .img-preview:hover {
@@ -4002,6 +4003,7 @@ input.loginInput {
   border-radius: 3px;
   opacity: 0;
   bottom: 44px;
+	display: none;
 }
 .comment-number-holder .hint-social {
   right: -40px;
