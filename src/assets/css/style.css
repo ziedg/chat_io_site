@@ -363,7 +363,7 @@
 }
 /*------------------------------all-hover-effects-end-------------------*/
 
-.profile-photo:hover .fa-upload,
+/*.profile-photo:hover .fa-camera,*/
 .profile-photo:hover .fa-floppy-o,
 .profile-photo:hover .fa-times {
 	display: inline;
@@ -1094,7 +1094,7 @@ section.widget {
     -webkit-animation: spin 1s infinite linear;
     animation: spin 0.5s infinite linear;
 }
-.profile-photo .fa-upload {
+.profile-photo .fa-camera {
   position: absolute;
   color: white;
   background-color: rgba(55,55,55,0.5);
@@ -1102,7 +1102,6 @@ section.widget {
   border-radius:50%;
   font-size: 20px;
   text-shadow: 2px 1px 5px #999;
-  display: none;
   cursor: pointer;
   width: 36px;
   height: 36px;
