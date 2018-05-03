@@ -1562,10 +1562,6 @@ section.widget {
 	.header-right .fa {
 		font-size: 1.4em!important;
 	}
-
-	.header-segement {
-		padding-left: 10px;
-	}
 }
 .comment-publish.comment-loading {
   padding: 2.5px 23px !important;
@@ -2230,6 +2226,9 @@ top-blagueurs-decov .user .user-img,
   .form-more .fa {
     display: none;
   }
+  .comment-holder .textarea {
+    padding-right:9px!important;
+  }
 }
 .comment-holder input,
 .comment-holder textarea,
@@ -2596,7 +2595,7 @@ top-blagueurs-decov .user .user-img,
     display: inline-block;
     text-overflow: ellipsis;
     display: inline-block;
-    max-width: 70%;
+    max-width: 80%;
     white-space: unset!important;
     overflow: hidden;
   }
@@ -4196,6 +4195,10 @@ top-blagueurs-decov section.widget{
     padding: 50% 0!important;
     width: calc(100% + 10px)!important;
   }
+
+  .header-segement.name-holder {
+		padding-left: 10px;
+	}
 }
 
 /*-----------blagueurs-populaires-glissement-start-----------*/
