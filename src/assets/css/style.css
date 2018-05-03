@@ -847,7 +847,7 @@ a {
   display: -ms-flexbox;
   display: -webkit-flex;
   align-items: center;
-  margin-right: 20px;
+  margin-right: 16px;
   position: absolute;
   right: 100px;
   top: 20px;
@@ -982,6 +982,10 @@ section.widget {
   text-align: left;
   padding-left:0;
   padding-right:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  margin-right: -24px;
 }
 .header-segement.description-holder {
   text-align: left;
@@ -1105,8 +1109,8 @@ section.widget {
   cursor: pointer;
   width: 36px;
   height: 36px;
-  bottom: 10%;
-  right: 14%;
+  bottom: 2px;
+  right: calc(50% - 18px);
 }
 .profile-photo .fa-floppy-o {
   position: absolute;
@@ -2463,10 +2467,6 @@ top-blagueurs-decov .user .user-img,
   .profil-name {
     margin: 25px 0 10px;
   }
-
-  .user-name-profile .three-dots {
-    margin-left: -4px;
-  }
 }
 .profil-name .subscribe {
   position: absolute;
@@ -2590,14 +2590,19 @@ top-blagueurs-decov .user .user-img,
   .friend-hover-box {
     width: 100% !important;
   }
-
-  .user-name-profile span{
-    display: inline-block;
+}
+@media (max-width: 450px) {
+  .user-name-profile > span{
     text-overflow: ellipsis;
     display: inline-block;
-    max-width: 80%;
+    max-width: calc(100% - 50px);
     white-space: unset!important;
     overflow: hidden;
+  }
+
+  .user-name-profile .three-dots {
+    margin-left: -4px;
+    display: inline-block;
   }
 }
 .friend-hover {

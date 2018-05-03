@@ -2,7 +2,7 @@
   <div *ngIf="!isNotFound" class="row header-Profile">
 
     <!--heder Profile-->
-    <div *ngIf="user && userDisplayed" class="col-md-3 col-sm-3 col-xs-5">
+    <div *ngIf="user && userDisplayed" class="col-md-3 col-sm-3 col-xs-4">
       <section class="widget bordered-white profile-photo centered-text" style="position:relative;" [ngStyle]="{'background-image': 'url(' + userDisplayed.profilePicture + ')',
                   minWidth: '80px', minHeight:'80px'}">
         <div class="profile-picture-loading" *ngIf="profilePictLoad"></div>
@@ -15,7 +15,7 @@
     </div>
 
 
-    <div class="col-md-6 header-segement name-holder col-sm-9 col-xs-7" [ngStyle]="{display:'flex', flexDirection:'column', alignItems:'flex-start'}">
+    <div class="col-md-6 header-segement name-holder col-sm-9 col-xs-8">
       <h3 class="user-name-profile">
         <span>{{userDisplayed.firstName}} {{userDisplayed.lastName}}</span>
         <div class="profile-edit three-dots hidden-lg hidden-md hidden-sm"
