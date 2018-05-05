@@ -282,7 +282,7 @@ export class Main {
 
              this.listNotif = arr;
 
-            if (response.length == 5) this.showButtonMoreNotif = true;
+            if (response.length == 10) this.showButtonMoreNotif = true;
             else this.showButtonMoreNotif = false;
           } else {
             this.showNoNotif = true;
