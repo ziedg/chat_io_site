@@ -50,7 +50,8 @@ export class ForgetPasswordComponent {
     }
 
     this.loadingSign = true;
-    let body = JSON.stringify(this.form.value.toLowerCase().trim());
+    //this.form.value.email.toLowerCase()
+    let body = JSON.stringify(this.form.value);
     this.http.post(environment.SERVER_URL + pathUtils.FORGET_PASSWORD,
       body, AppSettings.OPTIONS)
       .map((res:Response) => res.json())
