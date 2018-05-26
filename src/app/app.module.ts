@@ -4,7 +4,10 @@ import {BrowserModule, Title} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule}         from '@angular/forms';
 import {APP_BASE_HREF, PathLocationStrategy, LocationStrategy} from '@angular/common';
 import { HttpModule, Http, CookieXSRFStrategy, XSRFStrategy, RequestOptions, XHRBackend } from '@angular/http';
-import {TranslateModule, TranslateLoader, TranslateStaticLoader} from 'ng2-translate';
+
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import {AppComponent}  from './app.component';
 import {LoginService} from "./service/loginService";
@@ -56,10 +59,13 @@ import { SuggestionsComponent } from './main/suggestions/suggestions.component';
 @NgModule({
     imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
       ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule,Ng2ImgMaxModule,
+      HttpClientModule,
       TranslateModule.forRoot({
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [Http]
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
       })],       // module dependencies
     declarations: [AppComponent, Comment, LoadingBar, FacebookLogin,
         Signin, Signup, Login, Logout, NotFoundPage, Home, NotFound, Notification, ChangePassword, EditProfile,
@@ -94,6 +100,7 @@ export class AppModule {
 }
 
 
-export function createTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, './assets/translations', '.json');
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }

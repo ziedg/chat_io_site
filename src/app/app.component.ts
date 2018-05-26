@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import './operators';
-import {TranslateService} from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 declare var FB:any
 declare global {
@@ -15,9 +15,8 @@ declare global {
   })
 export class AppComponent implements OnInit {
 
-  constructor(translate: TranslateService) {
+  constructor(private translate: TranslateService) {
     translate.setDefaultLang('fr');
-    translate.use('fr');
   }
   ngOnInit(){
     window.fbAsyncInit = function() {

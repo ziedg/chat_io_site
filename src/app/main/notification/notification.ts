@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 
 /* conf */
 import {AppSettings} from '../../conf/app-settings';
-import { TranslateService } from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 /* services */
 import {LoginService} from '../../service/loginService';
@@ -136,7 +136,7 @@ export class Notification implements OnInit {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-      
+
       },
         err => {
       },

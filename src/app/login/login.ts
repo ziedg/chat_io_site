@@ -1,6 +1,6 @@
 import { Location } from "@angular/common";
 import "rxjs/add/operator/map";
-import { TranslateService } from "ng2-translate";
+import {TranslateService} from '@ngx-translate/core';
 
 /* Login components */
 import { Signin } from "./signin/signin";
@@ -210,7 +210,7 @@ export class Login {
     this.loadingFb = true;
     FB.login(
       result => {
-    
+
 
         this.getUserFacbookConnexion(result);
       },

@@ -2,7 +2,7 @@ import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/co
 import {Title} from "@angular/platform-browser";
 
 /* services */
-import { TranslateService } from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({

@@ -9,7 +9,7 @@ import { environment } from "../../environments/environment";
 
 /* services */
 import { LoginService } from '../service/loginService';
-import { TranslateService } from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 /* beans  */
 import { User } from '../beans/user';

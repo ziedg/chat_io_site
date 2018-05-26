@@ -3,7 +3,7 @@ import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {FormGroup, Validators, FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
-import { TranslateService } from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 /* conf */
 import {AppSettings} from '../../conf/app-settings';

@@ -19,7 +19,7 @@ import {EmojiService} from "../service/emojiService";
 import {LinkView} from "../service/linkView";
 import {PostService} from "../service/postService";
 import {SeoService} from '../service/seo-service';
-import { TranslateService } from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 /** Utils */
 import * as pathUtils from '../utils/path.utils';

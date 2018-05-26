@@ -20,7 +20,7 @@ import { Notification } from "./notification/notification";
 
 /* services */
 import { LoginService } from "../service/loginService";
-import { TranslateService } from "ng2-translate";
+import {TranslateService} from '@ngx-translate/core';
 
 /** Utils */
 import * as pathUtils from "../utils/path.utils";

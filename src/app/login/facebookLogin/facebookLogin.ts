@@ -2,7 +2,7 @@ import {Component, NgZone} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
-import { TranslateService } from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 /* conf */
 import {AppSettings} from '../../conf/app-settings';
@@ -67,7 +67,7 @@ export class FacebookLogin {
             this.loadingSign=false;
         }
         else {
-          
+
             this.loadingSign=false;
         }
     }

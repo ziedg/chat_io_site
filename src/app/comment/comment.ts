@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 /* conf */
 import {AppSettings} from "../conf/app-settings";
 import {environment} from "../../environments/environment";
-import { TranslateService } from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 /* services */
 import {EmojiService} from "../service/emojiService";

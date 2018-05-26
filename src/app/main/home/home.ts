@@ -28,7 +28,7 @@ import { LoginService } from "../../service/loginService";
 import { LinkView } from "../../service/linkView";
 import { LinkPreview } from "../../service/linkPreview";
 import { PostService } from "../../service/postService";
-import { TranslateService } from "ng2-translate";
+import {TranslateService} from '@ngx-translate/core';
 
 /* user  */
 import { User } from "../../beans/user";
