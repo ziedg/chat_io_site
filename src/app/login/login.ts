@@ -134,9 +134,9 @@ export class Login {
               FB.api(
                 "/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location",
                 response => {
-                  FB.api('/me/friends', ( response => {
+                  FB.api('/me/friends', ( friends => {
                     //console.log('friends');
-                    alert(JSON.stringify('Facebook friends: ' + response));
+                    alert(JSON.stringify('Facebook friends: ' + friends));
                     //console.log(friends);
 
                     this.getUserInformations(

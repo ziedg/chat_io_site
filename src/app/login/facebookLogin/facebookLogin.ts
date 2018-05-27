@@ -63,9 +63,9 @@ export class FacebookLogin {
         if (result.authResponse) {
             FB.api('/me?fields=picture.witdh(1000).height(1000){url}', ( responsePic => {
                 FB.api('/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location', ( response => {
-                  FB.api('/me/friends', ( response => {
+                  FB.api('/me/friends', ( friends => {
 
-                    alert(JSON.stringify('Facebook friends: ' + response));
+                    alert(JSON.stringify('Facebook friends: ' + friends));
                     //console.log(friends);
                     /* FB.api('/me/friends', ( friends => {
                                         console.log('friends');
