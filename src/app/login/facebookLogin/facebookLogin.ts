@@ -63,18 +63,15 @@ export class FacebookLogin {
         if (result.authResponse) {
             FB.api('/me?fields=picture.witdh(1000).height(1000){url}', ( responsePic => {
                 FB.api('/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location', ( response => {
-                 /* FB.api('/me/friends', ( friends => {
-                    console.log('friends');
-                    console.log(JSON.parse(JSON.stringify('friendsielnidsst:'+friends))) ;
-                    console.log(friends);*/
-                  FB.api("me/friends",
-                    //FAILURE
-                    function(response) {
-                      alert('Retrieving Facebook friends failed');
-                    },
-                    //SUCCESS
-                    function(response) {
-                      alert('Facebook friends: ' + JSON.stringify(response));
+                  FB.api('/me/friends', ( response => {
+
+                    alert(JSON.stringify('Facebook friends: ' + response));
+                    //console.log(friends);
+                    /* FB.api('/me/friends', ( friends => {
+                                        console.log('friends');
+                                        console.log(JSON.parse(JSON.stringify('friendsielnidsst:'+friends))) ;
+                                        console.log(friends);*/
+
                     this.getUserInformations(response, responsePic);
                   }));
                 }));
