@@ -887,7 +887,7 @@ a {
   width: 205px;
 }
 .header-right article:first-child {
-  margin-right: 29px;
+  margin-right: 10px;
 }
 .bordered {
   border: 1px solid #edeeee;
@@ -4610,6 +4610,11 @@ top-blagueurs-decov .user-img {
 	right: 28px;
 }
 
+/*
+.dropdown-menu-translate {
+  display: block;
+}
+*/
 /*------------ugly-and-bad-bug-fix----------*/
 img[src="undefined"] {
 	display:none;

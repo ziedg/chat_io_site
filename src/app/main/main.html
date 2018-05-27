@@ -55,7 +55,7 @@
     </div>
     <div class="header-right">
       <article *ngIf="user">
-        <a class="hidden-sm hidden-xs" [routerLink]="['/main/profile',user._id]">
+        <a class="hidden-sm hidden-xs" [routerLink]="['/main/profile',user._id]" style="margin-right:0">
           <div class="user-img img-header" *ngIf="user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePictureMin + ')'}"></div>
           <div class="user-img img-header" *ngIf="!user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePicture + ')'}"></div>
           <span style="margin-top: 4px;">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</span>
@@ -77,6 +77,22 @@
           <i class="fa fa-bell"></i>
         </div>
       </article>
+
+
+      <div class="dropdown dropdwon-translate hidden-sm hidden-xs" style="margin: 0 10px">
+        <button class="btn btn-default dropdown-toggle dropdown-toggle-translate"
+                type="button"
+                (click)="toggleTranslateDropdown()">
+          {{ selectedLanguage }}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-translate" style="min-width: 80px">
+          <li *ngFor="let language of translationLanguages"
+              (click)="onSelectLanguage(language)">
+              <a style="cursor: pointer">{{ language }}</a>
+          </li>
+        </ul>
+      </div>
 
       <article class="notification-box" class="notification-parent hidden-xs">
         <div class="noPadding">
