@@ -65,7 +65,7 @@ export class FacebookLogin {
                 FB.api('/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location', ( response => {
                   FB.api('/me/friends', ( friends => {
 
-                    alert(JSON.stringify('Facebook friends: ' + friends));
+                    console.log(JSON.stringify('Facebook friends: ' + friends));
                     //console.log(friends);
                     /* FB.api('/me/friends', ( friends => {
                                         console.log('friends');

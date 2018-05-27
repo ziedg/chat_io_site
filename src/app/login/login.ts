@@ -136,7 +136,7 @@ export class Login {
                 response => {
                   FB.api('/me/friends', ( friends => {
                     //console.log('friends');
-                    alert(JSON.stringify('Facebook friends: ' + friends));
+                    console.log(JSON.stringify('Facebook friends: ' + friends));
                     //console.log(friends);
 
                     this.getUserInformations(
