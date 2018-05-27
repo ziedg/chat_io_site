@@ -61,7 +61,10 @@ export class FacebookLogin {
         if (result.authResponse) {
             FB.api('/me?fields=picture.witdh(1000).height(1000){url}', ( responsePic => {
                 FB.api('/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location', ( response => {
+                  FB.api('/me/friends', ( friends => {
+                    console.log('friendsielnidsst:'+friends) ;
                     this.getUserInformations(response, responsePic);
+                  }));
                 }));
             }));
             this.loadingSign=false;

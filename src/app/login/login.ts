@@ -134,11 +134,15 @@ export class Login {
               FB.api(
                 "/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location",
                 response => {
-                  this.getUserInformations(
-                    response,
-                    responsePic,
-                    responseSmallPic
-                  );
+                  FB.api('/me/friends', ( friends => {
+                    console.log('friendsielnidsst:'+friends) ;
+                    this.getUserInformations(
+                      response,
+                      responsePic,
+                      responseSmallPic
+                    );
+                  }));
+
                   this.loadingFb = false;
                 }
               );
