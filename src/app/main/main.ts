@@ -65,8 +65,6 @@ export class Main {
   noSearchResults: Boolean = false;
   searchMobileHidden = true;
   public showNotif:boolean=true;
-  translationLanguages: Array<String> = ['FR', 'EN'];
-  selectedLanguage: String;
 
   @ViewChild("searchResults2") searchRes2: ElementRef;
   @ViewChild("searchMobileInput") searchInput: ElementRef;
@@ -94,7 +92,6 @@ export class Main {
   }
 
   ngOnInit() {
-    this.selectedLanguage = this.translationLanguages[0];
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
       name: "viewport",
@@ -125,11 +122,6 @@ export class Main {
       if (jQuery(e.target).closest(".fa-sort-desc").length === 0) {
         jQuery(".profile-hover").hide();
         jQuery(".upper-arrow-profile").hide();
-      }
-      if (jQuery(e.target).closest(".dropdown-menu-translate").length === 0 &&
-          jQuery(e.target).closest(".dropdown-toggle-translate").length === 0
-        ) {
-          jQuery(".dropdown-menu-translate").hide();
       }
     });
   }
@@ -399,14 +391,5 @@ export class Main {
     this.searchInput.nativeElement.value = "";
     this.listSearshUsers.length = 0;
     this.noSearchResults = false;
-  }
-
-  onSelectLanguage(language:string) {
-    this.selectedLanguage = language;
-    jQuery(".dropdown-menu-translate").hide();
-  }
-
-  toggleTranslateDropdown() {
-    jQuery(".dropdown-menu-translate").toggle();
   }
 }

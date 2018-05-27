@@ -79,21 +79,6 @@
       </article>
 
 
-      <div class="dropdown dropdwon-translate hidden-sm hidden-xs" style="margin: 0 10px">
-        <button class="btn btn-default dropdown-toggle dropdown-toggle-translate"
-                type="button"
-                (click)="toggleTranslateDropdown()">
-          {{ selectedLanguage }}
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-translate" style="min-width: 80px">
-          <li *ngFor="let language of translationLanguages"
-              (click)="onSelectLanguage(language)">
-              <a style="cursor: pointer">{{ language }}</a>
-          </li>
-        </ul>
-      </div>
-
       <article class="notification-box" class="notification-parent hidden-xs">
         <div class="noPadding">
           <div class="cercle-notice" (click)="loadFirstNotifactions()" *ngIf="nbNewNotifications">
