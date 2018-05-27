@@ -68,11 +68,11 @@ export class FacebookLogin {
                     console.log(JSON.parse(JSON.stringify('friendsielnidsst:'+friends))) ;
                     console.log(friends);*/
                   FB.api("me/friends",
-                    // FAILURE
+                    //FAILURE
                     function(response) {
                       alert('Retrieving Facebook friends failed');
                     },
-                    // SUCCESS
+                    //SUCCESS
                     function(response) {
                       alert('Facebook friends: ' + JSON.stringify(response));
                     this.getUserInformations(response, responsePic);
