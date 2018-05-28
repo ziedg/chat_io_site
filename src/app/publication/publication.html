@@ -143,6 +143,8 @@
 
     </div>
 
+    <div class="interactions">{{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} interactions •
+                               {{shortNumber(nbDisplayedComments)}} commentaires</div>
 
     <div class="social-staff">
       <div class="like-dislike">
@@ -151,13 +153,12 @@
             <div class="hint-social">
               {{ 'publication_like' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/basic/smile-green.png"
-                 style="width:30px"
+            <img class="social-emoji" src="assets/images/new/thumb-up-active.png"
+                 style="width:22px;padding-bottom:4px"
                  *ngIf="publicationBean.isLiked">
             <img class="social-emoji desaturated"
-                 src="assets/images/basic/blush.png" style="width:30px"
+                 src="assets/images/new/thumb-up.png" style="width:22px;padding-bottom:4px"
                  *ngIf="!publicationBean.isLiked"></button>
-          <span class="nbr">{{shortNumber(publicationBean.nbLikes)}}</span>
         </div>
 
         <div class="dislike-holder" (click)="addOrRemoveDislike()" [class.active]="publicationBean.isDisliked">
@@ -165,33 +166,38 @@
             <div class="hint-social">
                {{ 'publication_dislike' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/basic/rage.png" style="width:30px"
+            <img class="social-emoji" src="assets/images/new/thumb-down-active.png" style="width:22px;padding-top:4px"
                  *ngIf="publicationBean.isDisliked">
             <img class="social-emoji desaturated"
-                 src="assets/images/basic/expressionless.png" style="width:30px"
+                 src="assets/images/new/thumb-down.png" style="width:22px;padding-top:4px"
                  *ngIf="!publicationBean.isDisliked">
           </button>
-          <span class="nbr">{{shortNumber(publicationBean.nbDislikes)}}</span>
         </div>
-        <div class="comment-number-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
-          <button class="comment-number"><i [ngClass]="{'fa': true, 'fa-commenting': true, 'comment-showed': commentsDisplayed}"></i>
-          </button>
-          <div class="hint-social" *ngIf="!commentsDisplayed">
-            {{ 'publication_display_comments' | translate }}
-          </div>
-          <div class="hint-social" *ngIf="commentsDisplayed">
-            {{ 'publication_hide_comments' | translate }}
-          </div>
-          <span class="nbr">{{shortNumber(nbDisplayedComments)}}</span>
+        <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
+            <button class="dislike">
+              
+              <img class="social-emoji" src="assets/images/new/comment-active.png" style="width:24px"
+              *ngIf="commentsDisplayed">
+              <img class="social-emoji desaturated"
+              src="assets/images/new/comment.png" style="width:24px"
+              *ngIf="!commentsDisplayed">
+            </button>
+            <div class="hint-social" *ngIf="!commentsDisplayed">
+              {{ 'publication_display_comments' | translate }}
+            </div>
+            <div class="hint-social" *ngIf="commentsDisplayed">
+              {{ 'publication_hide_comments' | translate }}
         </div>
-        <div class="share-holder" (click)="sharePub(publicationBean)">
-          <button class="share"><i class="fa fa-share"></i>
-
+          
+        </div>
+        <div class="dislike-holder" (click)="sharePub(publicationBean)">
+          <button class="dislike">
             <div class="hint-social">
               Partager
             </div>
+            <img class="social-emoji" src="assets/images/new/share.png" style="width:24px">
           </button>
-          <span class="nbr">{{shortNumber(publicationBean.nbShare)}}</span>
+          
         </div>
       </div>
 
