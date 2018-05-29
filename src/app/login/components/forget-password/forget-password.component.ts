@@ -6,16 +6,16 @@ import 'rxjs/add/operator/map';
 import {TranslateService} from '@ngx-translate/core';
 
 /* conf */
-import {AppSettings} from '../../conf/app-settings';
+import {AppSettings} from '../../../conf/app-settings';
 
 /* services */
-import {LoginService} from '../../service/loginService';
+import {LoginService} from '../../services/loginService';
 
 import {Title} from "@angular/platform-browser";
-import {environment} from "../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 
 /** Utils */
-import * as pathUtils from '../../utils/path.utils';
+import * as pathUtils from '../../../utils/path.utils';
 
 @Component({
   moduleId: module.id,

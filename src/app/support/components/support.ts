@@ -10,16 +10,16 @@ import {AboutUs} from './about-us/aboutUs'
 import {Team} from './team/team'
 
 /* conf */
-import {AppSettings} from '../conf/app-settings';
+import {AppSettings} from '../../conf/app-settings';
 
 /* services */
-import {LoginService} from '../service/loginService';
+import {LoginService} from '../../login/services/loginService';
 
 /* user  */
-import {User} from '../beans/user';
+import {User} from '../../beans/user';
 
 /* beans */
-import {NotFound} from "../main/notFound/not-found";
+import {NotFound} from "../../main/notFound/not-found";
 import {Title} from "@angular/platform-browser";
 
 declare var jQuery: any;

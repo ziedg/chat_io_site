@@ -18,16 +18,16 @@ import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 /* conf */
-import { AppSettings } from "../conf/app-settings";
+import { AppSettings } from "../../conf/app-settings";
 
 /* services */
-import { LoginService } from "../service/loginService";
+import { LoginService } from "../services/loginService";
 
 /* beans */
-import { SocialUser } from "../beans/social-user";
-import { User } from "../beans/user";
+import { SocialUser } from "../../beans/social-user";
+import { User } from "../../beans/user";
 import { Title } from "@angular/platform-browser";
-import { environment } from "../../environments/environment";
+import { environment } from "../../../environments/environment";
 
 declare var FB: any;
 declare var window: any;

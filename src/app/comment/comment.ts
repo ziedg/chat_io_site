@@ -9,7 +9,7 @@ import {TranslateService} from '@ngx-translate/core';
 
 /* services */
 import {EmojiService} from "../service/emojiService";
-import {LoginService} from "../service/loginService";
+import {LoginService} from "../login/services/loginService";
 import {DateService} from '../service/dateService';
 
 /* beans */

@@ -9,17 +9,17 @@ import { EditProfile} from './edit-profile/editProfile'
 import { ChangePassword} from './change-password/changePassword'
 
 /* conf */
-import {AppSettings} from '../../conf/app-settings';
+import {AppSettings} from '../../../conf/app-settings';
 
 /* services */
-import {LoginService} from '../../service/loginService';
+import {LoginService} from '../../../login/services/loginService';
 import {TranslateService} from '@ngx-translate/core';
 
 /* user  */
-import {User} from '../../beans/user';
+import {User} from '../../../beans/user';
 
 /* beans */
-import {NotFound} from "../notFound/not-found";
+import {NotFound} from "../../notFound/not-found";
 import {Title} from "@angular/platform-browser";
 
 declare var jQuery: any;

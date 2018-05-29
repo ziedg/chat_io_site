@@ -8,7 +8,7 @@ import { AppSettings } from '../conf/app-settings';
 import { environment } from "../../environments/environment";
 
 /* services */
-import { LoginService } from '../service/loginService';
+import { LoginService } from '../login/services/loginService';
 import {TranslateService} from '@ngx-translate/core';
 
 /* beans  */

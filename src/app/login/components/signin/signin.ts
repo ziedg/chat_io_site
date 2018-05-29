@@ -5,20 +5,20 @@ import { Router } from "@angular/router";
 import "rxjs/add/operator/map";
 
 /* conf */
-import { AppSettings } from "../../conf/app-settings";
+import { AppSettings } from "../../../conf/app-settings";
 
 /* services */
-import { LoginService } from "../../service/loginService";
+import { LoginService } from "../../services/loginService";
 import {TranslateService} from '@ngx-translate/core';
 
 /* beans */
-import { SocialUser } from "../../beans/social-user";
-import { User } from "../../beans/user";
+import { SocialUser } from "../../../beans/social-user";
+import { User } from "../../../beans/user";
 import { Title } from "@angular/platform-browser";
-import { environment } from "../../../environments/environment";
+import { environment } from "../../../../environments/environment";
 
 /** Utils */
-import * as pathUtils from "../../utils/path.utils";
+import * as pathUtils from "../../../utils/path.utils";
 
 @Component({
   selector: "sign-in",
