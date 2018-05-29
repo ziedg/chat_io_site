@@ -68,6 +68,8 @@ export class Home {
   titleEnable = false;
   youtubeInput = false;
   youtubeLink = "";
+  facebookInput = false;
+  facebookLink = "";
   menuFilter = "recent";
   selectedMenuElement = 0;
   nbLoadedPosts = 10;
@@ -344,7 +346,16 @@ export class Home {
       jQuery(".yt-in-url").val(text);
       this.changeDetector.markForCheck();
       this.youtubeLink = text;
-      this.updateYoutube();
+      this.updateYoutubeFacebook();
+	      return 1;
+	    }
+	    if (
+	      text.search("web.facebook.com") >= 0 ) {
+	      this.facebookInput = true;
+	      jQuery(".yt-in-url").val(text);
+	      this.changeDetector.markForCheck();
+	      this.facebookLink = text;
+	      this.updateYoutubeFacebook();
       return 1;
     }
 		if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
@@ -353,7 +364,9 @@ export class Home {
 			jQuery(".file-input-holder").show();
 			jQuery("#preview-image").show();
 			this.imageFromLink = true;
-			this.youtubeLink = null;
+      this.youtubeLink = null;
+      this.facebookLink = null;
+      
 			this.uploadedPicture = null;
 			jQuery(".youtube-preview").html("");
 			this.link.isSet = false;
@@ -380,6 +393,8 @@ export class Home {
     this.titleEnable = false;
     this.youtubeInput = false;
     this.youtubeLink = null;
+    this.facebookInput = false;
+    this.facebookLink = null;
     jQuery(".yt-in-url").val("");
     jQuery(".youtube-preview").html("");
     this.loadingPublish = false;
@@ -401,6 +416,7 @@ export class Home {
       //!this.form.value.publicationText &&
       white_space_regex.test(txt)
       && !this.youtubeLink
+      && !this.facebookLink
       && !this.uploadedPicture
       &&!this.link.isSet
 			&& !this.imageFromLink) {
@@ -415,7 +431,8 @@ export class Home {
 
 		// when image form link is passed
 		this.imageFromLink = this.imageFromLink
-												&& !this.youtubeLink
+                        && !this.youtubeLink
+                        && !this.facebookLink
 												&& !this.uploadedPicture
 												&& !this.link.isSet;
 
@@ -431,6 +448,7 @@ export class Home {
 
 
 		if(this.youtubeLink){ jQuery(".yt-in-url").hide(); }
+    if(this.facebookLink){ jQuery(".yt-in-url").hide(); }
 
     this.form.value.publicationText = txt;
 
@@ -444,6 +462,7 @@ export class Home {
     data.append("publTitle", this.form.value.publicationTitle);
     data.append("publText", this.form.value.publicationText);
     data.append("publyoutubeLink", this.youtubeLink);
+    data.append("publfacebookLink", this.facebookLink);
     data.append("publPicture", this.uploadedPicture);
     // clear title value
     this.form.reset();
@@ -592,6 +611,22 @@ export class Home {
     }
   }
 
+  getIdFacebookVideo(facebookLink): string {
+     
+    var myRegexp = /\/\d+\//;
+    var match = facebookLink.match(myRegexp);
+    if (match) {
+      return match[0].slice(1,-1);
+    }
+  
+  
+}
+
+getPageFacebookVideo(videoLink): string {
+  
+  return "facebook";
+}
+
   getIdYoutubeVideoId(youtubeLink): string {
     if (youtubeLink.indexOf("youtube.com") > 0) {
       var video = "";
@@ -614,35 +649,60 @@ export class Home {
     return "error";
   }
 
-  displayYoutubeLinkError() {
+  displayLinkError() {
     this.errorMsg =
-      "Votre lien Youtube est invalide! Veuillez mettre un lien Youtube Valide.";
+      "Votre lien Youtube ou Facebook est invalide! Veuillez mettre un lien Valide.";
     this.errorTimed();
     jQuery(".youtube-preview").html("");
   }
 
-  updateYoutube() {
+  updateYoutubeFacebook() {
     var a = jQuery(".yt-in-url");
-    let videoId = this.getIdYoutubeVideoId(a.val());
+    var videoLink = a.val();
+    var videoId;
 
-    try {
-      if (videoId == "error") {
-        this.displayYoutubeLinkError();
-        return;
+    if(videoLink.indexOf("youtube.com") > 0 || videoLink.indexOf("youtu.be") > 0){
+       videoId = this.getIdYoutubeVideoId(videoLink);
+       try {
+        jQuery(".youtube-preview").html(
+          '<iframe width="560" height="315" src="https://www.youtube.com/embed/' +
+            videoId +
+            '" frameborder="0" allowfullscreen></iframe>'
+        );
+        this.uploadedPicture = null;
+        this.closeLinkAPI();
+        this.youtubeLink = videoId;
+        jQuery("#preview-image").hide();
+      } catch (err) {
+        this.displayLinkError();
       }
-
-      jQuery(".youtube-preview").html(
-        '<iframe width="560" height="315" src="https://www.youtube.com/embed/' +
-          videoId +
-          '" frameborder="0" allowfullscreen></iframe>'
-      );
-      this.uploadedPicture = null;
-      this.closeLinkAPI();
-      this.youtubeLink = videoId;
-      jQuery("#preview-image").hide();
-    } catch (err) {
-      this.displayYoutubeLinkError();
     }
+    else if (videoLink.indexOf("web.facebook.com") > 0){
+       videoId = this.getIdFacebookVideo(videoLink);
+       var videoPage = this.getPageFacebookVideo(videoLink);
+       try {
+        
+  
+        jQuery(".youtube-preview").html(
+          '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
+          videoId +
+          '%2F&show_text=0&width=560" width="560" height="360" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
+        );
+        this.uploadedPicture = null;
+        this.closeLinkAPI();
+        this.facebookLink = videoId;
+        jQuery("#preview-image").hide();
+      } catch (err) {
+        this.displayLinkError();
+      }
+    }
+    else{
+      this.displayLinkError();
+          return;
+    }
+    
+
+    
   }
 
   closeLinkAPI() {
@@ -670,7 +730,7 @@ export class Home {
         linkURL.search("youtu.be/") >= 0
       ) {
         jQuery(".yt-in-url").val(linkURL);
-        this.updateYoutube();
+        this.updateYoutubeFacebook();
         return 1;
       }
 			/*

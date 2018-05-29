@@ -109,6 +109,11 @@
         <iframe width="560" height="400" [src]="url" frameborder="0" allowfullscreen>
         </iframe>
       </div>
+      <div class="youtube-preview-publication"
+	           *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
+	        <iframe width="560" height="400" [src]="url" frameborder="0" allowfullscreen>
+	        </iframe>
+	      </div>
     </div>
 
 

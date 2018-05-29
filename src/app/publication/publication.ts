@@ -75,6 +75,7 @@ export class Publication {
   public shareLink = "";
   signalSubMenu = false;
   linkYtb = "";
+  linkFb = "";
   url: SafeResourceUrl;
   listEmoji: Array<EmojiListBean> = [];
   newCommentText: string = "";
@@ -292,6 +293,12 @@ export class Publication {
       if (this.publicationBean.publyoutubeLink) {
         this.linkYtb = "https://www.youtube.com/embed/" + this.publicationBean.publyoutubeLink;
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkYtb);
+      }
+      else if (this.publicationBean.publfacebookLink) {
+        this.linkFb = "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +
+        this.publicationBean.publfacebookLink +
+        "%2F&show_text=0&width=560";
+        this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkFb);
       }
       else {
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl('');
