@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 import {AppSettings} from '../conf/app-settings';
 
 /* services */
-import {LoginService} from '../service/loginService';
+import {LoginService} from '../login/services/loginService';
 import {DateService} from '../service/dateService';
 import {EmojiService} from "../service/emojiService";
 import {LinkView} from "../service/linkView";

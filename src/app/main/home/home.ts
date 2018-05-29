@@ -24,7 +24,7 @@ import { AppSettings } from "../../conf/app-settings";
 import * as pathUtils from "../../utils/path.utils";
 
 /* services */
-import { LoginService } from "../../service/loginService";
+import { LoginService } from "../../login/services/loginService";
 import { LinkView } from "../../service/linkView";
 import { LinkPreview } from "../../service/linkPreview";
 import { PostService } from "../../service/postService";
