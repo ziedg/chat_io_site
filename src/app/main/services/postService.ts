@@ -1,15 +1,23 @@
+import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
+import { Injectable }     from '@angular/core';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
-import { ChangeDetectorRef, Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Router } from '@angular/router';
+/* conf */
+import {AppSettings} from '../../shared/conf/app-settings';
 
-import { environment } from '../../../environments/environment';
-import { PublicationBean } from '../../beans/publication-bean';
-import { User } from '../../beans/user';
-import { LoginService } from '../../login/services/loginService';
-import { AppSettings } from '../../shared/conf/app-settings';
-import { LinkView } from './linkView';
+/* services */
+import {LoginService} from '../../login/services/loginService';
+import {LinkView} from "./linkView";
+
+/* user  */
+import {User} from '../../beans/user';
+/* beans */
+import {PublicationBean} from '../../beans/publication-bean';
+import {Title} from "@angular/platform-browser";
+import {environment} from "../../../environments/environment";
+/* beans */
 
 @Injectable()
 export class PostService {

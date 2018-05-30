@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { NotFoundPage } from './components/404/404';
-import { Home } from './components/home/home';
 import { Main } from './components/main';
-import { Post } from './components/post/post';
+import { Home } from './components/home/home';
 import { Profile } from './components/profile/profile';
 import { SuggestionsComponent } from './components/suggestions/suggestions.component';
+import { Post } from './components/post/post';
+import { NotFoundPage } from './components/404/404';
 
 
 const mainRoutes: Routes = [

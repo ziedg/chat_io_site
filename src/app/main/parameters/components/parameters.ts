@@ -1,14 +1,26 @@
+import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import { Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { Http } from '@angular/http';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+/* parameters components */
+import { EditProfile} from './edit-profile/editProfile'
+import { ChangePassword} from './change-password/changePassword'
 
-import { User } from '../../../beans/user';
-import { LoginService } from '../../../login/services/loginService';
+/* conf */
+import {AppSettings} from '../../../shared/conf/app-settings';
 
+/* services */
+import {LoginService} from '../../../login/services/loginService';
+import {TranslateService} from '@ngx-translate/core';
+
+/* user  */
+import {User} from '../../../beans/user';
+
+/* beans */
+import {NotFound} from "../../components/notFound/not-found";
+import {Title} from "@angular/platform-browser";
 
 declare var jQuery: any;
 

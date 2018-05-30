@@ -1,23 +1,24 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-
-import { SharedModule } from '../shared/shared.module';
-import { NotFoundPage } from './components/404/404';
-import { Comment } from './components/comment/comment';
-import { Home } from './components/home/home';
-import { LoadingBar } from './components/loading/loading-bar';
-import { Main } from './components/main';
-import { NotFound } from './components/notFound/not-found';
-import { Notification } from './components/notification/notification';
+import { CommonModule } from '@angular/common';
 import { Post } from './components/post/post';
 import { Profile } from './components/profile/profile';
-import { ContenteditableModel } from './components/publication/contenteditable-model';
-import { Publication } from './components/publication/publication';
-import { SuggestionsComponent } from './components/suggestions/suggestions.component';
-import { TopBlagueursAndDecov } from './components/topBlagueursAndDecov/topBlagueursAndDecov';
-import { MainRoutingModule } from './main.routing.module';
+import { Comment } from './components/comment/comment';
+import { Notification } from './components/notification/notification';
 
+
+import { Main } from './components/main';
+import { Publication } from './components/publication/publication';
+import { Home } from './components/home/home';
+import { TopBlagueursAndDecov } from './components/topBlagueursAndDecov/topBlagueursAndDecov';
+import { SuggestionsComponent } from './components/suggestions/suggestions.component';
+import { SharedModule } from '../shared/shared.module';
+import { MainRoutingModule } from './main.routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ContenteditableModel } from './components/publication/contenteditable-model';
+import { LoadingBar } from './components/loading/loading-bar';
+import { NotFound } from './components/notFound/not-found';
+import { NotFoundPage } from './components/404/404';
 
 @NgModule({
   imports: [

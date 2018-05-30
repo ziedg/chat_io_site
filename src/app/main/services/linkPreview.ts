@@ -1,14 +1,15 @@
+import { Router } from '@angular/router';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Input, Output, EventEmitter, Component, ChangeDetectorRef, ChangeDetectionStrategy,Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 
-import { ChangeDetectorRef, Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Router } from '@angular/router';
 
-import { environment } from '../../../environments/environment';
-import { LinkBean } from '../../beans/linkBean';
+/* conf */
 import { AppSettings } from '../../shared/conf/app-settings';
-import { LinkView } from './linkView';
-
+import { LinkView } from "./linkView";
+/*bean*/
+import { LinkBean } from '../../beans/linkBean';
+import {environment} from "../../../environments/environment";
 @Injectable()
 export class LinkPreview {
     public linkToPreview: LinkBean = new LinkBean();

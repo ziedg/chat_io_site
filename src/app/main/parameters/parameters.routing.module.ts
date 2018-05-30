@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { ChangePassword } from './components/change-password/changePassword';
-import { EditProfile } from './components/edit-profile/editProfile';
 import { Parameters } from './components/parameters';
+import { EditProfile } from './components/edit-profile/editProfile';
+import { ChangePassword } from './components/change-password/changePassword';
 
 
 const parametersRoutes: Routes = [
