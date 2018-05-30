@@ -847,7 +847,7 @@ a {
   display: -ms-flexbox;
   display: -webkit-flex;
   align-items: center;
-  margin-right: 16px;
+  margin-right: 13px;
   position: absolute;
   right: 100px;
   top: 20px;
@@ -2005,7 +2005,7 @@ top-blagueurs-decov .user .user-img,
 .content img {
   max-height: 400px;
   max-width: 100%;
-  border: solid 1px #ddd;
+  border: solid 0px #ddd;
   padding: 1px;
   margin-top: 10px;
   display: block;
@@ -2013,10 +2013,10 @@ top-blagueurs-decov .user .user-img,
 
 .interactions{
   margin-top:6px;
-  margin-bottom:7px;
+  margin-bottom:8px;
   margin-left:7px;
   color:#424242;
-  font-size:12px;
+  font-size:14px;
 }
 
 
@@ -4585,6 +4585,14 @@ change-password .input-param input {
 
 .publication .content {
   margin-top: 14px;
+}
+
+@media(min-width:830px){
+  .publication .content {
+    margin-top: 14px;
+    padding-right:30px;
+    padding-left:30px;
+  }
 }
 
 

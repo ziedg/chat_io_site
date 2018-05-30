@@ -154,7 +154,8 @@
 
     </div>
 
-    <div class="interactions">{{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} interactions •
+    <div class="interactions" *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0"
+    >{{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} interactions •
                                {{shortNumber(nbDisplayedComments)}} commentaires</div>
 
     <div class="social-staff">
