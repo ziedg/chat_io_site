@@ -1,10 +1,8 @@
-import { Injectable}     from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-/* beans */
-import {User} from '../../beans/user'
-import {SocialUser} from "../../beans/social-user";
-import {environment} from "../../../environments/environment";
+import { SocialUser } from '../../beans/social-user';
+import { User } from '../../beans/user';
 
 
 @Injectable()
