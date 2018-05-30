@@ -1,15 +1,25 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Http, Response } from '@angular/http';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import {FormGroup, Validators, FormControl} from '@angular/forms';
+import { Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { environment } from '../../../../../environments/environment';
-import { User } from '../../../../beans/user';
-import { AppSettings } from '../../../../shared/conf/app-settings';
-import { LoginService } from '../../../../login/services/loginService';
+/* conf */
+import {AppSettings} from '../../../../conf/app-settings';
+
+/* services */
+import {LoginService} from '../../../../login/services/loginService';
+import {TranslateService} from '@ngx-translate/core';
+
+/* user  */
+import {User} from '../../../../beans/user';
+
+/** Utils */
 import * as pathUtils from '../../../../utils/path.utils';
 
+/* beans */
+import {NotFound} from "../../../notFound/not-found";
+import {environment} from "../../../../../environments/environment";
 
 declare var jQuery:any;
 declare var swal:any;

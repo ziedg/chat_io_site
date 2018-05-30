@@ -1,19 +1,21 @@
-import 'rxjs/add/operator/map';
-
-import { Component, NgZone } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Title } from '@angular/platform-browser';
+import {Component, NgZone} from '@angular/core';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import 'rxjs/add/operator/map';
+import {TranslateService} from '@ngx-translate/core';
 
-import { environment } from '../../../../environments/environment';
-import { SocialUser } from '../../../beans/social-user';
-import { User } from '../../../beans/user';
-import { AppSettings } from '../../../shared/conf/app-settings';
-import { LoginService } from '../../services/loginService';
+/* conf */
+import {AppSettings} from '../../../conf/app-settings';
 
-
+/* services */
+import {LoginService} from '../../services/loginService';
 declare var jQuery: any;
+
+/* beans */
+import {User} from '../../../beans/user';
+import {Title} from "@angular/platform-browser";
+import {SocialUser} from "../../../beans/social-user";
+import {environment} from "../../../../environments/environment";
 
 
 declare const FB:any;

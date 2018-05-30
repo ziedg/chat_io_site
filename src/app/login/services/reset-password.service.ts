@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 /* conf */
-import {AppSettings} from '../../shared/conf/app-settings';
+import {AppSettings} from '../../conf/app-settings';
 
 /** Utils */
 import * as pathUtils from '../../utils/path.utils';
