@@ -1,22 +1,18 @@
-import { OnInit } from '@angular/core';
-import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
-import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
-/* conf */
-import {AppSettings} from '../../../shared/conf/app-settings';
-import {TranslateService} from '@ngx-translate/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
-/* services */
-import {LoginService} from '../../../login/services/loginService';
-import {DateService} from "../../services/dateService";
-import {NotificationBean} from "../../../beans/notification-bean";
-import {User} from "../../../beans/user";
-import {environment} from "../../../../environments/environment";
-
-/** Utils */
+import { environment } from '../../../../environments/environment';
+import { NotificationBean } from '../../../beans/notification-bean';
+import { User } from '../../../beans/user';
+import { LoginService } from '../../../login/services/loginService';
+import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
+import { DateService } from '../../services/dateService';
+
 
 @Component({
     selector: 'notification',

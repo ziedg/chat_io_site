@@ -1,20 +1,14 @@
-import { Component, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
-/* conf */
-import { AppSettings } from '../../../shared/conf/app-settings';
-import { environment } from "../../../../environments/environment";
+import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
-/* services */
-import { LoginService } from '../../../login/services/loginService';
-import {TranslateService} from '@ngx-translate/core';
-
-/* beans  */
+import { environment } from '../../../../environments/environment';
 import { User } from '../../../beans/user';
-
-/** Utils */
+import { LoginService } from '../../../login/services/loginService';
+import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
 
 

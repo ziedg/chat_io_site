@@ -1,25 +1,19 @@
-import {Input, Output, EventEmitter, Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
-import {Response, Http} from "@angular/http";
 import 'rxjs/add/operator/map';
 
-/* conf */
-import {AppSettings} from "../../../shared/conf/app-settings";
-import {environment} from "../../../../environments/environment";
-import {TranslateService} from '@ngx-translate/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { TranslateService } from '@ngx-translate/core';
 
-/* services */
-import {EmojiService} from "../../services/emojiService";
-import {LoginService} from "../../../login/services/loginService";
-import {DateService} from '../../services/dateService';
-
-/* beans */
-import {PublicationBean} from "../../../beans/publication-bean";
-import {User} from "../../../beans/user";
-import {CommentBean} from "../../../beans/comment-bean";
-import {EmojiListBean} from "../../../beans/emoji-list-bean";
-
-/** Utils */
+import { environment } from '../../../../environments/environment';
+import { CommentBean } from '../../../beans/comment-bean';
+import { EmojiListBean } from '../../../beans/emoji-list-bean';
+import { PublicationBean } from '../../../beans/publication-bean';
+import { User } from '../../../beans/user';
+import { LoginService } from '../../../login/services/loginService';
+import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
+import { DateService } from '../../services/dateService';
+import { EmojiService } from '../../services/emojiService';
 
 declare var swal:any;
 
