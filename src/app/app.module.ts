@@ -12,10 +12,21 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { Comment } from './main/components/comment/comment';
+import { LoadingBar } from './main/components/loading/loading-bar';
 import { LoginService } from './login/services/loginService';
 import { ResetPasswordService } from './login/services/reset-password.service';
 import { Logout } from './logout/logout';
-
+import { NotFoundPage } from './main/components/404/404';
+import { Home } from './main/components/home/home';
+import { Main } from './main/components/main';
+import { NotFound } from './main/components/notFound/not-found';
+import { Notification } from './main/components/notification/notification';
+import { Post } from './main/components/post/post';
+import { Profile } from './main/components/profile/profile';
+import { SuggestionsComponent } from './main/components/suggestions/suggestions.component';
+import { ContenteditableModel } from './main/components/publication/contenteditable-model';
+import { Publication } from './main/components/publication/publication';
 import { DateService } from './main/services/dateService';
 import { EmojiService } from './main/services/emojiService';
 import { GlobalService } from './main/services/globalService';
@@ -26,16 +37,14 @@ import { PostService } from './main/services/postService';
 import { RecentRechService } from './main/services/recentRechService';
 import { SeoService } from './main/services/seo-service';
 import { FakeComponent } from './shared/fake.component';
-
+import { TopBlagueursAndDecov } from './main/components/topBlagueursAndDecov/topBlagueursAndDecov';
 import { httpFactory } from './utils/factories/http.factory';
-import { MainModule } from './main/main.module';
 
 /** Factories */
 @NgModule({
     imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
       ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule,Ng2ImgMaxModule,
       HttpClientModule,
-      MainModule,
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
@@ -43,9 +52,9 @@ import { MainModule } from './main/main.module';
           deps: [HttpClient]
         }
       })],       // module dependencies
-    declarations: [AppComponent,  Logout ,
-         GoogleRecaptchaDirective,
-        FakeComponent],   // components and directives
+    declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
+        TopBlagueursAndDecov, GoogleRecaptchaDirective,
+        FakeComponent, ContenteditableModel, SuggestionsComponent],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,
