@@ -1,23 +1,22 @@
-
-import {Injectable, Injector} from '@angular/core';
-import { Http, Response, RequestOptionsArgs, Headers, RequestOptions, ConnectionBackend, XHRBackend, Request } from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/empty';
-import 'rxjs/add/operator/share';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/share';
 
-import {Router} from '@angular/router';
+import { Injectable, Injector } from '@angular/core';
+import { ConnectionBackend, Headers, Http, RequestOptions, RequestOptionsArgs, Response } from '@angular/http';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+
+import * as Constants from './constants';
+
 
 //import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 /** Constants */
-import * as Constants from './constants';
-
 
 /**
  * HttpClient
