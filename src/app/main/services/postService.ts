@@ -5,18 +5,18 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 /* conf */
-import {AppSettings} from '../conf/app-settings';
+import {AppSettings} from '../../shared/conf/app-settings';
 
 /* services */
-import {LoginService} from '../login/services/loginService';
-import {LinkView} from "../service/linkView";
+import {LoginService} from '../../login/services/loginService';
+import {LinkView} from "./linkView";
 
 /* user  */
-import {User} from '../beans/user';
+import {User} from '../../beans/user';
 /* beans */
-import {PublicationBean} from '../beans/publication-bean';
+import {PublicationBean} from '../../beans/publication-bean';
 import {Title} from "@angular/platform-browser";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 /* beans */
 
 @Injectable()

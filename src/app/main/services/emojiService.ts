@@ -1,6 +1,6 @@
 import { Injectable }     from '@angular/core';
-import {EmojiListBean} from "../beans/emoji-list-bean";
-import {EmojiBean} from "../beans/emoji-bean";
+import {EmojiListBean} from "../../beans/emoji-list-bean";
+import {EmojiBean} from "../../beans/emoji-bean";
 /* beans */
 
 @Injectable()

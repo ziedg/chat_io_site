@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { Logout } from './logout/logout';
-import { NotFoundPage } from './main/404/404';
-import { Home } from './main/home/home';
-import { Main } from './main/main';
-import { Notification } from './main/notification/notification';
-import { Post } from './main/post/post';
-import { Profile } from './main/profile/profile';
-import { SuggestionsComponent } from './main/suggestions/suggestions.component';
+import { NotFoundPage } from './main/components/404/404';
+import { Home } from './main/components/home/home';
+import { Main } from './main/components/main';
+import { Notification } from './main/components/notification/notification';
+import { Post } from './main/components/post/post';
+import { Profile } from './main/components/profile/profile';
+import { SuggestionsComponent } from './main/components/suggestions/suggestions.component';
 import { FakeComponent } from './shared/fake.component';
 
 /* Main components  */

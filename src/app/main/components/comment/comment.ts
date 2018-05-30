@@ -3,23 +3,23 @@ import {Response, Http} from "@angular/http";
 import 'rxjs/add/operator/map';
 
 /* conf */
-import {AppSettings} from "../conf/app-settings";
-import {environment} from "../../environments/environment";
+import {AppSettings} from "../../../shared/conf/app-settings";
+import {environment} from "../../../../environments/environment";
 import {TranslateService} from '@ngx-translate/core';
 
 /* services */
-import {EmojiService} from "../service/emojiService";
-import {LoginService} from "../login/services/loginService";
-import {DateService} from '../service/dateService';
+import {EmojiService} from "../../services/emojiService";
+import {LoginService} from "../../../login/services/loginService";
+import {DateService} from '../../services/dateService';
 
 /* beans */
-import {PublicationBean} from "../beans/publication-bean";
-import {User} from "../beans/user";
-import {CommentBean} from "../beans/comment-bean";
-import {EmojiListBean} from "../beans/emoji-list-bean";
+import {PublicationBean} from "../../../beans/publication-bean";
+import {User} from "../../../beans/user";
+import {CommentBean} from "../../../beans/comment-bean";
+import {EmojiListBean} from "../../../beans/emoji-list-bean";
 
 /** Utils */
-import * as pathUtils from '../utils/path.utils';
+import * as pathUtils from '../../../utils/path.utils';
 
 declare var swal:any;
 

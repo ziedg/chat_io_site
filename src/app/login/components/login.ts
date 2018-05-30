@@ -18,7 +18,7 @@ import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 /* conf */
-import { AppSettings } from "../../conf/app-settings";
+import { AppSettings } from "../../shared/conf/app-settings";
 
 /* services */
 import { LoginService } from "../services/loginService";

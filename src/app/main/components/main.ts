@@ -14,29 +14,29 @@ import * as _ from "lodash";
 
 /* Main components */
 import { Home } from "./home/home";
-import { Parameters } from "./parameters/components/parameters";
+import { Parameters } from "../parameters/components/parameters";
 import { Profile } from "./profile/profile";
 import { Notification } from "./notification/notification";
 
 /* services */
-import { LoginService } from "../login/services/loginService";
+import { LoginService } from "../../login/services/loginService";
 import {TranslateService} from '@ngx-translate/core';
 
 /** Utils */
-import * as pathUtils from "../utils/path.utils";
+import * as pathUtils from "../../utils/path.utils";
 
 /* user  */
-import { User } from "../beans/user";
-import { AppSettings } from "../conf/app-settings";
+import { User } from "../../beans/user";
+import { AppSettings } from "../../shared/conf/app-settings";
 import { Response, Http } from "@angular/http";
 import { Post } from "./post/post";
-import { NotificationBean } from "../beans/notification-bean";
+import { NotificationBean } from "../../beans/notification-bean";
 import { Title, Meta } from "@angular/platform-browser";
-import { RecentRechService } from "../service/recentRechService";
-import { DateService } from "../service/dateService";
-import { environment } from "../../environments/environment";
-import { AppComponent } from "../app.component";
-import { GlobalService } from "../service/globalService";
+import { RecentRechService } from "../services/recentRechService";
+import { DateService } from "../services/dateService";
+import { environment } from "../../../environments/environment";
+import { AppComponent } from "../../app.component";
+import { GlobalService } from "../services/globalService";
 
 declare var jQuery: any;
 declare var FB: any;

@@ -4,18 +4,18 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 /* conf */
-import { AppSettings } from '../conf/app-settings';
-import { environment } from "../../environments/environment";
+import { AppSettings } from '../../../shared/conf/app-settings';
+import { environment } from "../../../../environments/environment";
 
 /* services */
-import { LoginService } from '../login/services/loginService';
+import { LoginService } from '../../../login/services/loginService';
 import {TranslateService} from '@ngx-translate/core';
 
 /* beans  */
-import { User } from '../beans/user';
+import { User } from '../../../beans/user';
 
 /** Utils */
-import * as pathUtils from '../utils/path.utils';
+import * as pathUtils from '../../../utils/path.utils';
 
 
 @Component({

@@ -1,8 +1,8 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {User} from "../../beans/user";
-import {environment} from "../../../environments/environment";
-import {AppSettings} from "../../conf/app-settings";
-import * as pathUtils from "../../utils/path.utils";
+import {User} from "../../../beans/user";
+import {environment} from "../../../../environments/environment";
+import {AppSettings} from "../../../shared/conf/app-settings";
+import * as pathUtils from "../../../utils/path.utils";
 import * as _ from "lodash";
 
 import {Http, Response, Headers, RequestOptions} from '@angular/http';

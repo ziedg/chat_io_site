@@ -3,34 +3,34 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { TopBlagueursAndDecov } from '../../topBlagueursAndDecov/topBlagueursAndDecov';
+import { TopBlagueursAndDecov } from '../topBlagueursAndDecov/topBlagueursAndDecov';
 import 'rxjs/add/operator/map';
 
-import { Publication } from '../../publication/publication';
-import { Comment } from '../../comment/comment';
+import { Publication } from '../publication/publication';
+import { Comment } from '../comment/comment';
 
 /* conf */
-import { AppSettings } from '../../conf/app-settings';
+import { AppSettings } from '../../../shared/conf/app-settings';
 
 /* services */
-import { LoginService } from '../../login/services/loginService';
-import { LinkView } from "../../service/linkView";
-import { LinkPreview } from "../../service/linkPreview";
+import { LoginService } from '../../../login/services/loginService';
+import { LinkView } from "../../services/linkView";
+import { LinkPreview } from "../../services/linkPreview";
 import {TranslateService} from '@ngx-translate/core';
 
 
 /* user  */
-import { User } from '../../beans/user';
+import { User } from '../../../beans/user';
 
 /* beans */
-import { PublicationBean } from '../../beans/publication-bean';
+import { PublicationBean } from '../../../beans/publication-bean';
 import { NotFound } from "../notFound/not-found";
 import { Title } from "@angular/platform-browser";
-import { LinkBean } from '../../beans/linkBean';
-import {environment} from "../../../environments/environment";
+import { LinkBean } from '../../../beans/linkBean';
+import {environment} from "../../../../environments/environment";
 
 /** Utils */
-import * as pathUtils from '../../utils/path.utils';
+import * as pathUtils from '../../../utils/path.utils';
 
 
 declare var $:any;

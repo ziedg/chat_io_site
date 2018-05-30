@@ -5,7 +5,7 @@ import { Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 /* conf */
-import {AppSettings} from '../../../../conf/app-settings';
+import {AppSettings} from '../../../../shared/conf/app-settings';
 
 /* services */
 import {LoginService} from '../../../../login/services/loginService';
@@ -15,7 +15,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {User} from '../../../../beans/user';
 
 /* beans */
-import {NotFound} from "../../../notFound/not-found";
+import {NotFound} from "../../../components/notFound/not-found";
 import {environment} from "../../../../../environments/environment";
 
 /** Utils */

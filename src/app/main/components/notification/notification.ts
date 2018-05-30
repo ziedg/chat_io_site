@@ -5,18 +5,18 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 /* conf */
-import {AppSettings} from '../../conf/app-settings';
+import {AppSettings} from '../../../shared/conf/app-settings';
 import {TranslateService} from '@ngx-translate/core';
 
 /* services */
-import {LoginService} from '../../login/services/loginService';
-import {DateService} from "../../service/dateService";
-import {NotificationBean} from "../../beans/notification-bean";
-import {User} from "../../beans/user";
-import {environment} from "../../../environments/environment";
+import {LoginService} from '../../../login/services/loginService';
+import {DateService} from "../../services/dateService";
+import {NotificationBean} from "../../../beans/notification-bean";
+import {User} from "../../../beans/user";
+import {environment} from "../../../../environments/environment";
 
 /** Utils */
-import * as pathUtils from '../../utils/path.utils';
+import * as pathUtils from '../../../utils/path.utils';
 
 @Component({
     selector: 'notification',

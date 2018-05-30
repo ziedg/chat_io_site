@@ -3,40 +3,40 @@ import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {FormGroup, Validators, FormControl} from '@angular/forms';
 import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
-import {Comment} from '../comment/comment';
-import {LoadingBar} from '../loading/loading-bar';
+import {Comment} from '../../../main/components/comment/comment';
+import {LoadingBar} from '../../../main/components/loading/loading-bar';
 import {Injectable} from '@angular/core';
 import { Ng2ImgMaxService } from 'ng2-img-max';
 import 'rxjs/add/operator/map';
 
 /* conf */
-import {AppSettings} from '../conf/app-settings';
+import {AppSettings} from '../../../shared/conf/app-settings';
 
 /* services */
-import {LoginService} from '../login/services/loginService';
-import {DateService} from '../service/dateService';
-import {EmojiService} from "../service/emojiService";
-import {LinkView} from "../service/linkView";
-import {PostService} from "../service/postService";
-import {SeoService} from '../service/seo-service';
+import {LoginService} from '../../../login/services/loginService';
+import {DateService} from '../../services/dateService';
+import {EmojiService} from "../../services/emojiService";
+import {LinkView} from "../../services/linkView";
+import {PostService} from "../../services/postService";
+import {SeoService} from '../../services/seo-service';
 import {TranslateService} from '@ngx-translate/core';
 
 /** Utils */
-import * as pathUtils from '../utils/path.utils';
+import * as pathUtils from '../../../utils/path.utils';
 
 
 /* beans */
-import {PublicationBean} from '../beans/publication-bean';
-import {DiffDateBean} from '../beans/diff-date-bean';
-import {CommentBean} from '../beans/comment-bean';
+import {PublicationBean} from '../../../beans/publication-bean';
+import {DiffDateBean} from '../../../beans/diff-date-bean';
+import {CommentBean} from '../../../beans/comment-bean';
 
 /* beans  */
-import {User} from '../beans/user';
-import {EmojiListBean} from "../beans/emoji-list-bean";
-import {LinkBean} from '../beans/linkBean';
+import {User} from '../../../beans/user';
+import {EmojiListBean} from "../../../beans/emoji-list-bean";
+import {LinkBean} from '../../../beans/linkBean';
 
 import {timer} from "rxjs/observable/timer";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../../environments/environment";
 
 declare var jQuery: any;
 declare var swal: any;

@@ -5,7 +5,7 @@ import { Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 /* conf */
-import {AppSettings} from '../../../../conf/app-settings';
+import {AppSettings} from '../../../../shared/conf/app-settings';
 
 /* services */
 import {LoginService} from '../../../../login/services/loginService';
@@ -18,7 +18,7 @@ import {User} from '../../../../beans/user';
 import * as pathUtils from '../../../../utils/path.utils';
 
 /* beans */
-import {NotFound} from "../../../notFound/not-found";
+import {NotFound} from "../../../components/notFound/not-found";
 import {environment} from "../../../../../environments/environment";
 
 declare var jQuery:any;

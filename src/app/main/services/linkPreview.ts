@@ -5,11 +5,11 @@ import 'rxjs/add/operator/map';
 
 
 /* conf */
-import { AppSettings } from '../conf/app-settings';
-import { LinkView } from "../service/linkView";
+import { AppSettings } from '../../shared/conf/app-settings';
+import { LinkView } from "./linkView";
 /*bean*/
-import { LinkBean } from '../beans/linkBean';
-import {environment} from "../../environments/environment";
+import { LinkBean } from '../../beans/linkBean';
+import {environment} from "../../../environments/environment";
 @Injectable()
 export class LinkPreview {
     public linkToPreview: LinkBean = new LinkBean();

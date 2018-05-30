@@ -10,7 +10,7 @@ import {AboutUs} from './about-us/aboutUs'
 import {Team} from './team/team'
 
 /* conf */
-import {AppSettings} from '../../conf/app-settings';
+import {AppSettings} from '../../shared/conf/app-settings';
 
 /* services */
 import {LoginService} from '../../login/services/loginService';
@@ -19,7 +19,7 @@ import {LoginService} from '../../login/services/loginService';
 import {User} from '../../beans/user';
 
 /* beans */
-import {NotFound} from "../../main/notFound/not-found";
+import {NotFound} from "../../main/components/notFound/not-found";
 import {Title} from "@angular/platform-browser";
 
 declare var jQuery: any;

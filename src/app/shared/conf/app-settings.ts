@@ -1,6 +1,6 @@
 import { Headers, RequestOptions } from '@angular/http';
 
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 
 export class AppSettings {
 
