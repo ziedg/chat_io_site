@@ -1,13 +1,27 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, ChangeDetectorRef} from '@angular/core';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import { Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import {TopBlagueursAndDecov} from '../topBlagueursAndDecov/topBlagueursAndDecov';
 
-import { environment } from '../../../../environments/environment';
-import { PublicationBean } from '../../../beans/publication-bean';
-import { User } from '../../../beans/user';
-import { LoginService } from '../../../login/services/loginService';
-import { AppSettings } from '../../../shared/conf/app-settings';
+import {Publication } from '../publication/publication';
+import {Comment} from '../comment/comment';
+
+/* conf */
+import {AppSettings} from '../../../shared/conf/app-settings';
+
+/* services */
+import {LoginService} from '../../../login/services/loginService';
+
+/* user  */
+import {User} from '../../../beans/user';
+
+/* beans */
+import {PublicationBean} from '../../../beans/publication-bean';
+import {NotFound} from "../notFound/not-found";
+import {Title} from "@angular/platform-browser";
+
+import {environment} from "../../../../environments/environment";
 
 declare var jQuery: any;
 
