@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { Http } from '@angular/http';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Router } from '@angular/router';
-
-import { LoginService } from '../login/services/loginService';
+import {LoginService} from "../login/services/loginService";
+import {Component} from "@angular/core";
 
 @Component({
   moduleId: module.id,
