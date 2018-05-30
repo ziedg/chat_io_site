@@ -116,7 +116,7 @@
 	      </div>
     </div>
 
-
+<!--Mobile-->
     <div class="content" *ngIf="publicationBean.isShared">
 
       <article class="publication bordered shared-publication">
@@ -138,6 +138,7 @@
           <img *ngIf="publicationBean.publPictureLink" src="{{imageBaseUrl + publicationBean.publPictureLink}}">
 
           <div class="youtube-preview-publication"
+
                *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
             <iframe width="560" height="400" [src]="url" frameborder="0">
             </iframe>
