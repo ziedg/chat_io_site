@@ -1,26 +1,11 @@
-import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
-import { Router} from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { Http } from '@angular/http';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 
-/* parameters components */
-import {Cgu} from './cgu/cgu'
-import {AboutUs} from './about-us/aboutUs'
-import {Team} from './team/team'
-
-/* conf */
-import {AppSettings} from '../../conf/app-settings';
-
-/* services */
-import {LoginService} from '../../login/services/loginService';
-
-/* user  */
-import {User} from '../../beans/user';
-
-/* beans */
-import {NotFound} from "../../main/notFound/not-found";
-import {Title} from "@angular/platform-browser";
+import { User } from '../../beans/user';
+import { LoginService } from '../../login/services/loginService';
 
 declare var jQuery: any;
 

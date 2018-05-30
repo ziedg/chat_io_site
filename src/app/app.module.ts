@@ -1,50 +1,41 @@
-import { APP_BASE_HREF, CommonModule, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ChangeDetectorRef, Injector, NgModule, Provider } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Comment } from './comment/comment';
-import { LoadingBar } from './loading/loading-bar';
 import { LoginService } from './login/services/loginService';
 import { ResetPasswordService } from './login/services/reset-password.service';
 import { Logout } from './logout/logout';
-import { NotFoundPage } from './main/404/404';
-import { Home } from './main/home/home';
-import { Main } from './main/main';
-import { NotFound } from './main/notFound/not-found';
-import { Notification } from './main/notification/notification';
-import { Post } from './main/post/post';
-import { Profile } from './main/profile/profile';
-import { SuggestionsComponent } from './main/suggestions/suggestions.component';
-import { ContenteditableModel } from './publication/contenteditable-model';
-import { Publication } from './publication/publication';
-import { DateService } from './service/dateService';
-import { EmojiService } from './service/emojiService';
-import { GlobalService } from './service/globalService';
-import { GoogleRecaptchaDirective } from './service/googlerecaptcha';
-import { LinkPreview } from './service/linkPreview';
-import { LinkView } from './service/linkView';
-import { PostService } from './service/postService';
-import { RecentRechService } from './service/recentRechService';
-import { SeoService } from './service/seo-service';
+import { MainModule } from './main/main.module';
+import { DateService } from './main/services/dateService';
+import { EmojiService } from './main/services/emojiService';
+import { GlobalService } from './main/services/globalService';
+import { LinkPreview } from './main/services/linkPreview';
+import { LinkView } from './main/services/linkView';
+import { PostService } from './main/services/postService';
+import { RecentRechService } from './main/services/recentRechService';
+import { SeoService } from './main/services/seo-service';
+import { GoogleRecaptchaDirective } from './directives/googlerecaptcha';
 import { FakeComponent } from './shared/fake.component';
-import { TopBlagueursAndDecov } from './topBlagueursAndDecov/topBlagueursAndDecov';
 import { httpFactory } from './utils/factories/http.factory';
 
 /** Factories */
 @NgModule({
-    imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
-      ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule,Ng2ImgMaxModule,
+    imports: [
+      BrowserModule,
+      HttpModule,
+      RouterModule,
+      Ng2ImgMaxModule,
       HttpClientModule,
+      AppRoutingModule,
+      MainModule,
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
@@ -52,9 +43,12 @@ import { httpFactory } from './utils/factories/http.factory';
           deps: [HttpClient]
         }
       })],       // module dependencies
-    declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
-        TopBlagueursAndDecov, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent],   // components and directives
+    declarations: 
+    [
+      AppComponent, 
+      Logout ,
+      GoogleRecaptchaDirective,
+      FakeComponent],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,

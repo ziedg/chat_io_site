@@ -1,25 +1,18 @@
-import {Component} from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
-import {FormGroup, Validators, FormControl} from '@angular/forms';
-import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
-import {TranslateService} from '@ngx-translate/core';
 
-/* conf */
-import {AppSettings} from '../../../conf/app-settings';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Http, Response } from '@angular/http';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
-/* services */
-import {LoginService} from '../../services/loginService';
-import{emailValidator} from '../../../utils/validationService'
-
-/* beans */
-import {User} from '../../../beans/user';
-import {Title} from "@angular/platform-browser";
-import {SocialUser} from "../../../beans/social-user";
-import {environment} from "../../../../environments/environment";
-
-/** Utils */
+import { environment } from '../../../../environments/environment';
+import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
+import { emailValidator } from '../../../utils/validationService';
+import { LoginService } from '../../services/loginService';
+
 
 @Component({
   moduleId: module.id,
