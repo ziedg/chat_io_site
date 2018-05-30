@@ -1,6 +1,5 @@
-import { Injectable }     from '@angular/core';
-/* beans */
-/* class Recent Users Rech */
+import { Injectable } from '@angular/core';
+
 class RecentRechBeans{
     public _id : string ;
     public firstName : string;
