@@ -8,7 +8,7 @@ export const environment = {
 
 
  // SERVER_URL: 'http://localhost:3002/',
-  //IMAGE_BASE_URL: 'https://speegar.com/images/'
+// IMAGE_BASE_URL: 'https://speegar.com/images/'
 
   //INTEGRATION SERVERS
   SERVER_URL: 'https://integration.speegar.com:3005/',

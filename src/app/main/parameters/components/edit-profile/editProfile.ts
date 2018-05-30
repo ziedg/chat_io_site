@@ -5,21 +5,21 @@ import { Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 /* conf */
-import {AppSettings} from '../../../conf/app-settings';
+import {AppSettings} from '../../../../conf/app-settings';
 
 /* services */
-import {LoginService} from '../../../service/loginService';
+import {LoginService} from '../../../../login/services/loginService';
 import {TranslateService} from '@ngx-translate/core';
 
 /* user  */
-import {User} from '../../../beans/user';
+import {User} from '../../../../beans/user';
 
 /* beans */
-import {NotFound} from "../../notFound/not-found";
-import {environment} from "../../../../environments/environment";
+import {NotFound} from "../../../notFound/not-found";
+import {environment} from "../../../../../environments/environment";
 
 /** Utils */
-import * as pathUtils from '../../../utils/path.utils';
+import * as pathUtils from '../../../../utils/path.utils';
 
 declare var jQuery:any;
 declare var swal:any;

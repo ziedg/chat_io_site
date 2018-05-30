@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 import {AppSettings} from '../conf/app-settings';
 
 /* services */
-import {LoginService} from '../service/loginService';
+import {LoginService} from '../login/services/loginService';
 import {LinkView} from "../service/linkView";
 
 /* user  */

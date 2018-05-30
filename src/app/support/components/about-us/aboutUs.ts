@@ -6,12 +6,11 @@ import { ActivatedRoute } from '@angular/router';
 
 
 /* conf */
-import {AppSettings} from '../../conf/app-settings';
+import {AppSettings} from '../../../conf/app-settings';
 
 /* beans */
-import {NotFound} from "../../main/notFound/not-found";
+import {NotFound} from "../../../main/notFound/not-found";
 import {Title} from "@angular/platform-browser";
-
 
 
 declare var jQuery: any;
@@ -19,15 +18,15 @@ declare var jQuery: any;
 
 @Component({
   moduleId: module.id,
-    selector: 'cgu',
-    templateUrl: 'cgu.html',
+    selector: 'about-us',
+    templateUrl: 'aboutUs.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class Cgu {
+export class AboutUs {
 
     constructor(private title:Title,private route: ActivatedRoute,private http:Http, private router:Router) {
-        this.title.setTitle("Conditions générales d'utilisation");
+         this.title.setTitle("A propos de nous");
 
     }
 

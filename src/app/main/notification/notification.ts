@@ -9,7 +9,7 @@ import {AppSettings} from '../../conf/app-settings';
 import {TranslateService} from '@ngx-translate/core';
 
 /* services */
-import {LoginService} from '../../service/loginService';
+import {LoginService} from '../../login/services/loginService';
 import {DateService} from "../../service/dateService";
 import {NotificationBean} from "../../beans/notification-bean";
 import {User} from "../../beans/user";

@@ -1,41 +1,22 @@
-import { NgModule }             from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {Main} from './main/main';
-import {Login} from './login/login';
+import { Logout } from './logout/logout';
+import { NotFoundPage } from './main/404/404';
+import { Home } from './main/home/home';
+import { Main } from './main/main';
+import { Notification } from './main/notification/notification';
+import { Post } from './main/post/post';
+import { Profile } from './main/profile/profile';
+import { SuggestionsComponent } from './main/suggestions/suggestions.component';
+import { FakeComponent } from './shared/fake.component';
 
 /* Main components  */
-import {Profile} from './main/profile/profile';
-import {Parameters} from './main/parameters/parameters';
-import {Home} from './main/home/home';
-import {Notification} from './main/notification/notification';
-import {Support} from './support/support';
-
 /* parameters components */
-import {EditProfile} from './main/parameters/edit-profile/editProfile';
-import {ChangePassword} from './main/parameters/change-password/changePassword';
-
 
 /* login components  */
-import {Signin} from './login/signin/signin';
-import {Signup} from './login/signup/signup';
-
-
-import {FacebookLogin} from './login/facebookLogin/facebookLogin';
-import {Logout} from "./logout/logout";
-import {Post} from "./main/post/post";
-import {NotFoundPage} from "./main/404/404";
 
 /* support components */
-import {Cgu} from './support/cgu/cgu';
-import {AboutUs} from './support/about-us/aboutUs'
-import {Team} from './support/team/team'
-import {ForgetPasswordComponent} from "./login/forget-password/forget-password.component";
-import {ResetPasswordComponent} from "./login/reset-password/reset-password.component";
-import {FakeComponent} from "./shared/fake.component";
-
-import { SuggestionsComponent } from "./main/suggestions/suggestions.component"
-
 export const routes: Routes = [
     {path: 'redirect', component: FakeComponent},
     {
@@ -44,19 +25,8 @@ export const routes: Routes = [
         pathMatch: 'full'
         //terminal: true
     },
-    {
-        path: 'login',
-        component: Login,
-        children: [
-            {path: '', redirectTo: 'sign-in', pathMatch: 'full'},
-            {path: 'sign-in', component: Signin},
-            {path: 'sign-up', component: Signup},
-            {path: 'forget-password', component: ForgetPasswordComponent},
-            {path: 'reset-password/:code', component: ResetPasswordComponent},
-            {path: 'facebook-login', component: FacebookLogin},
-            {path: '**', redirectTo: 'sign-in'}
-        ]
-    },
+    { path: 'login', loadChildren: './login/login.module#LoginModule'},
+
     {
         path: 'main',
         component: Main,
@@ -65,12 +35,7 @@ export const routes: Routes = [
             {path: 'home', component: Home },
             {path: 'profile/:id', component: Profile},
             {
-                path: 'parameters', component: Parameters,
-                children: [
-                    {path: '', redirectTo: 'edit-profile', pathMatch: 'full'},
-                    {path: 'edit-profile', component: EditProfile},
-                    {path: 'change-password', component: ChangePassword}
-                ]
+                path: 'parameters', loadChildren: './main/parameters/parameters.module#ProfileParametersModule'
             },
 						{ path: 'suggestions', component: SuggestionsComponent },
             {path: 'post/:id', component: Post},
@@ -79,19 +44,15 @@ export const routes: Routes = [
             {path: '**', redirectTo: '404'},
         ]
     },
-    {
+     {
         path: 'logout',
         component: Logout
-    },
+    },   
+    
     {
         path: 'support',
-        component: Support,
-        children: [
-            {path: '', redirectTo: 'about-us', pathMatch: 'full'},
-            {path: 'about-us', component: AboutUs},
-            {path: 'team', component: Team},
-            {path: 'cgu', component: Cgu}
-        ]
+        loadChildren: './support/support.module#SupportModule'
+       
     },
     {
         path: '**',

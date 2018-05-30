@@ -11,7 +11,7 @@ import {Comment} from '../../comment/comment';
 import {AppSettings} from '../../conf/app-settings';
 
 /* services */
-import {LoginService} from '../../service/loginService';
+import {LoginService} from '../../login/services/loginService';
 
 /* user  */
 import {User} from '../../beans/user';

@@ -14,12 +14,12 @@ import * as _ from "lodash";
 
 /* Main components */
 import { Home } from "./home/home";
-import { Parameters } from "./parameters/parameters";
+import { Parameters } from "./parameters/components/parameters";
 import { Profile } from "./profile/profile";
 import { Notification } from "./notification/notification";
 
 /* services */
-import { LoginService } from "../service/loginService";
+import { LoginService } from "../login/services/loginService";
 import {TranslateService} from '@ngx-translate/core';
 
 /** Utils */

@@ -13,7 +13,7 @@ import { Comment } from '../../comment/comment';
 import { AppSettings } from '../../conf/app-settings';
 
 /* services */
-import { LoginService } from '../../service/loginService';
+import { LoginService } from '../../login/services/loginService';
 import { LinkView } from "../../service/linkView";
 import { LinkPreview } from "../../service/linkPreview";
 import {TranslateService} from '@ngx-translate/core';

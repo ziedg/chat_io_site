@@ -6,10 +6,10 @@ import { ActivatedRoute } from '@angular/router';
 
 
 /* conf */
-import {AppSettings} from '../../conf/app-settings';
+import {AppSettings} from '../../../conf/app-settings';
 
 /* beans */
-import {NotFound} from "../../main/notFound/not-found";
+import {NotFound} from "../../../main/notFound/not-found";
 import {Title} from "@angular/platform-browser";
 
 
