@@ -1,5 +1,5 @@
-import { Injectable }     from '@angular/core';
-/* beans */
+import { Injectable } from '@angular/core';
+
 /* class Recent Users Rech */
 class RecentRechBeans{
     public _id : string ;

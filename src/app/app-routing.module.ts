@@ -11,12 +11,7 @@ import { Profile } from './main/components/profile/profile';
 import { SuggestionsComponent } from './main/components/suggestions/suggestions.component';
 import { FakeComponent } from './shared/fake.component';
 
-/* Main components  */
-/* parameters components */
 
-/* login components  */
-
-/* support components */
 export const routes: Routes = [
     {path: 'redirect', component: FakeComponent},
     {
