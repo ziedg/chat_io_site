@@ -4612,6 +4612,7 @@ change-password .input-param input {
 
 .publication .content {
   margin-top: 14px;
+  margin-bottom: 14px;
 }
 
 @media(min-width:830px){
@@ -4680,8 +4681,6 @@ img[src="undefined"] {
   transition: 0.3s;
 }
 
-.myImg:hover {opacity: 0.7;}
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -4719,33 +4718,16 @@ img[src="undefined"] {
   height: 150px;
 }
 
-/* Add Animation - Zoom in the Modal */
-.modal-content, #caption {
-  -webkit-animation-name: zoom;
-  -webkit-animation-duration: 0.6s;
-  animation-name: zoom;
-  animation-duration: 0.6s;
-}
-
-@-webkit-keyframes zoom {
-  from {-webkit-transform:scale(0)}
-  to {-webkit-transform:scale(1)}
-}
-
-@keyframes zoom {
-  from {transform:scale(0)}
-  to {transform:scale(1)}
-}
 
 /* The Close Button */
 .close-button {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  opacity:0;
 }
 
 .close-button:hover,
