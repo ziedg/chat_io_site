@@ -976,12 +976,12 @@ section.widget {
 }
 @media(max-width:830px){
   #container{
-    padding-right:0px;
-    padding-left:0px;
     margin-right:auto;
     margin-left:auto;
   }
 }
+
+
 
 .header-segement {
   position: relative;
@@ -1385,6 +1385,11 @@ section.widget {
     padding: 60px 0 !important;
     width: calc(120px + 10px) !important;
   }
+
+  #container .sub-container{
+    padding-left:0;
+    padding-right: 0;
+  }
 }
 .dropdown header {
   display: none;
@@ -1714,10 +1719,10 @@ textarea:focus {
 .facebook-preview,
 .youtube-preview-publication,
 .facebook-preview-publication {
-  
+
   margin: 0px;
   text-align: center;
-  
+
 }
 
 .youtube-preview iframe,
@@ -2068,7 +2073,7 @@ top-blagueurs-decov .user .user-img,
   color: #666;
   margin-top:-7px;
   margin-left:14px;
-  
+
 }
 .comment-content {
   width: 100%;
