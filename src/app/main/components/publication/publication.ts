@@ -297,7 +297,7 @@ export class Publication {
       else if (this.publicationBean.publfacebookLink) {
         this.linkFb = "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +
         this.publicationBean.publfacebookLink +
-        "%2F&show_text=0&width=560";
+        "%2F&show_text=0&height=580";
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkFb);
       }
       else {

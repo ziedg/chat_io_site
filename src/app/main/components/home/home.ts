@@ -348,9 +348,11 @@ export class Home {
       this.youtubeLink = text;
       this.updateYoutubeFacebook();
 	      return 1;
-	    }
+      }
+      
 	    if (
-	      text.search("web.facebook.com") >= 0 ) {
+	      text.search("web.facebook.com") >= 0 || text.search("www.facebook.com") > 0 ||
+        text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0 ) {
 	      this.facebookInput = true;
 	      jQuery(".yt-in-url").val(text);
 	      this.changeDetector.markForCheck();
@@ -368,7 +370,8 @@ export class Home {
       this.facebookLink = null;
       
 			this.uploadedPicture = null;
-			jQuery(".youtube-preview").html("");
+      jQuery(".youtube-preview").html("");
+      jQuery(".facebook-preview").html("");
 			this.link.isSet = false;
 			return 1;
 		}
@@ -397,6 +400,7 @@ export class Home {
     this.facebookLink = null;
     jQuery(".yt-in-url").val("");
     jQuery(".youtube-preview").html("");
+    jQuery(".facebook-preview").html("");
     this.loadingPublish = false;
     jQuery(".textarea-publish").html("");
     this.closeLinkAPI();
@@ -581,6 +585,7 @@ export class Home {
 
           previewFile(this.uploadedPicture);
           jQuery(".youtube-preview").html("");
+          jQuery(".facebook-preview").html("");
           //this.form.controls.publicationYoutubeLink.updateValue('');
           this.closeLinkAPI();
           return this.uploadedPicture;
@@ -606,6 +611,7 @@ export class Home {
       this.uploadedPicture = inputValue.files[0];
       previewFile(this.uploadedPicture);
       jQuery(".youtube-preview").html("");
+      jQuery(".facebook-preview").html("");
     } else {
       this.uploadedPicture = null;
     }
@@ -613,13 +619,13 @@ export class Home {
 
   getIdFacebookVideo(facebookLink): string {
      
-    var myRegexp = /\/\d+\//;
-    var match = facebookLink.match(myRegexp);
-    if (match) {
-      return match[0].slice(1,-1);
+      var myRegexp = /(\/(videos\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
+      var match = facebookLink.match(myRegexp);
+      if (match) {
+      return match[match.length-1];
     }
-  
-  
+    
+    
 }
 
 getPageFacebookVideo(videoLink): string {
@@ -654,6 +660,7 @@ getPageFacebookVideo(videoLink): string {
       "Votre lien Youtube ou Facebook est invalide! Veuillez mettre un lien Valide.";
     this.errorTimed();
     jQuery(".youtube-preview").html("");
+    jQuery(".facebook-preview").html("");
   }
 
   updateYoutubeFacebook() {
@@ -664,6 +671,7 @@ getPageFacebookVideo(videoLink): string {
     if(videoLink.indexOf("youtube.com") > 0 || videoLink.indexOf("youtu.be") > 0){
        videoId = this.getIdYoutubeVideoId(videoLink);
        try {
+        jQuery(".facebook-preview").html("");
         jQuery(".youtube-preview").html(
           '<iframe width="560" height="315" src="https://www.youtube.com/embed/' +
             videoId +
@@ -677,21 +685,23 @@ getPageFacebookVideo(videoLink): string {
         this.displayLinkError();
       }
     }
-    else if (videoLink.indexOf("web.facebook.com") > 0){
+    else if (videoLink.indexOf("web.facebook.com") > 0 || videoLink.indexOf("www.facebook.com") > 0 ||
+    videoLink.indexOf("m.facebook.com") > 0 || videoLink.indexOf("mobile.facebook.com") > 0 ){
        videoId = this.getIdFacebookVideo(videoLink);
        var videoPage = this.getPageFacebookVideo(videoLink);
        try {
-        
-  
-        jQuery(".youtube-preview").html(
+        jQuery(".youtube-preview").html("");
+        jQuery(".facebook-preview").html(
           '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
           videoId +
-          '%2F&show_text=0&width=560" width="560" height="360" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
+          '%2F&show_text=0&height=580" width="560" height="640" style="border:none;overflow:visible" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="false"></iframe>'
         );
+        
         this.uploadedPicture = null;
         this.closeLinkAPI();
         this.facebookLink = videoId;
         jQuery("#preview-image").hide();
+
       } catch (err) {
         this.displayLinkError();
       }
@@ -763,7 +773,7 @@ getPageFacebookVideo(videoLink): string {
 	          response => {
 	            if (response.results.success) {
 	              this.resetPublishPicture();
-	              jQuery(".youtube-preview").html("");
+	              jQuery(".video-preview").html("");
 	              //this.form.controls.publicationYoutubeLink.updateValue('');
 	              this.link.url = linkURL.substring(0, linkURL.length - 6);
 	              this.link.title = response.results.data.ogTitle;

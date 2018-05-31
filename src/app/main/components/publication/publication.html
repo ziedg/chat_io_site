@@ -104,19 +104,22 @@
       </div>
       <img *ngIf="publicationBean.publPictureLink"
            src="{{imageBaseUrl+ publicationBean.publPictureLink}}">
-      <div class="youtube-preview-publication"
+      
+      
+           <div class="facebook-preview-publication"
+           *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
+        <iframe width="560" height="640" [src]="url" frameborder="0" allowfullscreen>
+        </iframe>
+          </div>
+           <div class="youtube-preview-publication"
            *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
         <iframe width="560" height="400" [src]="url" frameborder="0" allowfullscreen>
         </iframe>
       </div>
-      <div class="youtube-preview-publication"
-	           *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
-	        <iframe width="560" height="400" [src]="url" frameborder="0" allowfullscreen>
-	        </iframe>
-	      </div>
+      
     </div>
 
-<!--Mobile-->
+
     <div class="content" *ngIf="publicationBean.isShared">
 
       <article class="publication bordered shared-publication">
@@ -137,17 +140,19 @@
             </span>
           <img *ngIf="publicationBean.publPictureLink" src="{{imageBaseUrl + publicationBean.publPictureLink}}">
 
+          <div class="facebook-preview-publication"
+	           *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
+	        <iframe width="560" height="640" [src]="url" frameborder="0" allowfullscreen>
+	        </iframe>
+        </div>
+        
           <div class="youtube-preview-publication"
 
                *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
             <iframe width="560" height="400" [src]="url" frameborder="0">
             </iframe>
           </div>
-          <div class="youtube-preview-publication"
-	           *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
-	        <iframe width="560" height="400" [src]="url" frameborder="0" allowfullscreen>
-	        </iframe>
-	      </div>
+          
         </div>
       </article>
 

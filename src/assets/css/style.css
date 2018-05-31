@@ -1711,17 +1711,40 @@ textarea:focus {
   }
 }
 .youtube-preview,
-.youtube-preview-publication {
+.facebook-preview,
+.youtube-preview-publication,
+.facebook-preview-publication {
+  
   margin: 0px;
   text-align: center;
+  
 }
+
 .youtube-preview iframe,
 .youtube-preview-publication iframe {
   width: 100%;
   margin: 0px;
   display: inline-block;
 }
+.facebook-preview iframe
+.facebook-preview-publication iframe {
+  width: 70%;
+  margin: 0px;
+  display: inline-block;
+}
+
+
 @media (max-width: 600px) {
+  .facebook-preview iframe,
+  .facebook-preview-publication iframe {
+    width: 100%;
+    margin: 0px;
+    height: 480px;
+    display: inline-block;
+    transition: 1s ease-in-out;
+    -webkit-transition: 1s ease-in-out;
+  }
+
   .youtube-preview iframe,
   .youtube-preview-publication iframe {
     width: 100%;
@@ -4580,6 +4603,9 @@ change-password .input-param input {
 }
 
 .youtube-preview {
+  width: 100%;
+}
+.facebook-preview {
   width: 100%;
 }
 
