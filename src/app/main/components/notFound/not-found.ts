@@ -1,9 +1,6 @@
-import {Component, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
-import {Title} from "@angular/platform-browser";
-
-/* services */
-import {TranslateService} from '@ngx-translate/core';
-
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   moduleId: module.id,

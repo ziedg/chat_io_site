@@ -1,21 +1,14 @@
-import {Component} from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
-import {Validators, FormControl, FormGroup} from '@angular/forms';
-import {Router, ActivatedRoute, Params} from '@angular/router';
 import 'rxjs/add/operator/map';
-import {TranslateService} from '@ngx-translate/core';
 
-/* conf */
-import {AppSettings} from '../../../shared/conf/app-settings';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Http } from '@angular/http';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
-/* services */
-import {LoginService} from '../../services/loginService';
-
-import {Title} from "@angular/platform-browser";
-import {ResetPasswordService} from "../../services/reset-password.service";
-
-/** Utils */
-import * as pathUtils from '../../../utils/path.utils';
+import { LoginService } from '../../services/loginService';
+import { ResetPasswordService } from '../../services/reset-password.service';
 
 @Component({
   moduleId: module.id,

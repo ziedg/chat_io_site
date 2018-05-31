@@ -1,33 +1,18 @@
-import { Location } from "@angular/common";
-import "rxjs/add/operator/map";
-import {TranslateService} from '@ngx-translate/core';
+import 'rxjs/add/operator/map';
 
-/* Login components */
-import { Signin } from "./signin/signin";
-import { Signup } from "./signup/signup";
-import { FacebookLogin } from "./facebookLogin/facebookLogin";
+import { Location } from '@angular/common';
+import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Http, Response } from '@angular/http';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
-import {
-  Component,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy,
-  NgZone
-} from "@angular/core";
-import { Http, Response, Headers, RequestOptions } from "@angular/http";
-import { FormGroup, Validators, FormControl } from "@angular/forms";
-import { Router } from "@angular/router";
-import { ActivatedRoute } from "@angular/router";
-/* conf */
-import { AppSettings } from "../../shared/conf/app-settings";
-
-/* services */
-import { LoginService } from "../services/loginService";
-
-/* beans */
-import { SocialUser } from "../../beans/social-user";
-import { User } from "../../beans/user";
-import { Title } from "@angular/platform-browser";
-import { environment } from "../../../environments/environment";
+import { environment } from '../../../environments/environment';
+import { SocialUser } from '../../beans/social-user';
+import { User } from '../../beans/user';
+import { AppSettings } from '../../shared/conf/app-settings';
+import { LoginService } from '../services/loginService';
 
 declare var FB: any;
 declare var window: any;

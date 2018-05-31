@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
 import './operators';
-import {TranslateService} from '@ngx-translate/core';
+
+import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var FB:any
 declare global {

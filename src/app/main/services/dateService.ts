@@ -1,6 +1,7 @@
-import { Injectable }     from '@angular/core';
-import {DiffDateBean} from "../../beans/diff-date-bean";
-/* beans */
+import { Injectable } from '@angular/core';
+
+import { DiffDateBean } from '../../beans/diff-date-bean';
+
 
 @Injectable()
 export class DateService {
