@@ -1,6 +1,4 @@
-import {Component} from '@angular/core';
-import {NotFound} from "../notFound/not-found";
-import { Title }  from '@angular/platform-browser';
+import { Component } from '@angular/core';
 
 
 @Component({

@@ -976,12 +976,12 @@ section.widget {
 }
 @media(max-width:830px){
   #container{
-    padding-right:0px;
-    padding-left:0px;
     margin-right:auto;
     margin-left:auto;
   }
 }
+
+
 
 .header-segement {
   position: relative;
@@ -1385,6 +1385,11 @@ section.widget {
     padding: 60px 0 !important;
     width: calc(120px + 10px) !important;
   }
+
+  #container .sub-container{
+    padding-left:0;
+    padding-right: 0;
+  }
 }
 .dropdown header {
   display: none;
@@ -1711,17 +1716,40 @@ textarea:focus {
   }
 }
 .youtube-preview,
-.youtube-preview-publication {
+.facebook-preview,
+.youtube-preview-publication,
+.facebook-preview-publication {
+
   margin: 0px;
   text-align: center;
+
 }
+
 .youtube-preview iframe,
 .youtube-preview-publication iframe {
   width: 100%;
   margin: 0px;
   display: inline-block;
 }
+.facebook-preview iframe
+.facebook-preview-publication iframe {
+  width: 70%;
+  margin: 0px;
+  display: inline-block;
+}
+
+
 @media (max-width: 600px) {
+  .facebook-preview iframe,
+  .facebook-preview-publication iframe {
+    width: 100%;
+    margin: 0px;
+    height: 480px;
+    display: inline-block;
+    transition: 1s ease-in-out;
+    -webkit-transition: 1s ease-in-out;
+  }
+
   .youtube-preview iframe,
   .youtube-preview-publication iframe {
     width: 100%;
@@ -2045,7 +2073,7 @@ top-blagueurs-decov .user .user-img,
   color: #666;
   margin-top:-7px;
   margin-left:14px;
-  
+
 }
 .comment-content {
   width: 100%;
@@ -4583,9 +4611,13 @@ change-password .input-param input {
 .youtube-preview {
   width: 100%;
 }
+.facebook-preview {
+  width: 100%;
+}
 
 .publication .content {
   margin-top: 14px;
+  margin-bottom: 14px;
 }
 
 @media(min-width:830px){
@@ -4654,8 +4686,6 @@ img[src="undefined"] {
   transition: 0.3s;
 }
 
-.myImg:hover {opacity: 0.7;}
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -4693,33 +4723,16 @@ img[src="undefined"] {
   height: 150px;
 }
 
-/* Add Animation - Zoom in the Modal */
-.modal-content, #caption {
-  -webkit-animation-name: zoom;
-  -webkit-animation-duration: 0.6s;
-  animation-name: zoom;
-  animation-duration: 0.6s;
-}
-
-@-webkit-keyframes zoom {
-  from {-webkit-transform:scale(0)}
-  to {-webkit-transform:scale(1)}
-}
-
-@keyframes zoom {
-  from {transform:scale(0)}
-  to {transform:scale(1)}
-}
 
 /* The Close Button */
 .close-button {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  opacity:0;
 }
 
 .close-button:hover,

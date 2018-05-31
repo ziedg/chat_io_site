@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Support } from './components/support';
+
 import { AboutUs } from './components/about-us/aboutUs';
-import { Team } from './components/team/team';
 import { Cgu } from './components/cgu/cgu';
+import { Support } from './components/support';
+import { Team } from './components/team/team';
 
 const supportRoutes: Routes = [
     {

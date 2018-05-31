@@ -1,13 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-/* conf */
-import {AppSettings} from '../../shared/conf/app-settings';
-
-/** Utils */
-import * as pathUtils from '../../utils/path.utils';
-
 import 'rxjs/add/operator/toPromise';
-import {environment} from "../../../environments/environment";
+
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+
+import { environment } from '../../../environments/environment';
+import { AppSettings } from '../../shared/conf/app-settings';
+import * as pathUtils from '../../utils/path.utils';
 
 @Injectable()
 export class ResetPasswordService {

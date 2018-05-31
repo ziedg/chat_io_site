@@ -1,6 +1,4 @@
-import { Injectable }     from '@angular/core';
-import {DiffDateBean} from "../../beans/diff-date-bean";
-/* beans */
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LoginWithSpeegar {

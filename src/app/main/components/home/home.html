@@ -1,6 +1,6 @@
 <div *ngIf="user" class="container" id="container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)" (touchmove)="onTouchMove($event)">
   <div class="row">
-    <div *ngIf="user" class="col-md-8 col-sm-7 col-xs-12">
+    <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 col-md-offset-2 sub-container">
       <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri">
         <h3>{{ 'home_welcome' | translate }}</h3>
         {{ 'home_welcome_text_first_part' | translate }}
@@ -90,9 +90,14 @@
                   -->
                 </div>
               </div>
+              <div class="facebook-preview">
+
+              </div>
               <div class="youtube-preview">
 
               </div>
+
+
             </div>
 
           </div>
@@ -218,7 +223,7 @@
 
       </section>
     </div>
-    <div *ngIf="user" class="col-md-4 col-sm-5 hidden-xs side-home">
+    <div *ngIf="user" class="col-md-3 col-sm-5 hidden-xs side-home">
       <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
     </div>
   </div>

@@ -12,32 +12,32 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Comment } from './main/components/comment/comment';
-import { LoadingBar } from './main/components/loading/loading-bar';
+import { GoogleRecaptchaDirective } from './directives/googlerecaptcha';
 import { LoginService } from './login/services/loginService';
 import { ResetPasswordService } from './login/services/reset-password.service';
 import { Logout } from './logout/logout';
 import { NotFoundPage } from './main/components/404/404';
+import { Comment } from './main/components/comment/comment';
 import { Home } from './main/components/home/home';
+import { LoadingBar } from './main/components/loading/loading-bar';
 import { Main } from './main/components/main';
 import { NotFound } from './main/components/notFound/not-found';
 import { Notification } from './main/components/notification/notification';
 import { Post } from './main/components/post/post';
 import { Profile } from './main/components/profile/profile';
-import { SuggestionsComponent } from './main/components/suggestions/suggestions.component';
 import { ContenteditableModel } from './main/components/publication/contenteditable-model';
 import { Publication } from './main/components/publication/publication';
+import { SuggestionsComponent } from './main/components/suggestions/suggestions.component';
+import { TopBlagueursAndDecov } from './main/components/topBlagueursAndDecov/topBlagueursAndDecov';
 import { DateService } from './main/services/dateService';
 import { EmojiService } from './main/services/emojiService';
 import { GlobalService } from './main/services/globalService';
-import { GoogleRecaptchaDirective } from './directives/googlerecaptcha';
 import { LinkPreview } from './main/services/linkPreview';
 import { LinkView } from './main/services/linkView';
 import { PostService } from './main/services/postService';
 import { RecentRechService } from './main/services/recentRechService';
 import { SeoService } from './main/services/seo-service';
 import { FakeComponent } from './shared/fake.component';
-import { TopBlagueursAndDecov } from './main/components/topBlagueursAndDecov/topBlagueursAndDecov';
 import { httpFactory } from './utils/factories/http.factory';
 
 /** Factories */
