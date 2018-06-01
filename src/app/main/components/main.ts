@@ -18,6 +18,10 @@ import { DateService } from '../services/dateService';
 import { GlobalService } from '../services/globalService';
 import { RecentRechService } from '../services/recentRechService';
 
+//Notification
+import { NotificationService } from "../services/notification.service";
+import { urlB64ToUint8Array, VAPID_PUBLIC_KEY } from "../../utils/notification";
+
 declare var jQuery: any;
 declare var FB: any;
 declare var auth: any;
@@ -48,6 +52,12 @@ export class Main {
 
   @ViewChild("searchResults2") searchRes2: ElementRef;
   @ViewChild("searchMobileInput") searchInput: ElementRef;
+  
+  // Notification vars 
+  private subscriptionJson = '';
+  private isSubscribed = false;
+  private registration = undefined;
+  // end Notification vars
 
   constructor(
     public translate: TranslateService,
@@ -62,7 +72,10 @@ export class Main {
     public globalService: GlobalService,
 
     // TODO: check globalService access
-    private meta: Meta
+    private meta: Meta,
+
+    //Notiifcation
+    private notificationService: NotificationService
   ) {
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
@@ -72,6 +85,7 @@ export class Main {
   }
 
   ngOnInit() {
+    
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
       name: "viewport",
@@ -104,6 +118,16 @@ export class Main {
         jQuery(".upper-arrow-profile").hide();
       }
     });
+    //Notification Check
+      if ('serviceWorker' in navigator && 'PushManager' in window) {
+        navigator.serviceWorker.register('assets/sw.js').then(reg => {
+        this.registration = reg;
+        this.init();
+          console.log('Service Worker and Push is supported');
+        });
+      } else {
+        console.warn('Push messaging is not supported');
+      }
   }
 
   saveRecentRech(_id, firstName, lastName, profilePicture, profilePictureMin) {
@@ -371,5 +395,47 @@ export class Main {
     this.searchInput.nativeElement.value = "";
     this.listSearshUsers.length = 0;
     this.noSearchResults = false;
+  }
+
+
+  // Notification !!
+
+  private init() {
+    this.registration.pushManager.getSubscription().then(subscription => {
+      this.isSubscribed = !(subscription === null);
+      this.updateSubscriptionOnServer(subscription);
+      console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
+      if (!this.isSubscribed){
+        this.subscribeUser()
+      }
+    });
+  }
+
+  subscribeUser() {
+    const applicationServerKey = urlB64ToUint8Array(VAPID_PUBLIC_KEY);
+    this.registration.pushManager
+      .subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: applicationServerKey
+      })
+      .then(subscription => {
+        console.log('User is subscribed.');
+        this.updateSubscriptionOnServer(subscription);
+        this.isSubscribed = true;
+      })
+      .catch(err => {
+        console.log('Failed to subscribe the user: ', err);
+      });
+  }
+
+  private updateSubscriptionOnServer(subscription) {
+    if (subscription) {
+      this.subscriptionJson = subscription;
+      this.notificationService.addPushSubscriber(subscription).subscribe(
+        () => console.log('Sent push subscription object to server.'),
+        err =>  console.log('Could not send subscription object to server, reason: ', err));
+    } else {
+      this.subscriptionJson = '';
+    }
   }
 }
