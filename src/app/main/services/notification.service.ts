@@ -1,17 +1,18 @@
+import { AppSettings } from './../../shared/conf/app-settings';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
 import {environment} from "../../../environments/environment";
-import { AppSettings } from '../../shared/conf/app-settings';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: Http) { }
 
   addPushSubscriber(sub:any) {
-    return this.http.post(environment.SERVER_URL +'notifications', sub);
+    return this.http.post(environment.SERVER_URL +'api/push-subscribe', sub,AppSettings.OPTIONS);
   }
 
   sendNotification(user_id:any) {
