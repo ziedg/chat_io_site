@@ -184,26 +184,26 @@ export class Publication {
         
 
     // Get the modal
-    var modal = document.getElementById('myModal');
+    // var modal = document.getElementById('myModal');
     
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = jQuery('.myImg');
-        var modalImg = jQuery("#img01");
-        var captionText = document.getElementById("caption");
-        jQuery('.myImg').click(function(){
-            modal.style.display = "block";
-            var newSrc = this.src;
-            modalImg.attr('src', newSrc);
-            captionText.innerHTML = this.alt;
-        });
+    //     // Get the image and insert it inside the modal - use its "alt" text as a caption
+    //     var img = jQuery('.myImg');
+    //     var modalImg = jQuery("#img01");
+    //     var captionText = document.getElementById("caption");
+    //     jQuery('.myImg').click(function(){
+    //         modal.style.display = "block";
+    //         var newSrc = this.src;
+    //         modalImg.attr('src', newSrc);
+    //         captionText.innerHTML = this.alt;
+    //     });
     
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close-button")[0];
+    //     // Get the <span> element that closes the modal
+    //     var span = document.getElementsByClassName("close-button")[0];
     
-        // When the user clicks on <span> (x), close the modal
-        span.addEventListener("click",function(){
-          modal.style.display = "none";
-        }); 
+    //     // When the user clicks on <span> (x), close the modal
+    //     span.addEventListener("click",function(){
+    //       modal.style.display = "none";
+    //     }); 
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 
@@ -292,7 +292,7 @@ export class Publication {
     this.commentTextareaId = "comment-" + this.publicationBean._id;
     this.changeDetector.markForCheck();
     if (this.publicationBean) {
-
+      console.log('hey');
       this.pubLink = urlEncode(environment.SERVER_URL + "main/post/" + this.publicationBean._id);
       this.shareLink = "https://www.facebook.com/sharer/sharer.php?u=" + this.pubLink + "&amp;src=sdkpreparse";
 
@@ -302,11 +302,12 @@ export class Publication {
       if (this.publicationBean.publyoutubeLink) {
         this.linkYtb = "https://www.youtube.com/embed/" + this.publicationBean.publyoutubeLink;
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkYtb);
+        
       }
       else if (this.publicationBean.publfacebookLink) {
         this.linkFb = "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +
         this.publicationBean.publfacebookLink +
-        "%2F&show_text=0&height=580";
+        "%2F&show_text=0&height=580&appId";
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkFb);
       }
       else {

@@ -373,9 +373,9 @@ export class Home {
     this.uploadedPicture = null;
     this.titleEnable = false;
     this.youtubeInput = false;
-    this.youtubeLink = null;
+    this.youtubeLink = "";
     this.facebookInput = false;
-    this.facebookLink = null;
+    this.facebookLink = "";
     jQuery(".yt-in-url").val("");
     jQuery(".youtube-preview").html("");
     jQuery(".facebook-preview").html("");
@@ -400,7 +400,7 @@ export class Home {
       && !this.youtubeLink
       && !this.facebookLink
       && !this.uploadedPicture
-      &&!this.link.isSet
+      && !this.link.isSet
 			&& !this.imageFromLink) {
       this.errorMsg = "SP_FV_ER_PUBLICATION_EMPTY";
       this.errorTimed();
@@ -672,7 +672,7 @@ getPageFacebookVideo(videoLink): string {
         jQuery(".facebook-preview").html(
           '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
           videoId +
-          '%2F&show_text=0&height=580" width="560" height="640" style="border:none;overflow:visible" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="false"></iframe>'
+          '%2F&show_text=0&height=580&appId" width="560" height="640" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
         );
         
         this.uploadedPicture = null;
