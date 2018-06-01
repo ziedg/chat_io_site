@@ -1744,7 +1744,7 @@ textarea:focus {
   .facebook-preview-publication iframe {
     width: 100%;
     margin: 0px;
-    height: 480px;
+    height: 400px;
     display: inline-block;
     transition: 1s ease-in-out;
     -webkit-transition: 1s ease-in-out;

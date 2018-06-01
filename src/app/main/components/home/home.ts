@@ -672,7 +672,7 @@ getPageFacebookVideo(videoLink): string {
         jQuery(".facebook-preview").html(
           '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
           videoId +
-          '%2F&show_text=0&height=580&appId" width="560" height="640" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
+          '%2F&show_text=0&height=580&appId" width="500" height="580" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
         );
         
         this.uploadedPicture = null;
