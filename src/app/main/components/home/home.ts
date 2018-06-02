@@ -43,6 +43,7 @@ export class Home {
   public previewLink: Array<LinkBean> = [];
 
   //Variables Declarations
+  linkDomain = "";
   titleEnable = false;
   youtubeInput = false;
   youtubeLink = "";
@@ -702,15 +703,18 @@ getPageFacebookVideo(videoLink): string {
     //this.analyzeLink(source);
   }
 
-  analyzeLink(source) {
+  analyzeLink(source) 
     {
-
+      
       var myArray = this.linkView.getListLinks(source);
+      
       if (!myArray.length) {
         return 1;
       }
       var linkURL = myArray[0];
+      //check if linkURL refers to speegar.com
       if (linkURL == this.link.url) {
+        
         return 1;
       }
       if (
@@ -739,56 +743,64 @@ getPageFacebookVideo(videoLink): string {
         //}
       }
 			*/
-			if(this.imageFromLink) { return 1 }
-	      this.linkLoading = true;
-	      this.http
-	        .get(
-	          environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
-	          AppSettings.OPTIONS
-	        )
-	        .map((res: Response) => res.json())
-	        .subscribe(
-	          response => {
-	            if (response.results.success) {
-	              this.resetPublishPicture();
-	              jQuery(".video-preview").html("");
-	              //this.form.controls.publicationYoutubeLink.updateValue('');
-	              this.link.url = linkURL.substring(0, linkURL.length - 6);
-	              this.link.title = response.results.data.ogTitle;
-	              this.link.description = response.results.data.ogDescription;
-	              if (response.results.data.ogImage) {
-	                var a = response.results.data.ogImage.url;
-	                this.link.image = response.results.data.ogImage.url;
-	                this.link.imageWidth = response.results.data.ogImage.width;
-	                this.link.imageHeight = response.results.data.ogImage.height;
-									/*
-	                if (a.search(/(\.gif)$/i) > 0) {
-	                  this.link.isGif = true;
-	                  this.link.url = this.link.image;
-	                } else {
-	                  this.link.isGif = false;
-										this.linkLoading = false;
-	                }*/
-	              } else {
-	                this.link.image = null;
-	                this.link.imageWidth = 0;
-	                this.link.imageHeight = 0;
-	              }
-	              this.link.isSet = true;
-	              this.linkLoading = false;
-	              this.changeDetector.markForCheck();
-	            }
-							this.linkLoading = false;
-	          },
-	          err => {
-	            console.error("error in link API;");
-	          },
-	          () => {
-	            this.linkLoading = false;
-	          }
-	        );
+      if(this.imageFromLink) { return 1 }
+
+      
+      this.linkLoading = true;
+      
+      this.http
+        .get(
+          environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
+          AppSettings.OPTIONS
+        )
+        .map((res: Response) => res.json())
+        .subscribe(
+          response => {
+            if (response.results.success) {
+              jQuery("#publishDiv").empty();
+              this.resetPublishPicture();
+              jQuery(".video-preview").html("");
+              //this.form.controls.publicationYoutubeLink.updateValue('');
+              console.log("hellooooooo");
+              var r = /:\/\/(.[^/]+)/;
+              this.linkDomain= linkURL.match(r)[1] ;
+//              this.link.url = linkURL.substring(0, linkURL.length - 6);
+              this.link.url = linkURL;
+              this.link.title = response.results.data.ogTitle;
+              this.link.description = response.results.data.ogDescription;
+              if (response.results.data.ogImage) {
+                var a = response.results.data.ogImage.url;
+                this.link.image = response.results.data.ogImage.url;
+                this.link.imageWidth = response.results.data.ogImage.width;
+                this.link.imageHeight = response.results.data.ogImage.height;
+                /*
+                if (a.search(/(\.gif)$/i) > 0) {
+                  this.link.isGif = true;
+                  this.link.url = this.link.image;
+                } else {
+                  this.link.isGif = false;
+                  this.linkLoading = false;
+                }*/
+              } else {
+                this.link.image = null;
+                this.link.imageWidth = 0;
+                this.link.imageHeight = 0;
+              }
+              this.link.isSet = true;
+              this.linkLoading = false;
+              this.changeDetector.markForCheck();
+            }
+            this.linkLoading = false;
+          },
+          err => {
+            console.error("error in link API;");
+          },
+          () => {
+            this.linkLoading = false;
+          }
+        );
     }
-  }
+  
 
   pasteInnerHtml($event) {
     $event.preventDefault();
