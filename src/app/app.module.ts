@@ -49,7 +49,7 @@ import { httpFactory } from './utils/factories/http.factory';
         loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
+          deps: [HttpClient,Http]
         }
       })],       // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,

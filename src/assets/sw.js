@@ -69,10 +69,12 @@ self.addEventListener('push', event => {
   console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
   let data = JSON.parse(event.data.text())
   const title = data.notification.title;
+
+
   const options = {
     body: data.notification.body,
-    icon: 'assets/apple-icon.png',
-    badge: 'assets/apple-icon.png'
+    icon:data.notification.icon,
+    badge: data.notification.icon
   };
 
   event.waitUntil(self.registration.showNotification(title, options));
@@ -84,7 +86,7 @@ self.addEventListener('notificationclick', event => {
 
   event.notification.close();
 
-  event.waitUntil(clients.openWindow('http://www.speegar.com/'));
+  event.waitUntil(clients.openWindow('https://speegar.com/'));
 });
 
 
