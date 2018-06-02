@@ -19,6 +19,9 @@ import { GlobalService } from '../../services/globalService';
 import { LinkPreview } from '../../services/linkPreview';
 import { LinkView } from '../../services/linkView';
 import { PostService } from '../../services/postService';
+import { NotificationService } from '../../services/notification.service';
+import { VAPID_PUBLIC_KEY, urlB64ToUint8Array } from '../../../utils/notification';
+
 
 declare var jQuery: any;
 declare var $: any;
@@ -74,6 +77,12 @@ export class Home {
   //check if there is more post to retreive from server
   morePosts=true;
 
+  // Notification vars 
+  private subscriptionJson = '';
+  private isSubscribed:boolean = true;
+  private registration = undefined;
+  // end Notification vars
+
   constructor(
     public translate: TranslateService,
     private postService: PostService,
@@ -86,7 +95,13 @@ export class Home {
     private changeDetector: ChangeDetectorRef,
     private globalService: GlobalService,
     private ng2ImgMaxService: Ng2ImgMaxService,
+    
+    //Notiifcation
+    private notificationService: NotificationService,
+
+    private ref:ChangeDetectorRef
   ) {
+    this.isSubscribed = true;
     this.loginService.redirect();
 
     this.user = this.loginService.getUser();
@@ -110,6 +125,18 @@ export class Home {
   }
 
   ngOnInit() {
+
+    //Notification Check
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+          navigator.serviceWorker.register('assets/sw.js').then(reg => {
+          this.registration = reg;
+          this.init();
+            console.log('Service Worker and Push is supported');
+          });
+      } else {
+          console.warn('Push messaging is not supported');
+      }
+
     jQuery("#publishDiv").on("paste", function(e) {
       e.preventDefault();
       var pastedData = e.originalEvent.clipboardData.getData("text");
@@ -806,6 +833,59 @@ getPageFacebookVideo(videoLink): string {
     $event.preventDefault();
     var plainText = $event.clipboardData.getData("text/plain");
     document.execCommand("insertHTML", false, plainText);
+  }
+
+
+  // Notification !!
+
+  private init() {
+    this.registration.pushManager.getSubscription().then(subscription => {
+      this.isSubscribed = !(subscription === null);
+      this.ref.detectChanges();
+      console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
+      if (!this.isSubscribed){
+        this.subscribeUser()
+      } else {
+        this.updateSubscriptionOnServer(subscription);
+      }
+    });
+  }
+
+  subscribeUser() {
+    const applicationServerKey = urlB64ToUint8Array(VAPID_PUBLIC_KEY);
+    this.registration.pushManager
+      .subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: applicationServerKey
+      })
+      .then(subscription => {
+        console.log('User is subscribed.');
+        this.updateSubscriptionOnServer(subscription);
+        this.isSubscribed = true;
+      })
+      .catch(err => {
+        console.log('Failed to subscribe the user: ', err);
+        this.isSubscribed = false;
+      });
+      this.ref.detectChanges();
+  }
+
+  private updateSubscriptionOnServer(subscription) {
+    if (subscription) {
+      this.subscriptionJson = subscription;
+      this.notificationService.addPushSubscriber(subscription).subscribe(
+        () => {
+          console.log('Sent push subscription object to server.')
+          this.isSubscribed = true;
+        },
+        err =>  {
+          console.log('Could not send subscription object to server, reason: ', err);
+          this.isSubscribed = false;
+        })
+        this.ref.detectChanges();
+    } else {
+      this.subscriptionJson = '';
+    }
   }
 }
 

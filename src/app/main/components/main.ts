@@ -85,7 +85,7 @@ export class Main {
   }
 
   ngOnInit() {
-    
+  
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
       name: "viewport",
@@ -118,16 +118,6 @@ export class Main {
         jQuery(".upper-arrow-profile").hide();
       }
     });
-    //Notification Check
-      if ('serviceWorker' in navigator && 'PushManager' in window) {
-        navigator.serviceWorker.register('assets/sw.js').then(reg => {
-        this.registration = reg;
-        this.init();
-          console.log('Service Worker and Push is supported');
-        });
-      } else {
-        console.warn('Push messaging is not supported');
-      }
   }
 
   saveRecentRech(_id, firstName, lastName, profilePicture, profilePictureMin) {
