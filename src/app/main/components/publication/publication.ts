@@ -640,7 +640,11 @@ export class Publication {
 
     let body = JSON.stringify({
       publId: this.publicationBean._id,
-      profileId: this.user._id
+      profileId: this.user._id,
+      profilefirstname : this.user.firstName,
+      profilelastname : this.user.lastName,
+      profilepicture : this.user.profilePictureMin
+
     });
     this.http.post(environment.SERVER_URL + pathUtils.LIKE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
@@ -693,7 +697,10 @@ export class Publication {
 
     let body = JSON.stringify({
       publId: this.publicationBean._id,
-      profileId: this.user._id
+      profileId: this.user._id,
+      profilefirstname : this.user.firstName,
+      profilelastname : this.user.lastName,
+      profilepicture : this.user.profilePictureMin
     });
     this.http.post(environment.SERVER_URL +  pathUtils.DISLIKE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
