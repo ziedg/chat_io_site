@@ -336,7 +336,7 @@
   .share-holder:hover .hint-social,
   .fb-xfbml-parse-ignore:hover .hint-social {
     opacity: 1;
-		display: block;
+        display: block;
   }
 
   .content .img-preview:hover {
@@ -366,11 +366,11 @@
 /*.profile-photo:hover .fa-camera,*/
 .profile-photo:hover .fa-floppy-o,
 .profile-photo:hover .fa-times {
-	display: inline;
+    display: inline;
 }
 
 .profile-hover > article {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 
@@ -775,14 +775,14 @@ a {
 }
 .time-notif {
   color: #666;
-	min-width: 55px;
-	text-align: right;
+    min-width: 55px;
+    text-align: right;
 }
 
 .time-notif > span {
-	text-align: right;
-	width: 100%;
-	display: inline-block;
+    text-align: right;
+    width: 100%;
+    display: inline-block;
 }
 
 .time-notif-mobile {
@@ -806,12 +806,12 @@ a {
 }
 .notif-content {
   margin-left: 10px;
-	display: flex;
-	align-items: center;
-	width:100%
+    display: flex;
+    align-items: center;
+    width:100%
 }
 .for-notif {
-	--w: 40px;
+    --w: 40px;
   width: var(--w) !important;
   height: var(--w) !important;
   min-height: var(--w);
@@ -847,7 +847,7 @@ a {
   display: -ms-flexbox;
   display: -webkit-flex;
   align-items: center;
-  margin-right: 16px;
+  margin-right: 13px;
   position: absolute;
   right: 100px;
   top: 20px;
@@ -974,6 +974,14 @@ section.widget {
   height:36px;
   min-width: 140px;
 }
+@media(max-width:830px){
+  #container{
+    margin-right:auto;
+    margin-left:auto;
+  }
+}
+
+
 
 .header-segement {
   position: relative;
@@ -1377,6 +1385,11 @@ section.widget {
     padding: 60px 0 !important;
     width: calc(120px + 10px) !important;
   }
+
+  #container .sub-container{
+    padding-left:0;
+    padding-right: 0;
+  }
 }
 .dropdown header {
   display: none;
@@ -1563,9 +1576,9 @@ section.widget {
     padding: 5px 20px !important;
   }
 
-	.header-right .fa {
-		font-size: 1.4em!important;
-	}
+    .header-right .fa {
+        font-size: 1.4em!important;
+    }
 }
 .comment-publish.comment-loading {
   padding: 2.5px 23px !important;
@@ -1703,21 +1716,44 @@ textarea:focus {
   }
 }
 .youtube-preview,
-.youtube-preview-publication {
-  margin: 5px;
+.facebook-preview,
+.youtube-preview-publication,
+.facebook-preview-publication {
+
+  margin: 0px;
   text-align: center;
+
 }
+
 .youtube-preview iframe,
 .youtube-preview-publication iframe {
-  width: 90%;
-  margin: 5px 5%;
+  width: 100%;
+  margin: 0px;
   display: inline-block;
 }
+.facebook-preview iframe
+.facebook-preview-publication iframe {
+  width: 70%;
+  margin: 0px;
+  display: inline-block;
+}
+
+
 @media (max-width: 600px) {
+  .facebook-preview iframe,
+  .facebook-preview-publication iframe {
+    width: 100%;
+    margin: 0px;
+    height: 400px;
+    display: inline-block;
+    transition: 1s ease-in-out;
+    -webkit-transition: 1s ease-in-out;
+  }
+
   .youtube-preview iframe,
   .youtube-preview-publication iframe {
-    width: 96%;
-    margin: 5px 2%;
+    width: 100%;
+    margin: 0px;
     height: 200px;
     display: inline-block;
     transition: 1s ease-in-out;
@@ -1844,13 +1880,13 @@ textarea:focus {
 }
 .publication {
   background-color: white;
-  padding: 20px 20px 0px 20px;
+  padding: 20px 0px 0px 0px;;
   margin: 10px 0 20px;
   position: relative;
 }
 .shared-publication {
   background-color: white;
-  padding: 15px;
+  padding: 0px;
   margin: 10px 0 20px;
   position: relative;
   width: 100%;
@@ -1962,6 +1998,7 @@ top-blagueurs-decov .user .user-img,
 }
 .user-name {
   margin-left: 10px;
+  margin-right: 5px;
   margin-top: 0px;
   min-width: 80px;
 }
@@ -1990,18 +2027,30 @@ top-blagueurs-decov .user .user-img,
 .comment-text {
   display: inline-block;
   width: 100%;
+  margin-left:7px;
+  margin-bottom:5px;
   word-wrap: break-word;
 }
 .content img {
   max-height: 400px;
   max-width: 100%;
-  border: solid 1px #ddd;
+  border: solid 0px #ddd;
   padding: 1px;
   margin-top: 10px;
   display: block;
 }
+
+.interactions{
+  margin-top:6px;
+  margin-bottom:8px;
+  margin-left:7px;
+  color:#424242;
+  font-size:14px;
+}
+
+
 .social-staff {
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2022,6 +2071,9 @@ top-blagueurs-decov .user .user-img,
   align-items: center;
   position: relative;
   color: #666;
+  margin-top:-7px;
+  margin-left:14px;
+
 }
 .comment-content {
   width: 100%;
@@ -2046,7 +2098,7 @@ top-blagueurs-decov .user .user-img,
   font-size: 25px;
 }
 .dislike {
-  margin-left: 10px;
+  margin-left: 17px;
 }
 .comment-number {
   margin-left: 10px;
@@ -4005,7 +4057,7 @@ input.loginInput {
   border-radius: 3px;
   opacity: 0;
   bottom: 44px;
-	display: none;
+    display: none;
 }
 .comment-number-holder .hint-social {
   right: -40px;
@@ -4079,9 +4131,9 @@ input.loginInput {
 }
 .img-preview {
   width: 100%;
-	max-height: 400px;
+    max-height: 400px;
   margin-top: 0 !important;
-	object-fit: cover;
+    object-fit: cover;
 }
 .link-preview .fa-times {
   position: absolute;
@@ -4202,8 +4254,8 @@ top-blagueurs-decov section.widget{
   }
 
   .header-segement.name-holder {
-		padding-left: 10px;
-	}
+        padding-left: 10px;
+    }
 }
 
 /*-----------blagueurs-populaires-glissement-start-----------*/
@@ -4273,6 +4325,7 @@ publication .user-name {
 publication .user {
   dispaly: flex;
   align-items: center;
+  margin-left:7px;
 }
 
 @media(max-width:400px) {
@@ -4351,7 +4404,7 @@ top-blagueurs-decov .user-name header {
   }
 
   .shared-publication {
-    padding: 10px;
+    padding: 0px;
   }
 
   .dots {
@@ -4454,7 +4507,7 @@ top-blagueurs-decov .user-name header {
 
 .header-right .notification-parent,
 .header-right .suggestions-icon {
-	margin-right: 12px;
+    margin-right: 12px;
 }
 
 
@@ -4558,9 +4611,21 @@ change-password .input-param input {
 .youtube-preview {
   width: 100%;
 }
+.facebook-preview {
+  width: 100%;
+}
 
 .publication .content {
   margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+@media(min-width:830px){
+  .publication .content {
+    margin-top: 14px;
+    padding-right:30px;
+    padding-left:30px;
+  }
 }
 
 
@@ -4586,31 +4651,100 @@ change-password .input-param input {
 
 
 top-blagueurs-decov user-img {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .suggestions-icon .fa-user {
-	text-shadow: -3px 0px 0px white, -12px 0px 0 #9b9999;
-	padding-left: 12px;
+    text-shadow: -3px 0px 0px white, -12px 0px 0 #9b9999;
+    padding-left: 12px;
 }
 
 top-blagueurs-decov .user-img {
-	cursor: pointer;
+    cursor: pointer;
 }
 
-.publication .content {
-	margin-right: 11px;
-}
 
 .right-side-of-likes .dots {
-	right: 4px;
+    right: 4px;
 }
 
 .publication .date {
-	right: 28px;
+    right: 28px;
 }
 
 /*------------ugly-and-bad-bug-fix----------*/
 img[src="undefined"] {
-	display:none;
+    display:none;
+}
+
+/*------------Image Modal popup----------*/
+
+ /* Style the Image Used to Trigger the Modal */
+ .myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  position: fixed;
+  top:17%;
+  margin: auto;
+  display: block;
+  width: auto;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+
+/* The Close Button */
+.close-button {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  opacity:0;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+      width: 100%;
+  }
 }

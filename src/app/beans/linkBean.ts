@@ -1,8 +1,8 @@
 
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 /* conf */
-import { AppSettings } from '../conf/app-settings';
-import { LinkView } from "../service/linkView";
+import { AppSettings } from '../shared/conf/app-settings';
+import { LinkView } from "../main/services/linkView";
 
 /* LinkBean */
 export class LinkBean {
