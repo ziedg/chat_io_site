@@ -4501,13 +4501,29 @@ top-blagueurs-decov .user-name header {
 }
 
 @media(max-width:768px) {
-  .header-left {
-    margin-top: 20px;
-    margin-left: 5px!important;
-  }
-
   .main-header {
     padding: 0!important;
+    height: 50px;
+  }
+
+  .sub-main-header {
+    display: flex;
+    justify-content:  space-between;
+    width: 100%;
+    align-items:  center;
+  }
+
+  .logo img {
+    position: static;
+    bottom: 0;
+  }
+
+  .header-right {
+    display: none;
+  }
+
+  .header-right-mobile .outline-icon {
+    margin-right: 20px;
   }
 }
 
@@ -4767,6 +4783,10 @@ img[src="undefined"] {
 }
 .close-button-x:hover {
   color: #dddddd;
+}
+
+.outline-icon {
+  height: 40px;
 }
 
 /* 100% Image Width on Smaller Screens */
