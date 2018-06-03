@@ -164,9 +164,8 @@ export class Home {
     });
     this.changeDetector.markForCheck();
 
-  
-    document.documentElement.scrollTop = 0;
-      
+    setTimeout(function(){document.documentElement.scrollTop = 0;}, 1000);
+          
   }
 
   onTouchStart(event) {
