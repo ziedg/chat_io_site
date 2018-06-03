@@ -33,7 +33,7 @@ declare var window: any;
   moduleId: module.id,
   selector: "home",
   templateUrl: "home.html",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Home {
   form;
