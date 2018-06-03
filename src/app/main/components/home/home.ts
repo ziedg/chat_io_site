@@ -77,7 +77,7 @@ export class Home {
   //check if there is more post to retreive from server
   morePosts=true;
 
-  // Notification vars 
+  // Notification vars
   private subscriptionJson = '';
   private isSubscribed:boolean = true;
   private registration = undefined;
@@ -95,7 +95,7 @@ export class Home {
     private changeDetector: ChangeDetectorRef,
     private globalService: GlobalService,
     private ng2ImgMaxService: Ng2ImgMaxService,
-    
+
     //Notiifcation
     private notificationService: NotificationService,
 
@@ -355,7 +355,7 @@ export class Home {
       this.updateYoutubeFacebook();
 	      return 1;
       }
-      
+
 	    if (
 	      text.search("web.facebook.com") >= 0 || text.search("www.facebook.com") > 0 ||
         text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0 ) {
@@ -374,7 +374,7 @@ export class Home {
 			this.imageFromLink = true;
       this.youtubeLink = null;
       this.facebookLink = null;
-      
+
 			this.uploadedPicture = null;
       jQuery(".youtube-preview").html("");
       jQuery(".facebook-preview").html("");
@@ -624,18 +624,18 @@ export class Home {
   }
 
   getIdFacebookVideo(facebookLink): string {
-     
+
       var myRegexp = /(\/(videos\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
       var match = facebookLink.match(myRegexp);
       if (match) {
       return match[match.length-1];
     }
-    
-    
+
+
 }
 
 getPageFacebookVideo(videoLink): string {
-  
+
   return "facebook";
 }
 
@@ -702,7 +702,7 @@ getPageFacebookVideo(videoLink): string {
           videoId +
           '%2F&show_text=0&height=580&appId" width="500" height="580" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
         );
-        
+
         this.uploadedPicture = null;
         this.closeLinkAPI();
         this.facebookLink = videoId;
@@ -716,9 +716,9 @@ getPageFacebookVideo(videoLink): string {
       this.displayLinkError();
           return;
     }
-    
 
-    
+
+
   }
 
   closeLinkAPI() {
@@ -730,18 +730,18 @@ getPageFacebookVideo(videoLink): string {
     //this.analyzeLink(source);
   }
 
-  analyzeLink(source) 
+  analyzeLink(source)
     {
-      
+
       var myArray = this.linkView.getListLinks(source);
-      
+
       if (!myArray.length) {
         return 1;
       }
       var linkURL = myArray[0];
       //check if linkURL refers to speegar.com
       if (linkURL == this.link.url) {
-        
+
         return 1;
       }
       if (
@@ -772,9 +772,9 @@ getPageFacebookVideo(videoLink): string {
 			*/
       if(this.imageFromLink) { return 1 }
 
-      
+
       this.linkLoading = true;
-      
+
       this.http
         .get(
           environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
@@ -827,7 +827,7 @@ getPageFacebookVideo(videoLink): string {
           }
         );
     }
-  
+
 
   pasteInnerHtml($event) {
     $event.preventDefault();
@@ -887,6 +887,13 @@ getPageFacebookVideo(videoLink): string {
       this.subscriptionJson = '';
     }
   }
+
+  useLanguage(language: string) {
+    localStorage.setItem('userLang',language);
+    this.translate.setDefaultLang(language);
+    console.log(localStorage.getItem('userLang')) ;
+  }
+
 }
 
 export function readURL(input) {
