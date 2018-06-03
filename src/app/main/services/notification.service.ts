@@ -65,9 +65,9 @@ private updateSubscriptionOnServer(subscription) {
 
 
   removePushSubscriber(){
-     const sub = this.subscription;
-     console.log(sub)
-    return  this.http.post(environment.SERVER_URL +'api/push-unsubscribe',sub,AppSettings.OPTIONS);
+     const subs = this.subscription;
+     console.log(subs)
+    return  this.http.post(environment.SERVER_URL +'api/push-unsubscribe',subs,AppSettings.OPTIONS);
   }
 
 
@@ -79,6 +79,7 @@ public init(reg) {
   this.registration.pushManager.getSubscription().then(subscription => {
     this.isSubscribed = !(subscription === null);
     this.subscription=subscription;
+
     this.updateSubscriptionOnServer(subscription);
 
     console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);

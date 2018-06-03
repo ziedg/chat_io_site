@@ -836,58 +836,18 @@ getPageFacebookVideo(videoLink): string {
   }
 
 
-  // Notification !!
 
-//   private init() {
-//     this.registration.pushManager.getSubscription().then(subscription => {
-//       this.isSubscribed = !(subscription === null);
-//       this.ref.detectChanges();
-//       console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
-//       if (!this.isSubscribed){
-//         this.subscribeUser()
-//       } else {
-//         this.updateSubscriptionOnServer(subscription);
-//       }
-//     });
-//   }
 
-//   subscribeUser() {
-//     const applicationServerKey = urlB64ToUint8Array(VAPID_PUBLIC_KEY);
-//     this.registration.pushManager
-//       .subscribe({
-//         userVisibleOnly: true,
-//         applicationServerKey: applicationServerKey
-//       })
-//       .then(subscription => {
-//         console.log('User is subscribed.');
-//         this.updateSubscriptionOnServer(subscription);
-//         this.isSubscribed = true;
-//       })
-//       .catch(err => {
-//         console.log('Failed to subscribe the user: ', err);
-//         this.isSubscribed = false;
-//       });
-//       this.ref.detectChanges();
-//   }
 
-//   private updateSubscriptionOnServer(subscription) {
-//     if (subscription) {
-//       this.subscriptionJson = subscription;
-//       this.notificationService.addPushSubscriber(subscription).subscribe(
-//         () => {
-//           console.log('Sent push subscription object to server.')
-//           this.isSubscribed = true;
-//         },
-//         err =>  {
-//           console.log('Could not send subscription object to server, reason: ', err);
-//           this.isSubscribed = false;
-//         })
-//         this.ref.detectChanges();
-//     } else {
-//       this.subscriptionJson = '';
-//     }
-//   }
-// }
+
+
+  useLanguage(language: string) {
+    localStorage.setItem('userLang',language);
+    this.translate.setDefaultLang(language);
+    console.log(localStorage.getItem('userLang')) ;
+  }
+
+}
 
 export function readURL(input) {
   if (input.files && input.files[0]) {

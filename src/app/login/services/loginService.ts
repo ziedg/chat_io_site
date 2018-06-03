@@ -107,7 +107,7 @@ export class LoginService {
 
 
       // notification unsubscribe
-          this.notificationService.removePushSubscriber().subscribe(res => console.log(res));
+          this.notificationService.removePushSubscriber().subscribe(result => console.log(result));
         //  this.http.post(environment.SERVER_URL +'api/push-unsubscribe', sub,AppSettings.OPTIONS);
         // })
         if(this.isConnected()){

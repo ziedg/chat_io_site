@@ -219,4 +219,9 @@ export class Login {
   setPopupAction(fn: any) {
     this.openPopup = fn;
   }
+  useLanguage(language: string) {
+    localStorage.setItem('userLang',language);
+    this.translate.setDefaultLang(language);
+     console.log(localStorage.getItem('userLang')) ;
+  }
 }
