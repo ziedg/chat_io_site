@@ -139,7 +139,7 @@
 
     <div class="content" *ngIf="publicationBean.isShared">
 
-      <article class="publication bordered shared-publication">
+      <article class="publication shared-publication">
         <div [ngClass]="{'content' : true, 'arabic-text': arabicText}">
           <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]">
             {{publicationBean.publTitle}} </h4>
@@ -147,7 +147,7 @@
                   && publicationBean.publText !=='undefined'
                   && publicationBean.publText.length > 0">
                 <!--[innerHTML]="linkView.transformATextHaveALink(publicationBean.publText)">-->
-                <span [innerHTML]="firstPubText"></span>
+                <span [innerHTML]="firstPubText" style="padding-left:7px"></span>
                 <a *ngIf="longPubText && !longPubTextShow"
                     (click)="longPubTextShow=true"
                     style="margin-top: 0; display:inline">
@@ -255,7 +255,7 @@
         <div class="dots">
 
 					<span (click)="openModalPub()">
-                  <img class="social-emoji" src="assets/images/new/3-pts.png" style="width:23px;margin-right:10px;" >
+                  <img class="three-points" src="assets/images/new/3-pts.png">
                     </span>
 
           <div class="upper-arrow upper-arrow-signal" *ngIf="signalButton" style="display:block;"></div>

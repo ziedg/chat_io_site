@@ -908,6 +908,21 @@ a {
     height: 200px;
   }
 }
+.notification-bar {
+  width:100%;
+  padding:10px 0px 10px;
+  background-color: #36a0f0;
+  color:white;
+  text-align:center;
+}
+.notification-bar a {
+  color:white;
+  text-decoration:underline;
+}
+.notification-bar a:hover {
+  color:white;
+}
+
 .main-holder {
   display: flex;
   display: -webkit-box;
@@ -980,8 +995,6 @@ section.widget {
     margin-left:auto;
   }
 }
-
-
 
 .header-segement {
   position: relative;
@@ -1890,7 +1903,7 @@ textarea:focus {
   margin: 10px 0 20px;
   position: relative;
   width: 100%;
-  background-color: #f9f9f9;
+
 }
 .hashtag {
   cursor: pointer;
@@ -2032,7 +2045,7 @@ top-blagueurs-decov .user .user-img,
   word-wrap: break-word;
 }
 .content img {
-  max-height: 400px;
+/*  max-height: 400px; */
   max-width: 100%;
   border: solid 0px #ddd;
   padding: 1px;
@@ -4544,6 +4557,16 @@ top-blagueurs-decov .user-name header {
   margin: 0;
 }
 
+.three-points {
+  margin-right:7px;
+  width:23px;
+}
+@media (min-width: 768px) {
+.three-points {
+width:23px;margin-right:25px;
+}
+}
+
 @media(max-width: 768px) {
   .add-buttons .fa-picture-o {
     vertical-align: middle;
@@ -4669,7 +4692,7 @@ top-blagueurs-decov .user-img {
 }
 
 .publication .date {
-    right: 28px;
+    right: 25px;
 }
 
 /*------------ugly-and-bad-bug-fix----------*/
@@ -4681,7 +4704,6 @@ img[src="undefined"] {
 
  /* Style the Image Used to Trigger the Modal */
  .myImg {
-  border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
 }
