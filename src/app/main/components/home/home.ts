@@ -163,6 +163,10 @@ export class Home {
       }
     });
     this.changeDetector.markForCheck();
+
+  
+    document.documentElement.scrollTop = 0;
+      
   }
 
   onTouchStart(event) {

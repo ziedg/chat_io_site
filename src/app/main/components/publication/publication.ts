@@ -184,26 +184,24 @@ export class Publication {
         
 
     // Get the modal
-    // var modal = document.getElementById('myModal');
+     var popupmodal = document.getElementById('myModal');
     
-    //     // Get the image and insert it inside the modal - use its "alt" text as a caption
-    //     var img = jQuery('.myImg');
-    //     var modalImg = jQuery("#img01");
-    //     var captionText = document.getElementById("caption");
-    //     jQuery('.myImg').click(function(){
-    //         modal.style.display = "block";
-    //         var newSrc = this.src;
-    //         modalImg.attr('src', newSrc);
-    //         captionText.innerHTML = this.alt;
-    //     });
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = jQuery('.myImg');
+         var popupmodalImg = jQuery("#img01");
+         jQuery('.myImg').click(function(){
+            popupmodal.style.display = "block";
+            var popupnewSrc = this.src;
+             popupmodalImg.attr('src', popupnewSrc);
+        });
     
-    //     // Get the <span> element that closes the modal
-    //     var span = document.getElementsByClassName("close-button")[0];
+       // Get the <span> element that closes the modal
+         var popupspan = document.getElementsByClassName("close-button")[0];
     
-    //     // When the user clicks on <span> (x), close the modal
-    //     span.addEventListener("click",function(){
-    //       modal.style.display = "none";
-    //     }); 
+       // When the user clicks on <span> (x), close the modal
+        popupspan.addEventListener("click",function(){
+          popupmodal.style.display = "none";
+        }); 
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 

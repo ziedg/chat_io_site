@@ -2047,8 +2047,6 @@ top-blagueurs-decov .user .user-img,
 .content img {
 /*  max-height: 400px; */
   max-width: 100%;
-  border: solid 0px #ddd;
-  padding: 1px;
   margin-top: 10px;
   display: block;
 }
@@ -4726,7 +4724,9 @@ img[src="undefined"] {
 /* Modal Content (Image) */
 .modal-content {
   position: fixed;
-  top:17%;
+  top:40%;
+  transform: translateY(-50%);
+  max-height: 600px;
   margin: auto;
   display: block;
   width: auto;
@@ -4746,7 +4746,7 @@ img[src="undefined"] {
 }
 
 
-/* The Close Button */
+/* The Close Button and area */
 .close-button {
   position: fixed;
   width: 100%;
@@ -4756,12 +4756,17 @@ img[src="undefined"] {
   z-index: 10;
   opacity:0;
 }
-
-.close-button:hover,
-.close-button:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
+.close-button-x {
+  position: fixed;
+  margin:10px 20px;
+  right: 0;
+  top: 0;
+  opacity:0.9;
+  color: #999999;
+  font-size:24px;
+}
+.close-button-x:hover {
+  color: #dddddd;
 }
 
 /* 100% Image Width on Smaller Screens */

@@ -247,6 +247,7 @@ export class Main {
     this.getNotifications();
   }
 
+
   getNotifications() {
     this.http
       .get(
