@@ -4545,6 +4545,17 @@ main {
   .header-right-mobile .outline-icon {
     margin-right: 20px;
   }
+
+  .sub-container > .bordered,
+  .sub-container .publications-holder .publication {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
 }
 
 .navigation-bottom {
