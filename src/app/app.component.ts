@@ -16,29 +16,18 @@ declare global {
   })
 export class AppComponent implements OnInit {
   constructor(private translate: TranslateService) {
-    let userLang = localStorage.getItem('userLang');
 
+    let userLang = localStorage.getItem('userLang');
     if (!userLang) {
       userLang = navigator.language;
+    }
 
-      }
-
-    console.log("lassad",userLang);
-     if (userLang.startsWith('es') ) {
+    if (userLang.startsWith('es') ) {
        translate.setDefaultLang('es');
-
-    }
-
-    else if (userLang.startsWith('fr') ) {
-
+    } else if (userLang.startsWith('fr') ) {
       translate.setDefaultLang('fr');
-
-    }
-
-    else
-    {
+    } else {
       translate.setDefaultLang('en');
-
     }
   }
 

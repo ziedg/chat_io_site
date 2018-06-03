@@ -1,12 +1,17 @@
 <div class="notification-bar" id="subscribeMsg" *ngIf="isSubscribed === false ">
   <span> Speegar a besoin de votre autorisation pour </span>
-  <span> <a (click)="subscribeUser()">activer les notifications de bureau</a></span>
+  <span> <a (click)="notificationService.subscribeUser()">activer les notifications de bureau</a></span>
 </div>
 
 <div *ngIf="user" class="container" id="container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)" (touchmove)="onTouchMove($event)">
   <div class="row">
     <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 col-md-offset-2 sub-container">
-              
+
+      <button (click)="useLanguage('en')">en</button>
+      <button (click)="useLanguage('fr')">fr</button>
+      <button (click)="useLanguage('es')">es</button> <br> <br>
+
+
       <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri">
         <h3>{{ 'home_welcome' | translate }}</h3>
         {{ 'home_welcome_text_first_part' | translate }}
@@ -218,9 +223,6 @@
             </div>
           </article>
         </div>
-        <button (click)="useLanguage('en')">en</button>
-        <button (click)="useLanguage('fr')">fr</button>
-        <button (click)="useLanguage('es')">es</button> <br> <br>
 
         <app-suggestions *ngIf="!morePosts" class="col-xs-12 noPadding hidden-lg hidden-md hidden-sm"></app-suggestions>
 
