@@ -15,9 +15,9 @@
   <div class="sub-main-header">
     <div class="header-left">
       <article class="logo">
-      <a routerLink="/redirect"> 
+      <a routerLink="/redirect">
           <img src="assets/pictures/logo.png">
-      </a>  
+      </a>
 
       </article>
     </div>
@@ -226,10 +226,10 @@
 
     </div>
 
-    <div class="header-right-mobile">
+    <div class="header-right-mobile hidden-lg hidden-md hidden-sm">
       <img src="assets/images/new/messaging-outline.png"
            alt="messaging-icon"
-           class="outline-icon">
+           class="messaging-icon outline-icon">
     </div>
 
   </div>
@@ -238,6 +238,21 @@
 
 </div>
 
+
+<div class="hidden-lg hidden-md hidden-sm navigation-bottom">
+  <div class="home-icon">
+    <img class="outline-icon" src="assets/images/new/home-outline.png">
+  </div>
+  <div class="search-icon">
+    <img class="outline-icon" src="assets/images/new/search-outline.png">
+  </div>
+  <div class="notification-icon">
+    <img class="outline-icon" src="assets/images/new/notification-outline.png">
+  </div>
+  <div class="user-icon">
+    <img class="outline-icon" src="assets/images/new/user-outline.png">
+  </div>
+</div>
 
 <div *ngIf="globalService.showSearchMobile" class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm"
   (click)="globalService.showSearchMobile=false" #searchResults2>

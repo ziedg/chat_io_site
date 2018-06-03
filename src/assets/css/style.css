@@ -4500,10 +4500,30 @@ top-blagueurs-decov .user-name header {
   padding-left: 35px;
 }
 
+
+.outline-icon {
+  height: 35px;
+}
+
+main {
+  --header-mobile-h: 60px;
+  --outline-icon-h: 35px;
+}
+
+.outline-icon {
+  height: var(--outline-icon-h);
+  opacity: 0.65;
+}
+
+.header-right-mobile .outline-icon {
+  height: calc(var(--outline-icon-h) + 5px);
+}
+
 @media(max-width:768px) {
   .main-header {
     padding: 0!important;
-    height: 50px;
+    height: var(--header-mobile-h);
+    box-shadow: 0 -1px 2px 0 #676767;
   }
 
   .sub-main-header {
@@ -4526,6 +4546,23 @@ top-blagueurs-decov .user-name header {
     margin-right: 20px;
   }
 }
+
+.navigation-bottom {
+  display: flex;
+  justify-items: center;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  height: var(--header-mobile-h);
+  width: 100%;
+  position: fixed;
+  z-index: 8;
+  bottom: 0;
+  border-top: solid 1px #edeeee;
+  box-shadow: 0 1px 2px 0 #676767;
+}
+
+
 
 .notification-parent {
   position:relative;
@@ -4785,9 +4822,6 @@ img[src="undefined"] {
   color: #dddddd;
 }
 
-.outline-icon {
-  height: 40px;
-}
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px){
