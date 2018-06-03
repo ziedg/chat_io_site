@@ -20,7 +20,7 @@
 
             <router-outlet></router-outlet>
 
-                        <span *ngIf="!dontShowSocialNetworksLoginButtons">
+            <span *ngIf="!dontShowSocialNetworksLoginButtons">
 
         <div class="col-xs-12 separatorBox" *ngIf="loacationPath=='/login/sign-in' || loacationPath=='/login/sign-up' ">
           <div class="semiSeparator"></div>
@@ -69,8 +69,12 @@
         <a [routerLink]="['/support/about-us']">{{'footer_about' | translate }}</a>
         <a [routerLink]="['/support/cgu']">{{'footer_cgu' | translate }}</a>
         <a [routerLink]="['/support/team']">{{'footer_team' | translate }}</a>
-                <span class="pull-right copyrightSignature">
+        <span class="pull-right copyrightSignature">
+                  <button (click)="useLanguage('en')">en</button>
+                  <button (click)="useLanguage('fr')">fr</button>
+          <button (click)="useLanguage('es')">es</button> <br> <br>
                   {{'footer_copyright' | translate }}
+
 				</span>
       </div>
     </div>

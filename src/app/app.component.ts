@@ -14,11 +14,36 @@ declare global {
 
   })
 export class AppComponent implements OnInit {
-
   constructor(private translate: TranslateService) {
-    translate.setDefaultLang('fr');
+    let userLang = localStorage.getItem('userLang');
+
+    if (!userLang) {
+      userLang = navigator.language;
+
+      }
+
+    console.log("lassad",userLang);
+     if (userLang.startsWith('es') ) {
+       translate.setDefaultLang('es');
+
+    }
+
+    else if (userLang.startsWith('fr') ) {
+
+      translate.setDefaultLang('fr');
+
+    }
+
+    else
+    {
+      translate.setDefaultLang('en');
+
+    }
   }
+
+
   ngOnInit(){
+
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '963422573811438',
@@ -29,12 +54,12 @@ export class AppComponent implements OnInit {
     };
 
     (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "https://connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
   }
 
   login(){
