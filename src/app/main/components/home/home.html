@@ -1,4 +1,4 @@
-<div class="notification-bar" id="subscribeMsg" *ngIf="isSubscribed === false ">
+<div class="notification-bar" id="subscribeMsg" *ngIf="notificationService.isSubscribed === false ">
   <span> Speegar a besoin de votre autorisation pour </span>
   <span> <a (click)="notificationService.subscribeUser()">activer les notifications de bureau</a></span>
 </div>
