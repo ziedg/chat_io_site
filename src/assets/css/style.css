@@ -4467,7 +4467,7 @@ top-blagueurs-decov .user-name header {
   height: 100%;
   margin: 0!important;
   width: 100%;
-  top: var(--header-mobile-h);
+  top: var(--search-mobile-h);
   right: unset;
   padding: 0;
   background-color: #fafafa;
@@ -4507,7 +4507,12 @@ top-blagueurs-decov .user-name header {
 
 main {
   --header-mobile-h: 50px;
+  --search-mobile-h: 70px;
   --outline-icon-h: 26px;
+}
+
+.search-mobile {
+  height: var(--search-mobile-h);
 }
 
 .outline-icon-container {
