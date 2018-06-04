@@ -4723,8 +4723,7 @@ change-password .input-param input {
 }
 
 .publication .content {
-  margin-top: 14px;
-  margin-bottom: 14px;
+  margin: 14px 0 14px 14px;
 }
 
 @media(min-width:830px){
