@@ -83,9 +83,9 @@ public init(reg) {
     this.updateSubscriptionOnServer(subscription);
 
     console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
-    if (!this.isSubscribed){
-      this.subscribeUser()
-    }
+    // if (!this.isSubscribed){
+    //  this.subscribeUser()
+    //}
   });
 }
 
