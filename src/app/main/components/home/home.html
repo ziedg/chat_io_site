@@ -6,18 +6,19 @@
 <div *ngIf="user" class="container" id="container">
   <div class="row">
     <div class="col-md-2 home-sidebar"> 
-        <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin" [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}"></span>
-          <span>Profil</span></div>
+        <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
+           [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}" style="height:20px"></span>
+          <span><a style="color:black" [routerLink]="['/main/profile',user._id]" >Profil</a></span></div>
         <div><span><img class="home-sidebar-icon" src="assets/images/new/nav-icons/home-icon-outline.png"></span>
-          <span>Actualités</span></div>
+          <span ><a style="color:black" routerLink="/redirect">Actualités</a></span></div>
         <div><span><img class="home-sidebar-icon" src="assets/images/new/nav-icons/messaging-icon-outline.png"></span>
             <span>Messenger</span></div>
         <div class="conditions-generales"> Conditions générales</div>
         <div class="copyright-home"> Speegar &copy; 2018</div>
     </div>
     <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 sub-container">
-
-
+ 
+    
       <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri">
         <h3>{{ 'home_welcome' | translate }}</h3>
         {{ 'home_welcome_text_first_part' | translate }}
