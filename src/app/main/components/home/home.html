@@ -6,10 +6,11 @@
 <div *ngIf="user" class="container" id="container">
   <div class="row">
     <div class="col-md-2 home-sidebar"> 
-        <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin" [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}"></span>
-          <span>Profil</span></div>
+        <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
+           [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}" style="height:20px"></span>
+          <span><a style="color:black" [routerLink]="['/main/profile',user._id]" >Profil</a></span></div>
         <div><span><img class="home-sidebar-icon" src="assets/images/new/nav-icons/home-icon-outline.png"></span>
-          <span>Actualités</span></div>
+          <span ><a style="color:black" routerLink="/redirect">Actualités</a></span></div>
         <div><span><img class="home-sidebar-icon" src="assets/images/new/nav-icons/messaging-icon-outline.png"></span>
             <span>Messenger</span></div>
         <div class="conditions-generales"> Conditions générales</div>
