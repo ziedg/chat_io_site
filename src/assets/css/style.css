@@ -4467,7 +4467,7 @@ top-blagueurs-decov .user-name header {
   height: 100%;
   margin: 0!important;
   width: 100%;
-  top: unset;
+  top: var(--header-mobile-h);
   right: unset;
   padding: 0;
   background-color: #fafafa;
@@ -4510,9 +4510,12 @@ main {
   --outline-icon-h: 35px;
 }
 
+.outline-icon-container {
+  opacity: .65;
+}
+
 .outline-icon {
   height: var(--outline-icon-h);
-  opacity: 0.65;
 }
 
 .header-right-mobile .outline-icon {
@@ -4547,7 +4550,8 @@ main {
   }
 
   .sub-container > .bordered,
-  .sub-container .publications-holder .publication {
+  .sub-container .publications-holder .publication,
+  profile .publications-holder .publication {
     border-radius: 0;
     border-left: 0;
     border-right: 0;
@@ -4833,6 +4837,14 @@ img[src="undefined"] {
   color: #dddddd;
 }
 
+
+.opacity-1 {
+  opacity: 1!important;
+}
+
+.scroll-v-none {
+  overflow-y: hidden;
+}
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px){
