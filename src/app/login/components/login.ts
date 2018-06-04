@@ -123,7 +123,7 @@ export class Login {
                     console.log('friends');
                     console.log(JSON.stringify('Facebook friends: ' + friends));
                     console.log(friends);
-                    console.log("friends add ");
+
 
                     this.getUserInformations(
                       response,
