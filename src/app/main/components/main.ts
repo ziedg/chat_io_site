@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/map';
 
 import { Location } from '@angular/common';
-import { ApplicationRef, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import {ApplicationRef, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -15,7 +15,6 @@ import { LoginService } from '../../login/services/loginService';
 import { AppSettings } from '../../shared/conf/app-settings';
 import * as pathUtils from '../../utils/path.utils';
 import { DateService } from '../services/dateService';
-import { GlobalService } from '../services/globalService';
 import { RecentRechService } from '../services/recentRechService';
 
 //Notification
@@ -33,11 +32,12 @@ declare const gapi: any;
   templateUrl: "main.html"
 })
 export class Main {
+  showSearchMobile: boolean;
   autocomplete = false;
   notification = false;
   signoutHover = false;
   user: User = new User();
-  listSearshUsers: Array<User> = [];
+  listSearchUsers: Array<User> = [];
   listNotif: Array<NotificationBean> = [];
   nbNewNotifications: number = 0;
   searchValue: string;
@@ -47,13 +47,12 @@ export class Main {
   showButtonMoreNotif: Boolean = false;
   showNoNotif: Boolean = false;
   noSearchResults: Boolean = false;
-  searchMobileHidden = true;
   public showNotif:boolean=true;
 
   @ViewChild("searchResults2") searchRes2: ElementRef;
   @ViewChild("searchMobileInput") searchInput: ElementRef;
-  
-  // Notification vars 
+
+  // Notification vars
   private subscriptionJson = '';
   private isSubscribed = false;
   private registration = undefined;
@@ -69,10 +68,9 @@ export class Main {
     private changeDetector: ChangeDetectorRef,
     private recentRechService: RecentRechService,
     private appRef: ApplicationRef,
-    public globalService: GlobalService,
-
-    // TODO: check globalService access
     private meta: Meta,
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
 
     //Notiifcation
     private notificationService: NotificationService
@@ -85,7 +83,7 @@ export class Main {
   }
 
   ngOnInit() {
-  
+
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
       name: "viewport",
@@ -117,6 +115,11 @@ export class Main {
         jQuery(".profile-hover").hide();
         jQuery(".upper-arrow-profile").hide();
       }
+
+      if (jQuery(e.target).closest(".search-mobile").length === 0 &&
+          jQuery(e.target).closest(".search-icon").length === 0) {
+        console.log("hide  search mobile !!");
+      }
     });
   }
 
@@ -138,7 +141,7 @@ export class Main {
   }
 
   onChange(newValue: string) {
-    this.listSearshUsers = [];
+    this.listSearchUsers = [];
     this.enableAutocomplete();
     this.changeDetector.markForCheck();
     if (newValue.length > 1) {
@@ -181,17 +184,17 @@ export class Main {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-          this.listSearshUsers = [];
+          this.listSearchUsers = [];
           this.noSearchResults = false;
           this.changeDetector.markForCheck();
-          for (var i = 0; i < this.listSearshUsers.length; i++) {
-            this.listSearshUsers.pop();
+          for (var i = 0; i < this.listSearchUsers.length; i++) {
+            this.listSearchUsers.pop();
             this.changeDetector.markForCheck();
           }
           if (response.status == 0) {
             if (response.profiles)
               for (var i = 0; i < response.profiles.length; i++) {
-                this.listSearshUsers[i] = response.profiles[i];
+                this.listSearchUsers[i] = response.profiles[i];
                 this.changeDetector.markForCheck();
               }
           }
@@ -200,7 +203,7 @@ export class Main {
           this.noSearchResults = true;
         },
         () => {
-          if (this.listSearshUsers.length == 0) {
+          if (this.listSearchUsers.length == 0) {
             this.disableAutocomplete();
             this.noSearchResults = true;
           } else {
@@ -384,7 +387,7 @@ export class Main {
 
   clearSearchMobile() {
     this.searchInput.nativeElement.value = "";
-    this.listSearshUsers.length = 0;
+    this.listSearchUsers.length = 0;
     this.noSearchResults = false;
   }
 
@@ -428,5 +431,13 @@ export class Main {
     } else {
       this.subscriptionJson = '';
     }
+  }
+
+  toggleSearchMobile() {
+    this.showSearchMobile = ! this.showSearchMobile;
+    if(this.showSearchMobile && (this.listSearchUsers || this.showRecentSearch))
+      this.renderer.addClass(document.body, 'scroll-v-none');
+    else
+      this.renderer.removeClass(document.body, 'scroll-v-none');
   }
 }
