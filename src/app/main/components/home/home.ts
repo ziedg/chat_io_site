@@ -73,6 +73,10 @@ export class Home {
 	arabicRegex:RegExp = /[\u0600-\u06FF]/;
   public imageFromLink:boolean = false;
 
+  translationLanguages: Array<String> = ['en', 'fr', 'es'];
+  selectedLanguage: String;
+
+
   //check if there is more post to retreive from server
   morePosts=true;
 
@@ -123,6 +127,7 @@ export class Home {
   }
 
   ngOnInit() {
+    this.selectedLanguage = localStorage.getItem('userLang');
 
     //Notification Check
         if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -592,8 +597,8 @@ export class Home {
 
   getIdFacebookVideo(facebookLink): string {
 
-      var myRegexp = /(\/(videos\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
-      var match = facebookLink.match(myRegexp);
+      let myRegexp = /(\/(videos\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
+      let match = facebookLink.match(myRegexp);
       if (match) {
       return match[match.length-1];
     }
@@ -804,14 +809,23 @@ getPageFacebookVideo(videoLink): string {
 
 
 
+  onSelectLanguage(language:string) {
+    this.selectedLanguage = language;
+    language = language.toLowerCase();
+    jQuery(".dropdown-menu-translate").hide();
+    localStorage.setItem('userLang',language);
+    this.translate.setDefaultLang(language);
+    console.log(localStorage.getItem('userLang')) ;
+  }
+
+  toggleTranslateDropdown() {
+    jQuery(".dropdown-menu-translate").toggle();
+  }
 
 
 
 
   useLanguage(language: string) {
-    localStorage.setItem('userLang',language);
-    this.translate.setDefaultLang(language);
-    console.log(localStorage.getItem('userLang')) ;
   }
 
 }
