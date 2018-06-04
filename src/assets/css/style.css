@@ -4889,7 +4889,7 @@ img[src="undefined"] {
 }
 
 .scroll-v-none {
-  overflow-y: hidden;
+  /*overflow-y: hidden;*/
 }
 
 .navigation-bottom img[src*="full"] {

@@ -135,12 +135,14 @@ export class Main {
       content: "width=device-width; initial-scale=1.0;"
     });
     this.checkNewNotifications();
+
     jQuery(".recherche-results-holder").blur(function() {
       jQuery(".file-input-holder").hide();
     });
     setInterval(() => {
       this.changeDetector.markForCheck();
     }, 500);
+
     jQuery(document).click(function(e) {
       if (
         jQuery(e.target).closest(".recherche-results-holder").length === 0 &&
@@ -161,11 +163,10 @@ export class Main {
         jQuery(".upper-arrow-profile").hide();
       }
 
-/*
       if (jQuery(e.target).closest(".search-mobile").length === 0 &&
           jQuery(e.target).closest(".search-icon").length === 0) {
-        console.log("hide  search mobile !!");
-      }*/
+        console.log("hide search mobile !!");
+      }
     });
   }
 
@@ -481,7 +482,7 @@ export class Main {
 
   toggleSearchMobile() {
     this.showSearchMobile = ! this.showSearchMobile;
-    if(this.showSearchMobile && (this.listSearchUsers || this.showRecentSearch)) {
+    if(this.showSearchMobile) {
       this.renderer.addClass(document.body, 'scroll-v-none');
       this.icons.wasActiveIcon = this.icons.activeIcon;
       this.icons.activeIcon = this.icons.search.icon;
