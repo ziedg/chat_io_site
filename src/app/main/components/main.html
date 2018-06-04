@@ -245,7 +245,7 @@
          src="assets/images/new/nav-icons/{{icons.home.icon}}-{{icons.home.type}}.png">
   </div>
   <div class="search-icon outline-icon-container"
-       (click)="toggleSearchMobile()">
+       (click)="toggleSearchMobile()" #searchMobileIcon>
     <img class="outline-icon"
          alt="search-icon"
          src="assets/images/new/nav-icons/{{icons.search.icon}}-{{icons.search.type}}.png">
@@ -267,7 +267,7 @@
 </div>
 
 <div *ngIf="showSearchMobile" class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm"
-  (click)="showSearchMobile=false" #searchResults2>
+   #searchResults2 style="display:block!important" (click)="onClickSearchMobileHolder()">
   <div class="recherche-results recherche-results-2">
 
     <div *ngIf="listSearchUsers && !showRecentSearch">

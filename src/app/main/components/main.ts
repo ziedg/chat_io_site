@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/map';
 
 import { Location } from '@angular/common';
-import {ApplicationRef, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
+import {ApplicationRef, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild, HostListener} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Meta } from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
@@ -53,12 +53,25 @@ export class Main {
 
   @ViewChild("searchResults2") searchRes2: ElementRef;
   @ViewChild("searchMobileInput") searchInput: ElementRef;
+  @ViewChild("searchMobileIcon") searchMobileIcon: ElementRef;
 
   // Notification vars
   private subscriptionJson = '';
   private isSubscribed = false;
   private registration = undefined;
   // end Notification vars
+
+
+  @HostListener('document:click', ['$event'])
+  click(event) {
+    if( !this.searchRes2.nativeElement.contains(event.target) &&
+        !this.searchInput.nativeElement.contains(event.target) &&
+        !this.searchMobileIcon.nativeElement.contains(event.target) &&
+        this.showSearchMobile) {
+      console.log("got ittt!");
+      this.toggleSearchMobile();
+    }
+  }
 
   constructor(
     public translate: TranslateService,
@@ -111,6 +124,11 @@ export class Main {
     };
   }
 
+  onClickSearchMobileHolder() {
+    console.log("ok");
+    this.toggleSearchMobile()
+  }
+
   ngOnInit() {
     this.router
       .events
@@ -161,11 +179,6 @@ export class Main {
       if (jQuery(e.target).closest(".fa-sort-desc").length === 0) {
         jQuery(".profile-hover").hide();
         jQuery(".upper-arrow-profile").hide();
-      }
-
-      if (jQuery(e.target).closest(".search-mobile").length === 0 &&
-          jQuery(e.target).closest(".search-icon").length === 0) {
-        console.log("hide search mobile !!");
       }
     });
   }
@@ -481,7 +494,7 @@ export class Main {
   }
 
   toggleSearchMobile() {
-    this.showSearchMobile = ! this.showSearchMobile;
+    this.showSearchMobile = !this.showSearchMobile;
     if(this.showSearchMobile) {
       this.renderer.addClass(document.body, 'scroll-v-none');
       this.icons.wasActiveIcon = this.icons.activeIcon;
