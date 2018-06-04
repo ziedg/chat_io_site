@@ -100,7 +100,7 @@ export class Main {
         icon: "notifications-icon",
         type: "outline"
       },
-      user: {
+      profile: {
         icon: "user-icon",
         type: "outline"
       },
@@ -119,11 +119,11 @@ export class Main {
           if(event.url.includes("/home")) {
             this.changeActiveIcon("home");
           }
-          else if(event.url.includes("/notifications")) {
+          else if(event.url.includes("/notification")) {
             this.changeActiveIcon("notifications");
           }
           else if(event.url.includes("/profile/"+this.user._id)) {
-            this.changeActiveIcon("user");
+            this.changeActiveIcon("profile");
           }
         }
       });
@@ -161,10 +161,11 @@ export class Main {
         jQuery(".upper-arrow-profile").hide();
       }
 
+/*
       if (jQuery(e.target).closest(".search-mobile").length === 0 &&
           jQuery(e.target).closest(".search-icon").length === 0) {
         console.log("hide  search mobile !!");
-      }
+      }*/
     });
   }
 
@@ -485,7 +486,6 @@ export class Main {
       this.icons.wasActiveIcon = this.icons.activeIcon;
       this.icons.activeIcon = this.icons.search.icon;
       this.icons.search.type = this.icons.full;
-      console.log(this.icons.wasActiveIcon, "turn off");
       this.icons[this.icons.wasActiveIcon].type = this.icons.outline;
     }
     else {
@@ -498,11 +498,9 @@ export class Main {
   }
 
   changeActiveIcon(newActiveIcon: string) {
-    if(this.icons.activeIcon) {
-      console.log("change form: ", this.icons[this.icons.activeIcon].icon,
-        " to : ", this.icons[newActiveIcon]);
-      this.icons[this.icons.activeIcon].type = this.icons.outline;
-    }
+    console.log("change form: ", this.icons[this.icons.activeIcon].icon, " to : ", this.icons[newActiveIcon]);
+    this.showSearchMobile = false;
+    this.icons[this.icons.activeIcon].type = this.icons.outline;
     this.icons[newActiveIcon].type = this.icons.full;
     this.icons.activeIcon = newActiveIcon;
   }
