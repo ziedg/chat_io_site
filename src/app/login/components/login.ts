@@ -120,9 +120,9 @@ export class Login {
                 "/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location",
                 response => {
                   FB.api('/me/friends', ( friends => {
-                    //console.log('friends');
+                    console.log('friends');
                     console.log(JSON.stringify('Facebook friends: ' + friends));
-                    //console.log(friends);
+                    console.log(friends);
 
                     this.getUserInformations(
                       response,
