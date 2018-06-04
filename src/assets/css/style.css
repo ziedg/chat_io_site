@@ -4566,7 +4566,7 @@ main {
     border-right: 0;
   }
 
-  body {
+  body, main {
     overflow-x: hidden;
   }
 }
