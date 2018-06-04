@@ -4506,16 +4506,20 @@ top-blagueurs-decov .user-name header {
 }
 
 main {
-  --header-mobile-h: 60px;
-  --outline-icon-h: 35px;
+  --header-mobile-h: 50px;
+  --outline-icon-h: 26px;
 }
 
 .outline-icon-container {
-  opacity: .65;
 }
 
 .outline-icon {
   height: var(--outline-icon-h);
+  opacity: .65;
+}
+
+.messaging-icon{
+  opacity: 1;
 }
 
 .header-right-mobile .outline-icon {
@@ -4844,6 +4848,10 @@ img[src="undefined"] {
 
 .scroll-v-none {
   overflow-y: hidden;
+}
+
+.navigation-bottom img[src*="full"] {
+  opacity: 1;
 }
 
 /* 100% Image Width on Smaller Screens */
