@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import {ApplicationRef, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Meta } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
@@ -49,6 +49,8 @@ export class Main {
   noSearchResults: Boolean = false;
   public showNotif:boolean=true;
 
+  icons;
+
   @ViewChild("searchResults2") searchRes2: ElementRef;
   @ViewChild("searchMobileInput") searchInput: ElementRef;
 
@@ -64,6 +66,7 @@ export class Main {
     private http: Http,
     private location: Location,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private loginService: LoginService,
     private changeDetector: ChangeDetectorRef,
     private recentRechService: RecentRechService,
@@ -73,16 +76,58 @@ export class Main {
     private renderer: Renderer2,
 
     //Notiifcation
-    private notificationService: NotificationService
-  ) {
+    private notificationService: NotificationService) {
+
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
     this.listNotif = [];
     this.user = this.loginService.getUser();
+    this.icons = {
+      messaging: {
+        icon: "messaging-icon",
+        type: "outline"
+      },
+      home: {
+        icon: "home-icon",
+        type: "full"
+      },
+      search: {
+        icon: "search-icon",
+        type: "outline"
+      },
+      notifications: {
+        icon: "notifications-icon",
+        type: "outline"
+      },
+      profile: {
+        icon: "user-icon",
+        type: "outline"
+      },
+      outline: "outline",
+      full: "full",
+      activeIcon: "home",
+      wasActiveIcon: ""
+    };
   }
 
   ngOnInit() {
+    this.router
+      .events
+      .subscribe(event => {
+        if(event instanceof NavigationStart) {
+          if(event.url.includes("/home")) {
+            this.changeActiveIcon("home");
+          }
+          else if(event.url.includes("/notification")) {
+            this.changeActiveIcon("notifications");
+          }
+          else if(event.url.includes("/profile/"+this.user._id)) {
+            this.changeActiveIcon("profile");
+          }
+        }
+      });
+
 
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
@@ -116,10 +161,11 @@ export class Main {
         jQuery(".upper-arrow-profile").hide();
       }
 
+/*
       if (jQuery(e.target).closest(".search-mobile").length === 0 &&
           jQuery(e.target).closest(".search-icon").length === 0) {
         console.log("hide  search mobile !!");
-      }
+      }*/
     });
   }
 
@@ -435,9 +481,27 @@ export class Main {
 
   toggleSearchMobile() {
     this.showSearchMobile = ! this.showSearchMobile;
-    if(this.showSearchMobile && (this.listSearchUsers || this.showRecentSearch))
+    if(this.showSearchMobile && (this.listSearchUsers || this.showRecentSearch)) {
       this.renderer.addClass(document.body, 'scroll-v-none');
-    else
+      this.icons.wasActiveIcon = this.icons.activeIcon;
+      this.icons.activeIcon = this.icons.search.icon;
+      this.icons.search.type = this.icons.full;
+      this.icons[this.icons.wasActiveIcon].type = this.icons.outline;
+    }
+    else {
+      this.icons.activeIcon = this.icons.wasActiveIcon;
+      this.icons.wasActiveIcon = "";
+      this.icons.search.type = this.icons.outline;
+      this.icons[this.icons.activeIcon].type = this.icons.full;
       this.renderer.removeClass(document.body, 'scroll-v-none');
+    }
+  }
+
+  changeActiveIcon(newActiveIcon: string) {
+    console.log("change form: ", this.icons[this.icons.activeIcon].icon, " to : ", this.icons[newActiveIcon]);
+    this.showSearchMobile = false;
+    this.icons[this.icons.activeIcon].type = this.icons.outline;
+    this.icons[newActiveIcon].type = this.icons.full;
+    this.icons.activeIcon = newActiveIcon;
   }
 }

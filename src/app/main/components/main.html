@@ -224,9 +224,8 @@
     </div>
 
     <div class="header-right-mobile hidden-lg hidden-md hidden-sm">
-      <img src="assets/images/new/messaging-icon-outline.png"
+      <img src="assets/images/new/nav-icons/{{icons.messaging.icon}}-{{icons.messaging.type}}.png"
            alt="messaging-icon"
-           [routerLinkActive]="['opacity-1']"
            class="messaging-icon outline-icon">
     </div>
 
@@ -239,31 +238,31 @@
 
 <div class="hidden-lg hidden-md hidden-sm navigation-bottom">
   <div class="home-icon outline-icon-container"
-       [routerLink]="['/main', 'home']"
-       [routerLinkActive]="['opacity-1']">
+       (click)="changeActiveIcon('home')"
+       [routerLink]="['/main', 'home']">
     <img class="outline-icon"
          alt="home-icon"
-         src="assets/images/new/home-icon-outline.png">
+         src="assets/images/new/nav-icons/{{icons.home.icon}}-{{icons.home.type}}.png">
   </div>
   <div class="search-icon outline-icon-container"
-       (click)="toggleSearchMobile()"
-       [routerLinkActive]="['opacity-1']">
+       (click)="toggleSearchMobile()">
     <img class="outline-icon"
          alt="search-icon"
-         src="assets/images/new/search-icon-outline.png">
+         src="assets/images/new/nav-icons/{{icons.search.icon}}-{{icons.search.type}}.png">
   </div>
   <div class="notifications-icon outline-icon-container"
-       [routerLink]="['/main', 'notification']"
-       [routerLinkActive]="['opacity-1']">
+       (click)="changeActiveIcon('notifications')"
+       [routerLink]="['/main', 'notification']">
     <img class="outline-icon"
          alt="notifications-icon"
-         src="assets/images/new/notifications-icon-outline.png">
+         src="assets/images/new/nav-icons/{{icons.notifications.icon}}-{{icons.notifications.type}}.png">
   </div>
   <div class="user-icon outline-icon-container"
+       (click)="changeActiveIcon('profile')"
        [routerLink]="['/main', 'profile', user._id]">
     <img class="outline-icon"
          alt="user-icon"
-         src="assets/images/new/user-icon-outline.png">
+         src="assets/images/new/nav-icons/{{icons.profile.icon}}-{{icons.profile.type}}.png">
   </div>
 </div>
 

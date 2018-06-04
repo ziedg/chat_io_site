@@ -3,15 +3,22 @@
   <span> <a (click)="notificationService.subscribeUser()">activer les notifications de bureau</a></span>
 </div>
 
-<div *ngIf="user" class="container" id="container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)" (touchmove)="onTouchMove($event)">
+<div *ngIf="user" class="container" id="container">
   <div class="row">
-    <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 col-md-offset-2 sub-container">
-
-      <button (click)="useLanguage('en')">en</button>
-      <button (click)="useLanguage('fr')">fr</button>
-      <button (click)="useLanguage('es')">es</button> <br> <br>
-
-
+    <div class="col-md-2 home-sidebar"> 
+        <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
+           [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}" style="height:20px"></span>
+          <span><a style="color:black" [routerLink]="['/main/profile',user._id]" >Profil</a></span></div>
+        <div><span><img class="home-sidebar-icon" src="assets/images/new/nav-icons/home-icon-outline.png"></span>
+          <span ><a style="color:black" routerLink="/redirect">Actualités</a></span></div>
+        <div><span><img class="home-sidebar-icon" src="assets/images/new/nav-icons/messaging-icon-outline.png"></span>
+            <span>Messenger</span></div>
+        <div class="conditions-generales"> Conditions générales</div>
+        <div class="copyright-home"> Speegar &copy; 2018</div>
+    </div>
+    <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 sub-container">
+ 
+    
       <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri">
         <h3>{{ 'home_welcome' | translate }}</h3>
         {{ 'home_welcome_text_first_part' | translate }}
@@ -231,6 +238,23 @@
     </div>
     <div *ngIf="user" class="col-md-3 col-sm-5 hidden-xs side-home">
       <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
+
+      <div class="dropdown dropdwon-translate hidden-sm hidden-xs">
+        <button class="btn btn-default dropdown-toggle dropdown-toggle-translate"
+                style="border-color: #edeeee"
+                type="button"
+                (click)="toggleTranslateDropdown()">
+          {{ selectedLanguage }}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-translate" style="min-width: 80px;">
+          <li *ngFor="let language of translationLanguages"
+              (click)="onSelectLanguage(language)">
+            <a style="cursor: pointer">{{ language }}</a>
+          </li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </div>

@@ -379,7 +379,7 @@
 }
 body {
   margin: 0;
-  padding: 77px 0;
+  padding-top: 77px;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #fafafa !important;
   font-size: 14px;
@@ -914,6 +914,11 @@ a {
   background-color: #36a0f0;
   color:white;
   text-align:center;
+}
+@media (max-width:768px){
+  .notification-bar{
+    display:none;
+  }
 }
 .notification-bar a {
   color:white;
@@ -4467,7 +4472,7 @@ top-blagueurs-decov .user-name header {
   height: 100%;
   margin: 0!important;
   width: 100%;
-  top: var(--header-mobile-h);
+  top: var(--search-mobile-h);
   right: unset;
   padding: 0;
   background-color: #fafafa;
@@ -4505,17 +4510,26 @@ top-blagueurs-decov .user-name header {
   height: 35px;
 }
 
-main {
-  --header-mobile-h: 60px;
-  --outline-icon-h: 35px;
+body {
+  --header-mobile-h: 50px;
+  --search-mobile-h: 70px;
+  --outline-icon-h: 26px;
+}
+
+.search-mobile {
+  height: var(--search-mobile-h);
 }
 
 .outline-icon-container {
-  opacity: .65;
 }
 
 .outline-icon {
   height: var(--outline-icon-h);
+  opacity: .65;
+}
+
+.messaging-icon{
+  opacity: 1;
 }
 
 .header-right-mobile .outline-icon {
@@ -4557,8 +4571,12 @@ main {
     border-right: 0;
   }
 
-  body {
+  body, main {
     overflow-x: hidden;
+  }
+
+  body {
+    padding-top: calc(var(--header-mobile-h) + 10px);
   }
 }
 
@@ -4761,6 +4779,34 @@ top-blagueurs-decov .user-img {
     right: 25px;
 }
 
+.home-sidebar {
+  margin-top :30px;
+  padding:20px
+}
+
+@media (max-width:768px){
+  .home-sidebar {
+    display:none;
+  }
+}
+.conditions-generales {
+  color:#505050;
+  margin-top:27px;
+  font-size:12px;
+}
+.copyright-home {
+  margin-top:5px;
+  font-weight:lighter;
+  color:#505050;
+  font-size:12px;
+}
+
+.home-sidebar-icon {
+  width:19px;
+  margin:5px;
+  padding-bottom:5px;
+}
+
 /*------------ugly-and-bad-bug-fix----------*/
 img[src="undefined"] {
     display:none;
@@ -4844,6 +4890,10 @@ img[src="undefined"] {
 
 .scroll-v-none {
   overflow-y: hidden;
+}
+
+.navigation-bottom img[src*="full"] {
+  opacity: 1;
 }
 
 /* 100% Image Width on Smaller Screens */
