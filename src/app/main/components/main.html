@@ -52,22 +52,21 @@
     <div id="notifSound">
     </div>
     <div class="header-right">
-      <article *ngIf="user">
-        <a class="hidden-sm hidden-xs" [routerLink]="['/main/profile',user._id]" style="margin-right:0">
-          <div class="user-img img-header" *ngIf="user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePictureMin + ')'}"></div>
-          <div class="user-img img-header" *ngIf="!user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePicture + ')'}"></div>
-          <span style="margin-top: 4px;">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</span>
-        </a>
-      </article>
 
 
 			<article class="suggestions-icon hidden-lg hidden-md hidden-sm">
 				<i class="fa fa-user" [routerLink]="['/main/suggestions']"></i>
 			</article>
 
+      <article
+               class="hidden-xs"
+               style="margin-right: 10px; cursor: pointer;">
+        <div class="noPadding">
+          <i class="fa fa-comments"></i>
+        </div>
+      </article>
 
-
-      <article class="notification-box" [routerLink]="['/main/notification']" class="notification-parent hidden-lg hidden-md hidden-sm">
+      <article [routerLink]="['/main/notification']" class="notification-parent hidden-lg hidden-md hidden-sm">
         <div class="noPadding">
           <div class="cercle-notice" *ngIf="nbNewNotifications">
             {{nbNewNotifications}}
@@ -77,7 +76,7 @@
       </article>
 
 
-      <article class="notification-box" class="notification-parent hidden-xs">
+      <article class="notification-parent hidden-xs">
         <div class="noPadding">
           <div class="cercle-notice" (click)="loadFirstNotifactions()" *ngIf="nbNewNotifications">
             {{nbNewNotifications}}
@@ -196,6 +195,14 @@
         </div>
       </article>
 
+
+      <article [routerLink]="['/main', 'profile', user._id]"
+               class="hidden-xs"
+                style="margin-right: 10px; cursor: pointer">
+        <div class="noPadding">
+          <i class="fa fa-user"></i>
+        </div>
+      </article>
 
       <article class="signout-button" class="hidden-sm hidden-xs">
         <i class="fa fa-sort-desc" (click)="enableProfile()" style="font-size: 19px;position: relative;bottom: 2px; cursor: pointer"></i>

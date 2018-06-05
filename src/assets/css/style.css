@@ -280,13 +280,6 @@
     cursor: pointer;
   }
 
-  .widget .subscribe button:hover,
-  .widget .subscribe button:active {
-    background-color: #009900;
-    border: 1px solid #009900;
-    color: #fff;
-  }
-
   .change-account:hover {
     color: #4668a9;
   }
@@ -998,6 +991,12 @@ section.widget {
   #container{
     margin-right:auto;
     margin-left:auto;
+  }
+}
+
+@media(min-width: 1300px) {
+  #container {
+    min-width: 1260px;
   }
 }
 
@@ -1949,7 +1948,6 @@ textarea:focus {
 }
 
 .publication .user .user-img,
-top-blagueurs-decov .user .user-img,
 #pub-holder .user-img {
   --user-img-w: 60px;
   width: var(--user-img-w);
@@ -1958,6 +1956,23 @@ top-blagueurs-decov .user .user-img,
   min-height: var(--user-img-w);
 }
 
+top-blagueurs-decov .user .user-img {
+  --user-img-w: 50px;
+  width: var(--user-img-w);
+  height: var(--user-img-w);
+  min-width: var(--user-img-w);
+  min-height: var(--user-img-w);
+}
+
+.widget .subscribe button {
+  color: black;
+  background-color: white;
+  font-weight: bold;
+}
+
+.widget .subscribe button:hover {
+  background-color: #ddd;
+}
 
 .publication .user .user-img,
 #pub-holder .user-img {
@@ -2914,20 +2929,31 @@ top-blagueurs-decov .user .user-img,
 }
 .widget .subscribe button {
   border: 1px solid #ccc;
-  background-color: #eee;
+  background-color: white;
   color: #333;
   font-size: 12px !important;
   width: auto !important;
   padding: 5px 6px;
-  font-size: 15px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   height: 28px;
   box-sizing: border-box;
 }
-.nbr-subscribes {
+
+.show-more {
+  color: black;
+  font-weight: bold;
+  text-decoration: underline;
+  border: 0;
+  margin-bottom: -2px;
+}
+
+.show-more:hover {
+  color: black;
+}
+.nbr-subscribes,
+.ignore-profile{
   color: #555;
-  border-left: none;
   padding: 5px 6px;
   margin: 0;
   height: 28px;
@@ -2937,9 +2963,17 @@ top-blagueurs-decov .user .user-img,
   border-bottom-right-radius: 3px;
   border-left: 0;
   box-sizing: border-box;
-  min-width: 34px;
+  min-width: 23px;
   text-align: center;
 }
+
+.subscribers {
+  font-weight: 700;
+  color: #999;
+  font-size: 13px;
+  margin-top: -3px;
+}
+
 .profil-holder {
   width: 80%;
   margin: 10px 10%;
@@ -4245,7 +4279,7 @@ input.loginInput {
 }
 
 top-blagueurs-decov section.widget{
-  padding: 10px 20px;
+  padding: 10px 14px;
 }
 
 @media(max-width:500px){
@@ -4377,7 +4411,7 @@ publication .user {
 
 top-blagueurs-decov .user {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .top-blagueurs-ignore {
@@ -4723,7 +4757,7 @@ change-password .input-param input {
 }
 
 .publication .content {
-  margin: 14px 0 14px 14px;
+  margin: 14px 0;
 }
 
 @media(min-width:830px){
@@ -4800,10 +4834,22 @@ top-blagueurs-decov .user-img {
   font-size:12px;
 }
 
+.home-sidebar {
+  --icon-h: 26px;
+}
+
+
 .home-sidebar-icon {
-  width:19px;
+  height: var(--icon-h);
+  width: var(--icon-h);
   margin:5px;
   padding-bottom:5px;
+
+}
+
+.home-sidebar .fa {
+  font-size: var(--icon-h);
+  margin-right: 10px;
 }
 
 /*------------ugly-and-bad-bug-fix----------*/
@@ -4883,9 +4929,11 @@ img[src="undefined"] {
 }
 
 
+
 .opacity-1 {
   opacity: 1!important;
 }
+
 
 .scroll-v-none {
   /*overflow-y: hidden;*/

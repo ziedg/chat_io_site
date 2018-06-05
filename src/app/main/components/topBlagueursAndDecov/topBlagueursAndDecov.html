@@ -14,30 +14,32 @@
              	[ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
         </div>
         <div class="user-name">
-          <header><a [routerLink]="['/main/profile',profile._id]">
+          <header>
+            <a [routerLink]="['/main/profile',profile._id]"
+               style="width: 96px; text-overflow:ellipsis">
             {{profile.firstName}} {{profile.lastName}}
           </a></header>
-          <div class="subscribe">
-            <button *ngIf="!profile.isSubscribed"
-                    (click)="subscribe(profile)">
-              {{ 'profile_subscribe' | translate }}
-            </button>
-            <button class="active" *ngIf="profile.isFollowed"
-                    (click)="unsubscribe(profile)">
-              <i class="fa fa-check" style="position: relative;top: 1.1px;"></i>
-              {{ 'profile_already_subscribed' | translate }}
-            </button>
-
-            <div class="nbr-subscribes">
-              {{profile.nbSuivi}}
-            </div>
+          <div class="subscribers">
+            {{profile.nbSuivi}} abonnés
           </div>
         </div>
-        <div class="top-blagueurs-ignore">
-          <span
-            (click)="ignore(profile)"
-            class="fa fa-times">
-          </span>
+        <div class="subscribe">
+          <button *ngIf="!profile.isSubscribed"
+                  (click)="subscribe(profile)">
+            {{ 'profile_subscribe' | translate }}
+          </button>
+          <button class="active" *ngIf="profile.isFollowed"
+                  (click)="unsubscribe(profile)">
+            <i class="fa fa-check" style="position: relative;top: 1.1px;"></i>
+            {{ 'profile_already_subscribed' | translate }}
+          </button>
+
+          <div class="ignore-profile" style="cursor: pointer">
+              <span
+                (click)="ignore(profile)"
+                class="fa fa-times">
+              </span>
+          </div>
         </div>
       </div>
     </div>
@@ -79,7 +81,10 @@
               {{ 'profile_already_subscribed' | translate }}
             </button>
             <div class="nbr-subscribes">
-              {{profile.nbSuivi}}
+              <span
+                (click)="ignore(profile)"
+                class="fa fa-times">
+          </span>
             </div>
           </div>
         </div>
