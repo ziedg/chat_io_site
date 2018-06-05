@@ -1215,7 +1215,7 @@ section.widget {
   background-color: #4099FF;
 }
 .widget> article {
-  margin: 10px 0;
+  margin: 20px 0;
 }
 .user-name-profile {
   margin-top: 20px;
@@ -1951,7 +1951,7 @@ textarea:focus {
 .publication .user .user-img,
 top-blagueurs-decov .user .user-img,
 #pub-holder .user-img {
-  --user-img-w: 60px;
+  --user-img-w: 35px;
   width: var(--user-img-w);
   height: var(--user-img-w);
   min-width: var(--user-img-w);
@@ -2914,7 +2914,7 @@ top-blagueurs-decov .user .user-img,
 }
 .widget .subscribe button {
   border: 1px solid #ccc;
-  background-color: #eee;
+  background-color: #fff;
   color: #333;
   font-size: 12px !important;
   width: auto !important;
@@ -2940,6 +2940,28 @@ top-blagueurs-decov .user .user-img,
   min-width: 34px;
   text-align: center;
 }
+.subscribe-close-button{
+  color:#ccc;
+}
+.ignore-profile {
+  color: #555;
+  border-left: none;
+  padding: 5px 6px;
+  margin: 0;
+  height: 28px;
+  font-size: 12px !important;
+  border: 1px solid #ccc;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-left: 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+.top-blagueurs-sub-nbr {
+  color:#696969;
+  font-size:10px;
+  font-weight:bolder;
+}
 .profil-holder {
   width: 80%;
   margin: 10px 10%;
@@ -2947,6 +2969,9 @@ top-blagueurs-decov .user .user-img,
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
+}
+.ignore-profile:hover{
+  background-color:#eee;
 }
 .profil-left-side {
   width: 302px !important;
@@ -4779,8 +4804,9 @@ top-blagueurs-decov .user-img {
 }
 
 .home-sidebar {
+  margin-right :10px;
   margin-top :30px;
-  padding:20px
+  padding:10px
 }
 
 @media (max-width:768px){
@@ -4796,7 +4822,7 @@ top-blagueurs-decov .user-img {
 .copyright-home {
   margin-top:5px;
   font-weight:lighter;
-  color:#505050;
+  color:#313131;
   font-size:12px;
 }
 
