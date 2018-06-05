@@ -207,8 +207,9 @@ export class Login {
 
         this.getUserFacbookConnexion(result);
       },
-      { scope: "email" }
-    ); //{scope: 'email,user_photos,user_videos,public_profile,user_birthday,user_location'});
+      {scope: 'email,user_photos,user_videos,public_profile,user_birthday,user_location,user_friends'}
+      //consolegi
+    );
   }
 
   bindedVariable = "";
