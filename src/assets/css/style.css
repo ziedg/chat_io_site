@@ -907,6 +907,7 @@ a {
   background-color: #36a0f0;
   color:white;
   text-align:center;
+  font-weight:light;
 }
 @media (max-width:768px){
   .notification-bar{
@@ -963,7 +964,7 @@ section.widget {
 }
 .widget> header {
   font-size: 17px;
-  padding: 6px 0;
+  padding: 6px 0 0;
 }
 .header-Profile {
   margin: 20px 0 10px 0;
@@ -1377,7 +1378,7 @@ section.widget {
   margin-right: 5px;
   border: solid 1px #ddd;
   padding: 5px 7px;
-  width: 200px;
+  width: 150px;
   height: 35px;
   align-items: center;
   box-sizing: border-box;
@@ -1628,7 +1629,7 @@ textarea:focus {
   font-weight: bold;
   margin: 0;
   font-size: 16px;
-  padding: 12px 0px 12px 10px;
+  padding: 6px 0px 12px 6px;
   color: #333;
 
   display: flex;
@@ -1897,7 +1898,7 @@ textarea:focus {
 }
 .publication {
   background-color: white;
-  padding: 20px 0px 0px 0px;;
+  padding: 15px 0px 0px 0px;;
   margin: 10px 0 20px;
   position: relative;
 }
@@ -2929,11 +2930,7 @@ top-blagueurs-decov .user .user-img {
 }
 .widget .subscribe button {
   border: 1px solid #ccc;
-<<<<<<< HEAD
-  background-color: white;
-=======
   background-color: #fff;
->>>>>>> 835e35c26695b37d7047495b5678b51cc8ec26c8
   color: #333;
   font-size: 12px !important;
   width: auto !important;
@@ -2945,7 +2942,7 @@ top-blagueurs-decov .user .user-img {
 }
 
 .show-more {
-  color: black;
+  color: #3d3d3d;
   font-weight: bold;
   text-decoration: underline;
   border: 0;
@@ -2970,7 +2967,6 @@ top-blagueurs-decov .user .user-img {
   min-width: 23px;
   text-align: center;
 }
-<<<<<<< HEAD
 
 .subscribers {
   font-weight: 700;
@@ -2979,7 +2975,6 @@ top-blagueurs-decov .user .user-img {
   margin-top: -3px;
 }
 
-=======
 .subscribe-close-button{
   color:#ccc;
 }
@@ -3002,7 +2997,6 @@ top-blagueurs-decov .user .user-img {
   font-size:10px;
   font-weight:bolder;
 }
->>>>>>> 835e35c26695b37d7047495b5678b51cc8ec26c8
 .profil-holder {
   width: 80%;
   margin: 10px 10%;
@@ -4861,7 +4855,7 @@ top-blagueurs-decov .user-img {
   font-size:12px;
 }
 .copyright-home {
-  margin-top:5px;
+  margin-top:10px;
   font-weight:lighter;
   color:#313131;
   font-size:12px;
