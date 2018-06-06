@@ -13,7 +13,7 @@
           <span ><a style="color:black;font-weight:bolder" routerLink="/redirect">Fil d'actualité</a></span></div>
         <div><span><img class="home-sidebar-icon" src="assets/images/new/chat-grey.png"></span>
             <span>Messenger</span></div>
-        <div class="conditions-generales"><div> Conditions générales &#5867;</div>
+        <div class="conditions-generales"><hr><div> Conditions générales &#5867;</div>
           <div> A propos de nous</div></div>
         <div class="copyright-home"> Speegar &copy; 2018</div>
     </div>
@@ -21,7 +21,7 @@
 
 
       <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri">
-        <h3>{{ 'home_welcome' | translate }}</h3>
+        <h3 style="margin-top:12px">{{ 'home_welcome' | translate }}</h3>
         {{ 'home_welcome_text_first_part' | translate }}
         <br> {{ 'home_welcome_text_second_part' | translate }}
         <i class="fa fa-times" aria-hidden="true" (click)="closeWelcomeMsg()"></i>
@@ -54,7 +54,7 @@
 
           </div>
           <div class="col-md-12 col-xs-12 add-head noPadding" id="pub-holder">
-            <div style="display: flex;align-items: flex-start; padding: 18px 13px 8px 14px; flex-wrap: wrap">
+            <div style="display: flex;align-items: flex-start; padding: 14px 13px 8px 14px; flex-wrap: wrap">
               <div class="user-img for-add" *ngIf="user.profilePictureMin" [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
               </div>
 
@@ -116,7 +116,7 @@
             </div>
 
           </div>
-          <div class="col-md-12 col-xs-12 add-head" style="padding: 2px 15px 2px 22px;display: flex">
+          <div class="col-md-12 col-xs-12 add-head" style="padding: 2px 15px 0px 22px;display: flex">
             <div class="col-md-5 col-xs-6 add-buttons noPadding" style="display: flex; align-items: center">
 
               <span class="picture-pub-in" (click)="addPhoto()" style="margin-right: 5px; line-height: 22px;">
@@ -234,21 +234,15 @@
       <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
 
       
-      <div class="dropdown dropdwon-translate hidden-sm hidden-xs">
-        <button class="btn btn-default dropdown-toggle dropdown-toggle-translate"
-                style="border-color: #edeeee"
-                type="button"
-                (click)="toggleTranslateDropdown()">
-          {{ selectedLanguage }}
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-translate" style="min-width: 80px;">
-          <li *ngFor="let language of translationLanguages"
+      <section class="hidden-sm hidden-xs widget bordered" style="padding:10px">
+      
+
+        <span *ngFor="let language of translationLanguages"
               (click)="onSelectLanguage(language)">
-            <a style="cursor: pointer">{{ language }}</a>
-          </li>
-        </ul>
-      </div>
+            <a class="language-option" style="cursor: pointer">{{ language }} </a>
+        </span>
+        
+      </section>
       
 
     </div>

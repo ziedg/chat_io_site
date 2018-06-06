@@ -840,9 +840,9 @@ a {
   display: -ms-flexbox;
   display: -webkit-flex;
   align-items: center;
-  margin-right: 13px;
+  margin-right: 18px;
   position: absolute;
-  right: 100px;
+  right: 15%;
   top: 20px;
   padding-top: 5px;
 }
@@ -1231,9 +1231,9 @@ section.widget {
 .welcome-msg {
   font-weight: 500;
   background-color: #fff;
-  padding: 10px 30px 20px;
-  padding-left: 30px !important;
-  padding-right: 30px !important;
+  padding: 5px 30px 20px;
+  padding-left: 20px !important;
+  padding-right: 10px !important;
   margin-top: 30px;
   width: 100%;
   flex-direction: column;
@@ -1629,7 +1629,7 @@ textarea:focus {
   font-weight: bold;
   margin: 0;
   font-size: 16px;
-  padding: 6px 0px 12px 6px;
+  padding: 12px 0px 12px 6px;
   color: #333;
 
   display: flex;
@@ -1854,7 +1854,7 @@ textarea:focus {
   padding: 0;
   margin-left: 0px;
   flex-grow: 1;
-  margin-top: 13px;
+  margin-top: 7px;
 }
 #pub-holder input {
   padding: 2px 2px 2px 0;
@@ -1908,8 +1908,14 @@ textarea:focus {
   margin: 10px 0 20px;
   position: relative;
   width: 100%;
-
 }
+.language-option {
+  color: #3d3d3d;
+  padding-right: 8px;
+  padding-left:15px;
+  text-align:center;
+}
+
 .hashtag {
   cursor: pointer;
   color: #3897f0;
@@ -1958,7 +1964,7 @@ textarea:focus {
 }
 
 top-blagueurs-decov .user .user-img {
-  --user-img-w: 50px;
+  --user-img-w: 35px;
   width: var(--user-img-w);
   height: var(--user-img-w);
   min-width: var(--user-img-w);
@@ -2993,8 +2999,8 @@ top-blagueurs-decov .user .user-img {
   text-align: center;
 }
 .top-blagueurs-sub-nbr {
-  color:#696969;
-  font-size:10px;
+  color:#979797;
+  font-size:12px;
   font-weight:bolder;
 }
 .profil-holder {
@@ -4850,15 +4856,17 @@ top-blagueurs-decov .user-img {
   }
 }
 .conditions-generales {
-  color:#505050;
+  color:#919191;
   margin-top:27px;
-  font-size:12px;
+  font-size:11px;
+  margin-left:20px;
 }
 .copyright-home {
   margin-top:10px;
   font-weight:lighter;
-  color:#313131;
+  color:#545454;
   font-size:12px;
+  margin-left:20px
 }
 
 .home-sidebar {
