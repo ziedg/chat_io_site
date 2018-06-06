@@ -14,22 +14,11 @@
              	[ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
         </div>
         <div class="user-name">
-<<<<<<< HEAD
-          <header>
-            <a [routerLink]="['/main/profile',profile._id]"
-               style="width: 96px; text-overflow:ellipsis">
-            {{profile.firstName}} {{profile.lastName}}
-          </a></header>
-          <div class="subscribers">
-            {{profile.nbSuivi}} abonnés
-          </div>
-=======
           <header><a [routerLink]="['/main/profile',profile._id]" 
             style="max-width:115px">
             {{profile.firstName}} {{profile.lastName}}
           </a></header>
           <div class="top-blagueurs-sub-nbr"> {{profile.nbSuivi}} abonnés </div>
->>>>>>> 835e35c26695b37d7047495b5678b51cc8ec26c8
         </div>
         <div class="subscribe">
           <button *ngIf="!profile.isSubscribed"
@@ -42,14 +31,6 @@
             {{ 'profile_already_subscribed' | translate }}
           </button>
 
-<<<<<<< HEAD
-          <div class="ignore-profile" style="cursor: pointer">
-              <span
-                (click)="ignore(profile)"
-                class="fa fa-times">
-              </span>
-          </div>
-=======
           <div class="ignore-profile">
             <span
             (click)="ignore(profile)"
@@ -57,7 +38,6 @@
           </span>
           </div>
         
->>>>>>> 835e35c26695b37d7047495b5678b51cc8ec26c8
         </div>
       </div>
     </div>
