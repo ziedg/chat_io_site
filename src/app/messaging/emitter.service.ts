@@ -11,6 +11,7 @@ conversationEmitter =new EventEmitter<any>();
   emitUser(user){
     this.userEmitter.emit(user);
     }
+    
     emitConversation(conversation){
       this.conversationEmitter.emit(conversation);
       }
