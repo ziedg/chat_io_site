@@ -31,7 +31,6 @@ import { SuggestionsComponent } from './main/components/suggestions/suggestions.
 import { TopBlagueursAndDecov } from './main/components/topBlagueursAndDecov/topBlagueursAndDecov';
 import { DateService } from './main/services/dateService';
 import { EmojiService } from './main/services/emojiService';
-import { GlobalService } from './main/services/globalService';
 import { LinkPreview } from './main/services/linkPreview';
 import { LinkView } from './main/services/linkView';
 import { PostService } from './main/services/postService';
@@ -83,7 +82,6 @@ import { MessagingModule } from './messaging/messaging.module';
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
         {provide: APP_BASE_HREF, useValue: '/'},
-        GlobalService,
     ],
 
 })

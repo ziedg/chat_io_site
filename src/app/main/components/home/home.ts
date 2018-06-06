@@ -15,7 +15,6 @@ import { User } from '../../../beans/user';
 import { LoginService } from '../../../login/services/loginService';
 import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
-import { GlobalService } from '../../services/globalService';
 import { LinkPreview } from '../../services/linkPreview';
 import { LinkView } from '../../services/linkView';
 import { NotificationService } from '../../services/notification.service';
@@ -32,7 +31,7 @@ declare var window: any;
   moduleId: module.id,
   selector: "home",
   templateUrl: "home.html",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Home {
   form;
@@ -73,6 +72,10 @@ export class Home {
 	arabicRegex:RegExp = /[\u0600-\u06FF]/;
   public imageFromLink:boolean = false;
 
+  translationLanguages: Array<String> = ['en', 'fr', 'es'];
+  selectedLanguage: String;
+
+
   //check if there is more post to retreive from server
   morePosts=true;
 
@@ -92,7 +95,6 @@ export class Home {
     private router: Router,
     private loginService: LoginService,
     private changeDetector: ChangeDetectorRef,
-    private globalService: GlobalService,
     private ng2ImgMaxService: Ng2ImgMaxService,
 
     //Notiifcation
@@ -124,6 +126,7 @@ export class Home {
   }
 
   ngOnInit() {
+    this.selectedLanguage = localStorage.getItem('userLang');
 
     //Notification Check
         if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -164,28 +167,8 @@ export class Home {
     this.changeDetector.markForCheck();
 
     setTimeout(function(){document.documentElement.scrollTop = 0;}, 1000);
-          
+
   }
-
-  onTouchStart(event) {
-    var touch_pos: number = +event.targetTouches[0].screenY;
-    this.touch_start_position = touch_pos;
-  }
-
-  onTouchEnd(event, marge: number = 20) {
-    // marge to show search mobile
-    if (this.globalService.showSearchMobile) {
-      this.globalService.showSearchMobile = false;
-
-    } else if (
-      event.changedTouches[0].screenY - this.touch_start_position >
-      marge
-    ) {
-      this.globalService.showSearchMobile = true
-    }
-  }
-
-  onTouchMove(event) {}
 
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
@@ -194,13 +177,9 @@ export class Home {
   }
 
   putNewPub(pub: PublicationBean, isShared: boolean) {
-    var element = pub;
+    let element = pub;
     element.displayed = true;
-    if (isShared) {
-      element.isShared = true;
-    } else {
-      element.isShared = false;
-    }
+    element.isShared = isShared;
     this.publicationBeanList.unshift(element);
     this.changeDetector.markForCheck();
   }
@@ -226,30 +205,20 @@ export class Home {
     }
     this.showSuggestionMSG = false;
     let element;
-    for (var i = 0; i < response.length; i++) {
+    for (let i = 0; i < response.length; i++) {
       element = response[i];
       element.displayed = true;
 
-      if (response[i].isShared == "true") {
-        element.isShared = true;
-      } else {
-        element.isShared = false;
-      }
+      element.isShared = response[i].isShared == "true";
 
-      if (response[i].isLiked == "true") element.isLiked = true;
-      else element.isLiked = false;
+      element.isLiked = response[i].isLiked == "true";
 
-      if (response[i].isDisliked == "true") element.isDisliked = true;
-      else element.isDisliked = false;
+      element.isDisliked = response[i].isDisliked == "true";
 
-      for (var j = 0; j < response[i].comments.length; j++) {
-        if (response[i].comments[j].isLiked == "true")
-          element.comments[j].isLiked = true;
-        else element.comments[j].isLiked = false;
+      for (let j = 0; j < response[i].comments.length; j++) {
+        element.comments[j].isLiked = response[i].comments[j].isLiked == "true";
 
-        if (response[i].comments[j].isDisliked == "true")
-          element.comments[j].isDisliked = true;
-        else element.comments[j].isDisliked = false;
+        element.comments[j].isDisliked = response[i].comments[j].isDisliked == "true";
 
         if (j == response[i].comments.length) {
           this.publicationBeanList.push(element);
@@ -344,7 +313,7 @@ export class Home {
 
   updatePublishTextOnPaste($event) {
     $event.preventDefault();
-    var text = $event.clipboardData.getData("text/plain");
+    let text = $event.clipboardData.getData("text/plain");
 
     if (
       text.search("youtube.com/watch") >= 0 ||
@@ -421,9 +390,9 @@ export class Home {
 
     this.online = window.navigator.onLine;
 
-    var txt:string = jQuery("#publishDiv").html();
+    let txt: string = jQuery("#publishDiv").html();
 
-    var white_space_regex:RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
+    let white_space_regex: RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
     if (
       //!this.form.value.publicationText &&
       white_space_regex.test(txt)
@@ -448,8 +417,8 @@ export class Home {
 												&& !this.uploadedPicture
 												&& !this.link.isSet;
 
-		var img_src:string = jQuery('#preview-image').attr('src');
-		if(this.imageFromLink) {
+    let img_src: string = jQuery('#preview-image').attr('src');
+    if(this.imageFromLink) {
 			this.imageFromLink = false;
 			if(img_src && img_src.length) {
 
@@ -464,7 +433,7 @@ export class Home {
 
     this.form.value.publicationText = txt;
 
-    var data = new FormData();
+    let data = new FormData();
     data.append("profileId", this.user._id);
     if (this.selectedMenuElement == 0) {
       data.append("confidentiality", "PUBLIC");
@@ -627,8 +596,8 @@ export class Home {
 
   getIdFacebookVideo(facebookLink): string {
 
-      var myRegexp = /(\/(videos\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
-      var match = facebookLink.match(myRegexp);
+      let myRegexp = /(\/(videos\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
+      let match = facebookLink.match(myRegexp);
       if (match) {
       return match[match.length-1];
     }
@@ -728,19 +697,19 @@ getPageFacebookVideo(videoLink): string {
   }
 
   linkAPI() {
-    var source = (this.publishText || "").toString();
+    let source = (this.publishText || "").toString();
     //this.analyzeLink(source);
   }
 
   analyzeLink(source)
     {
 
-      var myArray = this.linkView.getListLinks(source);
+      let myArray = this.linkView.getListLinks(source);
 
       if (!myArray.length) {
         return 1;
       }
-      var linkURL = myArray[0];
+      let linkURL = myArray[0];
       //check if linkURL refers to speegar.com
       if (linkURL == this.link.url) {
 
@@ -839,14 +808,23 @@ getPageFacebookVideo(videoLink): string {
 
 
 
+  onSelectLanguage(language:string) {
+    this.selectedLanguage = language;
+    language = language.toLowerCase();
+    jQuery(".dropdown-menu-translate").hide();
+    localStorage.setItem('userLang',language);
+    this.translate.setDefaultLang(language);
+    console.log(localStorage.getItem('userLang')) ;
+  }
+
+  toggleTranslateDropdown() {
+    jQuery(".dropdown-menu-translate").toggle();
+  }
 
 
 
 
   useLanguage(language: string) {
-    localStorage.setItem('userLang',language);
-    this.translate.setDefaultLang(language);
-    console.log(localStorage.getItem('userLang')) ;
   }
 
 }
@@ -869,9 +847,9 @@ export function readURL(input) {
 }
 
 function previewFile(uploadedFile) {
-  var preview = jQuery("#preview-image");
-  var file = uploadedFile;
-  var reader = new FileReader();
+  let preview = jQuery("#preview-image");
+  let file = uploadedFile;
+  let reader = new FileReader();
 
   reader.addEventListener(
     "load",

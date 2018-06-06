@@ -1,5 +1,5 @@
 <div class="main-header">
-  <div *ngIf="globalService.showSearchMobile" class="search-mobile col-xs-12 typeEffect hidden-lg hidden-md hidden-sm">
+  <div *ngIf="showSearchMobile" class="search-mobile col-xs-12 typeEffect hidden-lg hidden-md hidden-sm">
     <div class="mobile-header-center">
       <div class="header-center">
         <input class="search" placeholder="{{ 'main_search_placeholder' | translate }}" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)"
@@ -7,9 +7,6 @@
         <i class="fa fa-search" style="padding: 12px;margin-top: 0;margin-left: -46px;" aria-hidden="true"></i>
         <i class="fa fa-times-circle" aria-hidden="true" (click)="clearSearchMobile()"></i>
       </div>
-      <span (click)="globalService.showSearchMobile=false" class="search-mobile-annuler">
-        {{ 'Annuler' | translate }}
-      </span>
     </div>
   </div>
   <div class="sub-main-header">
@@ -27,9 +24,9 @@
       <i class="fa fa-search" aria-hidden="true"></i>
 
       <div class="upper-arrow-search upper-arrow"></div>
-      <div class="recherche-results-holder recherche-results-holder-1" style="display:none;" *ngIf="listSearshUsers">
+      <div class="recherche-results-holder recherche-results-holder-1" style="display:none;" *ngIf="listSearchUsers">
         <div class="recherche-results" *ngIf="!showRecentSearch">
-          <article *ngFor="let result of listSearshUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
+          <article *ngFor="let result of listSearchUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
             <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
             </div>
             <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
@@ -55,22 +52,21 @@
     <div id="notifSound">
     </div>
     <div class="header-right">
-      <article *ngIf="user">
-        <a class="hidden-sm hidden-xs" [routerLink]="['/main/profile',user._id]" style="margin-right:0">
-          <div class="user-img img-header" *ngIf="user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePictureMin + ')'}"></div>
-          <div class="user-img img-header" *ngIf="!user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + loginService.getUser().profilePicture + ')'}"></div>
-          <span style="margin-top: 4px;">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</span>
-        </a>
-      </article>
 
 
 			<article class="suggestions-icon hidden-lg hidden-md hidden-sm">
 				<i class="fa fa-user" [routerLink]="['/main/suggestions']"></i>
 			</article>
 
+      <article
+               class="hidden-xs"
+               style="margin-right: 10px; cursor: pointer;">
+        <div class="noPadding">
+          <i class="fa fa-comments"></i>
+        </div>
+      </article>
 
-
-      <article class="notification-box" [routerLink]="['/main/notification']" class="notification-parent hidden-lg hidden-md hidden-sm">
+      <article [routerLink]="['/main/notification']" class="notification-parent hidden-lg hidden-md hidden-sm">
         <div class="noPadding">
           <div class="cercle-notice" *ngIf="nbNewNotifications">
             {{nbNewNotifications}}
@@ -80,7 +76,7 @@
       </article>
 
 
-      <article class="notification-box" class="notification-parent hidden-xs">
+      <article class="notification-parent hidden-xs">
         <div class="noPadding">
           <div class="cercle-notice" (click)="loadFirstNotifactions()" *ngIf="nbNewNotifications">
             {{nbNewNotifications}}
@@ -200,6 +196,14 @@
       </article>
 
 
+      <article [routerLink]="['/main', 'profile', user._id]"
+               class="hidden-xs"
+                style="margin-right: 10px; cursor: pointer">
+        <div class="noPadding">
+          <i class="fa fa-user"></i>
+        </div>
+      </article>
+
       <article class="signout-button" class="hidden-sm hidden-xs">
         <i class="fa fa-sort-desc" (click)="enableProfile()" style="font-size: 19px;position: relative;bottom: 2px; cursor: pointer"></i>
         <img src="assets/pictures/arrow-up.png" class="upper-arrow-profile" style="display: none;">
@@ -227,7 +231,7 @@
     </div>
 
     <div class="header-right-mobile hidden-lg hidden-md hidden-sm">
-      <img src="assets/images/new/messaging-outline.png"
+      <img src="assets/images/new/nav-icons/{{icons.messaging.icon}}-{{icons.messaging.type}}.png"
            alt="messaging-icon"
            class="messaging-icon outline-icon">
     </div>
@@ -240,26 +244,41 @@
 
 
 <div class="hidden-lg hidden-md hidden-sm navigation-bottom">
-  <div class="home-icon">
-    <img class="outline-icon" src="assets/images/new/home-outline.png">
+  <div class="home-icon outline-icon-container"
+       (click)="changeActiveIcon('home')"
+       [routerLink]="['/main', 'home']">
+    <img class="outline-icon"
+         alt="home-icon"
+         src="assets/images/new/nav-icons/{{icons.home.icon}}-{{icons.home.type}}.png">
   </div>
-  <div class="search-icon">
-    <img class="outline-icon" src="assets/images/new/search-outline.png">
+  <div class="search-icon outline-icon-container"
+       (click)="toggleSearchMobile()" #searchMobileIcon>
+    <img class="outline-icon"
+         alt="search-icon"
+         src="assets/images/new/nav-icons/{{icons.search.icon}}-{{icons.search.type}}.png">
   </div>
-  <div class="notification-icon">
-    <img class="outline-icon" src="assets/images/new/notification-outline.png">
+  <div class="notifications-icon outline-icon-container"
+       (click)="changeActiveIcon('notifications')"
+       [routerLink]="['/main', 'notification']">
+    <img class="outline-icon"
+         alt="notifications-icon"
+         src="assets/images/new/nav-icons/{{icons.notifications.icon}}-{{icons.notifications.type}}.png">
   </div>
-  <div class="user-icon">
-    <img class="outline-icon" src="assets/images/new/user-outline.png">
+  <div class="user-icon outline-icon-container"
+       (click)="changeActiveIcon('profile')"
+       [routerLink]="['/main', 'profile', user._id]">
+    <img class="outline-icon"
+         alt="user-icon"
+         src="assets/images/new/nav-icons/{{icons.profile.icon}}-{{icons.profile.type}}.png">
   </div>
 </div>
 
-<div *ngIf="globalService.showSearchMobile" class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm"
-  (click)="globalService.showSearchMobile=false" #searchResults2>
+<div *ngIf="showSearchMobile" class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm"
+   #searchResults2 style="display:block!important" (click)="onClickSearchMobileHolder()">
   <div class="recherche-results recherche-results-2">
 
-    <div *ngIf="listSearshUsers && !showRecentSearch">
-      <article *ngFor="let result of listSearshUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
+    <div *ngIf="listSearchUsers && !showRecentSearch">
+      <article *ngFor="let result of listSearchUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
         <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
         </div>
         <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
@@ -270,7 +289,7 @@
       </article>
     </div>
 
-    <div *ngIf="listSearshUsers && showRecentSearch">
+    <div *ngIf="listSearchUsers && showRecentSearch">
       <article *ngFor="let result of RecentSearchList" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
         <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
 
@@ -282,7 +301,7 @@
       </article>
     </div>
     <div *ngIf="noSearchResults" class="search-2-no-results-cont">
-      <div class="search-2-no-results-img" style="background-image: url(assets/images/new/search.png);"></div>
+      <div class="search-2-no-results-img" style="background-image: url('assets/images/new/search.png');"></div>
       <h4 class="search-2-no-results-msg text-center">
         {{'search_result_no_result' | translate }}
         <br> {{ searchValue }}

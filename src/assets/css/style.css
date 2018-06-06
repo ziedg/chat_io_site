@@ -280,13 +280,6 @@
     cursor: pointer;
   }
 
-  .widget .subscribe button:hover,
-  .widget .subscribe button:active {
-    background-color: #009900;
-    border: 1px solid #009900;
-    color: #fff;
-  }
-
   .change-account:hover {
     color: #4668a9;
   }
@@ -379,7 +372,7 @@
 }
 body {
   margin: 0;
-  padding: 77px 0;
+  padding-top: 77px;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #fafafa !important;
   font-size: 14px;
@@ -915,6 +908,11 @@ a {
   color:white;
   text-align:center;
 }
+@media (max-width:768px){
+  .notification-bar{
+    display:none;
+  }
+}
 .notification-bar a {
   color:white;
   text-decoration:underline;
@@ -993,6 +991,12 @@ section.widget {
   #container{
     margin-right:auto;
     margin-left:auto;
+  }
+}
+
+@media(min-width: 1300px) {
+  #container {
+    min-width: 1260px;
   }
 }
 
@@ -1210,7 +1214,7 @@ section.widget {
   background-color: #4099FF;
 }
 .widget> article {
-  margin: 10px 0;
+  margin: 20px 0;
 }
 .user-name-profile {
   margin-top: 20px;
@@ -1944,15 +1948,31 @@ textarea:focus {
 }
 
 .publication .user .user-img,
-top-blagueurs-decov .user .user-img,
 #pub-holder .user-img {
-  --user-img-w: 60px;
+  --user-img-w: 35px;
   width: var(--user-img-w);
   height: var(--user-img-w);
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
 }
 
+top-blagueurs-decov .user .user-img {
+  --user-img-w: 50px;
+  width: var(--user-img-w);
+  height: var(--user-img-w);
+  min-width: var(--user-img-w);
+  min-height: var(--user-img-w);
+}
+
+.widget .subscribe button {
+  color: black;
+  background-color: white;
+  font-weight: bold;
+}
+
+.widget .subscribe button:hover {
+  background-color: #ddd;
+}
 
 .publication .user .user-img,
 #pub-holder .user-img {
@@ -2909,18 +2929,61 @@ top-blagueurs-decov .user .user-img,
 }
 .widget .subscribe button {
   border: 1px solid #ccc;
-  background-color: #eee;
+<<<<<<< HEAD
+  background-color: white;
+=======
+  background-color: #fff;
+>>>>>>> 835e35c26695b37d7047495b5678b51cc8ec26c8
   color: #333;
   font-size: 12px !important;
   width: auto !important;
   padding: 5px 6px;
-  font-size: 15px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   height: 28px;
   box-sizing: border-box;
 }
-.nbr-subscribes {
+
+.show-more {
+  color: black;
+  font-weight: bold;
+  text-decoration: underline;
+  border: 0;
+  margin-bottom: -2px;
+}
+
+.show-more:hover {
+  color: black;
+}
+.nbr-subscribes,
+.ignore-profile{
+  color: #555;
+  padding: 5px 6px;
+  margin: 0;
+  height: 28px;
+  font-size: 12px !important;
+  border: 1px solid #ccc;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-left: 0;
+  box-sizing: border-box;
+  min-width: 23px;
+  text-align: center;
+}
+<<<<<<< HEAD
+
+.subscribers {
+  font-weight: 700;
+  color: #999;
+  font-size: 13px;
+  margin-top: -3px;
+}
+
+=======
+.subscribe-close-button{
+  color:#ccc;
+}
+.ignore-profile {
   color: #555;
   border-left: none;
   padding: 5px 6px;
@@ -2932,9 +2995,14 @@ top-blagueurs-decov .user .user-img,
   border-bottom-right-radius: 3px;
   border-left: 0;
   box-sizing: border-box;
-  min-width: 34px;
   text-align: center;
 }
+.top-blagueurs-sub-nbr {
+  color:#696969;
+  font-size:10px;
+  font-weight:bolder;
+}
+>>>>>>> 835e35c26695b37d7047495b5678b51cc8ec26c8
 .profil-holder {
   width: 80%;
   margin: 10px 10%;
@@ -2942,6 +3010,9 @@ top-blagueurs-decov .user .user-img,
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
+}
+.ignore-profile:hover{
+  background-color:#eee;
 }
 .profil-left-side {
   width: 302px !important;
@@ -4240,7 +4311,7 @@ input.loginInput {
 }
 
 top-blagueurs-decov section.widget{
-  padding: 10px 20px;
+  padding: 10px 14px;
 }
 
 @media(max-width:500px){
@@ -4372,7 +4443,7 @@ publication .user {
 
 top-blagueurs-decov .user {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .top-blagueurs-ignore {
@@ -4467,7 +4538,7 @@ top-blagueurs-decov .user-name header {
   height: 100%;
   margin: 0!important;
   width: 100%;
-  top: unset;
+  top: var(--search-mobile-h);
   right: unset;
   padding: 0;
   background-color: #fafafa;
@@ -4505,14 +4576,26 @@ top-blagueurs-decov .user-name header {
   height: 35px;
 }
 
-main {
-  --header-mobile-h: 60px;
-  --outline-icon-h: 35px;
+body {
+  --header-mobile-h: 50px;
+  --search-mobile-h: 70px;
+  --outline-icon-h: 26px;
+}
+
+.search-mobile {
+  height: var(--search-mobile-h);
+}
+
+.outline-icon-container {
 }
 
 .outline-icon {
   height: var(--outline-icon-h);
-  opacity: 0.65;
+  opacity: .65;
+}
+
+.messaging-icon{
+  opacity: 1;
 }
 
 .header-right-mobile .outline-icon {
@@ -4547,14 +4630,19 @@ main {
   }
 
   .sub-container > .bordered,
-  .sub-container .publications-holder .publication {
+  .sub-container .publications-holder .publication,
+  profile .publications-holder .publication {
     border-radius: 0;
     border-left: 0;
     border-right: 0;
   }
 
-  body {
+  body, main {
     overflow-x: hidden;
+  }
+
+  body {
+    padding-top: calc(var(--header-mobile-h) + 10px);
   }
 }
 
@@ -4701,8 +4789,7 @@ change-password .input-param input {
 }
 
 .publication .content {
-  margin-top: 14px;
-  margin-bottom: 14px;
+  margin: 14px 0;
 }
 
 @media(min-width:830px){
@@ -4755,6 +4842,47 @@ top-blagueurs-decov .user-img {
 
 .publication .date {
     right: 25px;
+}
+
+.home-sidebar {
+  margin-right :10px;
+  margin-top :30px;
+  padding:10px
+}
+
+@media (max-width:768px){
+  .home-sidebar {
+    display:none;
+  }
+}
+.conditions-generales {
+  color:#505050;
+  margin-top:27px;
+  font-size:12px;
+}
+.copyright-home {
+  margin-top:5px;
+  font-weight:lighter;
+  color:#313131;
+  font-size:12px;
+}
+
+.home-sidebar {
+  --icon-h: 26px;
+}
+
+
+.home-sidebar-icon {
+  height: var(--icon-h);
+  width: var(--icon-h);
+  margin:5px;
+  padding-bottom:5px;
+
+}
+
+.home-sidebar .fa {
+  font-size: var(--icon-h);
+  margin-right: 10px;
 }
 
 /*------------ugly-and-bad-bug-fix----------*/
@@ -4833,6 +4961,20 @@ img[src="undefined"] {
   color: #dddddd;
 }
 
+
+
+.opacity-1 {
+  opacity: 1!important;
+}
+
+
+.scroll-v-none {
+  /*overflow-y: hidden;*/
+}
+
+.navigation-bottom img[src*="full"] {
+  opacity: 1;
+}
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px){

@@ -1,10 +1,10 @@
 import 'rxjs/add/operator/map';
 
 import { Location } from '@angular/common';
-import { ApplicationRef, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import {ApplicationRef, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild, HostListener} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Meta } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
@@ -15,7 +15,6 @@ import { LoginService } from '../../login/services/loginService';
 import { AppSettings } from '../../shared/conf/app-settings';
 import * as pathUtils from '../../utils/path.utils';
 import { DateService } from '../services/dateService';
-import { GlobalService } from '../services/globalService';
 import { RecentRechService } from '../services/recentRechService';
 
 //Notification
@@ -33,11 +32,12 @@ declare const gapi: any;
   templateUrl: "main.html"
 })
 export class Main {
+  showSearchMobile: boolean;
   autocomplete = false;
   notification = false;
   signoutHover = false;
   user: User = new User();
-  listSearshUsers: Array<User> = [];
+  listSearchUsers: Array<User> = [];
   listNotif: Array<NotificationBean> = [];
   nbNewNotifications: number = 0;
   searchValue: string;
@@ -47,17 +47,31 @@ export class Main {
   showButtonMoreNotif: Boolean = false;
   showNoNotif: Boolean = false;
   noSearchResults: Boolean = false;
-  searchMobileHidden = true;
   public showNotif:boolean=true;
+
+  icons;
 
   @ViewChild("searchResults2") searchRes2: ElementRef;
   @ViewChild("searchMobileInput") searchInput: ElementRef;
-  
-  // Notification vars 
+  @ViewChild("searchMobileIcon") searchMobileIcon: ElementRef;
+
+  // Notification vars
   private subscriptionJson = '';
   private isSubscribed = false;
   private registration = undefined;
   // end Notification vars
+
+
+  @HostListener('document:click', ['$event'])
+  click(event) {
+    if( !this.searchRes2.nativeElement.contains(event.target) &&
+        !this.searchInput.nativeElement.contains(event.target) &&
+        !this.searchMobileIcon.nativeElement.contains(event.target) &&
+        this.showSearchMobile) {
+      console.log("got ittt!");
+      this.toggleSearchMobile();
+    }
+  }
 
   constructor(
     public translate: TranslateService,
@@ -65,39 +79,88 @@ export class Main {
     private http: Http,
     private location: Location,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private loginService: LoginService,
     private changeDetector: ChangeDetectorRef,
     private recentRechService: RecentRechService,
     private appRef: ApplicationRef,
-    public globalService: GlobalService,
-
-    // TODO: check globalService access
     private meta: Meta,
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
 
     //Notiifcation
-    private notificationService: NotificationService
-  ) {
+    private notificationService: NotificationService) {
+
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
     this.listNotif = [];
     this.user = this.loginService.getUser();
+    this.icons = {
+      messaging: {
+        icon: "messaging-icon",
+        type: "outline"
+      },
+      home: {
+        icon: "home-icon",
+        type: "full"
+      },
+      search: {
+        icon: "search-icon",
+        type: "outline"
+      },
+      notifications: {
+        icon: "notifications-icon",
+        type: "outline"
+      },
+      profile: {
+        icon: "user-icon",
+        type: "outline"
+      },
+      outline: "outline",
+      full: "full",
+      activeIcon: "home",
+      wasActiveIcon: ""
+    };
+  }
+
+  onClickSearchMobileHolder() {
+    console.log("ok");
+    this.toggleSearchMobile()
   }
 
   ngOnInit() {
-  
+    this.router
+      .events
+      .subscribe(event => {
+        if(event instanceof NavigationStart) {
+          if(event.url.includes("/home")) {
+            this.changeActiveIcon("home");
+          }
+          else if(event.url.includes("/notification")) {
+            this.changeActiveIcon("notifications");
+          }
+          else if(event.url.includes("/profile/"+this.user._id)) {
+            this.changeActiveIcon("profile");
+          }
+        }
+      });
+
+
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
       name: "viewport",
       content: "width=device-width; initial-scale=1.0;"
     });
     this.checkNewNotifications();
+
     jQuery(".recherche-results-holder").blur(function() {
       jQuery(".file-input-holder").hide();
     });
     setInterval(() => {
       this.changeDetector.markForCheck();
     }, 500);
+
     jQuery(document).click(function(e) {
       if (
         jQuery(e.target).closest(".recherche-results-holder").length === 0 &&
@@ -138,7 +201,7 @@ export class Main {
   }
 
   onChange(newValue: string) {
-    this.listSearshUsers = [];
+    this.listSearchUsers = [];
     this.enableAutocomplete();
     this.changeDetector.markForCheck();
     if (newValue.length > 1) {
@@ -181,17 +244,17 @@ export class Main {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-          this.listSearshUsers = [];
+          this.listSearchUsers = [];
           this.noSearchResults = false;
           this.changeDetector.markForCheck();
-          for (var i = 0; i < this.listSearshUsers.length; i++) {
-            this.listSearshUsers.pop();
+          for (var i = 0; i < this.listSearchUsers.length; i++) {
+            this.listSearchUsers.pop();
             this.changeDetector.markForCheck();
           }
           if (response.status == 0) {
             if (response.profiles)
               for (var i = 0; i < response.profiles.length; i++) {
-                this.listSearshUsers[i] = response.profiles[i];
+                this.listSearchUsers[i] = response.profiles[i];
                 this.changeDetector.markForCheck();
               }
           }
@@ -200,7 +263,7 @@ export class Main {
           this.noSearchResults = true;
         },
         () => {
-          if (this.listSearshUsers.length == 0) {
+          if (this.listSearchUsers.length == 0) {
             this.disableAutocomplete();
             this.noSearchResults = true;
           } else {
@@ -384,7 +447,7 @@ export class Main {
 
   clearSearchMobile() {
     this.searchInput.nativeElement.value = "";
-    this.listSearshUsers.length = 0;
+    this.listSearchUsers.length = 0;
     this.noSearchResults = false;
   }
 
@@ -428,5 +491,31 @@ export class Main {
     } else {
       this.subscriptionJson = '';
     }
+  }
+
+  toggleSearchMobile() {
+    this.showSearchMobile = !this.showSearchMobile;
+    if(this.showSearchMobile) {
+      this.renderer.addClass(document.body, 'scroll-v-none');
+      this.icons.wasActiveIcon = this.icons.activeIcon;
+      this.icons.activeIcon = this.icons.search.icon;
+      this.icons.search.type = this.icons.full;
+      this.icons[this.icons.wasActiveIcon].type = this.icons.outline;
+    }
+    else {
+      this.icons.activeIcon = this.icons.wasActiveIcon;
+      this.icons.wasActiveIcon = "";
+      this.icons.search.type = this.icons.outline;
+      this.icons[this.icons.activeIcon].type = this.icons.full;
+      this.renderer.removeClass(document.body, 'scroll-v-none');
+    }
+  }
+
+  changeActiveIcon(newActiveIcon: string) {
+    console.log("change form: ", this.icons[this.icons.activeIcon].icon, " to : ", this.icons[newActiveIcon]);
+    this.showSearchMobile = false;
+    this.icons[this.icons.activeIcon].type = this.icons.outline;
+    this.icons[newActiveIcon].type = this.icons.full;
+    this.icons.activeIcon = newActiveIcon;
   }
 }

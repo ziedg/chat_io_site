@@ -119,10 +119,11 @@ export class Login {
               FB.api(
                 "/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location",
                 response => {
-                  FB.api('/me/friends', ( friends => {
-                    //console.log('friends');
+                  FB.api('me/?fields=friends', ( friends => {
+                    console.log('friends');
                     console.log(JSON.stringify('Facebook friends: ' + friends));
-                    //console.log(friends);
+                    console.log(friends);
+
 
                     this.getUserInformations(
                       response,
@@ -206,8 +207,9 @@ export class Login {
 
         this.getUserFacbookConnexion(result);
       },
-      { scope: "email" }
-    ); //{scope: 'email,user_photos,user_videos,public_profile,user_birthday,user_location'});
+      {scope: 'email,user_photos,user_videos,public_profile,user_birthday,user_location,user_friends'}
+      //consolegi
+    );
   }
 
   bindedVariable = "";
