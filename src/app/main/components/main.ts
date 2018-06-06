@@ -53,7 +53,6 @@ export class Main {
 
   @ViewChild("searchResults2") searchRes2: ElementRef;
   @ViewChild("searchMobileInput") searchInput: ElementRef;
-  @ViewChild("searchMobileIcon") searchMobileIcon: ElementRef;
 
   // Notification vars
   private subscriptionJson = '';
@@ -61,17 +60,6 @@ export class Main {
   private registration = undefined;
   // end Notification vars
 
-
-  @HostListener('document:click', ['$event'])
-  click(event) {
-    if( !this.searchRes2.nativeElement.contains(event.target) &&
-        !this.searchInput.nativeElement.contains(event.target) &&
-        !this.searchMobileIcon.nativeElement.contains(event.target) &&
-        this.showSearchMobile) {
-      console.log("got ittt!");
-      this.toggleSearchMobile();
-    }
-  }
 
   constructor(
     public translate: TranslateService,
@@ -103,7 +91,7 @@ export class Main {
       },
       home: {
         icon: "home-icon",
-        type: "full"
+        type: "outline"
       },
       search: {
         icon: "search-icon",
@@ -124,29 +112,8 @@ export class Main {
     };
   }
 
-  onClickSearchMobileHolder() {
-    console.log("ok");
-    this.toggleSearchMobile()
-  }
 
   ngOnInit() {
-    this.router
-      .events
-      .subscribe(event => {
-        if(event instanceof NavigationStart) {
-          if(event.url.includes("/home")) {
-            this.changeActiveIcon("home");
-          }
-          else if(event.url.includes("/notification")) {
-            this.changeActiveIcon("notifications");
-          }
-          else if(event.url.includes("/profile/"+this.user._id)) {
-            this.changeActiveIcon("profile");
-          }
-        }
-      });
-
-
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
       name: "viewport",
@@ -493,29 +460,4 @@ export class Main {
     }
   }
 
-  toggleSearchMobile() {
-    this.showSearchMobile = !this.showSearchMobile;
-    if(this.showSearchMobile) {
-      this.renderer.addClass(document.body, 'scroll-v-none');
-      this.icons.wasActiveIcon = this.icons.activeIcon;
-      this.icons.activeIcon = this.icons.search.icon;
-      this.icons.search.type = this.icons.full;
-      this.icons[this.icons.wasActiveIcon].type = this.icons.outline;
-    }
-    else {
-      this.icons.activeIcon = this.icons.wasActiveIcon;
-      this.icons.wasActiveIcon = "";
-      this.icons.search.type = this.icons.outline;
-      this.icons[this.icons.activeIcon].type = this.icons.full;
-      this.renderer.removeClass(document.body, 'scroll-v-none');
-    }
-  }
-
-  changeActiveIcon(newActiveIcon: string) {
-    console.log("change form: ", this.icons[this.icons.activeIcon].icon, " to : ", this.icons[newActiveIcon]);
-    this.showSearchMobile = false;
-    this.icons[this.icons.activeIcon].type = this.icons.outline;
-    this.icons[newActiveIcon].type = this.icons.full;
-    this.icons.activeIcon = newActiveIcon;
-  }
 }
