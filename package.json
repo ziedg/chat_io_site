@@ -33,6 +33,7 @@
     "ng2-img-max": "2.1.6",
     "rxjs": "^6.2.0",
     "rxjs-compat": "^6.0.0-rc.0",
+    "socket.io-client": "^2.1.1",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {

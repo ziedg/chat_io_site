@@ -37,14 +37,19 @@ import { LinkView } from './main/services/linkView';
 import { PostService } from './main/services/postService';
 import { RecentRechService } from './main/services/recentRechService';
 import { SeoService } from './main/services/seo-service';
+import { SocketService } from './main/services/socket.service';
+import { EmitterService } from './messaging/emitter.service';
+import { ChatService } from './messanging/chat.service';
 import { FakeComponent } from './shared/fake.component';
 import { httpFactory } from './utils/factories/http.factory';
+import { MessagingModule } from './messaging/messaging.module';
 
 /** Factories */
 @NgModule({
     imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
       ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule,Ng2ImgMaxModule,
       HttpClientModule,
+      MessagingModule,
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
@@ -67,6 +72,9 @@ import { httpFactory } from './utils/factories/http.factory';
         PostService,
         SeoService,
         LoginService,
+        SocketService,
+        EmitterService,
+        ChatService,
         ResetPasswordService,
         {
           provide: Http, useFactory: httpFactory,

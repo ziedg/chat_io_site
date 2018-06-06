@@ -10,6 +10,7 @@ import { Post } from './main/components/post/post';
 import { Profile } from './main/components/profile/profile';
 import { SuggestionsComponent } from './main/components/suggestions/suggestions.component';
 import { FakeComponent } from './shared/fake.component';
+import { MessagingComponent } from './messaging/messaging.component';
 
 
 export const routes: Routes = [
@@ -49,6 +50,10 @@ export const routes: Routes = [
         loadChildren: './support/support.module#SupportModule'
        
     },
+    {
+        path: 'messaging',
+        component: MessagingComponent
+    },   
     {
         path: '**',
         redirectTo: '/main/404'

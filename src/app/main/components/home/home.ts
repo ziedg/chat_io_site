@@ -18,9 +18,8 @@ import * as pathUtils from '../../../utils/path.utils';
 import { GlobalService } from '../../services/globalService';
 import { LinkPreview } from '../../services/linkPreview';
 import { LinkView } from '../../services/linkView';
-import { PostService } from '../../services/postService';
 import { NotificationService } from '../../services/notification.service';
-import { VAPID_PUBLIC_KEY, urlB64ToUint8Array } from '../../../utils/notification';
+import { PostService } from '../../services/postService';
 
 
 declare var jQuery: any;

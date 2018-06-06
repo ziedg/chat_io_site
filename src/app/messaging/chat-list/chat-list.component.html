@@ -1,0 +1,10 @@
+ 
+<ul class="list-group">
+	<li class="list-group-item"
+		*ngFor="let user of chatListUsers"
+		(click)="selectUser(user)" 
+		[class.active]="isUserSelected(user.id)">
+			{{ user.firstName +' '+ user.lastName }}
+	</li>
+</ul>
+
