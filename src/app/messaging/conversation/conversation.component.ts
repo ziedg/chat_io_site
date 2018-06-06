@@ -53,13 +53,12 @@ public messageLoading = true;
 
     this.emitterService.conversationEmitter.subscribe((data) => {
       this.messageLoading = false;
-      if(data.messages==undefined)
+      if(data==undefined)
       {
         this.messages=[];
       }
       else{
-        this.messages = data.messages;
-
+        this.messages = data;
       }
   });
 }
@@ -67,7 +66,6 @@ public messageLoading = true;
 sendMessage(event) {
   if (event.keyCode === 13) {
       const message = this.messageForm.controls['message'].value.trim();
-      console.log(message);
       if (message === '' || message === undefined || message === null) {
           alert(`Message can't be empty.`);
       } else if (this.userId === '') {
