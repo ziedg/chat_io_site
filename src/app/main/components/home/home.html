@@ -7,16 +7,17 @@
   <div class="row">
     <div class="col-md-2 home-sidebar"> 
         <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
-           [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}" style="height:20px"></span>
+           [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}" ></span>
           <span><a style="color:black" [routerLink]="['/main/profile',user._id]" >{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span></div>
         <div><span><img class="home-sidebar-icon" src="assets/images/new/home-grey.png"></span>
           <span ><a style="color:black;font-weight:bolder" routerLink="/redirect">Fil d'actualité</a></span></div>
         <div><span><img class="home-sidebar-icon" src="assets/images/new/chat-grey.png"></span>
             <span>Messenger</span></div>
-        <div class="conditions-generales"> Conditions générales</div>
+        <div class="conditions-generales"><div> Conditions générales &#5867;</div>
+          <div> A propos de nous</div></div>
         <div class="copyright-home"> Speegar &copy; 2018</div>
     </div>
-    <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 sub-container">
+    <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 sub-container" style="height:100%;overflow:auto !important">
 
 
       <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri">
@@ -53,7 +54,7 @@
 
           </div>
           <div class="col-md-12 col-xs-12 add-head noPadding" id="pub-holder">
-            <div style="display: flex;align-items: flex-start; padding: 10px 13px 8px 17px; flex-wrap: wrap">
+            <div style="display: flex;align-items: flex-start; padding: 18px 13px 8px 14px; flex-wrap: wrap">
               <div class="user-img for-add" *ngIf="user.profilePictureMin" [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
               </div>
 
@@ -126,13 +127,6 @@
                 <b class="gif-btn">{{ 'home_publish_GIF' | translate }}</b>
               </span>
 
-              <span class="youtube-video-in hidden-xs" style="line-height: 23px">
-                <input class="yt-in-url youtube-input-popup" placeholder="{{ 'home_publish_youtube_placeholder' | translate }}" style="display:none;"
-                (change)="updateYoutubeFacebook()" formControlName="publicationYoutubeLink">
-
-
-                <i class="fa fa-youtube-play" (click)="changeYoutubeInput()"></i>
-              </span>
 
               <input type="file" id="file-image" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
               <input type="file" id="file-image-gif" style="display:none" accept=".gif" (change)="uploadPhotoGIF($event)">
@@ -239,6 +233,7 @@
     <div *ngIf="user" class="col-md-3 col-sm-5 hidden-xs side-home">
       <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
 
+      
       <div class="dropdown dropdwon-translate hidden-sm hidden-xs">
         <button class="btn btn-default dropdown-toggle dropdown-toggle-translate"
                 style="border-color: #edeeee"
@@ -254,6 +249,7 @@
           </li>
         </ul>
       </div>
+      
 
     </div>
   </div>
