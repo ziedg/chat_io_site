@@ -1,4 +1,9 @@
 {
+  "home": "Home",
+  "search": "Search",
+  "discussion": "Discussion",
+  "notifications": "Notifications",
+  "profile": "Profile",
   "login_speegar_description": "le permite compartir sus mejores chistes y videos con su entorno",
   "login_message": "Conéctese para compartir sus mejores videos y chistes con su entorno",
   "login_button_facebook_login": "Iniciar sesión con Facebook",

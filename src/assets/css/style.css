@@ -1629,7 +1629,7 @@ textarea:focus {
   font-weight: bold;
   margin: 0;
   font-size: 16px;
-  padding: 12px 0px 12px 6px;
+  padding: 12px 0 12px 6px;
   color: #333;
 
   display: flex;
@@ -1802,7 +1802,7 @@ textarea:focus {
 }
 
 @media(max-width: 767px) {
-  .add-pub .add-head {
+  .add-pub{
     padding-top: 6px!important;
     padding-bottom: 6px!important;
   }
@@ -4347,13 +4347,6 @@ top-blagueurs-decov section.widget{
   transition-duration: 400ms;
   transition-property: opacity;
 }
-.suggestions-box .container-draggable:first-child .user {
-  border-top: 1px solid #edeeee;
-}
-
-.suggestions-box .container-draggable:last-child .user{
-  border-bottom: 1px solid #edeeee;
-}
 
 .container-draggable {
   margin:auto;
@@ -4545,7 +4538,17 @@ top-blagueurs-decov .user-name header {
   max-height: 100%;
 }
 
+#pub-holder .pub-holder-holder {
+  display: flex;
+  align-items: flex-start;
+  padding: 14px 13px 8px 14px;
+  flex-wrap: wrap;
+}
 
+.add-head {
+  padding: 2px 15px 0px 22px;
+  display: flex
+}
 
 .search-mobile {
   padding:0;
@@ -4573,7 +4576,7 @@ top-blagueurs-decov .user-name header {
 
 
 body {
-  --header-mobile-h: 50px;
+  --header-mobile-h: 46px;
   --search-mobile-h: 70px;
   --outline-icon-h: 26px;
 }
@@ -4604,6 +4607,8 @@ body {
 .header-right-mobile .outline-icon {
   height: calc(var(--outline-icon-h) + 5px);
 }
+
+
 
 @media(max-width:768px) {
   .main-header {
@@ -4647,6 +4652,67 @@ body {
   .bordered {
     border-color: #e0e0e0;
   }
+
+  .upper-form-add {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .add-pub {
+    margin-top: 20px;
+  }
+  #welcomeMsgDisplay {
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: justify;
+    padding-right: 21px!important;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  #pub-holder .pub-holder-holder {
+    padding: 0;
+  }
+
+  .add-head {
+    padding: 4px 15px!important;
+  }
+
+  .publish-button {
+    height: 33px;
+    margin: 3px 0;
+  }
+
+  #pub-holder .textarea-publish {
+    margin-top: 12px;
+    font-size: 17px;
+  }
+
+  .upper-form-add {
+    padding-left: 0;
+  }
+
+  .welcome-msg {
+    margin-top: 90px;
+    margin-bottom: 20px;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+
+  .suggestions-box {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .add-pub {
+    margin-bottom: 20px;
+  }
+
+  .sub-container > .bordered {
+    margin-bottom: 20px;
+  }
 }
 
 .navigation-bottom {
@@ -4682,6 +4748,8 @@ body {
 .search-mobile {
   padding-left:0!important;
   padding-right: 0!important;
+  border-bottom: solid 1px #bfbfbf;
+  box-shadow: 0 -4px 11px 0 #676767;
 }
 
 .search-mobile .search-mobile-annuler {

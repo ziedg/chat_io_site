@@ -5,7 +5,7 @@
 
 <div *ngIf="user" class="container" id="container">
   <div class="row">
-    <div class="col-md-2 home-sidebar"> 
+    <div class="col-md-2 home-sidebar">
         <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
            [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}" ></span>
           <span><a style="color:black" [routerLink]="['/main/profile',user._id]" >{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span></div>
@@ -20,8 +20,8 @@
     <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 sub-container" style="height:100%;overflow:auto !important">
 
 
-      <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri">
-        <h3 style="margin-top:12px">{{ 'home_welcome' | translate }}</h3>
+      <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="true || user.isNewInscri">
+        <h3 style="margin-top:0">{{ 'home_welcome' | translate }}</h3>
         {{ 'home_welcome_text_first_part' | translate }}
         <br> {{ 'home_welcome_text_second_part' | translate }}
         <i class="fa fa-times" aria-hidden="true" (click)="closeWelcomeMsg()"></i>
@@ -54,7 +54,7 @@
 
           </div>
           <div class="col-md-12 col-xs-12 add-head noPadding" id="pub-holder">
-            <div style="display: flex;align-items: flex-start; padding: 14px 13px 8px 14px; flex-wrap: wrap">
+            <div class="pub-holder-holder">
               <div class="user-img for-add" *ngIf="user.profilePictureMin" [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
               </div>
 
@@ -116,7 +116,7 @@
             </div>
 
           </div>
-          <div class="col-md-12 col-xs-12 add-head" style="padding: 2px 15px 0px 22px;display: flex">
+          <div class="col-md-12 col-xs-12 add-head" style="border-bottom: 0">
             <div class="col-md-5 col-xs-6 add-buttons noPadding" style="display: flex; align-items: center">
 
               <span class="picture-pub-in" (click)="addPhoto()" style="margin-right: 5px; line-height: 22px;">
@@ -233,17 +233,17 @@
     <div *ngIf="user" class="col-md-3 col-sm-5 hidden-xs side-home">
       <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
 
-      
+
       <section class="hidden-sm hidden-xs widget bordered" style="padding:10px">
-      
+
 
         <span *ngFor="let language of translationLanguages"
               (click)="onSelectLanguage(language)">
             <a class="language-option" style="cursor: pointer">{{ language }} </a>
         </span>
-        
+
       </section>
-      
+
 
     </div>
   </div>
