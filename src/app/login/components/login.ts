@@ -154,9 +154,16 @@ export class Login {
       facebookId: response.id,
       birthday: response.birthday,
       gender: response.gender,
+      friends: response.friends,
+  
       //coverPicture: response.cover.source,
-      profilePictureMin: responseSmallPic.picture.data.url
-    });
+      profilePictureMin: responseSmallPic.picture.data.url,
+       
+
+    }
+  );
+  console.log(response.data);
+  
     this.changeDetector.markForCheck();
 
     this.http
