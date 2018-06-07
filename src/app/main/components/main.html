@@ -1,14 +1,4 @@
 <div class="main-header">
-  <div *ngIf="showSearchMobile" class="search-mobile col-xs-12 typeEffect hidden-lg hidden-md hidden-sm">
-    <div class="mobile-header-center">
-      <div class="header-center">
-        <input class="search" placeholder="{{ 'main_search_placeholder' | translate }}" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)"
-          (focus)="onFocus()" #searchMobileInput>
-        <i class="fa fa-search" style="padding: 12px;margin-top: 0;margin-left: -46px;" aria-hidden="true"></i>
-        <i class="fa fa-times-circle" aria-hidden="true" (click)="clearSearchMobile()"></i>
-      </div>
-    </div>
-  </div>
   <div class="sub-main-header">
     <div class="header-left">
       <article class="logo">
@@ -247,7 +237,7 @@
     <span class="outline-icon-text">Accueil</span>
   </div>
   <div class="search-icon outline-icon-container"
-       [routerLink]="['/main', 'suggestions']"
+       [routerLink]="['/main', 'search-mobile']"
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="search-icon"
@@ -280,44 +270,6 @@
   </div>
 </div>
 
-<div *ngIf="showSearchMobile" class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm"
-   #searchResults2 style="display:block!important">
-  <div class="recherche-results recherche-results-2">
-
-    <div *ngIf="listSearchUsers && !showRecentSearch">
-      <article *ngFor="let result of listSearchUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
-        <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
-        </div>
-        <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
-        </div>
-        <div class="">
-          {{result.firstName}} {{result.lastName}}
-        </div>
-      </article>
-    </div>
-
-    <div *ngIf="listSearchUsers && showRecentSearch">
-      <article *ngFor="let result of RecentSearchList" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
-        <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
-
-        <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
-
-        <div class="">
-          {{result.firstName}} {{result.lastName}}
-        </div>
-      </article>
-    </div>
-    <div *ngIf="noSearchResults" class="search-2-no-results-cont">
-      <div class="search-2-no-results-img" style="background-image: url('assets/images/new/search.png');"></div>
-      <h4 class="search-2-no-results-msg text-center">
-        {{'search_result_no_result' | translate }}
-        <br> {{ searchValue }}
-      </h4>
-    </div>
-
-  </div>
-
-</div>
 
 
 

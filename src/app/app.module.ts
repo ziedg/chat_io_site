@@ -42,6 +42,7 @@ import { ChatService } from './messanging/chat.service';
 import { FakeComponent } from './shared/fake.component';
 import { httpFactory } from './utils/factories/http.factory';
 import { MessagingModule } from './messaging/messaging.module';
+import { SearchMobile } from "./main/components/search-mobile/search-mobile.component";
 
 /** Factories */
 @NgModule({
@@ -58,7 +59,7 @@ import { MessagingModule } from './messaging/messaging.module';
       })],       // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,
