@@ -61,6 +61,8 @@ selectUser(user: User): void {
      this.emitterService.emitUser(user);
 
       /* calling method to get the messages */
+      console.log(this.loginService.getUser())
+      console.log(user._id)
     this.chatService.getMessages({ userId: this.userId, toUserId: user._id })
     .subscribe((response) => {
       console.log(response)
