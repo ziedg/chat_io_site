@@ -181,11 +181,11 @@ export class Publication {
 
   ngOnInit() {
 
-        
+
 
     // Get the modal
      var popupmodal = document.getElementById('myModal');
-    
+
         // Get the image and insert it inside the modal - use its "alt" text as a caption
         var img = jQuery('.myImg');
          var popupmodalImg = jQuery("#img01");
@@ -194,14 +194,14 @@ export class Publication {
             var popupnewSrc = this.src;
              popupmodalImg.attr('src', popupnewSrc);
         });
-    
+
        // Get the <span> element that closes the modal
          var popupspan = document.getElementsByClassName("close-button")[0];
-    
+
        // When the user clicks on <span> (x), close the modal
         popupspan.addEventListener("click",function(){
           popupmodal.style.display = "none";
-        }); 
+        });
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 
@@ -300,7 +300,7 @@ export class Publication {
       if (this.publicationBean.publyoutubeLink) {
         this.linkYtb = "https://www.youtube.com/embed/" + this.publicationBean.publyoutubeLink;
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkYtb);
-        
+
       }
       else if (this.publicationBean.publfacebookLink) {
         this.linkFb = "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +

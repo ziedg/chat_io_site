@@ -2066,7 +2066,7 @@ top-blagueurs-decov .user .user-img {
 .publication-text,
 .comment-text {
   display: inline-block;
-  width: 100%;
+  width: 96%;
   margin-left:7px;
   margin-bottom:5px;
   word-wrap: break-word;
@@ -2393,7 +2393,7 @@ top-blagueurs-decov .user .user-img {
 /* profil */
 
 .cover {
-  background-image: url(../pictures/cover.jpg);
+  background-image: url("../pictures/cover.jpg");
   background-size: cover;
   height: 279px;
   width: 100%;
@@ -4572,10 +4572,6 @@ top-blagueurs-decov .user-name header {
 }
 
 
-.outline-icon {
-  height: 35px;
-}
-
 body {
   --header-mobile-h: 50px;
   --search-mobile-h: 70px;
@@ -4590,12 +4586,15 @@ body {
   width: 100%;
   height: 100%;
   flex-grow: 1;
-  padding: 10px 6%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5px;
 }
 
 .outline-icon {
-  height: var(--outline-icon-h);
-  opacity: .65;
+  height: 20px;
+  background-color: rgb(22, 22, 22);
 }
 
 .messaging-icon{
@@ -4641,7 +4640,7 @@ body {
 
   body {
     padding-top: 0;
-    background-color: #e9e9e9!important;
+    background-color: #f1f1f1!important;
   }
 
   .bordered {
@@ -4660,8 +4659,8 @@ body {
   position: fixed;
   z-index: 8;
   bottom: 0;
-  border-top: solid 1px #edeeee;
-  box-shadow: 0 1px 2px 0 #676767;
+  border-top: solid 1px #bfbfbf;
+  box-shadow: 0 4px 11px 0 #676767;
 }
 
 
@@ -4981,8 +4980,14 @@ img[src="undefined"] {
   opacity: 1;
 }
 
-.active-nav-icon {
-  border-top: 2px solid #4fa123;
+.active-nav-icon > .outline-icon {
+  background-color: #4c9a21;
+}
+
+.outline-icon-text {
+  font-size: 12px;
+  margin-top: 2px;
+  color: #5d5d5d;
 }
 
 /* 100% Image Width on Smaller Screens */

@@ -243,35 +243,40 @@
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="home-icon"
-         src="assets/images/new/nav-icons/{{icons.home.icon}}-{{icons.home.type}}.png">
+         src="assets/images/new/nav-icons/{{icons.home.icon}}-full.png">
+    <span class="outline-icon-text">Accueil</span>
   </div>
   <div class="search-icon outline-icon-container"
-       [routerLink]="['/main', 'search']"
+       [routerLink]="['/main', 'suggestions']"
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="search-icon"
-         src="assets/images/new/nav-icons/{{icons.search.icon}}-{{icons.search.type}}.png">
+         src="assets/images/new/nav-icons/{{icons.search.icon}}-full.png">
+    <span class="outline-icon-text">Recherche</span>
   </div>
-  <div class="notifications-icon outline-icon-container"
+  <div class="messaging-icon outline-icon-container"
        [routerLink]="['/main', 'messaging']"
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
-         alt="notifications-icon"
-         src="assets/images/new/nav-icons/{{icons.messaging.icon}}-{{icons.messaging.type}}.png">
+         alt="messaging-icon"
+         src="assets/images/new/nav-icons/{{icons.messaging.icon}}-full.png">
+    <span class="outline-icon-text">Discussions</span>
   </div>
   <div class="notifications-icon outline-icon-container"
        [routerLink]="['/main', 'notification']"
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="notifications-icon"
-         src="assets/images/new/nav-icons/{{icons.notifications.icon}}-{{icons.notifications.type}}.png">
+         src="assets/images/new/nav-icons/{{icons.notifications.icon}}-full.png">
+    <span class="outline-icon-text">Activité</span>
   </div>
-  <div class="user-icon outline-icon-container"
+  <div class="profile-icon outline-icon-container"
        [routerLink]="['/main', 'profile', user._id]"
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="user-icon"
-         src="assets/images/new/nav-icons/{{icons.profile.icon}}-{{icons.profile.type}}.png">
+         src="assets/images/new/nav-icons/{{icons.profile.icon}}-full.png">
+    <span class="outline-icon-text">Profile</span>
   </div>
 </div>
 
