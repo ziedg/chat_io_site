@@ -62,7 +62,7 @@
                class="hidden-xs"
                style="margin-right: 10px; cursor: pointer;">
         <div class="noPadding">
-          <i class="fa fa-comments"></i>
+          <img class="home-sidebar-icon" style="width:25px" src="assets/images/new/chat-grey.png">
         </div>
       </article>
 
@@ -230,12 +230,6 @@
 
     </div>
 
-    <div class="header-right-mobile hidden-lg hidden-md hidden-sm">
-      <img src="assets/images/new/nav-icons/{{icons.messaging.icon}}-{{icons.messaging.type}}.png"
-           alt="messaging-icon"
-           class="messaging-icon outline-icon">
-    </div>
-
   </div>
 
 
@@ -245,28 +239,36 @@
 
 <div class="hidden-lg hidden-md hidden-sm navigation-bottom">
   <div class="home-icon outline-icon-container"
-       (click)="changeActiveIcon('home')"
-       [routerLink]="['/main', 'home']">
+       [routerLink]="['/main', 'home']"
+       [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="home-icon"
          src="assets/images/new/nav-icons/{{icons.home.icon}}-{{icons.home.type}}.png">
   </div>
   <div class="search-icon outline-icon-container"
-       (click)="toggleSearchMobile()" #searchMobileIcon>
+       [routerLink]="['/main', 'search']"
+       [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="search-icon"
          src="assets/images/new/nav-icons/{{icons.search.icon}}-{{icons.search.type}}.png">
   </div>
   <div class="notifications-icon outline-icon-container"
-       (click)="changeActiveIcon('notifications')"
-       [routerLink]="['/main', 'notification']">
+       [routerLink]="['/main', 'messaging']"
+       [routerLinkActive]="['active-nav-icon']">
+    <img class="outline-icon"
+         alt="notifications-icon"
+         src="assets/images/new/nav-icons/{{icons.messaging.icon}}-{{icons.messaging.type}}.png">
+  </div>
+  <div class="notifications-icon outline-icon-container"
+       [routerLink]="['/main', 'notification']"
+       [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="notifications-icon"
          src="assets/images/new/nav-icons/{{icons.notifications.icon}}-{{icons.notifications.type}}.png">
   </div>
   <div class="user-icon outline-icon-container"
-       (click)="changeActiveIcon('profile')"
-       [routerLink]="['/main', 'profile', user._id]">
+       [routerLink]="['/main', 'profile', user._id]"
+       [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="user-icon"
          src="assets/images/new/nav-icons/{{icons.profile.icon}}-{{icons.profile.type}}.png">
@@ -274,7 +276,7 @@
 </div>
 
 <div *ngIf="showSearchMobile" class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm"
-   #searchResults2 style="display:block!important" (click)="onClickSearchMobileHolder()">
+   #searchResults2 style="display:block!important">
   <div class="recherche-results recherche-results-2">
 
     <div *ngIf="listSearchUsers && !showRecentSearch">

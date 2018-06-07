@@ -840,9 +840,9 @@ a {
   display: -ms-flexbox;
   display: -webkit-flex;
   align-items: center;
-  margin-right: 13px;
+  margin-right: 18px;
   position: absolute;
-  right: 100px;
+  right: 15%;
   top: 20px;
   padding-top: 5px;
 }
@@ -907,6 +907,7 @@ a {
   background-color: #36a0f0;
   color:white;
   text-align:center;
+  font-weight:light;
 }
 @media (max-width:768px){
   .notification-bar{
@@ -963,7 +964,7 @@ section.widget {
 }
 .widget> header {
   font-size: 17px;
-  padding: 6px 0;
+  padding: 6px 0 0;
 }
 .header-Profile {
   margin: 20px 0 10px 0;
@@ -1230,9 +1231,9 @@ section.widget {
 .welcome-msg {
   font-weight: 500;
   background-color: #fff;
-  padding: 10px 30px 20px;
-  padding-left: 30px !important;
-  padding-right: 30px !important;
+  padding: 5px 30px 20px;
+  padding-left: 20px !important;
+  padding-right: 10px !important;
   margin-top: 30px;
   width: 100%;
   flex-direction: column;
@@ -1377,7 +1378,7 @@ section.widget {
   margin-right: 5px;
   border: solid 1px #ddd;
   padding: 5px 7px;
-  width: 200px;
+  width: 150px;
   height: 35px;
   align-items: center;
   box-sizing: border-box;
@@ -1628,7 +1629,7 @@ textarea:focus {
   font-weight: bold;
   margin: 0;
   font-size: 16px;
-  padding: 12px 0px 12px 10px;
+  padding: 12px 0px 12px 6px;
   color: #333;
 
   display: flex;
@@ -1853,7 +1854,7 @@ textarea:focus {
   padding: 0;
   margin-left: 0px;
   flex-grow: 1;
-  margin-top: 13px;
+  margin-top: 7px;
 }
 #pub-holder input {
   padding: 2px 2px 2px 0;
@@ -1897,7 +1898,7 @@ textarea:focus {
 }
 .publication {
   background-color: white;
-  padding: 20px 0px 0px 0px;;
+  padding: 15px 0px 0px 0px;;
   margin: 10px 0 20px;
   position: relative;
 }
@@ -1907,8 +1908,14 @@ textarea:focus {
   margin: 10px 0 20px;
   position: relative;
   width: 100%;
-
 }
+.language-option {
+  color: #3d3d3d;
+  padding-right: 8px;
+  padding-left:15px;
+  text-align:center;
+}
+
 .hashtag {
   cursor: pointer;
   color: #3897f0;
@@ -1957,7 +1964,7 @@ textarea:focus {
 }
 
 top-blagueurs-decov .user .user-img {
-  --user-img-w: 50px;
+  --user-img-w: 35px;
   width: var(--user-img-w);
   height: var(--user-img-w);
   min-width: var(--user-img-w);
@@ -2929,11 +2936,7 @@ top-blagueurs-decov .user .user-img {
 }
 .widget .subscribe button {
   border: 1px solid #ccc;
-<<<<<<< HEAD
-  background-color: white;
-=======
   background-color: #fff;
->>>>>>> 835e35c26695b37d7047495b5678b51cc8ec26c8
   color: #333;
   font-size: 12px !important;
   width: auto !important;
@@ -2945,7 +2948,7 @@ top-blagueurs-decov .user .user-img {
 }
 
 .show-more {
-  color: black;
+  color: #3d3d3d;
   font-weight: bold;
   text-decoration: underline;
   border: 0;
@@ -2970,7 +2973,6 @@ top-blagueurs-decov .user .user-img {
   min-width: 23px;
   text-align: center;
 }
-<<<<<<< HEAD
 
 .subscribers {
   font-weight: 700;
@@ -2979,7 +2981,6 @@ top-blagueurs-decov .user .user-img {
   margin-top: -3px;
 }
 
-=======
 .subscribe-close-button{
   color:#ccc;
 }
@@ -2998,11 +2999,10 @@ top-blagueurs-decov .user .user-img {
   text-align: center;
 }
 .top-blagueurs-sub-nbr {
-  color:#696969;
-  font-size:10px;
+  color:#979797;
+  font-size:12px;
   font-weight:bolder;
 }
->>>>>>> 835e35c26695b37d7047495b5678b51cc8ec26c8
 .profil-holder {
   width: 80%;
   margin: 10px 10%;
@@ -4587,6 +4587,10 @@ body {
 }
 
 .outline-icon-container {
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  padding: 10px 6%;
 }
 
 .outline-icon {
@@ -4604,16 +4608,10 @@ body {
 
 @media(max-width:768px) {
   .main-header {
-    padding: 0!important;
-    height: var(--header-mobile-h);
-    box-shadow: 0 -1px 2px 0 #676767;
+    display:none;
   }
 
   .sub-main-header {
-    display: flex;
-    justify-content:  space-between;
-    width: 100%;
-    align-items:  center;
   }
 
   .logo img {
@@ -4642,7 +4640,12 @@ body {
   }
 
   body {
-    padding-top: calc(var(--header-mobile-h) + 10px);
+    padding-top: 0;
+    background-color: #e9e9e9!important;
+  }
+
+  .bordered {
+    border-color: #e0e0e0;
   }
 }
 
@@ -4856,15 +4859,17 @@ top-blagueurs-decov .user-img {
   }
 }
 .conditions-generales {
-  color:#505050;
+  color:#919191;
   margin-top:27px;
-  font-size:12px;
+  font-size:11px;
+  margin-left:20px;
 }
 .copyright-home {
-  margin-top:5px;
+  margin-top:10px;
   font-weight:lighter;
-  color:#313131;
+  color:#545454;
   font-size:12px;
+  margin-left:20px
 }
 
 .home-sidebar {
@@ -4974,6 +4979,10 @@ img[src="undefined"] {
 
 .navigation-bottom img[src*="full"] {
   opacity: 1;
+}
+
+.active-nav-icon {
+  border-top: 2px solid #4fa123;
 }
 
 /* 100% Image Width on Smaller Screens */

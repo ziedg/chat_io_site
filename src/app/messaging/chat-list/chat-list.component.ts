@@ -28,7 +28,6 @@ export class ChatListComponent implements OnInit {
    let user =this.loginService.getUser();
    this.userId=user._id;
    this.getChatList();
-
    }
   getChatList(){
     /*
@@ -39,10 +38,11 @@ export class ChatListComponent implements OnInit {
     .map(users=>{
      return users.json();
     })
-    .subscribe((users:any)=>{
-      users.forEach(user => {
-        this.chatListUsers.push(user)
-      });
+    .subscribe((users:any[])=>{
+       for(let i=0;i<users.length;i++){
+       this.chatListUsers.push(users[i]);
+       } 
+   
     })
   }
 
@@ -61,11 +61,8 @@ selectUser(user: User): void {
      this.emitterService.emitUser(user);
 
       /* calling method to get the messages */
-      console.log(this.loginService.getUser())
-      console.log(user._id)
-    this.chatService.getMessages({ userId: this.userId, toUserId: user._id })
+    this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId })
     .subscribe((response) => {
-      console.log(response)
       /* Sending conversation between two users to other component. */
       this.emitterService.emitConversation(response);
   });

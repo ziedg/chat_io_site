@@ -1,3 +1,4 @@
+import { environment } from 'environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
@@ -7,7 +8,7 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class SocketService {
 
-	private BASE_URL = 'http://localhost:3002/'
+	private BASE_URL = environment.SERVER_URL;
 	private socket;
 
 	constructor() { }
@@ -33,6 +34,6 @@ export class SocketService {
 				this.socket.disconnect();
 			};
 		});
-		
+
 	}
 }

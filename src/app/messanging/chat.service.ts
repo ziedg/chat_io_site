@@ -22,8 +22,7 @@ return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_LIST_SUGGESTIONS}`+u
 
 getMessages(users){
 /* get messages between current user and the selected user from the list*/
-console.log(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}`+users.userId+'/'+users.toUserId)
-return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}`+users.userId+'/'+users.toUserId)
+return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}`+users.fromUserId+'/'+users.toUserId)
 .map((response)=>{
 return response.json()
 });
