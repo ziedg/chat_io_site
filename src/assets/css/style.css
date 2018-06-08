@@ -4520,7 +4520,7 @@ top-blagueurs-decov .user-name header {
   display: flex;
   align-items: center;
   position: relative;
-  border-bottom: solid 1px #edeeee;
+  border-bottom: solid 1px #e0e0e0;
 }
 
 .recherche-results-holder-2 {
@@ -4565,9 +4565,7 @@ top-blagueurs-decov .user-name header {
 
 .search-mobile .search {
   width:100%;
-  border: none;
   background-color: #fafafa;
-  border: 1px solid #e0e7ed;
   border-radius: 8px;
   font-size: 18px;
   height: 40px;
@@ -4748,8 +4746,6 @@ body {
 .search-mobile {
   padding-left:0!important;
   padding-right: 0!important;
-  border-bottom: solid 1px #bfbfbf;
-  box-shadow: 0 -4px 11px 0 #676767;
 }
 
 .search-mobile .search-mobile-annuler {
