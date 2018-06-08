@@ -6,7 +6,6 @@ import {take} from 'rxjs/operator/take'
 
 import { SocialUser } from '../../beans/social-user';
 import { User } from '../../beans/user';
-import { Friends } from '../../beans/friends';
 import { environment } from 'environments/environment';
 
 import { AppSettings } from '../../shared/conf/app-settings';
@@ -17,7 +16,6 @@ export class LoginService {
     public token: string;
     /* User */
     public user : User;
-    public friends: Friends;
 
     /* constructor  */
     constructor(private router:Router, private http:Http,private notificationService:NotificationService){
@@ -101,19 +99,6 @@ export class LoginService {
     getUser():User{
         this.user= JSON.parse(localStorage.getItem('user'));
         return this.user;
-        
-    }
-    /* getfacebookUser */
-    getidUser():User{
-        this.user= JSON.parse(localStorage.getItem('user'));
-        return this.user;
-        
-        
-    }
-    getFacebookFriends:Array<Friends>{
-        var userId = this.getuser()._id;
-        this.friends=  JSON.parse(localStorage.getItem('friends'));
-        return this.friends;
     }
 
     /* deconnexion */
