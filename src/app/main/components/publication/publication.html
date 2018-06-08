@@ -204,11 +204,11 @@
             <div class="hint-social">
               {{ 'publication_like' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/new/thumb-up-active.png"
-                 style="width:22px;padding-bottom:4px"
+            <img class="social-emoji social-emoji-like-active"
+                 src="assets/images/new/publication/like-full.png"
                  *ngIf="publicationBean.isLiked">
-            <img class="social-emoji desaturated"
-                 src="assets/images/new/thumb-up.png" style="width:22px;padding-bottom:4px"
+            <img class="social-emoji desaturated social-emoji-like"
+                 src="assets/images/new/publication/like-outline.png"
                  *ngIf="!publicationBean.isLiked"></button>
         </div>
 
@@ -217,20 +217,20 @@
             <div class="hint-social">
                {{ 'publication_dislike' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/new/thumb-down-active.png" style="width:22px;padding-top:4px"
+            <img class="social-emoji" src="assets/images/new/thumb-down-active.png"
                  *ngIf="publicationBean.isDisliked">
             <img class="social-emoji desaturated"
-                 src="assets/images/new/thumb-down.png" style="width:22px;padding-top:4px"
+                 src="assets/images/new/thumb-down.png"
                  *ngIf="!publicationBean.isDisliked">
           </button>
         </div>
         <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
             <button class="dislike">
 
-              <img class="social-emoji" src="assets/images/new/comment-active.png" style="width:24px"
+              <img class="social-emoji" src="assets/images/new/comment-active.png"
               *ngIf="commentsDisplayed">
               <img class="social-emoji desaturated"
-              src="assets/images/new/comment.png" style="width:24px"
+              src="assets/images/new/comment.png"
               *ngIf="!commentsDisplayed">
             </button>
             <div class="hint-social" *ngIf="!commentsDisplayed">
@@ -246,7 +246,7 @@
             <div class="hint-social">
               Partager
             </div>
-            <img class="social-emoji" src="assets/images/new/share.png" style="width:24px">
+            <img class="social-emoji" src="assets/images/new/share.png">
           </button>
 
         </div>

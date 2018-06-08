@@ -1272,7 +1272,7 @@ section.widget {
   padding: 10px;
   padding-left: 30px !important;
   padding-right: 30px !important;
-  margin: 30px 0% -10px;
+  margin: 20px 0 -10px !important;
   width: 100%;
   flex-direction: column;
   box-sizing: border-box;
@@ -4711,6 +4711,12 @@ body {
   .sub-container > .bordered {
     margin-bottom: 20px;
   }
+
+  .interactions {
+    font-size: 13px;
+    text-align: center;
+    font-weight: bold;
+  }
 }
 
 .navigation-bottom {
@@ -5053,6 +5059,18 @@ img[src="undefined"] {
   font-size: 11px;
   margin-top: 2px;
   color: #5d5d5d;
+}
+
+.social-emoji {
+  width: 22px;
+}
+
+.social-emoji-like {
+  background-color: #666;
+}
+
+.social-emoji-like-active {
+  background-color: #4c9a21;
 }
 
 /* 100% Image Width on Smaller Screens */
