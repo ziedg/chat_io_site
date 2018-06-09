@@ -128,7 +128,8 @@ export class Login {
                     this.getUserInformations(
                       response,
                       responsePic,
-                      responseSmallPic
+                      responseSmallPic,
+                      friends
                     );
                   }));
 
@@ -144,7 +145,7 @@ export class Login {
     }
   }
 
-  getUserInformations(response, responsePic, responseSmallPic) {
+  getUserInformations(response, responsePic, responseSmallPic,friends) {
     let body = {};
     body = JSON.stringify({
       profilePicture: responsePic.picture.data.url,
@@ -154,7 +155,7 @@ export class Login {
       facebookId: response.id,
       birthday: response.birthday,
       gender: response.gender,
-      friends: response.friends,
+      friends: friends.friends.data,
   
       //coverPicture: response.cover.source,
       profilePictureMin: responseSmallPic.picture.data.url,
