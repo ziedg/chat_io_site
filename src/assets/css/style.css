@@ -4691,8 +4691,12 @@ body {
     padding-left: 0;
   }
 
-  .welcome-msg {
-    margin-top: 90px;
+  home .welcome-msg {
+    margin-top: 10px;
+  }
+
+  search-mobile .welcome-msg {
+    margin-top: 100px;
     margin-bottom: 20px;
     border-left: 0;
     border-right: 0;
@@ -4714,7 +4718,6 @@ body {
 
   .interactions {
     font-size: 13px;
-    text-align: center;
     font-weight: bold;
   }
 }
