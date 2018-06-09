@@ -17,7 +17,9 @@ export class SocketService {
 	* Method to connect the users to socket
 	*/
 	connectSocket(userId: string): void {
-		this.socket = io(this.BASE_URL, {  query: `userId=${userId}`} );
+		this.socket = io(this.BASE_URL, 
+		{ transports: [ 'websocket' ]},
+		{query: `userId=${userId}`} )
     }
 
     sendMessage(message){
