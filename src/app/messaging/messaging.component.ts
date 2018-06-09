@@ -28,7 +28,8 @@ public overlayDisplay = true;
 ngOnInit(){
   this.loginService.redirect();
   this.user=this.loginService.getUser();
-
+  //connect to socket
+  console.log('connect to socket')
   this.socketService.connectSocket(this.user._id);
 
   
