@@ -8,7 +8,7 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class SocketService {
 
-	private BASE_SOCKET_URL = environment.BASE_SOCKET_URL;
+	private BASE_URL = environment.SERVER_URL;
 	private socket;
 
 	constructor() { }
@@ -17,7 +17,7 @@ export class SocketService {
 	* Method to connect the users to socket
 	*/
 	connectSocket(userId: string): void {
-		this.socket = io.connect(this.BASE_SOCKET_URL, { query: `userId=${userId}`, secure: true, rejectUnauthorized: false});
+		this.socket = io.connect(this.BASE_URL, { query: `userId=${userId}`, secure: true, rejectUnauthorized: false});
 		/* this.socket = io(this.BASE_URL, 
 		{ transports: [ 'websocket' ]},
 		{query: `userId=${userId}`} ) */
