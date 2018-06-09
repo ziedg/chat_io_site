@@ -1,4 +1,9 @@
 ﻿{
+  "home": "Accueil",
+  "search": "Rechercher",
+  "discussion": "Discussion",
+  "notifications": "Activités",
+  "profile": "Profil",
   "login_speegar_description": "permet de partager vos meilleures blagues et vidéos avec votre entourage",
   "login_message": "Connectez vous pour partager vos meilleures blagues et vidéos avec votre entourage",
   "login_button_facebook_login": "Se connecter avec Facebook",

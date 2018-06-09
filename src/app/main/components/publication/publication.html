@@ -32,7 +32,7 @@
         <div class="date-mobile hidden-lg hidden-md hidden-sm" [routerLink]="['/main/post',publicationBean._id]">
           <i class="fa fa-globe" style="color:#666" *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
           <i class="fa fa-users" style="color:#666" *ngIf="publicationBean.confidentiality=='PRIVATE'"></i>
-          {{getPublicationTime(publicationBean.datePublication)}}
+           {{getPublicationTime(publicationBean.datePublication)}}
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@
             <span *ngIf="longPubText && longPubTextShow" [innerHTML]="lastPubText">
             </span>
             </span>
-            
+
 
       <div class="link-preview" *ngIf="link.isSet">
         <div class="noPadding" *ngIf="link.image">
@@ -107,33 +107,33 @@
 
        <!-- The Modal -->
        <div id="myModal" class="modal">
-          
+
         <!-- The Close Button -->
         <span class="close-button" onclick="document.getElementById('myModal').style.display='none'">×</span>
-      
+
         <!-- Modal Content (The Image) -->
         <img class="modal-content" id="img01">
-      
+
         <!-- Modal Caption (Image Text) -->
         <div id="caption"></div>
       </div>
-      
+
            <div class="facebook-preview-publication"
            *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
         <iframe width="500" height="580" [src]="url" frameborder="0" allowfullscreen>
         </iframe>
           </div>
           <div class="youtube-preview-publication"
-          
+
                      *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
                   <iframe width="560" height="400" [src]="url" frameborder="0" allowfullscreen>
                   </iframe>
 
-           
-       
-      
+
+
+
       </div>
-      
+
     </div>
 
 
@@ -156,20 +156,20 @@
                 </span>
             </span>
           <img class="myImg" *ngIf="publicationBean.publPictureLink" src="{{imageBaseUrl + publicationBean.publPictureLink}}">
-          
+
           <!-- The Modal -->
           <div id="myModal" class="modal">
-  
+
           <!-- The close Button -->
           <span class="close-button-x">&#10006;</span>
           <!-- The Closing Area -->
             <span class="close-button" onclick="document.getElementById('myModal').style.display='none'">x</span>
-          
+
 
 
           <!-- Modal Content (The Image) -->
             <img class="modal-content" id="img01">
-  
+
           <!-- Modal Caption (Image Text) -->
            <div id="caption"></div>
           </div>
@@ -179,14 +179,14 @@
 	        <iframe width="500" height="580" [src]="url" frameborder="0" allowfullscreen>
 	        </iframe>
         </div>
-        
+
           <div class="youtube-preview-publication"
 
                *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
             <iframe width="560" height="400" [src]="url" frameborder="0">
             </iframe>
           </div>
-          
+
         </div>
       </article>
 
@@ -204,11 +204,11 @@
             <div class="hint-social">
               {{ 'publication_like' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/new/thumb-up-active.png"
-                 style="width:22px;padding-bottom:4px"
+            <img class="social-emoji social-emoji-like-active"
+                 src="assets/images/new/publication/like-full.png"
                  *ngIf="publicationBean.isLiked">
-            <img class="social-emoji desaturated"
-                 src="assets/images/new/thumb-up.png" style="width:22px;padding-bottom:4px"
+            <img class="social-emoji desaturated social-emoji-like"
+                 src="assets/images/new/publication/like-outline.png"
                  *ngIf="!publicationBean.isLiked"></button>
         </div>
 
@@ -217,20 +217,20 @@
             <div class="hint-social">
                {{ 'publication_dislike' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/new/thumb-down-active.png" style="width:22px;padding-top:4px"
+            <img class="social-emoji" src="assets/images/new/thumb-down-active.png"
                  *ngIf="publicationBean.isDisliked">
             <img class="social-emoji desaturated"
-                 src="assets/images/new/thumb-down.png" style="width:22px;padding-top:4px"
+                 src="assets/images/new/thumb-down.png"
                  *ngIf="!publicationBean.isDisliked">
           </button>
         </div>
         <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
             <button class="dislike">
-              
-              <img class="social-emoji" src="assets/images/new/comment-active.png" style="width:24px"
+
+              <img class="social-emoji" src="assets/images/new/comment-active.png"
               *ngIf="commentsDisplayed">
               <img class="social-emoji desaturated"
-              src="assets/images/new/comment.png" style="width:24px"
+              src="assets/images/new/comment.png"
               *ngIf="!commentsDisplayed">
             </button>
             <div class="hint-social" *ngIf="!commentsDisplayed">
@@ -239,16 +239,16 @@
             <div class="hint-social" *ngIf="commentsDisplayed">
               {{ 'publication_hide_comments' | translate }}
         </div>
-          
+
         </div>
         <div class="dislike-holder" (click)="sharePub(publicationBean)">
           <button class="dislike">
             <div class="hint-social">
               Partager
             </div>
-            <img class="social-emoji" src="assets/images/new/share.png" style="width:24px">
+            <img class="social-emoji" src="assets/images/new/share.png">
           </button>
-          
+
         </div>
       </div>
 
