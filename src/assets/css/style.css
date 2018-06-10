@@ -2079,7 +2079,7 @@ top-blagueurs-decov .user .user-img {
 }
 
 .interactions{
-  margin-top:6px;
+  margin-top:-5px;
   margin-bottom:8px;
   margin-left:7px;
   color:#424242;
@@ -2135,7 +2135,13 @@ top-blagueurs-decov .user .user-img {
 .social-staff .like-dislike button {
   font-size: 25px;
 }
+.social-staff .like-dislike button:active {
+  transform: rotate(15deg) scale(1.2);
+}
 .dislike {
+  margin-left: 17px;
+}
+.social-button{
   margin-left: 17px;
 }
 .comment-number {
@@ -4138,7 +4144,7 @@ input.loginInput {
   right: -2px;
   border-radius: 3px;
   opacity: 0;
-  bottom: 44px;
+  bottom: 47px;
     display: none;
 }
 .comment-number-holder .hint-social {
@@ -4785,7 +4791,7 @@ body {
 
 .three-points {
   margin-right:7px;
-  width:23px;
+  width:20px;
 }
 @media (min-width: 768px) {
 .three-points {

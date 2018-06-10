@@ -204,11 +204,11 @@
             <div class="hint-social">
               {{ 'publication_like' | translate }}
             </div>
-            <img class="social-emoji social-emoji-like-active"
-                 src="assets/images/new/publication/like-full.png"
+            <img class="social-emoji social-emoji-like-active"  style="margin-bottom:7px"
+                 src="assets/images/new/publication/like-full.png" 
                  *ngIf="publicationBean.isLiked">
-            <img class="social-emoji desaturated social-emoji-like"
-                 src="assets/images/new/publication/like-outline.png"
+            <img class="social-emoji desaturated social-emoji-like" style="margin-bottom:7px"
+                 src="assets/images/new/publication/like-outline.png" 
                  *ngIf="!publicationBean.isLiked"></button>
         </div>
 
@@ -217,15 +217,15 @@
             <div class="hint-social">
                {{ 'publication_dislike' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/new/thumb-down-active.png"
+            <img class="social-emoji" src="assets/images/new/thumb-down-active.png" style="margin-top:7px"
                  *ngIf="publicationBean.isDisliked">
             <img class="social-emoji desaturated"
-                 src="assets/images/new/thumb-down.png"
+                 src="assets/images/new/thumb-down.png" style="margin-top:7px"
                  *ngIf="!publicationBean.isDisliked">
           </button>
         </div>
         <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
-            <button class="dislike">
+            <button class="social-button">
 
               <img class="social-emoji" src="assets/images/new/comment-active.png"
               *ngIf="commentsDisplayed">
@@ -242,7 +242,7 @@
 
         </div>
         <div class="dislike-holder" (click)="sharePub(publicationBean)">
-          <button class="dislike">
+          <button class="social-button">
             <div class="hint-social">
               Partager
             </div>
