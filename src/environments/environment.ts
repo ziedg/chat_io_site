@@ -11,7 +11,7 @@ export const environment = {
   //IMAGE_BASE_URL: 'https://integration.speegar.com/images/'
 
   //INTEGRATION SERVERS
-  SERVER_URL: 'https://integration.speegar.com:3006/',
+  SERVER_URL: 'https://integration.speegar.com:3008/',
   IMAGE_BASE_URL: 'https://integration.speegar.com/images/'
 
    
