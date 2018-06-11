@@ -380,6 +380,9 @@
 </div>
 <div class="modal-edit-pub" *ngIf="modalPub" (click)="closeModalPub()">
   <div class="white-box-edit">
+      <article *ngIf="publicationBean.profileId != user._id" (click)="unsubscribe(publicationBean)">
+          {{ 'publication_unfollow' | translate }} {{publicationBean.profileFirstName}}
+      </article>
     <article *ngIf="publicationBean.profileId != user._id" (click)="reportPub(publicationBean)">
         {{ 'publication_report' | translate }}
     </article>

@@ -107,7 +107,30 @@ export class Publication {
     });
 
   }
+  unsubscribe(post:PublicationBean) {
+    let body = JSON.stringify({
+      profileId: post.profileId
+    });
 
+    this.http.post(
+      environment.SERVER_URL + pathUtils.UNSUBSCRIBE,
+      body,
+      AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        if (response.status == 0) {
+          this.user.isFollowed = false;
+          this.user.nbSuivi--;
+        }
+      },
+        err => {
+      },
+      () => {
+        this.changeDetector.markForCheck();
+      }
+    );
+  }
   deletePub() {
     swal({
       title: this.translateCode("publication_popup_confirmation_title"),
