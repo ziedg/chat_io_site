@@ -5,13 +5,14 @@ import { MessagingRoutingModule } from './messaging-routing.module';
 import { MessagingComponent } from './messaging.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { ConversationComponent } from './conversation/conversation.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     MessagingRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [MessagingComponent, ChatListComponent, ConversationComponent]
 })

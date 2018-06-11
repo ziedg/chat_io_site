@@ -11,8 +11,8 @@
           <span><a style="color:black" [routerLink]="['/main/profile',user._id]" >{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span></div>
         <div><span><img class="home-sidebar-icon" src="assets/images/new/home-grey.png"></span>
           <span ><a style="color:black;font-weight:bolder" routerLink="/redirect">Fil d'actualité</a></span></div>
-        <div><span><img class="home-sidebar-icon" src="assets/images/new/chat-grey.png"></span>
-            <span>Messenger</span></div>
+        <div [routerLink]="['/messaging']"><span><img class="home-sidebar-icon" src="assets/images/new/chat-grey.png"></span>
+          <span ><a style="color:black;font-weight:bolder" routerLink="/messaging">Messenger</a></span></div>
         <div class="conditions-generales"><hr><div> Conditions générales &#5867;</div>
           <div> A propos de nous</div></div>
         <div class="copyright-home"> Speegar &copy; 2018</div>
