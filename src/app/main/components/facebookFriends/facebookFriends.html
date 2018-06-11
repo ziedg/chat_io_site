@@ -1,0 +1,26 @@
+<section class="widget bordered">
+    
+    <article *ngFor="let profile of facebookProfiles;  let i=index">
+      <div *ngIf="i < displayedNumberfacebookProfiles">
+         <div class="user">
+          <div class="user-img" *ngIf="profile.profilePictureMin"
+                              [routerLink]="['/main/profile',profile._id]"
+                              [ngStyle]="{'background-image': 'url(' + profile.profilePictureMin + ')'}">
+          </div>
+          <div class="user-img" *ngIf="!profile.profilePictureMin"
+                              [routerLink]="['/main/profile',profile._id]"
+                   [ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
+          </div>
+          <div class="user-name">
+            <header><a [routerLink]="['/main/profile',profile._id]" 
+              style="max-width:115px">
+              {{profile.firstName}} {{profile.lastName}}
+            </a></header>
+            <div class="top-blagueurs-sub-nbr"> {{profile.nbSuivi}} abonnés </div>
+          </div>
+          
+          </div>
+      </div>
+    </article>
+
+  </section> 

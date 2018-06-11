@@ -43,6 +43,7 @@ import { FakeComponent } from './shared/fake.component';
 import { httpFactory } from './utils/factories/http.factory';
 import { MessagingModule } from './messaging/messaging.module';
 import { SearchMobile } from "./main/components/search-mobile/search-mobile.component";
+import { FacebookFriends } from './main/components/facebookFriends/facebookFriends';
 
 /** Factories */
 @NgModule({
@@ -58,7 +59,7 @@ import { SearchMobile } from "./main/components/search-mobile/search-mobile.comp
         }
       })],       // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
-        TopBlagueursAndDecov, GoogleRecaptchaDirective,
+        TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
         FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
