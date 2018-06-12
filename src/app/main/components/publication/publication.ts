@@ -222,9 +222,11 @@ export class Publication {
          var popupspan = document.getElementsByClassName("close-button")[0];
 
        // When the user clicks on <span> (x), close the modal
-        popupspan.addEventListener("click",function(){
+       if(popupspan){
+       popupspan.addEventListener("click",function(){
           popupmodal.style.display = "none";
         });
+      }
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 
