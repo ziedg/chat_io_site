@@ -13,7 +13,7 @@ export class PublicationBean {
     public nbLikes  : number;
     public nbDislikes : number;
     public nbComments : number;
-    //public nbSignals : number;
+    public nbSignals : number;
     public publTitle  : string;
     public publText : string;
     //public publLink
