@@ -1935,6 +1935,15 @@ textarea:focus {
   display: -ms-flexbox;
   display: -webkit-flex;
 }
+
+.user-fb {
+  display:block !important;
+  position:relative;
+  border: 1px solid #edeeee;
+  padding :10px;
+  width :min-content;
+}
+
 .suggestions-box .user{
   padding: 8px 14px 8px 10px;
   display: flex;
@@ -1970,6 +1979,15 @@ top-blagueurs-decov .user .user-img {
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
 }
+facebook-friends .user .user-img  {
+  --user-img-w: 35px;
+  width: var(--user-img-w);
+  height: var(--user-img-w);
+  min-width: var(--user-img-w);
+  min-height: var(--user-img-w);
+  margin: 0 auto;
+}
+
 
 .widget .subscribe button {
   color: black;
@@ -4317,7 +4335,7 @@ input.loginInput {
   display:none;
 }
 
-top-blagueurs-decov section.widget{
+top-blagueurs-decov section.widget,facebook-friends section.widget{
   padding: 10px 14px;
 }
 

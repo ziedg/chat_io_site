@@ -11,6 +11,7 @@ import { LoginService } from '../../../login/services/loginService';
 import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
 
+
 @Component({
     moduleId: module.id,
     selector: 'facebook-friends',
@@ -20,7 +21,7 @@ import * as pathUtils from '../../../utils/path.utils';
 export class FacebookFriends {
 
     public facebookProfiles: Array<User> = [];
-    displayedNumberfacebookProfiles = 4;
+    displayedNumberfacebookProfiles = 2;
     displayShowMore: boolean = true;
 
     public user: User = new User();
@@ -32,10 +33,14 @@ export class FacebookFriends {
         private changeDetector: ChangeDetectorRef) {
         loginService.redirect();
         this.user = loginService.user;
-        this.loadfacebookProfiles(this.user._id);
-        console.log('user id'+this.user._id);
-    }
+        this.loadfacebookProfiles(this.user._id);  
+        
+          console.log(this.facebookProfiles);
+    
+    
+        }
 
+  
     loadfacebookProfiles(Id_Profile?: string) {
 
         var url: string = environment.SERVER_URL + pathUtils.GET_FACEBOOK_FRIENDS;
@@ -45,11 +50,59 @@ export class FacebookFriends {
             .map((res: Response) => res.json())
             .subscribe(
               response => {
-                console.log("first results");
-                console.log(response);
+              
                 Array.prototype.push.apply(this.facebookProfiles, response.message);
-                console.log("response results");
-                console.log(this.facebookProfiles);
+            },
+            err => {
+            },
+            () => {
+              this.changeDetector.markForCheck();
+            }
+          );
+    } 
+
+    subscribe(user: User) {
+        let body = JSON.stringify({
+          profileId: user._id
+        });
+    
+        this.http.post(
+          environment.SERVER_URL + pathUtils.SUBSCRIBE,
+          body,
+          AppSettings.OPTIONS
+        )
+          .map((res: Response) => res.json())
+          .subscribe(
+            response => {
+              if (response.status == 0) {
+                this.facebookProfiles.splice(this.facebookProfiles.indexOf(user), 1);
+              }
+            },
+            err => {
+            },
+            () => {
+              this.changeDetector.markForCheck();
+            }
+          );
+    
+    }
+
+    unsubscribe(user: User) {
+        let body = JSON.stringify({
+          profileId: user._id
+        });
+    
+        this.http.post(
+          environment.SERVER_URL + pathUtils.UNSUBSCRIBE,
+          body,
+          AppSettings.OPTIONS)
+          .map((res: Response) => res.json())
+          .subscribe(
+            response => {
+              if (response.status == 0) {
+                user.isFollowed = false;
+                user.nbSuivi--;
+              }
             },
             err => {
             },
@@ -58,5 +111,32 @@ export class FacebookFriends {
             }
           );
     }
+
+    ignore(user: User) {
+        let body = JSON.stringify({
+          profileId: user._id
+        });
+    
+        this.http.post(
+          environment.SERVER_URL + pathUtils.IGNORE,
+          body,
+          AppSettings.OPTIONS
+        )
+          .map((res: Response) => res.json())
+          .subscribe(
+            response => {
+              if (response.status == 0) {
+                this.facebookProfiles.splice(this.facebookProfiles.indexOf(user), 1);
+              }
+            },
+            err => {
+            },
+            () => {
+              this.changeDetector.markForCheck();
+            }
+          );
+    
+    
+      }
 
 }
