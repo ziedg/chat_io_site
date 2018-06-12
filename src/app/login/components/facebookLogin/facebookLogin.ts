@@ -62,7 +62,7 @@ export class FacebookLogin {
                   FB.api('/me/friends', ( friends => {
 
                     console.log(JSON.stringify('Facebook friends: ' + friends));
-                    //console.log(friends);
+                    console.log(friends);
                     /* FB.api('/me/friends', ( friends => {
                                         console.log('friends');
                                         console.log(JSON.parse(JSON.stringify('friendsielnidsst:'+friends))) ;

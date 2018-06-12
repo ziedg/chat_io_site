@@ -71,3 +71,5 @@ export const GET_PROFILES_SUGGESTIONS:string = 'getProfilesSuggestions';
  export const GET_CHAT_LIST_SUGGESTIONS:string='suggestions/';
 
  export const GET_CHAT_MESSAGES:string='messages/';
+
+ export const GET_FACEBOOK_FRIENDS:string= 'getFacebookFriends/';

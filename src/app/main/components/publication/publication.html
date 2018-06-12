@@ -109,6 +109,7 @@
        <div id="myModal" class="modal">
 
         <!-- The Close Button -->
+        <span class="close-button-x">&#10006;</span>
         <span class="close-button" onclick="document.getElementById('myModal').style.display='none'">×</span>
 
         <!-- Modal Content (The Image) -->
@@ -204,11 +205,11 @@
             <div class="hint-social">
               {{ 'publication_like' | translate }}
             </div>
-            <img class="social-emoji social-emoji-like-active"
-                 src="assets/images/new/publication/like-full.png"
+            <img class="social-emoji social-emoji-like-active"  style="margin-bottom:4px"
+                 src="assets/images/new/publication/like-full.png" 
                  *ngIf="publicationBean.isLiked">
-            <img class="social-emoji desaturated social-emoji-like"
-                 src="assets/images/new/publication/like-outline.png"
+            <img class="social-emoji desaturated social-emoji-like" style="margin-bottom:4px"
+                 src="assets/images/new/publication/like-outline.png" 
                  *ngIf="!publicationBean.isLiked"></button>
         </div>
 
@@ -217,15 +218,15 @@
             <div class="hint-social">
                {{ 'publication_dislike' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/new/thumb-down-active.png"
+            <img class="social-emoji" src="assets/images/new/thumb-down-active.png" style="margin-top:4px"
                  *ngIf="publicationBean.isDisliked">
             <img class="social-emoji desaturated"
-                 src="assets/images/new/thumb-down.png"
+                 src="assets/images/new/thumb-down.png" style="margin-top:4px"
                  *ngIf="!publicationBean.isDisliked">
           </button>
         </div>
         <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
-            <button class="dislike">
+            <button class="social-button">
 
               <img class="social-emoji" src="assets/images/new/comment-active.png"
               *ngIf="commentsDisplayed">
@@ -242,7 +243,7 @@
 
         </div>
         <div class="dislike-holder" (click)="sharePub(publicationBean)">
-          <button class="dislike">
+          <button class="social-button">
             <div class="hint-social">
               Partager
             </div>
@@ -380,6 +381,9 @@
 </div>
 <div class="modal-edit-pub" *ngIf="modalPub" (click)="closeModalPub()">
   <div class="white-box-edit">
+      <article *ngIf="publicationBean.profileId != user._id" (click)="unsubscribe(publicationBean)">
+          {{ 'publication_unfollow' | translate }} {{publicationBean.profileFirstName}}
+      </article>
     <article *ngIf="publicationBean.profileId != user._id" (click)="reportPub(publicationBean)">
         {{ 'publication_report' | translate }}
     </article>

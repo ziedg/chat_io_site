@@ -107,7 +107,30 @@ export class Publication {
     });
 
   }
+  unsubscribe(post:PublicationBean) {
+    let body = JSON.stringify({
+      profileId: post.profileId
+    });
 
+    this.http.post(
+      environment.SERVER_URL + pathUtils.UNSUBSCRIBE,
+      body,
+      AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        if (response.status == 0) {
+          this.user.isFollowed = false;
+          this.user.nbSuivi--;
+        }
+      },
+        err => {
+      },
+      () => {
+        this.changeDetector.markForCheck();
+      }
+    );
+  }
   deletePub() {
     swal({
       title: this.translateCode("publication_popup_confirmation_title"),
@@ -199,9 +222,10 @@ export class Publication {
          var popupspan = document.getElementsByClassName("close-button")[0];
 
        // When the user clicks on <span> (x), close the modal
+       if(popupspan || popupspan != undefined){
         popupspan.addEventListener("click",function(){
           popupmodal.style.display = "none";
-        });
+        });}
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 
