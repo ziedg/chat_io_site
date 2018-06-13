@@ -36,8 +36,7 @@ export class FacebookFriends {
         this.user = loginService.user;
         this.page = 1;
         this.loadfacebookProfiles(this.user._id);  
-        this.isValid = this.facebookProfiles.length != 0;
-        
+            
         }
 
   
@@ -52,6 +51,7 @@ export class FacebookFriends {
               response => {
 
                 Array.prototype.push.apply(this.facebookProfiles, response.message);
+                this.isValid = this.facebookProfiles.length != 0;
             },
             err => {
             },
