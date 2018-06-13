@@ -22,7 +22,8 @@ export class FacebookFriends {
 
     public facebookProfiles: Array<User> = [];
     displayedNumberfacebookProfiles = 2;
-    displayShowMore: boolean = true;
+    page = 1;
+    isValid : boolean = false;
 
     public user: User = new User();
 
@@ -33,24 +34,23 @@ export class FacebookFriends {
         private changeDetector: ChangeDetectorRef) {
         loginService.redirect();
         this.user = loginService.user;
+        this.page = 1;
         this.loadfacebookProfiles(this.user._id);  
+        this.isValid = this.facebookProfiles.length != 0;
         
-          console.log(this.facebookProfiles);
-    
-    
         }
 
   
     loadfacebookProfiles(Id_Profile?: string) {
 
-        var url: string = environment.SERVER_URL + pathUtils.GET_FACEBOOK_FRIENDS;
+        var url: string = environment.SERVER_URL + pathUtils.GET_FACEBOOK_FRIENDS + String(this.page);
 
         this.http.get(url,
             AppSettings.OPTIONS)
             .map((res: Response) => res.json())
             .subscribe(
               response => {
-              
+
                 Array.prototype.push.apply(this.facebookProfiles, response.message);
             },
             err => {
@@ -116,7 +116,7 @@ export class FacebookFriends {
         let body = JSON.stringify({
           profileId: user._id
         });
-    
+
         this.http.post(
           environment.SERVER_URL + pathUtils.IGNORE,
           body,
@@ -137,6 +137,12 @@ export class FacebookFriends {
           );
     
     
-      }
+    }
+
+    loadmore() {
+      this.page++;
+      this.loadfacebookProfiles(this.user._id);
+
+    }
 
 }
