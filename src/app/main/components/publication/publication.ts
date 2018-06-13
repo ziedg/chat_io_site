@@ -566,7 +566,6 @@ export class Publication {
     );
     this.closeModalPub();
     this.unsubscribe(post);
-    post.nbSignals++;
   }
 
   doReportPub(text) {
