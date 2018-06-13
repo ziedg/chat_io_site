@@ -666,6 +666,7 @@ getPageFacebookVideo(videoLink): string {
     videoLink.indexOf("m.facebook.com") > 0 || videoLink.indexOf("mobile.facebook.com") > 0 ){
        videoId = this.getIdFacebookVideo(videoLink);
        var videoPage = this.getPageFacebookVideo(videoLink);
+       console.log("faceboook");
        try {
         jQuery(".youtube-preview").html("");
         jQuery(".facebook-preview").html(
