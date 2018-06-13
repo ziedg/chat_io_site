@@ -1,12 +1,13 @@
-<section class="widget bordered">
+<section class="widget bordered" *ngIf="isValid">
   <header>
     Facebook
   </header>
  
+  <div  class="fb-suggestions-container">
   <article *ngFor="let profile of facebookProfiles;  let i=index">
     <div *ngIf="i < displayedNumberfacebookProfiles"> 
     
-      <span class="user user-fb" style="margin:0 auto !important">
+      <span class="user user-fb">
         <div class="user-img" *ngIf="profile.profilePictureMin"
 							[routerLink]="['/main/profile',profile._id]"
 							[ngStyle]="{'background-image': 'url(' + profile.profilePictureMin + ')'}">
@@ -16,8 +17,7 @@
              	[ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
         </div>
         <div class="user-name" style="padding:10px 5px 10px 0px">
-          <header><a [routerLink]="['/main/profile',profile._id]" 
-            style="max-width:115px;text-align:center">
+          <header><a [routerLink]="['/main/profile',profile._id]" class="fb-link-name">
             {{profile.firstName}} {{profile.lastName}}
           </a></header>
           <div class="top-blagueurs-sub-nbr" style="text-align: center"> {{profile.nbSuivi}} abonnés </div>
@@ -46,5 +46,6 @@
 
     </div>   
   </article>
+  </div>
 
 </section>

@@ -565,6 +565,7 @@ export class Publication {
       }
     );
     this.closeModalPub();
+    this.unsubscribe(post);
   }
 
   doReportPub(text) {

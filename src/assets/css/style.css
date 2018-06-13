@@ -1935,6 +1935,13 @@ textarea:focus {
   display: -ms-flexbox;
   display: -webkit-flex;
 }
+.fb-suggestions-container{
+  display:flex;
+  flex-direction:row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .user-fb {
   display:block !important;
@@ -1942,6 +1949,16 @@ textarea:focus {
   border: 1px solid #edeeee;
   padding :10px;
   width :min-content;
+  height :160px;
+  margin:20px 10px;
+}
+.fb-link-name{
+  max-width:115px;
+  text-align:center;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .suggestions-box .user{
