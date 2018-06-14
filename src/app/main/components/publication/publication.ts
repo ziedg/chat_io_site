@@ -314,7 +314,7 @@ export class Publication {
     this.commentTextareaId = "comment-" + this.publicationBean._id;
     this.changeDetector.markForCheck();
     if (this.publicationBean) {
-      console.log('hey');
+      console.log(this.publicationBean._id);
       this.pubLink = urlEncode(environment.SERVER_URL + "main/post/" + this.publicationBean._id);
       this.shareLink = "https://www.facebook.com/sharer/sharer.php?u=" + this.pubLink + "&amp;src=sdkpreparse";
 
