@@ -92,7 +92,7 @@ export class FacebookLogin {
             email: response.email,
             facebookId: response.id,
             birthday: response.birthday,
-            friends:friends.friends.data,
+            friends:friends.data,
             gender: response.gender,
             coverPicture: response.cover.source,
         });
