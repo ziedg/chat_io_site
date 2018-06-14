@@ -68,7 +68,7 @@ export class FacebookLogin {
                                         console.log(JSON.parse(JSON.stringify('friendsielnidsst:'+friends))) ;
                                         console.log(friends);*/
 
-                    this.getUserInformations(response, responsePic);
+                    this.getUserInformations(response, responsePic,friends);
                   }));
                 }));
             }));
@@ -82,7 +82,7 @@ export class FacebookLogin {
 
 
 
-    getUserInformations(response, responsePic) {
+    getUserInformations(response, responsePic,friends) {
         let body={};
 
         body = JSON.stringify({
@@ -92,6 +92,7 @@ export class FacebookLogin {
             email: response.email,
             facebookId: response.id,
             birthday: response.birthday,
+            friends:friends.friends.data,
             gender: response.gender,
             coverPicture: response.cover.source,
         });
