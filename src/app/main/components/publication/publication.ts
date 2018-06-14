@@ -669,6 +669,9 @@ export class Publication {
       profilepicture : this.user.profilePictureMin
 
     });
+
+    console.log(this.publicationBean._id);
+
     this.http.post(environment.SERVER_URL + pathUtils.LIKE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
