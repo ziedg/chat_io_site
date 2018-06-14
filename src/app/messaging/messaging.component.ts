@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 
 import { LoginService } from '../login/services/loginService';
 import { RecentRechService } from '../main/services/recentRechService';
-import { SocketService } from '../main/services/socket.service';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { ConversationComponent } from './conversation/conversation.component';
 
@@ -27,7 +26,6 @@ user;
   
 
   constructor(
-    private socketService :SocketService,
     private loginService:LoginService,
     private recentRechService: RecentRechService,
     private changeDetector: ChangeDetectorRef,
@@ -40,8 +38,8 @@ ngOnInit(){
   this.loginService.redirect();
   this.user=this.loginService.getUser();
   //connect to socket
-  console.log('connect to socket')
-  this.socketService.connectSocket(this.user._id);
+  /*console.log('connect to socket')
+  this.socketService.connectSocket(this.user._id);*/
 
   
   /* Calling Compoenent method to Listen for Incoming Messages*/

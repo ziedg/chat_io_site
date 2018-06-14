@@ -1,6 +1,6 @@
 import { Http } from '@angular/http';
 import { NotificationService } from './../../main/services/notification.service';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import {take} from 'rxjs/operator/take'
 
@@ -16,6 +16,8 @@ export class LoginService {
     public token: string;
     /* User */
     public user : User;
+
+ userEmitter=new EventEmitter<any>();
 
     /* constructor  */
     constructor(private router:Router, private http:Http,private notificationService:NotificationService){
@@ -74,7 +76,7 @@ export class LoginService {
             this.token = localStorage.getItem('token');
 
             this.user= JSON.parse(localStorage.getItem('user'));
-
+            this.userEmitter.emit(this.user)
         }
     }
 

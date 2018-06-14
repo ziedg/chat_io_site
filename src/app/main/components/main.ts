@@ -20,6 +20,7 @@ import { RecentRechService } from '../services/recentRechService';
 //Notification
 import { NotificationService } from "../services/notification.service";
 import { urlB64ToUint8Array, VAPID_PUBLIC_KEY } from "../../utils/notification";
+import { SocketService } from '../services/socket.service';
 
 declare var jQuery: any;
 declare var FB: any;
@@ -75,7 +76,7 @@ export class Main {
     private meta: Meta,
     private elementRef: ElementRef,
     private renderer: Renderer2,
-
+    private socketService :SocketService,
 
     //Notiifcation
     private notificationService: NotificationService) {
@@ -84,7 +85,15 @@ export class Main {
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
     this.listNotif = [];
-    this.user = this.loginService.getUser();
+   this.loginService.userEmitter
+   .subscribe((user)=>{
+    this.user=user
+    console.log('connect to socket')
+    this.socketService.connectSocket(this.user._id);
+    this.listenForEvents();
+   })
+    
+    
     this.icons = {
       messaging: {
         icon: "messaging-icon",
@@ -149,7 +158,21 @@ export class Main {
         jQuery(".upper-arrow-profile").hide();
       }
     });
+
+
   }
+
+
+
+  //listen for socket events 
+  listenForEvents(): void {
+    this.socketService.receiveEvents()
+    .subscribe((event) => {
+      /* subscribing for events statrts */
+       console.log(event)
+      });
+  }
+
 
   saveRecentRech(_id, firstName, lastName, profilePicture, profilePictureMin) {
     let newRechUser = {};

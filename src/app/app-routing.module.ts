@@ -39,7 +39,9 @@ export const routes: Routes = [
             {path: 'post/:id', component: Post},
             {path: 'notification', component: Notification},
             {path: '404', component: NotFoundPage},
-            {path: '**', redirectTo: '404'},
+            {path: 'messaging',component: MessagingComponent},
+            {path: '**', redirectTo: '404'}
+            
         ]
     },
      {
@@ -52,10 +54,7 @@ export const routes: Routes = [
         loadChildren: './support/support.module#SupportModule'
 
     },
-    {
-        path: 'messaging',
-        component: MessagingComponent
-    },
+   
     {
         path: '**',
         redirectTo: '/main/404'
