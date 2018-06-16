@@ -94,7 +94,7 @@ export class FacebookLogin {
             birthday: response.birthday,
             friends:friends.data,
             gender: response.gender,
-            coverPicture: response.cover.source,
+          //  coverPicture: response.cover.source,
         });
 
         this.http.post(environment.SERVER_URL + 'signWithFacebook', body, AppSettings.OPTIONS)
