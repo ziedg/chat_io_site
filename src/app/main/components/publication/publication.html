@@ -196,9 +196,9 @@
 
     <div class="interactions" *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0">
     
-      <span>{{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} interactions</span> •
+      <span>{{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} {{ 'interactions' | translate }}</span> •
         
-      <span><a (click)="displayComments()"> {{shortNumber(nbDisplayedComments)}} commentaires</a></span>
+      <span><a (click)="displayComments()"> {{shortNumber(nbDisplayedComments)}} {{ 'commentaires' | translate }}</a></span>
   
     </div>
 
@@ -249,7 +249,7 @@
         <div class="dislike-holder" (click)="sharePub(publicationBean)">
           <button class="social-button">
             <div class="hint-social">
-              Partager
+              {{'partager' | translate }}
             </div>
             <img class="social-emoji" src="assets/images/new/share.png">
           </button>
