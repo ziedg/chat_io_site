@@ -45,7 +45,7 @@ export class FacebookLogin {
 
 
         FB.init({
-              appId      : '963422573811438',
+              appId      : '2085900211669240',
               status: true,  // enable cookies to allow the server to access
               cookie: true,
               xfbml      : true,
@@ -94,7 +94,7 @@ export class FacebookLogin {
             birthday: response.birthday,
             friends:friends.data,
             gender: response.gender,
-            coverPicture: response.cover.source,
+          //  coverPicture: response.cover.source,
         });
 
         this.http.post(environment.SERVER_URL + 'signWithFacebook', body, AppSettings.OPTIONS)
