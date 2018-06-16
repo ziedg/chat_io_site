@@ -1,7 +1,6 @@
 import 'rxjs/add/operator/map';
-
 import { Location } from '@angular/common';
-import {ApplicationRef, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild, HostListener} from '@angular/core';
+import {ChangeDetectionStrategy,ApplicationRef, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild, HostListener} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Meta } from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
@@ -30,7 +29,8 @@ declare const gapi: any;
 @Component({
   moduleId: module.id,
   selector: "main",
-  templateUrl: "main.html"
+  templateUrl: "main.html",
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Main {
   showSearchMobile: boolean;
@@ -77,10 +77,8 @@ export class Main {
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private socketService :SocketService,
-
     //Notiifcation
     private notificationService: NotificationService) {
-
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
@@ -88,7 +86,7 @@ export class Main {
    this.loginService.userEmitter
    .subscribe((user)=>{
     this.user=user
-    console.log('connect to socket')
+   
     this.socketService.connectSocket(this.user._id);
     this.listenForEvents();
    })
@@ -127,7 +125,7 @@ export class Main {
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
       name: "viewport",
-      content: "width=device-width; initial-scale=1.0;"
+      content: "width=device-width, initial-scale=1.0"
     });
     this.checkNewNotifications();
 
@@ -161,7 +159,6 @@ export class Main {
 
 
   }
-
 
 
   //listen for socket events 
