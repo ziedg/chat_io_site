@@ -62,9 +62,9 @@
               </div>
 
 
-              <input id="pub-title-input" placeholder="{{ 'home_publish_title' | translate }}" *ngIf="titleEnable" formControlName="publicationTitle">
+              <input id="pub-title-input" placeholder="{{ 'home_publish_title' | translate }}" *ngIf="titleEnable" formControlName="publicationTitle" class="new-publication-title">
 
-              <div id="publishDiv" [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText}" (paste)="updatePublishTextOnPaste($event)"
+              <div id="publishDiv" [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText, 'post-title-enable':titleEnable}" (paste)="updatePublishTextOnPaste($event)"
                 contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkArabic(publishDivRef.textContent[0])"
                 #publishDivRef style="width: calc(100% - 80px)"></div>
 

@@ -1242,6 +1242,7 @@ section.widget {
   color: black;
   align-content: center;
   font-size: 14px;
+  text-align: justify;
 }
 .welcome-msg h3 {
   font-family: 'coolvetica';
@@ -2022,11 +2023,21 @@ facebook-friends .user .user-img  {
   --user-img-w: 40px;
 }
 
+.post-title-enable {
+  margin-left:53px !important;
+  margin-bottom: 7px !important;
+}
+
+.new-publication-title::-webkit-input-placeholder{
+  color: #ccc;
+}
+
 @media(max-width: 767px) {
   #pub-holder .user-img {
     --user-img-w: 50px;
   }
 }
+
 
 .user-img {
   background-size: cover;
@@ -2174,9 +2185,9 @@ facebook-friends .user .user-img  {
 .social-staff .like-dislike button {
   font-size: 25px;
 }
-.social-staff .like-dislike button:active {
+/*.social-staff .like-dislike button:active {
   transform: rotate(15deg) scale(1.2);
-}
+}*/
 .dislike {
   margin-left: 17px;
 }
@@ -4246,7 +4257,6 @@ input.loginInput {
 /* API LINK DATA */
 
 .link-preview {
-  border: 1px solid #e1e1e1;
   margin: 15px;
   padding: 0;
   width: 450px;
@@ -4757,7 +4767,7 @@ body {
   }
 
   .sub-container > .bordered {
-    margin-bottom: 20px;
+    margin-bottom: 7px;
   }
 
   .interactions {
