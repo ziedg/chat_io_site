@@ -72,7 +72,8 @@ export class Home {
 	arabicRegex:RegExp = /[\u0600-\u06FF]/;
   public imageFromLink:boolean = false;
 
-  translationLanguages: Array<String> = ['en', 'fr', 'es'];
+  translationLanguages = [{ name : 'English (US)',value: 'en'},
+                          { name : 'Français (France)',value: 'fr'} ,{ name : '     Español (España)',value: 'es'}];
   selectedLanguage: String;
 
 

@@ -243,12 +243,14 @@
 
       <facebook-friends></facebook-friends>
 
-      <section class="hidden-sm hidden-xs widget bordered" style="padding:10px">
+      <section class="hidden-sm hidden-xs widget bordered" style="padding:15px">
 
 
-        <span *ngFor="let language of translationLanguages"
-              (click)="onSelectLanguage(language)">
-            <a class="language-option" style="cursor: pointer">{{ language }} </a>
+        <span *ngFor="let language of translationLanguages; let i = index"
+              (click)="onSelectLanguage(language.value)">
+            <a class="language-option" style="cursor: pointer" 
+               [ngClass]="{'selected-language':language.value === selectedLanguage}">{{ language.name }}</a>
+            <span *ngIf="i === 1"><br></span>
         </span>
 
       </section>

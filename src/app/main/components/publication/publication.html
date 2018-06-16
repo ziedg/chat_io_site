@@ -71,7 +71,7 @@
     </div>
 
     <div class="content" *ngIf="!publicationBean.isShared">
-      <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]">
+      <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]" style="margin-left:7px">
         {{publicationBean.publTitle}} </h4>
       <span *ngIf="publicationBean.publText !== 'null'
                   && publicationBean.publText !=='undefined'

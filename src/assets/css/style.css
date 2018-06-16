@@ -1913,9 +1913,11 @@ textarea:focus {
 }
 .language-option {
   color: #3d3d3d;
-  padding-right: 8px;
-  padding-left:15px;
+  padding-right:8px;
   text-align:center;
+}
+.selected-language {
+  color:#1f609a;
 }
 
 .hashtag {
