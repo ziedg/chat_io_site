@@ -2121,8 +2121,10 @@ facebook-friends .user .user-img  {
   font-size:14px;
   font-weight: bold;
 }
-
-
+.interactions a,.interactions a:visited,.interactions a:hover {
+  color:#424242;
+  text-decoration:none;
+}
 .social-staff {
   margin-top: 5px;
   display: flex;
