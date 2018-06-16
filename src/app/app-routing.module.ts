@@ -10,6 +10,8 @@ import { Post } from './main/components/post/post';
 import { Profile } from './main/components/profile/profile';
 import { SuggestionsComponent } from './main/components/suggestions/suggestions.component';
 import { FakeComponent } from './shared/fake.component';
+import { MessagingComponent } from './messaging/messaging.component';
+import {SearchMobile} from "./main/components/search-mobile/search-mobile.component";
 
 
 export const routes: Routes = [
@@ -32,23 +34,27 @@ export const routes: Routes = [
             {
                 path: 'parameters', loadChildren: './main/parameters/parameters.module#ProfileParametersModule'
             },
-						{ path: 'suggestions', component: SuggestionsComponent },
+						{path: 'suggestions', component: SuggestionsComponent},
+            {path: 'search-mobile', component: SearchMobile},
             {path: 'post/:id', component: Post},
             {path: 'notification', component: Notification},
             {path: '404', component: NotFoundPage},
-            {path: '**', redirectTo: '404'},
+            {path: 'messaging',component: MessagingComponent},
+            {path: '**', redirectTo: '404'}
+            
         ]
     },
      {
         path: 'logout',
         component: Logout
-    },   
-    
+    },
+
     {
         path: 'support',
         loadChildren: './support/support.module#SupportModule'
-       
+
     },
+   
     {
         path: '**',
         redirectTo: '/main/404'

@@ -1,8 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { NotificationService } from './../../main/services/notification.service';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import {take} from 'rxjs/operator/take'
 
 import { SocialUser } from '../../beans/social-user';
 import { User } from '../../beans/user';
+import { environment } from 'environments/environment';
+
+import { AppSettings } from '../../shared/conf/app-settings';
 
 @Injectable()
 export class LoginService {
@@ -11,8 +17,10 @@ export class LoginService {
     /* User */
     public user : User;
 
+ userEmitter=new EventEmitter<any>();
+
     /* constructor  */
-    constructor(private router:Router){
+    constructor(private router:Router, private http:Http,private notificationService:NotificationService){
         this.actualize();
     }
 
@@ -42,7 +50,7 @@ export class LoginService {
     redirect(){
       if(!this.isConnected()){
         if(this.isWasConnectedWithFacebook()){
-      
+
           this.router.navigate(['/login/facebook-login']);
         }else{
           this.router.navigate(['/login/sign-in']);
@@ -68,7 +76,7 @@ export class LoginService {
             this.token = localStorage.getItem('token');
 
             this.user= JSON.parse(localStorage.getItem('user'));
-
+            this.userEmitter.emit(this.user)
         }
     }
 
@@ -97,6 +105,13 @@ export class LoginService {
 
     /* deconnexion */
     logout(){
+
+
+
+      // notification unsubscribe
+          this.notificationService.removePushSubscriber().subscribe(result => console.log(result));
+        //  this.http.post(environment.SERVER_URL +'api/push-unsubscribe', sub,AppSettings.OPTIONS);
+        // })
         if(this.isConnected()){
             localStorage.removeItem('token');
             localStorage.removeItem('user');

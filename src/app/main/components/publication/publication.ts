@@ -81,6 +81,10 @@ export class Publication {
   pub_text:string = "";
   arabicText:boolean = false;
 
+  public InteractionsLikes: Array<User> = [];
+  public InteractionsDislikes: Array<User> = [];
+  displayedNumberInteractions = 10;
+  interactionsPage = 1;
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
 
@@ -107,7 +111,30 @@ export class Publication {
     });
 
   }
+  unsubscribe(post:PublicationBean) {
+    let body = JSON.stringify({
+      profileId: post.profileId
+    });
 
+    this.http.post(
+      environment.SERVER_URL + pathUtils.UNSUBSCRIBE,
+      body,
+      AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        if (response.status == 0) {
+          this.user.isFollowed = false;
+          this.user.nbSuivi--;
+        }
+      },
+        err => {
+      },
+      () => {
+        this.changeDetector.markForCheck();
+      }
+    );
+  }
   deletePub() {
     swal({
       title: this.translateCode("publication_popup_confirmation_title"),
@@ -181,29 +208,28 @@ export class Publication {
 
   ngOnInit() {
 
-        
+
 
     // Get the modal
-    // var modal = document.getElementById('myModal');
-    
-    //     // Get the image and insert it inside the modal - use its "alt" text as a caption
-    //     var img = jQuery('.myImg');
-    //     var modalImg = jQuery("#img01");
-    //     var captionText = document.getElementById("caption");
-    //     jQuery('.myImg').click(function(){
-    //         modal.style.display = "block";
-    //         var newSrc = this.src;
-    //         modalImg.attr('src', newSrc);
-    //         captionText.innerHTML = this.alt;
-    //     });
-    
-    //     // Get the <span> element that closes the modal
-    //     var span = document.getElementsByClassName("close-button")[0];
-    
-    //     // When the user clicks on <span> (x), close the modal
-    //     span.addEventListener("click",function(){
-    //       modal.style.display = "none";
-    //     }); 
+     var popupmodal = document.getElementById('myModal');
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = jQuery('.myImg');
+         var popupmodalImg = jQuery("#img01");
+         jQuery('.myImg').click(function(){
+            popupmodal.style.display = "block";
+            var popupnewSrc = this.src;
+             popupmodalImg.attr('src', popupnewSrc);
+        });
+
+       // Get the <span> element that closes the modal
+         var popupspan = document.getElementsByClassName("close-button")[0];
+
+       // When the user clicks on <span> (x), close the modal
+       if(popupspan || popupspan != undefined){
+        popupspan.addEventListener("click",function(){
+          popupmodal.style.display = "none";
+        });}
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 
@@ -292,7 +318,7 @@ export class Publication {
     this.commentTextareaId = "comment-" + this.publicationBean._id;
     this.changeDetector.markForCheck();
     if (this.publicationBean) {
-      console.log('hey');
+      console.log(this.publicationBean._id);
       this.pubLink = urlEncode(environment.SERVER_URL + "main/post/" + this.publicationBean._id);
       this.shareLink = "https://www.facebook.com/sharer/sharer.php?u=" + this.pubLink + "&amp;src=sdkpreparse";
 
@@ -302,7 +328,7 @@ export class Publication {
       if (this.publicationBean.publyoutubeLink) {
         this.linkYtb = "https://www.youtube.com/embed/" + this.publicationBean.publyoutubeLink;
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkYtb);
-        
+
       }
       else if (this.publicationBean.publfacebookLink) {
         this.linkFb = "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +
@@ -543,6 +569,7 @@ export class Publication {
       }
     );
     this.closeModalPub();
+    this.unsubscribe(post);
   }
 
   doReportPub(text) {
@@ -640,8 +667,15 @@ export class Publication {
 
     let body = JSON.stringify({
       publId: this.publicationBean._id,
-      profileId: this.user._id
+      profileId: this.user._id,
+      profilefirstname : this.user.firstName,
+      profilelastname : this.user.lastName,
+      profilepicture : this.user.profilePictureMin
+
     });
+
+    console.log(this.publicationBean._id);
+
     this.http.post(environment.SERVER_URL + pathUtils.LIKE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
@@ -693,7 +727,10 @@ export class Publication {
 
     let body = JSON.stringify({
       publId: this.publicationBean._id,
-      profileId: this.user._id
+      profileId: this.user._id,
+      profilefirstname : this.user.firstName,
+      profilelastname : this.user.lastName,
+      profilepicture : this.user.profilePictureMin
     });
     this.http.post(environment.SERVER_URL +  pathUtils.DISLIKE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
@@ -729,6 +766,34 @@ export class Publication {
       );
     this.publicationBean.isDisliked = false;
     this.publicationBean.nbDislikes--;
+  }
+
+  getInteractions() {
+    var url: string = environment.SERVER_URL + pathUtils.GET_SOCIAL_INTERACTIONS;
+    
+    let body = JSON.stringify({
+      publId: this.publicationBean._id,
+      page: this.interactionsPage
+    });
+
+            this.http.post(url,body,
+                AppSettings.OPTIONS)
+                .map((res: Response) => res.json())
+                .subscribe(
+                  response => { 
+                    Array.prototype.push.apply(this.InteractionsLikes, response.message.likes);
+                    Array.prototype.push.apply(this.InteractionsDislikes, response.message.dislikes);
+                    console.log(this.InteractionsLikes);
+                    console.log(this.InteractionsDislikes);
+                },
+                err => {
+                  console.error('Cannot get interactions');
+                },
+                () => {
+                  this.changeDetector.markForCheck();
+                  console.error('Cannot get interactions');
+                }
+              );
   }
 
   public toggleEmoji() {

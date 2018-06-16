@@ -62,13 +62,13 @@ export class FacebookLogin {
                   FB.api('/me/friends', ( friends => {
 
                     console.log(JSON.stringify('Facebook friends: ' + friends));
-                    //console.log(friends);
+                    console.log(friends);
                     /* FB.api('/me/friends', ( friends => {
                                         console.log('friends');
                                         console.log(JSON.parse(JSON.stringify('friendsielnidsst:'+friends))) ;
                                         console.log(friends);*/
 
-                    this.getUserInformations(response, responsePic);
+                    this.getUserInformations(response, responsePic,friends);
                   }));
                 }));
             }));
@@ -82,7 +82,7 @@ export class FacebookLogin {
 
 
 
-    getUserInformations(response, responsePic) {
+    getUserInformations(response, responsePic,friends) {
         let body={};
 
         body = JSON.stringify({
@@ -92,8 +92,9 @@ export class FacebookLogin {
             email: response.email,
             facebookId: response.id,
             birthday: response.birthday,
+            friends:friends.data,
             gender: response.gender,
-            coverPicture: response.cover.source,
+          //  coverPicture: response.cover.source,
         });
 
         this.http.post(environment.SERVER_URL + 'signWithFacebook', body, AppSettings.OPTIONS)

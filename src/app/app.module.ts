@@ -31,20 +31,26 @@ import { SuggestionsComponent } from './main/components/suggestions/suggestions.
 import { TopBlagueursAndDecov } from './main/components/topBlagueursAndDecov/topBlagueursAndDecov';
 import { DateService } from './main/services/dateService';
 import { EmojiService } from './main/services/emojiService';
-import { GlobalService } from './main/services/globalService';
 import { LinkPreview } from './main/services/linkPreview';
 import { LinkView } from './main/services/linkView';
 import { PostService } from './main/services/postService';
 import { RecentRechService } from './main/services/recentRechService';
 import { SeoService } from './main/services/seo-service';
+import { SocketService } from './main/services/socket.service';
+import { EmitterService } from './messaging/emitter.service';
+import { ChatService } from './messanging/chat.service';
 import { FakeComponent } from './shared/fake.component';
 import { httpFactory } from './utils/factories/http.factory';
+import { MessagingModule } from './messaging/messaging.module';
+import { SearchMobile } from "./main/components/search-mobile/search-mobile.component";
+import { FacebookFriends } from './main/components/facebookFriends/facebookFriends';
 
 /** Factories */
 @NgModule({
     imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
       ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule,Ng2ImgMaxModule,
       HttpClientModule,
+      MessagingModule,
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
@@ -53,8 +59,8 @@ import { httpFactory } from './utils/factories/http.factory';
         }
       })],       // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
-        TopBlagueursAndDecov, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent],   // components and directives
+        TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,
@@ -67,6 +73,9 @@ import { httpFactory } from './utils/factories/http.factory';
         PostService,
         SeoService,
         LoginService,
+        SocketService,
+        EmitterService,
+        ChatService,
         ResetPasswordService,
         {
           provide: Http, useFactory: httpFactory,
@@ -75,7 +84,6 @@ import { httpFactory } from './utils/factories/http.factory';
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
         {provide: APP_BASE_HREF, useValue: '/'},
-        GlobalService,
     ],
 
 })

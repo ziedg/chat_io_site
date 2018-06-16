@@ -1,10 +1,9 @@
 import 'rxjs/add/operator/map';
-
 import { Location } from '@angular/common';
-import { ApplicationRef, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import {ChangeDetectionStrategy,ApplicationRef, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild, HostListener} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Meta } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
@@ -15,12 +14,12 @@ import { LoginService } from '../../login/services/loginService';
 import { AppSettings } from '../../shared/conf/app-settings';
 import * as pathUtils from '../../utils/path.utils';
 import { DateService } from '../services/dateService';
-import { GlobalService } from '../services/globalService';
 import { RecentRechService } from '../services/recentRechService';
 
 //Notification
 import { NotificationService } from "../services/notification.service";
 import { urlB64ToUint8Array, VAPID_PUBLIC_KEY } from "../../utils/notification";
+import { SocketService } from '../services/socket.service';
 
 declare var jQuery: any;
 declare var FB: any;
@@ -30,14 +29,16 @@ declare const gapi: any;
 @Component({
   moduleId: module.id,
   selector: "main",
-  templateUrl: "main.html"
+  templateUrl: "main.html",
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Main {
+  showSearchMobile: boolean;
   autocomplete = false;
   notification = false;
   signoutHover = false;
   user: User = new User();
-  listSearshUsers: Array<User> = [];
+  listSearchUsers: Array<User> = [];
   listNotif: Array<NotificationBean> = [];
   nbNewNotifications: number = 0;
   searchValue: string;
@@ -47,17 +48,19 @@ export class Main {
   showButtonMoreNotif: Boolean = false;
   showNoNotif: Boolean = false;
   noSearchResults: Boolean = false;
-  searchMobileHidden = true;
   public showNotif:boolean=true;
+
+  icons;
 
   @ViewChild("searchResults2") searchRes2: ElementRef;
   @ViewChild("searchMobileInput") searchInput: ElementRef;
-  
-  // Notification vars 
+
+  // Notification vars
   private subscriptionJson = '';
   private isSubscribed = false;
   private registration = undefined;
   // end Notification vars
+
 
   constructor(
     public translate: TranslateService,
@@ -65,39 +68,74 @@ export class Main {
     private http: Http,
     private location: Location,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private loginService: LoginService,
     private changeDetector: ChangeDetectorRef,
     private recentRechService: RecentRechService,
     private appRef: ApplicationRef,
-    public globalService: GlobalService,
-
-    // TODO: check globalService access
     private meta: Meta,
-
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private socketService :SocketService,
     //Notiifcation
-    private notificationService: NotificationService
-  ) {
+    private notificationService: NotificationService) {
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
     this.listNotif = [];
-    this.user = this.loginService.getUser();
+   this.loginService.userEmitter
+   .subscribe((user)=>{
+    this.user=user
+   
+    this.socketService.connectSocket(this.user._id);
+    this.listenForEvents();
+   })
+    
+    
+    this.icons = {
+      messaging: {
+        icon: "messaging-icon",
+        type: "outline"
+      },
+      home: {
+        icon: "home-icon",
+        type: "outline"
+      },
+      search: {
+        icon: "search-icon",
+        type: "outline"
+      },
+      notifications: {
+        icon: "notifications-icon",
+        type: "outline"
+      },
+      profile: {
+        icon: "user-icon",
+        type: "outline"
+      },
+      outline: "outline",
+      full: "full",
+      activeIcon: "home",
+      wasActiveIcon: ""
+    };
   }
 
+
   ngOnInit() {
-    
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
       name: "viewport",
-      content: "width=device-width; initial-scale=1.0;"
+      content: "width=device-width, initial-scale=1.0"
     });
     this.checkNewNotifications();
+
     jQuery(".recherche-results-holder").blur(function() {
       jQuery(".file-input-holder").hide();
     });
     setInterval(() => {
       this.changeDetector.markForCheck();
     }, 500);
+
     jQuery(document).click(function(e) {
       if (
         jQuery(e.target).closest(".recherche-results-holder").length === 0 &&
@@ -118,17 +156,20 @@ export class Main {
         jQuery(".upper-arrow-profile").hide();
       }
     });
-    //Notification Check
-      if ('serviceWorker' in navigator && 'PushManager' in window) {
-        navigator.serviceWorker.register('assets/sw.js').then(reg => {
-        this.registration = reg;
-        this.init();
-          console.log('Service Worker and Push is supported');
-        });
-      } else {
-        console.warn('Push messaging is not supported');
-      }
+
+
   }
+
+
+  //listen for socket events 
+  listenForEvents(): void {
+    this.socketService.receiveEvents()
+    .subscribe((event) => {
+      /* subscribing for events statrts */
+       console.log(event)
+      });
+  }
+
 
   saveRecentRech(_id, firstName, lastName, profilePicture, profilePictureMin) {
     let newRechUser = {};
@@ -148,7 +189,7 @@ export class Main {
   }
 
   onChange(newValue: string) {
-    this.listSearshUsers = [];
+    this.listSearchUsers = [];
     this.enableAutocomplete();
     this.changeDetector.markForCheck();
     if (newValue.length > 1) {
@@ -191,17 +232,17 @@ export class Main {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-          this.listSearshUsers = [];
+          this.listSearchUsers = [];
           this.noSearchResults = false;
           this.changeDetector.markForCheck();
-          for (var i = 0; i < this.listSearshUsers.length; i++) {
-            this.listSearshUsers.pop();
+          for (var i = 0; i < this.listSearchUsers.length; i++) {
+            this.listSearchUsers.pop();
             this.changeDetector.markForCheck();
           }
           if (response.status == 0) {
             if (response.profiles)
               for (var i = 0; i < response.profiles.length; i++) {
-                this.listSearshUsers[i] = response.profiles[i];
+                this.listSearchUsers[i] = response.profiles[i];
                 this.changeDetector.markForCheck();
               }
           }
@@ -210,7 +251,7 @@ export class Main {
           this.noSearchResults = true;
         },
         () => {
-          if (this.listSearshUsers.length == 0) {
+          if (this.listSearchUsers.length == 0) {
             this.disableAutocomplete();
             this.noSearchResults = true;
           } else {
@@ -256,6 +297,7 @@ export class Main {
     this.listNotif = [];
     this.getNotifications();
   }
+
 
   getNotifications() {
     this.http
@@ -393,7 +435,7 @@ export class Main {
 
   clearSearchMobile() {
     this.searchInput.nativeElement.value = "";
-    this.listSearshUsers.length = 0;
+    this.listSearchUsers.length = 0;
     this.noSearchResults = false;
   }
 
@@ -438,4 +480,5 @@ export class Main {
       this.subscriptionJson = '';
     }
   }
+
 }

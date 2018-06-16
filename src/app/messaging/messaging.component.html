@@ -1,0 +1,23 @@
+
+<!-- header section starts -->
+<header class="app-header">
+	<nav class="navbar navbar-expand-md">
+		<a class="navbar-brand" >Hello {{user.firstName}}</a>
+	</nav>
+	
+</header>
+<!-- header section ends -->
+<br> 
+<br>
+<br>
+
+<main role="main" class="container-fluid">
+	<div class="row">
+		<div class="col-3">
+			<app-chat-list #chatList [conversation]="conversation" [selectedUserInfo]="selectedUserInfo"></app-chat-list>
+		</div>
+		<div class="col-8">
+			<app-conversation #conversation [conversation]="conversation" [selectedUserInfo]="selectedUserInfo"></app-conversation>
+		</div>
+	</div>
+</main>

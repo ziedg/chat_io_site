@@ -15,14 +15,13 @@ const parametersRoutes: Routes = [
             {path: 'change-password', component: ChangePassword}
         ]
     }
-]
+];
 @NgModule({
 
     imports: [
       RouterModule.forChild(parametersRoutes)
     ],
     exports: [RouterModule]
-   
+
   })
   export class ParametersRoutingModule {}
-  

@@ -1,16 +1,31 @@
-<div *ngIf="user" class="container" id="container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)" (touchmove)="onTouchMove($event)">
+<div class="notification-bar" id="subscribeMsg" *ngIf="notificationService.isSubscribed === false ">
+  <span> {{ 'SP_AUTORISATION_NOTIF' | translate}} </span>
+  <span> <a (click)="notificationService.subscribeUser()">{{ 'ACTIVER_NOTIF_BUREAU' | translate}}</a></span>
+</div>
+
+<div *ngIf="user" class="container" id="container">
   <div class="row">
-    <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 col-md-offset-2 sub-container">
-      <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="user.isNewInscri">
-        <h3>{{ 'home_welcome' | translate }}</h3>
+    <div class="col-md-2 home-sidebar">
+        <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
+           [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}" ></span>
+          <span><a style="color:black" [routerLink]="['/main/profile',user._id]" >{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span></div>
+        <div><span><img class="home-sidebar-icon" src="assets/images/new/home-grey.png"></span>
+          <span ><a style="color:black;font-weight:bolder" routerLink="/redirect">{{ 'FIL_ACTUALITES' | translate}}</a></span></div>
+        <div [routerLink]="['/main/messaging']"><span><img class="home-sidebar-icon" src="assets/images/new/chat-grey.png"></span>
+          <span ><a style="color:black;font-weight:bolder" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a></span></div>
+        <div class="conditions-generales"><hr><div><a routerlink="/support/cgu">{{'conditions_generales' | translate}} &#5867;</a></div>
+          <div><a routerlink="/support/about-us">{{'a_propos' | translate}}</a></div></div>
+        <div class="copyright-home"> Speegar &copy; 2018</div>
+    </div>
+    <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 sub-container" style="height:100%;overflow:auto !important">
+
+
+      <div class="col-xs-12 bordered welcome-msg typeEffect" id="welcomeMsgDisplay" *ngIf="true || user.isNewInscri">
+        <h3 style="margin-top:10px">{{ 'home_welcome' | translate }}</h3>
         {{ 'home_welcome_text_first_part' | translate }}
         <br> {{ 'home_welcome_text_second_part' | translate }}
         <i class="fa fa-times" aria-hidden="true" (click)="closeWelcomeMsg()"></i>
       </div>
-
-
-
-
 
 
 
@@ -39,7 +54,7 @@
 
           </div>
           <div class="col-md-12 col-xs-12 add-head noPadding" id="pub-holder">
-            <div style="display: flex;align-items: flex-start; padding: 10px 13px 8px 17px; flex-wrap: wrap">
+            <div class="pub-holder-holder">
               <div class="user-img for-add" *ngIf="user.profilePictureMin" [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
               </div>
 
@@ -47,9 +62,9 @@
               </div>
 
 
-              <input id="pub-title-input" placeholder="{{ 'home_publish_title' | translate }}" *ngIf="titleEnable" formControlName="publicationTitle">
+              <input id="pub-title-input" placeholder="{{ 'home_publish_title' | translate }}" *ngIf="titleEnable" formControlName="publicationTitle" class="new-publication-title">
 
-              <div id="publishDiv" [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText}" (paste)="updatePublishTextOnPaste($event)"
+              <div id="publishDiv" [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText, 'post-title-enable':titleEnable}" (paste)="updatePublishTextOnPaste($event)"
                 contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkArabic(publishDivRef.textContent[0])"
                 #publishDivRef style="width: calc(100% - 80px)"></div>
 
@@ -101,7 +116,7 @@
             </div>
 
           </div>
-          <div class="col-md-12 col-xs-12 add-head" style="padding: 2px 15px 2px 22px;display: flex">
+          <div class="col-md-12 col-xs-12 add-head" style="border-bottom: 0">
             <div class="col-md-5 col-xs-6 add-buttons noPadding" style="display: flex; align-items: center">
 
               <span class="picture-pub-in" (click)="addPhoto()" style="margin-right: 5px; line-height: 22px;">
@@ -119,6 +134,7 @@
 
                 <i class="fa fa-youtube-play" (click)="changeYoutubeInput()"></i>
               </span>
+
 
               <input type="file" id="file-image" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
               <input type="file" id="file-image-gif" style="display:none" accept=".gif" (change)="uploadPhotoGIF($event)">
@@ -217,7 +233,6 @@
           </article>
         </div>
 
-
         <app-suggestions *ngIf="!morePosts" class="col-xs-12 noPadding hidden-lg hidden-md hidden-sm"></app-suggestions>
 
 
@@ -225,6 +240,22 @@
     </div>
     <div *ngIf="user" class="col-md-3 col-sm-5 hidden-xs side-home">
       <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
+
+      <facebook-friends></facebook-friends>
+
+      <section class="hidden-sm hidden-xs widget bordered" style="padding:15px">
+
+
+        <span *ngFor="let language of translationLanguages; let i = index"
+              (click)="onSelectLanguage(language.value)">
+            <a class="language-option" style="cursor: pointer" 
+               [ngClass]="{'selected-language':language.value === selectedLanguage}">{{ language.name }}</a>
+            <span *ngIf="i === 1"><br></span>
+        </span>
+
+      </section>
+
+
     </div>
   </div>
 </div>
