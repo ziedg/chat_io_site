@@ -3559,6 +3559,28 @@ input.loginInput {
   vertical-align: top;
   float: right;
 }
+
+@media(min-width:767px){
+  .login-lang{
+    display: none;
+  }
+}
+.login-lang{
+
+  background-color: transparent;
+  border: 0;
+  border-radius: 1px;
+  align-items:center;
+  width: 100%;
+  padding:10px 15px;
+  text-align:center;
+  display:flex;
+  flex-direction:row;
+  
+}
+.login-lang a{
+  border:0;
+}
 /*Loading*/
 
 #fountainTextG {
