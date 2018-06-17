@@ -76,7 +76,9 @@ export class Main {
     private meta: Meta,
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private socketService :SocketService,
+
+    private socketService:SocketService,
+
     //Notiifcation
     private notificationService: NotificationService) {
     if (!this.recentRechService.isEmptyList())
@@ -86,12 +88,12 @@ export class Main {
    this.loginService.userEmitter
    .subscribe((user)=>{
     this.user=user
-   
+
     this.socketService.connectSocket(this.user._id);
     this.listenForEvents();
    })
-    
-    
+
+
     this.icons = {
       messaging: {
         icon: "messaging-icon",
@@ -122,6 +124,9 @@ export class Main {
 
 
   ngOnInit() {
+
+
+
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
       name: "viewport",
@@ -161,7 +166,7 @@ export class Main {
   }
 
 
-  //listen for socket events 
+  //listen for socket events
   listenForEvents(): void {
     this.socketService.receiveEvents()
     .subscribe((event) => {
