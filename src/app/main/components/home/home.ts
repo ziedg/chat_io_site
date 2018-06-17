@@ -1,3 +1,4 @@
+import { SocketService } from './../../services/socket.service';
 import 'rxjs/add/operator/map';
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
@@ -19,6 +20,7 @@ import { LinkPreview } from '../../services/linkPreview';
 import { LinkView } from '../../services/linkView';
 import { NotificationService } from '../../services/notification.service';
 import { PostService } from '../../services/postService';
+
 
 
 declare var jQuery: any;
@@ -72,7 +74,8 @@ export class Home {
 	arabicRegex:RegExp = /[\u0600-\u06FF]/;
   public imageFromLink:boolean = false;
 
-  translationLanguages: Array<String> = ['en', 'fr', 'es'];
+  translationLanguages = [{ name : 'English (US)',value: 'en'},
+                          { name : 'Français (France)',value: 'fr'} ,{ name : '     Español (España)',value: 'es'}];
   selectedLanguage: String;
 
 
@@ -99,9 +102,24 @@ export class Home {
 
     //Notiifcation
     public notificationService: NotificationService,
+    private socketService:SocketService,
 
     private ref:ChangeDetectorRef
   ) {
+
+    ///try socket
+    const user= new Promise((resolve,reject)=>{
+      resolve(this.loginService.getUser())
+    }
+    )
+    //connect to socket
+        console.log('connect to socket from main')
+        user.then(user => {
+        this.socketService.connectSocket((user as any)._id);
+
+        })
+
+
     this.isSubscribed = true;
     this.loginService.redirect();
 
@@ -127,6 +145,7 @@ export class Home {
 
   ngOnInit() {
     this.selectedLanguage = localStorage.getItem('userLang');
+    this.socketService.receiveNotifications().subscribe(data => console.log(data))
 
     //Notification Check
         if ('serviceWorker' in navigator && 'PushManager' in window) {

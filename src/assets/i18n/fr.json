@@ -171,5 +171,19 @@
   "SP_ER_RESET_LINK_EXPIRED": "Le lien de renitialisation est expiré.",
   "SP_ER_EMAIL_NOT_VALID": "Cette adresse mail n'est pas valide",
   "publication_open_last_part": "... Lire la suite",
-  "top_blagueurs_show_more": "Afficher plus.."
+  "top_blagueurs_show_more": "Afficher plus..",
+  "SP_AUTORISATION_NOTIF": "Speegar a besoin de votre autorisation pour",
+  "ACTIVER_NOTIF_BUREAU" : "activer les notification de bureau.",
+  "FIL_ACTUALITES": "Fil d'actualité",
+  "MESSENGER": "Messager",
+  "subscribers": "abonnés",
+  "partager" : "Partager",
+  "votre_commentaire":"Votre commentaire ...",
+  "interactions": "interactions",
+  "commentaires": "commentaires",
+  "Modifier_Profil": "Modifier le Profil",
+  "conditions_generales": "Conditions générales",
+  "a_propos":"A propos de nous",
+  "fb_friends": "Suggestions pour vous",
+  "fb_label": "ami(e) facebook"
 }
