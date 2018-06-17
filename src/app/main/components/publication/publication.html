@@ -71,7 +71,7 @@
     </div>
 
     <div class="content" *ngIf="!publicationBean.isShared">
-      <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]" style="margin-left:7px">
+      <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]" class="publication-text">
         {{publicationBean.publTitle}} </h4>
       <span *ngIf="publicationBean.publText !== 'null'
                   && publicationBean.publText !=='undefined'
@@ -284,10 +284,12 @@
     <div [class.comment-with-picture]="uploadedPictureComment">
       <div *ngIf="commentsDisplayed" class="comment-holder form-comment">
         <div class="user-img for-comment" *ngIf="user.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + user.profilePictureMin + ')'}"></div>
+             [ngStyle]="{'background-image': 'url(' + user.profilePictureMin + ')'}"
+             ></div>
 
         <div class="user-img for-comment" *ngIf="!user.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}"></div>
+             [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}"
+             ></div>
 
         <form (ngSubmit)="publishComment()" [formGroup]="formComment" #f="ngForm">
           <textarea placeholder="Votre commentaire ..."

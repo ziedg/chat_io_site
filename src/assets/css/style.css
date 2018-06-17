@@ -2009,6 +2009,9 @@ facebook-friends .user .user-img  {
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
   margin: 0 auto;
+  width:45px;
+  height:45px;
+  margin-top:8px;
 }
 
 .fb-section{
@@ -2166,6 +2169,11 @@ facebook-friends .user .user-img  {
   margin-bottom:5px;
   word-wrap: break-word;
 }
+@media(max-width:767px){
+  .publication-text{
+    margin-left:9px;
+  }
+}
 .content img {
 /*  max-height: 400px; */
   max-width: 100%;
@@ -2176,7 +2184,7 @@ facebook-friends .user .user-img  {
 .interactions{
   margin-top: 0px;
   margin-bottom:14px;
-  margin-left:7px;
+  margin-left:9px;
   color:#424242;
   font-size:14px;
   font-weight: bold;
@@ -3104,8 +3112,9 @@ facebook-friends .user .user-img  {
 }
 .top-blagueurs-sub-nbr {
   color:#979797;
-  font-size:12px;
+  font-size: 9.5px;
   font-weight:bolder;
+  margin-top:2px;
 }
 .profil-holder {
   width: 80%;
@@ -5035,7 +5044,7 @@ top-blagueurs-decov .user-img {
 }
 .conditions-generales {
   color:#919191;
-  margin-top:27px;
+  margin-top: 10px;
   font-size: 12.5px;
   margin-left:5px;
 }
