@@ -85,13 +85,15 @@ export class Main {
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
     this.listNotif = [];
-   this.loginService.userEmitter
-   .subscribe((user)=>{
-    this.user=user
+    
+    //its med amin work i will uncomment it  lately  just for testing  ....
+   //this.loginService.userEmitter
+  // .subscribe((user)=>{
+   // this.user=user
 
-    this.socketService.connectSocket(this.user._id);
-    this.listenForEvents();
-   })
+   // this.socketService.connectSocket(this.user._id);
+   // this.listenForEvents();
+  // })
 
 
     this.icons = {
