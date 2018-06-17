@@ -2011,6 +2011,34 @@ facebook-friends .user .user-img  {
   margin: 0 auto;
 }
 
+.fb-section{
+  background-color:#fff;
+  margin-top: 20px;
+  padding:10px;
+}
+.navigation-arrow-container{
+  width:20px;
+  height: 20px;
+  background-color:rgba(0, 0, 0, 0.62);
+  border-radius: 50%;
+  position: absolute;
+  top:50%;
+}
+.navigation-arrow-container:hover{
+  background-color:rgba(0, 0, 0, 0.37);
+}
+.left-navigation-arrow{
+  width:50%;
+  height: 50%;
+  margin-left:4px;
+  margin-bottom:2px;
+}
+.right-navigation-arrow{
+  width:50%;
+  height: 50%;
+  margin-left:5.5px;
+  margin-bottom:2px;
+}
 
 .widget .subscribe button {
   color: black;

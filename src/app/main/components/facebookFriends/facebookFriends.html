@@ -1,8 +1,10 @@
-<section class="widget bordered" *ngIf="isValid">
+<div class=" col-xs-12 bordered widget bordered fb-section" *ngIf="isValid">
   <header>
     Facebook
   </header>
  
+  <div class="navigation-arrow-container" style="left:15px"><img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png"></div>
+  <div class="navigation-arrow-container" style="right:15px"><img class="right-navigation-arrow" src="assets/images/new/right-arrow-white.png"></div>
   <div  class="fb-suggestions-container">
   <article *ngFor="let profile of facebookProfiles;  let i=index">
     <div *ngIf="i < displayedNumberfacebookProfiles"> 
@@ -24,6 +26,8 @@
         </div>
         <div class="subscribe">
           <button *ngIf="!profile.isSubscribed"
+                   style="width:100% !important;border-top-right-radius:5px;border-bottom-right-radius:5px;
+                   padding-left:10px;padding-left:17px"
                   (click)="subscribe(profile)">
             {{ 'profile_subscribe' | translate }}
           </button>
@@ -33,12 +37,12 @@
             {{ 'profile_already_subscribed' | translate }}
           </button>
 
-          <div class="ignore-profile">
+          
             <span
             (click)="ignore(profile)"
-            class="fa fa-times subscribe-close-button">
+            class="fa fa-times subscribe-close-button" style="position:absolute;top:7px;right:7px">
           </span>
-          </div>
+          
         
         </div>
      
@@ -47,5 +51,7 @@
     </div>   
   </article>
   </div>
+  
 
-</section>
+
+</div>
