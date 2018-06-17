@@ -114,7 +114,7 @@ export class Home {
   
   }
     )
-    connect to socket
+   // connect to socket
         console.log('connect to socket from main')
         user.then(user => {
         this.socketService.connectSocket((user as any)._id);
