@@ -28,7 +28,7 @@ export class SocketService {
 		this.socket.emit('add-message', message);
         /* here the logic to send a message */
 	}
-	
+
 
 ///just tryinig the socket
 receiveNotifications(): Observable<any> {

@@ -81,7 +81,6 @@ export class Main {
 
     //Notiifcation
     private notificationService: NotificationService) {
-
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
@@ -89,12 +88,21 @@ export class Main {
    this.loginService.userEmitter
    .subscribe((user)=>{
     this.user=user
+<<<<<<< HEAD
 
     this.socketService.connectSocket(this.user._id);
     this.listenForEvents();
    })
 
 
+=======
+
+    this.socketService.connectSocket(this.user._id);
+    this.listenForEvents();
+   })
+
+
+>>>>>>> 01bc1f6e84aa66ca0d97e825c5a06ff2c60b155f
     this.icons = {
       messaging: {
         icon: "messaging-icon",
@@ -167,7 +175,11 @@ export class Main {
   }
 
 
+<<<<<<< HEAD
   //listen for socket events
+=======
+  //listen for socket events
+>>>>>>> 01bc1f6e84aa66ca0d97e825c5a06ff2c60b155f
   listenForEvents(): void {
     this.socketService.receiveEvents()
     .subscribe((event) => {
