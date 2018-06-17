@@ -18,7 +18,7 @@
       </div>
       <div class="col-xs-12 comment-text"
            [innerHTML]="afficheComment(commentBean.commentText)"
-           style="margin-bottom: 5px; !important;">
+           style="margin-bottom: 5px;">
       </div>
       <img *ngIf="commentBean.commentPicture"
            src="{{imageBaseUrl + commentBean.commentPicture}}"
@@ -35,7 +35,8 @@
                aria-hidden="true"></i></button>
           <span class="nbr">{{commentBean.nbLikes}}</span>
         </div>
-        <div class="dislike-holder" style="margin-right:10px" (click)="addOrRemoveDislike()"
+        <div class="dislike-holder"
+                (click)="addOrRemoveDislike()"
              [class.active]="commentBean.isDisliked">
           <button class="dislike">
             <i class="fa fa-thumbs-down"
@@ -45,7 +46,7 @@
           </span>
         </div>
 
-        <div class="dislike-holder" style="margin-right:10px"
+        <div class="remove-holder" style="margin-right:10px"
              (click)="removeComment(commentBean)"
              *ngIf="commentBean.profileId == user._id || publicationBean.profileId == user._id">
           <button class="like">
