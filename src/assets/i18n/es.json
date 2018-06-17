@@ -171,5 +171,17 @@
   "SP_ER_RESET_LINK_EXPIRED": "El enlace de restablecimiento ha expirado.",
   "SP_ER_EMAIL_NOT_VALID": "Esta dirección de correo no es válida",
   "publication_open_last_part": "... lee el resto",
-  "top_blagueurs_show_more": "Mostrar más"
+  "top_blagueurs_show_more": "Mostrar más",
+  "SP_AUTORISATION_NOTIF": "Speegar necesita tu permiso para",
+  "ACTIVER_NOTIF_BUREAU" : "habilitar notificaciones.",
+  "FIL_ACTUALITES": "Noticias",
+  "MESSENGER": "Mensajero",
+  "subscribers": "suscriptores",
+  "partager" : "Compartir",
+  "votre_commentaire":"Su comentario ...",
+  "interactions": "interacciones",
+  "commentaires": "comentarios",
+  "Modifier_Profil": "Editar Perfil",
+  "conditions_generales": "Condiciones Generales",
+  "a_propos":"A propósito de nosotros"
 }
