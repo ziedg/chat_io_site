@@ -111,20 +111,20 @@ listenForMessages(userId: string): void {
     console.log(JSON.stringify(item));
     this.s.snapshotChanges().subscribe(action => {
       var notif = action.payload.val();
-      this.chatService.getMessage(notif.msgId).subscribe(
-        message => {
-          if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
-            this.messages = [...this.messages, message];
-            setTimeout(() => {
-              console.log('scroll')
-              document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
-            }, 100);
-        }
-        },
-        err =>  console.log('Could send message to server, reason: ', err)
-      );
-      
-      
+      if (notif !== null){
+        this.chatService.getMessage(notif.msgId).subscribe(
+          message => {
+            if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
+              this.messages = [...this.messages, message];
+              setTimeout(() => {
+                console.log('scroll')
+                document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
+              }, 100);
+          }
+          },
+          err =>  console.log('Could send message to server, reason: ', err)
+        );
+      }
     });
   /*
   this.socketService.receiveMessages()
