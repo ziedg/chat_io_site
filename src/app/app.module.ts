@@ -45,9 +45,15 @@ import { MessagingModule } from './messaging/messaging.module';
 import { SearchMobile } from "./main/components/search-mobile/search-mobile.component";
 import { FacebookFriends } from './main/components/facebookFriends/facebookFriends';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from '../environments/environment';
+import { AngularFireDatabase } from 'angularfire2/database';
+
 /** Factories */
 @NgModule({
-    imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
+    imports: [
+      BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
       ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule,Ng2ImgMaxModule,
       HttpClientModule,
       MessagingModule,
@@ -57,7 +63,11 @@ import { FacebookFriends } from './main/components/facebookFriends/facebookFrien
           useFactory: HttpLoaderFactory,
           deps: [HttpClient,Http]
         }
-      })],       // module dependencies
+      }),
+      AngularFireModule.initializeApp(environment.firebase, 'speegar'),
+      AngularFireDatabaseModule
+    ],       
+    // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
         FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile],   // components and directives
@@ -84,6 +94,7 @@ import { FacebookFriends } from './main/components/facebookFriends/facebookFrien
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
         {provide: APP_BASE_HREF, useValue: '/'},
+        AngularFireDatabase
     ],
 
 })
