@@ -46,7 +46,7 @@ export const REMOVE_LIKE_COMMENT:string = 'removeLikeComment';
 
 export const DISLIKE_COMMENT:string = 'dislikeComment';
 
-export const REMOVE_DISLIKE_COMMENT:string = 'removeLikeComment';
+export const REMOVE_DISLIKE_COMMENT:string = 'removeDislikeComment';
 
 export const REMOVE_COMMENT:string = 'removeComment';
 
