@@ -1955,7 +1955,7 @@ textarea:focus {
   border: 1px solid #edeeee;
   padding :10px;
   width :min-content;
-  height :160px;
+  height :175px;
   margin:20px 10px;
 }
 .fb-link-name{
@@ -2039,6 +2039,17 @@ facebook-friends .user .user-img  {
   margin-left:5.5px;
   margin-bottom:2px;
 }
+.fb-ignore{
+  position:absolute;
+  top:8px;
+  right:9px;
+  color:#666 !important;
+  font-size:11px;
+  text-decoration: none;
+}
+.fb-ignore:hover{
+  text-decoration: none;
+}
 
 .widget .subscribe button {
   color: black;
@@ -2048,6 +2059,11 @@ facebook-friends .user .user-img  {
 
 .widget .subscribe button:hover {
   background-color: #ddd;
+}
+
+.fb-friends-header{
+  padding-left:15px !important;
+  color:#666;
 }
 
 .publication .user .user-img,
