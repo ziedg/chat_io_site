@@ -166,11 +166,7 @@ export class Main {
   }
 
 
-<<<<<<< HEAD
   //listen for socket events
-=======
-  //listen for socket events
->>>>>>> 01bc1f6e84aa66ca0d97e825c5a06ff2c60b155f
   listenForEvents(): void {
     this.socketService.receiveEvents()
     .subscribe((event) => {
