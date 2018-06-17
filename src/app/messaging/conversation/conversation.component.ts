@@ -108,7 +108,7 @@ listenForMessages(userId: string): void {
   this.s = this.db.object('messaging/'+this.userId);
     console.log('messaging/'+this.userId);
     var item = this.s.valueChanges()
-    console.log(JSON.stringify(item));
+    console.log(JSON.stringify(this.s));
     this.s.snapshotChanges().subscribe(action => {
       var notif = action.payload.val();
       this.chatService.getMessage(notif.msgId).subscribe(
