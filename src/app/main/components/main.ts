@@ -20,6 +20,7 @@ import { RecentRechService } from '../services/recentRechService';
 //Notification
 import { NotificationService } from "../services/notification.service";
 import { urlB64ToUint8Array, VAPID_PUBLIC_KEY } from "../../utils/notification";
+import { SocketService } from '../services/socket.service';
 
 declare var jQuery: any;
 declare var FB: any;
@@ -75,10 +76,12 @@ export class Main {
     private meta: Meta,
     private elementRef: ElementRef,
     private renderer: Renderer2,
-
+    private socketService:SocketService,
 
     //Notiifcation
     private notificationService: NotificationService) {
+
+
 
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
@@ -115,6 +118,9 @@ export class Main {
 
 
   ngOnInit() {
+
+
+
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
       name: "viewport",
