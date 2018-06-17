@@ -88,21 +88,12 @@ export class Main {
    this.loginService.userEmitter
    .subscribe((user)=>{
     this.user=user
-<<<<<<< HEAD
 
     this.socketService.connectSocket(this.user._id);
     this.listenForEvents();
    })
 
 
-=======
-
-    this.socketService.connectSocket(this.user._id);
-    this.listenForEvents();
-   })
-
-
->>>>>>> 01bc1f6e84aa66ca0d97e825c5a06ff2c60b155f
     this.icons = {
       messaging: {
         icon: "messaging-icon",
