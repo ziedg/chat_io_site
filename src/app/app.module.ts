@@ -45,9 +45,15 @@ import { MessagingModule } from './messaging/messaging.module';
 import { SearchMobile } from "./main/components/search-mobile/search-mobile.component";
 import { FacebookFriends } from './main/components/facebookFriends/facebookFriends';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from '../environments/environment';
+import { AngularFireDatabase } from 'angularfire2/database';
+
 /** Factories */
 @NgModule({
-    imports: [BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
+    imports: [
+      BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
       ReactiveFormsModule, HttpModule, RouterModule, AppRoutingModule,Ng2ImgMaxModule,
       HttpClientModule,
       MessagingModule,
@@ -57,7 +63,19 @@ import { FacebookFriends } from './main/components/facebookFriends/facebookFrien
           useFactory: HttpLoaderFactory,
           deps: [HttpClient,Http]
         }
-      })],       // module dependencies
+      }),
+      //TODO : change after test
+      AngularFireModule.initializeApp({
+        apiKey: "AIzaSyAnCqxH5CTNWksJH6j59jIKjxkVJOyEyIk",
+        authDomain: "speegar-6deca.firebaseapp.com",
+        databaseURL: "https://speegar-6deca.firebaseio.com",
+        projectId: "speegar-6deca",
+        storageBucket: "speegar-6deca.appspot.com",
+        messagingSenderId: "861552240215"
+      }),
+      AngularFireDatabaseModule
+    ],       
+    // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
         FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile],   // components and directives
@@ -84,6 +102,7 @@ import { FacebookFriends } from './main/components/facebookFriends/facebookFrien
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
         {provide: APP_BASE_HREF, useValue: '/'},
+        AngularFireDatabase
     ],
 
 })
