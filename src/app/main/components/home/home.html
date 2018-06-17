@@ -12,9 +12,9 @@
         <div><span><img class="home-sidebar-icon" src="assets/images/new/home-grey.png"></span>
           <span ><a style="color:black;font-weight:bolder" routerLink="/redirect">{{ 'FIL_ACTUALITES' | translate}}</a></span></div>
         <div [routerLink]="['/main/messaging']"><span><img class="home-sidebar-icon" src="assets/images/new/chat-grey.png"></span>
-          <span ><a style="color:black;font-weight:bolder" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a></span></div>
-        <div class="conditions-generales"><hr><div> Conditions générales &#5867;</div>
-          <div> A propos de nous</div></div>
+          <span ><a style="color:black" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a></span></div><hr style="width:120px;margin-left:0">
+        <div class="conditions-generales"><div><a href="/support/cgu">{{'conditions_generales' | translate}}</a></div>
+          <div><a href="/support/about-us">{{'a_propos' | translate}}</a></div></div>
         <div class="copyright-home"> Speegar &copy; 2018</div>
     </div>
     <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 sub-container" style="height:100%;overflow:auto !important">
@@ -193,6 +193,8 @@
 
       </form>
 
+      <facebook-friends></facebook-friends>
+      
       <section id="publications" class="col-xs-12 noPadding" style="height: 100%">
         <div class="filters hidden-xs" *ngIf="false">
           <div class="filter-right">
@@ -241,14 +243,16 @@
     <div *ngIf="user" class="col-md-3 col-sm-5 hidden-xs side-home">
       <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
 
-      <facebook-friends></facebook-friends>
+      
 
-      <section class="hidden-sm hidden-xs widget bordered" style="padding:10px">
+      <section class="hidden-sm hidden-xs widget bordered" style="padding:15px">
 
 
-        <span *ngFor="let language of translationLanguages"
-              (click)="onSelectLanguage(language)">
-            <a class="language-option" style="cursor: pointer">{{ language }} </a>
+        <span *ngFor="let language of translationLanguages; let i = index"
+              (click)="onSelectLanguage(language.value)">
+            <a class="language-option" style="cursor: pointer" 
+               [ngClass]="{'selected-language':language.value === selectedLanguage}">{{ language.name }}</a>
+            <span *ngIf="i === 1"><br></span>
         </span>
 
       </section>

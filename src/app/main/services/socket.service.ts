@@ -19,7 +19,7 @@ export class SocketService {
 	*/
 	connectSocket(userId: string): void {
 		this.socket = io.connect(this.BASE_URL, { query: `userId=${userId}`, secure: true, rejectUnauthorized: false});
-		/* this.socket = io(this.BASE_URL, 
+		/* this.socket = io(this.BASE_URL,
 		{ transports: [ 'websocket' ]},
 		{query: `userId=${userId}`} ) */
     }
@@ -28,7 +28,21 @@ export class SocketService {
 		this.socket.emit('add-message', message);
         /* here the logic to send a message */
 	}
-	
+
+
+///just tryinig the socket
+receiveNotifications(): Observable<any> {
+  return new Observable(observer => {
+    this.socket.on('new-event', (data) => {
+      observer.next(data);
+    });
+    return () => {
+      this.socket.disconnect();
+    };
+  });
+
+}
+
 
     receiveMessages(): Observable<any> {
 		return new Observable(observer => {
