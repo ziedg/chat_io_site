@@ -63,20 +63,31 @@
       </div>
     </div>
 
+    <div class="mobile-login-lang-container hidden-sm hidden-md hidden-lg">
+      <div class="login-lang  hidden-sm hidden-md hidden-lg">
+        <button (click)="useLanguage('en')">English (US)</button>
+        <button (click)="useLanguage('fr')">Français (France)</button>
+        <button (click)="useLanguage('es')">Español</button> 
+      </div>
+    </div>
 
-    <div class="row footer hidden-xs">
+    <div class="row footer hidden-xs login-footer">
       <div class="footerContainer">
         <a [routerLink]="['/support/about-us']">{{'footer_about' | translate }}</a>
         <a [routerLink]="['/support/cgu']">{{'footer_cgu' | translate }}</a>
         <a [routerLink]="['/support/team']">{{'footer_team' | translate }}</a>
         <span class="pull-right copyrightSignature">
-                  <button (click)="useLanguage('en')">en</button>
-                  <button (click)="useLanguage('fr')">fr</button>
-          <button (click)="useLanguage('es')">es</button> <br> <br>
-                  {{'footer_copyright' | translate }}
+            <div class="login-lang">
+                  <button (click)="useLanguage('en')">English (US)</button>
+                  <button (click)="useLanguage('fr')">Français (France)</button>
+                  <button (click)="useLanguage('es')">Español</button> 
+            </div>
+            <br>
+                  <p style="float:right !important"> {{'footer_copyright' | translate }} </p>
 
 				</span>
       </div>
+
     </div>
   </div>
 

@@ -197,7 +197,58 @@ export class Profile {
     );
   }
 
+reportPub(userDisplayed:User) {
+    swal({
+      title: this.translateCode("profile_popup_report_title"),
+      text: this.translateCode("publication_popup_report_text"),
+      showCancelButton: true,
+      cancelButtonColor: '#999',
+      confirmButtonColor: "#6bac6f",
+      confirmButtonText: this.translateCode("publication_popup_confirm"),
+      cancelButtonText: this.translateCode("publication_popup_cancel_button"),
+      input: 'textarea',
+    }).then(function (text) {
+        if (text) {
+          this.doReportPub(text);
+          swal({
+            title: this.translateCode("publication_popup_notification_report_title"),
+            text: this.translateCode("profile_popup_notification_report_text"),
+            type: "success",
+            timer: 1000,
+            showConfirmButton: false
+          }).then(function () {
+          }, function (dismiss) {
+          });
+          this.changeDetector.markForCheck();
+        }
 
+      }.bind(this),
+      function (dismiss) {
+        if (dismiss === 'overlay') {}
+      }
+    );
+    this.closeModalOtherProfile()
+    this.unsubscribe(userDisplayed);
+  }
+
+  doReportPub(text) {
+    let body = JSON.stringify({
+      signalText: text,
+      publId: this.userDisplayed._id,
+      profileId: this.user._id
+    });
+    this.http.post(environment.SERVER_URL +  pathUtils.REPORT_PUBLICATION, body, AppSettings.OPTIONS)
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+
+        },
+        err => {
+        },
+        () => {
+        }
+      );
+  }
   putIntoList(response) {
     if (!response.length || response.length == 0) {
       this.showLoading = false;

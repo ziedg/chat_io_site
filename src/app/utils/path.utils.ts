@@ -46,7 +46,7 @@ export const REMOVE_LIKE_COMMENT:string = 'removeLikeComment';
 
 export const DISLIKE_COMMENT:string = 'dislikeComment';
 
-export const REMOVE_DISLIKE_COMMENT:string = 'removeLikeComment';
+export const REMOVE_DISLIKE_COMMENT:string = 'removeDislikeComment';
 
 export const REMOVE_COMMENT:string = 'removeComment';
 
@@ -72,4 +72,6 @@ export const GET_PROFILES_SUGGESTIONS:string = 'getProfilesSuggestions';
 
  export const GET_CHAT_MESSAGES:string='messages/';
 
- export const GET_FACEBOOK_FRIENDS:string= 'getFacebookFriends/';
+ export const GET_FACEBOOK_FRIENDS:string= 'getFacebookFriends?page=';
+
+ export const GET_SOCIAL_INTERACTIONS:string= 'getInteractions';

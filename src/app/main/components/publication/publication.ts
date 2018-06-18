@@ -81,6 +81,10 @@ export class Publication {
   pub_text:string = "";
   arabicText:boolean = false;
 
+  public InteractionsLikes: Array<User> = [];
+  public InteractionsDislikes: Array<User> = [];
+  displayedNumberInteractions = 10;
+  interactionsPage = 1;
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
 
@@ -314,7 +318,7 @@ export class Publication {
     this.commentTextareaId = "comment-" + this.publicationBean._id;
     this.changeDetector.markForCheck();
     if (this.publicationBean) {
-      console.log('hey');
+      //console.log(this.publicationBean._id);
       this.pubLink = urlEncode(environment.SERVER_URL + "main/post/" + this.publicationBean._id);
       this.shareLink = "https://www.facebook.com/sharer/sharer.php?u=" + this.pubLink + "&amp;src=sdkpreparse";
 
@@ -565,6 +569,7 @@ export class Publication {
       }
     );
     this.closeModalPub();
+    this.unsubscribe(post);
   }
 
   doReportPub(text) {
@@ -668,6 +673,9 @@ export class Publication {
       profilepicture : this.user.profilePictureMin
 
     });
+
+    //console.log(this.publicationBean._id);
+
     this.http.post(environment.SERVER_URL + pathUtils.LIKE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
       .subscribe(
@@ -758,6 +766,34 @@ export class Publication {
       );
     this.publicationBean.isDisliked = false;
     this.publicationBean.nbDislikes--;
+  }
+
+  getInteractions() {
+    var url: string = environment.SERVER_URL + pathUtils.GET_SOCIAL_INTERACTIONS;
+    
+    let body = JSON.stringify({
+      publId: this.publicationBean._id,
+      page: this.interactionsPage
+    });
+
+            this.http.post(url,body,
+                AppSettings.OPTIONS)
+                .map((res: Response) => res.json())
+                .subscribe(
+                  response => { 
+                    Array.prototype.push.apply(this.InteractionsLikes, response.message.likes);
+                    Array.prototype.push.apply(this.InteractionsDislikes, response.message.dislikes);
+                    //console.log(this.InteractionsLikes);
+                    //console.log(this.InteractionsDislikes);
+                },
+                err => {
+                  console.error('Cannot get interactions');
+                },
+                () => {
+                  this.changeDetector.markForCheck();
+                  console.error('Cannot get interactions');
+                }
+              );
   }
 
   public toggleEmoji() {

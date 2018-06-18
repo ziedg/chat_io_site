@@ -903,11 +903,12 @@ a {
 }
 .notification-bar {
   width:100%;
-  padding:10px 0px 10px;
+  padding:15px 0px 15px;
   background-color: #36a0f0;
   color:white;
   text-align:center;
-  font-weight:light;
+  font-weight:600;
+  font-size:16px;
 }
 @media (max-width:768px){
   .notification-bar{
@@ -1233,14 +1234,16 @@ section.widget {
   background-color: #fff;
   padding: 5px 30px 20px;
   padding-left: 20px !important;
-  padding-right: 10px !important;
+  padding-right: 20px !important;
   margin-top: 30px;
+  margin-bottom: -10px;
   width: 100%;
   flex-direction: column;
   box-sizing: border-box;
   color: black;
   align-content: center;
   font-size: 14px;
+  text-align: justify;
 }
 .welcome-msg h3 {
   font-family: 'coolvetica';
@@ -1307,7 +1310,7 @@ section.widget {
 .add-pub {
   background-color: #fff;
   padding: 0;
-  margin: 30px 0% 10px;
+  margin: 30px 0% 0px;
   width: 100%;
   display: flex;
   display: -webkit-box;
@@ -1317,6 +1320,7 @@ section.widget {
   flex-direction: column;
   box-sizing: border-box;
 }
+
 .add-head {
   border-bottom: 1px solid #edeeee;
 }
@@ -1911,9 +1915,11 @@ textarea:focus {
 }
 .language-option {
   color: #3d3d3d;
-  padding-right: 8px;
-  padding-left:15px;
+  padding-right:8px;
   text-align:center;
+}
+.selected-language {
+  color:#1f609a;
 }
 
 .hashtag {
@@ -1935,13 +1941,30 @@ textarea:focus {
   display: -ms-flexbox;
   display: -webkit-flex;
 }
-
+.fb-suggestions-container{
+  display:flex;
+  flex-direction:row;
+  overflow: auto;
+}
+.fb-suggestions-container::-webkit-scrollbar { 
+  display: none; 
+}
 .user-fb {
   display:block !important;
   position:relative;
   border: 1px solid #edeeee;
   padding :10px;
   width :min-content;
+  height :175px;
+  margin:20px 10px;
+}
+.fb-link-name{
+  max-width:115px;
+  text-align:center;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .suggestions-box .user{
@@ -1986,8 +2009,50 @@ facebook-friends .user .user-img  {
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
   margin: 0 auto;
+  width:45px;
+  height:45px;
+  margin-top:8px;
 }
 
+.fb-section{
+  background-color:#fff;
+  padding:10px;
+  margin-bottom:-10px;
+}
+.navigation-arrow-container{
+  width:20px;
+  height: 20px;
+  background-color:rgba(0, 0, 0, 0.62);
+  border-radius: 50%;
+  position: absolute;
+  top:50%;
+}
+.navigation-arrow-container:hover{
+  background-color:rgba(0, 0, 0, 0.37);
+}
+.left-navigation-arrow{
+  width:50%;
+  height: 50%;
+  margin-left:4px;
+  margin-bottom:2px;
+}
+.right-navigation-arrow{
+  width:50%;
+  height: 50%;
+  margin-left:5.5px;
+  margin-bottom:2px;
+}
+.fb-ignore{
+  position:absolute;
+  top:8px;
+  right:9px;
+  color:#666 !important;
+  font-size:11px;
+  text-decoration: none;
+}
+.fb-ignore:hover{
+  text-decoration: none;
+}
 
 .widget .subscribe button {
   color: black;
@@ -1999,9 +2064,23 @@ facebook-friends .user .user-img  {
   background-color: #ddd;
 }
 
+.fb-friends-header{
+  padding-left:15px !important;
+  color:#666;
+}
+
 .publication .user .user-img,
 #pub-holder .user-img {
   --user-img-w: 40px;
+}
+
+.post-title-enable {
+  margin-left:53px !important;
+  margin-bottom: 7px !important;
+}
+
+.new-publication-title::-webkit-input-placeholder{
+  color: #ccc;
 }
 
 @media(max-width: 767px) {
@@ -2009,6 +2088,7 @@ facebook-friends .user .user-img  {
     --user-img-w: 50px;
   }
 }
+
 
 .user-img {
   background-size: cover;
@@ -2089,6 +2169,11 @@ facebook-friends .user .user-img  {
   margin-bottom:5px;
   word-wrap: break-word;
 }
+@media(max-width:767px){
+  .publication-text{
+    margin-left:9px;
+  }
+}
 .content img {
 /*  max-height: 400px; */
   max-width: 100%;
@@ -2099,13 +2184,15 @@ facebook-friends .user .user-img  {
 .interactions{
   margin-top: 0px;
   margin-bottom:14px;
-  margin-left:7px;
+  margin-left:9px;
   color:#424242;
   font-size:14px;
   font-weight: bold;
 }
-
-
+.interactions a,.interactions a:visited,.interactions a:hover {
+  color:#424242;
+  text-decoration:none;
+}
 .social-staff {
   margin-top: 5px;
   display: flex;
@@ -2154,9 +2241,9 @@ facebook-friends .user .user-img  {
 .social-staff .like-dislike button {
   font-size: 25px;
 }
-.social-staff .like-dislike button:active {
+/*.social-staff .like-dislike button:active {
   transform: rotate(15deg) scale(1.2);
-}
+}*/
 .dislike {
   margin-left: 17px;
 }
@@ -3025,8 +3112,9 @@ facebook-friends .user .user-img  {
 }
 .top-blagueurs-sub-nbr {
   color:#979797;
-  font-size:12px;
+  font-size: 9.5px;
   font-weight:bolder;
+  margin-top:2px;
 }
 .profil-holder {
   width: 80%;
@@ -3470,6 +3558,37 @@ input.loginInput {
   font-size: 11px;
   vertical-align: top;
   float: right;
+}
+
+@media(min-width:767px){
+  .login-lang{
+    display: none;
+  }
+}
+.login-lang{
+  display:flex;
+  flex-direction:row;
+  color: #355977;
+}
+.login-lang button{
+    background-color:#fff;
+    border:0;
+}
+.login-footer{
+  background-color: #ffffff;
+  border-top: 1px solid #e1e1e1;
+  position:absolute;
+  bottom:0;
+  margin-right:0 !important;
+  margin-left:0 !important;
+}
+.mobile-login-lang-container{
+  padding: 15px 10px;
+  display:flex;
+  justify-content: center;
+}
+.mobile-login-lang-container button{
+  background-color:transparent !important;
 }
 /*Loading*/
 
@@ -4226,7 +4345,6 @@ input.loginInput {
 /* API LINK DATA */
 
 .link-preview {
-  border: 1px solid #e1e1e1;
   margin: 15px;
   padding: 0;
   width: 450px;
@@ -4423,7 +4541,7 @@ publication .user-name {
 
 
 publication .user {
-  dispaly: flex;
+  display: flex;
   align-items: center;
   margin-left:7px;
 }
@@ -4686,12 +4804,11 @@ body {
   }
   #welcomeMsgDisplay {
     padding: 0;
-    padding-top: 10px;
     padding-bottom: 10px;
     text-align: justify;
     padding-right: 21px!important;
     margin-top: 20px;
-    margin-bottom: 0;
+    margin-bottom: 0px;
   }
 
   #pub-holder .pub-holder-holder {
@@ -4738,7 +4855,7 @@ body {
   }
 
   .sub-container > .bordered {
-    margin-bottom: 20px;
+    margin-bottom: 7px;
   }
 
   .interactions {
@@ -4958,16 +5075,19 @@ top-blagueurs-decov .user-img {
 }
 .conditions-generales {
   color:#919191;
-  margin-top:27px;
-  font-size:11px;
-  margin-left:20px;
+  margin-top: 10px;
+  font-size: 12.5px;
+  margin-left:5px;
+}
+.conditions-generales a ,.conditions-generales a:hover{
+  color:#919191;
+  text-decoration: none;
 }
 .copyright-home {
   margin-top:10px;
-  font-weight:lighter;
   color:#545454;
-  font-size:12px;
-  margin-left:20px
+  font-size:13px;
+  margin-left:5px
 }
 
 .home-sidebar {

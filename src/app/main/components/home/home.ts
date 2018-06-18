@@ -133,7 +133,7 @@ export class Home {
           navigator.serviceWorker.register('assets/sw.js').then(reg => {
           this.registration = reg;
           this.notificationService.init(reg);
-            console.log('Service Worker and Push is supported');
+            //console.log('Service Worker and Push is supported');
           });
       } else {
           console.warn('Push messaging is not supported');
@@ -338,7 +338,7 @@ export class Home {
       return 1;
     }
 		if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
-			console.log("image detected");
+			//console.log("image detected");
 			jQuery("#preview-image").attr("src", text);
 			jQuery(".file-input-holder").show();
 			jQuery("#preview-image").show();
@@ -666,6 +666,7 @@ getPageFacebookVideo(videoLink): string {
     videoLink.indexOf("m.facebook.com") > 0 || videoLink.indexOf("mobile.facebook.com") > 0 ){
        videoId = this.getIdFacebookVideo(videoLink);
        var videoPage = this.getPageFacebookVideo(videoLink);
+       //console.log("faceboook");
        try {
         jQuery(".youtube-preview").html("");
         jQuery(".facebook-preview").html(
@@ -759,7 +760,7 @@ getPageFacebookVideo(videoLink): string {
               this.resetPublishPicture();
               jQuery(".video-preview").html("");
               //this.form.controls.publicationYoutubeLink.updateValue('');
-              console.log("hellooooooo");
+              //console.log("hellooooooo");
               var r = /:\/\/(.[^/]+)/;
               this.linkDomain= linkURL.match(r)[1] ;
 //              this.link.url = linkURL.substring(0, linkURL.length - 6);
@@ -814,7 +815,7 @@ getPageFacebookVideo(videoLink): string {
     jQuery(".dropdown-menu-translate").hide();
     localStorage.setItem('userLang',language);
     this.translate.setDefaultLang(language);
-    console.log(localStorage.getItem('userLang')) ;
+    //console.log(localStorage.getItem('userLang')) ;
   }
 
   toggleTranslateDropdown() {
