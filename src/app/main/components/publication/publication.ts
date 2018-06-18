@@ -270,7 +270,7 @@ export class Publication {
     if(txt !== 'null' && txt !=='undefined' && txt.length > 0) {
 			var line_parts = txt.split('<br>');
 			if(line_parts.length > lines_max ){
-				this.firstPubText = line_parts.slice(0, lines_max).join('<br>');
+        this.firstPubText = line_parts.slice(lines_max, lines_max).join('<br>');
 				this.lastPubText = line_parts.slice(lines_max, line_parts.length ).join('<br>');
 				this.longPubText = true;
 			}
