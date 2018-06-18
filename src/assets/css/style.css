@@ -1944,11 +1944,11 @@ textarea:focus {
 .fb-suggestions-container{
   display:flex;
   flex-direction:row;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
 }
-
+.fb-suggestions-container::-webkit-scrollbar { 
+  display: none; 
+}
 .user-fb {
   display:block !important;
   position:relative;
@@ -2016,8 +2016,8 @@ facebook-friends .user .user-img  {
 
 .fb-section{
   background-color:#fff;
-  margin-top: 20px;
   padding:10px;
+  margin-bottom:-10px;
 }
 .navigation-arrow-container{
   width:20px;
@@ -4541,7 +4541,7 @@ publication .user-name {
 
 
 publication .user {
-  dispaly: flex;
+  display: flex;
   align-items: center;
   margin-left:7px;
 }

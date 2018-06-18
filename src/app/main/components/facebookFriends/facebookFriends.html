@@ -3,8 +3,14 @@
     {{'fb_friends' | translate }}
   </header> -->
  
-  <div class="navigation-arrow-container" style="left:20px;z-index:1"><img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png"></div>
-  <div class="navigation-arrow-container" style="right:20px;z-index:1"><img class="right-navigation-arrow" src="assets/images/new/right-arrow-white.png"></div>
+  <div class="navigation-arrow-container" style="left:20px;z-index:1"
+  (click)="sideScroll('left',25,100,100)">
+  <img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png"></div>
+
+  <div class="navigation-arrow-container" style="right:20px;z-index:1"
+  (click)="sideScroll('right',25,100,100)">
+  <img class="right-navigation-arrow" src="assets/images/new/right-arrow-white.png"></div>
+  
   <div  class="fb-suggestions-container">
   <article *ngFor="let profile of facebookProfiles;  let i=index">
     <div *ngIf="i < displayedNumberfacebookProfiles"> 
