@@ -3566,20 +3566,29 @@ input.loginInput {
   }
 }
 .login-lang{
-
-  background-color: transparent;
-  border: 0;
-  border-radius: 1px;
-  align-items:center;
-  width: 100%;
-  padding:10px 15px;
-  text-align:center;
   display:flex;
   flex-direction:row;
-  
+  color: #355977;
 }
-.login-lang a{
-  border:0;
+.login-lang button{
+    background-color:#fff;
+    border:0;
+}
+.login-footer{
+  background-color: #ffffff;
+  border-top: 1px solid #e1e1e1;
+  position:absolute;
+  bottom:0;
+  margin-right:0 !important;
+  margin-left:0 !important;
+}
+.mobile-login-lang-container{
+  padding: 15px 10px;
+  display:flex;
+  justify-content: center;
+}
+.mobile-login-lang-container button{
+  background-color:transparent !important;
 }
 /*Loading*/
 
