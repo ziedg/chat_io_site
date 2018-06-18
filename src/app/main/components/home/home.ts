@@ -1,3 +1,4 @@
+import { SocketService } from './../../services/socket.service';
 import 'rxjs/add/operator/map';
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
@@ -19,6 +20,7 @@ import { LinkPreview } from '../../services/linkPreview';
 import { LinkView } from '../../services/linkView';
 import { NotificationService } from '../../services/notification.service';
 import { PostService } from '../../services/postService';
+
 
 
 declare var jQuery: any;
@@ -72,7 +74,8 @@ export class Home {
 	arabicRegex:RegExp = /[\u0600-\u06FF]/;
   public imageFromLink:boolean = false;
 
-  translationLanguages: Array<String> = ['en', 'fr', 'es'];
+  translationLanguages = [{ name : 'English (US)',value: 'en'},
+                          { name : 'Français (France)',value: 'fr'} ,{ name : '     Español (España)',value: 'es'}];
   selectedLanguage: String;
 
 
@@ -99,9 +102,27 @@ export class Home {
 
     //Notiifcation
     public notificationService: NotificationService,
+    private socketService:SocketService,
 
     private ref:ChangeDetectorRef
   ) {
+
+    ///try socket
+
+   const user= new Promise((resolve,reject)=>{
+  resolve(this.loginService.getUser())
+  
+  }
+    )
+   // connect to socket
+        console.log('connect to socket from main')
+        user.then(user => {
+        this.socketService.connectSocket((user as any)._id);
+
+        })
+    
+
+
     this.isSubscribed = true;
     this.loginService.redirect();
 
@@ -127,13 +148,14 @@ export class Home {
 
   ngOnInit() {
     this.selectedLanguage = localStorage.getItem('userLang');
+    this.socketService.receiveNotifications().subscribe(data => console.log(data))
 
     //Notification Check
         if ('serviceWorker' in navigator && 'PushManager' in window) {
           navigator.serviceWorker.register('assets/sw.js').then(reg => {
           this.registration = reg;
           this.notificationService.init(reg);
-            //console.log('Service Worker and Push is supported');
+            console.log('Service Worker and Push is supported');
           });
       } else {
           console.warn('Push messaging is not supported');
@@ -338,7 +360,7 @@ export class Home {
       return 1;
     }
 		if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
-			//console.log("image detected");
+			console.log("image detected");
 			jQuery("#preview-image").attr("src", text);
 			jQuery(".file-input-holder").show();
 			jQuery("#preview-image").show();
@@ -666,7 +688,7 @@ getPageFacebookVideo(videoLink): string {
     videoLink.indexOf("m.facebook.com") > 0 || videoLink.indexOf("mobile.facebook.com") > 0 ){
        videoId = this.getIdFacebookVideo(videoLink);
        var videoPage = this.getPageFacebookVideo(videoLink);
-       //console.log("faceboook");
+       console.log("faceboook");
        try {
         jQuery(".youtube-preview").html("");
         jQuery(".facebook-preview").html(
@@ -760,7 +782,7 @@ getPageFacebookVideo(videoLink): string {
               this.resetPublishPicture();
               jQuery(".video-preview").html("");
               //this.form.controls.publicationYoutubeLink.updateValue('');
-              //console.log("hellooooooo");
+              console.log("hellooooooo");
               var r = /:\/\/(.[^/]+)/;
               this.linkDomain= linkURL.match(r)[1] ;
 //              this.link.url = linkURL.substring(0, linkURL.length - 6);
@@ -815,7 +837,7 @@ getPageFacebookVideo(videoLink): string {
     jQuery(".dropdown-menu-translate").hide();
     localStorage.setItem('userLang',language);
     this.translate.setDefaultLang(language);
-    //console.log(localStorage.getItem('userLang')) ;
+    console.log(localStorage.getItem('userLang')) ;
   }
 
   toggleTranslateDropdown() {
