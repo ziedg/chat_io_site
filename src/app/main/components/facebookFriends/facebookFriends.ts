@@ -904,7 +904,6 @@ export class FacebookFriends {
     }
 
     loadmore() {
-      this.page++;
       this.loadfacebookProfiles(this.user._id);
 
     }
