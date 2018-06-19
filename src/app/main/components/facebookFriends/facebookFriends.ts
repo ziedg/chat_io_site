@@ -72,7 +72,6 @@ export class FacebookFriends {
 
             response.profiles = response.profiles.filter(el => this.facebookProfiles.indexOf(el) === -1);
             response.profiles = response.profiles.map(el => {  el.ispop = true ; return el;} );
-            console.log(response.profiles);
             Array.prototype.push.apply(this.facebookProfiles, response.profiles);
 
             //changes
