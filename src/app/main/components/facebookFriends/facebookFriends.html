@@ -27,7 +27,8 @@
           <header><a [routerLink]="['/main/profile',profile._id]" class="fb-link-name">
             {{profile.firstName}} {{profile.lastName}}
           </a></header>
-          <div class="top-blagueurs-sub-nbr" style="text-align: center"> {{profile.nbSuivi}} {{'subscribers' | translate}} </div>
+          <div class="top-blagueurs-sub-nbr" style="text-align: center" *ngIf="!profile.ispop"> {{'fb_label' | translate}}</div>
+          <div class="top-blagueurs-sub-nbr" style="text-align: center" *ngIf="profile.ispop"> {{profile.nbSuivi}} {{'subscribers' | translate}} </div>
         </div>
         <div class="subscribe">
           <button *ngIf="!profile.isSubscribed"
