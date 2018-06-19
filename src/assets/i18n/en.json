@@ -172,5 +172,18 @@
   "SP_ER_EMAIL_NOT_VALID": "This mail address is not valid ",
   "publication_open_last_part": "... read the rest of it",
   "top_blagueurs_show_more": "Show more",
-  "support_dubscribe": "A propos de nous"
+  "SP_AUTORISATION_NOTIF": "Speegar needs your permission to",
+  "ACTIVER_NOTIF_BUREAU" : "enable desktop notification.",
+  "FIL_ACTUALITES": "News",
+  "MESSENGER": "Messenger",
+  "subscribers": "subscribers",
+  "partager" : "Share",
+  "votre_commentaire":"Your comment ...",
+  "interactions": "interactions",
+  "commentaires": "comments",
+  "Modifier_Profil": "Modify the profile",
+  "conditions_generales": "Terms and conditions",
+  "a_propos":"About us",
+  "fb_friends": "Suggestions for you",
+  "fb_label": "facebook friend"
 }
