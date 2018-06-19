@@ -1,4 +1,4 @@
-<div class=" col-xs-12 bordered widget bordered fb-section" *ngIf="isValid">
+<div class=" col-xs-12 bordered widget bordered fb-section">
   <!-- <header class="fb-friends-header">
     {{'fb_friends' | translate }}
   </header> -->
@@ -11,10 +11,9 @@
   (click)="sideScroll('right',25,100,100)">
   <img class="right-navigation-arrow" src="assets/images/new/right-arrow-white.png"></div>
   
-  <div  class="fb-suggestions-container">
-  <article *ngFor="let profile of facebookProfiles;  let i=index">
-    <div *ngIf="i < displayedNumberfacebookProfiles"> 
-    
+  <div  class="fb-suggestions-container" infinite-scroll [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="0" (scrolled)="onScrollDown()">
+  <article *ngFor="let profile of facebookProfiles">
       <span class="user user-fb">
         <div class="user-img" *ngIf="profile.profilePictureMin"
 							[routerLink]="['/main/profile',profile._id]"
@@ -28,7 +27,7 @@
           <header><a [routerLink]="['/main/profile',profile._id]" class="fb-link-name">
             {{profile.firstName}} {{profile.lastName}}
           </a></header>
-          <div class="top-blagueurs-sub-nbr" style="text-align: center"> {{ 'fb_label' | translate }} </div>
+          <div class="top-blagueurs-sub-nbr" style="text-align: center"> {{profile.nbSuivi}} {{'subscribers' | translate}} </div>
         </div>
         <div class="subscribe">
           <button *ngIf="!profile.isSubscribed"
@@ -54,8 +53,6 @@
         </div>
      
       </span>
-
-    </div>   
   </article>
   </div>
   
