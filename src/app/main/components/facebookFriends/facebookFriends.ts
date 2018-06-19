@@ -36,8 +36,8 @@ export class FacebookFriends {
         loginService.redirect();
         this.user = loginService.user;
         this.page = 1;
-        //this.loadfacebookProfiles(this.user._id); 
-        Array.prototype.push.apply(this.facebookProfiles, [
+        this.loadfacebookProfiles(this.user._id); 
+        /*Array.prototype.push.apply(this.facebookProfiles, [
           {
             "notifications": [],
             "pictures": [],
@@ -801,7 +801,7 @@ export class FacebookFriends {
             "dateInscription": "2018-06-04",
             "isNewInscri": "false"
           }
-        ]);
+        ]);*/
             
         }
 

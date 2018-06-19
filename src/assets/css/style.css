@@ -3535,6 +3535,9 @@ input.loginInput {
   padding-left: 0;
   padding: 0 200px;
 }
+.footerContainer a {
+  margin-left:4px;
+}
 @media (max-width: 992px) {
   .footerContainer {
     padding: 0 20px;
@@ -3573,6 +3576,7 @@ input.loginInput {
 .login-lang button{
     background-color:#fff;
     border:0;
+    font-size:1.1em;
 }
 .login-footer{
   background-color: #ffffff;
