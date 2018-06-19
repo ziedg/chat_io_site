@@ -23,7 +23,6 @@ export class FacebookFriends {
 
     public facebookProfiles: Array<User> = [];
     displayedNumberfacebookProfiles = 10;
-    page = 1;
     isValid : boolean = true;
 
     public user: User = new User();
@@ -35,7 +34,6 @@ export class FacebookFriends {
         private changeDetector: ChangeDetectorRef) {
         loginService.redirect();
         this.user = loginService.user;
-        this.page = 1;
         this.loadfacebookProfiles(this.user._id); 
         /*Array.prototype.push.apply(this.facebookProfiles, [
           {
@@ -808,7 +806,7 @@ export class FacebookFriends {
   
     loadfacebookProfiles(Id_Profile?: string) {
 
-        var url: string = environment.SERVER_URL + pathUtils.GET_FACEBOOK_FRIENDS + String(this.page);
+        var url: string = environment.SERVER_URL + pathUtils.GET_FACEBOOK_FRIENDS;
 
         this.http.get(url,
             AppSettings.OPTIONS)
