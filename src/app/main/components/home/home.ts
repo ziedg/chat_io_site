@@ -1,4 +1,3 @@
-import { SocketService } from './../../services/socket.service';
 import 'rxjs/add/operator/map';
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
@@ -102,27 +101,10 @@ export class Home {
 
     //Notiifcation
     public notificationService: NotificationService,
-    private socketService:SocketService,
-
     private ref:ChangeDetectorRef
   ) {
 
-    ///try socket
-
-   const user= new Promise((resolve,reject)=>{
-  resolve(this.loginService.getUser())
-  
-  }
-    )
-   // connect to socket
-        //console.log('connect to socket from main')
-        user.then(user => {
-        this.socketService.connectSocket((user as any)._id);
-
-        })
     
-
-
     this.isSubscribed = true;
     this.loginService.redirect();
 
@@ -148,8 +130,6 @@ export class Home {
 
   ngOnInit() {
     this.selectedLanguage = localStorage.getItem('userLang');
-    this.socketService.receiveNotifications().subscribe(data => console.log(data))
-
     //Notification Check
         if ('serviceWorker' in navigator && 'PushManager' in window) {
           navigator.serviceWorker.register('assets/sw.js').then(reg => {

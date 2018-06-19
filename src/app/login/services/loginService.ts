@@ -17,7 +17,6 @@ export class LoginService {
     /* User */
     public user : User;
 
- userEmitter=new EventEmitter<any>();
 
     /* constructor  */
     constructor(private router:Router, private http:Http,private notificationService:NotificationService){
@@ -76,7 +75,6 @@ export class LoginService {
             this.token = localStorage.getItem('token');
 
             this.user= JSON.parse(localStorage.getItem('user'));
-            this.userEmitter.emit(this.user)
         }
     }
 

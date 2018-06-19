@@ -18,6 +18,7 @@ import { ResetPasswordService } from './login/services/reset-password.service';
 import { Logout } from './logout/logout';
 import { NotFoundPage } from './main/components/404/404';
 import { Comment } from './main/components/comment/comment';
+import { FacebookFriends } from './main/components/facebookFriends/facebookFriends';
 import { Home } from './main/components/home/home';
 import { LoadingBar } from './main/components/loading/loading-bar';
 import { Main } from './main/components/main';
@@ -27,6 +28,7 @@ import { Post } from './main/components/post/post';
 import { Profile } from './main/components/profile/profile';
 import { ContenteditableModel } from './main/components/publication/contenteditable-model';
 import { Publication } from './main/components/publication/publication';
+import { SearchMobile } from './main/components/search-mobile/search-mobile.component';
 import { SuggestionsComponent } from './main/components/suggestions/suggestions.component';
 import { TopBlagueursAndDecov } from './main/components/topBlagueursAndDecov/topBlagueursAndDecov';
 import { DateService } from './main/services/dateService';
@@ -36,15 +38,11 @@ import { LinkView } from './main/services/linkView';
 import { PostService } from './main/services/postService';
 import { RecentRechService } from './main/services/recentRechService';
 import { SeoService } from './main/services/seo-service';
-import { SocketService } from './main/services/socket.service';
 import { EmitterService } from './messaging/emitter.service';
+import { MessagingModule } from './messaging/messaging.module';
 import { ChatService } from './messanging/chat.service';
 import { FakeComponent } from './shared/fake.component';
 import { httpFactory } from './utils/factories/http.factory';
-import { MessagingModule } from './messaging/messaging.module';
-import { SearchMobile } from "./main/components/search-mobile/search-mobile.component";
-import { FacebookFriends } from './main/components/facebookFriends/facebookFriends';
-import { environment } from '../environments/environment';
 
 /** Factories */
 @NgModule({
@@ -76,7 +74,6 @@ import { environment } from '../environments/environment';
         PostService,
         SeoService,
         LoginService,
-        SocketService,
         EmitterService,
         ChatService,
         ResetPasswordService,
