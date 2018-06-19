@@ -7,7 +7,7 @@
              *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
           <i class="fa fa-users" style="color:#666"
              *ngIf="publicationBean.confidentiality=='PRIVATE'"></i>
-          {{getPublicationTime(publicationBean.datePublication)}}
+          {{getPublicationTime(publicationBean.datePublication) | translate}}
         </div>
       <div class="user-img"
            [routerLink]="['/main/profile',publicationBean.profileId]"
