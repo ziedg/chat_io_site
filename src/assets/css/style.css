@@ -5089,6 +5089,10 @@ top-blagueurs-decov .user-img {
   padding:10px
 }
 
+.side-content-detached {
+  top: 100px;
+}
+
 .home-sidebar .user-img {
   padding: calc(var(--icon-h)/2);
 }

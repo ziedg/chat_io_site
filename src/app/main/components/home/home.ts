@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/map';
 
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Http, Response} from '@angular/http';
 import {Title} from '@angular/platform-browser';
@@ -80,7 +80,8 @@ export class Home {
 
 
   translationLanguages = [{name: 'English (US)', value: 'en'},
-    {name: 'Français (France)', value: 'fr'}, {name: '     Español (España)', value: 'es'}];
+    {name: 'Français (France)', value: 'fr'},
+    {name: '     Español (España)', value: 'es'}];
   selectedLanguage: String;
 
 
@@ -94,6 +95,9 @@ export class Home {
   private tagDropdownActive: boolean = false;
   private hashTagPos: number;
 
+  @ViewChild("homeSidebar") homeSidebarRef: ElementRef;
+  @ViewChild("newPubForm") newPubFormRef: ElementRef;
+
   // end Notification vars
 
   constructor(public translate: TranslateService,
@@ -106,6 +110,7 @@ export class Home {
               private loginService: LoginService,
               private changeDetector: ChangeDetectorRef,
               private ng2ImgMaxService: Ng2ImgMaxService,
+              private renderer: Renderer2,
               //Notiifcation
               public notificationService: NotificationService,
               private ref: ChangeDetectorRef) {
@@ -144,6 +149,20 @@ export class Home {
   }
 
   ngOnInit() {
+    window.onscroll = () => {
+      let k = parseInt(this.newPubFormRef.nativeElement.offsetTop - window.pageYOffset);
+      let className = 'side-content-detached';
+      if(k < 0) {
+        console.log('oups!');
+        this.renderer.addClass(this.homeSidebarRef, className);
+      }
+      else {
+        this.renderer.removeClass(this.homeSidebarRef, className);
+      }
+    };
+
+
+
     this.selectedLanguage = localStorage.getItem('userLang');
     //Notification Check
     if ('serviceWorker' in navigator && 'PushManager' in window) {
