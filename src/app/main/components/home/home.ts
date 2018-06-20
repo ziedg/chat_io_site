@@ -1,25 +1,24 @@
 import 'rxjs/add/operator/map';
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Http, Response } from '@angular/http';
-import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { Ng2ImgMaxService } from 'ng2-img-max';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Http, Response} from '@angular/http';
+import {Title} from '@angular/platform-browser';
+import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {Ng2ImgMaxService} from 'ng2-img-max';
 
-import { environment } from '../../../../environments/environment';
-import { LinkBean } from '../../../beans/linkBean';
-import { PublicationBean } from '../../../beans/publication-bean';
-import { User } from '../../../beans/user';
-import { LoginService } from '../../../login/services/loginService';
-import { AppSettings } from '../../../shared/conf/app-settings';
+import {environment} from '../../../../environments/environment';
+import {LinkBean} from '../../../beans/linkBean';
+import {PublicationBean} from '../../../beans/publication-bean';
+import {User} from '../../../beans/user';
+import {LoginService} from '../../../login/services/loginService';
+import {AppSettings} from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
-import { LinkPreview } from '../../services/linkPreview';
-import { LinkView } from '../../services/linkView';
-import { NotificationService } from '../../services/notification.service';
-import { PostService } from '../../services/postService';
-
+import {LinkPreview} from '../../services/linkPreview';
+import {LinkView} from '../../services/linkView';
+import {NotificationService} from '../../services/notification.service';
+import {PostService} from '../../services/postService';
 
 
 declare var jQuery: any;
@@ -28,6 +27,7 @@ declare var FB: any;
 declare var auth: any;
 declare const gapi: any;
 declare var window: any;
+
 @Component({
   moduleId: module.id,
   selector: "home",
@@ -68,43 +68,58 @@ export class Home {
   keepLoading = true;
   touch_start_position: number;
   online: any;
-	public pubInputHtml: string = "";
-	public arabicText: boolean = false;
-	arabicRegex:RegExp = /[\u0600-\u06FF]/;
-  public imageFromLink:boolean = false;
+  public pubInputHtml: string = "";
+  public arabicText: boolean = false;
+  arabicRegex: RegExp = /[\u0600-\u06FF]/;
+  public imageFromLink: boolean = false;
 
-  translationLanguages = [{ name : 'English (US)',value: 'en'},
-                          { name : 'Français (France)',value: 'fr'} ,{ name : '     Español (España)',value: 'es'}];
+  /* tag search */
+  searchValue: string;
+  listTagSearchUsers: Array<User> = [];
+  noSearchResults: Boolean = false;
+
+
+  translationLanguages = [{name: 'English (US)', value: 'en'},
+    {name: 'Français (France)', value: 'fr'}, {name: '     Español (España)', value: 'es'}];
   selectedLanguage: String;
 
 
   //check if there is more post to retreive from server
-  morePosts=true;
+  morePosts = true;
 
   // Notification vars
   private subscriptionJson = '';
-  private isSubscribed:boolean = true;
+  private isSubscribed: boolean = true;
   private registration = undefined;
+  private tagDropdownActive: boolean = false;
+  private hashTagPos: number;
+
   // end Notification vars
 
-  constructor(
-    public translate: TranslateService,
-    private postService: PostService,
-    private linkView: LinkView,
-    private linkPreview: LinkPreview,
-    private title: Title,
-    private http: Http,
-    private router: Router,
-    private loginService: LoginService,
-    private changeDetector: ChangeDetectorRef,
-    private ng2ImgMaxService: Ng2ImgMaxService,
+  constructor(public translate: TranslateService,
+              private postService: PostService,
+              private linkView: LinkView,
+              private linkPreview: LinkPreview,
+              private title: Title,
+              private http: Http,
+              private router: Router,
+              private loginService: LoginService,
+              private changeDetector: ChangeDetectorRef,
+              private ng2ImgMaxService: Ng2ImgMaxService,
+              //Notiifcation
+              public notificationService: NotificationService,
+              private ref: ChangeDetectorRef) {
+    ///try socket
+    const user = new Promise((resolve, reject) => {
+        resolve(this.loginService.getUser())
+      }
+    );
+    // connect to socket
+    //console.log('connect to socket from main')
+    user.then(user => {
+      //this.socketService.connectSocket((user as any)._id);
+    });
 
-    //Notiifcation
-    public notificationService: NotificationService,
-    private ref:ChangeDetectorRef
-  ) {
-
-    
     this.isSubscribed = true;
     this.loginService.redirect();
 
@@ -125,40 +140,40 @@ export class Home {
     // window.scrollTo(0, 0);
 
     this.menuFilter = "recent";
-		this.title.setTitle("Speegar");
+    this.title.setTitle("Speegar");
   }
 
   ngOnInit() {
     this.selectedLanguage = localStorage.getItem('userLang');
     //Notification Check
-        if ('serviceWorker' in navigator && 'PushManager' in window) {
-          navigator.serviceWorker.register('assets/sw.js').then(reg => {
-          this.registration = reg;
-          this.notificationService.init(reg);
-            //console.log('Service Worker and Push is supported');
-          });
-      } else {
-          //console.warn('Push messaging is not supported');
-      }
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+      navigator.serviceWorker.register('assets/sw.js').then(reg => {
+        this.registration = reg;
+        this.notificationService.init(reg);
+        //console.log('Service Worker and Push is supported');
+      });
+    } else {
+      //console.warn('Push messaging is not supported');
+    }
 
-    jQuery("#publishDiv").on("paste", function(e) {
+    jQuery("#publishDiv").on("paste", function (e) {
       e.preventDefault();
       var pastedData = e.originalEvent.clipboardData.getData("text");
       alert(pastedData);
     });
 
     jQuery("#errorMsgDisplay").hide();
-    jQuery("#file-image").change(function() {
+    jQuery("#file-image").change(function () {
       jQuery(".file-input-holder").show();
       readURL(this);
     });
 
-    jQuery("#file-image-gif").change(function() {
+    jQuery("#file-image-gif").change(function () {
       jQuery(".file-input-holder").show();
       readURL(this);
     });
 
-    jQuery(document).click(function(e) {
+    jQuery(document).click(function (e) {
       if (
         jQuery(e.target).closest(".select-menu").length === 0 &&
         jQuery(e.target).closest(".dropdown").length === 0
@@ -168,7 +183,9 @@ export class Home {
     });
     this.changeDetector.markForCheck();
 
-    setTimeout(function(){document.documentElement.scrollTop = 0;}, 1000);
+    setTimeout(function () {
+      document.documentElement.scrollTop = 0;
+    }, 1000);
 
   }
 
@@ -192,13 +209,82 @@ export class Home {
     this.linkView.getListLinks(this.pubText);
   }
 
-	checkArabic(firstLetter) {
-		this.arabicText = this.arabicRegex.test(firstLetter);
+  checkTyping(publishDivRef) {
+    let text = publishDivRef.textContent;
+    this.checkTag(publishDivRef);
+    this.checkArabic(text);
 
-	}
+  }
+
+  /*----------------------------------*/
+
+  checkTag(publishDivRef) {
+    // let caretPosition = publishDivRef.caretPosition();
+    // console.log(caretPosition);
+
+    let text = publishDivRef.textContent;
+    console.log(text[text.length - 1]);
+    if (!this.tagDropdownActive && // text.search(/.*?\ \@$/g) > 0) {
+      text[text.length - 2] == ' ' &&
+      text[text.length - 1] == '@') {
+      this.tagDropdownActive = true;
+      this.hashTagPos = text[text.length - 1];
+      console.log("detect tag is working");
+    }
+    if (this.tagDropdownActive) {
+      let tagText = text.split('@')[1];
+      this.listTagSearchUsers = [];
+      if (tagText.length > 1) {
+        this.getListSearchUsers(tagText);
+      }
+    }
+  }
+
+
+  getListSearchUsers(key: string) {
+    // this.showRecentSearch = false;
+    this.http
+      .get(
+        environment.SERVER_URL + pathUtils.FIND_PROFILE + key,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+          this.listTagSearchUsers = [];
+          this.noSearchResults = false;
+          this.changeDetector.markForCheck();
+          for (let i = 0; i < this.listTagSearchUsers.length; i++) {
+            this.listTagSearchUsers.pop();
+            this.changeDetector.markForCheck();
+          }
+          if (response.status == 0) {
+            if (response.profiles)
+              for (let i = 0; i < response.profiles.length; i++) {
+                this.listTagSearchUsers[i] = response.profiles[i];
+                this.changeDetector.markForCheck();
+              }
+          }
+        },
+        err => {
+          this.noSearchResults = true;
+        },
+        () => {
+          this.noSearchResults = this.listTagSearchUsers.length == 0;
+          this.changeDetector.markForCheck();
+        }
+      );
+  }
+
+
+  /*----------------------------------*/
+
+  checkArabic(text) {
+    this.arabicText = this.arabicRegex.test(text[0]);
+  }
 
   putIntoList(response) {
-    if (!response.length ) {
+    if (!response.length) {
       this.showLoading = false;
       this.isLock = false;
       this.showSuggestionMSG = true;
@@ -257,7 +343,9 @@ export class Home {
         response => {
           //this.publicationBeanList = [];
           this.putIntoList(response);
-          if (response.length==0){this.morePosts=false}
+          if (response.length == 0) {
+            this.morePosts = false
+          }
           this.changeDetector.markForCheck();
         },
         err => {
@@ -268,7 +356,8 @@ export class Home {
             this.changeDetector.markForCheck();
           }, 3000);
         },
-        () => {}
+        () => {
+        }
       );
   }
 
@@ -284,7 +373,9 @@ export class Home {
         .subscribe(
           response => {
             this.putIntoList(response);
-            if (response.length==0){this.morePosts=false}
+            if (response.length == 0) {
+              this.morePosts = false
+            }
             this.changeDetector.markForCheck();
           },
           err => {
@@ -294,7 +385,8 @@ export class Home {
               this.keepLoading = false;
             }, 3000);
           },
-          () => {}
+          () => {
+          }
         );
     }
   }
@@ -326,34 +418,34 @@ export class Home {
       this.changeDetector.markForCheck();
       this.youtubeLink = text;
       this.updateYoutubeFacebook();
-	      return 1;
-      }
-
-	    if (
-	      text.search("web.facebook.com") >= 0 || text.search("www.facebook.com") > 0 ||
-        text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0 ) {
-	      this.facebookInput = true;
-	      jQuery(".yt-in-url").val(text);
-	      this.changeDetector.markForCheck();
-	      this.facebookLink = text;
-	      this.updateYoutubeFacebook();
       return 1;
     }
-		if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
-			//console.log("image detected");
-			jQuery("#preview-image").attr("src", text);
-			jQuery(".file-input-holder").show();
-			jQuery("#preview-image").show();
-			this.imageFromLink = true;
+
+    if (
+      text.search("web.facebook.com") >= 0 || text.search("www.facebook.com") > 0 ||
+      text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0) {
+      this.facebookInput = true;
+      jQuery(".yt-in-url").val(text);
+      this.changeDetector.markForCheck();
+      this.facebookLink = text;
+      this.updateYoutubeFacebook();
+      return 1;
+    }
+    if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
+      //console.log("image detected");
+      jQuery("#preview-image").attr("src", text);
+      jQuery(".file-input-holder").show();
+      jQuery("#preview-image").show();
+      this.imageFromLink = true;
       this.youtubeLink = null;
       this.facebookLink = null;
 
-			this.uploadedPicture = null;
+      this.uploadedPicture = null;
       jQuery(".youtube-preview").html("");
       jQuery(".facebook-preview").html("");
-			this.link.isSet = false;
-			return 1;
-		}
+      this.link.isSet = false;
+      return 1;
+    }
     this.analyzeLink(text);
     text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
     document.execCommand("insertHTML", false, text);
@@ -362,7 +454,7 @@ export class Home {
   resetPublishPicture() {
     jQuery("#preview-image").attr("src", "");
     jQuery("#preview-image").hide();
-		this.imageFromLink = false;
+    this.imageFromLink = false;
     this.uploadedPicture = null;
   }
 
@@ -402,36 +494,40 @@ export class Home {
       && !this.facebookLink
       && !this.uploadedPicture
       && !this.link.isSet
-			&& !this.imageFromLink) {
+      && !this.imageFromLink) {
       this.errorMsg = "SP_FV_ER_PUBLICATION_EMPTY";
       this.errorTimed();
       return;
     }
 
     txt = txt.replace(/(\&nbsp;|\ )+/g, ' ')
-              .replace(/(\<.?br\>)+/g, '<br>')
-              .replace(/^\<.?br\>|\<.?br\>$/g,'');
+      .replace(/(\<.?br\>)+/g, '<br>')
+      .replace(/^\<.?br\>|\<.?br\>$/g, '');
 
-		// when image form link is passed
-		this.imageFromLink = this.imageFromLink
-                        && !this.youtubeLink
-                        && !this.facebookLink
-												&& !this.uploadedPicture
-												&& !this.link.isSet;
+    // when image form link is passed
+    this.imageFromLink = this.imageFromLink
+      && !this.youtubeLink
+      && !this.facebookLink
+      && !this.uploadedPicture
+      && !this.link.isSet;
 
     let img_src: string = jQuery('#preview-image').attr('src');
-    if(this.imageFromLink) {
-			this.imageFromLink = false;
-			if(img_src && img_src.length) {
+    if (this.imageFromLink) {
+      this.imageFromLink = false;
+      if (img_src && img_src.length) {
 
-			let br:string = txt.length ? '<br>' : "";
-			txt += `${br}<img src="${img_src}" class='image-from-link'>`;
-			}
-		}
+        let br: string = txt.length ? '<br>' : "";
+        txt += `${br}<img src="${img_src}" class='image-from-link'>`;
+      }
+    }
 
 
-		if(this.youtubeLink){ jQuery(".yt-in-url").hide(); }
-    if(this.facebookLink){ jQuery(".yt-in-url").hide(); }
+    if (this.youtubeLink) {
+      jQuery(".yt-in-url").hide();
+    }
+    if (this.facebookLink) {
+      jQuery(".yt-in-url").hide();
+    }
 
     this.form.value.publicationText = txt;
 
@@ -473,7 +569,7 @@ export class Home {
               this.errorMsg = response.error;
               this.errorTimed();
             }
-						this.arabicText = false;
+            this.arabicText = false;
           },
           err => {
             console.log(err);
@@ -598,19 +694,19 @@ export class Home {
 
   getIdFacebookVideo(facebookLink): string {
 
-      let myRegexp = /(\/(videos\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
-      let match = facebookLink.match(myRegexp);
-      if (match) {
-      return match[match.length-1];
+    let myRegexp = /(\/(videos\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
+    let match = facebookLink.match(myRegexp);
+    if (match) {
+      return match[match.length - 1];
     }
 
 
-}
+  }
 
-getPageFacebookVideo(videoLink): string {
+  getPageFacebookVideo(videoLink): string {
 
-  return "facebook";
-}
+    return "facebook";
+  }
 
   getIdYoutubeVideoId(youtubeLink): string {
     if (youtubeLink.indexOf("youtube.com") > 0) {
@@ -647,14 +743,14 @@ getPageFacebookVideo(videoLink): string {
     var videoLink = a.val();
     var videoId;
 
-    if(videoLink.indexOf("youtube.com") > 0 || videoLink.indexOf("youtu.be") > 0){
-       videoId = this.getIdYoutubeVideoId(videoLink);
-       try {
+    if (videoLink.indexOf("youtube.com") > 0 || videoLink.indexOf("youtu.be") > 0) {
+      videoId = this.getIdYoutubeVideoId(videoLink);
+      try {
         jQuery(".facebook-preview").html("");
         jQuery(".youtube-preview").html(
           '<iframe width="560" height="315" src="https://www.youtube.com/embed/' +
-            videoId +
-            '" frameborder="0" allowfullscreen></iframe>'
+          videoId +
+          '" frameborder="0" allowfullscreen></iframe>'
         );
         this.uploadedPicture = null;
         this.closeLinkAPI();
@@ -665,11 +761,11 @@ getPageFacebookVideo(videoLink): string {
       }
     }
     else if (videoLink.indexOf("web.facebook.com") > 0 || videoLink.indexOf("www.facebook.com") > 0 ||
-    videoLink.indexOf("m.facebook.com") > 0 || videoLink.indexOf("mobile.facebook.com") > 0 ){
-       videoId = this.getIdFacebookVideo(videoLink);
-       var videoPage = this.getPageFacebookVideo(videoLink);
-       //console.log("faceboook");
-       try {
+      videoLink.indexOf("m.facebook.com") > 0 || videoLink.indexOf("mobile.facebook.com") > 0) {
+      videoId = this.getIdFacebookVideo(videoLink);
+      var videoPage = this.getPageFacebookVideo(videoLink);
+      //console.log("faceboook");
+      try {
         jQuery(".youtube-preview").html("");
         jQuery(".facebook-preview").html(
           '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
@@ -686,11 +782,10 @@ getPageFacebookVideo(videoLink): string {
         this.displayLinkError();
       }
     }
-    else{
+    else {
       this.displayLinkError();
-          return;
+      return;
     }
-
 
 
   }
@@ -704,103 +799,104 @@ getPageFacebookVideo(videoLink): string {
     //this.analyzeLink(source);
   }
 
-  analyzeLink(source)
-    {
+  analyzeLink(source) {
 
-      let myArray = this.linkView.getListLinks(source);
+    let myArray = this.linkView.getListLinks(source);
 
-      if (!myArray.length) {
-        return 1;
-      }
-      let linkURL = myArray[0];
-      //check if linkURL refers to speegar.com
-      if (linkURL == this.link.url) {
-
-        return 1;
-      }
-      if (
-        linkURL.search("youtube.com/watch") >= 0 ||
-        linkURL.search("youtu.be/") >= 0
-      ) {
-        jQuery(".yt-in-url").val(linkURL);
-        this.updateYoutubeFacebook();
-        return 1;
-      }
-			/*
-      if (linkURL.search(/(\.gif)$/i) > 0) {
-        console.log("this is a gif!");
-        console.log(linkURL);
-        //var checker = linkURL.substr(linkURL.length - 13, 8);
-        //if (checker.indexOf(".gif") >= 0) {
-        this.link.image = linkURL; //.substring(0, linkURL.indexOf(".gif") + 4);
-        this.link.imageWidth = 500;
-        this.link.imageHeight = 500;
-        this.link.isGif = true;
-        this.link.url = linkURL; //.substring(0, linkURL.indexOf(".gif") + 4);
-        this.link.title = "gif";
-        this.link.description = "gif";
-        this.link.isSet = true;
-        return 1;
-        //}
-      }
-			*/
-      if(this.imageFromLink) { return 1 }
-
-
-      this.linkLoading = true;
-
-      this.http
-        .get(
-          environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
-          AppSettings.OPTIONS
-        )
-        .map((res: Response) => res.json())
-        .subscribe(
-          response => {
-            if (response.results.success) {
-              jQuery("#publishDiv").empty();
-              this.resetPublishPicture();
-              jQuery(".video-preview").html("");
-              //this.form.controls.publicationYoutubeLink.updateValue('');
-              //console.log("hellooooooo");
-              var r = /:\/\/(.[^/]+)/;
-              this.linkDomain= linkURL.match(r)[1] ;
-//              this.link.url = linkURL.substring(0, linkURL.length - 6);
-              this.link.url = linkURL;
-              this.link.title = response.results.data.ogTitle;
-              this.link.description = response.results.data.ogDescription;
-              if (response.results.data.ogImage) {
-                var a = response.results.data.ogImage.url;
-                this.link.image = response.results.data.ogImage.url;
-                this.link.imageWidth = response.results.data.ogImage.width;
-                this.link.imageHeight = response.results.data.ogImage.height;
-                /*
-                if (a.search(/(\.gif)$/i) > 0) {
-                  this.link.isGif = true;
-                  this.link.url = this.link.image;
-                } else {
-                  this.link.isGif = false;
-                  this.linkLoading = false;
-                }*/
-              } else {
-                this.link.image = null;
-                this.link.imageWidth = 0;
-                this.link.imageHeight = 0;
-              }
-              this.link.isSet = true;
-              this.linkLoading = false;
-              this.changeDetector.markForCheck();
-            }
-            this.linkLoading = false;
-          },
-          err => {
-            console.error("error in link API;");
-          },
-          () => {
-            this.linkLoading = false;
-          }
-        );
+    if (!myArray.length) {
+      return 1;
     }
+    let linkURL = myArray[0];
+    //check if linkURL refers to speegar.com
+    if (linkURL == this.link.url) {
+
+      return 1;
+    }
+    if (
+      linkURL.search("youtube.com/watch") >= 0 ||
+      linkURL.search("youtu.be/") >= 0
+    ) {
+      jQuery(".yt-in-url").val(linkURL);
+      this.updateYoutubeFacebook();
+      return 1;
+    }
+    /*
+    if (linkURL.search(/(\.gif)$/i) > 0) {
+      console.log("this is a gif!");
+      console.log(linkURL);
+      //var checker = linkURL.substr(linkURL.length - 13, 8);
+      //if (checker.indexOf(".gif") >= 0) {
+      this.link.image = linkURL; //.substring(0, linkURL.indexOf(".gif") + 4);
+      this.link.imageWidth = 500;
+      this.link.imageHeight = 500;
+      this.link.isGif = true;
+      this.link.url = linkURL; //.substring(0, linkURL.indexOf(".gif") + 4);
+      this.link.title = "gif";
+      this.link.description = "gif";
+      this.link.isSet = true;
+      return 1;
+      //}
+    }
+          */
+    if (this.imageFromLink) {
+      return 1
+    }
+
+
+    this.linkLoading = true;
+
+    this.http
+      .get(
+        environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+          if (response.results.success) {
+            jQuery("#publishDiv").empty();
+            this.resetPublishPicture();
+            jQuery(".video-preview").html("");
+            //this.form.controls.publicationYoutubeLink.updateValue('');
+            //console.log("hellooooooo");
+            var r = /:\/\/(.[^/]+)/;
+            this.linkDomain = linkURL.match(r)[1];
+//              this.link.url = linkURL.substring(0, linkURL.length - 6);
+            this.link.url = linkURL;
+            this.link.title = response.results.data.ogTitle;
+            this.link.description = response.results.data.ogDescription;
+            if (response.results.data.ogImage) {
+              var a = response.results.data.ogImage.url;
+              this.link.image = response.results.data.ogImage.url;
+              this.link.imageWidth = response.results.data.ogImage.width;
+              this.link.imageHeight = response.results.data.ogImage.height;
+              /*
+              if (a.search(/(\.gif)$/i) > 0) {
+                this.link.isGif = true;
+                this.link.url = this.link.image;
+              } else {
+                this.link.isGif = false;
+                this.linkLoading = false;
+              }*/
+            } else {
+              this.link.image = null;
+              this.link.imageWidth = 0;
+              this.link.imageHeight = 0;
+            }
+            this.link.isSet = true;
+            this.linkLoading = false;
+            this.changeDetector.markForCheck();
+          }
+          this.linkLoading = false;
+        },
+        err => {
+          console.error("error in link API;");
+        },
+        () => {
+          this.linkLoading = false;
+        }
+      );
+  }
 
 
   pasteInnerHtml($event) {
@@ -810,12 +906,11 @@ getPageFacebookVideo(videoLink): string {
   }
 
 
-
-  onSelectLanguage(language:string) {
+  onSelectLanguage(language: string) {
     this.selectedLanguage = language;
     language = language.toLowerCase();
     jQuery(".dropdown-menu-translate").hide();
-    localStorage.setItem('userLang',language);
+    localStorage.setItem('userLang', language);
     this.translate.setDefaultLang(language);
     location.reload();
     //console.log(localStorage.getItem('userLang')) ;
@@ -826,10 +921,8 @@ getPageFacebookVideo(videoLink): string {
   }
 
 
-
-
   useLanguage(language: string) {
-  
+
   }
 
 }
@@ -858,7 +951,7 @@ function previewFile(uploadedFile) {
 
   reader.addEventListener(
     "load",
-    function() {
+    function () {
       //preview.att.src = reader.result;
       jQuery("#preview-image").attr("src", reader.result);
       jQuery(".file-input-holder").fadeIn(500);
@@ -869,7 +962,7 @@ function previewFile(uploadedFile) {
 
   if (file) {
     reader.readAsDataURL(file);
- 
- }
+
+  }
 
 }
