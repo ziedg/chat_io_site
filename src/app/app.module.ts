@@ -7,6 +7,8 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -57,7 +59,18 @@ import { httpFactory } from './utils/factories/http.factory';
           useFactory: HttpLoaderFactory,
           deps: [HttpClient,Http]
         }
-      })],       
+      }),
+      //TODO : change after test
+      AngularFireModule.initializeApp({
+        apiKey: "AIzaSyAnCqxH5CTNWksJH6j59jIKjxkVJOyEyIk",
+        authDomain: "speegar-6deca.firebaseapp.com",
+        databaseURL: "https://speegar-6deca.firebaseio.com",
+        projectId: "speegar-6deca",
+        storageBucket: "speegar-6deca.appspot.com",
+        messagingSenderId: "861552240215"
+      }),
+      AngularFireDatabaseModule
+    ],       
     // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
@@ -83,7 +96,8 @@ import { httpFactory } from './utils/factories/http.factory';
           multi: false
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
-        {provide: APP_BASE_HREF, useValue: '/'}
+        {provide: APP_BASE_HREF, useValue: '/'},
+        AngularFireDatabase
     ],
 
 })
