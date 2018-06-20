@@ -6,23 +6,40 @@
 <div *ngIf="user" class="container" id="container">
   <div class="row">
     <div class="col-md-2 home-sidebar">
-      <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
-                      [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}"></span>
-        <span><a style="color:black" [routerLink]="['/main/profile',user._id]">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span>
+      <div class="home-sidebar-container">
+        <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
+                        [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}"></span>
+          <span><a style="color:black" [routerLink]="['/main/profile',user._id]">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span>
+        </div>
+        <div><span><img class="home-sidebar-icon" src="assets/images/new/home-grey.png"></span>
+          <span><a style="color:black;font-weight:bolder"
+                   routerLink="/redirect">{{ 'FIL_ACTUALITES' | translate}}</a></span></div>
+        <div [routerLink]="['/main/messaging']"><span><img class="home-sidebar-icon"
+                                                           src="assets/images/new/chat-grey.png"></span>
+          <span><a style="color:black" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a></span></div>
+        <hr style="width:120px;margin-left:0; margin-bottom: 0">
+        <div class="conditions-generales">
+          <div><a href="/support/cgu">{{'conditions_generales' | translate}}</a></div>
+          <div><a href="/support/about-us">{{'a_propos' | translate}}</a></div>
+        </div>
+        <div class="copyright-home"> Speegar &copy; 2018</div>
       </div>
-      <div><span><img class="home-sidebar-icon" src="assets/images/new/home-grey.png"></span>
-        <span><a style="color:black;font-weight:bolder"
-                 routerLink="/redirect">{{ 'FIL_ACTUALITES' | translate}}</a></span></div>
-      <div [routerLink]="['/main/messaging']"><span><img class="home-sidebar-icon"
-                                                         src="assets/images/new/chat-grey.png"></span>
-        <span><a style="color:black" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a></span></div>
-      <hr style="width:120px;margin-left:0">
-      <div class="conditions-generales">
-        <div><a href="/support/cgu">{{'conditions_generales' | translate}}</a></div>
-        <div><a href="/support/about-us">{{'a_propos' | translate}}</a></div>
-      </div>
-      <div class="copyright-home"> Speegar &copy; 2018</div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 sub-container" style="height:100%;overflow:auto !important">
 
 
