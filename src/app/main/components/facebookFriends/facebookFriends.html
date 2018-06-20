@@ -1,12 +1,19 @@
-<section class="widget bordered" *ngIf="isValid">
-  <header>
-    Facebook
-  </header>
+<div class=" col-xs-12 bordered widget bordered fb-section">
+  <!-- <header class="fb-friends-header">
+    {{'fb_friends' | translate }}
+  </header> -->
  
-  <div  class="fb-suggestions-container">
-  <article *ngFor="let profile of facebookProfiles;  let i=index">
-    <div *ngIf="i < displayedNumberfacebookProfiles"> 
-    
+  <div class="navigation-arrow-container" style="left:20px;z-index:1"
+  (click)="sideScroll('left',25,100,100)">
+  <img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png"></div>
+
+  <div class="navigation-arrow-container" style="right:20px;z-index:1"
+  (click)="sideScroll('right',25,100,100)">
+  <img class="right-navigation-arrow" src="assets/images/new/right-arrow-white.png"></div>
+  
+  <div  class="fb-suggestions-container" infinite-scroll [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="0" (scrolled)="onScrollDown()">
+  <article *ngFor="let profile of facebookProfiles">
       <span class="user user-fb">
         <div class="user-img" *ngIf="profile.profilePictureMin"
 							[routerLink]="['/main/profile',profile._id]"
@@ -20,10 +27,13 @@
           <header><a [routerLink]="['/main/profile',profile._id]" class="fb-link-name">
             {{profile.firstName}} {{profile.lastName}}
           </a></header>
-          <div class="top-blagueurs-sub-nbr" style="text-align: center"> {{profile.nbSuivi}} abonnés </div>
+          <div class="top-blagueurs-sub-nbr" style="text-align: center" *ngIf="!profile.ispop"> {{'fb_label' | translate}}</div>
+          <div class="top-blagueurs-sub-nbr" style="text-align: center" *ngIf="profile.ispop"> {{profile.nbSuivi}} {{'subscribers' | translate}} </div>
         </div>
         <div class="subscribe">
           <button *ngIf="!profile.isSubscribed"
+                   style="width:100% !important;border-top-right-radius:5px;border-bottom-right-radius:5px;
+                   padding-left:10px;padding-left:17px"
                   (click)="subscribe(profile)">
             {{ 'profile_subscribe' | translate }}
           </button>
@@ -33,19 +43,20 @@
             {{ 'profile_already_subscribed' | translate }}
           </button>
 
-          <div class="ignore-profile">
-            <span
+          
+            <a
             (click)="ignore(profile)"
-            class="fa fa-times subscribe-close-button">
-          </span>
-          </div>
+            class="subscribe-close-button fb-ignore" >
+            &#x2715;
+          </a>
+          
         
         </div>
      
       </span>
-
-    </div>   
   </article>
   </div>
+  
 
-</section>
+
+</div>

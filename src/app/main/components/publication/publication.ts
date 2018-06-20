@@ -270,7 +270,7 @@ export class Publication {
     if(txt !== 'null' && txt !=='undefined' && txt.length > 0) {
 			var line_parts = txt.split('<br>');
 			if(line_parts.length > lines_max ){
-				this.firstPubText = line_parts.slice(0, lines_max).join('<br>');
+        this.firstPubText = line_parts.slice(lines_max, lines_max).join('<br>');
 				this.lastPubText = line_parts.slice(lines_max, line_parts.length ).join('<br>');
 				this.longPubText = true;
 			}
@@ -318,7 +318,7 @@ export class Publication {
     this.commentTextareaId = "comment-" + this.publicationBean._id;
     this.changeDetector.markForCheck();
     if (this.publicationBean) {
-      console.log(this.publicationBean._id);
+      //console.log(this.publicationBean._id);
       this.pubLink = urlEncode(environment.SERVER_URL + "main/post/" + this.publicationBean._id);
       this.shareLink = "https://www.facebook.com/sharer/sharer.php?u=" + this.pubLink + "&amp;src=sdkpreparse";
 
@@ -674,7 +674,7 @@ export class Publication {
 
     });
 
-    console.log(this.publicationBean._id);
+    //console.log(this.publicationBean._id);
 
     this.http.post(environment.SERVER_URL + pathUtils.LIKE_PUBLICATION, body, AppSettings.OPTIONS)
       .map((res: Response) => res.json())
@@ -783,8 +783,8 @@ export class Publication {
                   response => { 
                     Array.prototype.push.apply(this.InteractionsLikes, response.message.likes);
                     Array.prototype.push.apply(this.InteractionsDislikes, response.message.dislikes);
-                    console.log(this.InteractionsLikes);
-                    console.log(this.InteractionsDislikes);
+                    //console.log(this.InteractionsLikes);
+                    //console.log(this.InteractionsDislikes);
                 },
                 err => {
                   console.error('Cannot get interactions');

@@ -32,6 +32,8 @@ export class Comment {
   publicationBean:PublicationBean = new PublicationBean();
   user:User;
   listEmoji:Array<EmojiListBean> = [];
+  public InteractionsLikes: Array<User> = [];
+  public InteractionsDislikes: Array<User> = [];
   private isFixedPublishDate:boolean = false;
   private fixedPublishDate:string;
 
@@ -101,7 +103,34 @@ export class Comment {
     this.commentBean.isLiked = true;
     this.commentBean.nbLikes++;
   }
+  addDislike() {
+    if (this.commentBean.isLiked)
+      this.removeLike();
 
+    let body = JSON.stringify({
+      publId: this.commentBean.publId,
+      commentId: this.commentBean._id,
+      profileId: this.user._id
+    });
+
+    this.http.post(
+      environment.SERVER_URL + pathUtils.DISLIKE_COMMENT,
+      body,
+      AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+
+      },
+        err => {
+      },
+      () => {
+      }
+    );
+
+    this.commentBean.isDisliked = true;
+    this.commentBean.nbDislikes++;
+  }
   getCommentTime(publishDateString:string):string {
     if (this.isFixedPublishDate)
       return this.fixedPublishDate;
@@ -161,34 +190,30 @@ export class Comment {
     this.commentBean.isLiked = false;
     this.commentBean.nbLikes--;
   }
-
-  addDislike() {
-    if (this.commentBean.isLiked)
-      this.removeLike();
-
+  removeDislike() {
     let body = JSON.stringify({
       publId: this.commentBean.publId,
       commentId: this.commentBean._id,
       profileId: this.user._id
     });
 
-    this.http.post(environment.SERVER_URL + pathUtils.DISLIKE_COMMENT,
+    this.http.post(
+      environment.SERVER_URL + pathUtils.REMOVE_DISLIKE_COMMENT,
       body,
       AppSettings.OPTIONS)
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-
       },
         err => {
       },
       () => {
       }
     );
-
-    this.commentBean.isDisliked = true;
-    this.commentBean.nbDislikes++;
+    this.commentBean.isDisliked = false;
+    this.commentBean.nbDislikes--;
   }
+
 
   removeComment(comment:CommentBean) {
     if (this.user._id == comment.profileId
@@ -248,28 +273,7 @@ export class Comment {
     );
   }
 
-  removeDislike() {
-    let body = JSON.stringify({
-      publId: this.commentBean.publId,
-      commentId: this.commentBean._id,
-      profileId: this.user._id
-    });
-
-    this.http.post(environment.SERVER_URL + pathUtils.REMOVE_DISLIKE_COMMENT,
-      body,
-      AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
-      .subscribe(
-        response => {
-      },
-        err => {
-      },
-      () => {
-      }
-    );
-    this.commentBean.isDisliked = false;
-    this.commentBean.nbDislikes--;
-  }
+  
 
 
   translateCode(code) {

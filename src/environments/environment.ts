@@ -8,13 +8,19 @@ export const environment = {
 
 
   //SERVER_URL: 'http://localhost:3002/',
-  //IMAGE_BASE_URL: 'https://integration.speegar.com/images/'
+  //IMAGE_BASE_URL: 'https://integration.speegar.com/images/',
 
   //INTEGRATION SERVERS
   SERVER_URL: 'https://integration.speegar.com:3008/',
-  IMAGE_BASE_URL: 'https://integration.speegar.com/images/'
-
-   
-
+  IMAGE_BASE_URL: 'https://integration.speegar.com/images/',
+  //Todo : change with speegar account
+  firebase: {
+    apiKey: "AIzaSyAnCqxH5CTNWksJH6j59jIKjxkVJOyEyIk",
+    authDomain: "speegar-6deca.firebaseapp.com",
+    databaseURL: "https://speegar-6deca.firebaseio.com",
+    projectId: "speegar-6deca",
+    storageBucket: "speegar-6deca.appspot.com",
+    messagingSenderId: "861552240215"
+  }
 
 };

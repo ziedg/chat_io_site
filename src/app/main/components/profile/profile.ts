@@ -111,6 +111,7 @@ export class Profile {
             this.userDisplayed = response.user;
             this.title.setTitle(this.userDisplayed.firstName + " " + this.userDisplayed.lastName);
             this.loadFirstPosts();
+            console.log("first pub");
           } else {
             this.isNotFound = true;
           }

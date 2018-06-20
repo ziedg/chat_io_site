@@ -11,6 +11,7 @@ import { LoginService } from '../../../login/services/loginService';
 import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
 
+declare var jQuery: any;
 
 @Component({
     moduleId: module.id,
@@ -21,11 +22,10 @@ import * as pathUtils from '../../../utils/path.utils';
 export class FacebookFriends {
 
     public facebookProfiles: Array<User> = [];
-    displayedNumberfacebookProfiles = 2;
-    page = 1;
-    isValid : boolean = false;
-
+    public popularProfiles: Array<User> = [];
+    displayedNumberfacebookProfiles = 10;
     public user: User = new User();
+    lastPopularProfileID;
 
     constructor(public translate: TranslateService,
         private http: Http,
@@ -34,15 +34,13 @@ export class FacebookFriends {
         private changeDetector: ChangeDetectorRef) {
         loginService.redirect();
         this.user = loginService.user;
-        this.page = 1;
-        this.loadfacebookProfiles(this.user._id);  
-            
+        this.loadfacebookProfiles();             
         }
 
   
-    loadfacebookProfiles(Id_Profile?: string) {
+    loadfacebookProfiles() {
 
-        var url: string = environment.SERVER_URL + pathUtils.GET_FACEBOOK_FRIENDS + String(this.page);
+        var url: string = environment.SERVER_URL + pathUtils.GET_FACEBOOK_FRIENDS;
 
         this.http.get(url,
             AppSettings.OPTIONS)
@@ -51,7 +49,7 @@ export class FacebookFriends {
               response => {
 
                 Array.prototype.push.apply(this.facebookProfiles, response.message);
-                this.isValid = this.facebookProfiles.length != 0;
+
             },
             err => {
             },
@@ -60,6 +58,35 @@ export class FacebookFriends {
             }
           );
     } 
+
+    loadPopularProfiles(Id_Profile?: string) {
+      var url: string = environment.SERVER_URL + pathUtils.GET_POPULAR_PROFILES + '/';
+      if (Id_Profile) { url += Id_Profile }
+      this.http.get(url,
+        AppSettings.OPTIONS)
+        .map((res: Response) => res.json())
+        .subscribe(
+          response => {
+          
+            Array.prototype.push.apply(this.popularProfiles, response.profiles);
+
+            response.profiles = response.profiles.filter(el => this.facebookProfiles.indexOf(el) === -1);
+            response.profiles = response.profiles.map(el => {  el.ispop = true ; return el;} );
+            Array.prototype.push.apply(this.facebookProfiles, response.profiles);
+
+            //changes
+            if (response.profiles && response.profiles.length) {
+              this.lastPopularProfileID = response.profiles[response.profiles.length - 1]._id;
+            }
+            //
+          },
+          err => {
+          },
+          () => {
+            this.changeDetector.markForCheck();
+          }
+        );
+    }
 
     subscribe(user: User) {
         let body = JSON.stringify({
@@ -139,10 +166,31 @@ export class FacebookFriends {
     
     }
 
-    loadmore() {
-      this.page++;
-      this.loadfacebookProfiles(this.user._id);
+    onScrollDown() {
+      if (this.popularProfiles.length < 6) {
+        this.loadPopularProfiles(this.lastPopularProfileID);
+      }
+    }
 
+    sideScroll(direction,speed,distance,step){
+      var fbContainer = jQuery(".fb-suggestions-container");
+      //var scrollAmount = 0;
+     /* var slideTimer = setInterval(function(){
+          if(direction == 'left'){
+              fbContainer.scrollLeft -= step;
+          } else {
+              fbContainer.scrollLeft += step;
+          }
+          scrollAmount += step;
+          if(scrollAmount >= distance){
+              window.clearInterval(slideTimer);
+          }
+      }, speed);*/
+      if(direction == 'left'){
+        fbContainer.animate( { scrollLeft: '-=460' }, 1000);
+      }else{
+        fbContainer.animate( { scrollLeft: '+=460' }, 1000);
+      }
     }
 
 }

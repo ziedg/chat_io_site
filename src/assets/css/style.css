@@ -646,7 +646,6 @@ a {
   background-color:white;
   width: 486px;
   max-height: 400px;
-  overflow-y: scroll;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   top: 35px;
   right: -54px;
@@ -1158,7 +1157,7 @@ section.widget {
 }
 .profile-photo .fa-times {
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   left: 40px;
   color: white;
   background-color: rgba(55,55,55,0.5);
@@ -1944,18 +1943,18 @@ textarea:focus {
 .fb-suggestions-container{
   display:flex;
   flex-direction:row;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
 }
-
+.fb-suggestions-container::-webkit-scrollbar {
+  display: none;
+}
 .user-fb {
   display:block !important;
   position:relative;
   border: 1px solid #edeeee;
   padding :10px;
   width :min-content;
-  height :160px;
+  height :175px;
   margin:20px 10px;
 }
 .fb-link-name{
@@ -2009,8 +2008,50 @@ facebook-friends .user .user-img  {
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
   margin: 0 auto;
+  width:45px;
+  height:45px;
+  margin-top:8px;
 }
 
+.fb-section{
+  background-color:#fff;
+  padding:10px;
+  margin-bottom:-10px;
+}
+.navigation-arrow-container{
+  width:20px;
+  height: 20px;
+  background-color:rgba(0, 0, 0, 0.62);
+  border-radius: 50%;
+  position: absolute;
+  top:50%;
+}
+.navigation-arrow-container:hover{
+  background-color:rgba(0, 0, 0, 0.37);
+}
+.left-navigation-arrow{
+  width:50%;
+  height: 50%;
+  margin-left:4px;
+  margin-bottom:2px;
+}
+.right-navigation-arrow{
+  width:50%;
+  height: 50%;
+  margin-left:5.5px;
+  margin-bottom:2px;
+}
+.fb-ignore{
+  position:absolute;
+  top:8px;
+  right:9px;
+  color:#666 !important;
+  font-size:11px;
+  text-decoration: none;
+}
+.fb-ignore:hover{
+  text-decoration: none;
+}
 
 .widget .subscribe button {
   color: black;
@@ -2020,6 +2061,11 @@ facebook-friends .user .user-img  {
 
 .widget .subscribe button:hover {
   background-color: #ddd;
+}
+
+.fb-friends-header{
+  padding-left:15px !important;
+  color:#666;
 }
 
 .publication .user .user-img,
@@ -2122,6 +2168,11 @@ facebook-friends .user .user-img  {
   margin-bottom:5px;
   word-wrap: break-word;
 }
+@media(max-width:767px){
+  .publication-text{
+    margin-left:9px;
+  }
+}
 .content img {
 /*  max-height: 400px; */
   max-width: 100%;
@@ -2132,7 +2183,7 @@ facebook-friends .user .user-img  {
 .interactions{
   margin-top: 0px;
   margin-bottom:14px;
-  margin-left:7px;
+  margin-left:9px;
   color:#424242;
   font-size:14px;
   font-weight: bold;
@@ -3060,8 +3111,9 @@ facebook-friends .user .user-img  {
 }
 .top-blagueurs-sub-nbr {
   color:#979797;
-  font-size:12px;
+  font-size: 9.5px;
   font-weight:bolder;
+  margin-top:2px;
 }
 .profil-holder {
   width: 80%;
@@ -3204,7 +3256,6 @@ facebook-friends .user .user-img  {
 .login-body {
   margin: 0;
   margin-top: -77px;
-  background-color: #fafafa;
 }
 .logo-login {
   width: 70%;
@@ -3212,21 +3263,23 @@ facebook-friends .user .user-img  {
   margin: 15px auto 15px;
 }
 .underLogo {
-  font-family: 'coolvetica';
   font-size: 15px;
   margin-bottom: 15px;
   margin-top: -10px;
 }
 #mainLogin {
   margin: 0;
-  background-color: #fafafa;
   height: 100%;
   width: 100%;
   padding-top: 20px;
 }
-.loginCorpse {
-  background-color: #fafafa;
+
+@media(max-width: 768px) {
+  .login-body {
+    margin-top: 0;
+  }
 }
+
 @media (min-width: 767px) {
   .loginCorpse {
     width: 750px;
@@ -3258,7 +3311,6 @@ facebook-friends .user .user-img  {
 }
 .photoLogin {
   font-size: 20px;
-  font-family: 'coolvetica';
   color: black;
   padding: 150px 0 0 !important;
 }
@@ -3272,17 +3324,25 @@ facebook-friends .user .user-img  {
 }
 .boxLogin {
   background-color: white;
-  border: 1px solid #efefef;
   border-radius: 1px;
   margin: 120px 00px 10px !important;
   padding: 10px 0;
+  border: 1px solid #efefef;
 }
+
+
 .boxLogin {
   margin-top: 106px !important;
 }
 @media (max-width: 768px) {
   .boxLogin {
-    margin-top: 0px !important;
+    margin-top: 0 !important;
+  }
+  .boxLogin, .boxLogin2 {
+    border-right: 0!important;
+    border-left: 0!important;
+    border-top: 1px solid #E0E0E0!important;
+    border-bottom: 1px solid #E0E0E0!important;
   }
 }
 .signup-box {
@@ -3303,7 +3363,6 @@ facebook-friends .user .user-img  {
 @media (max-width: 767px) {
   .boxLogin {
     margin: 0 0 10px !important;
-    margin-top: 0 !important;
   }
   .mainTitle {
     font-size: 16px;
@@ -3315,8 +3374,7 @@ facebook-friends .user .user-img  {
   }
 }
 .smartphone {
-  margin-top: 20px;
-  margin: 00px 20px 20px !important;
+  margin: 0 20px 20px !important;
   width: 75%;
 }
 .boxLogin {
@@ -3416,6 +3474,12 @@ a {
   padding: 0;
   text-align: center;
 }
+
+@media(max-width: 768px) {
+  .loginButton-facebook {
+    border-radius: 0;
+  }
+}
 .change-account {
   margin-top: 0;
   margin-bottom: 0;
@@ -3427,10 +3491,9 @@ input.loginInput {
   margin-bottom: 12px;
   background: 0 0;
   border: 1px solid #dbdbdb;
-  border-radius: 0px;
+  border-radius: 0;
   box-sizing: border-box;
   color: #262626;
-  font-size: 14px;
   padding: 9px 8px 7px;
   width: 100%;
   font: 13.3333px Arial;
@@ -3479,8 +3542,10 @@ input.loginInput {
 .footerContainer {
   width: 100%;
   margin: 0 auto;
-  padding-left: 0;
   padding: 0 200px;
+}
+.footerContainer a {
+  margin-left:4px;
 }
 @media (max-width: 992px) {
   .footerContainer {
@@ -3490,7 +3555,6 @@ input.loginInput {
 .footerContainer a {
   color: #003569;
   cursor: pointer;
-  display: inline-block;
   font-size: 11px;
   font-weight: 600;
   position: relative;
@@ -3505,6 +3569,39 @@ input.loginInput {
   font-size: 11px;
   vertical-align: top;
   float: right;
+}
+
+@media(min-width:767px){
+  .login-lang{
+    display: none;
+  }
+}
+.login-lang{
+  display:flex;
+  flex-direction:row;
+  color: #355977;
+  font-size: 13px;
+}
+.login-lang button{
+    background-color:#fff;
+    border:0;
+    font-size:1.1em;
+}
+.login-footer{
+  background-color: #ffffff;
+  border-top: 1px solid #e1e1e1;
+  position:absolute;
+  bottom:0;
+  margin-right:0 !important;
+  margin-left:0 !important;
+}
+.mobile-login-lang-container{
+  padding: 15px 10px;
+  display:flex;
+  justify-content: center;
+}
+.mobile-login-lang-container button{
+  background-color:transparent !important;
 }
 /*Loading*/
 
@@ -4457,7 +4554,7 @@ publication .user-name {
 
 
 publication .user {
-  dispaly: flex;
+  display: flex;
   align-items: center;
   margin-left:7px;
 }
@@ -4984,6 +5081,14 @@ top-blagueurs-decov .user-img {
   padding:10px
 }
 
+.home-sidebar .user-img {
+  padding: calc(var(--icon-h)/2);
+}
+
+.home-sidebar-container {
+  position: fixed;
+}
+
 @media (max-width:768px){
   .home-sidebar {
     display:none;
@@ -4991,7 +5096,7 @@ top-blagueurs-decov .user-img {
 }
 .conditions-generales {
   color:#919191;
-  margin-top:27px;
+  margin-top: 10px;
   font-size: 12.5px;
   margin-left:5px;
 }
@@ -5012,11 +5117,9 @@ top-blagueurs-decov .user-img {
 
 
 .home-sidebar-icon {
-  height: var(--icon-h);
-  width: var(--icon-h);
+  max-height: var(--icon-h);
+  max-width: var(--icon-h);
   margin:5px;
-  padding-bottom:5px;
-
 }
 
 .home-sidebar .fa {

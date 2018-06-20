@@ -1,9 +1,18 @@
 import 'rxjs/add/operator/map';
+
 import { Location } from '@angular/common';
-import {ChangeDetectionStrategy,ApplicationRef, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild, HostListener} from '@angular/core';
+import {
+  ApplicationRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Meta } from '@angular/platform-browser';
-import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
@@ -12,15 +21,13 @@ import { NotificationBean } from '../../beans/notification-bean';
 import { User } from '../../beans/user';
 import { LoginService } from '../../login/services/loginService';
 import { AppSettings } from '../../shared/conf/app-settings';
+import { urlB64ToUint8Array, VAPID_PUBLIC_KEY } from '../../utils/notification';
 import * as pathUtils from '../../utils/path.utils';
 import { DateService } from '../services/dateService';
+import { NotificationService } from '../services/notification.service';
 import { RecentRechService } from '../services/recentRechService';
 
 //Notification
-import { NotificationService } from "../services/notification.service";
-import { urlB64ToUint8Array, VAPID_PUBLIC_KEY } from "../../utils/notification";
-import { SocketService } from '../services/socket.service';
-
 declare var jQuery: any;
 declare var FB: any;
 declare var auth: any;
@@ -76,22 +83,15 @@ export class Main {
     private meta: Meta,
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private socketService :SocketService,
+
+
     //Notiifcation
     private notificationService: NotificationService) {
     if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
     this.listNotif = [];
-   this.loginService.userEmitter
-   .subscribe((user)=>{
-    this.user=user
-   
-    this.socketService.connectSocket(this.user._id);
-    this.listenForEvents();
-   })
-    
-    
+
     this.icons = {
       messaging: {
         icon: "messaging-icon",
@@ -122,6 +122,10 @@ export class Main {
 
 
   ngOnInit() {
+
+//for touati: i was just listening for the socket events for notifications here in the main component because he is the parent of the the others
+
+
     // meta tag to fix view on iDevices (like iPohne)
     this.meta.addTag({
       name: "viewport",
@@ -158,16 +162,6 @@ export class Main {
     });
 
 
-  }
-
-
-  //listen for socket events 
-  listenForEvents(): void {
-    this.socketService.receiveEvents()
-    .subscribe((event) => {
-      /* subscribing for events statrts */
-       console.log(event)
-      });
   }
 
 
