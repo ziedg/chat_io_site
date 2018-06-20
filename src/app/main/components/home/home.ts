@@ -817,6 +817,7 @@ getPageFacebookVideo(videoLink): string {
     jQuery(".dropdown-menu-translate").hide();
     localStorage.setItem('userLang',language);
     this.translate.setDefaultLang(language);
+    location.reload();
     //console.log(localStorage.getItem('userLang')) ;
   }
 
@@ -828,6 +829,7 @@ getPageFacebookVideo(videoLink): string {
 
 
   useLanguage(language: string) {
+  
   }
 
 }
@@ -867,5 +869,7 @@ function previewFile(uploadedFile) {
 
   if (file) {
     reader.readAsDataURL(file);
-  }
+ 
+ }
+
 }
