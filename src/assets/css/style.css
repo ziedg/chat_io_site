@@ -1953,9 +1953,9 @@ textarea:focus {
   position:relative;
   border: 1px solid #edeeee;
   padding :10px;
-  width :min-content;
-  height :175px;
-  margin:20px 10px;
+  width :131px;
+  height :min-content;
+  margin:5px;
 }
 .fb-link-name{
   max-width:115px;
@@ -2003,20 +2003,23 @@ top-blagueurs-decov .user .user-img {
 }
 facebook-friends .user .user-img  {
   --user-img-w: 35px;
-  width: var(--user-img-w);
-  height: var(--user-img-w);
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
   margin: 0 auto;
-  width:45px;
-  height:45px;
-  margin-top:8px;
+  width:70px;
+  height:70px;
 }
 
 .fb-section{
   background-color:#fff;
   padding:10px;
-  margin-bottom:-10px;
+  margin-bottom:-20px;
+  margin-top:-10px;
+}
+@media(max-width:767px){
+  .fb-section{
+    padding-left:5px !important;
+  }
 }
 .navigation-arrow-container{
   width:20px;
@@ -2040,6 +2043,11 @@ facebook-friends .user .user-img  {
   height: 50%;
   margin-left:5.5px;
   margin-bottom:2px;
+}
+@media(max-width:767px){
+  .navigation-arrow-container {
+    display:none;
+  }
 }
 .fb-ignore{
   position:absolute;
