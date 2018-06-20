@@ -646,7 +646,6 @@ a {
   background-color:white;
   width: 486px;
   max-height: 400px;
-  overflow-y: scroll;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   top: 35px;
   right: -54px;
@@ -1158,7 +1157,7 @@ section.widget {
 }
 .profile-photo .fa-times {
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   left: 40px;
   color: white;
   background-color: rgba(55,55,55,0.5);
@@ -1946,8 +1945,8 @@ textarea:focus {
   flex-direction:row;
   overflow: auto;
 }
-.fb-suggestions-container::-webkit-scrollbar { 
-  display: none; 
+.fb-suggestions-container::-webkit-scrollbar {
+  display: none;
 }
 .user-fb {
   display:block !important;
@@ -3257,7 +3256,6 @@ facebook-friends .user .user-img  {
 .login-body {
   margin: 0;
   margin-top: -77px;
-  background-color: #fafafa;
 }
 .logo-login {
   width: 70%;
@@ -3265,21 +3263,23 @@ facebook-friends .user .user-img  {
   margin: 15px auto 15px;
 }
 .underLogo {
-  font-family: 'coolvetica';
   font-size: 15px;
   margin-bottom: 15px;
   margin-top: -10px;
 }
 #mainLogin {
   margin: 0;
-  background-color: #fafafa;
   height: 100%;
   width: 100%;
   padding-top: 20px;
 }
-.loginCorpse {
-  background-color: #fafafa;
+
+@media(max-width: 768px) {
+  .login-body {
+    margin-top: 0;
+  }
 }
+
 @media (min-width: 767px) {
   .loginCorpse {
     width: 750px;
@@ -3311,7 +3311,6 @@ facebook-friends .user .user-img  {
 }
 .photoLogin {
   font-size: 20px;
-  font-family: 'coolvetica';
   color: black;
   padding: 150px 0 0 !important;
 }
@@ -3325,17 +3324,25 @@ facebook-friends .user .user-img  {
 }
 .boxLogin {
   background-color: white;
-  border: 1px solid #efefef;
   border-radius: 1px;
   margin: 120px 00px 10px !important;
   padding: 10px 0;
+  border: 1px solid #efefef;
 }
+
+
 .boxLogin {
   margin-top: 106px !important;
 }
 @media (max-width: 768px) {
   .boxLogin {
-    margin-top: 0px !important;
+    margin-top: 0 !important;
+  }
+  .boxLogin, .boxLogin2 {
+    border-right: 0!important;
+    border-left: 0!important;
+    border-top: 1px solid #E0E0E0!important;
+    border-bottom: 1px solid #E0E0E0!important;
   }
 }
 .signup-box {
@@ -3356,7 +3363,6 @@ facebook-friends .user .user-img  {
 @media (max-width: 767px) {
   .boxLogin {
     margin: 0 0 10px !important;
-    margin-top: 0 !important;
   }
   .mainTitle {
     font-size: 16px;
@@ -3368,8 +3374,7 @@ facebook-friends .user .user-img  {
   }
 }
 .smartphone {
-  margin-top: 20px;
-  margin: 00px 20px 20px !important;
+  margin: 0 20px 20px !important;
   width: 75%;
 }
 .boxLogin {
@@ -3469,6 +3474,12 @@ a {
   padding: 0;
   text-align: center;
 }
+
+@media(max-width: 768px) {
+  .loginButton-facebook {
+    border-radius: 0;
+  }
+}
 .change-account {
   margin-top: 0;
   margin-bottom: 0;
@@ -3480,10 +3491,9 @@ input.loginInput {
   margin-bottom: 12px;
   background: 0 0;
   border: 1px solid #dbdbdb;
-  border-radius: 0px;
+  border-radius: 0;
   box-sizing: border-box;
   color: #262626;
-  font-size: 14px;
   padding: 9px 8px 7px;
   width: 100%;
   font: 13.3333px Arial;
@@ -3532,7 +3542,6 @@ input.loginInput {
 .footerContainer {
   width: 100%;
   margin: 0 auto;
-  padding-left: 0;
   padding: 0 200px;
 }
 .footerContainer a {
@@ -3546,7 +3555,6 @@ input.loginInput {
 .footerContainer a {
   color: #003569;
   cursor: pointer;
-  display: inline-block;
   font-size: 11px;
   font-weight: 600;
   position: relative;
@@ -3572,6 +3580,7 @@ input.loginInput {
   display:flex;
   flex-direction:row;
   color: #355977;
+  font-size: 13px;
 }
 .login-lang button{
     background-color:#fff;
@@ -5072,6 +5081,14 @@ top-blagueurs-decov .user-img {
   padding:10px
 }
 
+.home-sidebar .user-img {
+  padding: calc(var(--icon-h)/2);
+}
+
+.home-sidebar-container {
+  position: fixed;
+}
+
 @media (max-width:768px){
   .home-sidebar {
     display:none;
@@ -5100,11 +5117,9 @@ top-blagueurs-decov .user-img {
 
 
 .home-sidebar-icon {
-  height: var(--icon-h);
-  width: var(--icon-h);
+  max-height: var(--icon-h);
+  max-width: var(--icon-h);
   margin:5px;
-  padding-bottom:5px;
-
 }
 
 .home-sidebar .fa {

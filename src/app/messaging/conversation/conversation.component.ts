@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { EmitterService } from '../emitter.service';
-import { User } from '../../beans/user';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SocketService } from '../../main/services/socket.service';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+
+import { User } from '../../beans/user';
 import { ChatService } from '../../messanging/chat.service';
+import { EmitterService } from '../emitter.service';
 
 class MessageValidation {
 	constructor() {
@@ -33,10 +34,11 @@ export class ConversationComponent  {
 
   public messages = [];
   public messageLoading = true;
+  private s: AngularFireObject<any>;
 
   constructor(private emitterService:EmitterService,
     private router:Router,
-    private socketService :SocketService,
+    private db: AngularFireDatabase,
     private chatService: ChatService
   ) { 
 		this.messageForm =new FormBuilder().group({
@@ -85,13 +87,7 @@ sendMessage(event) {
           this.chatService.sendMessage(data).subscribe(
             () => console.log('Sent Message server.'),
             err =>  console.log('Could send message to server, reason: ', err));
-          /*
-          this.socketService.sendMessage({
-              fromUserId: this.userId,
-              message: (message).trim(),
-              toUserId: this.selectedUser._id
-          });
-          **/
+          
           this.messageForm.reset();
           setTimeout(() => {
               document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
@@ -102,21 +98,28 @@ sendMessage(event) {
 
 listenForMessages(userId: string): void {
   this.userId = userId;
-  
-  /*
-  this.socketService.receiveMessages()
-  .subscribe((message) => {
-    // subscribing for messages statrts 
-    if (this.selectedUser !== null && this.selectedUser._id === message.fromUserId) {
-      this.messages = [...this.messages, message];
-      setTimeout(() => {
-        document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
-      }, 100);
-    }
-    
-  });*/
-
-
+  this.s = this.db.object('messaging/'+this.userId);
+    console.log('messaging/'+this.userId);
+    var item = this.s.valueChanges()
+    console.log(JSON.stringify(item));
+    this.s.snapshotChanges().subscribe(action => {
+      var notif = action.payload.val();
+      if (notif !== null){
+        this.chatService.getMessage(notif.msgId).subscribe(
+          message => {
+            if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
+              this.messages = [...this.messages, message];
+              setTimeout(() => {
+                console.log('scroll')
+                document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
+              }, 100);
+          }
+          },
+          err =>  console.log('Could send message to server, reason: ', err)
+        );
+      }
+    });
+ 
 }
 
 alignMessage(userId: string): boolean {

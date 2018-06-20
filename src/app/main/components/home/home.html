@@ -6,17 +6,40 @@
 <div *ngIf="user" class="container" id="container">
   <div class="row">
     <div class="col-md-2 home-sidebar">
+      <div class="home-sidebar-container">
         <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
-           [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}" ></span>
-          <span><a style="color:black" [routerLink]="['/main/profile',user._id]" >{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span></div>
+                        [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}"></span>
+          <span><a style="color:black" [routerLink]="['/main/profile',user._id]">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span>
+        </div>
         <div><span><img class="home-sidebar-icon" src="assets/images/new/home-grey.png"></span>
-          <span ><a style="color:black;font-weight:bolder" routerLink="/redirect">{{ 'FIL_ACTUALITES' | translate}}</a></span></div>
-        <div [routerLink]="['/main/messaging']"><span><img class="home-sidebar-icon" src="assets/images/new/chat-grey.png"></span>
-          <span ><a style="color:black" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a></span></div><hr style="width:120px;margin-left:0">
-        <div class="conditions-generales"><div><a href="/support/cgu">{{'conditions_generales' | translate}}</a></div>
-          <div><a href="/support/about-us">{{'a_propos' | translate}}</a></div></div>
+          <span><a style="color:black;font-weight:bolder"
+                   routerLink="/redirect">{{ 'FIL_ACTUALITES' | translate}}</a></span></div>
+        <div [routerLink]="['/main/messaging']"><span><img class="home-sidebar-icon"
+                                                           src="assets/images/new/chat-grey.png"></span>
+          <span><a style="color:black" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a></span></div>
+        <hr style="width:120px;margin-left:0; margin-bottom: 0">
+        <div class="conditions-generales">
+          <div><a href="/support/cgu">{{'conditions_generales' | translate}}</a></div>
+          <div><a href="/support/about-us">{{'a_propos' | translate}}</a></div>
+        </div>
         <div class="copyright-home"> Speegar &copy; 2018</div>
+      </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 sub-container" style="height:100%;overflow:auto !important">
 
 
@@ -28,14 +51,12 @@
       </div>
 
 
-
       <div class="col-xs-12 bordered error-msg" id="errorMsgDisplay" style="display:none">
         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
         {{errorMsg | translate }}
 
         <i class="fa fa-times" aria-hidden="true" (click)="closeErrorMsg()"></i>
       </div>
-
 
 
       <form class="col-xs-12 add-pub bordered noPadding" (ngSubmit)="publish()" [formGroup]="form" #f="ngForm">
@@ -55,25 +76,53 @@
           </div>
           <div class="col-md-12 col-xs-12 add-head noPadding" id="pub-holder">
             <div class="pub-holder-holder">
-              <div class="user-img for-add" *ngIf="user.profilePictureMin" [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
+              <div class="user-img for-add" *ngIf="user.profilePictureMin"
+                   [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
               </div>
 
-              <div class="user-img for-add" *ngIf="!user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}">
+              <div class="user-img for-add" *ngIf="!user.profilePictureMin"
+                   [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}">
               </div>
 
 
-              <input id="pub-title-input" placeholder="{{ 'home_publish_title' | translate }}" *ngIf="titleEnable" formControlName="publicationTitle" class="new-publication-title">
+              <input id="pub-title-input" placeholder="{{ 'home_publish_title' | translate }}" *ngIf="titleEnable"
+                     formControlName="publicationTitle" class="new-publication-title">
 
-              <div id="publishDiv" [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText, 'post-title-enable':titleEnable}" (paste)="updatePublishTextOnPaste($event)"
-                contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkArabic(publishDivRef.textContent[0])"
-                #publishDivRef style="width: calc(100% - 80px)"></div>
+              <div id="publishDiv"
+                   [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText, 'post-title-enable':titleEnable}"
+                   (paste)="updatePublishTextOnPaste($event)"
+                   contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)"
+                   #publishDivRef style="width: calc(100% - 80px)"></div>
 
+
+              <!-- tag new publication -->
+              <!--
+              <div class="" >
+                <span> tag Search user</span>
+                <div class="" >
+                  <div *ngIf="listTagSearchUsers">
+                    <article *ngFor="let result of listTagSearchUsers">
+                      <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
+                      </div>
+                      <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
+                      </div>
+                      <div class="">
+                        {{result.firstName}} {{result.lastName}}
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+              -->
+
+              <!-- tag new publication end -->
 
               <div class="file-input-holder">
                 <div class="file-input">
                   <div class="ajout-img-holder">
                     <img id="preview-image">
-                    <i class="fa fa-times delete-photo-post" aria-hidden="true" *ngIf="uploadedPicture || imageFromLink" (click)="resetPublishPicture()"></i>
+                    <i class="fa fa-times delete-photo-post" aria-hidden="true" *ngIf="uploadedPicture || imageFromLink"
+                       (click)="resetPublishPicture()"></i>
 
                   </div>
                 </div>
@@ -89,7 +138,7 @@
                 </span>
 
                 <div class="noPadding" *ngIf="link.image">
-                  <img class="img-preview" [src]="link.image" />
+                  <img class="img-preview" [src]="link.image"/>
                 </div>
                 <div class="descriptions" *ngIf="!link.isGif">
                   <a href="{{link.url}}" target="_blank">
@@ -128,8 +177,9 @@
               </span>
 
               <span class="youtube-video-in hidden-xs" style="line-height: 23px">
-                <input class="yt-in-url youtube-input-popup" placeholder="{{ 'home_publish_youtube_placeholder' | translate }}" style="display:none;"
-                (change)="updateYoutubeFacebook()" formControlName="publicationYoutubeLink">
+                <input class="yt-in-url youtube-input-popup"
+                       placeholder="{{ 'home_publish_youtube_placeholder' | translate }}" style="display:none;"
+                       (change)="updateYoutubeFacebook()" formControlName="publicationYoutubeLink">
 
 
                 <i class="fa fa-youtube-play" (click)="changeYoutubeInput()"></i>
@@ -137,14 +187,19 @@
 
 
               <input type="file" id="file-image" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
-              <input type="file" id="file-image-gif" style="display:none" accept=".gif" (change)="uploadPhotoGIF($event)">
+              <input type="file" id="file-image-gif" style="display:none" accept=".gif"
+                     (change)="uploadPhotoGIF($event)">
 
-              <div class="change-privacy hidden-lg hidden-md hidden-sm" style="position:unset; margin-right: 12px; line-height: 10px;">
-                <i class="fa fa-globe" style="vertical-align: middle" [class.hide]="selectedMenuElement!=0" (click)="changeSelectMenu(1)"></i>
-                <i class="fa fa-users" style="vertical-align: middle" [class.hide]="selectedMenuElement!=1" (click)="changeSelectMenu(0)"></i>
+              <div class="change-privacy hidden-lg hidden-md hidden-sm"
+                   style="position:unset; margin-right: 12px; line-height: 10px;">
+                <i class="fa fa-globe" style="vertical-align: middle" [class.hide]="selectedMenuElement!=0"
+                   (click)="changeSelectMenu(1)"></i>
+                <i class="fa fa-users" style="vertical-align: middle" [class.hide]="selectedMenuElement!=1"
+                   (click)="changeSelectMenu(0)"></i>
               </div>
             </div>
-            <div class="col-md-7 col-xs-6 share-button" style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
+            <div class="col-md-7 col-xs-6 share-button"
+                 style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
               <div class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
                 <div>
                   <header (click)="disableSelectMenu()">
@@ -175,8 +230,10 @@
                 <i class="fa fa-caret-down"></i>
               </div>
               <div class="change-privacy hidden-lg hidden-md hidden-xs" style="position:unset; margin-right: 12px">
-                <i class="fa fa-globe" style="vertical-align: middle" [class.hide]="selectedMenuElement!=0" (click)="changeSelectMenu(1)"></i>
-                <i class="fa fa-users" style="vertical-align: middle" [class.hide]="selectedMenuElement!=1" (click)="changeSelectMenu(0)"></i>
+                <i class="fa fa-globe" style="vertical-align: middle" [class.hide]="selectedMenuElement!=0"
+                   (click)="changeSelectMenu(1)"></i>
+                <i class="fa fa-users" style="vertical-align: middle" [class.hide]="selectedMenuElement!=1"
+                   (click)="changeSelectMenu(0)"></i>
               </div>
               <button class="publish-button" type="submit" *ngIf="!loadingPublish">
                 {{ 'home_publish_button' | translate }}
@@ -193,7 +250,7 @@
 
       </form>
 
-      
+
       <section id="publications" class="col-xs-12 noPadding" style="height: 100%">
         <div class="filters hidden-xs" *ngIf="false">
           <div class="filter-right">
@@ -207,20 +264,20 @@
         </div>
 
 
-        <div *ngIf="user" infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0" (scrolled)="onScrollDown()">
+        <div *ngIf="user" infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0"
+             (scrolled)="onScrollDown()">
           <div *ngFor=" let publicationBean of publicationBeanList; let i= index">
 
-          <publication [publicationBean]="publicationBean">
-          </publication>
+            <publication [publicationBean]="publicationBean">
+            </publication>
 
-          <div *ngIf="i == 2" >
-            <facebook-friends ></facebook-friends>
-            <div style="color:transparent">facebook</div>
-          </div>
-          
+            <div *ngIf="i == 2">
+              <facebook-friends></facebook-friends>
+              <div style="color:transparent">facebook</div>
+            </div>
+
           </div>
         </div>
-
 
 
         <!-- Loading-->
@@ -251,14 +308,13 @@
     <div *ngIf="user" class="col-md-3 col-sm-5 hidden-xs side-home">
       <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
 
-      
 
       <section class="hidden-sm hidden-xs widget bordered" style="padding:15px">
 
 
         <span *ngFor="let language of translationLanguages; let i = index"
               (click)="onSelectLanguage(language.value)">
-            <a class="language-option" style="cursor: pointer" 
+            <a class="language-option" style="cursor: pointer"
                [ngClass]="{'selected-language':language.value === selectedLanguage}">{{ language.name }}</a>
             <span *ngIf="i === 1"><br></span>
         </span>
