@@ -1941,7 +1941,7 @@ textarea:focus {
 .fb-suggestions-container{
   display:flex;
   flex-direction:row;
-  overflow: auto;
+  overflow-x: auto;
 }
 .fb-suggestions-container::-webkit-scrollbar {
   display: none;
