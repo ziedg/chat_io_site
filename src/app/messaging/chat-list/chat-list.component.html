@@ -41,16 +41,16 @@
 <div class="users-list" *ngFor="let user of chatListUsers">
 	<app-chat-list-item [class.active]="isUserSelected(user.id)" (click)="selectUser(user)"  user="{{user.firstName}} {{user.lastName}}"
 		userImage="{{user.profilePicture}}"></app-chat-list-item>
-		<div class="col-xs-1"></div>
-		<div class="col-xs-11"><hr></div>
+		<div class="col-xs-2"></div>
+		<div class="col-xs-10" style="padding-right: 0 !important;"><hr></div>
 		
 </div>
 <app-chat-list-item  user="Test"></app-chat-list-item>
-<div class="col-xs-1"></div>
-		<div class="col-xs-11"><hr></div>
+<div class="col-xs-2"></div>
+		<div class="col-xs-10" style="padding-right: 0 !important;"><hr></div>
 <app-chat-list-item   user="Test"></app-chat-list-item>
-<div class="col-xs-1"></div>
-		<div class="col-xs-11"><hr></div>
+<div class="col-xs-2"></div>
+		<div class="col-xs-10" style="padding-right: 0 !important;"><hr></div>
 <app-chat-list-item  user="Test"></app-chat-list-item>
-<div class="col-xs-1"></div>
-		<div class="col-xs-11"><hr></div>
+<div class="col-xs-2"></div>
+		<div class="col-xs-10" style="padding-right: 0 !important;"><hr></div>
