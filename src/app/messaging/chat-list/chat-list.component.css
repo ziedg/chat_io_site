@@ -26,7 +26,12 @@
   .users-list{
     overflow: hidden;
   }
-hr{
-  margin: 0 !important;
-  margin-left: 88px !important;
+  hr{
+    margin: 0 !important;
+    border-top: 1px solid transparent !important;
+    -webkit-border-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cec8cc), to(cec8cc)) 1 0%;
+    -webkit-border-image: -webkit-linear-gradient(left, #cec8cc, rgba(0, 0, 0, 0)) 1 0%;
+    -moz-border-image: -moz-linear-gradient(left, #cec8cc, rgba(0, 0, 0, 0)) 1 0%;    
+    -o-border-image: -o-linear-gradient(left, #cec8cc, rgba(0, 0, 0, 0)) 1 0%;
+    border-image: linear-gradient(to left, #cec8cc, rgba(0, 0, 0, 0)) 1 0%;
 }
