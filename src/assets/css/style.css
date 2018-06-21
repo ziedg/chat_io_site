@@ -1994,11 +1994,12 @@ textarea:focus {
 }
 
 top-blagueurs-decov .user .user-img {
-  --user-img-w: 35px;
+  --user-img-w: 40px;
   width: var(--user-img-w);
   height: var(--user-img-w);
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
+  object-fit: cover;
 }
 facebook-friends .user .user-img  {
   --user-img-w: 35px;
