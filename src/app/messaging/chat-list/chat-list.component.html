@@ -41,8 +41,11 @@
 <div class="users-list" *ngFor="let user of chatListUsers">
 	<app-chat-list-item [class.active]="isUserSelected(user.id)" (click)="selectUser(user)"  user="{{user.firstName}} {{user.lastName}}"
 		userImage="{{user.profilePicture}}"></app-chat-list-item>
+	<hr>
 </div>
-<app-chat-list-item  user="Test"
-		></app-chat-list-item>
-		<app-chat-list-item   user="Test"></app-chat-list-item>
-		<app-chat-list-item  user="Test"></app-chat-list-item>
+<app-chat-list-item  user="Test"></app-chat-list-item>
+<hr>
+<app-chat-list-item   user="Test"></app-chat-list-item>
+<hr>
+<app-chat-list-item  user="Test"></app-chat-list-item>
+<hr>

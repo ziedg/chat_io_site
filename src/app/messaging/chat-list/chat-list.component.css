@@ -26,3 +26,7 @@
   .users-list{
     overflow: hidden;
   }
+hr{
+  margin: 0 !important;
+  margin-left: 88px !important;
+}
