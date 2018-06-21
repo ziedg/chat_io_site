@@ -1,0 +1,23 @@
+.input-search {
+    position: relative;
+    color: rgb(88, 88, 88);
+    padding:5px 15px;
+  }
+  
+  .input-search input {
+    width: 100%;
+    height: 32px;
+    text-indent: 32px;
+    background: #EFEFEF;
+    border-radius: 5px;
+    border: 1px solid transparent;
+  }
+  .input-search .fa-search {
+    font-size: 8pt; 
+    position: absolute;
+    top: 12px;
+    left: 25px;
+  }
+  .users-list{
+    overflow: hidden;
+  }
