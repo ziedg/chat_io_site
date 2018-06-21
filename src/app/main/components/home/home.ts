@@ -94,6 +94,7 @@ export class Home {
   private registration = undefined;
   private tagDropdownActive: boolean = false;
   private hashTagPos: number;
+  private showGifSlider:boolean = false;
 
   @ViewChild("homeSidebar") homeSidebarRef: ElementRef;
   @ViewChild("newPubForm") newPubFormRef: ElementRef;
@@ -114,16 +115,6 @@ export class Home {
               //Notiifcation
               public notificationService: NotificationService,
               private ref: ChangeDetectorRef) {
-    ///try socket
-    const user = new Promise((resolve, reject) => {
-        resolve(this.loginService.getUser())
-      }
-    );
-    // connect to socket
-    //console.log('connect to socket from main')
-    user.then(user => {
-      //this.socketService.connectSocket((user as any)._id);
-    });
 
     this.isSubscribed = true;
     this.loginService.redirect();
@@ -150,7 +141,7 @@ export class Home {
 
   ngOnInit() {
     window.onscroll = () => {
-      let k = parseInt(this.newPubFormRef.nativeElement.offsetTop - window.pageYOffset);
+      let k = this.newPubFormRef.nativeElement.offsetTop - window.pageYOffset;
       let className = 'side-content-detached';
       if(k < 0) {
         console.log('oups!');
@@ -943,6 +934,10 @@ export class Home {
   useLanguage(language: string) {
 
   }
+
+  toggleGifSlider() {
+    this.showGifSlider = !this.showGifSlider;
+}
 
 }
 

@@ -1,9 +1,17 @@
  <!--Search functionnality-->
+<<<<<<< HEAD
   <div class="row ">
 	<input #searchBar class="search" placeholder="{{ 'main_search_placeholder' }}" [(ngModel)]="searchValue" (keyup)="onChange($event.target.value)"
 	(focus)="onFocus()">
 	<i class="fa fa-search" aria-hidden="true"></i>
 
+=======
+<app-header-mobile class="hidden-md hidden-lg"></app-header-mobile>
+<div class="input-search">
+	<img alt="search-icon" class="outline-icon" src="assets/images/new/search-icon.png">
+	<input placeholder="Rechercher" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)"
+		(focus)="checkAutoComplete()">
+>>>>>>> c6d3a477bc0262a916177ccb26d122dbc4baf0b2
 	<div class="upper-arrow-search upper-arrow"></div>
 	<div class="recherche-results-holder recherche-results-holder-1" style="display:none;" *ngIf="listSearchUsers">
 	  <div class="recherche-results" *ngIf="listSearchUsers.length>0">
@@ -13,21 +21,33 @@
 		  <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
 		  </div>
 		  <div class="">
-			{{result.firstName}} {{result.lastName}}
+				{{result.firstName}} {{result.lastName}}
 		  </div>
 		</article>
 	  </div>
 	 
 	</div>
+<<<<<<< HEAD
 	</div>
 
 <!---->
 <ul class="list-group">
+=======
+</div>
+<!-- <ul class="list-group">
+>>>>>>> c6d3a477bc0262a916177ccb26d122dbc4baf0b2
 	<li class="list-group-item"
 		*ngFor="let user of chatListUsers"
 		(click)="selectUser(user)" 
 		[class.active]="isUserSelected(user.id)">
 			{{ user.firstName +' '+ user.lastName }}
 	</li>
-</ul>
-
+</ul> -->
+<div class="users-list" *ngFor="let user of chatListUsers">
+	<app-chat-list-item [class.active]="isUserSelected(user.id)" (click)="selectUser(user)"  user="{{user.firstName}} {{user.lastName}}"
+		userImage="{{user.profilePicture}}"></app-chat-list-item>
+</div>
+<app-chat-list-item  user="Test"
+		></app-chat-list-item>
+		<app-chat-list-item   user="Test"></app-chat-list-item>
+		<app-chat-list-item  user="Test"></app-chat-list-item>

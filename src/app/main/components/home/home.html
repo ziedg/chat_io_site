@@ -98,7 +98,7 @@
                    contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)"
                    #publishDivRef style="width: calc(100% - 80px)"></div>
 
-
+              <gif-slider style="width:100%;" *ngIf="showGifSlider"></gif-slider>
               <!-- tag new publication -->
               <!--
               <div class="" >
@@ -176,7 +176,7 @@
                 <i class="fa fa-picture-o" style="font-size: 20px;"></i>
               </span>
 
-              <span class="hidden-xs" (click)="addPhotoGIF()" style="line-height: 46Px">
+              <span class="hidden-xs" (click)="toggleGifSlider()" style="line-height: 46Px">
                 <b class="gif-btn">{{ 'home_publish_GIF' | translate }}</b>
               </span>
 
@@ -277,7 +277,7 @@
 
             <div *ngIf="i == 2">
               <facebook-friends></facebook-friends>
-              <div style="color:transparent">facebook</div>
+              <div style="color:transparent">facebook suggestions</div>
             </div>
 
           </div>

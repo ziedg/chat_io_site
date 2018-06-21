@@ -1,22 +1,29 @@
 
-<!-- header section starts -->
+<!-- header section starts
 <header class="app-header">
 	<nav class="navbar navbar-expand-md">
 		<a class="navbar-brand" >Hello {{user.firstName}}</a>
 	</nav>
 	
 </header>
-<!-- header section ends -->
+header section ends
 <br> 
 <br>
-<br>
+<br> -->
 
-<main role="main" class="container-fluid">
+<main role="main" class="container messengerDiv">
 	<div class="row">
+<<<<<<< HEAD
 		<div class="col-5">
 			<app-chat-list #chatList [conversation]="conversation" [selectedUserInfo]="selectedUserInfo"></app-chat-list>
 		</div>
 		<div class="col-7">
+=======
+		<div class="col-md-3 chat-list">
+			<app-chat-list #chatList [conversation]="conversation" [selectedUserInfo]="selectedUserInfo"></app-chat-list>
+		</div>
+		<div class="col-md-9 hidden-sm hidden-xs">
+>>>>>>> c6d3a477bc0262a916177ccb26d122dbc4baf0b2
 			<app-conversation #conversation [conversation]="conversation" [selectedUserInfo]="selectedUserInfo"></app-conversation>
 		</div>
 	</div>
