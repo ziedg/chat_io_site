@@ -1,17 +1,24 @@
 .item{
-    padding:5px 10px 0 16px;
+    padding:5px 0 10px 16px;
 }
 .corps{
     color:#7E7E7E;
     line-height:12px;
-    margin-top:20px;
-    margin-bottom:-15px;
+    margin-top: 10px;
+    margin-bottom: -15px;
+    margin-left: -28px;
 }
-.corps p:first-child{
+
+.corps>div p:first-child{
     text-transform: capitalize;
     font-weight: normal;
     color:black;
-    font-size: 14pt;
+    font-size: 12pt;
+    display: inline-block;
+}
+
+.corps>div p:nth-child(2){
+    float: right;
 }
 
 .corps p{
@@ -25,6 +32,12 @@
     -ms-transform: scaleX(-1);
     -o-transform: scaleX(-1);
 }
-.corps hr{
-    margin-left: -5px;
-}
+/* .corps hr{
+    margin: 0 !important;
+    border-top: 1px solid transparent !important;
+    -webkit-border-image: -webkit-gradient(linear, 0 0, 0 100%, from(#7E7E7E), to(rgba(0, 0, 0, 0))) 1 0%;
+    -webkit-border-image: -webkit-linear-gradient(left, #7E7E7E, rgba(0, 0, 0, 0)) 1 0%;
+    -moz-border-image: -moz-linear-gradient(left, #7E7E7E, rgba(0, 0, 0, 0)) 1 0%;    
+    -o-border-image: -o-linear-gradient(left, #7E7E7E, rgba(0, 0, 0, 0)) 1 0%;
+    border-image: linear-gradient(to left, #7E7E7E, rgba(0, 0, 0, 0)) 1 0%;
+} */

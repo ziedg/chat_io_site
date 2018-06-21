@@ -1994,19 +1994,20 @@ textarea:focus {
 }
 
 top-blagueurs-decov .user .user-img {
-  --user-img-w: 35px;
+  --user-img-w: 40px;
   width: var(--user-img-w);
   height: var(--user-img-w);
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
+  object-fit: cover;
 }
 facebook-friends .user .user-img  {
   --user-img-w: 35px;
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
   margin: 0 auto;
-  width:70px;
-  height:70px;
+  width:80px;
+  height:80px;
 }
 
 .fb-section{
@@ -3076,8 +3077,8 @@ facebook-friends .user .user-img  {
 .show-more:hover {
   color: black;
 }
-.nbr-subscribes,
-.ignore-profile{
+.nbr-subscribes
+/*.ignore-profile*/{
   color: #555;
   padding: 5px 6px;
   margin: 0;
@@ -3088,8 +3089,14 @@ facebook-friends .user .user-img  {
   border-bottom-right-radius: 3px;
   border-left: 0;
   box-sizing: border-box;
-  min-width: 23px;
+  min-width: 28px;
   text-align: center;
+}
+
+.ignore-profile {
+  margin-left: 10px;
+  margin-top: 4px;
+  font-size: 14px;
 }
 
 .subscribers {
@@ -3102,9 +3109,9 @@ facebook-friends .user .user-img  {
 .subscribe-close-button{
   color:#ccc;
 }
-.ignore-profile {
+
+.nbr-subscribes{
   color: #555;
-  border-left: none;
   padding: 5px 6px;
   margin: 0;
   height: 28px;
@@ -5095,11 +5102,6 @@ top-blagueurs-decov .user-img {
   position: fixed;
 }
 
-@media (max-width:768px){
-  .home-sidebar {
-    display:none;
-  }
-}
 .conditions-generales {
   color:#919191;
   margin-top: 10px;
