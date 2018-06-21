@@ -1,0 +1,19 @@
+.header-mobile{
+    text-align: center;
+    padding:10px;
+    border-bottom: solid 1px #dcdcdc;
+    /* box-shadow: 0 -3px 18px 0 #676767; */
+}
+.header-mobile img{
+    background-color: #4c9a21;
+    height: 30px;
+}
+.homebtn{
+    position: absolute;
+    top:5px;
+    left: 10px;
+    box-shadow: none;
+}
+.homebtn object{
+    transform: rotate(180deg);
+}
