@@ -74,7 +74,7 @@ export class FacebookFriends {
           
             Array.prototype.push.apply(this.popularProfiles, response.profiles);
 
-            response.profiles = response.profiles.filter(el => this.facebookProfiles.indexOf(el) == -1)
+            response.profiles = response.profiles.filter(el => this.facebookProfiles.find(x => x._id === el._id) == undefined)
                                                  .map(el => {  el.ispop = true ; return el;} );
             Array.prototype.push.apply(this.facebookProfiles, response.profiles);
             this.isValid = this.facebookProfiles.length != 0;
