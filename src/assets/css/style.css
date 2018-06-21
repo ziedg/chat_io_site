@@ -1956,6 +1956,7 @@ textarea:focus {
   margin:5px;
 }
 .fb-link-name{
+  white-space: pre-line;
   max-width:115px;
   text-align:center;
   height: 40px;

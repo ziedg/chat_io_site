@@ -25,7 +25,8 @@
         </div>
         <div class="user-name" style="padding:10px 0px 10px 0px;margin-right:0px;margin-left:0px;font-size:12.5px">
           <header><a [routerLink]="['/main/profile',profile._id]" class="fb-link-name">
-            {{profile.firstName}} {{profile.lastName}}
+            {{profile.firstName}}<br>
+            {{profile.lastName}}
           </a></header>
           <div class="top-blagueurs-sub-nbr" style="text-align: center" *ngIf="!profile.ispop"> {{'fb_label' | translate}}</div>
           <div class="top-blagueurs-sub-nbr" style="text-align: center" *ngIf="profile.ispop"> {{profile.nbSuivi}} {{'subscribers' | translate}} </div>
