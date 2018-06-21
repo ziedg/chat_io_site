@@ -1,13 +1,13 @@
  <!--Search functionnality-->
-<div class="header-center hidden-xs">
-	<input class="search" placeholder="{{ 'main_search_placeholder' }}" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)"
-	  (focus)="checkAutoComplete()">
+  <div class="row ">
+	<input #searchBar class="search" placeholder="{{ 'main_search_placeholder' }}" [(ngModel)]="searchValue" (keyup)="onChange($event.target.value)"
+	(focus)="onFocus()">
 	<i class="fa fa-search" aria-hidden="true"></i>
 
 	<div class="upper-arrow-search upper-arrow"></div>
 	<div class="recherche-results-holder recherche-results-holder-1" style="display:none;" *ngIf="listSearchUsers">
-	  <div class="recherche-results" *ngIf="!showRecentSearch">
-		<article *ngFor="let result of listSearchUsers" (click)="saveRecentRech(result)">
+	  <div class="recherche-results" *ngIf="listSearchUsers.length>0">
+		<article *ngFor="let result of listSearchUsers" (click)="loadUser(result)">
 		  <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
 		  </div>
 		  <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
@@ -17,19 +17,10 @@
 		  </div>
 		</article>
 	  </div>
-	  <div class="recherche-results" *ngIf="showRecentSearch">
-		<article *ngFor="let result of RecentSearchList" (click)="saveRecentRech(result)">
-		  <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
-
-		  <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
-
-		  <div class="">
-			{{result.firstName}} {{result.lastName}}
-		  </div>
-		</article>
-	  </div>
+	 
 	</div>
-  </div>
+	</div>
+
 <!---->
 <ul class="list-group">
 	<li class="list-group-item"
