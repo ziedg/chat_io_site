@@ -9,11 +9,15 @@
 }
 
 .messengerDiv{
-	margin-top:20px;
 	background-color: white;
 }
 
 .messengerDiv>.row>div{
 	padding-left:0!important;
 	padding-right: 0!important;
+}
+@media (max-width: 991px) {
+    .chat-list{
+		height:100vh;
+	}
 }

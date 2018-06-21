@@ -1,25 +1,30 @@
 .item{
-    padding:5px 10px 0 10px;
+    padding:5px 10px 0 16px;
 }
 .corps{
     color:#7E7E7E;
-    line-height:5px;
-    margin-top:15px;
+    line-height:12px;
+    margin-top:20px;
     margin-bottom:-15px;
 }
 .corps p:first-child{
     text-transform: capitalize;
-    font-weight: bold;
+    font-weight: normal;
     color:black;
-    font-size: 14px;
+    font-size: 14pt;
 }
 
 .corps p{
-    margin-left: 10px;
-    font-size: 8pt;
+    margin-left: -5px;
+    font-size: 11pt;
 }
 .corps p object{
     transform: scaleX(-1);
     -moz-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+}
+.corps hr{
+    margin-left: -5px;
 }

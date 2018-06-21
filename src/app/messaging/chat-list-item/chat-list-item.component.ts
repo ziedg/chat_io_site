@@ -12,7 +12,7 @@ export class ChatListItemComponent implements OnInit {
   @Input() userImage;
   constructor() { 
     this.myLastMessage = true;
-    this.lastMessage = ":)";
+    this.lastMessage = "Bonjour";
     this.user = "Leyana";
     this.userImage = "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&h=350";
   }

@@ -1,7 +1,7 @@
  <!--Search functionnality-->
 <app-header-mobile class="hidden-md hidden-lg"></app-header-mobile>
 <div class="input-search">
-	<i class="fa fa-search"></i>
+	<img alt="search-icon" class="outline-icon" src="assets/images/new/search-icon.png">
 	<input placeholder="Rechercher" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)"
 		(focus)="checkAutoComplete()">
 	<div class="upper-arrow-search upper-arrow"></div>
@@ -42,5 +42,7 @@
 	<app-chat-list-item [class.active]="isUserSelected(user.id)" (click)="selectUser(user)"  user="{{user.firstName}} {{user.lastName}}"
 		userImage="{{user.profilePicture}}"></app-chat-list-item>
 </div>
-
-
+<app-chat-list-item  user="Test"
+		></app-chat-list-item>
+		<app-chat-list-item   user="Test"></app-chat-list-item>
+		<app-chat-list-item  user="Test"></app-chat-list-item>

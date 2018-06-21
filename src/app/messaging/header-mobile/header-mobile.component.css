@@ -1,7 +1,8 @@
 .header-mobile{
     text-align: center;
     padding:10px;
-    border-bottom: 1px solid #EFEFEF;
+    border-bottom: solid 1px #bfbfbf;
+    box-shadow: 0 4px 11px 0 #676767;
 }
 .header-mobile img{
     background-color: #4c9a21;
