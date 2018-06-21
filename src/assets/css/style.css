@@ -5087,6 +5087,7 @@ top-blagueurs-decov .user-img {
 
 .home-sidebar .user-img {
   padding: calc(var(--icon-h)/2);
+  display:inline-block;
 }
 
 .home-sidebar-container {
