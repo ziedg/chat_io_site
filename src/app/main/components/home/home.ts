@@ -1,3 +1,4 @@
+import { GifBean } from './../../../beans/gif-bean';
 import 'rxjs/add/operator/map';
 
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
@@ -19,6 +20,8 @@ import {LinkPreview} from '../../services/linkPreview';
 import {LinkView} from '../../services/linkView';
 import {NotificationService} from '../../services/notification.service';
 import {PostService} from '../../services/postService';
+import { GifListBean } from '../../../beans/gif-list-bean';
+import { GifService } from '../../services/gifService';
 
 
 declare var jQuery: any;
@@ -45,6 +48,11 @@ export class Home {
   public previewLink: Array<LinkBean> = [];
 
   //Variables Declarations
+  urlGIF = "https://9gag.com/gag/aq7W4rj";
+  imageGIF = "https://images-cdn.9gag.com/photo/aq7W4rj_700b.jpg";
+  
+  public GifList: Array<GifBean> = [];
+  
   linkDomain = "";
   titleEnable = false;
   youtubeInput = false;
@@ -105,6 +113,7 @@ export class Home {
               private postService: PostService,
               private linkView: LinkView,
               private linkPreview: LinkPreview,
+              private gifService: GifService,
               private title: Title,
               private http: Http,
               private router: Router,
@@ -137,6 +146,8 @@ export class Home {
 
     this.menuFilter = "recent";
     this.title.setTitle("Speegar");
+
+    this.GifList = gifService.getGifList().list;
   }
 
   ngOnInit() {
@@ -413,6 +424,52 @@ export class Home {
       this.loadMorePosts();
       return 1;
     }
+  }
+
+  previewGIF(linkURL){
+    this.http
+      .get(
+        environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+          if (response.results.success) {
+            jQuery("#publishDiv").empty();
+            this.resetPublishPicture();
+            jQuery(".video-preview").html("");
+            var r = /:\/\/(.[^/]+)/;
+            this.linkDomain = linkURL.match(r)[1];
+            this.link.url = linkURL;
+            console.log(linkURL);
+            this.link.title = response.results.data.ogTitle;
+            this.link.description = response.results.data.ogDescription;
+            if (response.results.data.ogImage) {
+              var a = response.results.data.ogImage.url;
+              this.link.image = response.results.data.ogImage.url;
+              this.link.imageWidth = response.results.data.ogImage.width;
+              this.link.imageHeight = response.results.data.ogImage.height;
+               } 
+               else {
+              this.link.image = null;
+              this.link.imageWidth = 0;
+              this.link.imageHeight = 0;
+            }
+            this.link.isSet = true;
+            this.linkLoading = false;
+            this.changeDetector.markForCheck();
+          }
+          this.linkLoading = false;
+        },
+        err => {
+          console.error("error in link API;");
+        },
+        () => {
+          this.linkLoading = false;
+        }
+      );
+
   }
 
   updatePublishTextOnPaste($event) {
@@ -873,11 +930,13 @@ export class Home {
             this.linkDomain = linkURL.match(r)[1];
 //              this.link.url = linkURL.substring(0, linkURL.length - 6);
             this.link.url = linkURL;
+            
             this.link.title = response.results.data.ogTitle;
             this.link.description = response.results.data.ogDescription;
             if (response.results.data.ogImage) {
               var a = response.results.data.ogImage.url;
               this.link.image = response.results.data.ogImage.url;
+              console.log(this.link.image);
               this.link.imageWidth = response.results.data.ogImage.width;
               this.link.imageHeight = response.results.data.ogImage.height;
               /*

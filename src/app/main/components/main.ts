@@ -26,6 +26,7 @@ import * as pathUtils from '../../utils/path.utils';
 import { DateService } from '../services/dateService';
 import { NotificationService } from '../services/notification.service';
 import { RecentRechService } from '../services/recentRechService';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 
 //Notification
 declare var jQuery: any;
@@ -47,7 +48,7 @@ export class Main {
   user: User = new User();
   listSearchUsers: Array<User> = [];
   listNotif: Array<NotificationBean> = [];
-  nbNewNotifications: number = 0;
+  nbNewNotifications: number = -1;
   searchValue: string;
   showRecentSearch: Boolean;
   RecentSearchList;
@@ -56,7 +57,8 @@ export class Main {
   showNoNotif: Boolean = false;
   noSearchResults: Boolean = false;
   public showNotif:boolean=true;
-
+  private s: AngularFireObject<any>;
+  
   icons;
 
   @ViewChild("searchResults2") searchRes2: ElementRef;
@@ -86,7 +88,14 @@ export class Main {
 
 
     //Notiifcation
-    private notificationService: NotificationService) {
+    private notificationService: NotificationService,
+  
+  
+    //Angular Notification Listener 
+    private db: AngularFireDatabase,
+
+    
+    ) {
       this.user=loginService.getUser();
          if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
@@ -124,7 +133,11 @@ export class Main {
 
   ngOnInit() {
 
-//for touati: i was just listening for the socket events for notifications here in the main component because he is the parent of the the others
+    //for touati: i was just listening for the socket events for notifications here in the main component because he is the parent of the the others
+    //got it thank you amine :p
+
+    this.checkNewNotifications();
+    this.listenForNotifications(this.user._id);
 
 
     // meta tag to fix view on iDevices (like iPohne)
@@ -132,7 +145,6 @@ export class Main {
       name: "viewport",
       content: "width=device-width, initial-scale=1.0"
     });
-    this.checkNewNotifications();
 
     jQuery(".recherche-results-holder").blur(function() {
       jQuery(".file-input-holder").hide();
@@ -384,6 +396,8 @@ export class Main {
       .subscribe(response => {}, err => {}, () => {});
   }
 
+
+
   checkNewNotifications() {
     this.http
       .get(
@@ -394,7 +408,8 @@ export class Main {
       .subscribe(
         response => {
           if (response.status == 0) {
-            this.nbNewNotifications = response.nbNewNotifications;
+            console.log(response)
+            this.nbNewNotifications += response.nbNewNotifications;
           }
         },
         err => {},
@@ -403,12 +418,13 @@ export class Main {
         }
       );
   }
-
+/*
   loadNotif() {
     setInterval(() => {
       this.checkNewNotifications();
     }, 5000);
   }
+  */
 
   showNotificationList() {
     jQuery(".notification-holder").show();
@@ -476,4 +492,19 @@ export class Main {
     }
   }
 
+
+  listenForNotifications(userId: string): void {
+
+    this.s = this.db.object('notifications/'+userId+'/notification');
+      console.log('notifications/'+userId+'/notification');
+      var item = this.s.valueChanges()
+      console.log(JSON.stringify(item));
+      this.s.snapshotChanges().subscribe(action => {
+        var notif = action.payload.val();
+        if (notif !== null){
+          this.nbNewNotifications++;
+        }
+      });
+   
+  }
 }
