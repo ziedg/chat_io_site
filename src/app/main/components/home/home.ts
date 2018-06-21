@@ -114,16 +114,6 @@ export class Home {
               //Notiifcation
               public notificationService: NotificationService,
               private ref: ChangeDetectorRef) {
-    ///try socket
-    const user = new Promise((resolve, reject) => {
-        resolve(this.loginService.getUser())
-      }
-    );
-    // connect to socket
-    //console.log('connect to socket from main')
-    user.then(user => {
-      //this.socketService.connectSocket((user as any)._id);
-    });
 
     this.isSubscribed = true;
     this.loginService.redirect();

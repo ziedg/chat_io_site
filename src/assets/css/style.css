@@ -726,7 +726,6 @@ a {
 }
 
 .recherche-results-2 article {
-  background-color: none;
   border-bottom: 1px solid #e1e8ed;
   background-color: unset;
   height: 60px;
@@ -1219,7 +1218,6 @@ section.widget {
 }
 .user-name-profile {
   margin-top: 20px;
-  margin-bottom: 5px;
   font-size: 32px;
   position: relative;
   display:inline;
@@ -3473,7 +3471,6 @@ a {
   width: calc(100% + 50px);
   color: #fff;
   border: 1px solid #009900;
-  border-radius: 3px;
   line-height: 30px;
   font-size: 13px;
   font-weight: 600;
@@ -3483,11 +3480,6 @@ a {
   text-align: center;
 }
 
-@media(max-width: 768px) {
-  .loginButton-facebook {
-    border-radius: 0;
-  }
-}
 .change-account {
   margin-top: 0;
   margin-bottom: 0;
@@ -3588,7 +3580,7 @@ input.loginInput {
   display:flex;
   flex-direction:row;
   color: #355977;
-  font-size: 13px;
+  font-size: 12px;
 }
 .login-lang button{
     background-color:#fff;
