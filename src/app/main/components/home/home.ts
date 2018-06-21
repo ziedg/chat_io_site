@@ -150,7 +150,7 @@ export class Home {
 
   ngOnInit() {
     window.onscroll = () => {
-      let k = parseInt(this.newPubFormRef.nativeElement.offsetTop - window.pageYOffset);
+      let k = this.newPubFormRef.nativeElement.offsetTop - window.pageYOffset;
       let className = 'side-content-detached';
       if(k < 0) {
         console.log('oups!');
