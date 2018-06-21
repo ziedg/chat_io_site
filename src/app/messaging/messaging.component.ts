@@ -37,10 +37,6 @@ user;
 ngOnInit(){
   this.loginService.redirect();
   this.user=this.loginService.getUser();
-  //connect to socket
-  /*console.log('connect to socket')
-  this.socketService.connectSocket(this.user._id);*/
-
   
   /* Calling Compoenent method to Listen for Incoming Messages*/
   this.conversationComponent.listenForMessages(this.user._id);

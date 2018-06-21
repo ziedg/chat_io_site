@@ -646,7 +646,6 @@ a {
   background-color:white;
   width: 486px;
   max-height: 400px;
-  overflow-y: scroll;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   top: 35px;
   right: -54px;
@@ -727,7 +726,6 @@ a {
 }
 
 .recherche-results-2 article {
-  background-color: none;
   border-bottom: 1px solid #e1e8ed;
   background-color: unset;
   height: 60px;
@@ -1158,7 +1156,7 @@ section.widget {
 }
 .profile-photo .fa-times {
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   left: 40px;
   color: white;
   background-color: rgba(55,55,55,0.5);
@@ -1220,7 +1218,6 @@ section.widget {
 }
 .user-name-profile {
   margin-top: 20px;
-  margin-bottom: 5px;
   font-size: 32px;
   position: relative;
   display:inline;
@@ -1944,21 +1941,22 @@ textarea:focus {
 .fb-suggestions-container{
   display:flex;
   flex-direction:row;
-  overflow: auto;
+  overflow-x: auto;
 }
-.fb-suggestions-container::-webkit-scrollbar { 
-  display: none; 
+.fb-suggestions-container::-webkit-scrollbar {
+  display: none;
 }
 .user-fb {
   display:block !important;
   position:relative;
   border: 1px solid #edeeee;
   padding :10px;
-  width :min-content;
-  height :175px;
-  margin:20px 10px;
+  width :131px;
+  height :min-content;
+  margin:5px;
 }
 .fb-link-name{
+  white-space: pre-line;
   max-width:115px;
   text-align:center;
   height: 40px;
@@ -2004,20 +2002,23 @@ top-blagueurs-decov .user .user-img {
 }
 facebook-friends .user .user-img  {
   --user-img-w: 35px;
-  width: var(--user-img-w);
-  height: var(--user-img-w);
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
   margin: 0 auto;
-  width:45px;
-  height:45px;
-  margin-top:8px;
+  width:70px;
+  height:70px;
 }
 
 .fb-section{
   background-color:#fff;
   padding:10px;
-  margin-bottom:-10px;
+  margin-bottom:-20px;
+  margin-top:-10px;
+}
+@media(max-width:767px){
+  .fb-section{
+    padding-left:5px !important;
+  }
 }
 .navigation-arrow-container{
   width:20px;
@@ -2041,6 +2042,11 @@ facebook-friends .user .user-img  {
   height: 50%;
   margin-left:5.5px;
   margin-bottom:2px;
+}
+@media(max-width:767px){
+  .navigation-arrow-container {
+    display:none;
+  }
 }
 .fb-ignore{
   position:absolute;
@@ -3257,7 +3263,6 @@ facebook-friends .user .user-img  {
 .login-body {
   margin: 0;
   margin-top: -77px;
-  background-color: #fafafa;
 }
 .logo-login {
   width: 70%;
@@ -3265,21 +3270,23 @@ facebook-friends .user .user-img  {
   margin: 15px auto 15px;
 }
 .underLogo {
-  font-family: 'coolvetica';
   font-size: 15px;
   margin-bottom: 15px;
   margin-top: -10px;
 }
 #mainLogin {
   margin: 0;
-  background-color: #fafafa;
   height: 100%;
   width: 100%;
   padding-top: 20px;
 }
-.loginCorpse {
-  background-color: #fafafa;
+
+@media(max-width: 768px) {
+  .login-body {
+    margin-top: 0;
+  }
 }
+
 @media (min-width: 767px) {
   .loginCorpse {
     width: 750px;
@@ -3311,7 +3318,6 @@ facebook-friends .user .user-img  {
 }
 .photoLogin {
   font-size: 20px;
-  font-family: 'coolvetica';
   color: black;
   padding: 150px 0 0 !important;
 }
@@ -3325,17 +3331,25 @@ facebook-friends .user .user-img  {
 }
 .boxLogin {
   background-color: white;
-  border: 1px solid #efefef;
   border-radius: 1px;
   margin: 120px 00px 10px !important;
   padding: 10px 0;
+  border: 1px solid #efefef;
 }
+
+
 .boxLogin {
   margin-top: 106px !important;
 }
 @media (max-width: 768px) {
   .boxLogin {
-    margin-top: 0px !important;
+    margin-top: 0 !important;
+  }
+  .boxLogin, .boxLogin2 {
+    border-right: 0!important;
+    border-left: 0!important;
+    border-top: 1px solid #E0E0E0!important;
+    border-bottom: 1px solid #E0E0E0!important;
   }
 }
 .signup-box {
@@ -3356,7 +3370,6 @@ facebook-friends .user .user-img  {
 @media (max-width: 767px) {
   .boxLogin {
     margin: 0 0 10px !important;
-    margin-top: 0 !important;
   }
   .mainTitle {
     font-size: 16px;
@@ -3368,8 +3381,7 @@ facebook-friends .user .user-img  {
   }
 }
 .smartphone {
-  margin-top: 20px;
-  margin: 00px 20px 20px !important;
+  margin: 0 20px 20px !important;
   width: 75%;
 }
 .boxLogin {
@@ -3460,7 +3472,6 @@ a {
   width: calc(100% + 50px);
   color: #fff;
   border: 1px solid #009900;
-  border-radius: 3px;
   line-height: 30px;
   font-size: 13px;
   font-weight: 600;
@@ -3469,6 +3480,7 @@ a {
   padding: 0;
   text-align: center;
 }
+
 .change-account {
   margin-top: 0;
   margin-bottom: 0;
@@ -3480,10 +3492,9 @@ input.loginInput {
   margin-bottom: 12px;
   background: 0 0;
   border: 1px solid #dbdbdb;
-  border-radius: 0px;
+  border-radius: 0;
   box-sizing: border-box;
   color: #262626;
-  font-size: 14px;
   padding: 9px 8px 7px;
   width: 100%;
   font: 13.3333px Arial;
@@ -3532,7 +3543,6 @@ input.loginInput {
 .footerContainer {
   width: 100%;
   margin: 0 auto;
-  padding-left: 0;
   padding: 0 200px;
 }
 .footerContainer a {
@@ -3546,7 +3556,6 @@ input.loginInput {
 .footerContainer a {
   color: #003569;
   cursor: pointer;
-  display: inline-block;
   font-size: 11px;
   font-weight: 600;
   position: relative;
@@ -3572,6 +3581,7 @@ input.loginInput {
   display:flex;
   flex-direction:row;
   color: #355977;
+  font-size: 12px;
 }
 .login-lang button{
     background-color:#fff;
@@ -5072,6 +5082,19 @@ top-blagueurs-decov .user-img {
   padding:10px
 }
 
+.side-content-detached {
+  top: 100px;
+}
+
+.home-sidebar .user-img {
+  padding: calc(var(--icon-h)/2);
+  display:inline-block;
+}
+
+.home-sidebar-container {
+  position: fixed;
+}
+
 @media (max-width:768px){
   .home-sidebar {
     display:none;
@@ -5100,11 +5123,9 @@ top-blagueurs-decov .user-img {
 
 
 .home-sidebar-icon {
-  height: var(--icon-h);
-  width: var(--icon-h);
+  max-height: var(--icon-h);
+  max-width: var(--icon-h);
   margin:5px;
-  padding-bottom:5px;
-
 }
 
 .home-sidebar .fa {

@@ -7,6 +7,8 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -18,6 +20,7 @@ import { ResetPasswordService } from './login/services/reset-password.service';
 import { Logout } from './logout/logout';
 import { NotFoundPage } from './main/components/404/404';
 import { Comment } from './main/components/comment/comment';
+import { FacebookFriends } from './main/components/facebookFriends/facebookFriends';
 import { Home } from './main/components/home/home';
 import { LoadingBar } from './main/components/loading/loading-bar';
 import { Main } from './main/components/main';
@@ -27,6 +30,7 @@ import { Post } from './main/components/post/post';
 import { Profile } from './main/components/profile/profile';
 import { ContenteditableModel } from './main/components/publication/contenteditable-model';
 import { Publication } from './main/components/publication/publication';
+import { SearchMobile } from './main/components/search-mobile/search-mobile.component';
 import { SuggestionsComponent } from './main/components/suggestions/suggestions.component';
 import { TopBlagueursAndDecov } from './main/components/topBlagueursAndDecov/topBlagueursAndDecov';
 import { DateService } from './main/services/dateService';
@@ -36,15 +40,12 @@ import { LinkView } from './main/services/linkView';
 import { PostService } from './main/services/postService';
 import { RecentRechService } from './main/services/recentRechService';
 import { SeoService } from './main/services/seo-service';
-import { SocketService } from './main/services/socket.service';
 import { EmitterService } from './messaging/emitter.service';
+import { MessagingModule } from './messaging/messaging.module';
 import { ChatService } from './messanging/chat.service';
 import { FakeComponent } from './shared/fake.component';
 import { httpFactory } from './utils/factories/http.factory';
-import { MessagingModule } from './messaging/messaging.module';
-import { SearchMobile } from "./main/components/search-mobile/search-mobile.component";
-import { FacebookFriends } from './main/components/facebookFriends/facebookFriends';
-import { environment } from '../environments/environment';
+import { GifSlider } from './main/components/gif-slider/gif-slider';
 
 /** Factories */
 @NgModule({
@@ -59,11 +60,22 @@ import { environment } from '../environments/environment';
           useFactory: HttpLoaderFactory,
           deps: [HttpClient,Http]
         }
-      })],       
+      }),
+      //TODO : change after test
+      AngularFireModule.initializeApp({
+        apiKey: "AIzaSyAnCqxH5CTNWksJH6j59jIKjxkVJOyEyIk",
+        authDomain: "speegar-6deca.firebaseapp.com",
+        databaseURL: "https://speegar-6deca.firebaseio.com",
+        projectId: "speegar-6deca",
+        storageBucket: "speegar-6deca.appspot.com",
+        messagingSenderId: "861552240215"
+      }),
+      AngularFireDatabaseModule
+    ],
     // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,
@@ -76,7 +88,6 @@ import { environment } from '../environments/environment';
         PostService,
         SeoService,
         LoginService,
-        SocketService,
         EmitterService,
         ChatService,
         ResetPasswordService,
@@ -86,7 +97,8 @@ import { environment } from '../environments/environment';
           multi: false
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
-        {provide: APP_BASE_HREF, useValue: '/'}
+        {provide: APP_BASE_HREF, useValue: '/'},
+        AngularFireDatabase
     ],
 
 })
