@@ -58,7 +58,7 @@
 
       <article [routerLink]="['/main/notification']" class="notification-parent hidden-lg hidden-md hidden-sm">
         <div class="noPadding">
-          <div class="cercle-notice" *ngIf="nbNewNotifications">
+          <div class="cercle-notice" *ngIf="nbNewNotifications > 0">
             {{nbNewNotifications}}
           </div>
           <i class="fa fa-bell"></i>
@@ -68,7 +68,7 @@
 
       <article class="notification-parent hidden-xs">
         <div class="noPadding">
-          <div class="cercle-notice" (click)="loadFirstNotifactions()" *ngIf="nbNewNotifications">
+          <div class="cercle-notice" (click)="loadFirstNotifactions()" *ngIf="nbNewNotifications > 0">
             {{nbNewNotifications}}
           </div>
           <i (click)="loadFirstNotifactions()" class="fa fa-bell"></i>
@@ -214,9 +214,7 @@
         </div>
 
       </article>
-      <article class="profile-icon signout-button hidden-lg hidden-md">
-        <i class="fa fa-user" [routerLink]="['/main/profile',user._id]"></i>
-      </article>
+      
 
     </div>
 

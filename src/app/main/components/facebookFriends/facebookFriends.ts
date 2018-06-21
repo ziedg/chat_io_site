@@ -26,6 +26,7 @@ export class FacebookFriends {
     displayedNumberfacebookProfiles = 10;
     public user: User = new User();
     lastPopularProfileID;
+    public isValid :boolean;
 
     constructor(public translate: TranslateService,
         private http: Http,
@@ -34,7 +35,9 @@ export class FacebookFriends {
         private changeDetector: ChangeDetectorRef) {
         loginService.redirect();
         this.user = loginService.user;
-        this.loadfacebookProfiles();             
+        this.isValid = true;
+        this.loadfacebookProfiles();  
+       
         }
 
   
@@ -49,6 +52,7 @@ export class FacebookFriends {
               response => {
 
                 Array.prototype.push.apply(this.facebookProfiles, response.message);
+                this.isValid = this.facebookProfiles.length != 0;
 
             },
             err => {
@@ -70,9 +74,10 @@ export class FacebookFriends {
           
             Array.prototype.push.apply(this.popularProfiles, response.profiles);
 
-            response.profiles = response.profiles.filter(el => this.facebookProfiles.indexOf(el) === -1);
-            response.profiles = response.profiles.map(el => {  el.ispop = true ; return el;} );
+            response.profiles = response.profiles.filter(el => this.facebookProfiles.find(x => x._id === el._id) == undefined)
+                                                 .map(el => {  el.ispop = true ; return el;} );
             Array.prototype.push.apply(this.facebookProfiles, response.profiles);
+            this.isValid = this.facebookProfiles.length != 0;
 
             //changes
             if (response.profiles && response.profiles.length) {
@@ -103,6 +108,7 @@ export class FacebookFriends {
             response => {
               if (response.status == 0) {
                 this.facebookProfiles.splice(this.facebookProfiles.indexOf(user), 1);
+                this.isValid = this.facebookProfiles.length != 0;
               }
             },
             err => {
@@ -129,6 +135,7 @@ export class FacebookFriends {
               if (response.status == 0) {
                 user.isFollowed = false;
                 user.nbSuivi--;
+                this.isValid = this.facebookProfiles.length != 0;
               }
             },
             err => {
@@ -154,6 +161,7 @@ export class FacebookFriends {
             response => {
               if (response.status == 0) {
                 this.facebookProfiles.splice(this.facebookProfiles.indexOf(user), 1);
+                this.isValid = this.facebookProfiles.length != 0;
               }
             },
             err => {
@@ -167,7 +175,7 @@ export class FacebookFriends {
     }
 
     onScrollDown() {
-      if (this.popularProfiles.length < 6) {
+      if (this.popularProfiles.length == 0 ) {
         this.loadPopularProfiles(this.lastPopularProfileID);
       }
     }

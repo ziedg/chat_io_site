@@ -1,0 +1,13 @@
+<div class="row item">
+  <div class="col-xs-3 col-md-3 person-img">
+    <img width="55" height="55" src="{{userImage}}" class="img-circle" alt="">
+  </div>
+  <div class="col-xs-9 col-md-9 corps">
+    <p>{{user}}</p>
+    <p><object *ngIf="myLastMessage" data="/assets/other/arrow-address-back.svg"
+      width="10"
+      height="10"
+      type="image/svg+xml"></object> {{lastMessage}}</p>
+      <!-- <hr> -->
+  </div>
+</div>

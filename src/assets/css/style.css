@@ -726,7 +726,6 @@ a {
 }
 
 .recherche-results-2 article {
-  background-color: none;
   border-bottom: 1px solid #e1e8ed;
   background-color: unset;
   height: 60px;
@@ -1219,7 +1218,6 @@ section.widget {
 }
 .user-name-profile {
   margin-top: 20px;
-  margin-bottom: 5px;
   font-size: 32px;
   position: relative;
   display:inline;
@@ -1943,7 +1941,7 @@ textarea:focus {
 .fb-suggestions-container{
   display:flex;
   flex-direction:row;
-  overflow: auto;
+  overflow-x: auto;
 }
 .fb-suggestions-container::-webkit-scrollbar {
   display: none;
@@ -1953,11 +1951,12 @@ textarea:focus {
   position:relative;
   border: 1px solid #edeeee;
   padding :10px;
-  width :min-content;
-  height :175px;
-  margin:20px 10px;
+  width :131px;
+  height :min-content;
+  margin:5px;
 }
 .fb-link-name{
+  white-space: pre-line;
   max-width:115px;
   text-align:center;
   height: 40px;
@@ -2003,20 +2002,23 @@ top-blagueurs-decov .user .user-img {
 }
 facebook-friends .user .user-img  {
   --user-img-w: 35px;
-  width: var(--user-img-w);
-  height: var(--user-img-w);
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
   margin: 0 auto;
-  width:45px;
-  height:45px;
-  margin-top:8px;
+  width:70px;
+  height:70px;
 }
 
 .fb-section{
   background-color:#fff;
   padding:10px;
-  margin-bottom:-10px;
+  margin-bottom:-20px;
+  margin-top:-10px;
+}
+@media(max-width:767px){
+  .fb-section{
+    padding-left:5px !important;
+  }
 }
 .navigation-arrow-container{
   width:20px;
@@ -2040,6 +2042,11 @@ facebook-friends .user .user-img  {
   height: 50%;
   margin-left:5.5px;
   margin-bottom:2px;
+}
+@media(max-width:767px){
+  .navigation-arrow-container {
+    display:none;
+  }
 }
 .fb-ignore{
   position:absolute;
@@ -3069,8 +3076,8 @@ facebook-friends .user .user-img  {
 .show-more:hover {
   color: black;
 }
-.nbr-subscribes,
-.ignore-profile{
+.nbr-subscribes
+/*.ignore-profile*/{
   color: #555;
   padding: 5px 6px;
   margin: 0;
@@ -3081,8 +3088,14 @@ facebook-friends .user .user-img  {
   border-bottom-right-radius: 3px;
   border-left: 0;
   box-sizing: border-box;
-  min-width: 23px;
+  min-width: 28px;
   text-align: center;
+}
+
+.ignore-profile {
+  margin-left: 10px;
+  margin-top: 4px;
+  font-size: 14px;
 }
 
 .subscribers {
@@ -3095,9 +3108,9 @@ facebook-friends .user .user-img  {
 .subscribe-close-button{
   color:#ccc;
 }
-.ignore-profile {
+
+.nbr-subscribes{
   color: #555;
-  border-left: none;
   padding: 5px 6px;
   margin: 0;
   height: 28px;
@@ -3465,7 +3478,6 @@ a {
   width: calc(100% + 50px);
   color: #fff;
   border: 1px solid #009900;
-  border-radius: 3px;
   line-height: 30px;
   font-size: 13px;
   font-weight: 600;
@@ -3475,11 +3487,6 @@ a {
   text-align: center;
 }
 
-@media(max-width: 768px) {
-  .loginButton-facebook {
-    border-radius: 0;
-  }
-}
 .change-account {
   margin-top: 0;
   margin-bottom: 0;
@@ -3580,7 +3587,7 @@ input.loginInput {
   display:flex;
   flex-direction:row;
   color: #355977;
-  font-size: 13px;
+  font-size: 12px;
 }
 .login-lang button{
     background-color:#fff;
@@ -5081,19 +5088,19 @@ top-blagueurs-decov .user-img {
   padding:10px
 }
 
+.side-content-detached {
+  top: 100px;
+}
+
 .home-sidebar .user-img {
   padding: calc(var(--icon-h)/2);
+  display:inline-block;
 }
 
 .home-sidebar-container {
   position: fixed;
 }
 
-@media (max-width:768px){
-  .home-sidebar {
-    display:none;
-  }
-}
 .conditions-generales {
   color:#919191;
   margin-top: 10px;

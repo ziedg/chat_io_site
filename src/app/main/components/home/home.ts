@@ -1,7 +1,7 @@
 import { GifBean } from './../../../beans/gif-bean';
 import 'rxjs/add/operator/map';
 
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Http, Response} from '@angular/http';
 import {Title} from '@angular/platform-browser';
@@ -88,7 +88,8 @@ export class Home {
 
 
   translationLanguages = [{name: 'English (US)', value: 'en'},
-    {name: 'Français (France)', value: 'fr'}, {name: '     Español (España)', value: 'es'}];
+    {name: 'Français (France)', value: 'fr'},
+    {name: '     Español (España)', value: 'es'}];
   selectedLanguage: String;
 
 
@@ -101,6 +102,10 @@ export class Home {
   private registration = undefined;
   private tagDropdownActive: boolean = false;
   private hashTagPos: number;
+  private showGifSlider:boolean = false;
+
+  @ViewChild("homeSidebar") homeSidebarRef: ElementRef;
+  @ViewChild("newPubForm") newPubFormRef: ElementRef;
 
   // end Notification vars
 
@@ -115,19 +120,10 @@ export class Home {
               private loginService: LoginService,
               private changeDetector: ChangeDetectorRef,
               private ng2ImgMaxService: Ng2ImgMaxService,
+              private renderer: Renderer2,
               //Notiifcation
               public notificationService: NotificationService,
               private ref: ChangeDetectorRef) {
-    ///try socket
-    const user = new Promise((resolve, reject) => {
-        resolve(this.loginService.getUser())
-      }
-    );
-    // connect to socket
-    //console.log('connect to socket from main')
-    user.then(user => {
-      //this.socketService.connectSocket((user as any)._id);
-    });
 
     this.isSubscribed = true;
     this.loginService.redirect();
@@ -155,6 +151,20 @@ export class Home {
   }
 
   ngOnInit() {
+    window.onscroll = () => {
+      let k = this.newPubFormRef.nativeElement.offsetTop - window.pageYOffset;
+      let className = 'side-content-detached';
+      if(k < 0) {
+        console.log('oups!');
+        this.renderer.addClass(this.homeSidebarRef, className);
+      }
+      else {
+        this.renderer.removeClass(this.homeSidebarRef, className);
+      }
+    };
+
+
+
     this.selectedLanguage = localStorage.getItem('userLang');
     //Notification Check
     if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -983,6 +993,10 @@ export class Home {
   useLanguage(language: string) {
 
   }
+
+  toggleGifSlider() {
+    this.showGifSlider = !this.showGifSlider;
+}
 
 }
 

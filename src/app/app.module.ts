@@ -46,6 +46,7 @@ import { MessagingModule } from './messaging/messaging.module';
 import { ChatService } from './messanging/chat.service';
 import { FakeComponent } from './shared/fake.component';
 import { httpFactory } from './utils/factories/http.factory';
+import { GifSlider } from './main/components/gif-slider/gif-slider';
 
 /** Factories */
 @NgModule({
@@ -71,11 +72,11 @@ import { httpFactory } from './utils/factories/http.factory';
         messagingSenderId: "861552240215"
       }),
       AngularFireDatabaseModule
-    ],       
+    ],
     // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,
