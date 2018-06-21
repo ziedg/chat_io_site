@@ -94,6 +94,7 @@ export class Home {
   private registration = undefined;
   private tagDropdownActive: boolean = false;
   private hashTagPos: number;
+  private showGifSlider:boolean = false;
 
   @ViewChild("homeSidebar") homeSidebarRef: ElementRef;
   @ViewChild("newPubForm") newPubFormRef: ElementRef;
@@ -933,6 +934,10 @@ export class Home {
   useLanguage(language: string) {
 
   }
+
+  toggleGifSlider() {
+    this.showGifSlider = !this.showGifSlider;
+}
 
 }
 
