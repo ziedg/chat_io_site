@@ -5,7 +5,7 @@
 
 <div *ngIf="user" class="container" id="container">
   <div class="row">
-    <div class="col-md-2 home-sidebar">
+    <div class="home-sidebar col-md-2 hidden-sm hidden-xs">
       <div class="home-sidebar-container" #homeSidebar>
         <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
                         [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}"></span>
