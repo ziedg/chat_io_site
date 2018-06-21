@@ -87,7 +87,8 @@ export class Main {
 
     //Notiifcation
     private notificationService: NotificationService) {
-    if (!this.recentRechService.isEmptyList())
+      this.user=loginService.getUser();
+         if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
     this.listNotif = [];
