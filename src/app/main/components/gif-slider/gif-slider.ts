@@ -4,6 +4,7 @@ import { GifBean } from '../../../beans/gif-bean';
 import { GifService } from '../../services/gifService';
 
 
+
 @Component({
   selector: 'gif-slider',
   templateUrl: './gif-slider.html',
@@ -13,7 +14,7 @@ export class GifSlider implements AfterViewInit {
 
   public GifList: Array<GifBean> = [];
   @Output() myEvent = new EventEmitter();
-  
+
   offset_x_pos:number = 0;
   sliderWidth: number = 120;
   sliderHeight: number = 110;
@@ -27,8 +28,7 @@ export class GifSlider implements AfterViewInit {
 
   constructor(private renderer: Renderer2,
               private gifService: GifService) {
-        
-            this.GifList = gifService.getGifList().list;
+    this.GifList = gifService.getGifList().list;
   }
 
   ngAfterViewInit() {
@@ -38,6 +38,7 @@ export class GifSlider implements AfterViewInit {
     containerStyle.setProperty('--slider-btn-w', `${this.sliderBtnWidth}px`);
     containerStyle.setProperty('--slider-m-r', `${this.sliderMarginRight}px`);
   }
+
 
   translate_it(n:number) {
     let offset_x_n = this.offset_x_pos + n;
@@ -54,5 +55,5 @@ export class GifSlider implements AfterViewInit {
     console.log("chiiiild");
     this.myEvent.emit(urlGIF);
 }
-  
+
 }

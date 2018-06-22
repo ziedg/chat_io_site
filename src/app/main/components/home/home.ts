@@ -152,22 +152,6 @@ export class Home {
   }
 
   ngOnInit() {
-    window.onscroll = () => {
-      let k = this.newPubFormRef.nativeElement.offsetTop - window.pageYOffset;
-      let className = 'side-content-detached';
-      if(k < 0) {
-        console.log('oups!');
-        this.renderer.addClass(this.homeSidebarLeftRef.nativeElement, className);
-        this.renderer.addClass(this.homeSidebarRightRef.nativeElement, className);
-      }
-      else {
-        this.renderer.removeClass(this.homeSidebarLeftRef.nativeElement, className);
-        this.renderer.removeClass(this.homeSidebarRightRef.nativeElement, className);
-      }
-    };
-
-
-
     this.selectedLanguage = localStorage.getItem('userLang');
     //Notification Check
     if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -430,7 +414,7 @@ export class Home {
   }
 
   previewGIF(urlGIF){
-    var linkURL = urlGIF;
+    let linkURL = urlGIF;
     this.http
       .get(
         environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,

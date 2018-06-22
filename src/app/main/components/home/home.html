@@ -98,7 +98,7 @@
                    contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)"
                    #publishDivRef style="width: calc(100% - 80px)"></div>
 
-              
+
               <!-- tag new publication -->
               <!--
               <div class="" >
@@ -151,7 +151,7 @@
 
                   <p>{{link.description}}</p>
                   <b>{{linkDomain}}</b>
-                 
+
                 </div> -->
               </div>
               <div class="facebook-preview">
@@ -160,7 +160,7 @@
               <div class="youtube-preview">
 
               </div>
-              
+
               <gif-slider style="width:100%;" *ngIf="showGifSlider" (myEvent)="previewGIF($event)"></gif-slider>
 
             </div>
@@ -307,7 +307,7 @@
       </section>
     </div>
     <div *ngIf="user" class="col-md-3 col-sm-5 hidden-xs side-home">
-      <div style="position:fixed" #homeSideBarRight>
+      <div id="top-kk" style="position:fixed" #homeSideBarRight>
         <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
         <section class="hidden-sm hidden-xs widget bordered" style="padding:15px">
 
