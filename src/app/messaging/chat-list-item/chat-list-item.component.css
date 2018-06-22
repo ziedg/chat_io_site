@@ -1,12 +1,12 @@
 .item{
-    padding:5px 0 5px 16px;
+    padding:5px 0 10px 16px;
 }
 .corps{
     color:#7E7E7E;
     line-height:12px;
     margin-top: 10px;
     margin-bottom: -15px;
-    margin-left: -18px;
+    margin-left: -28px;
 }
 
 .corps>div p:first-child{
