@@ -5,18 +5,12 @@
   <article *ngFor="let profile of popularProfiles; let i=index">
     <div *ngIf="i < displayedNumberPopularProfiles">
       <div class="user">
-        <div class="user-img" *ngIf="profile.profilePictureMin"
-             [routerLink]="['/main/profile',profile._id]"
-             [ngStyle]="{'background-image': 'url(' + profile.profilePictureMin + ')'}">
-        </div>
-        <div class="user-img" *ngIf="!profile.profilePictureMin"
-             [routerLink]="['/main/profile',profile._id]"
-             [ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
-        </div>
+        <img class="user-img"
+             src="{{profile | AvailablePicture}}"
+             [routerLink]="['/main/profile',profile._id]">
         <div class="user-name">
           <header>
-            <a [routerLink]="['/main/profile',profile._id]"
-               style="max-width:115px">
+            <a [routerLink]="['/main/profile',profile._id]">
               {{profile.firstName}} {{profile.lastName}}
             </a>
           </header>

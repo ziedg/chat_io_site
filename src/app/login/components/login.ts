@@ -1,18 +1,18 @@
 import 'rxjs/add/operator/map';
 
-import { Location } from '@angular/common';
-import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Http, Response } from '@angular/http';
-import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import {Location} from '@angular/common';
+import {ChangeDetectorRef, Component, NgZone} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Http, Response} from '@angular/http';
+import {Title} from '@angular/platform-browser';
+import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
-import { environment } from '../../../environments/environment';
-import { SocialUser } from '../../beans/social-user';
-import { User } from '../../beans/user';
-import { AppSettings } from '../../shared/conf/app-settings';
-import { LoginService } from '../services/loginService';
+import {environment} from '../../../environments/environment';
+import {SocialUser} from '../../beans/social-user';
+import {User} from '../../beans/user';
+import {AppSettings} from '../../shared/conf/app-settings';
+import {LoginService} from '../services/loginService';
 
 declare var FB: any;
 declare var window: any;
@@ -34,20 +34,21 @@ export class Login {
   dontShowSocialNetworksLoginButtons = false;
   loadingFb = false;
   public loacationPath: string = "/login/sign-in";
+  private selectedLanguage: string;
 
-  constructor(
-    public translate: TranslateService,
-    private _loc: Location,
-    private title: Title,
-    public http: Http,
-    private router: Router,
-    private loginService: LoginService,
-    private changeDetector: ChangeDetectorRef,
-    private zone: NgZone
-  ) {
+  constructor(public translate: TranslateService,
+              private _loc: Location,
+              private title: Title,
+              public http: Http,
+              private router: Router,
+              private loginService: LoginService,
+              private changeDetector: ChangeDetectorRef,
+              private zone: NgZone) {
+    if(localStorage.getItem('userLang'))
+      this.selectedLanguage = localStorage.getItem('userLang');
     this.title.setTitle("Connexion - Speegar");
 
-    (function(d, s, id) {
+    (function (d, s, id) {
       var js,
         fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {
@@ -105,7 +106,8 @@ export class Login {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   getUserFacbookConnexion(result) {
     if (result.authResponse) {
@@ -119,7 +121,7 @@ export class Login {
               FB.api(
                 "/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location",
                 response => {
-                  FB.api('me/?fields=friends', ( friends => {
+                  FB.api('me/?fields=friends', (friends => {
                     console.log('friends');
                     console.log(JSON.stringify('Facebook friends: ' + friends));
                     console.log(friends);
@@ -145,26 +147,26 @@ export class Login {
     }
   }
 
-  getUserInformations(response, responsePic, responseSmallPic,friends) {
+  getUserInformations(response, responsePic, responseSmallPic, friends) {
     let body = {};
     body = JSON.stringify({
-      profilePicture: responsePic.picture.data.url,
-      firstName: response.first_name,
-      lastName: response.last_name,
-      email: response.email,
-      facebookId: response.id,
-      birthday: response.birthday,
-      gender: response.gender,
-      friends: friends.friends.data,
-  
-      //coverPicture: response.cover.source,
-      profilePictureMin: responseSmallPic.picture.data.url,
-       
+        profilePicture: responsePic.picture.data.url,
+        firstName: response.first_name,
+        lastName: response.last_name,
+        email: response.email,
+        facebookId: response.id,
+        birthday: response.birthday,
+        gender: response.gender,
+        friends: friends.friends.data,
 
-    }
-  );
-  console.log(response.data);
-  
+        //coverPicture: response.cover.source,
+        profilePictureMin: responseSmallPic.picture.data.url,
+
+
+      }
+    );
+    console.log(response.data);
+
     this.changeDetector.markForCheck();
 
     this.http
@@ -203,7 +205,8 @@ export class Login {
         err => {
           this.errorMessage = "Erreur technique.";
         },
-        () => {}
+        () => {
+        }
       );
   }
 
@@ -222,16 +225,19 @@ export class Login {
 
   bindedVariable = "";
 
-  onEnterFunction($event: any) {}
+  onEnterFunction($event: any) {
+  }
 
   public openPopup: Function;
 
   setPopupAction(fn: any) {
     this.openPopup = fn;
   }
+
   useLanguage(language: string) {
-    localStorage.setItem('userLang',language);
+    localStorage.setItem('userLang', language);
+    this.selectedLanguage = language;
     this.translate.setDefaultLang(language);
-     console.log(localStorage.getItem('userLang')) ;
+    console.log(localStorage.getItem('userLang'));
   }
 }

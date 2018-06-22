@@ -65,9 +65,9 @@
 
     <div class="mobile-login-lang-container hidden-sm hidden-md hidden-lg">
       <div class="login-lang  hidden-sm hidden-md hidden-lg">
-        <button (click)="useLanguage('en')">English (US)</button>
-        <button (click)="useLanguage('fr')">Français (France)</button>
-        <button (click)="useLanguage('es')">Español</button> 
+        <button [ngClass]="{'selected-language':'en' === selectedLanguage}" (click)="useLanguage('en')">English (US)</button>
+        <button [ngClass]="{'selected-language':'fr' === selectedLanguage}" (click)="useLanguage('fr')">Français (France)</button>
+        <button [ngClass]="{'selected-language':'es' === selectedLanguage}" (click)="useLanguage('es')">Español</button>
       </div>
     </div>
 
@@ -80,9 +80,9 @@
             <div class="login-lang">
                   <button (click)="useLanguage('en')">English (US)</button>
                   <button (click)="useLanguage('fr')">Français (France)</button>
-                  <button (click)="useLanguage('es')">Español</button> 
+                  <button (click)="useLanguage('es')">Español</button>
             </div>
-            
+
               <p style="float:right !important;margin:5px 4px 25px 0"> {{'footer_copyright' | translate }} </p>
 
 				</span>
