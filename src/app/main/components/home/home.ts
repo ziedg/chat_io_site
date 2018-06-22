@@ -104,7 +104,8 @@ export class Home {
   private hashTagPos: number;
   private showGifSlider:boolean = false;
 
-  @ViewChild("homeSidebar") homeSidebarRef: ElementRef;
+  @ViewChild("homeSidebarLeft") homeSidebarLeftRef: ElementRef;
+  @ViewChild("homeSideBarRight") homeSidebarRightRef: ElementRef;
   @ViewChild("newPubForm") newPubFormRef: ElementRef;
 
   // end Notification vars
@@ -156,10 +157,12 @@ export class Home {
       let className = 'side-content-detached';
       if(k < 0) {
         console.log('oups!');
-        this.renderer.addClass(this.homeSidebarRef.nativeElement, className);
+        this.renderer.addClass(this.homeSidebarLeftRef.nativeElement, className);
+        this.renderer.addClass(this.homeSidebarRightRef.nativeElement, className);
       }
       else {
-        this.renderer.removeClass(this.homeSidebarRef.nativeElement, className);
+        this.renderer.removeClass(this.homeSidebarLeftRef.nativeElement, className);
+        this.renderer.removeClass(this.homeSidebarRightRef.nativeElement, className);
       }
     };
 
