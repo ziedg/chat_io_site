@@ -12,6 +12,7 @@ import { SuggestionsComponent } from './main/components/suggestions/suggestions.
 import { FakeComponent } from './shared/fake.component';
 import { MessagingComponent } from './messaging/messaging.component';
 import {SearchMobile} from "./main/components/search-mobile/search-mobile.component";
+import {ConversationMobileComponent} from './messaging/conversation-mobile/conversation-mobile.component';
 
 
 export const routes: Routes = [
@@ -40,8 +41,8 @@ export const routes: Routes = [
             {path: 'notification', component: Notification},
             {path: '404', component: NotFoundPage},
             {path: 'messaging',component: MessagingComponent},
+            {path: 'mobile', component: ConversationMobileComponent},
             {path: '**', redirectTo: '404'}
-            
         ]
     },
      {

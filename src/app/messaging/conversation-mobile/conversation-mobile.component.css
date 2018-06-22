@@ -1,0 +1,163 @@
+.myContainer{
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: 0;
+}
+.header-mobile{
+    text-align: center;
+    padding:5px 10px;
+    border-bottom: solid 1px #dcdcdc;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    z-index: 10000;
+    background: white;
+}
+.header-mobile div>img{
+    height: 40px;
+    width: 40px;
+}
+.header-mobile div>p{
+    color:#b3b3b3;
+    font-size: 8pt;
+    margin:0;
+}
+.homebtn{
+    position: absolute;
+    top:20px;
+    left: 10px;
+    box-shadow: none;
+    border: none;
+}
+.homebtn object{
+    transform: rotate(180deg);
+    float: left;
+}
+.opposite-user {
+	background-color: rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
+	left: 0;
+	right: 0;
+	padding:10px;
+	border: solid 1px #BDBDBD;
+	border-bottom: none;
+	text-align: center;
+	line-height: 5px;
+}
+
+.opposite-user>p:first-child{
+	text-transform: capitalize;
+}
+
+.commentMessenger{
+	color: #b9b9b9;
+	font-size:10pt;
+}
+.message-wrapper{
+    margin-top:65px;
+    background-color: white;
+    position: relative;
+    overflow-y: hidden;
+}
+.message-overlay {
+	height: 100%;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.82);
+	position: absolute;
+	z-index: 1;
+	text-align: center;
+	padding-top: 200px;
+}
+
+.message-thread {
+	overflow-y: initial;
+	list-style-type: none;
+	height: 90vh;
+	width: 100%;
+	margin: 0px !important;
+    padding: 5px !important;
+}
+.message-thread li{
+    margin: 10px 0;
+    font-weight: normal;
+}
+.message-thread li:not(.self-message){
+    display: inline-block;
+}
+.profilePicture{
+	width: 40px;
+	max-height: 40px;
+    vertical-align: middle;
+    object-fit: cover;
+}
+
+.self-message .messageContent{
+	color: white !important;
+	border-bottom-right-radius: 1px !important;
+	background-color: #009900 !important;
+	float: right !important;
+    text-align: right !important;
+    border-radius: 15px;
+    font-weight: normal;
+}
+
+
+.messageContent{
+	max-width: 300px;
+	clear: both;
+	text-decoration: none;
+	list-style-type: none;
+	margin: 0px 0px 0px 10px;
+	padding: 5px 7px;
+	min-width: 160px;
+	min-height: 10px;
+	max-width: 350px;
+	border-radius: 15px;
+	border-bottom-left-radius: 1px;
+	border:solid 1px transparent;
+	line-height: 1.4;
+	word-wrap: break-word;
+	color: #000;
+	font-weight: normal;
+	text-align: left;
+	background-color: #E5E5E5;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.align-right {
+	float: right !important;
+	text-align: right;
+}
+
+.message-typer {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    left: 5px;
+}
+.embed-submit-field{
+    position: relative;
+}
+.embed-submit-field textarea{
+    min-width: 100% !important;
+    border-radius: 50px;
+    height: 34px;
+    background-color: #F7F7F7;
+    resize: none;
+    padding: 15px;
+}
+.embed-submit-field button{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    background-color:transparent;
+    border:none;
+    color:#009900;
+}
+.img-circle{
+    object-fit: cover;
+}

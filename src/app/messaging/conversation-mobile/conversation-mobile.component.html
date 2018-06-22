@@ -1,0 +1,49 @@
+<div class="myContainer">
+	<div class="header-mobile">
+		<a class="homebtn" href="#">
+			<object data="/assets/images/new/angle-left.svg"
+					width="20"
+					height="20"
+					type="image/svg+xml"
+					style="float: left"></object>
+		</a>
+		<div>
+			<img class="img-circle" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&h=350">
+			<p>Lorem Ipsum</p>
+		</div>
+	</div>
+	<div class="message-wrapper">
+		<div class="message-container"> 
+			<ul class="message-thread">
+				<li class="self-message">
+					<p class="messageContent">
+						Hello Test!
+					</p>
+				</li>
+				<li>
+					<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&h=350" class="profilePicture img-circle" />
+					<p class="messageContent">
+						Hey not Test!
+					</p>
+				</li>
+				<li class="self-message">
+					<p class="messageContent">
+						Hello Again Test!
+					</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="message-typer">
+		<form [formGroup]="messageForm" novalidate>
+			<div class="embed-submit-field">
+				<textarea class="form-control message" 
+					placeholder="Type and hit Enter" 
+					(keyup)="sendMessage($event)" 
+					formControlName="message">
+				</textarea>
+				<button type="submit">Envoyer</button>
+			</div>
+		</form>
+	</div>
+</div>

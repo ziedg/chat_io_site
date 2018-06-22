@@ -44,9 +44,10 @@ noSearchResults: Boolean = false;
   ) { }
 
    ngOnInit(){
-   this.user =this.loginService.getUser();
-   this.userId=this.user._id;
-   this.getChatList();
+    this.user =this.loginService.getUser();
+    this.userId=this.user._id;
+    this.getChatList();
+    jQuery(".navigation-bottom").addClass('hidden-xs');
    }
   getChatList(){
     /*
@@ -93,6 +94,7 @@ selectUser(user: User): void {
       /* Sending conversation between two users to other component. */
       this.emitterService.emitConversation(response);
   });
+  //this.router.navigate(['/main/mobile']);
 }
 
 /*Search functionnality*/
