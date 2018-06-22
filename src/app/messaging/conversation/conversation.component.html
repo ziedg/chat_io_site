@@ -8,12 +8,16 @@
 <div class="massege-wrapper">
 	<div class="massege-container">
 		<div class="opposite-user" *ngIf="selectedUser !== null && selectedUser.firstName">
-			Chatting with {{selectedUser.firstName +' '+selectedUser.lastName}}
+			<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
+			<p class="commentMessenger">Actif sur Speegar</p>
 		</div>
  
 		<ul class="message-thread">
-			<li *ngFor="let message of messages" [class.align-right]="alignMessage(message.toUserId)">
-				{{ message.message}}
+			<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)">
+				<img *ngIf="alignMessage(message.toUserId) == false" src="{{selectedUser.profilePicture}}" class="profilePicture img-circle" />
+				<p class="messageContent">
+					{{message.message}}
+				</p>
 			</li>
 		</ul>
 	</div>

@@ -39,9 +39,15 @@ export class TopBlagueursAndDecov {
   }
 
   loadMoreProfiles() {
+
     this.displayedNumberPopularProfiles = this.displayedNumberPopularProfiles + 4;
-    this.displayShowMore = this.displayedNumberPopularProfiles < 12 &&
-      										 this.popularProfiles.length >= this.displayedNumberPopularProfiles;
+
+    
+    this.displayShowMore = this.popularProfiles.length >= this.displayedNumberPopularProfiles;
+  if (this.displayedNumberPopularProfiles % 20 === 0 || (this.displayedNumberPopularProfiles % 20) % 8 ===0){
+      this.loadPopularProfiles(this.lastPopularProfileID);
+    }
+  
   }
 
   loadPopularProfiles(Id_Profile?: string) {

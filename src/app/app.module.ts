@@ -35,6 +35,7 @@ import { SuggestionsComponent } from './main/components/suggestions/suggestions.
 import { TopBlagueursAndDecov } from './main/components/topBlagueursAndDecov/topBlagueursAndDecov';
 import { DateService } from './main/services/dateService';
 import { EmojiService } from './main/services/emojiService';
+import { GifService } from './main/services/gifService';
 import { LinkPreview } from './main/services/linkPreview';
 import { LinkView } from './main/services/linkView';
 import { PostService } from './main/services/postService';
@@ -45,6 +46,8 @@ import { MessagingModule } from './messaging/messaging.module';
 import { ChatService } from './messanging/chat.service';
 import { FakeComponent } from './shared/fake.component';
 import { httpFactory } from './utils/factories/http.factory';
+import { GifSlider } from './main/components/gif-slider/gif-slider';
+import {AvailablePicture} from "./main/components/profile/pipes/AvailablePicture.pipe";
 
 /** Factories */
 @NgModule({
@@ -70,11 +73,11 @@ import { httpFactory } from './utils/factories/http.factory';
         messagingSenderId: "861552240215"
       }),
       AngularFireDatabaseModule
-    ],       
+    ],
     // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, AvailablePicture],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,
@@ -82,6 +85,7 @@ import { httpFactory } from './utils/factories/http.factory';
         Title,
         RecentRechService,
         EmojiService,
+        GifService,
         LinkView,
         LinkPreview,
         PostService,

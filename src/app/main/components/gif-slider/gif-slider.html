@@ -1,0 +1,21 @@
+<section class="slider-container" #container>
+  <div class="slider-sub-container">
+    <div class="slides-container" #slidesContainer>
+      <div *ngFor="let Gif  of GifList;" class="slide">
+        <div class="bla-text"  >
+          <a (click)="gifPreview(Gif.urlGIF)"> <img class="gif-img" [src]="Gif.imageGIF"  /></a>
+        
+           
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="glyphicon glyphicon-chevron-left slider-btn slider-btn-before"
+            (click)="translate_it(1);"></span>
+      <span class="glyphicon glyphicon-chevron-right slider-btn slider-btn-after"
+            (click)="translate_it(-1);"></span>
+    </div>
+  </div>
+</section>
+
+<!-- [ngStyle]="{'background-image': 'url(' + Gif.imageGIF + ')'}"> -->

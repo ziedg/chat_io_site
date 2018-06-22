@@ -1,15 +1,14 @@
-import { Component, OnInit ,Input, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { User } from '../../beans/user';
-import { EmitterService } from '../emitter.service';
-import { ChatService } from '../../messanging/chat.service';
-import { LoginService } from '../../login/services/loginService';
-import {map} from 'rxjs/operators/map'
-import { RecentRechService } from '../../main/services/recentRechService';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
-import { Http ,Response} from '@angular/http';
 import { environment } from 'environments/environment';
-import * as pathUtils from '../../utils/path.utils';
+
+import { User } from '../../beans/user';
+import { LoginService } from '../../login/services/loginService';
+import { ChatService } from '../../messanging/chat.service';
 import { AppSettings } from '../../shared/conf/app-settings';
+import * as pathUtils from '../../utils/path.utils';
+import { EmitterService } from '../emitter.service';
 
 declare var jQuery: any;
 
@@ -23,33 +22,30 @@ export class ChatListComponent implements OnInit {
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
 
+  private user;
   private userId: string = null;
   public chatListUsers: any[] = [];
   private selectedUserId: string = null;
 //
 autocomplete = false;
-listSearchUsers: Array<User> = [];
+listSearchUsers = [];
 searchValue: string;
-showRecentSearch: Boolean;
-RecentSearchList;
 noSearchResults: Boolean = false;
-@ViewChild("searchResults2") searchRes2: ElementRef;
-@ViewChild("searchMobileInput") searchInput: ElementRef;
+@ViewChild("searchBar") searchBar: ElementRef;
 
 //
   constructor(
     private emitterService :EmitterService,
     private chatService:ChatService,
     private loginService :LoginService,
-    private recentRechService: RecentRechService,
     private changeDetector: ChangeDetectorRef,
     private router:Router,
     private http: Http
   ) { }
 
    ngOnInit(){
-   let user =this.loginService.getUser();
-   this.userId=user._id;
+   this.user =this.loginService.getUser();
+   this.userId=this.user._id;
    this.getChatList();
    }
   getChatList(){
@@ -65,7 +61,7 @@ noSearchResults: Boolean = false;
       _id:user._id,
       firstName: user.firstName,
       lastName: user.lastName,
-      profilePicture: user.profilePicture,
+      profilePicture: user.profilePicture
     }
      })
     })
@@ -100,21 +96,8 @@ selectUser(user: User): void {
 }
 
 /*Search functionnality*/
-saveRecentRech(user) {
-  console.log(user)
-  console.log(this.chatListUsers)
-  let newRechUser = {};
-  newRechUser = JSON.stringify({
-    _id:user._id,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    profilePicture: user.profilePicture,
-    profilePictureMin: user.profilePictureMin
-  });
-  this.recentRechService.addToListRecentRech(JSON.parse(<string>newRechUser));
-  this.changeDetector.markForCheck();
-  this.disableAutocomplete();
-  this.RecentSearchList = this.recentRechService.getListRecentRech();
+loadUser(user) {
+ 
   var found = this.chatListUsers.some(function (profile) {
     return profile._id ==user._id ;
   });
@@ -123,42 +106,49 @@ saveRecentRech(user) {
   this.selectUser(user)
 }
 
+filterChatListUsersByName(name){
+return this.chatListUsers.filter((user)=>{
+let fullName=user.firstName +' ' +user.lastName;
+return fullName.includes(name);
+});
+}
+
+filterSubscriptionsByName(name){
+  return this.user.subscriptions.filter((user)=>{
+  let fullName=user.firstName + ' ' + user.lastName;
+  return fullName.includes(name);
+  });
+  }
+
+onFocus(){
+    this.searchBar.nativeElement.style.display = "block!important";
+    this.onChange(this.searchBar.nativeElement.value);
+}
+
 onChange(newValue: string) {
+  console.log(newValue)
   this.listSearchUsers = [];
   this.enableAutocomplete();
   this.changeDetector.markForCheck();
   if (newValue.length > 1) {
-    this.getListSearchUsers(newValue);
-  } else {
-    if (this.recentRechService.isEmptyList()) {
-      this.disableAutocomplete();
-    } else {
-      this.showRecentSearchUsers();
+      let searchInHistory=this.filterChatListUsersByName(newValue);
+        if (searchInHistory && searchInHistory.length>0){
+        this.listSearchUsers=searchInHistory
+        }else{
+         let searchInSubscriptions=this.filterSubscriptionsByName(newValue);
+            if (searchInSubscriptions && searchInSubscriptions.length>0){
+             this.listSearchUsers=searchInSubscriptions;
+            }else{
+              this.getListSearchUsers(newValue);
+            }
     }
-  }
+  } 
   this.changeDetector.markForCheck();
 }
 
-onFocus() {
-  this.searchRes2.nativeElement.style.display = "block!important";
-  this.onChange(this.searchInput.nativeElement.value);
-  this.checkAutoComplete();
-}
 
-showRecentSearchUsers() {
-  if (this.recentRechService.isEmptyList()) {
-    this.disableAutocomplete();
-    this.showRecentSearch = false;
-  } else {
-    this.enableAutocomplete();
-    this.RecentSearchList = this.recentRechService.getListRecentRech();
-    this.showRecentSearch = true;
-  }
-  this.changeDetector.markForCheck();
-}
 
 getListSearchUsers(key: string) {
-  this.showRecentSearch = false;
   this.http
     .get(
       environment.SERVER_URL + pathUtils.FIND_PROFILE + key,
@@ -197,14 +187,6 @@ getListSearchUsers(key: string) {
     );
 }
 
-checkAutoComplete() {
-  if (this.searchValue && this.searchValue.length > 1) {
-    this.getListSearchUsers(this.searchValue);
-  } else {
-    this.enableAutocomplete();
-    this.showRecentSearchUsers();
-  }
-}
 
 enableAutocomplete() {
   jQuery(".recherche-results-holder").show();

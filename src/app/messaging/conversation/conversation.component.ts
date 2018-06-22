@@ -98,8 +98,8 @@ sendMessage(event) {
 
 listenForMessages(userId: string): void {
   this.userId = userId;
-  this.s = this.db.object('messaging/'+this.userId);
-    console.log('messaging/'+this.userId);
+  this.s = this.db.object('notifications/'+this.userId+'/messaging');
+    console.log('notifications/'+this.userId+'/messaging');
     var item = this.s.valueChanges()
     console.log(JSON.stringify(item));
     this.s.snapshotChanges().subscribe(action => {
@@ -119,7 +119,6 @@ listenForMessages(userId: string): void {
         );
       }
     });
- 
 }
 
 alignMessage(userId: string): boolean {
