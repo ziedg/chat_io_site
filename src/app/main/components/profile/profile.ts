@@ -160,7 +160,8 @@ export class Profile {
         response => {
         if (response.status == 0) {
           userDisplayed.isFollowed = true;
-          userDisplayed.nbSuivi++;
+          const nbSuivi=response.nbSuivi
+          userDisplayed.nbSuivi=nbSuivi;
 
         }
       },
@@ -186,7 +187,8 @@ export class Profile {
         response => {
         if (response.status == 0) {
           userDisplayed.isFollowed = false;
-          userDisplayed.nbSuivi--;
+          const nbSuivi = response.nbSuivi;
+          userDisplayed.nbSuivi=nbSuivi;
         }
       },
         err => {
@@ -241,6 +243,7 @@ reportPub(userDisplayed:User) {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
+        
 
         },
         err => {
