@@ -429,7 +429,8 @@ export class Home {
     }
   }
 
-  previewGIF(linkURL){
+  previewGIF(urlGIF){
+    var linkURL = urlGIF;
     this.http
       .get(
         environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
