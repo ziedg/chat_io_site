@@ -978,7 +978,7 @@ export class Home {
   onSelectLanguage(language: string) {
     this.selectedLanguage = language;
     language = language.toLowerCase();
-    jQuery(".dropdown-menu-translate").hide();
+    // jQuery(".dropdown-menu-translate").hide();
     localStorage.setItem('userLang', language);
     this.translate.setDefaultLang(language);
     location.reload();
