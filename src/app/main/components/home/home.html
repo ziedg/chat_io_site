@@ -6,7 +6,7 @@
 <div *ngIf="user" class="container" id="container">
   <div class="row">
     <div class="home-sidebar col-md-2 hidden-sm hidden-xs">
-      <div class="home-sidebar-container" #homeSidebar>
+      <div class="home-sidebar-container" #homeSidebarLeft>
         <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
                         [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}"></span>
           <span><a style="color:black" [routerLink]="['/main/profile',user._id]">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span>
@@ -98,7 +98,7 @@
                    contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)"
                    #publishDivRef style="width: calc(100% - 80px)"></div>
 
-              <gif-slider style="width:100%;" *ngIf="showGifSlider"></gif-slider>
+              
               <!-- tag new publication -->
               <!--
               <div class="" >
@@ -144,19 +144,15 @@
                 <div class="noPadding" *ngIf="link.image">
                   <img class="img-preview" [src]="link.image"/>
                 </div>
-                <div class="descriptions" *ngIf="!link.isGif">
+                <!-- <div class="descriptions" *ngIf="!link.isGif">
                   <a href="{{link.url}}" target="_blank">
                     <h4>{{link.title}}</h4>
                   </a>
 
                   <p>{{link.description}}</p>
                   <b>{{linkDomain}}</b>
-                  <!--
-                  <a href="{{link.url}}" target="_blank" class="subLink">
-                    {{link.url}}
-                  </a>
-                  -->
-                </div>
+                 
+                </div> -->
               </div>
               <div class="facebook-preview">
 
@@ -164,7 +160,8 @@
               <div class="youtube-preview">
 
               </div>
-
+              
+              <gif-slider style="width:100%;" *ngIf="showGifSlider" (myEvent)="previewGIF($event)"></gif-slider>
 
             </div>
 
@@ -310,10 +307,9 @@
       </section>
     </div>
     <div *ngIf="user" class="col-md-3 col-sm-5 hidden-xs side-home">
-      <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
-
-
-      <section class="hidden-sm hidden-xs widget bordered" style="padding:15px">
+      <div style="position:fixed" #homeSideBarRight>
+        <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
+        <section class="hidden-sm hidden-xs widget bordered" style="padding:15px">
 
 
         <span *ngFor="let language of translationLanguages; let i = index"
@@ -324,6 +320,7 @@
         </span>
 
       </section>
+      </div>
 
 
     </div>

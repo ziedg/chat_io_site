@@ -19,7 +19,17 @@ export class GifService {
         this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq7W4rj","https://images-cdn.9gag.com/photo/aq7W4rj_700b.jpg"));
         this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/azXONKN","https://images-cdn.9gag.com/photo/azXONKN_700b.jpg"));
         this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq760dZ","https://images-cdn.9gag.com/photo/aq760dZ_700b.jpg"));
+        this.nvList.list.push(this.addtoListGif("http://knowyourmeme.com/memes/slender-man","http://i0.kym-cdn.com/entries/icons/facebook/000/001/676/slenderman.thumbnail.jpg"));
         
+        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq7W4rj","https://images-cdn.9gag.com/photo/aq7W4rj_700b.jpg"));
+        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/azXONKN","https://images-cdn.9gag.com/photo/azXONKN_700b.jpg"));
+        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq760dZ","https://images-cdn.9gag.com/photo/aq760dZ_700b.jpg"));
+        this.nvList.list.push(this.addtoListGif("http://knowyourmeme.com/memes/slender-man","http://i0.kym-cdn.com/entries/icons/facebook/000/001/676/slenderman.thumbnail.jpg"));
+
+        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq7W4rj","https://images-cdn.9gag.com/photo/aq7W4rj_700b.jpg"));
+        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/azXONKN","https://images-cdn.9gag.com/photo/azXONKN_700b.jpg"));
+        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq760dZ","https://images-cdn.9gag.com/photo/aq760dZ_700b.jpg"));
+        this.nvList.list.push(this.addtoListGif("http://knowyourmeme.com/memes/slender-man","http://i0.kym-cdn.com/entries/icons/facebook/000/001/676/slenderman.thumbnail.jpg"));
 
         
 
