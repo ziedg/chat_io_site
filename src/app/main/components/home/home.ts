@@ -50,9 +50,9 @@ export class Home {
   //Variables Declarations
   urlGIF = "https://9gag.com/gag/aq7W4rj";
   imageGIF = "https://images-cdn.9gag.com/photo/aq7W4rj_700b.jpg";
-  
+
   public GifList: Array<GifBean> = [];
-  
+
   linkDomain = "";
   titleEnable = false;
   youtubeInput = false;
@@ -156,10 +156,10 @@ export class Home {
       let className = 'side-content-detached';
       if(k < 0) {
         console.log('oups!');
-        this.renderer.addClass(this.homeSidebarRef, className);
+        this.renderer.addClass(this.homeSidebarRef.nativeElement, className);
       }
       else {
-        this.renderer.removeClass(this.homeSidebarRef, className);
+        this.renderer.removeClass(this.homeSidebarRef.nativeElement, className);
       }
     };
 
@@ -450,7 +450,7 @@ export class Home {
               this.link.image = response.results.data.ogImage.url;
               this.link.imageWidth = response.results.data.ogImage.width;
               this.link.imageHeight = response.results.data.ogImage.height;
-               } 
+               }
                else {
               this.link.image = null;
               this.link.imageWidth = 0;
@@ -930,7 +930,7 @@ export class Home {
             this.linkDomain = linkURL.match(r)[1];
 //              this.link.url = linkURL.substring(0, linkURL.length - 6);
             this.link.url = linkURL;
-            
+
             this.link.title = response.results.data.ogTitle;
             this.link.description = response.results.data.ogDescription;
             if (response.results.data.ogImage) {
