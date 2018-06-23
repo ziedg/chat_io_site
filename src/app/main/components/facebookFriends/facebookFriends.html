@@ -2,7 +2,7 @@
   <!-- <header class="fb-friends-header">
     {{'fb_friends' | translate }}
   </header> -->
- 
+
   <div class="navigation-arrow-container" style="left:13px;z-index:1"
   (click)="sideScroll('left',25,100,100)">
   <img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png"></div>
@@ -10,7 +10,7 @@
   <div class="navigation-arrow-container" style="right:13px;z-index:1"
   (click)="sideScroll('right',25,100,100)">
   <img class="right-navigation-arrow" src="assets/images/new/right-arrow-white.png"></div>
-  
+
   <div  class="fb-suggestions-container" infinite-scroll [infiniteScrollDistance]="1"
        [infiniteScrollThrottle]="0" (scrolled)="onScrollDown()">
   <article *ngFor="let profile of facebookProfiles">
@@ -25,8 +25,7 @@
         </div>
         <div class="user-name" style="padding:10px 0px 10px 0px;margin-right:0px;margin-left:0px;font-size:12.5px">
           <header><a [routerLink]="['/main/profile',profile._id]" class="fb-link-name">
-            {{profile.firstName}}<br>
-            {{profile.lastName}}
+            {{profile.firstName}} {{profile.lastName}}
           </a></header>
           <div class="top-blagueurs-sub-nbr" style="text-align: center" *ngIf="!profile.ispop"> {{'fb_label' | translate}}</div>
           <div class="top-blagueurs-sub-nbr" style="text-align: center" *ngIf="profile.ispop"> {{profile.nbSuivi}} {{'subscribers' | translate}} </div>
@@ -44,20 +43,20 @@
             {{ 'profile_already_subscribed' | translate }}
           </button>
 
-          
+
             <a
             (click)="ignore(profile)"
             class="subscribe-close-button fb-ignore" >
             &#x2715;
           </a>
-          
-        
+
+
         </div>
-     
+
       </span>
   </article>
   </div>
-  
+
 
 
 </div>

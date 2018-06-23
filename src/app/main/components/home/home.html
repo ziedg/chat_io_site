@@ -307,9 +307,9 @@
       </section>
     </div>
     <div *ngIf="user" class="col-md-3 col-sm-5 hidden-xs side-home">
-      <div id="top-kk" style="position:fixed" #homeSideBarRight>
+      <div #homeSideBarRight>
         <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
-        <section class="hidden-sm hidden-xs widget bordered" style="padding:15px">
+        <section class="hidden-sm hidden-xs widget bordered" style="padding:15px" #selectLanguage>
 
 
         <span *ngFor="let language of translationLanguages; let i = index"
