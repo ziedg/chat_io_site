@@ -2149,21 +2149,21 @@ textarea:focus {
 .user-fb {
   display: block !important;
   position: relative;
-  border: 1px solid #edeeee;
-  padding: 10px;
-  width: 131px;
-  height: min-content;
+  padding: 18px 10px 10px;
+  width: 180px;
+  height: 220px;
   margin: 5px;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .fb-link-name {
-  white-space: pre-line;
-  max-width: 115px;
-  text-align: center;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 .suggestions-box .user {
@@ -2206,12 +2206,12 @@ top-blagueurs-decov .user .user-img {
 }
 
 facebook-friends .user .user-img {
-  --user-img-w: 35px;
+  --user-img-w: 60px;
+  width: var(--user-img-w);
+  height: var(--user-img-w);
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
   margin: 0 auto;
-  width: 80px;
-  height: 80px;
 }
 
 .fb-section {
@@ -3398,16 +3398,15 @@ facebook-friends .user .user-img {
 }
 
 .widget .subscribe button {
-  border: 1px solid #ccc;
   background-color: #fff;
   color: #333;
-  font-size: 12px !important;
-  width: auto !important;
+  font-size: 15px !important;
   padding: 5px 6px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
   height: 28px;
   box-sizing: border-box;
+  width: 130px;
+  border: 0;
+  border-radius: 5px;
 }
 
 .show-more {
@@ -3473,9 +3472,9 @@ facebook-friends .user .user-img {
 
 .top-blagueurs-sub-nbr {
   color: #979797;
-  font-size: 9.5px;
-  font-weight: bolder;
-  margin-top: 2px;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .profil-holder {
