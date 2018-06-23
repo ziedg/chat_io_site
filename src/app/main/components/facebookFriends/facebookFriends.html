@@ -24,17 +24,14 @@
              	[ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
         </div>
         <div class="user-name" style="padding:10px 0px 10px 0px;margin-right:0px;margin-left:0px;font-size:12.5px">
-          <header><a [routerLink]="['/main/profile',profile._id]" class="fb-link-name">
+          <header style="text-align: center"><a [routerLink]="['/main/profile',profile._id]" class="fb-link-name">
             {{profile.firstName}} {{profile.lastName}}
           </a></header>
-          <div class="top-blagueurs-sub-nbr" style="text-align: center" *ngIf="!profile.ispop"> {{'fb_label' | translate}}</div>
-          <div class="top-blagueurs-sub-nbr" style="text-align: center" *ngIf="profile.ispop"> {{profile.nbSuivi}} {{'subscribers' | translate}} </div>
+          <div class="top-blagueurs-sub-nbr" *ngIf="!profile.ispop"> {{'fb_label' | translate}}</div>
+          <div class="top-blagueurs-sub-nbr" *ngIf="profile.ispop"> {{profile.nbSuivi}} {{'subscribers' | translate}} </div>
         </div>
         <div class="subscribe">
-          <button *ngIf="!profile.isSubscribed"
-                   style="width:100% !important;border-top-right-radius:5px;border-bottom-right-radius:5px;
-                   display:flex;justify-content:center;color:white;background-color:#12a012;vertical-align:middle;"
-                  (click)="subscribe(profile)">
+          <button *ngIf="!profile.isSubscribed" (click)="subscribe(profile)">
             {{ 'profile_subscribe' | translate }}
           </button>
           <button class="active" *ngIf="profile.isFollowed"

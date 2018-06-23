@@ -156,9 +156,11 @@ export class Home {
 
     window.onscroll = () => {
       let k = this.selectLanguageRef.nativeElement.offsetTop;
+      /*
       console.log("---------------");
       console.log(k);
       console.log(window.pageYOffset);
+      */
       /*if(k - window.pageYOffset - 20 < 0) {
         this.renderer.setStyle(this.selectLanguageRef, "position", "fixed");
       }*/
