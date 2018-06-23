@@ -158,7 +158,8 @@
 	text-align: left;
 	background-color: #E5E5E5;
 	vertical-align: middle;
-	display: inline-block;
+    display: inline-block;
+    font-size: 17px;
 }
 
 .align-right {
