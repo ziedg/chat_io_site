@@ -2157,7 +2157,8 @@ textarea:focus {
   justify-items: center;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid #edeeee
+  border: 1px solid #edeeee;
+  border-radius: 4px;
 }
 
 .fb-link-name {
