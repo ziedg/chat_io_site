@@ -2238,6 +2238,8 @@ facebook-friends .user .user-img {
   border-radius: 50%;
   position: absolute;
   top: 50%;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .navigation-arrow-container:hover {
@@ -3412,7 +3414,8 @@ facebook-friends .user .user-img {
   border: 0;
   border-radius: 5px;
   text-align: center;
-  line-height: 10px;w
+  line-height: 10px;
+  display: inline-block;
 }
 
 .show-more {
