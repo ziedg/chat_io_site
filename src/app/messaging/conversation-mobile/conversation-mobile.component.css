@@ -84,19 +84,24 @@
     font-weight: normal;
     position: relative;
 }
+.message-thread img{
+    font-weight: normal;
+    position: absolute;
+    bottom:0;
+}
 .message-thread>li:not(.self-message):not(.mydate):after { 
     content: '';
     position: absolute;
-    left: 25%;
-    top: 50%;
+    left: 40px;
+    bottom: 1%;
     width: 0;
     height: 0;
     border: 10px solid transparent;
     border-right-color: #E5E5E5;
     border-left: 0;
     border-bottom: 0;
-    margin-top: 5px;
-    margin-left: -9px;
+    /* margin-top: 5px;
+    margin-left: -9px; */
     -webkit-transform: rotate(-35deg);
     transform: rotate(-35deg);
 }
@@ -131,7 +136,6 @@
 	color: white !important;
 	background-color: #039803 !important;
 	float: right !important;
-    text-align: right !important;
     border-radius: 15px;
     border-bottom-right-radius: 1px;
     font-weight: normal;
@@ -143,11 +147,10 @@
 	clear: both;
 	text-decoration: none;
 	list-style-type: none;
-	margin: 0px 0px 0px 10px;
-	padding: 5px 7px;
-	min-width: 160px;
+	margin: 0px 0px 0px 45px;
+	padding: 5px 15px;
 	min-height: 10px;
-	max-width: 350px;
+	max-width: 70%;
 	border-radius: 15px;
 	border:solid 1px transparent;
 	line-height: 1.4;
@@ -172,10 +175,22 @@
     right: 0;
     left: 0;
 }
+.message-typer form>div{
+    text-align: center;
+}
+.message-typer form>div>i{
+    margin: 5px 10px;
+    font-size: 16pt;
+}
+
+
 .embed-submit-field{
     position: relative;
+    display: inline-block;
     margin:5px;
+    min-width: 85%;
 }
+
 .embed-submit-field input{
     min-width: 100% !important;
     height: 34px;
