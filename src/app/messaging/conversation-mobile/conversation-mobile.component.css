@@ -58,7 +58,8 @@
     margin-top:40px;
     background-color: white;
     position: relative;
-    overflow-y: hidden;
+    overflow-y: scroll;
+    max-height: 88vh;
 }
 .message-overlay {
 	height: 100%;
@@ -174,6 +175,7 @@
     bottom: 0;
     right: 0;
     left: 0;
+    background-color: white;
 }
 .message-typer form>div{
     text-align: center;
