@@ -1,15 +1,15 @@
 <div class="myContainer">
 	<div class="header-mobile">
-		<a class="homebtn" href="#">
-			<object data="/assets/images/new/angle-left.svg"
-					width="20"
-					height="20"
-					type="image/svg+xml"
-					style="float: left"></object>
-		</a>
 		<div>
-			<img class="img-circle" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&h=350">
-			<p>Lorem Ipsum</p>
+			<a class="homebtn" href="#">
+					<i class="fas fa-chevron-left"></i>
+			</a>
+			<div>
+				<p>Lorem Ipsum</p>
+			</div>
+			<a class="topbtn">
+				<i class="fas fa-ellipsis-h"></i>
+			</a>
 		</div>
 	</div>
 	<div class="message-wrapper">
@@ -26,6 +26,9 @@
 						Hey not Test!
 					</p>
 				</li>
+				<li class="mydate">
+					<p>23:49</p>
+				</li>
 				<li class="self-message">
 					<p class="messageContent">
 						Hello Again Test!
@@ -37,11 +40,11 @@
 	<div class="message-typer">
 		<form [formGroup]="messageForm" novalidate>
 			<div class="embed-submit-field">
-				<textarea class="form-control message" 
-					placeholder="Type and hit Enter" 
+				<input class="message" 
+					type="text"
+					placeholder="Ecrire un message..." 
 					(keyup)="sendMessage($event)" 
-					formControlName="message">
-				</textarea>
+					formControlName="message"/>
 				<button type="submit">Envoyer</button>
 			</div>
 		</form>
