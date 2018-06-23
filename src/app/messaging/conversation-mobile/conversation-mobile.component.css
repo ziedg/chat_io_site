@@ -7,36 +7,32 @@
 }
 .header-mobile{
     text-align: center;
-    padding:10px;
+    padding:15px;
     position: fixed;
     top: 0;
     width: 100%;
     overflow: hidden;
     z-index: 10000;
-    background: #039803;
+    background: #fafafa;
+    height:50px;
+    border-bottom: 1px solid #efefef;
 }
 .header-mobile div>img{
     height: 40px;
     width: 40px;
 }
 .header-mobile div>p{
-    color:white;
-    font-size: 10pt;
-    font-weight: bold;
+    color:black;
+    font-size: 17px;
     margin:0;
 }
 .homebtn i{
-    color:white;
+    color:black;
     position: absolute;
-    top:12px;
+    top:18px;
     left: 10px;
     box-shadow: none;
     border: none;
-}
-.topbtn{
-    text-align:right;color:white;right: 8px;
-    position: absolute;
-    top: 11px;
 }
 .opposite-user {
 	background-color: rgb(255, 255, 255);
@@ -81,6 +77,7 @@
 	width: 100%;
 	margin: 0px !important;
     padding: 5px !important;
+    padding-top: 17px !important;
 }
 .message-thread li{
     margin: 10px 0;
@@ -120,6 +117,7 @@
     transform: rotate(35deg);
 } */
 .message-thread>li:not(.self-message):not(.mydate){
+    margin-top: 10% !important;
     display: inline-block;
 }
 .profilePicture{
@@ -176,6 +174,7 @@
 }
 .embed-submit-field{
     position: relative;
+    margin:5px;
 }
 .embed-submit-field input{
     min-width: 100% !important;
@@ -183,18 +182,30 @@
     background-color: white;
     color:black;
     resize: none;
-    padding: 25px 15px;
-    border:none;
-    border-top: 1px solid #E5E5E5;
+    font-size: 17px;
+    padding: 20px 15px;
+    border: 1px solid #E5E5E5;
+    border-radius: 50px;
 }
 .embed-submit-field button{
     position: absolute;
-    right: 10px;
-    top: 13px;
+    right: 5px;
+    top: 6px;
     background-color:transparent;
     border:none;
-    color:#039803;
+    color:white;
+    background-color: #E5E5E5;
+    -moz-border-radius: 70px; 
+    -webkit-border-radius: 70px; 
+    border-radius: 70px;
+    width: 30px;
+    padding: 5px 5px;
 }
+
+.activebtn{
+    background-color: #039803 !important;
+}
+
 .img-circle{
     object-fit: cover;
 }

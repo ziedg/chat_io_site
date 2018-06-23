@@ -13,4 +13,11 @@ export class ConversationMobileComponent implements OnInit {
     jQuery(".navigation-bottom").addClass('hidden-xs');
   }
 
+  sendMessage(){
+    if(jQuery(".message").val().length > 0){
+      jQuery(".embed-submit-field button").addClass('activebtn');
+    }else{
+      jQuery(".embed-submit-field button").removeClass('activebtn');
+    }
+  }
 }
