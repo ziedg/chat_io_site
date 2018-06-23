@@ -374,7 +374,7 @@
 
 body {
   margin: 0;
-  padding-top: 77px;
+  padding-top: 116px;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #fafafa !important;
   font-size: 14px;
@@ -971,12 +971,15 @@ a {
 
 .notification-bar {
   width: 100%;
-  padding: 15px 0px 15px;
+  padding: 15px 0 15px;
   background-color: #36a0f0;
   color: white;
   text-align: center;
   font-weight: 600;
   font-size: 16px;
+  position: fixed;
+  top: 77px;
+  z-index:5;
 }
 
 @media (max-width: 768px) {
@@ -5632,6 +5635,7 @@ top-blagueurs-decov .user-img {
   margin-top: 10px;
   font-size: 12.5px;
   margin-left: 5px;
+  font-weight: bold;
 }
 
 .conditions-generales a, .conditions-generales a:hover {
@@ -5640,9 +5644,9 @@ top-blagueurs-decov .user-img {
 }
 
 .copyright-home {
-  margin-top: 10px;
+  margin-top: 20px;
   color: #545454;
-  font-size: 13px;
+  font-size: 11px;
   margin-left: 5px
 }
 

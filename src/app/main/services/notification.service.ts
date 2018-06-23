@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { AppSettings } from './../../shared/conf/app-settings';
-import { Injectable } from '@angular/core';
+import {Injectable, Renderer2} from '@angular/core';
 import { Http } from '@angular/http';
 import {environment} from "../../../environments/environment";
 import { urlB64ToUint8Array, VAPID_PUBLIC_KEY } from '../../utils/notification';
@@ -14,7 +14,7 @@ export class NotificationService {
   subscriptionJson = '';
   isSubscribed = false;
   registration = undefined;
-  public subscription =''
+  public subscription ='';
 
 
 
@@ -35,6 +35,9 @@ export class NotificationService {
 
   //subscribe user
   subscribeUser() {
+
+    document.body.style.paddingTop = "77px";
+    document.getElementById("subscribeMsg").style.display = "none";
     const applicationServerKey = urlB64ToUint8Array(VAPID_PUBLIC_KEY);
     this.registration.pushManager
       .subscribe({

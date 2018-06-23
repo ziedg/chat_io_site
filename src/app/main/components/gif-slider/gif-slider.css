@@ -32,10 +32,11 @@
 .slides-container {
   transition: 600ms ease;
   display: flex;
+  /*overflow-x: auto;*/
 }
 
 .bla-text {
-  
+
   width: 100%;
   height: 100%;
 }
