@@ -126,6 +126,9 @@
     margin-top: 5% !important;
     display: inline-block;
 }
+.message-thread>li:last-child>.messageContent{
+    margin-bottom: 60px;
+}
 .profilePicture{
 	width: 40px;
 	max-height: 40px;
