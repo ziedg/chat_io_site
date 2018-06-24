@@ -59,7 +59,7 @@
     background-color: white;
     position: relative;
     overflow-y: scroll;
-    max-height: 88vh;
+    max-height: 86vh;
 }
 .message-overlay {
 	height: 100%;
@@ -123,7 +123,7 @@
     transform: rotate(35deg);
 } */
 .message-thread>li:not(.self-message):not(.mydate){
-    margin-top: 10% !important;
+    margin-top: 5% !important;
     display: inline-block;
 }
 .profilePicture{
@@ -171,7 +171,7 @@
 }
 
 .message-typer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
@@ -181,7 +181,7 @@
     text-align: center;
 }
 .message-typer form>div>i{
-    margin: 5px 10px;
+    /* margin: 5px 10px; */
     font-size: 16pt;
 }
 
