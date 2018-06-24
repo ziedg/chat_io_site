@@ -14,7 +14,7 @@
 			<ul class="message-thread">
 				<li class="self-message">
 					<p class="messageContent">
-						Hello Test!
+						Testing Cache!
 					</p>
 				</li>
 				<li>
@@ -35,18 +35,19 @@
 		</div>
 	</div>
 	<div class="message-typer">
-		<form [formGroup]="messageForm" novalidate>
-			<div>
-				<i class="fas fa-camera"></i>
-				<div class="embed-submit-field">
-					<input class="message" 
-						type="text"
-						placeholder="Message" 
-						(keyup)="sendMessage()" 
-						formControlName="message"/>
-					<button type="submit"><i class="fas fa-arrow-up"></i></button>
+			<form [formGroup]="messageForm" novalidate>
+				<div>
+					<i class="fas fa-camera"></i>
+					<div class="embed-submit-field">
+						<input class="message" 
+							type="text"
+							placeholder="Message" 
+							(keyup)="sendMessage()" 
+							formControlName="message"/>
+						<button type="submit"><i class="fas fa-arrow-up"></i></button>
+					</div>
 				</div>
-			</div>
-		</form>
-	</div>
+			</form>
+		</div>
 </div>
+
