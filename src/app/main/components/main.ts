@@ -26,10 +26,11 @@ import * as pathUtils from '../../utils/path.utils';
 import { DateService } from '../services/dateService';
 import { NotificationService } from '../services/notification.service';
 import { RecentRechService } from '../services/recentRechService';
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database'
+import * as jQuery from 'jquery';
 
 //Notification
-declare var jQuery: any;
+//declare var jQuery: any;
 declare var FB: any;
 declare var auth: any;
 declare const gapi: any;
@@ -58,7 +59,7 @@ export class Main {
   noSearchResults: Boolean = false;
   public showNotif:boolean=true;
   private s: AngularFireObject<any>;
-  
+
   icons;
 
   @ViewChild("searchResults2") searchRes2: ElementRef;
@@ -89,12 +90,12 @@ export class Main {
 
     //Notiifcation
     private notificationService: NotificationService,
-  
-  
-    //Angular Notification Listener 
+
+
+    //Angular Notification Listener
     private db: AngularFireDatabase,
 
-    
+
     ) {
       this.user=loginService.getUser();
          if (!this.recentRechService.isEmptyList())
@@ -314,15 +315,17 @@ export class Main {
       )
       .map((res: Response) => res.json())
       .subscribe(
-        response => {
+        (response:NotificationBean[]) => {
+
 
           if (response.length != 0) {
             this.showNoNotif = false;
             let arr = this.listNotif;
-            for (var i = 0; i < response.length; i++) {
-              //uniqness test before push
 
-              arr.push(response[i]);
+            for (var i = 0; i < response.length; i++) {
+
+              if(response[i]._id)
+                  arr.push(response[i]);
 
               this.lastNotifId = response[i]._id;
 
@@ -333,7 +336,14 @@ export class Main {
               return notif._id;
             });
 
+
+
+
              this.listNotif = arr;
+             this.listNotif.forEach(item => {
+               console.log(item._id)
+             })
+
 
             if (response.length == 5) this.showButtonMoreNotif = true;
             else this.showButtonMoreNotif = false;
@@ -505,6 +515,6 @@ export class Main {
           this.nbNewNotifications++;
         }
       });
-   
+
   }
 }

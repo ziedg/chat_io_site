@@ -56,6 +56,8 @@
         </div>
       </article>
 
+<!--
+      nb notification -->
       <article [routerLink]="['/main/notification']" class="notification-parent hidden-lg hidden-md hidden-sm">
         <div class="noPadding">
           <div class="cercle-notice" *ngIf="nbNewNotifications > 0">
@@ -80,14 +82,13 @@
               <span *ngFor="let notif of listNotif">
 
                 <article [class.seen-notification]="notif.isSeen === 'false'" *ngIf="notif.type !='subscribe'" (click)="goTo('post',notif.publId,notif._id)">
-                  <div class="user-img for-notif" *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePictureMin" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePictureMin + ')'}"></div>
-
-                  <div class="user-img for-notif" *ngIf="notif.profiles && !notif.profiles[notif.profiles.length-1].profilePictureMin" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
+                  <div class="user-img for-notif" *ngIf="notif.profiles && notif.profiles.length > 0&&notif.profiles[notif.profiles.length-1].profilePictureMin" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePictureMin + ')'}">
+                    </div>
 
 
                   <div class="notif-content">
                     <div *ngIf="notif.type =='comment'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
-                      <span *ngIf="notif.profiles &&notif.profiles.length==1">
+                      <span *ngIf="notif.profiles && notif.profiles.length == 1">
                         <span class="notif-a">
                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
                         <span>{{ 'main_comment_notification' | translate }}</span>
@@ -144,30 +145,38 @@
                     </div>
                   </div>
 
+
+
                 </article>
-                <article [class.seen-notification]="notif.isSeen === 'false'" *ngIf=" notif.type =='subscribe'" (click)="goTo('profile',notif.profiles[0]._id,notif._id)">
-                  <div class="user-img for-notif" *ngIf="notif.profiles &&notif.profiles[notif.profiles.length-1].profilePicture" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
-                  <div class="notif-content">
-                    <div *ngIf="notif.type =='subscribe'" class="comment-text">
+                <article [class.seen-notification]="notif.isSeen === 'false'" *ngIf=" notif.type =='subscribe' && notif.profiles.length >0" (click)="goTo('profile',notif.profiles[0]._id,notif._id)">
+                  <div class="user-img for-notif" *ngIf="notif.profiles && notif.profiles.length >0 &&notif.profiles[notif.profiles.length-1].profilePicture" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
 
-                      <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}</span>
-                      <span>{{ 'main_subscribe_notification' | translate }} </span>
+                    <div class="notif-content">
+                      <div *ngIf="notif.type =='subscribe'" class="comment-text">
+                         <div *ngIf="notif.profiles.length >0">
+                        <span class="notif-a">{{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}</span>
+                        <span>{{ 'main_subscribe_notification' | translate }} </span>
+                        </div>
 
+                      </div>
+                      <div class="time-notif ">
+
+
+                      <span>
+                     {{getNotificationTime(notif.date_notification)}}
+
+                  </span>
+                      </div>
                     </div>
-                    <div class="time-notif ">
 
+                    </article>
 
-                    <span>
-                   {{getNotificationTime(notif.date_notification)}}
 
                 </span>
-                    </div>
+
+              </div>
                   </div>
-                </article>
 
-              </span>
-
-            </div>
             <div style="text-align: center;" *ngIf="showButtonMoreNotif" (click)="getNotifications()">
               <a class="btn more-not" style="width: 100%">
                 {{ 'main_more_notifications' | translate }}
@@ -182,7 +191,7 @@
 
 
           </div>
-        </div>
+
       </article>
 
 
@@ -214,7 +223,7 @@
         </div>
 
       </article>
-      
+
 
     </div>
 
