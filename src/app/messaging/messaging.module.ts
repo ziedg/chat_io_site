@@ -9,6 +9,7 @@ import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
 import { ChatListItemComponent } from './chat-list-item/chat-list-item.component';
 import { HeaderMobileComponent } from './header-mobile/header-mobile.component';
 import { ConversationMobileComponent } from './conversation-mobile/conversation-mobile.component';
+import { SuggestionsComponent } from './suggestions/suggestions.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { ConversationMobileComponent } from './conversation-mobile/conversation-
     ReactiveFormsModule,
     FormsModule
   ],
-  declarations: [MessagingComponent, ChatListComponent, ConversationComponent, ChatListItemComponent, HeaderMobileComponent, ConversationMobileComponent]
+  declarations: [MessagingComponent, ChatListComponent, ConversationComponent, ChatListItemComponent, HeaderMobileComponent, ConversationMobileComponent, SuggestionsComponent]
 })
 export class MessagingModule { }

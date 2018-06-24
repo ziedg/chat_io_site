@@ -22,6 +22,7 @@
 	 
 	</div>
 </div>
+<app-suggestions></app-suggestions>
 <!-- <ul class="list-group">
 	<li class="list-group-item"
 		*ngFor="let user of chatListUsers"
@@ -30,6 +31,7 @@
 			{{ user.firstName +' '+ user.lastName }}
 	</li>
 </ul> -->
+<!-- <p class="sub">Messages Récents</p> -->
 <div class="users-list" *ngFor="let user of chatListUsers">
 	<app-chat-list-item [class.active]="isUserSelected(user.id)" (click)="selectUser(user)"  user="{{user.firstName}} {{user.lastName}}"
 		userImage="{{user.profilePicture}}"></app-chat-list-item>

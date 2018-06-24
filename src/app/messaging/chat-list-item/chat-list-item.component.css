@@ -1,13 +1,19 @@
 .item{
-    padding:5px 0 10px 16px;
+    padding:10px 25px;
     border-bottom: 1px solid #efefef;
 }
+.person-img{
+    display: inline-block;
+}
+.person-img img{
+    object-fit: cover;
+}
 .corps{
-    color:#7E7E7E;
-    line-height:12px;
+    color: #7E7E7E;
+    line-height: 12px;
     margin-top: 10px;
-    margin-bottom: -15px;
-    margin-left: -25px;
+    width: 80%;
+    float: right;
 }
 
 .vous{
@@ -57,4 +63,10 @@
 }
 .corps p i{
     margin-right: 5px;
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .corps{
+        width:90%
+    }
 }

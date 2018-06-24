@@ -1,0 +1,26 @@
+.img-circle{
+    object-fit: cover;
+}
+.suggestions{
+    padding:10px;
+}
+.suggestion{
+    max-width: 50px;
+    display: inline-block;
+    vertical-align: middle;
+    margin:0 8px;
+}
+.suggestion p{
+    text-align: center;
+    font-size: 12px;
+}
+.suggestion img{
+    vertical-align: middle;
+}
+.sub{
+    padding:10px;
+}
+.sub span{
+    background-color:#7E7E7E;
+    border-radius: 20px;
+}
