@@ -11,7 +11,9 @@ export class ChatListItemComponent implements OnInit {
   @Input() user;
   @Input() userImage;
   @Input() notread;
+  @Input() date;
   constructor() { 
+    this.date = "02:46";
     this.notread = false;
     this.myLastMessage = true;
     this.lastMessage = "Bonjour";
@@ -21,6 +23,11 @@ export class ChatListItemComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.myLastMessage);
+    if(this.myLastMessage){
+      this.lastMessage = "Vous : Bonjour";
+    }else{
+      this.lastMessage = "Bonjour";
+    }
   }
 
 }
