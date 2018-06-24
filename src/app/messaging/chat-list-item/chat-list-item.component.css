@@ -1,12 +1,27 @@
 .item{
     padding:5px 0 10px 16px;
+    border-bottom: 1px solid #efefef;
 }
 .corps{
     color:#7E7E7E;
     line-height:12px;
     margin-top: 10px;
     margin-bottom: -15px;
-    margin-left: -28px;
+    margin-left: -15px;
+}
+
+.not-read{
+    background-color:rgba(76, 154, 33,.2);
+}
+
+.not-read-text{
+    color:rgb(76, 154, 33);
+    font-weight: bold;
+}
+
+.fa-circle{
+    color: rgb(76, 154, 33);
+    font-size: 9pt;
 }
 
 .corps>div p:first-child{
@@ -31,6 +46,9 @@
     -webkit-transform: scaleX(-1);
     -ms-transform: scaleX(-1);
     -o-transform: scaleX(-1);
+}
+.corps p i{
+    margin-right: 5px;
 }
 /* .corps hr{
     margin: 0 !important;

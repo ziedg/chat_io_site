@@ -101,27 +101,10 @@
     border-right-color: #E5E5E5;
     border-left: 0;
     border-bottom: 0;
-    /* margin-top: 5px;
-    margin-left: -9px; */
     -webkit-transform: rotate(-35deg);
     transform: rotate(-35deg);
 }
-/* .self-message:after { 
-    content: '';
-    position: absolute;
-    right: 25%;
-    top: 50%;
-    width: 0;
-    height: 0;
-    border: 10px solid transparent;
-    border-left-color: #039803;
-    border-right: 0;
-    border-bottom: 0;
-    margin-top: 20px;
-    margin-right: -92px;
-    -webkit-transform: rotate(35deg);
-    transform: rotate(35deg);
-} */
+
 .message-thread>li:not(.self-message):not(.mydate){
     margin-top: 5% !important;
     display: inline-block;
@@ -184,7 +167,6 @@
     text-align: center;
 }
 .message-typer form>div>i{
-    /* margin: 5px 10px; */
     font-size: 16pt;
 }
 

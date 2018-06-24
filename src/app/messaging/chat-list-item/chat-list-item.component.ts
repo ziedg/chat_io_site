@@ -10,7 +10,9 @@ export class ChatListItemComponent implements OnInit {
   @Input() lastMessage;
   @Input() user;
   @Input() userImage;
+  @Input() notread;
   constructor() { 
+    this.notread = false;
     this.myLastMessage = true;
     this.lastMessage = "Bonjour";
     this.user = "Leyana";
