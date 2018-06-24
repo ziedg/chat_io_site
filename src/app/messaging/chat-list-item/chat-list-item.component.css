@@ -50,6 +50,9 @@
 .corps p{
     margin-left: -5px;
     font-size: 11pt;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .topdiv>p:nth-child(2){
     font-size: 9pt;
