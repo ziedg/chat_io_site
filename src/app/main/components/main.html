@@ -175,19 +175,22 @@
                 </span>
 
               </div>
+              <div style="text-align: center;" *ngIf="showButtonMoreNotif" (click)="getNotifications()">
+                <a class="btn more-not" style="width: 100%">
+                  {{ 'main_more_notifications' | translate }}
+                </a>
+              </div>
+
+              <div *ngIf="showNoNotif" style="text-align: center;">
+                <a class="btn more-not" style="width: 100%">
+                  {{ 'main_no_notification' | translate }}
+                </a>
+              </div>
+
+
+
                   </div>
 
-            <div style="text-align: center;" *ngIf="showButtonMoreNotif" (click)="getNotifications()">
-              <a class="btn more-not" style="width: 100%">
-                {{ 'main_more_notifications' | translate }}
-              </a>
-            </div>
-
-            <div *ngIf="showNoNotif" style="text-align: center;">
-              <a class="btn more-not" style="width: 100%">
-                {{ 'main_no_notification' | translate }}
-              </a>
-            </div>
 
 
           </div>
