@@ -36,6 +36,7 @@
 	<app-chat-list-item [class.active]="isUserSelected(user.id)" (click)="selectUser(user)"  user="{{user.firstName}} {{user.lastName}}"
 		userImage="{{user.profilePicture}}"></app-chat-list-item>
 </div>
+<hr>
 <app-chat-list-item  user="Test" date="23 juin 2018"
 		></app-chat-list-item>
 		<app-chat-list-item   user="Test" [notread]="true" [myLastMessage]="false" date="23 juin 2018"></app-chat-list-item>

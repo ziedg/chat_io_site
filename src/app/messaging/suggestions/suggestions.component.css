@@ -4,11 +4,14 @@
 .suggestions{
     padding:10px;
 }
+.suggestions:first-child{
+    margin-left: 0px;
+}
 .suggestion{
     max-width: 50px;
     display: inline-block;
     vertical-align: middle;
-    margin:0 8px;
+    margin:0 10px;
 }
 .suggestion p{
     text-align: center;
