@@ -448,7 +448,7 @@ export class Home {
     this.link.isGif = true;
     this.linkLoading = false;
     jQuery(".file-input-holder").hide();
-    
+
 
   }
 
@@ -695,9 +695,15 @@ export class Home {
 
   //uploading photo or GIF
   uploadPhoto($event) {
-    var inputValue = $event.target;
+    let inputValue = $event.target;
+    console.log($event);
 
     if (inputValue != null && null != inputValue.files[0]) {
+      if(inputValue.files[0].name.endsWith(".gif") || inputValue.files[0].name.endsWith(".GIF")) {
+        console.log("it ends with gif !");
+        this.uploadPhotoGIF($event);
+        return
+      }
       this.uploadedPicture = inputValue.files[0];
       //change
 
@@ -729,7 +735,7 @@ export class Home {
   }
 
   uploadPhotoGIF($event) {
-    var inputValue = $event.target;
+    let inputValue = $event.target;
     if (inputValue != null && null != inputValue.files[0]) {
       this.uploadedPicture = inputValue.files[0];
       previewFile(this.uploadedPicture);
@@ -860,7 +866,7 @@ console.log("analyyyze");
 
       return 1;
     }
-    
+
     /*
     if (linkURL.search(/(\.gif)$/i) > 0) {
       console.log("this is a gif!");
