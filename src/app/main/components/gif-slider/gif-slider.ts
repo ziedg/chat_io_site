@@ -12,7 +12,11 @@ import { GifService } from '../../services/gifService';
 })
 export class GifSlider implements AfterViewInit {
 
-  public GifList: Array<GifBean> = [];
+  public UrlGifList = [];
+  ListOfGifs = [];
+  NewListOfGifs = [];
+  gifLimitIndex: number = 47;
+  firstGifRequest = true;
   @Output() myEvent = new EventEmitter();
 
   offset_x_pos:number = 0;
@@ -28,7 +32,34 @@ export class GifSlider implements AfterViewInit {
 
   constructor(private renderer: Renderer2,
               private gifService: GifService) {
-    this.GifList = gifService.getGifList().list;
+                
+                this.gifService.loadMoreGifs();
+           this.ListOfGifs = gifService.getGifList();
+            for( var i=0; i<this.ListOfGifs.length; i++){
+              this.UrlGifList[i] = this.ListOfGifs[i]["media"][0]["nanogif"]["url"];
+
+            }
+  }
+
+  loadMoreGifs(){
+    this.gifService.loadMoreGifs();
+    //console.log(this.gifService.getGifList());
+    
+    
+    // if (this.firstGifRequest){
+    //   this.firstGifRequest = false;
+    //   this.gifService.loadMoreGifs();
+    //   }
+    this.NewListOfGifs = this.gifService.getGifList();
+    this.gifService.loadMoreGifs();
+    //console.log(this.NewListOfGifs);
+    var currentLength = this.UrlGifList.length;
+    for( var i=0; i<this.NewListOfGifs.length; i++){
+      this.UrlGifList[currentLength] = this.NewListOfGifs[i]["media"][0]["nanogif"]["url"];
+      currentLength++;
+    }
+    //console.log(currentLength);
+    this.gifLimitIndex +=50;
   }
 
   ngAfterViewInit() {
@@ -41,18 +72,30 @@ export class GifSlider implements AfterViewInit {
 
 
   translate_it(n:number) {
-    let offset_x_n = this.offset_x_pos + n;
-    if (offset_x_n <= 0 && offset_x_n > -this.GifList.length) {
+    //console.log("gif length: "+ (this.ListOfGifs.length-3));
+    let offset_x_n:any = this.offset_x_pos + n;
+    //console.log("offset_x_n: "+offset_x_n);
+
+    if (offset_x_n == - this.gifLimitIndex){
+      //console.log("max leeength");
+      this.loadMoreGifs();
+    }
+
+    if (offset_x_n <= 0 && offset_x_n > -this.UrlGifList.length) {
+      
       this.offset_x_pos = offset_x_n;
+      //console.log("offset_x_pos: "+this.offset_x_pos);
       let offset_x = this.offset_x_pos * (this.sliderWidth + this.sliderMarginRight);
+      //console.log("offset_x: "+offset_x);
       this.renderer.setStyle(this.slidesContainer.nativeElement,
         'transform',
         `translatex(${offset_x}px)`);
     }
+    
   }
 
   gifPreview(urlGIF){
-    console.log("chiiiild");
+    //console.log("chiiiild");
     this.myEvent.emit(urlGIF);
 }
 

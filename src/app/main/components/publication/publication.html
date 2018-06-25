@@ -194,7 +194,7 @@
 
     </div>
 
-    <div class="interactions" *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0">
+    <div class="interactions" *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0 || nbDisplayedComments != 0">
     
       <span>{{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} {{ 'interactions' | translate }}</span> •
         
