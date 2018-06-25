@@ -28,7 +28,7 @@
             {{profile.firstName}} {{profile.lastName}}
           </a></header>
           <div class="top-blagueurs-sub-nbr" *ngIf="!profile.ispop"> {{'fb_label' | translate}}</div>
-          <div class="top-blagueurs-sub-nbr" *ngIf="profile.ispop"> {{profile.nbSuivi}} {{'subscribers' | translate}} </div>
+          <div class="top-blagueurs-sub-nbr" *ngIf="profile.ispop"> {{profile.nbSubscribers}} {{'subscribers' | translate}} </div>
         </div>
         <div class="subscribe">
           <button *ngIf="!profile.isSubscribed" (click)="subscribe(profile)">

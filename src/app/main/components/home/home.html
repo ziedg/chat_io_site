@@ -141,7 +141,7 @@
                   <i class="fa fa-times" aria-hidden="true" (click)="closeLinkAPI()"></i>
                 </span>
 
-               
+
 
                 <div class="noPadding" *ngIf="link.isGif">
                   <img class="img-preview" [src]="link.url"/>
@@ -157,7 +157,7 @@
 
                   <p>{{link.description}}</p>
                   <b>{{linkDomain}}</b>
-                 
+
                 </div>
               </div>
               <div class="facebook-preview">
@@ -179,7 +179,7 @@
                 <i class="fa fa-picture-o" style="font-size: 20px;"></i>
               </span>
 
-              <span class="hidden-xs" (click)="toggleGifSlider()" style="line-height: 46Px">
+              <span (click)="toggleGifSlider()" style="line-height: 46Px">
                 <b class="gif-btn">{{ 'home_publish_GIF' | translate }}</b>
               </span>
 
