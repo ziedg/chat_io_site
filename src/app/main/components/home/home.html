@@ -141,18 +141,24 @@
                   <i class="fa fa-times" aria-hidden="true" (click)="closeLinkAPI()"></i>
                 </span>
 
-                <div class="noPadding" *ngIf="link.image">
+               
+
+                <div class="noPadding" *ngIf="link.isGif">
+                  <img class="img-preview" [src]="link.url"/>
+                </div>
+
+                <div class="noPadding" *ngIf="link.url && !link.isGif">
                   <img class="img-preview" [src]="link.image"/>
                 </div>
-                <!-- <div class="descriptions" *ngIf="!link.isGif">
+                <div class="descriptions" *ngIf="!link.isGif">
                   <a href="{{link.url}}" target="_blank">
                     <h4>{{link.title}}</h4>
                   </a>
 
                   <p>{{link.description}}</p>
                   <b>{{linkDomain}}</b>
-
-                </div> -->
+                 
+                </div>
               </div>
               <div class="facebook-preview">
 
