@@ -4,6 +4,7 @@ import { GifBean } from '../../../beans/gif-bean';
 import { GifService } from '../../services/gifService';
 
 
+
 @Component({
   selector: 'gif-slider',
   templateUrl: './gif-slider.html',
@@ -17,7 +18,7 @@ export class GifSlider implements AfterViewInit {
   gifLimitIndex: number = 47;
   firstGifRequest = true;
   @Output() myEvent = new EventEmitter();
-  
+
   offset_x_pos:number = 0;
   sliderWidth: number = 120;
   sliderHeight: number = 110;
@@ -69,6 +70,7 @@ export class GifSlider implements AfterViewInit {
     containerStyle.setProperty('--slider-m-r', `${this.sliderMarginRight}px`);
   }
 
+
   translate_it(n:number) {
     //console.log("gif length: "+ (this.ListOfGifs.length-3));
     let offset_x_n:any = this.offset_x_pos + n;
@@ -96,5 +98,5 @@ export class GifSlider implements AfterViewInit {
     //console.log("chiiiild");
     this.myEvent.emit(urlGIF);
 }
-  
+
 }

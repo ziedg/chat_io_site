@@ -374,7 +374,7 @@
 
 body {
   margin: 0;
-  padding-top: 77px;
+  padding-top: 116px;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #fafafa !important;
   font-size: 14px;
@@ -971,12 +971,15 @@ a {
 
 .notification-bar {
   width: 100%;
-  padding: 15px 0px 15px;
+  padding: 15px 0 15px;
   background-color: #36a0f0;
   color: white;
   text-align: center;
   font-weight: 600;
   font-size: 16px;
+  position: fixed;
+  top: 77px;
+  z-index:5;
 }
 
 @media (max-width: 768px) {
@@ -2144,23 +2147,27 @@ textarea:focus {
 }
 
 .user-fb {
-  display: block !important;
+  display: flex !important;
   position: relative;
-  border: 1px solid #edeeee;
-  padding: 10px;
-  width: 131px;
-  height: min-content;
+  padding: 20px;
+  width: 170px;
+  height: 210px;
   margin: 5px;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #edeeee;
+  border-radius: 4px;
 }
 
 .fb-link-name {
-  white-space: pre-line;
-  max-width: 115px;
-  text-align: center;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  font-size: 16px;
+  width: 130px;
 }
 
 .suggestions-box .user {
@@ -2203,12 +2210,12 @@ top-blagueurs-decov .user .user-img {
 }
 
 facebook-friends .user .user-img {
-  --user-img-w: 35px;
+  --user-img-w: 60px;
+  width: var(--user-img-w);
+  height: var(--user-img-w);
   min-width: var(--user-img-w);
   min-height: var(--user-img-w);
   margin: 0 auto;
-  width: 80px;
-  height: 80px;
 }
 
 .fb-section {
@@ -2231,6 +2238,8 @@ facebook-friends .user .user-img {
   border-radius: 50%;
   position: absolute;
   top: 50%;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .navigation-arrow-container:hover {
@@ -2275,6 +2284,8 @@ facebook-friends .user .user-img {
   background-color: white;
   font-weight: bold;
 }
+
+
 
 .widget .subscribe button:hover {
   background-color: #ddd;
@@ -3395,17 +3406,33 @@ facebook-friends .user .user-img {
 }
 
 .widget .subscribe button {
-  border: 1px solid #ccc;
-  background-color: #fff;
-  color: #333;
-  font-size: 12px !important;
-  width: auto !important;
+  color: white;
+  background-color: #12a012;
+  font-size: 15px !important;
   padding: 5px 6px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
   height: 28px;
   box-sizing: border-box;
+  width: 130px;
+  border: 0;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 10px;
+  display: inline-block;
 }
+
+
+top-blagueurs-decov .widget .subscribe button {
+  width: 94px;
+  background-color: white;
+  color: #333;
+  border: 1px solid #ccc;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  font-size: 13px!important;
+  line-height: unset;
+}
+
+
 
 .show-more {
   color: #3d3d3d;
@@ -3470,9 +3497,9 @@ facebook-friends .user .user-img {
 
 .top-blagueurs-sub-nbr {
   color: #979797;
-  font-size: 9.5px;
-  font-weight: bolder;
-  margin-top: 2px;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .profil-holder {
@@ -4338,7 +4365,6 @@ input.loginInput {
   border-radius: 3px;
   width: 60%;
   font-size: 16px;
-  padding-left: 6px 15px;
   resize: none;
 }
 
@@ -5632,6 +5658,7 @@ top-blagueurs-decov .user-img {
   margin-top: 10px;
   font-size: 12.5px;
   margin-left: 5px;
+  font-weight: bold;
 }
 
 .conditions-generales a, .conditions-generales a:hover {
@@ -5640,9 +5667,9 @@ top-blagueurs-decov .user-img {
 }
 
 .copyright-home {
-  margin-top: 10px;
+  margin-top: 20px;
   color: #545454;
-  font-size: 13px;
+  font-size: 11px;
   margin-left: 5px
 }
 

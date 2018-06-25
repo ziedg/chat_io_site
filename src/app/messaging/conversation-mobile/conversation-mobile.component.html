@@ -1,0 +1,53 @@
+<div class="myContainer">
+	<div class="header-mobile">
+		<div>
+			<a class="homebtn" href="#">
+					<i class="fas fa-chevron-left"></i>
+			</a>
+			<div>
+				<p>Lorem Ipsum</p>
+			</div>
+		</div>
+	</div>
+	<div class="message-wrapper">
+		<div class="message-container"> 
+			<ul class="message-thread">
+				<li class="self-message">
+					<p class="messageContent">
+						Testing Cache!
+					</p>
+				</li>
+				<li>
+					<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&h=350" class="profilePicture img-circle" />
+					<p class="messageContent">
+						Hey not Test!
+					</p>
+				</li>
+				<li class="mydate">
+					<p>23:49</p>
+				</li>
+				<li class="self-message">
+					<p class="messageContent">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="message-typer">
+			<form [formGroup]="messageForm" novalidate>
+				<div>
+					<i class="fas fa-camera"></i>
+					<div class="embed-submit-field">
+						<input class="message" 
+							type="text"
+							placeholder="Message" 
+							(keyup)="sendMessage()" 
+							formControlName="message"/>
+						<button type="submit"><i class="fas fa-arrow-up"></i></button>
+					</div>
+				</div>
+			</form>
+		</div>
+</div>
+

@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/map';
 
-import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,6 +10,10 @@ import { User } from '../../../beans/user';
 import { LoginService } from '../../../login/services/loginService';
 import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
+
+
+declare var jQuery: any;
+declare var $: any;
 
 @Component({
   moduleId: module.id,
@@ -27,12 +31,14 @@ export class TopBlagueursAndDecov {
   public user: User = new User();
 
   @Output() loadPublications = new EventEmitter<any>();
+  @ViewChild('container') container: ElementRef;
 
   constructor(public translate: TranslateService,
     private http: Http,
     private router: Router,
     private loginService: LoginService,
     private changeDetector: ChangeDetectorRef) {
+
     loginService.redirect();
     this.user = loginService.user;
     this.loadPopularProfiles();
@@ -42,12 +48,12 @@ export class TopBlagueursAndDecov {
 
     this.displayedNumberPopularProfiles = this.displayedNumberPopularProfiles + 4;
 
-    
+
     this.displayShowMore = this.popularProfiles.length >= this.displayedNumberPopularProfiles;
   if (this.displayedNumberPopularProfiles % 20 === 0 || (this.displayedNumberPopularProfiles % 20) % 8 ===0){
       this.loadPopularProfiles(this.lastPopularProfileID);
     }
-  
+
   }
 
   loadPopularProfiles(Id_Profile?: string) {

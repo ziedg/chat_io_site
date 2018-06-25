@@ -12,13 +12,12 @@ import { EmitterService } from '../emitter.service';
 
 declare var jQuery: any;
 
-
 @Component({
-  selector: 'app-chat-list',
-  templateUrl: './chat-list.component.html',
-  styleUrls: ['./chat-list.component.css']
+  selector: 'app-chat-list-mobile',
+  templateUrl: './chat-list-mobile.component.html',
+  styleUrls: ['./chat-list-mobile.component.css']
 })
-export class ChatListComponent implements OnInit {
+export class ChatListMobileComponent implements OnInit {
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
 
@@ -198,6 +197,4 @@ disableAutocomplete() {
   jQuery(".recherche-results-holder-1").hide();
   jQuery(".upper-arrow-search").hide();
 }
-
-
 }

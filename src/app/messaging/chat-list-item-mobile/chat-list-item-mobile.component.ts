@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-chat-list-item',
-  templateUrl: './chat-list-item.component.html',
-  styleUrls: ['./chat-list-item.component.css']
+  selector: 'app-chat-list-item-mobile',
+  templateUrl: './chat-list-item-mobile.component.html',
+  styleUrls: ['./chat-list-item-mobile.component.css']
 })
-export class ChatListItemComponent implements OnInit {
+export class ChatListItemMobileComponent implements OnInit {
   @Input() myLastMessage;
   @Input() lastMessage;
   @Input() user;
@@ -27,5 +27,4 @@ export class ChatListItemComponent implements OnInit {
       this.lastMessage = "Vous : "+this.lastMessage;
     }
   }
-
 }

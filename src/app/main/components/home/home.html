@@ -6,7 +6,7 @@
 <div *ngIf="user" class="container" id="container">
   <div class="row">
     <div class="home-sidebar col-md-2 hidden-sm hidden-xs">
-      <div class="home-sidebar-container" #homeSidebar>
+      <div class="home-sidebar-container" #homeSidebarLeft>
         <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
                         [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}"></span>
           <span><a style="color:black" [routerLink]="['/main/profile',user._id]">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span>
@@ -17,9 +17,9 @@
         <div [routerLink]="['/main/messaging']"><span><img class="home-sidebar-icon"
                                                            src="assets/images/new/chat-grey.png"></span>
           <span><a style="color:black" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a></span></div>
-        <hr style="width:120px;margin-left:0; margin-bottom: 0">
+        <hr style="width:120px;margin: 22px 0 28px 0">
         <div class="conditions-generales">
-          <div><a href="/support/cgu">{{'conditions_generales' | translate}}</a></div>
+          <div style="margin-bottom: 4px;"><a href="/support/cgu">{{'conditions_generales' | translate}}</a></div>
           <div><a href="/support/about-us">{{'a_propos' | translate}}</a></div>
         </div>
         <div class="copyright-home"> Speegar &copy; 2018</div>
@@ -98,7 +98,7 @@
                    contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)"
                    #publishDivRef style="width: calc(100% - 80px)"></div>
 
-              
+
               <!-- tag new publication -->
               <!--
               <div class="" >
@@ -166,7 +166,7 @@
               <div class="youtube-preview">
 
               </div>
-              
+
               <gif-slider style="width:100%;" *ngIf="showGifSlider" (myEvent)="previewGIF($event)"></gif-slider>
 
             </div>
@@ -313,10 +313,9 @@
       </section>
     </div>
     <div *ngIf="user" class="col-md-3 col-sm-5 hidden-xs side-home">
-      <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
-
-
-      <section class="hidden-sm hidden-xs widget bordered" style="padding:15px">
+      <div #homeSideBarRight>
+        <top-blagueurs-decov (loadPublications)="this.loadFirstPosts()"></top-blagueurs-decov>
+        <section class="hidden-sm hidden-xs widget bordered" style="padding:15px" #selectLanguage>
 
 
         <span *ngFor="let language of translationLanguages; let i = index"
@@ -327,6 +326,7 @@
         </span>
 
       </section>
+      </div>
 
 
     </div>

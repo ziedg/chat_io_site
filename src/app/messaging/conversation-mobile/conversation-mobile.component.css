@@ -1,33 +1,65 @@
+.myContainer{
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: 0;
+}
+.header-mobile{
+    text-align: center;
+    padding:15px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    z-index: 10000;
+    background: #fafafa;
+    height:50px;
+    border-bottom: 1px solid #efefef;
+}
+.header-mobile div>img{
+    height: 40px;
+    width: 40px;
+}
+.header-mobile div>p{
+    color:black;
+    font-size: 17px;
+    margin:0;
+}
+.homebtn i{
+    color:black;
+    position: absolute;
+    top:18px;
+    left: 10px;
+    box-shadow: none;
+    border: none;
+}
 .opposite-user {
 	background-color: rgb(255, 255, 255);
 	color: rgb(0, 0, 0);
 	left: 0;
 	right: 0;
 	padding:10px;
-	border-bottom: solid 1px #efefef;
+	border: solid 1px #BDBDBD;
+	border-bottom: none;
 	text-align: center;
-	line-height: 17px;
+	line-height: 5px;
 }
 
 .opposite-user>p:first-child{
 	text-transform: capitalize;
-	color:black;
-    font-size: 17px;
-	margin:0;
-	padding: 10px;
 }
 
 .commentMessenger{
 	color: #b9b9b9;
-	font-size:15px;
+	font-size:10pt;
 }
-
 .message-wrapper{
-    margin-top:0px;
+    margin-top:40px;
     background-color: white;
     position: relative;
-	max-height: 86vh;
-	border-left: 1px solid #efefef;
+    overflow-y: scroll;
+    max-height: 88vh;
 }
 .message-overlay {
 	height: 100%;
@@ -40,9 +72,9 @@
 }
 
 .message-thread {
-	overflow-y: scroll;
+	overflow-y: initial;
 	list-style-type: none;
-	height: 60vh;
+	height: 95vh;
 	width: 100%;
 	margin: 0px !important;
     padding: 5px !important;
@@ -74,7 +106,7 @@
 }
 
 .message-thread>li:not(.self-message):not(.mydate){
-    margin-top: 0% !important;
+    margin-top: 5% !important;
     display: inline-block;
 }
 .message-thread>li:last-child>.messageContent{
@@ -92,18 +124,10 @@
 	background-color: #039803 !important;
 	float: right !important;
     border-radius: 15px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 1px;
     font-weight: normal;
 }
 
-.start{
-    border-top-right-radius: 15px;
-}
-
-.end{
-    border-bottom-right-radius: 15px;
-}
 
 .messageContent{
 	max-width: 300px;
@@ -133,15 +157,17 @@
 }
 
 .message-typer {
-    position: relative;
-	background-color: white;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: white;
 }
 .message-typer form>div{
     text-align: center;
 }
 .message-typer form>div>i{
-	font-size: 16pt;
-	cursor: pointer;
+    font-size: 16pt;
 }
 
 
@@ -149,7 +175,7 @@
     position: relative;
     display: inline-block;
     margin:5px;
-    min-width: 93%;
+    min-width: 85%;
 }
 
 .embed-submit-field input{
