@@ -7,43 +7,126 @@ import { GifListBean } from '../../beans/gif-list-bean';
 @Injectable()
 export class GifService {
      nvList:GifListBean = new GifListBean();
+     url = "https://api.tenor.com/v1/anonid?key=" + "94VF61TXW797";
+     top_10_gifs;
+     next: string ="";
+     getMoreGifs: boolean = false;
+     public anon_id: string;
     /* constructor  */
     constructor(){
         
-        var nvgif:GifBean = new GifBean();
+        //var nvgif:GifBean = new GifBean();
         // list people
         //nvList.title="persone";
-        this.nvList.list=[];
+        //this.nvList.list=[];
+        this.httpGetAsync(this.url, this.tenorCallback_anonid, this);
 
-        nvgif= new GifBean();
-        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq7W4rj","https://images-cdn.9gag.com/photo/aq7W4rj_700b.jpg"));
-        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/azXONKN","https://images-cdn.9gag.com/photo/azXONKN_700b.jpg"));
-        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq760dZ","https://images-cdn.9gag.com/photo/aq760dZ_700b.jpg"));
-        this.nvList.list.push(this.addtoListGif("http://knowyourmeme.com/memes/slender-man","http://i0.kym-cdn.com/entries/icons/facebook/000/001/676/slenderman.thumbnail.jpg"));
+        // for( var i=0; i<10; i++){
+        //     this.nvList.list.push(this.addtoListGif(this.top_10_gifs[0]["media"][0]["nanogif"]["url"]));
+            
+        // }
         
-        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq7W4rj","https://images-cdn.9gag.com/photo/aq7W4rj_700b.jpg"));
-        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/azXONKN","https://images-cdn.9gag.com/photo/azXONKN_700b.jpg"));
-        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq760dZ","https://images-cdn.9gag.com/photo/aq760dZ_700b.jpg"));
-        this.nvList.list.push(this.addtoListGif("http://knowyourmeme.com/memes/slender-man","http://i0.kym-cdn.com/entries/icons/facebook/000/001/676/slenderman.thumbnail.jpg"));
-
-        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq7W4rj","https://images-cdn.9gag.com/photo/aq7W4rj_700b.jpg"));
-        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/azXONKN","https://images-cdn.9gag.com/photo/azXONKN_700b.jpg"));
-        this.nvList.list.push(this.addtoListGif("https://9gag.com/gag/aq760dZ","https://images-cdn.9gag.com/photo/aq760dZ_700b.jpg"));
-        this.nvList.list.push(this.addtoListGif("http://knowyourmeme.com/memes/slender-man","http://i0.kym-cdn.com/entries/icons/facebook/000/001/676/slenderman.thumbnail.jpg"));
-
-        
-
         
 
     }
-    addtoListGif(urlGIF,imageGIF):GifBean{
-        var nvgif:GifBean= new GifBean();
-        nvgif.urlGIF=urlGIF;
-        nvgif.imageGIF=imageGIF;
-        return nvgif;
+
+    httpGetAsync(theUrl, callback, that)
+{
+    // create the request object
+    var xmlHttp = new XMLHttpRequest();
+
+    // set the state change callback to capture when the response comes in
+    xmlHttp.onreadystatechange = function()
+    {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        {
+            callback(xmlHttp.responseText, that);
+        }
     }
-    getGifList(): GifListBean{
-        return this.nvList;
+
+    // open as a GET call, pass in the url and set async = True
+    xmlHttp.open("GET", theUrl, true);
+
+    // call send with no params as they were passed in on the url string
+    xmlHttp.send(null);
+
+    return;
+}
+
+// callback for trending top 10 GIFs
+public tenorCallback_trending(responsetext, that)
+{
+    // parse the json response
+    var response_objects = JSON.parse(responsetext);
+
+    that.top_10_gifs = response_objects["results"];
+
+    that.next = response_objects["next"];
+
+    // load the GIFs -- for our example we will load the first GIFs preview size (nanogif) and share size (tinygif)
+
+    // document.getElementById("preview_gif").src = top_10_gifs[0]["media"][0]["nanogif"]["url"];
+
+    // document.getElementById("share_gif").src = top_10_gifs[0]["media"][0]["tinygif"]["url"];
+
+    return;
+
+}
+
+// function to call the trending and category endpoints
+
+
+
+// callback for anonymous id -- for first time users
+public tenorCallback_anonid(responsetext, that)
+{
+    // parse the json response
+    let response_objects = JSON.parse(responsetext);
+    //console.log("responsetext "+response_objects["anon_id"]);
+    var anon_id = response_objects["anon_id"];
+    //console.log("anoooooooonid"+response_objects["anon_id"]);
+    // pass on to grab_data
+    that.grab_data(anon_id, that);
+    
+}
+
+public grab_data(anon_id, that)
+{ //  console.log("graaaaaab");
+    // set the apikey and limit
+    var apikey = "94VF61TXW797";
+    var lmt = 50;
+    if(that.getMoreGifs){
+        //console.log(that.next);
+        // get the top 10 trending GIFs (updated through out the day) - using the default locale of en_US
+    var trending_url = "https://api.tenor.com/v1/trending?key=" + apikey + "&limit=" + lmt + "&anon_id" + anon_id + "&pos=" + that.next;
+    this.httpGetAsync(trending_url,this.tenorCallback_trending, that);
+
+    }else{
+        // get the top 10 trending GIFs (updated through out the day) - using the default locale of en_US
+    var trending_url = "https://api.tenor.com/v1/trending?key=" + apikey + "&limit=" + lmt + "&anon_id" + anon_id + "&pos=" + that.next;
+    this.httpGetAsync(trending_url,this.tenorCallback_trending, that);
+
     }
+
+    return;
+}
+
+
+
+
+addtoListGif(urlGIF):GifBean{
+    var nvgif:GifBean= new GifBean();
+    nvgif.urlGIF=urlGIF;
+    
+    return nvgif;
+}
+getGifList(): any{
+    return this.top_10_gifs;
+}
+
+loadMoreGifs(){
+    this.getMoreGifs = true;
+    this.httpGetAsync(this.url, this.tenorCallback_anonid, this);
+}
 
 }

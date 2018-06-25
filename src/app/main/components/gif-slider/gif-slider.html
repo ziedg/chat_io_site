@@ -1,11 +1,11 @@
-<section class="slider-container" #container>
+<section id="gif-slider-container" class="slider-container" #container>
   <div class="slider-sub-container">
     <div class="slides-container" #slidesContainer>
-      <div *ngFor="let Gif  of GifList;" class="slide">
+      <div *ngFor="let Url  of UrlGifList" class="slide">
         <div class="bla-text"  >
-          <a (click)="gifPreview(Gif.urlGIF)"> <img class="gif-img" [src]="Gif.imageGIF"  /></a>
-        
-           
+          <a (click)="gifPreview(Url)"> <img class="gif-img" [src]="Url"  /></a>
+
+
         </div>
       </div>
     </div>
