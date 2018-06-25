@@ -20,10 +20,10 @@ export class GifSlider implements AfterViewInit {
   @Output() myEvent = new EventEmitter();
 
   offset_x_pos:number = 0;
-  sliderWidth: number = 120;
-  sliderHeight: number = 110;
-  sliderBtnWidth: number = 24;
-  sliderMarginRight: number = 10;
+  sliderWidth: number = 100;
+  sliderHeight: number = 60;
+  sliderBtnWidth: number = 22;
+  sliderMarginRight: number = 4;
 
   //list: Array<number> = [1, 2, 3, 4, 5];
 
@@ -32,10 +32,10 @@ export class GifSlider implements AfterViewInit {
 
   constructor(private renderer: Renderer2,
               private gifService: GifService) {
-                
+
                 this.gifService.loadMoreGifs();
            this.ListOfGifs = gifService.getGifList();
-            for( var i=0; i<this.ListOfGifs.length; i++){
+            for( let i=0; i<this.ListOfGifs.length; i++){
               this.UrlGifList[i] = this.ListOfGifs[i]["media"][0]["nanogif"]["url"];
 
             }
@@ -44,8 +44,8 @@ export class GifSlider implements AfterViewInit {
   loadMoreGifs(){
     this.gifService.loadMoreGifs();
     //console.log(this.gifService.getGifList());
-    
-    
+
+
     // if (this.firstGifRequest){
     //   this.firstGifRequest = false;
     //   this.gifService.loadMoreGifs();
@@ -53,8 +53,8 @@ export class GifSlider implements AfterViewInit {
     this.NewListOfGifs = this.gifService.getGifList();
     this.gifService.loadMoreGifs();
     //console.log(this.NewListOfGifs);
-    var currentLength = this.UrlGifList.length;
-    for( var i=0; i<this.NewListOfGifs.length; i++){
+    let currentLength = this.UrlGifList.length;
+    for(let i=0; i<this.NewListOfGifs.length; i++){
       this.UrlGifList[currentLength] = this.NewListOfGifs[i]["media"][0]["nanogif"]["url"];
       currentLength++;
     }
@@ -82,7 +82,7 @@ export class GifSlider implements AfterViewInit {
     }
 
     if (offset_x_n <= 0 && offset_x_n > -this.UrlGifList.length) {
-      
+
       this.offset_x_pos = offset_x_n;
       //console.log("offset_x_pos: "+this.offset_x_pos);
       let offset_x = this.offset_x_pos * (this.sliderWidth + this.sliderMarginRight);
@@ -91,7 +91,7 @@ export class GifSlider implements AfterViewInit {
         'transform',
         `translatex(${offset_x}px)`);
     }
-    
+
   }
 
   gifPreview(urlGIF){
