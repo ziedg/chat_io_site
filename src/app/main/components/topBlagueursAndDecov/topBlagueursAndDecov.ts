@@ -160,7 +160,7 @@ export class TopBlagueursAndDecov {
         response => {
           if (response.status == 0) {
             user.isFollowed = false;
-            user.nbSubscribers--;
+            user.nbSuivi--;
           }
         },
         err => {
