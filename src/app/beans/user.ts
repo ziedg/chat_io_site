@@ -8,7 +8,7 @@ export class User {
 	public coverPicture: string;
 	public nbLikes: number;
 	public nbSubscribers: number;
-	public nbSuivi: number;
+	public nbSubscriptions: number;
 	public profile;
 	public gender:string;
 	public googleId:string;

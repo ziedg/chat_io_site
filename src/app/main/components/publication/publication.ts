@@ -125,7 +125,7 @@ export class Publication {
         response => {
         if (response.status == 0) {
           this.user.isFollowed = false;
-          this.user.nbSuivi--;
+          this.user.nbSubscribers--;
         }
       },
         err => {
