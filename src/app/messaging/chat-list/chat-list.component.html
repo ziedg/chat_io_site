@@ -22,9 +22,6 @@
 <hr *ngIf="chatListUsers.length > 0">
 <div class="users-list" *ngFor="let user of chatListUsers">
 	<app-chat-list-item [class.active]="isUserSelected(user.id)" (click)="selectUser(user)"  user="{{user.firstName}} {{user.lastName}}"
-		userImage="{{user.profilePicture}}"></app-chat-list-item>
+		userImage="{{user.profilePicture}}" lastMessage="{{user.lastMessage.message}}" date="{{user.lastMessage.date}}"></app-chat-list-item>
 </div>
 <hr *ngIf="chatListUsers.length == 0">
-<app-chat-list-item  user="Test" date="23 juin 2018"></app-chat-list-item>
-<app-chat-list-item  lastMessage="BonjourjemappellemonsieurrobertlolBonjourjemappellemonsieurrobertlolBonjourjemappellemonsieurrobertlol" user="Test" [notread]="true" [myLastMessage]="true" date="23 juin 2018"></app-chat-list-item>
-<app-chat-list-item  user="Test" [myLastMessage]="false" date="23 juin 2018"></app-chat-list-item>

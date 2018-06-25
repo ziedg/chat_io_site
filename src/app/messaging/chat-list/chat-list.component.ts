@@ -62,7 +62,34 @@ noSearchResults: Boolean = false;
     .subscribe((users:any[])=>{
       console.log(users)
        for(let i=0;i<users.length;i++){
-       this.chatListUsers.push(users[i]);
+          if(users[i].lastMessage.fromUserId == this.userId){
+            users[i].lastMessage.message = "Vous : "+users[i].lastMessage.message;
+          }
+          let dateMsg = new Date(users[i].lastMessage.date);
+          let actualDate = new Date(Date.now());
+          let year = dateMsg.getFullYear();
+          let month = dateMsg.getMonth() + 1;
+          let day = dateMsg.getDate();
+          if((actualDate.getFullYear() - year > 0)||
+            ((actualDate.getMonth()+1) - month > 0)||
+            (actualDate.getDate() - day > 0)){
+            users[i].lastMessage.date = day +"-"+month+"-"+year;
+          }else{
+            let hours;
+            let minutes;
+            if(dateMsg.getHours().toString().length==1){
+              hours = "0"+dateMsg.getHours().toString();
+            }else{
+              hours = dateMsg.getHours().toString();
+            }
+            if(dateMsg.getMinutes().toString().length==1){
+              minutes = "0"+dateMsg.getMinutes().toString();
+            }else{
+              minutes = dateMsg.getMinutes().toString();
+            }
+            users[i].lastMessage.date = hours+":"+minutes;
+          }
+          this.chatListUsers.push(users[i]);
        } 
    
     })
