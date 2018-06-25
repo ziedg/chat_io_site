@@ -161,7 +161,7 @@ export class Profile {
         if (response.status == 0) {
           userDisplayed.isFollowed = true;
 
-          userDisplayed.nbSubscribers++;
+          userDisplayed.nbSuivi++;
 
         }
       },
@@ -188,7 +188,7 @@ export class Profile {
         if (response.status == 0) {
           userDisplayed.isFollowed = false;
 
-          userDisplayed.nbSubscribers--;
+          userDisplayed.nbSuivi--;
         }
       },
         err => {
