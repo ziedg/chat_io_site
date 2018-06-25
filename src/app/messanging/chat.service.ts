@@ -15,10 +15,15 @@ export class ChatService {
     this.ServerUrl = environment.SERVER_URL;
   }
 
-  //get the chat list 
+  //get the chat list (historique)
   getList(userId) {
-    return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_LIST_SUGGESTIONS}` + userId);
+    return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_LIST}` + userId);
   }
+
+  //get suggestions
+getSuggestions(userId) {
+  return this.http.get(`${this.ServerUrl}${pathUtils.GET_MESSAGING_SUGGESTIONS}` + userId);
+}
 
   getMessages(users) {
     /* get messages between current user and the selected user from the list*/

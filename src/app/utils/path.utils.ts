@@ -68,7 +68,9 @@ export const GET_POPULAR_PROFILES :string = 'getPopularProfiles';
 
 export const GET_PROFILES_SUGGESTIONS:string = 'getProfilesSuggestions';
 
- export const GET_CHAT_LIST_SUGGESTIONS:string='suggestions/';
+ export const GET_CHAT_LIST:string='messagingHistory/';
+ 
+ export const GET_MESSAGING_SUGGESTIONS:string = 'suggestions/';
 
  export const GET_CHAT_MESSAGES:string='messages/';
 

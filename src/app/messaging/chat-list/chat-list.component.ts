@@ -25,6 +25,7 @@ export class ChatListComponent implements OnInit {
   private user;
   private userId: string = null;
   public chatListUsers: any[] = [];
+  public suggestions: any[] = [];
   private selectedUserId: string = null;
 //
 autocomplete = false;
@@ -47,28 +48,37 @@ noSearchResults: Boolean = false;
     this.user =this.loginService.getUser();
     this.userId=this.user._id;
     this.getChatList();
+    this.getSuggestionsList();
     jQuery(".navigation-bottom").addClass('hidden-xs');
    }
   getChatList(){
     /*
-     l'historique des personnes dont il a fait des conversations avec 
-     sinon Les trois abonnements derniers des
+     l'historique des personnes dont il a fait des conversations avec +dernier message pour chacun
      */
     this.chatService.getList(this.userId)
     .map(users=>{
-    let results:Array<any>= users.json();
-     return results.map((user)=>{
-     return {
-      _id:user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      profilePicture: user.profilePicture
-    }
+     return users.json();
      })
-    })
     .subscribe((users:any[])=>{
+      console.log(users)
        for(let i=0;i<users.length;i++){
        this.chatListUsers.push(users[i]);
+       } 
+   
+    })
+  }
+  getSuggestionsList(){
+    /*
+     les abonnées dont il n'a pas fait des conversations avec encore
+     */
+    this.chatService.getSuggestions(this.userId)
+    .map(users=>{
+     return users.json();
+     })
+    .subscribe((users:any[])=>{
+      console.log(users)
+       for(let i=0;i<users.length;i++){
+       this.suggestions.push(users[i]);
        } 
    
     })
@@ -116,7 +126,7 @@ return fullName.includes(name);
 }
 
 filterSubscriptionsByName(name){
-  return this.user.subscriptions.filter((user)=>{
+  return this.user.subscriptionsDetails.filter((user)=>{
   let fullName=user.firstName + ' ' + user.lastName;
   return fullName.includes(name);
   });
@@ -128,11 +138,10 @@ onFocus(){
 }
 
 onChange(newValue: string) {
-  console.log(newValue)
   this.listSearchUsers = [];
   this.enableAutocomplete();
   this.changeDetector.markForCheck();
-  if (newValue.length > 1) {
+  if (newValue.length >=1) {
       let searchInHistory=this.filterChatListUsersByName(newValue);
         if (searchInHistory && searchInHistory.length>0){
         this.listSearchUsers=searchInHistory
