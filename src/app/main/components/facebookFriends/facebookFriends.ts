@@ -134,7 +134,7 @@ export class FacebookFriends {
             response => {
               if (response.status == 0) {
                 user.isFollowed = false;
-                user.nbSuivi--;
+                user.nbSubscribers--;
                 this.isValid = this.facebookProfiles.length != 0;
               }
             },
