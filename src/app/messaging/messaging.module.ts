@@ -10,6 +10,9 @@ import { ChatListItemComponent } from './chat-list-item/chat-list-item.component
 import { HeaderMobileComponent } from './header-mobile/header-mobile.component';
 import { ConversationMobileComponent } from './conversation-mobile/conversation-mobile.component';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
+import { ChatListMobileComponent } from './chat-list-mobile/chat-list-mobile.component';
+import { ChatListItemMobileComponent } from './chat-list-item-mobile/chat-list-item-mobile.component';
+import { SuggestionsMobileComponent } from './suggestions-mobile/suggestions-mobile.component';
 
 @NgModule({
   imports: [
@@ -18,6 +21,6 @@ import { SuggestionsComponent } from './suggestions/suggestions.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  declarations: [MessagingComponent, ChatListComponent, ConversationComponent, ChatListItemComponent, HeaderMobileComponent, ConversationMobileComponent, SuggestionsComponent]
+  declarations: [MessagingComponent, ChatListComponent, ConversationComponent, ChatListItemComponent, HeaderMobileComponent, ConversationMobileComponent, SuggestionsComponent, ChatListMobileComponent, ChatListItemMobileComponent, SuggestionsMobileComponent]
 })
 export class MessagingModule { }

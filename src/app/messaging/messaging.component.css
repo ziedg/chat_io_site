@@ -9,20 +9,20 @@
 }
 
 .messengerDiv{
-	background-color: white;
-	position: absolute;
-	bottom: 0;
-	top: 0;
-	right: 0;
-	left: 0;
+	position: relative;
+	margin: 0 auto;
 }
 
 .messengerDiv>.row>div{
 	padding-left:0!important;
 	padding-right: 0!important;
 }
-@media (max-width: 991px) {
-    .chat-list{
-		height:100vh;
-	}
+.row-eq-height {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display:         flex;
+  }
+.chat-list{
+	background-color:white;
 }
