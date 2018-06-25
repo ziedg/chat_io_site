@@ -1,10 +1,6 @@
 .item{
-    margin: 0;
-    padding: 10px 5px;
+    padding:10px 25px;
     border-bottom: 1px solid #efefef;
-}
-.item:hover{
-    cursor: pointer;
 }
 .person-img{
     display: inline-block;
@@ -16,7 +12,7 @@
     color: #7E7E7E;
     line-height: 12px;
     margin-top: 10px;
-    width: 76%;
+    width: 80%;
     float: right;
 }
 
@@ -70,4 +66,19 @@
 }
 .corps p i{
     margin-right: 5px;
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .corps{
+        width:90%
+    }
+}
+@media (min-width: 1025px) {
+    .item{
+        margin: 0!important;
+        padding: 10px 5px;
+    }
+    .corps{
+        width: 75%;
+    }
 }

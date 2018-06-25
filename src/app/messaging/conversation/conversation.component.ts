@@ -6,7 +6,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { User } from '../../beans/user';
 import { ChatService } from '../../messanging/chat.service';
 import { EmitterService } from '../emitter.service';
-
+declare var jQuery: any;
 class MessageValidation {
 	constructor() {
 		return [
@@ -67,8 +67,8 @@ export class ConversationComponent  {
   });
 }
 
-sendMessage(event) {
-  if (event.keyCode === 13) {
+sendMessageBtn() {
+  //if (event.keyCode === 13) {
       const message = this.messageForm.controls['message'].value.trim();
       if (message === '' || message === undefined || message === null) {
           alert(`Message can't be empty.`);
@@ -93,7 +93,7 @@ sendMessage(event) {
               document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
           }, 100);
       }
-  }
+  //}
 }
 
 listenForMessages(userId: string): void {
@@ -125,5 +125,12 @@ alignMessage(userId: string): boolean {
   return this.userId === userId ? false : true;
 }
 
+sendMessage(){
+  if(jQuery(".message").val().length > 0){
+    jQuery(".embed-submit-field button").addClass('activebtn');
+  }else{
+    jQuery(".embed-submit-field button").removeClass('activebtn');
+  }
+}
 
 }

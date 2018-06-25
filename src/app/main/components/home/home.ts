@@ -149,7 +149,7 @@ export class Home {
     this.menuFilter = "recent";
     this.title.setTitle("Speegar");
 
-    this.GifList = gifService.getGifList().list;
+    //this.GifList = gifService.getGifList().list;
   }
 
   ngOnInit() {
@@ -442,56 +442,20 @@ export class Home {
   }
 
   previewGIF(urlGIF){
-    let linkURL = urlGIF;
-    this.http
-      .get(
-        environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
-        AppSettings.OPTIONS
-      )
-      .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-          if (response.results.success) {
-            jQuery("#publishDiv").empty();
-            this.resetPublishPicture();
-            jQuery(".video-preview").html("");
-            var r = /:\/\/(.[^/]+)/;
-            this.linkDomain = linkURL.match(r)[1];
-            this.link.url = linkURL;
-            console.log(linkURL);
-            this.link.title = response.results.data.ogTitle;
-            this.link.description = response.results.data.ogDescription;
-            if (response.results.data.ogImage) {
-              var a = response.results.data.ogImage.url;
-              this.link.image = response.results.data.ogImage.url;
-              this.link.imageWidth = response.results.data.ogImage.width;
-              this.link.imageHeight = response.results.data.ogImage.height;
-               }
-               else {
-              this.link.image = null;
-              this.link.imageWidth = 0;
-              this.link.imageHeight = 0;
-            }
-            this.link.isSet = true;
-            this.linkLoading = false;
-            this.changeDetector.markForCheck();
-          }
-          this.linkLoading = false;
-        },
-        err => {
-          console.error("error in link API;");
-        },
-        () => {
-          this.linkLoading = false;
-        }
-      );
+    var linkURL = urlGIF;
+    this.link.url = linkURL;
+    this.link.isSet = true;
+    this.link.isGif = true;
+    this.linkLoading = false;
+    jQuery(".file-input-holder").hide();
+    
 
   }
 
   updatePublishTextOnPaste($event) {
     $event.preventDefault();
     let text = $event.clipboardData.getData("text/plain");
-
+    this.link.isGif = false;
     if (
       text.search("youtube.com/watch") >= 0 ||
       text.search("youtu.be/") >= 0
@@ -530,6 +494,7 @@ export class Home {
       return 1;
     }
     this.analyzeLink(text);
+    console.log("you will go out noooow");
     text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
     document.execCommand("insertHTML", false, text);
   }
@@ -885,7 +850,7 @@ export class Home {
   analyzeLink(source) {
 
     let myArray = this.linkView.getListLinks(source);
-
+console.log("analyyyze");
     if (!myArray.length) {
       return 1;
     }
@@ -895,14 +860,7 @@ export class Home {
 
       return 1;
     }
-    if (
-      linkURL.search("youtube.com/watch") >= 0 ||
-      linkURL.search("youtu.be/") >= 0
-    ) {
-      jQuery(".yt-in-url").val(linkURL);
-      this.updateYoutubeFacebook();
-      return 1;
-    }
+    
     /*
     if (linkURL.search(/(\.gif)$/i) > 0) {
       console.log("this is a gif!");

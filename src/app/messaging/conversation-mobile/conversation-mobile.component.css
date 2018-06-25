@@ -59,7 +59,7 @@
     background-color: white;
     position: relative;
     overflow-y: scroll;
-    max-height: 86vh;
+    max-height: 88vh;
 }
 .message-overlay {
 	height: 100%;
