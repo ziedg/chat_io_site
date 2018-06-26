@@ -109,6 +109,7 @@ noSearchResults: Boolean = false;
        } 
    
     })
+    console.log(this.suggestions);
   }
 
   isUserSelected(userId: string): boolean {
