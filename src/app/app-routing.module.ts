@@ -42,7 +42,7 @@ export const routes: Routes = [
             {path: '404', component: NotFoundPage},
             {path: 'messaging',component: MessagingComponent},
             {path: 'chat-mobile', component: ChatListMobileComponent},
-            {path: 'mobile', component: ConversationMobileComponent},
+            {path: 'mobile/:stringid', component: ConversationMobileComponent},
             {path: '**', redirectTo: '404'}
         ]
     },

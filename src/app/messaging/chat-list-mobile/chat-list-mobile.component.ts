@@ -24,6 +24,7 @@ export class ChatListMobileComponent implements OnInit {
   private user;
   private userId: string = null;
   public chatListUsers: any[] = [];
+  public suggestions: any[] = [];
   private selectedUserId: string = null;
 //
 autocomplete = false;
@@ -46,6 +47,7 @@ noSearchResults: Boolean = false;
     this.user =this.loginService.getUser();
     this.userId=this.user._id;
     this.getChatList();
+    this.getSuggestionsList();
     jQuery(".navigation-bottom").addClass('hidden-xs');
    }
   getChatList(){
@@ -55,22 +57,59 @@ noSearchResults: Boolean = false;
      */
     this.chatService.getList(this.userId)
     .map(users=>{
-    let results:Array<any>= users.json();
-     return results.map((user)=>{
-     return {
-      _id:user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      profilePicture: user.profilePicture
-    }
+     return users.json();
      })
-    })
     .subscribe((users:any[])=>{
        for(let i=0;i<users.length;i++){
-       this.chatListUsers.push(users[i]);
+        if(users[i].lastMessage.fromUserId == this.userId){
+          users[i].lastMessage.message = "Vous : "+users[i].lastMessage.message;
+        }
+        let dateMsg = new Date(users[i].lastMessage.date);
+        let actualDate = new Date(Date.now());
+        let year = dateMsg.getFullYear();
+        let month = dateMsg.getMonth() + 1;
+        let day = dateMsg.getDate();
+        if((actualDate.getFullYear() - year > 0)||
+          ((actualDate.getMonth()+1) - month > 0)||
+          (actualDate.getDate() - day > 0)){
+          users[i].lastMessage.date = day +"-"+month+"-"+year;
+        }else{
+          let hours;
+          let minutes;
+          if(dateMsg.getHours().toString().length==1){
+            hours = "0"+dateMsg.getHours().toString();
+          }else{
+            hours = dateMsg.getHours().toString();
+          }
+          if(dateMsg.getMinutes().toString().length==1){
+            minutes = "0"+dateMsg.getMinutes().toString();
+          }else{
+            minutes = dateMsg.getMinutes().toString();
+          }
+          users[i].lastMessage.date = hours+":"+minutes;
+        }
+        this.chatListUsers.push(users[i]);
        } 
    
     })
+  }
+
+  getSuggestionsList(){
+    /*
+     les abonnées dont il n'a pas fait des conversations avec encore
+     */
+    this.chatService.getSuggestions(this.userId)
+    .map(users=>{
+     return users.json();
+     })
+    .subscribe((users:any[])=>{
+      console.log(users)
+       for(let i=0;i<users.length;i++){
+       this.suggestions.push(users[i]);
+       } 
+   
+    })
+    console.log(this.suggestions);
   }
 
   isUserSelected(userId: string): boolean {
@@ -81,17 +120,8 @@ noSearchResults: Boolean = false;
 }
  
 /* Method to select the user from the Chat list starts */
-selectUser(user: User): void {
-    this.selectedUserId = user._id;
-     /* Sending selected users information to other component. */
-     this.emitterService.emitUser(user);
-
-      /* calling method to get the messages */
-    this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId })
-    .subscribe((response) => {
-      /* Sending conversation between two users to other component. */
-      this.emitterService.emitConversation(response);
-  });
+selectUser(stringid:string): void {
+  this.router.navigateByUrl('/main/mobile/'+stringid);
 }
 
 /*Search functionnality*/

@@ -6,6 +6,12 @@
   top: 0;
   background-color: white;
 }
+.suggestions{
+  padding:10px 10px 0 10px;
+}
+.suggestions:first-child{
+  margin-left: 0px;
+}
 .input-search {
     position: relative;
     color: rgb(88, 88, 88);
