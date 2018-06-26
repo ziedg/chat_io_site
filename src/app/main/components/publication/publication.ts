@@ -88,6 +88,7 @@ export class Publication {
   public InteractionsDislikes: Array<User> = [];
   displayedNumberInteractions = 10;
   interactionsPage = 1;
+  public modalInteractions = false;
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
 
@@ -814,8 +815,38 @@ export class Publication {
     this.modalPub = false;
   }
 
+  openModalInteractions(){
+    this.modalInteractions = true;
+    
+    const openLikeTab = async () => {
+      const tab = document.querySelector('#Likes');
+      if (tab !== null) tab.className+=" active";
+    }
+    openLikeTab();
+    
+  }
+
+  closeModalInteractions(){
+    this.modalInteractions = false;
+  }
+
   changeEmojiTab(tab) {
     this.selectedEmojiTab = tab;
+  }
+
+  openTab(tabName){
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("interactions-tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("interactions-tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    var currentelem = document.getElementById(tabName);
+    currentelem.style.display = "block"
+    currentelem.className += " active";
   }
 
   addToComment(emoji) {

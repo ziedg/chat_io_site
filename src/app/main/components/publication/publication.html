@@ -196,10 +196,39 @@
 
     <div class="interactions" *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0 || nbDisplayedComments != 0">
     
-      <span>{{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} {{ 'interactions' | translate }}</span> •
+      <span><a (click)="openModalInteractions()">{{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} {{ 'interactions' | translate }}</a></span> •
         
       <span><a (click)="displayComments()"> {{shortNumber(nbDisplayedComments)}} {{ 'commentaires' | translate }}</a></span>
   
+    </div>
+
+    <div class="modal-interactions" *ngIf="modalInteractions">
+      <div class="white-box-interactions">
+
+          <div class="interactions-tab">
+              <button class="interactions-tablinks" (click)="openTab('Likes')" style="color: #2aaa2a">
+                  LOL
+              </button> 
+              <button class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fd4000">
+                  Nulle
+              </button>
+              <button class="interactions-tablinks" style="float:right" (click)="closeModalInteractions()">
+                  &#10006;
+              </button>
+            </div>
+            
+            <div id="Likes" class="interactions-tabcontent" style="display:block">
+              <h3>Likes</h3>
+              <p>Likes will be put here</p>
+            </div>
+            
+            <div id="Dislikes" class="interactions-tabcontent">
+              <h3>Dislikes</h3>
+              <p>Disikes will be put here</p> 
+            </div>
+
+  
+      </div>
     </div>
 
     <div class="social-staff">
