@@ -828,10 +828,8 @@ export class Publication {
     this.modalInteractions = true;
     
     const openLikeTab = async () => {
-      console.log('hello babe');
       const tab = document.querySelector('#Likes');
       if (tab !== null) tab.className+=" active";
-      console.log(tab);
     }
     openLikeTab();
     
