@@ -18,7 +18,12 @@
 	 
 	</div>
 </div>
-<app-suggestions users="suggestions" *ngIf="chatListUsers.length == 0"></app-suggestions>
+<div class="suggestions-corps " *ngIf="chatListUsers.length == 0">
+		<p class="sub">Suggestions <span>{{suggestions.length}}</span></p>
+		<div *ngFor="let s of suggestions" class="row suggestions">
+				<app-suggestions user="s"></app-suggestions>
+		</div>
+</div>
 <hr *ngIf="chatListUsers.length > 0">
 <div class="users-list" *ngFor="let user of chatListUsers">
 	<app-chat-list-item [class.active]="isUserSelected(user.id)" (click)="selectUser(user)"  user="{{user.firstName}} {{user.lastName}}"

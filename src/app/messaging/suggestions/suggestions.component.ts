@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./suggestions.component.css']
 })
 export class SuggestionsComponent implements OnInit {
-  @Input() users;
+  @Input() user;
   constructor() { }
 
   ngOnInit() {
