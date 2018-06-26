@@ -4681,10 +4681,10 @@ input.loginInput {
   position: absolute;
   background-color: white;
   border: 1px solid #e1e1e1;
-  bottom: 21px;
-  left: 22px;
-  padding: 0px;
+  padding: 0;
   z-index: 5;
+  right: 0;
+  bottom: 25px;
 }
 
 .emoji-header {

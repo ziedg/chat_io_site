@@ -23,7 +23,8 @@ import { EmojiService } from '../../services/emojiService';
 import { LinkView } from '../../services/linkView';
 import { PostService } from '../../services/postService';
 import { SeoService } from '../../services/seo-service';
-import { async } from 'rxjs/internal/scheduler/async';
+import * as _ from 'lodash';
+
 
 
 declare var jQuery: any;
@@ -202,8 +203,15 @@ export class Publication {
       for (let i = 0; i < this.nbComments; i++)
         this.listComments.push(this.publicationBean.comments[i]);
     }
+    this.removeCommentDuplicates();
   }
 
+  private removeCommentDuplicates() {
+    let arr = _.uniqBy(this.listComments, notif => {
+      return notif._id;
+    });
+    this.listComments = arr;
+  }
 
   displayComments(){
     this.commentsDisplayed = !this.commentsDisplayed ;
@@ -615,6 +623,7 @@ export class Publication {
         this.loadMoreComments(i + 1);
       }, 0);
     }
+    this.removeCommentDuplicates();
   }
 
   public activateSignal() {
@@ -773,7 +782,7 @@ export class Publication {
 
   getInteractions() {
     var url: string = environment.SERVER_URL + pathUtils.GET_SOCIAL_INTERACTIONS;
-    
+
     let body = JSON.stringify({
       publId: this.publicationBean._id,
       page: this.interactionsPage
@@ -783,7 +792,7 @@ export class Publication {
                 AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
-                  response => { 
+                  response => {
                     Array.prototype.push.apply(this.InteractionsLikes, response.message.likes);
                     Array.prototype.push.apply(this.InteractionsDislikes, response.message.dislikes);
                     //console.log(this.InteractionsLikes);
