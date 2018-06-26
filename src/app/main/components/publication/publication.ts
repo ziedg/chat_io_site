@@ -204,14 +204,6 @@ export class Publication {
       for (let i = 0; i < this.nbComments; i++)
         this.listComments.push(this.publicationBean.comments[i]);
     }
-    this.removeCommentDuplicates();
-  }
-
-  private removeCommentDuplicates() {
-    let arr = _.uniqBy(this.listComments, notif => {
-      return notif._id;
-    });
-    this.listComments = arr;
   }
 
   displayComments(){
@@ -624,7 +616,6 @@ export class Publication {
         this.loadMoreComments(i + 1);
       }, 0);
     }
-    this.removeCommentDuplicates();
   }
 
   public activateSignal() {
