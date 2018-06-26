@@ -15,6 +15,7 @@ import { EmojiListBean } from '../../../beans/emoji-list-bean';
 import { LinkBean } from '../../../beans/linkBean';
 import { PublicationBean } from '../../../beans/publication-bean';
 import { User } from '../../../beans/user';
+import { MinifiedUser } from '../../../beans/Minified-user';
 import { LoginService } from '../../../login/services/loginService';
 import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
@@ -84,10 +85,10 @@ export class Publication {
   pub_text:string = "";
   arabicText:boolean = false;
 
-  public InteractionsLikes: Array<User> = [];
-  public InteractionsDislikes: Array<User> = [];
+  public InteractionsLikes: Array<MinifiedUser> = [];
+  public InteractionsDislikes: Array<MinifiedUser> = [];
   displayedNumberInteractions = 10;
-  interactionsPage = 1;
+  interactionsPage = 0;
   public modalInteractions = false;
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
@@ -787,23 +788,19 @@ export class Publication {
       publId: this.publicationBean._id,
       page: this.interactionsPage
     });
-
+            
             this.http.post(url,body,
                 AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
-                  response => {
-                    Array.prototype.push.apply(this.InteractionsLikes, response.message.likes);
-                    Array.prototype.push.apply(this.InteractionsDislikes, response.message.dislikes);
-                    //console.log(this.InteractionsLikes);
-                    //console.log(this.InteractionsDislikes);
+                  response => {  
+                    this.InteractionsLikes = response.message.likes.slice();
+                    this.InteractionsDislikes = response.message.dislikes.slice();
                 },
                 err => {
-                  console.error('Cannot get interactions');
                 },
                 () => {
                   this.changeDetector.markForCheck();
-                  console.error('Cannot get interactions');
                 }
               );
   }
@@ -826,13 +823,8 @@ export class Publication {
 
   openModalInteractions(){
     this.modalInteractions = true;
-    
-    const openLikeTab = async () => {
-      const tab = document.querySelector('#Likes');
-      if (tab !== null) tab.className+=" active";
-    }
-    openLikeTab();
-    
+    this.getInteractions();
+
   }
 
   closeModalInteractions(){

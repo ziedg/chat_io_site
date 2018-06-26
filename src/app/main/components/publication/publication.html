@@ -217,14 +217,53 @@
               </button>
             </div>
             
-            <div id="Likes" class="interactions-tabcontent" style="display:block">
-              <h3>Likes</h3>
-              <p>Likes will be put here</p>
+        
+            <div id="Likes" class="interactions-tabcontent" style="display:block" >
+                <div *ngIf="InteractionsLikes.length == 0" class="no-interactions ">No likes yet.</div>
+                <section class="suggestions-box widget row " *ngIf="InteractionsLikes.length != 0">
+                    <div class="container-draggable"  *ngFor="let user of InteractionsLikes">
+                      <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
+                        <div class="user-img-shared" 
+                             [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
+                        </div>
+                        <div class="user-name">
+                          <header><a [routerLink]="['/main/profile', user._id]">
+                            {{user.profilefirstname}} {{user.profilelastname}}
+                          </a></header>
+                        </div>
+                        <div class="subscribe-no-number" style="min-width:12px">
+                          <button (click)="subscribe(user.userId)" style="float:none">
+                              {{ 'profile_subscribe' | translate }}
+                          </button>
+                        </div>
+                      </div>
+                  
+                    </div>
+                  </section>
             </div>
             
             <div id="Dislikes" class="interactions-tabcontent">
-              <h3>Dislikes</h3>
-              <p>Disikes will be put here</p> 
+                <div *ngIf="InteractionsDislikes.length == 0" class="no-interactions">No dislikes yet.</div>
+                <section class="suggestions-box widget row " *ngIf="InteractionsDislikes.length != 0">
+                    <div class="container-draggable"  *ngFor="let user of InteractionsDislikes">
+                      <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
+                        <div class="user-img-shared" 
+                             [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
+                        </div>
+                        <div class="user-name">
+                          <header><a [routerLink]="['/main/profile', user._id]">
+                            {{user.profilefirstname}} {{user.profilelastname}}
+                          </a></header>
+                        </div>
+                        <div class="subscribe-no-number" style="min-width:12px">
+                          <button (click)="subscribe(user.userId)" style="float:none">
+                              {{ 'profile_subscribe' | translate }}
+                          </button>
+                        </div>
+                      </div>
+                  
+                    </div>
+                  </section>
             </div>
 
   
