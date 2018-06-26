@@ -1,8 +1,8 @@
 .slider-container {
-  /*--slider-w: 97px;
+  /*--slider-w: 100px;
   --slider-h: 60px;
   --slider-btn-w: 22px;
-  --slider-m-r: 5px;
+  --slider-m-r: 4px;
   */
   overflow: hidden;
   text-align: center;
@@ -19,14 +19,14 @@
 }
 
 .slider-sub-container {
-  width: calc(100% - 2*var(--slider-btn-w) - 20px);
-  margin-left: calc(var(--slider-btn-w) + 10px);
+  width: calc(100% - 2*var(--slider-btn-w) - 10px);
+  margin-left: calc(var(--slider-btn-w) + 5px);
   overflow: hidden;
 }
 
 
 .slides-container {
-  transition: 600ms ease;
+  transition: 800ms ease;
   display: flex;
   /*overflow-x: auto;*/
 }
