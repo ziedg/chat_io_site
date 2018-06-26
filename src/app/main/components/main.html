@@ -198,7 +198,7 @@
       </article>
 
 
-      <article [routerLink]="['/main', 'profile', user._id]"
+      <article *ngIf="user" [routerLink]="['/main', 'profile', user._id]"
                class="hidden-xs"
                 style="margin-right: 10px; cursor: pointer">
         <div class="noPadding">
@@ -271,6 +271,7 @@
     <span class="outline-icon-text">{{"notifications" | translate}}</span>
   </div>
   <div class="profile-icon outline-icon-container"
+        *ngIf="user"
        [routerLink]="['/main', 'profile', user._id]"
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
