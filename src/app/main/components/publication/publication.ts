@@ -23,6 +23,8 @@ import { EmojiService } from '../../services/emojiService';
 import { LinkView } from '../../services/linkView';
 import { PostService } from '../../services/postService';
 import { SeoService } from '../../services/seo-service';
+import { async } from 'rxjs/internal/scheduler/async';
+
 
 declare var jQuery: any;
 declare var swal: any;
@@ -85,6 +87,7 @@ export class Publication {
   public InteractionsDislikes: Array<User> = [];
   displayedNumberInteractions = 10;
   interactionsPage = 1;
+  public modalInteractions = false;
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
 
@@ -812,8 +815,40 @@ export class Publication {
     this.modalPub = false;
   }
 
+  openModalInteractions(){
+    this.modalInteractions = true;
+    
+    const openLikeTab = async () => {
+      console.log('hello babe');
+      const tab = document.querySelector('#Likes');
+      if (tab !== null) tab.className+=" active";
+      console.log(tab);
+    }
+    openLikeTab();
+    
+  }
+
+  closeModalInteractions(){
+    this.modalInteractions = false;
+  }
+
   changeEmojiTab(tab) {
     this.selectedEmojiTab = tab;
+  }
+
+  openTab(tabName){
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("interactions-tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("interactions-tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    var currentelem = document.getElementById(tabName);
+    currentelem.style.display = "block"
+    currentelem.className += " active";
   }
 
   addToComment(emoji) {
