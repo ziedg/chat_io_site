@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Http, Response } from '@angular/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { environment } from '../../../../../environments/environment';
@@ -32,6 +32,8 @@ export class EditProfile {
   public errLinkYoutube = "";
   public errLinkTwitter = "";
   errorMessage:string = null;
+  private previousUrl: string;
+  private currentUrl: string;
 
   constructor(public translate:TranslateService,
               private route:ActivatedRoute,
@@ -211,6 +213,8 @@ export class EditProfile {
         }
       );
     }
+
+    this.router.navigate(['main', 'profile', this.user._id]);
   }
 
 
