@@ -272,7 +272,7 @@ export class Home {
   }}
   getbg3(){if(this.bgvalid){
     this.bg="assets/images/background/bg3.jpg";
-    this.bgid="2";
+    this.bgid="3";
     this.ff="Arial Black";
     this.fs=undefined;
     this.fc="burlywood";
@@ -281,7 +281,7 @@ export class Home {
   }}
   getbg4(){if(this.bgvalid){
     this.bg="assets/images/background/bg4.jpg";
-    this.bgid="2";
+    this.bgid="4";
     this.ff="Arial Black";
     this.fs=undefined;
     this.fc="white";
@@ -290,7 +290,7 @@ export class Home {
   }}
   getbg5(){if(this.bgvalid){
     this.bg="assets/images/background/bg5.jpeg";
-    this.bgid="2";
+    this.bgid="5";
     this.ff="Arial Black";
     this.fs=undefined;
     this.fc="darkblue";
@@ -299,7 +299,7 @@ export class Home {
   }}
   getbg6(){if(this.bgvalid){
     this.bg="assets/images/background/bg6.jpeg";
-    this.bgid="2";
+    this.bgid="6";
     this.ff="Arial Black";
     this.fs=undefined;
     this.fc="white";
