@@ -186,5 +186,7 @@
   "conditions_generales": "Condiciones generales",
   "a_propos":"A propósito de nosotros",
   "fb_friends": "Sugerencias para ti",
-  "fb_label": "amigo facebook"
+  "fb_label": "amigo facebook",
+  "Like":"LOL" ,
+  "Dislike":"Disgusto"
 }
