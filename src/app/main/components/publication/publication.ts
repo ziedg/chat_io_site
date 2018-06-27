@@ -252,16 +252,17 @@ export class Publication {
         });}
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
-    //this.bgid=this.publicationBean.publText;
-    //console.log(this.publicationBean.bgid);
-    //this.bgid="assets/images/background/bg1.jpg";
 
     this.bg="assets/images/background/bg"+this.publicationBean.pubGid+".jpg";
     this.ff=this.publicationBean.pubFontFamily;
     this.fs=this.publicationBean.pubFontSize;
     this.fc=this.publicationBean.pubColor;
-    if(this.publicationBean.pubGid!=""){this.divheight="190px";
+    if(this.publicationBean.pubGid!=undefined&&this.publicationBean.pubGid!=""){
+      this.divheight="190px";
     this.textplace="center";}
+    else{
+      this.divheight=undefined;
+      this.textplace=undefined;}
 
     var pub_txt
     if(this.publicationBean.isShared) {
