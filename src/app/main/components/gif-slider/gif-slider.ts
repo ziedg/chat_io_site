@@ -17,10 +17,10 @@ export class GifSlider implements AfterViewInit {
   @Output() myEvent = new EventEmitter();
 
   offset_x_pos: number = 0;
-  sliderWidth: number = 97;
+  sliderWidth: number = 100;
   sliderHeight: number = 60;
   sliderBtnWidth: number = 22;
-  sliderMarginRight: number = 5;
+  sliderMarginRight: number = 4;
 
   //list: Array<number> = [1, 2, 3, 4, 5];
 

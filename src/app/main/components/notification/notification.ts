@@ -59,14 +59,11 @@ export class Notification implements OnInit {
 
         if (response.length != 0) {
           this.showNoNotif = false;
-          for (var i = 0; i < response.length; i++) {
+          for (let i = 0; i < response.length; i++) {
             this.listNotif.push(response[i]);
             this.lastNotifId = response[i]._id;
           }
-          if (response.length == 5)
-            this.showButtonMoreNotif = true;
-          else
-            this.showButtonMoreNotif = false;
+          this.showButtonMoreNotif = response.length == 5;
         } else {
           this.showNoNotif = true;
           this.showButtonMoreNotif = false;
@@ -92,7 +89,7 @@ export class Notification implements OnInit {
     let date = new Date();
     let currentDate = new Date(date.valueOf() + date.getTimezoneOffset() * 60000);
     let publishDate = this.dateService.convertIsoToDate(publishDateString);
-    var displayedDate = "";
+    let displayedDate = "";
 
     let diffDate = this.dateService.getdiffDate(publishDate, currentDate);
     if (diffDate.day > 28) {

@@ -15,6 +15,7 @@ import { EmojiListBean } from '../../../beans/emoji-list-bean';
 import { LinkBean } from '../../../beans/linkBean';
 import { PublicationBean } from '../../../beans/publication-bean';
 import { User } from '../../../beans/user';
+import { MinifiedUser } from '../../../beans/Minified-user';
 import { LoginService } from '../../../login/services/loginService';
 import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
@@ -23,6 +24,9 @@ import { EmojiService } from '../../services/emojiService';
 import { LinkView } from '../../services/linkView';
 import { PostService } from '../../services/postService';
 import { SeoService } from '../../services/seo-service';
+import * as _ from 'lodash';
+
+
 
 declare var jQuery: any;
 declare var swal: any;
@@ -81,10 +85,11 @@ export class Publication {
   pub_text:string = "";
   arabicText:boolean = false;
 
-  public InteractionsLikes: Array<User> = [];
-  public InteractionsDislikes: Array<User> = [];
+  public InteractionsLikes: Array<MinifiedUser> = [];
+  public InteractionsDislikes: Array<MinifiedUser> = [];
   displayedNumberInteractions = 10;
-  interactionsPage = 1;
+  interactionsPage = 0;
+  public modalInteractions = false;
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
 
@@ -200,7 +205,6 @@ export class Publication {
         this.listComments.push(this.publicationBean.comments[i]);
     }
   }
-
 
   displayComments(){
     this.commentsDisplayed = !this.commentsDisplayed ;
@@ -656,9 +660,20 @@ export class Publication {
 
   addOrRemoveLike() {
     if (!this.publicationBean.isLiked)
-      this.addLike();
+    { if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes == 0) {
+        this.addLike();
+        this.publicationBean.nbLikes = 0;
+        this.publicationBean.nbDislikes = 0;
+      }else {
+        this.addLike();
+      }
+    }
     else
       this.removeLike();
+      if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes < 0) {
+        this.publicationBean.nbLikes =0;
+        this.publicationBean.nbDislikes = 0;
+      }
   }
 
   addLike() {
@@ -716,9 +731,20 @@ export class Publication {
 
   addOrRemoveDislike() {
     if (!this.publicationBean.isDisliked)
-      this.addDislike();
+    { if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes == 0) {
+        this.addDislike();
+        this.publicationBean.nbLikes = 0;
+        this.publicationBean.nbDislikes = 0;
+      }else{
+        this.addDislike();
+      }
+    }
     else
       this.removeDislike();
+      if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes < 0) {
+        this.publicationBean.nbLikes =0;
+        this.publicationBean.nbDislikes = 0;
+      }
   }
 
   addDislike() {
@@ -770,28 +796,24 @@ export class Publication {
 
   getInteractions() {
     var url: string = environment.SERVER_URL + pathUtils.GET_SOCIAL_INTERACTIONS;
-    
+
     let body = JSON.stringify({
       publId: this.publicationBean._id,
       page: this.interactionsPage
     });
-
+            
             this.http.post(url,body,
                 AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
-                  response => { 
-                    Array.prototype.push.apply(this.InteractionsLikes, response.message.likes);
-                    Array.prototype.push.apply(this.InteractionsDislikes, response.message.dislikes);
-                    //console.log(this.InteractionsLikes);
-                    //console.log(this.InteractionsDislikes);
+                  response => {  
+                    this.InteractionsLikes = response.message.likes.slice();
+                    this.InteractionsDislikes = response.message.dislikes.slice();
                 },
                 err => {
-                  console.error('Cannot get interactions');
                 },
                 () => {
                   this.changeDetector.markForCheck();
-                  console.error('Cannot get interactions');
                 }
               );
   }
@@ -812,8 +834,33 @@ export class Publication {
     this.modalPub = false;
   }
 
+  openModalInteractions(){
+    this.modalInteractions = true;
+    this.getInteractions();
+
+  }
+
+  closeModalInteractions(){
+    this.modalInteractions = false;
+  }
+
   changeEmojiTab(tab) {
     this.selectedEmojiTab = tab;
+  }
+
+  openTab(tabName){
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("interactions-tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("interactions-tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    var currentelem = document.getElementById(tabName);
+    currentelem.style.display = "block"
+    currentelem.className += " active";
   }
 
   addToComment(emoji) {

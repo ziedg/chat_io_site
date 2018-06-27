@@ -97,7 +97,7 @@ export class Main {
 
 
     ) {
-      this.user=loginService.getUser();
+      this.user=this.loginService.getUser();
          if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
     this.showButtonMoreNotif = false;
@@ -138,6 +138,7 @@ export class Main {
     //got it thank you amine :p
 
     this.checkNewNotifications();
+    if (this.user!==null)
     this.listenForNotifications(this.user._id);
 
 
