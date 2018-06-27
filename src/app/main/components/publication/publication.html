@@ -70,22 +70,23 @@
       </div>
     </div>
 
-    <div class="content" *ngIf="!publicationBean.isShared">
+    <div class="content" [ngStyle]="{'background-image': 'url(' + bg + ')','height': divheight}" *ngIf="!publicationBean.isShared">
       <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]" class="publication-text">
         {{publicationBean.publTitle}} </h4>
-      <span *ngIf="publicationBean.publText !== 'null'
+      <div *ngIf="publicationBean.publText !== 'null'
                   && publicationBean.publText !=='undefined'
                   && publicationBean.publText.length > 0"
             [ngClass]="{'publication-text': true, 'arabic-text': arabicText}"
+            [ngStyle]="{'textAlign': textplace}"
             >
-            <span [innerHTML]="firstPubText"></span>
+            <div [ngStyle]="{'fontFamily': ff, 'fontSize': fs, 'color': fc}" [innerHTML]="firstPubText"></div>
             <a *ngIf="longPubText && !longPubTextShow"
                 (click)="longPubTextShow=true"
                 style="margin-top: 0; display: inline">
                 {{"publication_open_last_part" | translate }}</a>
-            <span *ngIf="longPubText && longPubTextShow" [innerHTML]="lastPubText">
+            <span *ngIf="longPubText && longPubTextShow" [ngStyle]="{'fontFamily': ff, 'fontSize': fs, 'color': fc}" [innerHTML]="lastPubText">
             </span>
-            </span>
+            </div>
 
 
       <div class="link-preview" *ngIf="link.isSet">
@@ -195,11 +196,11 @@
     </div>
 
     <div class="interactions" *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0 || nbDisplayedComments != 0">
-    
+
       <span>{{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} {{ 'interactions' | translate }}</span> •
-        
+
       <span><a (click)="displayComments()"> {{shortNumber(nbDisplayedComments)}} {{ 'commentaires' | translate }}</a></span>
-  
+
     </div>
 
     <div class="social-staff">
@@ -210,10 +211,10 @@
               {{ 'publication_like' | translate }}
             </div>
             <img class="social-emoji social-emoji-like-active"  style="margin-bottom:4px"
-                 src="assets/images/new/publication/like-full.png" 
+                 src="assets/images/new/publication/like-full.png"
                  *ngIf="publicationBean.isLiked">
             <img class="social-emoji desaturated social-emoji-like" style="margin-bottom:4px"
-                 src="assets/images/new/publication/like-outline.png" 
+                 src="assets/images/new/publication/like-outline.png"
                  *ngIf="!publicationBean.isLiked"></button>
         </div>
 

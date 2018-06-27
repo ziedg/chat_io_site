@@ -80,6 +80,12 @@ export class Publication {
   private lastPubText: string = "";
   pub_text:string = "";
   arabicText:boolean = false;
+  bg="";
+  ff="";
+  fs="";
+  fc="";
+  divheight="";
+  textplace="";
 
   public InteractionsLikes: Array<User> = [];
   public InteractionsDislikes: Array<User> = [];
@@ -232,6 +238,16 @@ export class Publication {
         });}
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
+    //this.bgid=this.publicationBean.publText;
+    //console.log(this.publicationBean.bgid);
+    //this.bgid="assets/images/background/bg1.jpg";
+
+    this.bg="assets/images/background/bg"+this.publicationBean.pubGid+".jpg";
+    this.ff=this.publicationBean.pubFontFamily;
+    this.fs=this.publicationBean.pubFontSize;
+    this.fc=this.publicationBean.pubColor;
+    if(this.publicationBean.pubGid!=undefined){this.divheight="190px";
+    this.textplace="center";}
 
     var pub_txt
     if(this.publicationBean.isShared) {
@@ -770,7 +786,7 @@ export class Publication {
 
   getInteractions() {
     var url: string = environment.SERVER_URL + pathUtils.GET_SOCIAL_INTERACTIONS;
-    
+
     let body = JSON.stringify({
       publId: this.publicationBean._id,
       page: this.interactionsPage
@@ -780,7 +796,7 @@ export class Publication {
                 AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
-                  response => { 
+                  response => {
                     Array.prototype.push.apply(this.InteractionsLikes, response.message.likes);
                     Array.prototype.push.apply(this.InteractionsDislikes, response.message.dislikes);
                     //console.log(this.InteractionsLikes);
