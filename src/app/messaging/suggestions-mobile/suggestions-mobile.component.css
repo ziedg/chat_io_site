@@ -1,12 +1,6 @@
 .img-circle{
     object-fit: cover;
 }
-.suggestions{
-    padding:10px 10px 0 10px;
-}
-.suggestions:first-child{
-    margin-left: 0px;
-}
 .suggestion{
     max-width: 50px;
     display: inline-block;

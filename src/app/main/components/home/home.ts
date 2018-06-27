@@ -162,7 +162,7 @@ export class Home {
   }
 
   ngOnInit() {
-
+    jQuery(".navigation-bottom").removeClass('hidden-xs');
     window.onscroll = () => {
       let k = this.selectLanguageRef.nativeElement.offsetTop;
       /*
@@ -799,9 +799,15 @@ export class Home {
 
   //uploading photo or GIF
   uploadPhoto($event) {
-    var inputValue = $event.target;
+    let inputValue = $event.target;
+    console.log($event);
 
     if (inputValue != null && null != inputValue.files[0]) {
+      if(inputValue.files[0].name.endsWith(".gif") || inputValue.files[0].name.endsWith(".GIF")) {
+        console.log("it ends with gif !");
+        this.uploadPhotoGIF($event);
+        return
+      }
       this.uploadedPicture = inputValue.files[0];
       //change
 
@@ -833,7 +839,7 @@ export class Home {
   }
 
   uploadPhotoGIF($event) {
-    var inputValue = $event.target;
+    let inputValue = $event.target;
     if (inputValue != null && null != inputValue.files[0]) {
       this.uploadedPicture = inputValue.files[0];
       previewFile(this.uploadedPicture);

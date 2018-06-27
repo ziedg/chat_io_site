@@ -44,7 +44,6 @@ export class ConversationComponent  {
 		this.messageForm =new FormBuilder().group({
 			message: new MessageValidation
 		});;
-    
   }
 
 
@@ -63,6 +62,11 @@ export class ConversationComponent  {
       }
       else{
         this.messages = data;
+        // this.messages = this.groupBy(data, function(item)
+        // {
+        //   return [item.fromUserId];
+        // });
+        // console.log(this.messages);
       }
   });
 }
@@ -132,5 +136,18 @@ sendMessage(){
     jQuery(".embed-submit-field button").removeClass('activebtn');
   }
 }
-
+groupBy( array , f )
+{
+  var groups = {};
+  array.forEach( function( o )
+  {
+    var group = JSON.stringify( f(o) );
+    groups[group] = groups[group] || [];
+    groups[group].push( o );  
+  });
+  return Object.keys(groups).map( function( group )
+  {
+    return groups[group]; 
+  })
+}
 }

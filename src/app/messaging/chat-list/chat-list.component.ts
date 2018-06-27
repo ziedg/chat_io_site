@@ -25,6 +25,7 @@ export class ChatListComponent implements OnInit {
   private user;
   private userId: string = null;
   public chatListUsers: any[] = [];
+  public suggestions: any[] = [];
   private selectedUserId: string = null;
 //
 autocomplete = false;
@@ -47,28 +48,62 @@ noSearchResults: Boolean = false;
     this.user =this.loginService.getUser();
     this.userId=this.user._id;
     this.getChatList();
+    this.getSuggestionsList();
     jQuery(".navigation-bottom").addClass('hidden-xs');
    }
   getChatList(){
     /*
-     l'historique des personnes dont il a fait des conversations avec 
-     sinon Les trois abonnements derniers des
+     l'historique des personnes dont il a fait des conversations avec +dernier message pour chacun
      */
     this.chatService.getList(this.userId)
     .map(users=>{
-    let results:Array<any>= users.json();
-     return results.map((user)=>{
-     return {
-      _id:user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      profilePicture: user.profilePicture
-    }
+     return users.json();
      })
-    })
     .subscribe((users:any[])=>{
        for(let i=0;i<users.length;i++){
-       this.chatListUsers.push(users[i]);
+          if(users[i].lastMessage.fromUserId == this.userId){
+            users[i].lastMessage.message = "Vous : "+users[i].lastMessage.message;
+          }
+          let dateMsg = new Date(users[i].lastMessage.date);
+          let actualDate = new Date(Date.now());
+          let year = dateMsg.getFullYear();
+          let month = dateMsg.getMonth() + 1;
+          let day = dateMsg.getDate();
+          if((actualDate.getFullYear() - year > 0)||
+            ((actualDate.getMonth()+1) - month > 0)||
+            (actualDate.getDate() - day > 0)){
+            users[i].lastMessage.date = day +"-"+month+"-"+year;
+          }else{
+            let hours;
+            let minutes;
+            if(dateMsg.getHours().toString().length==1){
+              hours = "0"+dateMsg.getHours().toString();
+            }else{
+              hours = dateMsg.getHours().toString();
+            }
+            if(dateMsg.getMinutes().toString().length==1){
+              minutes = "0"+dateMsg.getMinutes().toString();
+            }else{
+              minutes = dateMsg.getMinutes().toString();
+            }
+            users[i].lastMessage.date = hours+":"+minutes;
+          }
+          this.chatListUsers.push(users[i]);
+       } 
+   
+    })
+  }
+  getSuggestionsList(){
+    /*
+     les abonnées dont il n'a pas fait des conversations avec encore
+     */
+    this.chatService.getSuggestions(this.userId)
+    .map(users=>{
+     return users.json();
+     })
+    .subscribe((users:any[])=>{
+       for(let i=0;i<users.length;i++){
+       this.suggestions.push(users[i]);
        } 
    
     })
@@ -114,7 +149,7 @@ return fullName.includes(name);
 }
 
 filterSubscriptionsByName(name){
-  return this.user.subscriptions.filter((user)=>{
+  return this.user.subscriptionsDetails.filter((user)=>{
   let fullName=user.firstName + ' ' + user.lastName;
   return fullName.includes(name);
   });
@@ -126,11 +161,10 @@ onFocus(){
 }
 
 onChange(newValue: string) {
-  console.log(newValue)
   this.listSearchUsers = [];
   this.enableAutocomplete();
   this.changeDetector.markForCheck();
-  if (newValue.length > 1) {
+  if (newValue.length >=1) {
       let searchInHistory=this.filterChatListUsersByName(newValue);
         if (searchInHistory && searchInHistory.length>0){
         this.listSearchUsers=searchInHistory

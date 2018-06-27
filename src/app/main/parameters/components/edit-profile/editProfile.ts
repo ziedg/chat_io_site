@@ -199,7 +199,10 @@ export class EditProfile {
               showConfirmButton: false
             }).then(function () {
             }, function (dismiss) {
-            });
+            });   
+            setTimeout((router: Router) => {
+              this.router.navigate(['/main/profile',this.user._id]);
+          }, 2200);
           } else {
             this.errorMessage = response.error;
           }

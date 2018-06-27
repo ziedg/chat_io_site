@@ -3055,6 +3055,7 @@ facebook-friends .user .user-img {
 
 .modal-edit-profile,
 .modal-edit-pub,
+.modal-interactions,
 .modal-other-profile-options {
   width: 100%;
   height: 100%;
@@ -3064,6 +3065,10 @@ facebook-friends .user .user-img {
   background-color: rgba(150, 150, 150, 0.7);
   z-index: 100;
   padding: 0;
+}
+
+.modal-interactions {
+  background-color: rgba(0,0,0,0.4) !important;
 }
 
 .white-box-friends {
@@ -3199,6 +3204,15 @@ facebook-friends .user .user-img {
   z-index: 101;
 }
 
+.white-box-interactions {
+  background-color: white;
+  width: 400px;
+  margin: 15% auto;
+  z-index: 101;
+  border-radius: 4px;
+  padding : 7px;
+}
+
 .modal-edit-profile article,
 .modal-edit-pub article,
 .modal-other-profile-options article {
@@ -3225,6 +3239,52 @@ facebook-friends .user .user-img {
     position: absolute;
     bottom: 0;
   }
+  .white-box-interactions {
+    background-color: white;
+    width: 100%;
+    margin: 0;
+    z-index: 101;
+    position: absolute;
+    border-radius: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    
+  }
+}
+.no-interactions {
+  text-align: center;
+  padding :15px;
+  color : #777;
+}
+/******************** Interactions tabs **********************/
+/* Style the tab */
+.interactions-tab {
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+ 
+}
+
+/* Style the buttons inside the tab */
+.interactions-tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+
+/* Create an active/current tablink class */
+.interactions-tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.interactions-tabcontent {
+  display: none;
+  border-top: none;
 }
 
 .name {
@@ -4619,10 +4679,10 @@ input.loginInput {
   position: absolute;
   background-color: white;
   border: 1px solid #e1e1e1;
-  bottom: 21px;
-  left: 22px;
-  padding: 0px;
+  padding: 0;
   z-index: 5;
+  right: 0;
+  bottom: 25px;
 }
 
 .emoji-header {
@@ -5796,7 +5856,7 @@ img[src="undefined"] {
 }
 
 .social-emoji-like-active {
-  background-color: #4c9a21;
+  background-color: #fff;
 }
 
 /* 100% Image Width on Smaller Screens */

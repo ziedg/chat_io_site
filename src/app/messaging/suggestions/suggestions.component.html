@@ -1,7 +1,13 @@
-<!-- <p class="sub">Suggestions <span>{{users.length}}</span></p> -->
-<div class="row suggestions">
-  <div *ngFor="let user of users" class="suggestion">
+<div class="suggestion">
+  <div class="person-img">
     <img src="{{user.picture}}" width="50" height="50" class="img-circle" alt="">
-    <p>{{user.name}}</p>
+  </div>
+  <div class="corps">
+    <div class="topdiv">
+      <p>{{user.name}}</p>
+    </div>
+    <div>
+      <p>Tap to discuss</p>
+    </div>
   </div>
 </div>

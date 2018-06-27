@@ -6,7 +6,10 @@
     margin-bottom: 6px;
     background-color: white;
   }
-  
+  .suggestions-corps{
+    overflow: hidden;
+    padding: 0 15px;
+  }
   .input-search input {
     width: 100%;
     height: 36px;

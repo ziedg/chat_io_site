@@ -197,10 +197,81 @@
 
     <div class="interactions" *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0 || nbDisplayedComments != 0">
 
-      <span>{{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} {{ 'interactions' | translate }}</span> •
 
-      <span><a (click)="displayComments()"> {{shortNumber(nbDisplayedComments)}} {{ 'commentaires' | translate }}</a></span>
+      <span *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0"><a (click)="openModalInteractions()">
+        {{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} {{ 'interactions' | translate }}</a></span>
 
+      <span *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0 && nbDisplayedComments != 0"> • </span>
+      <span *ngIf="nbDisplayedComments != 0"><a (click)="displayComments()" >
+         {{shortNumber(nbDisplayedComments)}} {{ 'commentaires' | translate }}</a></span>
+    </div>
+
+    <div class="modal-interactions" *ngIf="modalInteractions">
+      <div class="white-box-interactions">
+
+          <div class="interactions-tab">
+              <button id="lol" class="interactions-tablinks" (click)="openTab('Likes')" style="color: #2aaa2a;border-bottom: 1px solid #2aaa2a">
+                  LOL
+              </button>
+              <button id="nulle" class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fd4000">
+                  Nulle
+              </button>
+              <button class="interactions-tablinks" style="float:right" (click)="closeModalInteractions()">
+                  &#10006;
+              </button>
+            </div>
+
+
+            <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px" >
+                <div *ngIf="InteractionsLikes.length == 0" class="no-interactions ">No likes yet.</div>
+                <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0">
+                    <div class="container-draggable"  *ngFor="let user of InteractionsLikes">
+                      <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
+                        <div class="user-img-shared"
+                             [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
+                        </div>
+                        <div class="user-name">
+                          <header><a [routerLink]="['/main/profile', user._id]">
+                            {{user.profilefirstname}} {{user.profilelastname}}
+                          </a></header>
+                        </div>
+                        <div class="subscribe-no-number" style="min-width:12px">
+                          <button (click)="subscribeUser($event, user.userId)" style="float:none">
+                              {{ 'profile_subscribe' | translate }}
+                          </button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </section>
+            </div>
+
+            <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px">
+                <div *ngIf="InteractionsDislikes.length == 0" class="no-interactions">No dislikes yet.</div>
+                <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0">
+                    <div class="container-draggable"  *ngFor="let user of InteractionsDislikes">
+                      <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
+                        <div class="user-img-shared"
+                             [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
+                        </div>
+                        <div class="user-name">
+                          <header><a [routerLink]="['/main/profile', user._id]">
+                            {{user.profilefirstname}} {{user.profilelastname}}
+                          </a></header>
+                        </div>
+                        <div class="subscribe-no-number" style="min-width:12px">
+                          <button (click)="subscribe(user.userId)" style="float:none">
+                              {{ 'profile_subscribe' | translate }}
+                          </button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </section>
+            </div>
+
+
+      </div>
     </div>
 
     <div class="social-staff">
@@ -307,6 +378,7 @@
                 id="{{commentTextareaId}}"
                 placeholder="Votre commentaire ..."
                 contenteditable="true"
+                (focus)="focused(this)"
                 [(contenteditableModel)]="commentInputHtml"
                 (keydown.Enter)="publishComment()">
           </div>
