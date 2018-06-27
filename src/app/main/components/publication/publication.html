@@ -209,10 +209,10 @@
       <div class="white-box-interactions">
 
           <div class="interactions-tab">
-              <button class="interactions-tablinks" (click)="openTab('Likes')" style="color: #2aaa2a">
+              <button id="lol" class="interactions-tablinks" (click)="openTab('Likes')" style="color: #2aaa2a;border-bottom: 1px solid #2aaa2a">
                   LOL
               </button> 
-              <button class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fd4000">
+              <button id="nulle" class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fd4000">
                   Nulle
               </button>
               <button class="interactions-tablinks" style="float:right" (click)="closeModalInteractions()">
@@ -221,9 +221,9 @@
             </div>
             
         
-            <div id="Likes" class="interactions-tabcontent" style="display:block" >
+            <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px" >
                 <div *ngIf="InteractionsLikes.length == 0" class="no-interactions ">No likes yet.</div>
-                <section class="suggestions-box widget row " *ngIf="InteractionsLikes.length != 0">
+                <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0">
                     <div class="container-draggable"  *ngFor="let user of InteractionsLikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
                         <div class="user-img-shared" 
@@ -235,7 +235,7 @@
                           </a></header>
                         </div>
                         <div class="subscribe-no-number" style="min-width:12px">
-                          <button (click)="subscribe(user.userId)" style="float:none">
+                          <button (click)="subscribeUser($event, user.userId)" style="float:none">
                               {{ 'profile_subscribe' | translate }}
                           </button>
                         </div>
@@ -245,9 +245,9 @@
                   </section>
             </div>
             
-            <div id="Dislikes" class="interactions-tabcontent">
+            <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px">
                 <div *ngIf="InteractionsDislikes.length == 0" class="no-interactions">No dislikes yet.</div>
-                <section class="suggestions-box widget row " *ngIf="InteractionsDislikes.length != 0">
+                <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0">
                     <div class="container-draggable"  *ngFor="let user of InteractionsDislikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
                         <div class="user-img-shared" 
