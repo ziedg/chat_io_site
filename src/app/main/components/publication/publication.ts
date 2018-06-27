@@ -819,6 +819,8 @@ export class Publication {
                   response => {  
                     this.InteractionsLikes = response.message.likes.slice();
                     this.InteractionsDislikes = response.message.dislikes.slice();
+                    console.log('likes');
+                    console.log(this.InteractionsLikes,this.InteractionsDislikes);
                 },
                 err => {
                 },
@@ -860,6 +862,15 @@ export class Publication {
 
   openTab(tabName){
     var i, tabcontent, tablinks;
+    if(tabName === 'Likes') { 
+      document.getElementById("nulle").style.borderBottom = "none";
+      document.getElementById("lol").style.borderBottom = "1px solid #2aaa2a";
+    }
+    else if(tabName === 'Dislikes') {  
+      document.getElementById("lol").style.borderBottom = "none";
+      document.getElementById("nulle").style.borderBottom = "1px solid #fd4000";
+    }
+
     tabcontent = document.getElementsByClassName("interactions-tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
@@ -871,6 +882,58 @@ export class Publication {
     var currentelem = document.getElementById(tabName);
     currentelem.style.display = "block"
     currentelem.className += " active";
+  }
+
+  subscribeUser(event, userId) {
+    let body = JSON.stringify({
+      profileId: userId
+    });
+
+    this.http.post(
+      environment.SERVER_URL + pathUtils.SUBSCRIBE,
+      body,
+      AppSettings.OPTIONS
+    )
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+          if (response.status == 0) {
+            event.target.style.backgroundColor = "#ccc";
+            event.target.innerHTML = "Abonné"
+          }
+        },
+        err => {
+        },
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
+
+  }
+
+  unsubscribeUser(event, userId){
+    let body = JSON.stringify({
+      profileId: userId
+    });
+
+    this.http.post(
+      environment.SERVER_URL + pathUtils.UNSUBSCRIBE,
+      body,
+      AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+        if (response.status == 0) {
+          event.target.style.backgroundColor = "#090";
+            event.target.innerHTML = "S'abonner"
+        }
+      },
+        err => {
+      },
+      () => {
+        this.changeDetector.markForCheck();
+      }
+    );
   }
 
   addToComment(emoji) {
