@@ -260,7 +260,7 @@ export class Publication {
     this.ff=this.publicationBean.pubFontFamily;
     this.fs=this.publicationBean.pubFontSize;
     this.fc=this.publicationBean.pubColor;
-    if(this.publicationBean.pubGid!=undefined){this.divheight="190px";
+    if(this.publicationBean.pubGid!=""){this.divheight="190px";
     this.textplace="center";}
 
     var pub_txt
