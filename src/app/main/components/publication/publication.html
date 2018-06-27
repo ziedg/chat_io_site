@@ -377,6 +377,7 @@
                 id="{{commentTextareaId}}"
                 placeholder="Votre commentaire ..."
                 contenteditable="true"
+                (focus)="focused(this)"
                 [(contenteditableModel)]="commentInputHtml"
                 (keydown.Enter)="publishComment()">
           </div>
