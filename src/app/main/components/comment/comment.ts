@@ -15,7 +15,7 @@ import * as pathUtils from '../../../utils/path.utils';
 import { DateService } from '../../services/dateService';
 import { EmojiService } from '../../services/emojiService';
 
-declare var swal:any;
+declare var swal: any;
 
 @Component({
   moduleId: module.id,
@@ -28,23 +28,23 @@ declare var swal:any;
 export class Comment {
   @Input() nbDisplayedComments;
   @Output() nbDisplayedCommentsChange = new EventEmitter();
-  commentBean:CommentBean = new CommentBean();
-  publicationBean:PublicationBean = new PublicationBean();
-  user:User;
-  listEmoji:Array<EmojiListBean> = [];
+  commentBean: CommentBean = new CommentBean();
+  publicationBean: PublicationBean = new PublicationBean();
+  user: User;
+  listEmoji: Array<EmojiListBean> = [];
   public InteractionsLikes: Array<User> = [];
   public InteractionsDislikes: Array<User> = [];
-  private isFixedPublishDate:boolean = false;
-  private fixedPublishDate:string;
+  private isFixedPublishDate: boolean = false;
+  private fixedPublishDate: string;
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
 
-  constructor(public translate:TranslateService,
-              private http:Http,
-              private dateService:DateService,
-              private loginService:LoginService,
-              public emojiService:EmojiService,
-              private changeDetector:ChangeDetectorRef) {
+  constructor(public translate: TranslateService,
+    private http: Http,
+    private dateService: DateService,
+    private loginService: LoginService,
+    public emojiService: EmojiService,
+    private changeDetector: ChangeDetectorRef) {
     loginService.actualize();
     this.user = loginService.user;
     this.listEmoji = emojiService.getEmojiList();
@@ -60,14 +60,14 @@ export class Comment {
       this.removeLike();
   }
 
-  afficheComment(comment):string {
-		var white_space_regex:RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
-		if(!white_space_regex.test(comment)){
-    	return this.emojiService.AfficheWithEmoji(comment);
-		}
-		else {
-			return '';
-		}
+  afficheComment(comment): string {
+    var white_space_regex: RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
+    if (!white_space_regex.test(comment)) {
+      return this.emojiService.AfficheWithEmoji(comment);
+    }
+    else {
+      return '';
+    }
   }
 
   addOrRemoveDislike() {
@@ -91,15 +91,15 @@ export class Comment {
       environment.SERVER_URL + pathUtils.LIKE_COMMENT,
       body,
       AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
+      .map((res: Response) => res.json())
       .subscribe(
         response => {
-      },
+        },
         err => {
-      },
-      () => {
-      }
-    );
+        },
+        () => {
+        }
+      );
     this.commentBean.isLiked = true;
     this.commentBean.nbLikes++;
   }
@@ -117,21 +117,21 @@ export class Comment {
       environment.SERVER_URL + pathUtils.DISLIKE_COMMENT,
       body,
       AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
+      .map((res: Response) => res.json())
       .subscribe(
         response => {
 
-      },
+        },
         err => {
-      },
-      () => {
-      }
-    );
+        },
+        () => {
+        }
+      );
 
     this.commentBean.isDisliked = true;
     this.commentBean.nbDislikes++;
   }
-  getCommentTime(publishDateString:string):string {
+  getCommentTime(publishDateString: string): string {
     if (this.isFixedPublishDate)
       return this.fixedPublishDate;
     let date = new Date();
@@ -177,16 +177,16 @@ export class Comment {
       environment.SERVER_URL + pathUtils.REMOVE_LIKE_COMMENT,
       body,
       AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
+      .map((res: Response) => res.json())
       .subscribe(
         response => {
 
-      },
+        },
         err => {
-      },
-      () => {
-      }
-    );
+        },
+        () => {
+        }
+      );
     this.commentBean.isLiked = false;
     this.commentBean.nbLikes--;
   }
@@ -201,45 +201,45 @@ export class Comment {
       environment.SERVER_URL + pathUtils.REMOVE_DISLIKE_COMMENT,
       body,
       AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
+      .map((res: Response) => res.json())
       .subscribe(
         response => {
-      },
+        },
         err => {
-      },
-      () => {
-      }
-    );
+        },
+        () => {
+        }
+      );
     this.commentBean.isDisliked = false;
     this.commentBean.nbDislikes--;
   }
 
 
-  removeComment(comment:CommentBean) {
+  removeComment(comment: CommentBean) {
     if (this.user._id == comment.profileId
       || this.publicationBean.profileId == this.user._id) {
       swal({
         cancelButtonColor: '#999',
         title: this.translateCode("comment_popup_confirmation_delete_title"),
-        text: this.translateCode("publication_popup_confirmation_delete_text"),
+        text: this.translateCode("comment_popup_confirmation_delete_text"),
         showCancelButton: true,
         confirmButtonColor: "#12A012",
         confirmButtonText: this.translateCode("comment_popup_confirmation_delete_button"),
         cancelButtonText: this.translateCode("comment_popup_cancel_delete_button"),
         allowOutsideClick: true
       }).then(function () {
-          this.doDeleteComment();
-          swal({
-            title: this.translateCode("comment_popup_notification_delete_title"),
-            text: this.translateCode("comment_popup_notification_delete_text"),
-            type: "success",
-            timer: 1000,
-            showConfirmButton: false
-          }).then(function () {
-          }, function (dismiss) {
-          });
-          this.changeDetector.markForCheck();
-        }.bind(this),
+        this.doDeleteComment();
+        swal({
+          title: this.translateCode("comment_popup_notification_delete_title"),
+          text: this.translateCode("comment_popup_notification_delete_text"),
+          type: "success",
+          timer: 1000,
+          showConfirmButton: false
+        }).then(function () {
+        }, function (dismiss) {
+        });
+        this.changeDetector.markForCheck();
+      }.bind(this),
         function (dismiss) {
           if (dismiss === 'overlay') {
 
@@ -261,24 +261,24 @@ export class Comment {
     this.http.post(environment.SERVER_URL + pathUtils.REMOVE_COMMENT,
       body,
       AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
+      .map((res: Response) => res.json())
       .subscribe(
         response => {
-      },
+        },
         err => {
-      },
-      () => {
-        this.changeDetector.markForCheck();
-      }
-    );
+        },
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
   }
 
-  
+
 
 
   translateCode(code) {
     let message;
-    this.translate.get(code).subscribe((resTranslate:string) => {
+    this.translate.get(code).subscribe((resTranslate: string) => {
       message = resTranslate;
     });
     return message;
