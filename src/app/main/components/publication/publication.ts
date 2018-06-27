@@ -660,9 +660,20 @@ export class Publication {
 
   addOrRemoveLike() {
     if (!this.publicationBean.isLiked)
-      this.addLike();
+    { if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes == 0) {
+        this.addLike();
+        this.publicationBean.nbLikes = 0;
+        this.publicationBean.nbDislikes = 0;
+      }else {
+        this.addLike();
+      }
+    }
     else
       this.removeLike();
+      if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes < 0) {
+        this.publicationBean.nbLikes =0;
+        this.publicationBean.nbDislikes = 0;
+      }
   }
 
   addLike() {
@@ -720,9 +731,20 @@ export class Publication {
 
   addOrRemoveDislike() {
     if (!this.publicationBean.isDisliked)
-      this.addDislike();
+    { if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes == 0) {
+        this.addDislike();
+        this.publicationBean.nbLikes = 0;
+        this.publicationBean.nbDislikes = 0;
+      }else{
+        this.addDislike();
+      }
+    }
     else
       this.removeDislike();
+      if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes < 0) {
+        this.publicationBean.nbLikes =0;
+        this.publicationBean.nbDislikes = 0;
+      }
   }
 
   addDislike() {
