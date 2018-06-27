@@ -93,9 +93,6 @@ noSearchResults: Boolean = false;
    
     })
   }
-  sendHome(){
-    this.router.navigate(['/main']);
-  }
   getSuggestionsList(){
     /*
      les abonnées dont il n'a pas fait des conversations avec encore
