@@ -103,13 +103,11 @@ noSearchResults: Boolean = false;
      return users.json();
      })
     .subscribe((users:any[])=>{
-      console.log(users)
        for(let i=0;i<users.length;i++){
        this.suggestions.push(users[i]);
        } 
    
     })
-    console.log(this.suggestions);
   }
 
   isUserSelected(userId: string): boolean {
@@ -120,8 +118,8 @@ noSearchResults: Boolean = false;
 }
  
 /* Method to select the user from the Chat list starts */
-selectUser(stringid:string): void {
-  this.router.navigateByUrl('/main/mobile/'+stringid);
+selectUser(user:User): void {
+  this.router.navigate(['/main/mobile/'+user._id]);
 }
 
 /*Search functionnality*/

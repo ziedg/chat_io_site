@@ -60,7 +60,6 @@ noSearchResults: Boolean = false;
      return users.json();
      })
     .subscribe((users:any[])=>{
-      console.log(users)
        for(let i=0;i<users.length;i++){
           if(users[i].lastMessage.fromUserId == this.userId){
             users[i].lastMessage.message = "Vous : "+users[i].lastMessage.message;
@@ -94,6 +93,9 @@ noSearchResults: Boolean = false;
    
     })
   }
+  sendHome(){
+    this.router.navigate(['/main']);
+  }
   getSuggestionsList(){
     /*
      les abonnées dont il n'a pas fait des conversations avec encore
@@ -103,13 +105,11 @@ noSearchResults: Boolean = false;
      return users.json();
      })
     .subscribe((users:any[])=>{
-      console.log(users)
        for(let i=0;i<users.length;i++){
        this.suggestions.push(users[i]);
        } 
    
     })
-    console.log(this.suggestions);
   }
 
   isUserSelected(userId: string): boolean {

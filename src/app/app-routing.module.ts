@@ -13,7 +13,6 @@ import { FakeComponent } from './shared/fake.component';
 import { MessagingComponent } from './messaging/messaging.component';
 import {SearchMobile} from "./main/components/search-mobile/search-mobile.component";
 import {ConversationMobileComponent} from './messaging/conversation-mobile/conversation-mobile.component';
-import {ChatListMobileComponent} from './messaging/chat-list-mobile/chat-list-mobile.component';
 
 export const routes: Routes = [
     {path: 'redirect', component: FakeComponent},
@@ -41,7 +40,6 @@ export const routes: Routes = [
             {path: 'notification', component: Notification},
             {path: '404', component: NotFoundPage},
             {path: 'messaging',component: MessagingComponent},
-            {path: 'chat-mobile', component: ChatListMobileComponent},
             {path: 'mobile/:stringid', component: ConversationMobileComponent},
             {path: '**', redirectTo: '404'}
         ]

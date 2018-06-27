@@ -53,7 +53,29 @@ export class ConversationMobileComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['stringid'];
     });
-    console.log(this.id);
+    this.emitterService.userEmitter
+      .subscribe((selectedUser: User) => {
+          this.selectedUser = selectedUser;
+          console.log(selectedUser);
+      });
+      
+      this.emitterService.conversationEmitter.subscribe((data) => {
+        this.messageLoading = false;
+        if(data==undefined)
+        {
+          this.messages=[];
+        }
+        else{
+          this.messages = data;
+          console.log("Here");
+          console.log(data);
+          // this.messages = this.groupBy(data, function(item)
+          // {
+          //   return [item.fromUserId];
+          // });
+          // console.log(this.messages);
+        }
+    });
   }
 
   ngOnChanges(changes: any) {
@@ -71,6 +93,8 @@ export class ConversationMobileComponent implements OnInit {
         }
         else{
           this.messages = data;
+          console.log("Here");
+          console.log(data);
           // this.messages = this.groupBy(data, function(item)
           // {
           //   return [item.fromUserId];
@@ -87,7 +111,9 @@ export class ConversationMobileComponent implements OnInit {
       jQuery(".embed-submit-field button").removeClass('activebtn');
     }
   }
-
+  sendHome(){
+    this.router.navigate(['/main/messaging']);
+  }
   sendMessageBtn() {
     //if (event.keyCode === 13) {
         const message = this.messageForm.controls['message'].value.trim();
