@@ -12,9 +12,10 @@ export class GifSlider implements AfterViewInit {
   public UrlGifList = [];
   ListOfGifs = [];
   NewListOfGifs = [];
-  gifLimitIndex: number = 47;
+  gifLimitIndex: number = 15;
   firstGifRequest = true;
   @Output() myEvent = new EventEmitter();
+  @Output() myToggleEvent = new EventEmitter();
 
   offset_x_pos: number = 0;
   sliderWidth: number = 100;
@@ -32,7 +33,10 @@ export class GifSlider implements AfterViewInit {
     this.gifService.loadMoreGifs();
     this.ListOfGifs = gifService.getGifList();
     for (let i = 0; i < this.ListOfGifs.length; i++) {
-      this.UrlGifList[i] = this.ListOfGifs[i]["media"][0]["nanogif"]["url"];
+      var GifObject = {Post: this.ListOfGifs[i]["media"][0]["tinygif"]["url"], Preview: this.ListOfGifs[i]["media"][0]["nanogif"]["url"]};
+      // this.UrlGifList[i].Post = this.ListOfGifs[i]["media"][0]["nanogif"]["url"];
+      // this.UrlGifList[i].Preview = this.ListOfGifs[i]["media"][0]["tinygif"]["url"];
+      this.UrlGifList.push(GifObject); //UrlGifList is undefined
 
     }
   }
@@ -55,7 +59,7 @@ export class GifSlider implements AfterViewInit {
       currentLength++;
     }
     //console.log(currentLength);
-    this.gifLimitIndex += 50;
+    this.gifLimitIndex += 15;
   }
 
   ngAfterViewInit() {
@@ -70,10 +74,10 @@ export class GifSlider implements AfterViewInit {
   translate_it(n: number) {
     //console.log("gif length: "+ (this.ListOfGifs.length-3));
     let offset_x_n: any = this.offset_x_pos + n;
-    //console.log("offset_x_n: "+offset_x_n);
+    console.log("offset_x_n: "+offset_x_n);
 
     if (offset_x_n == -this.gifLimitIndex) {
-      //console.log("max leeength");
+      console.log("max leeength");
       this.loadMoreGifs();
     }
 
@@ -93,6 +97,10 @@ export class GifSlider implements AfterViewInit {
   gifPreview(urlGIF) {
     //console.log("chiiiild");
     this.myEvent.emit(urlGIF);
+  }
+
+  toggleGifSlider(){
+    this.myToggleEvent.emit();
   }
 
 }

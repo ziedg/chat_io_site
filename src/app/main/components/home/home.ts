@@ -81,6 +81,10 @@ export class Home {
   arabicRegex: RegExp = /[\u0600-\u06FF]/;
   public imageFromLink: boolean = false;
 
+  bglist=false;
+  bgvalid=true;
+  pubclass="";
+  pubbg=false;
   /* tag search */
   searchValue: string;
   listTagSearchUsers: Array<User> = [];
@@ -224,7 +228,87 @@ export class Home {
     }, 1000);
 
   }
+  Classname(){
+    if(this.pubbg)
+    return this.pubclass;
+  }
+  bglistf(){
+    if(this.bglist == true)
+      this.bglist = false;
+    else
+      this.bglist = true;
+  }
+  getbg0(){
+    if(this.bgvalid){
+      this.pubbg=false;
+      this.pubclass="";
+  }}
+  getbg1(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes1";
+  }}
 
+  getbg2(){
+    if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes2";
+  }}
+  getbg3(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes3";
+  }}
+  getbg4(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes4";
+  }}
+  getbg5(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes5";
+  }}
+  getbg6(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes6";
+  }}
+  getbg7(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes7";
+  }}
+  getbg8(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes8";
+  }}
+  getbg9(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes9";
+  }}
+  getbg10(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes10";
+  }}
+  getbg11(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes11";
+  }}
+  getbg12(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes12";
+  }}
+  getbg13(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes13";
+  }}
+  getbg14(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes14";
+  }}
+  getbg15(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes15";
+  }}
+  getbg16(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes16";
+  }}
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
     this.user.isNewInscri = false;
@@ -320,6 +404,7 @@ export class Home {
   }
 
   putIntoList(response) {
+    console.log(response.pubGid);
     if (!response.length) {
       this.showLoading = false;
       this.isLock = false;
@@ -379,6 +464,7 @@ export class Home {
         response => {
           //this.publicationBeanList = [];
           this.putIntoList(response);
+          console.log(this.publicationBeanList);
           if (response.length == 0) {
             this.morePosts = false
           }
@@ -591,6 +677,7 @@ export class Home {
     data.append("publyoutubeLink", this.youtubeLink);
     data.append("publfacebookLink", this.facebookLink);
     data.append("publPicture", this.uploadedPicture);
+    data.append("publClass", this.pubclass);
     // clear title value
     this.form.reset();
 
@@ -632,6 +719,22 @@ export class Home {
       this.errorTimed();
 
     }
+  }
+
+  veriftextsize(publishDivRef){
+    let text = publishDivRef.textContent;
+    let nb=0;
+    if(text !== 'null' && text !=='undefined' && text.length > 0) {
+      var line_parts = text.split('<br>');
+      for(let i=0;i<line_parts.length;i++){
+        nb=nb+(line_parts[i].length/39);
+        if(line_parts[i].length%39!=0) nb++;}
+      if(nb>8){
+        this.getbg0();
+        this.bgvalid=false;
+      }
+      else{this.bgvalid=true;}
+  }
   }
 
   enableTitlePost() {

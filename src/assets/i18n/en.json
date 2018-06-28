@@ -186,5 +186,7 @@
   "conditions_generales": "Terms and conditions",
   "a_propos":"About us",
   "fb_friends": "Suggestions for you",
-  "fb_label": "facebook friend"
+  "fb_label": "facebook friend",
+  "Like":"Like" ,
+  "Dislike":"Dislike"
 }

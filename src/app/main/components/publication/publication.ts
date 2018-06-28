@@ -84,6 +84,8 @@ export class Publication {
   private lastPubText: string = "";
   pub_text:string = "";
   arabicText:boolean = false;
+  pubclass="";
+  pubbg=false;
 
   public InteractionsLikes: Array<MinifiedUser> = [];
   public InteractionsDislikes: Array<MinifiedUser> = [];
@@ -199,7 +201,7 @@ export class Publication {
         jQuery("#"+element.commentTextareaId).parent().parent().css({"position":"unset"});
       });
     }
-    
+
   }
 
   initComments() {
@@ -247,6 +249,8 @@ export class Publication {
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 
+    this.pubclass=this.publicationBean.publClass;
+
     var pub_txt
     if(this.publicationBean.isShared) {
       pub_txt = this.publicationBean.publText;
@@ -284,7 +288,7 @@ export class Publication {
     if(txt !== 'null' && txt !=='undefined' && txt.length > 0) {
 			var line_parts = txt.split('<br>');
 			if(line_parts.length > lines_max ){
-        this.firstPubText = line_parts.slice(lines_max, lines_max).join('<br>');
+        this.firstPubText = line_parts.slice(0, lines_max).join('<br>');
 				this.lastPubText = line_parts.slice(lines_max, line_parts.length ).join('<br>');
 				this.longPubText = true;
 			}
@@ -689,7 +693,7 @@ export class Publication {
   addLike() {
     if (this.publicationBean.isDisliked)
       this.removeDislike();
-
+      console.log(this.publicationBean._id);
     let body = JSON.stringify({
       publId: this.publicationBean._id,
       profileId: this.user._id,
@@ -811,16 +815,16 @@ export class Publication {
       publId: this.publicationBean._id,
       page: this.interactionsPage
     });
-            
+
             this.http.post(url,body,
                 AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
-                  response => {  
+
+                  response => {
                     this.InteractionsLikes = response.message.likes.slice();
                     this.InteractionsDislikes = response.message.dislikes.slice();
-                    console.log('likes');
-                    console.log(this.InteractionsLikes,this.InteractionsDislikes);
+                    console.log(this.InteractionsDislikes);
                 },
                 err => {
                 },
@@ -862,11 +866,11 @@ export class Publication {
 
   openTab(tabName){
     var i, tabcontent, tablinks;
-    if(tabName === 'Likes') { 
+    if(tabName === 'Likes') {
       document.getElementById("nulle").style.borderBottom = "none";
       document.getElementById("lol").style.borderBottom = "1px solid #2aaa2a";
     }
-    else if(tabName === 'Dislikes') {  
+    else if(tabName === 'Dislikes') {
       document.getElementById("lol").style.borderBottom = "none";
       document.getElementById("nulle").style.borderBottom = "1px solid #fd4000";
     }

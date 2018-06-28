@@ -1,8 +1,10 @@
 <section id="gif-slider-container" class="slider-container" #container>
+    <i class="fa fa-times" style="right: 5px; background-color:burlywood; position: absolute;top: 0px;cursor: pointer; color: green;" aria-hidden="true"  (click)="toggleGifSlider()"></i>
   <div class="slider-sub-container">
     <div class="slides-container" #slidesContainer>
+        
       <div *ngFor="let Url  of UrlGifList" class="slide">
-        <a (click)="gifPreview(Url)"> <img class="gif-img" [src]="Url"  /></a>
+        <a (click)="gifPreview(Url.Post)"> <img class="gif-img" [src]="Url.Preview"  /></a>
       </div>
     </div>
     <div>

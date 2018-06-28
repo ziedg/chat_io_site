@@ -78,9 +78,27 @@
             </div>
 
           </div>
-          <div class="col-md-12 col-xs-12 add-head noPadding" id="pub-holder">
-            <div class="pub-holder-holder">
-              <div class="user-img for-add" *ngIf="user.profilePictureMin"
+          <div class="col-md-12 col-xs-12 add-head noPadding" [ngClass]="{'pubbg1': pubclass=='pubdes1',
+                                                                          'pubbg2': pubclass=='pubdes2',
+                                                                          'pubbg3': pubclass=='pubdes3',
+                                                                          'pubbg4': pubclass=='pubdes4',
+                                                                          'pubbg5': pubclass=='pubdes5',
+                                                                          'pubbg6': pubclass=='pubdes6',
+                                                                          'pubbg7': pubclass=='pubdes7',
+                                                                          'pubbg8': pubclass=='pubdes8',
+                                                                          'pubbg9': pubclass=='pubdes9',
+                                                                          'pubbg10': pubclass=='pubdes10',
+                                                                          'pubbg11': pubclass=='pubdes11',
+                                                                          'pubbg12': pubclass=='pubdes12',
+                                                                          'pubbg13': pubclass=='pubdes13',
+                                                                          'pubbg14': pubclass=='pubdes14',
+                                                                          'pubbg15': pubclass=='pubdes15',
+                                                                          'pubbg16': pubclass=='pubdes16',
+                                                                          'pubcenter':pubbg
+                                                                          }"
+               (input)="veriftextsize(publishDivRef)" id="pub-holder">
+            <div class="pub-holder-holder" >
+              <div class="user-img for-add" *ngIf="user.profilePictureMin&&!pubbg"
                    [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
               </div>
 
@@ -93,33 +111,30 @@
                      formControlName="publicationTitle" class="new-publication-title">
 
               <div id="publishDiv"
+                   [ngClass]="{                                           'pubdes1': pubclass=='pubdes1',
+                                                                          'pubdes2': pubclass=='pubdes2',
+                                                                          'pubdes3': pubclass=='pubdes3',
+                                                                          'pubdes4': pubclass=='pubdes4',
+                                                                          'pubdes5': pubclass=='pubdes5',
+                                                                          'pubdes6': pubclass=='pubdes6',
+                                                                          'pubdes7': pubclass=='pubdes7',
+                                                                          'pubdes8': pubclass=='pubdes8',
+                                                                          'pubdes9': pubclass=='pubdes9',
+                                                                          'pubdes10': pubclass=='pubdes10',
+                                                                          'pubdes11': pubclass=='pubdes11',
+                                                                          'pubdes12': pubclass=='pubdes12',
+                                                                          'pubdes13': pubclass=='pubdes13',
+                                                                          'pubdes14': pubclass=='pubdes14',
+                                                                          'pubdes15': pubclass=='pubdes15',
+                                                                          'pubdes16': pubclass=='pubdes16'
+                                                                          }"
                    [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText, 'post-title-enable':titleEnable}"
                    (paste)="updatePublishTextOnPaste($event)"
                    contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)"
                    #publishDivRef style="width: calc(100% - 80px)"></div>
 
 
-              <!-- tag new publication -->
-              <!--
-              <div class="" >
-                <span> tag Search user</span>
-                <div class="" >
-                  <div *ngIf="listTagSearchUsers">
-                    <article *ngFor="let result of listTagSearchUsers">
-                      <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
-                      </div>
-                      <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
-                      </div>
-                      <div class="">
-                        {{result.firstName}} {{result.lastName}}
-                      </div>
-                    </article>
-                  </div>
-                </div>
-              </div>
-              -->
 
-              <!-- tag new publication end -->
 
               <div class="file-input-holder">
                 <div class="file-input">
@@ -167,7 +182,8 @@
 
               </div>
 
-              <gif-slider style="width:100%;" *ngIf="showGifSlider" (myEvent)="previewGIF($event)"></gif-slider>
+
+              <gif-slider style="width:100%;" *ngIf="showGifSlider" (myEvent)="previewGIF($event)" (myToggleEvent)="toggleGifSlider()"></gif-slider>
 
             </div>
 
@@ -204,6 +220,7 @@
                 <i class="fa fa-users" style="vertical-align: middle" [class.hide]="selectedMenuElement!=1"
                    (click)="changeSelectMenu(0)"></i>
               </div>
+              <div><i class="fas fa fa-th-large" style="font-size: 18px" (click)="bglistf()"></i></div>
             </div>
             <div class="col-md-7 col-xs-6 share-button"
                  style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
@@ -250,7 +267,25 @@
               </button>
             </div>
           </div>
-
+          <div *ngIf="bglist" class="bglist" display="none"><tr>
+            <td><img style="border: 1px solid gray; border-radius: 5px" src="assets/images/background/bg0.png" (click)="getbg0()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg1min.jpg" (click)="getbg1()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg2min.jpg" (click)="getbg2()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg3min.jpg" (click)="getbg3()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg4min.jpg" (click)="getbg4()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg5min.jpg" (click)="getbg5()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg6min.jpg" (click)="getbg6()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg7min.jpg" (click)="getbg7()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg8min.jpg" (click)="getbg8()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg9min.jpg" (click)="getbg9()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg10min.jpg" (click)="getbg10()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg11min.jpg" (click)="getbg11()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg12min.jpg" (click)="getbg12()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg13min.jpg" (click)="getbg13()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg14min.jpg" (click)="getbg14()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg15min.jpg" (click)="getbg15()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg16min.jpg" (click)="getbg16()"></td>
+          </tr></div>
 
         </div>
 
