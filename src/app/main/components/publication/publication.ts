@@ -679,7 +679,7 @@ export class Publication {
   addLike() {
     if (this.publicationBean.isDisliked)
       this.removeDislike();
-
+      console.log(this.publicationBean._id);
     let body = JSON.stringify({
       publId: this.publicationBean._id,
       profileId: this.user._id,
@@ -809,8 +809,7 @@ export class Publication {
                   response => {  
                     this.InteractionsLikes = response.message.likes.slice();
                     this.InteractionsDislikes = response.message.dislikes.slice();
-                    console.log('likes');
-                    console.log(this.InteractionsLikes,this.InteractionsDislikes);
+                    console.log(this.InteractionsDislikes);
                 },
                 err => {
                 },

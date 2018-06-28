@@ -58,7 +58,7 @@
              <a [routerLink]="['/main/profile',publicationBean.originalProfileId]"
                        style="display:inline;">
               {{publicationBean.originalProfileFirstName +"
-              "+publicationBean.originalProfileLastName }}
+              "+publicationBean.originalProfileLastName }} 
             </a>
 
         </header>
@@ -223,7 +223,7 @@
         
             <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px" >
                 <div *ngIf="InteractionsLikes.length == 0" class="no-interactions ">No likes yet.</div>
-                <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0">
+                <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsLikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
                         <div class="user-img-shared" 
@@ -247,7 +247,7 @@
             
             <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px">
                 <div *ngIf="InteractionsDislikes.length == 0" class="no-interactions">No dislikes yet.</div>
-                <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0">
+                <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsDislikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
                         <div class="user-img-shared" 
@@ -255,7 +255,7 @@
                         </div>
                         <div class="user-name">
                           <header><a [routerLink]="['/main/profile', user._id]">
-                            {{user.profilefirstname}} {{user.profilelastname}}
+                            {{user.profilefirstname}} {{user.profilelastname}} 
                           </a></header>
                         </div>
                         <div class="subscribe-no-number" style="min-width:12px">

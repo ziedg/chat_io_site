@@ -3203,10 +3203,14 @@ facebook-friends .user .user-img {
   margin: 15% auto;
   z-index: 101;
 }
+.suggestions-box::-webkit-scrollbar { 
+    display: none; 
+}
 
 .white-box-interactions {
   background-color: white;
   width: 400px;
+  max-height:450px;
   margin: 15% auto;
   z-index: 101;
   border-radius: 4px;
