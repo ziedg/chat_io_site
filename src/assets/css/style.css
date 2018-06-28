@@ -100,115 +100,163 @@
 }
 .pubdes1{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes2{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes3{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes4{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes5{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes6{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes7{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes8{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes9{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes10{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes11{
   font-family: "Arial Black";
-  font-size: 17px;
-  color: white;
+  font-size: calc(0.2vw + 2vh);
+  color: black;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes12{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes13{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes14{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes15{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubdes16{
   font-family: "Arial Black";
-  font-size: 17px;
+  font-size: calc(0.2vw + 2vh);
   color: white;
   text-align: center;
-  margin-left: 6vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pubcenter{
   justify-content: center;
