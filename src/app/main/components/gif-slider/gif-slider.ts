@@ -33,7 +33,10 @@ export class GifSlider implements AfterViewInit {
     this.gifService.loadMoreGifs();
     this.ListOfGifs = gifService.getGifList();
     for (let i = 0; i < this.ListOfGifs.length; i++) {
-      this.UrlGifList[i] = this.ListOfGifs[i]["media"][0]["nanogif"]["url"];
+      var GifObject = {Post: this.ListOfGifs[i]["media"][0]["tinygif"]["url"], Preview: this.ListOfGifs[i]["media"][0]["nanogif"]["url"]};
+      // this.UrlGifList[i].Post = this.ListOfGifs[i]["media"][0]["nanogif"]["url"];
+      // this.UrlGifList[i].Preview = this.ListOfGifs[i]["media"][0]["tinygif"]["url"];
+      this.UrlGifList.push(GifObject); //UrlGifList is undefined
 
     }
   }
