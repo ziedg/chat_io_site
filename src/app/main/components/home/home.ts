@@ -289,7 +289,7 @@ export class Home {
     this.textplace="center";
   }}
   getbg5(){if(this.bgvalid){
-    this.bg="assets/images/background/bg5.jpeg";
+    this.bg="assets/images/background/bg5.jpg";
     this.bgid="5";
     this.ff="Arial Black";
     this.fs=undefined;
@@ -298,7 +298,7 @@ export class Home {
     this.textplace="center";
   }}
   getbg6(){if(this.bgvalid){
-    this.bg="assets/images/background/bg6.jpeg";
+    this.bg="assets/images/background/bg6.jpg";
     this.bgid="6";
     this.ff="Arial Black";
     this.fs=undefined;
