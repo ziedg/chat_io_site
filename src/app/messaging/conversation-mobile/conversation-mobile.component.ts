@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 
 import { User } from '../../beans/user';
 import { ChatService } from '../../messanging/chat.service';
+import { LoginService } from '../../login/services/loginService';
 import { EmitterService } from '../emitter.service';
 declare var jQuery: any;
 class MessageValidation {
@@ -24,84 +25,48 @@ class MessageValidation {
   templateUrl: './conversation-mobile.component.html',
   styleUrls: ['./conversation-mobile.component.css']
 })
-export class ConversationMobileComponent implements OnInit {
-  id: string;
-  private sub: any;
+export class ConversationMobileComponent implements OnInit{
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
   public selectedUser: User = null;
 	public messageForm: FormGroup;
 	private userId: string = null;
-
+  private user: User = null;
   public messages = [];
-  public messageLoading = true;
+  public messageLoading = false;
   private s: AngularFireObject<any>;
 
   constructor(private emitterService:EmitterService,
     private router:Router,
-    private route: ActivatedRoute,
+    private loginService :LoginService,
     private db: AngularFireDatabase,
     private chatService: ChatService
   ) { 
+    
+    this.user =this.loginService.getUser();
+    this.userId=this.user._id;
 		this.messageForm =new FormBuilder().group({
 			message: new MessageValidation
-		});;
-  }
-
-  ngOnInit() {
+    });
     jQuery(".navigation-bottom").addClass('hidden-xs');
-    this.sub = this.route.params.subscribe(params => {
-      this.id = params['stringid'];
-    });
-    this.emitterService.userEmitter
-      .subscribe((selectedUser: User) => {
-          this.selectedUser = selectedUser;
-          console.log(selectedUser);
-      });
-      
-      this.emitterService.conversationEmitter.subscribe((data) => {
-        this.messageLoading = false;
-        if(data==undefined)
-        {
-          this.messages=[];
-        }
-        else{
-          this.messages = data;
-          console.log("Here");
-          console.log(data);
-          // this.messages = this.groupBy(data, function(item)
-          // {
-          //   return [item.fromUserId];
-          // });
-          // console.log(this.messages);
-        }
-    });
+    
   }
 
-  ngOnChanges(changes: any) {
-      /* Fetching selected users information from other component. */
-      this.emitterService.userEmitter
-      .subscribe((selectedUser: User) => {
-          this.selectedUser = selectedUser;
-      });
-
-      this.emitterService.conversationEmitter.subscribe((data) => {
-        this.messageLoading = false;
-        if(data==undefined)
-        {
-          this.messages=[];
-        }
-        else{
-          this.messages = data;
-          console.log("Here");
-          console.log(data);
-          // this.messages = this.groupBy(data, function(item)
-          // {
-          //   return [item.fromUserId];
-          // });
-          // console.log(this.messages);
-        }
-    });
+  ngOnInit(){
+    this.emitterService.userEmitter
+    .subscribe((selectedUser: User) => {
+        this.selectedUser = selectedUser;
+    },err => console.log(err), () => console.log('done'));
+    this.emitterService.conversationEmitter.subscribe((data) => {
+      if(data==undefined)
+      {
+        this.messages=[];
+      }
+      else{
+        this.messages = data;
+      }
+      this.messageLoading = true;
+  },err => console.log(err), () => console.log('done'));
   }
 
   sendMessage(){
@@ -166,5 +131,8 @@ export class ConversationMobileComponent implements OnInit {
           );
         }
       });
+  }
+  alignMessage(userId: string): boolean {
+    return this.userId === userId ? false : true;
   }
 }

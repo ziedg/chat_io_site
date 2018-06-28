@@ -62,11 +62,6 @@ export class ConversationComponent  {
       }
       else{
         this.messages = data;
-        // this.messages = this.groupBy(data, function(item)
-        // {
-        //   return [item.fromUserId];
-        // });
-        // console.log(this.messages);
       }
   });
 }
