@@ -70,7 +70,9 @@
       </div>
     </div>
 
-    <div class="content" [ngStyle]="{'background-image': 'url(' + bg + ')','height': divheight}" *ngIf="!publicationBean.isShared">
+    <div class="content" [ngStyle]="{'background-image': 'url(' + bg + ')','height': divheight}"
+    style=" display: inline"
+    *ngIf="!publicationBean.isShared">
       <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]" class="publication-text">
         {{publicationBean.publTitle}} </h4>
       <span *ngIf="publicationBean.publText !== 'null'
@@ -82,7 +84,7 @@
             <span [ngStyle]="{'fontFamily': ff, 'fontSize': fs, 'color': fc}" [innerHTML]="firstPubText"></span>
             <a *ngIf="longPubText && !longPubTextShow"
                 (click)="longPubTextShow=true"
-                style="margin-top: 0; display: inline">
+                style="display: inline">
                 {{"publication_open_last_part" | translate }}</a>
             <span *ngIf="longPubText && longPubTextShow" [ngStyle]="{'fontFamily': ff, 'fontSize': fs, 'color': fc}" [innerHTML]="lastPubText">
             </span>

@@ -259,7 +259,7 @@ export class Publication {
     this.fc=this.publicationBean.pubColor;
     if(this.publicationBean.pubGid!=undefined&&this.publicationBean.pubGid!=""){
       this.divheight="190px";
-    this.textplace="center";}
+}
     else{
       this.divheight=undefined;
       this.textplace=undefined;}
@@ -301,7 +301,7 @@ export class Publication {
     if(txt !== 'null' && txt !=='undefined' && txt.length > 0) {
 			var line_parts = txt.split('<br>');
 			if(line_parts.length > lines_max ){
-        this.firstPubText = line_parts.slice(lines_max, lines_max).join('<br>');
+        this.firstPubText = line_parts.slice(0, lines_max).join('<br>');
 				this.lastPubText = line_parts.slice(lines_max, line_parts.length ).join('<br>');
 				this.longPubText = true;
 			}
