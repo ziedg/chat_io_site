@@ -78,8 +78,8 @@
             </div>
 
           </div>
-          <div class="col-md-12 col-xs-12 add-head noPadding" id="pub-holder">
-            <div class="pub-holder-holder">
+          <div class="col-md-12 col-xs-12 add-head noPadding" [ngStyle]="{'background-image': 'url(' + bg + ')','height': divheight,'justifyContent': textplace}" (input)="veriftextsize(publishDivRef)" id="pub-holder">
+            <div class="pub-holder-holder" >
               <div class="user-img for-add" *ngIf="user.profilePictureMin"
                    [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
               </div>
@@ -93,6 +93,7 @@
                      formControlName="publicationTitle" class="new-publication-title">
 
               <div id="publishDiv"
+                   [ngStyle]="{'fontFamily': ff, 'fontSize': fs, 'color': fc, 'textAlign': textplace}"
                    [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText, 'post-title-enable':titleEnable}"
                    (paste)="updatePublishTextOnPaste($event)"
                    contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)"
@@ -204,6 +205,7 @@
                 <i class="fa fa-users" style="vertical-align: middle" [class.hide]="selectedMenuElement!=1"
                    (click)="changeSelectMenu(0)"></i>
               </div>
+              <div><i class="fas fa fa-th-large" style="font-size: 18px" (click)="bglistf()"></i></div>
             </div>
             <div class="col-md-7 col-xs-6 share-button"
                  style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
@@ -250,7 +252,15 @@
               </button>
             </div>
           </div>
-
+          <div *ngIf="bglist" class="bglist" display="none"><tr>
+            <td><img style="border: 1px solid gray; border-radius: 5px" src="assets/images/background/bg0.png" (click)="getbg0()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg1min.jpg" (click)="getbg1()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg2min.jpg" (click)="getbg2()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg3min.jpg" (click)="getbg3()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg4min.jpg" (click)="getbg4()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg5min.jpg" (click)="getbg5()"></td>&nbsp;
+            <td><img style="border-radius: 5px" src="assets/images/background/bg6min.jpg" (click)="getbg6()"></td>
+          </tr></div>
 
         </div>
 

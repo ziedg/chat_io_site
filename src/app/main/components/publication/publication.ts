@@ -84,6 +84,12 @@ export class Publication {
   private lastPubText: string = "";
   pub_text:string = "";
   arabicText:boolean = false;
+  bg="";
+  ff="";
+  fs="";
+  fc="";
+  divheight="";
+  textplace="";
 
   public InteractionsLikes: Array<MinifiedUser> = [];
   public InteractionsDislikes: Array<MinifiedUser> = [];
@@ -192,6 +198,16 @@ export class Publication {
         );
   }
 
+  focused(element){
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      jQuery("#"+element.commentTextareaId).parent().parent().css({"position":"fixed","bottom":"34px","background-color":"white","z-index":"10000"});
+      jQuery("#"+element.commentTextareaId).blur(function(){
+        jQuery("#"+element.commentTextareaId).parent().parent().css({"position":"unset"});
+      });
+    }
+
+  }
+
   initComments() {
     if (this.publicationBean.comments.length > this.nbMaxAddComments) {
       this.afficheMoreComments = true;
@@ -236,6 +252,17 @@ export class Publication {
         });}
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
+
+    this.bg="assets/images/background/bg"+this.publicationBean.pubGid+".jpg";
+    this.ff=this.publicationBean.pubFontFamily;
+    this.fs=this.publicationBean.pubFontSize;
+    this.fc=this.publicationBean.pubColor;
+    if(this.publicationBean.pubGid!=undefined&&this.publicationBean.pubGid!=""){
+      this.divheight="190px";
+    this.textplace="center";}
+    else{
+      this.divheight=undefined;
+      this.textplace=undefined;}
 
     var pub_txt
     if(this.publicationBean.isShared) {
@@ -801,12 +828,13 @@ export class Publication {
       publId: this.publicationBean._id,
       page: this.interactionsPage
     });
-            
+
             this.http.post(url,body,
                 AppSettings.OPTIONS)
                 .map((res: Response) => res.json())
                 .subscribe(
-                  response => {  
+
+                  response => {
                     this.InteractionsLikes = response.message.likes.slice();
                     this.InteractionsDislikes = response.message.dislikes.slice();
                     console.log(this.InteractionsDislikes);
@@ -851,11 +879,11 @@ export class Publication {
 
   openTab(tabName){
     var i, tabcontent, tablinks;
-    if(tabName === 'Likes') { 
+    if(tabName === 'Likes') {
       document.getElementById("nulle").style.borderBottom = "none";
       document.getElementById("lol").style.borderBottom = "1px solid #2aaa2a";
     }
-    else if(tabName === 'Dislikes') {  
+    else if(tabName === 'Dislikes') {
       document.getElementById("lol").style.borderBottom = "none";
       document.getElementById("nulle").style.borderBottom = "1px solid #fd4000";
     }

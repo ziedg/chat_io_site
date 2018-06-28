@@ -70,20 +70,21 @@
       </div>
     </div>
 
-    <div class="content" *ngIf="!publicationBean.isShared">
+    <div class="content" [ngStyle]="{'background-image': 'url(' + bg + ')','height': divheight}" *ngIf="!publicationBean.isShared">
       <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]" class="publication-text">
         {{publicationBean.publTitle}} </h4>
       <span *ngIf="publicationBean.publText !== 'null'
                   && publicationBean.publText !=='undefined'
                   && publicationBean.publText.length > 0"
             [ngClass]="{'publication-text': true, 'arabic-text': arabicText}"
+            [ngStyle]="{'textAlign': textplace}"
             >
-            <span [innerHTML]="firstPubText"></span>
+            <span [ngStyle]="{'fontFamily': ff, 'fontSize': fs, 'color': fc}" [innerHTML]="firstPubText"></span>
             <a *ngIf="longPubText && !longPubTextShow"
                 (click)="longPubTextShow=true"
                 style="margin-top: 0; display: inline">
                 {{"publication_open_last_part" | translate }}</a>
-            <span *ngIf="longPubText && longPubTextShow" [innerHTML]="lastPubText">
+            <span *ngIf="longPubText && longPubTextShow" [ngStyle]="{'fontFamily': ff, 'fontSize': fs, 'color': fc}" [innerHTML]="lastPubText">
             </span>
             </span>
 
@@ -195,14 +196,14 @@
     </div>
 
     <div class="interactions" *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0 || nbDisplayedComments != 0">
-    
+
+
       <span *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0"><a (click)="openModalInteractions()">
         {{shortNumber(publicationBean.nbLikes+publicationBean.nbDislikes)}} {{ 'interactions' | translate }}</a></span>
-        
+
       <span *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0 && nbDisplayedComments != 0"> • </span>
       <span *ngIf="nbDisplayedComments != 0"><a (click)="displayComments()" >
          {{shortNumber(nbDisplayedComments)}} {{ 'commentaires' | translate }}</a></span>
-  
     </div>
 
     <div class="modal-interactions" *ngIf="modalInteractions">
@@ -210,23 +211,23 @@
 
           <div class="interactions-tab">
               <button id="lol" class="interactions-tablinks" (click)="openTab('Likes')" style="color: #2aaa2a;border-bottom: 1px solid #2aaa2a">
-                  LOL
-              </button> 
+                  {{ 'Like' || translate }}
+              </button>
               <button id="nulle" class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fd4000">
-                  Nulle
+                  {{ 'Dislike' || translate }}
               </button>
               <button class="interactions-tablinks" style="float:right" (click)="closeModalInteractions()">
                   &#10006;
               </button>
             </div>
-            
-        
+
+
             <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px" >
                 <div *ngIf="InteractionsLikes.length == 0" class="no-interactions ">No likes yet.</div>
                 <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsLikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
-                        <div class="user-img-shared" 
+                        <div class="user-img-shared"
                              [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
                         </div>
                         <div class="user-name">
@@ -240,17 +241,17 @@
                           </button>
                         </div>
                       </div>
-                  
+
                     </div>
                   </section>
             </div>
-            
+
             <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px">
                 <div *ngIf="InteractionsDislikes.length == 0" class="no-interactions">No dislikes yet.</div>
                 <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsDislikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
-                        <div class="user-img-shared" 
+                        <div class="user-img-shared"
                              [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
                         </div>
                         <div class="user-name">
@@ -264,12 +265,12 @@
                           </button>
                         </div>
                       </div>
-                  
+
                     </div>
                   </section>
             </div>
 
-  
+
       </div>
     </div>
 
@@ -281,10 +282,10 @@
               {{ 'publication_like' | translate }}
             </div>
             <img class="social-emoji social-emoji-like-active"  style="margin-bottom:4px"
-                 src="assets/images/new/publication/like-full.png" 
+                 src="assets/images/new/publication/like-full.png"
                  *ngIf="publicationBean.isLiked">
             <img class="social-emoji desaturated social-emoji-like" style="margin-bottom:4px"
-                 src="assets/images/new/publication/like-outline.png" 
+                 src="assets/images/new/publication/like-outline.png"
                  *ngIf="!publicationBean.isLiked"></button>
         </div>
 
@@ -377,6 +378,7 @@
                 id="{{commentTextareaId}}"
                 placeholder="Votre commentaire ..."
                 contenteditable="true"
+                (focus)="focused(this)"
                 [(contenteditableModel)]="commentInputHtml"
                 (keydown.Enter)="publishComment()">
           </div>

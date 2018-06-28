@@ -81,6 +81,15 @@ export class Home {
   arabicRegex: RegExp = /[\u0600-\u06FF]/;
   public imageFromLink: boolean = false;
 
+  bglist=false;
+  bg="";
+  bgid="";
+  ff="";
+  fs="";
+  fc="";
+  divheight;
+  bgvalid=true;
+  textplace="";
   /* tag search */
   searchValue: string;
   listTagSearchUsers: Array<User> = [];
@@ -225,6 +234,79 @@ export class Home {
 
   }
 
+  bglistf(){
+    if(this.bglist == true)
+      this.bglist = false;
+    else
+      this.bglist = true;
+  }
+  getbg0(){
+    if(this.bgvalid){
+    this.bg="";
+    this.bgid=undefined;
+    this.ff=undefined;
+    this.fs=undefined;
+    this.fc=undefined;
+    this.divheight=undefined;
+    this.textplace="";
+  }}
+  getbg1(){if(this.bgvalid){
+    this.bg="assets/images/background/bg1.jpg";
+    this.bgid="1";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="gray";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+
+  getbg2(){
+    if(this.bgvalid){
+    this.bg="assets/images/background/bg2.jpg";
+    this.bgid="2";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="#f2f2f2";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg3(){if(this.bgvalid){
+    this.bg="assets/images/background/bg3.jpg";
+    this.bgid="3";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="burlywood";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg4(){if(this.bgvalid){
+    this.bg="assets/images/background/bg4.jpg";
+    this.bgid="4";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="white";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg5(){if(this.bgvalid){
+    this.bg="assets/images/background/bg5.jpeg";
+    this.bgid="5";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="darkblue";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg6(){if(this.bgvalid){
+    this.bg="assets/images/background/bg6.jpeg";
+    this.bgid="6";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="white";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
     this.user.isNewInscri = false;
@@ -320,6 +402,7 @@ export class Home {
   }
 
   putIntoList(response) {
+    console.log(response.pubGid);
     if (!response.length) {
       this.showLoading = false;
       this.isLock = false;
@@ -379,6 +462,7 @@ export class Home {
         response => {
           //this.publicationBeanList = [];
           this.putIntoList(response);
+          console.log(this.publicationBeanList);
           if (response.length == 0) {
             this.morePosts = false
           }
@@ -591,6 +675,10 @@ export class Home {
     data.append("publyoutubeLink", this.youtubeLink);
     data.append("publfacebookLink", this.facebookLink);
     data.append("publPicture", this.uploadedPicture);
+    data.append("pubGid", this.bgid);
+    data.append("pubFontFamily", this.ff);
+    data.append("pubFontSize", this.fs);
+    data.append("pubColor", this.fc);
     // clear title value
     this.form.reset();
 
@@ -632,6 +720,22 @@ export class Home {
       this.errorTimed();
 
     }
+  }
+
+  veriftextsize(publishDivRef){
+    let text = publishDivRef.textContent;
+    let nb=0;
+    if(text !== 'null' && text !=='undefined' && text.length > 0) {
+      var line_parts = text.split('<br>');
+      for(let i=0;i<line_parts.length;i++){
+        nb=nb+(line_parts[i].length/39);
+        if(line_parts[i].length%39!=0) nb++;}
+      if(nb>8){
+        this.getbg0();
+        this.bgvalid=false;
+      }
+      else{this.bgvalid=true;}
+  }
   }
 
   enableTitlePost() {

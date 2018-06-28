@@ -22,9 +22,5 @@ export class ChatListItemMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.myLastMessage);
-    if(this.myLastMessage){
-      this.lastMessage = "Vous : "+this.lastMessage;
-    }
   }
 }
