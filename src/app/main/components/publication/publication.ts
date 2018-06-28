@@ -84,12 +84,8 @@ export class Publication {
   private lastPubText: string = "";
   pub_text:string = "";
   arabicText:boolean = false;
-  bg="";
-  ff="";
-  fs="";
-  fc="";
-  divheight="";
-  textplace="";
+  pubclass="";
+  pubbg=false;
 
   public InteractionsLikes: Array<MinifiedUser> = [];
   public InteractionsDislikes: Array<MinifiedUser> = [];
@@ -253,18 +249,7 @@ export class Publication {
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 
-    this.bg="assets/images/background/bg"+this.publicationBean.pubGid+".jpg";
-    this.ff=this.publicationBean.pubFontFamily;
-    this.fs=this.publicationBean.pubFontSize;
-    this.fc=this.publicationBean.pubColor;
-    if(this.publicationBean.pubGid==""||this.publicationBean.pubGid==undefined){
-      this.divheight="";
-      this.textplace="";
-}
-    else{
-      this.divheight="190px";
-      this.textplace="center";
-}
+    this.pubclass=this.publicationBean.publClass;
 
     var pub_txt
     if(this.publicationBean.isShared) {

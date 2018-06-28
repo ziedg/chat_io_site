@@ -32,7 +32,187 @@
   font-family: "lato black";
   src: url(../fonts/lato/Lato-Black_0.ttf);
 }
-
+/*------------------------------publication-class-------------------------*/
+.pubbg1{
+  background-image: url("../images/background/bg1.jpg");
+  height: 190px;
+  vertical-align: middle;
+}
+.pubbg2{
+  background-image: url("../images/background/bg2.jpg");
+  height: 190px;
+}
+.pubbg3{
+  background-image: url("../images/background/bg3.jpg");
+  height: 190px;
+}
+.pubbg4{
+  background-image: url("../images/background/bg4.jpg");
+  height: 190px;
+}
+.pubbg5{
+  background-image: url("../images/background/bg5.jpg");
+  height: 190px;
+}
+.pubbg6{
+  background-image: url("../images/background/bg6.jpg");
+  height: 190px;
+}
+.pubbg7{
+  background-image: url("../images/background/bg7.jpg");
+  height: 190px;
+}
+.pubbg8{
+  background-image: url("../images/background/bg8.jpg");
+  height: 190px;
+}
+.pubbg9{
+  background-image: url("../images/background/bg9.jpg");
+  height: 190px;
+}
+.pubbg10{
+  background-image: url("../images/background/bg10.jpg");
+  height: 190px;
+}
+.pubbg11{
+  background-image: url("../images/background/bg11.jpg");
+  height: 190px;
+}
+.pubbg12{
+  background-image: url("../images/background/bg12.jpg");
+  height: 190px;
+}
+.pubbg13{
+  background-image: url("../images/background/bg13.jpg");
+  height: 190px;
+}
+.pubbg14{
+  background-image: url("../images/background/bg14.jpg");
+  height: 190px;
+}
+.pubbg15{
+  background-image: url("../images/background/bg15.jpg");
+  height: 190px;
+}
+.pubbg16{
+  background-image: url("../images/background/bg16.jpg");
+  height: 190px;
+}
+.pubdes1{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes2{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes3{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes4{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes5{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes6{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes7{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes8{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes9{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes10{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes11{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes12{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes13{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes14{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes15{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubdes16{
+  font-family: "Arial Black";
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  margin-left: 6vh;
+}
+.pubcenter{
+  justify-content: center;
+}
 /*------------------------------all-hover-effects-begin-------------------*/
 @media (min-width: 767px) {
   .fbShare:hover {
@@ -2793,6 +2973,7 @@ facebook-friends .user .user-img {
 .cover {
   background-image: url("../pictures/cover.jpg");
   background-size: cover;
+
   height: 279px;
   width: 100%;
   margin: 0px;

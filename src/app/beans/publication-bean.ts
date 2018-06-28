@@ -16,10 +16,7 @@ export class PublicationBean {
     public nbSignals : number;
     public publTitle  : string;
     public publText : string;
-    public pubGid : string;
-    public pubFontFamily : string;
-    public pubFontSize : string;
-    public pubColor : string;
+    public publClass : string;
     //public publLink
     public publPictureLink : string;
     public publyoutubeLink : string;
