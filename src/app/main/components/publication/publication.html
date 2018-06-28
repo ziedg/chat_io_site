@@ -58,7 +58,7 @@
              <a [routerLink]="['/main/profile',publicationBean.originalProfileId]"
                        style="display:inline;">
               {{publicationBean.originalProfileFirstName +"
-              "+publicationBean.originalProfileLastName }} 
+              "+publicationBean.originalProfileLastName }}
             </a>
 
         </header>
@@ -71,7 +71,6 @@
     </div>
 
     <div class="content" [ngStyle]="{'background-image': 'url(' + bg + ')','height': divheight}"
-    style=" display: inline"
     *ngIf="!publicationBean.isShared">
       <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]" class="publication-text">
         {{publicationBean.publTitle}} </h4>
@@ -258,7 +257,7 @@
                         </div>
                         <div class="user-name">
                           <header><a [routerLink]="['/main/profile', user._id]">
-                            {{user.profilefirstname}} {{user.profilelastname}} 
+                            {{user.profilefirstname}} {{user.profilelastname}}
                           </a></header>
                         </div>
                         <div class="subscribe-no-number" style="min-width:12px">

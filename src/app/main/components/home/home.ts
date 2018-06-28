@@ -87,7 +87,7 @@ export class Home {
   ff="";
   fs="";
   fc="";
-  divheight;
+  divheight="";
   bgvalid=true;
   textplace="";
   /* tag search */
@@ -243,11 +243,11 @@ export class Home {
   getbg0(){
     if(this.bgvalid){
     this.bg="";
-    this.bgid=undefined;
-    this.ff=undefined;
-    this.fs=undefined;
-    this.fc=undefined;
-    this.divheight=undefined;
+    this.bgid="";
+    this.ff="";
+    this.fs="";
+    this.fc="";
+    this.divheight="";
     this.textplace="";
   }}
   getbg1(){if(this.bgvalid){
@@ -300,6 +300,59 @@ export class Home {
   getbg6(){if(this.bgvalid){
     this.bg="assets/images/background/bg6.jpg";
     this.bgid="6";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="white";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg7(){if(this.bgvalid){
+    this.bg="assets/images/background/bg7.jpg";
+    this.bgid="7";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="white";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg8(){if(this.bgvalid){
+    this.bg="assets/images/background/bg8.jpg";
+    this.bgid="8";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="white";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg9(){if(this.bgvalid){
+    this.bg="assets/images/background/bg9.jpg";
+    this.bgid="9";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="white";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg10(){if(this.bgvalid){
+    this.bg="assets/images/background/bg10.jpg";
+    this.bgid="10";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="white";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg11(){if(this.bgvalid){
+    this.bg="assets/images/background/bg11.jpg";
+    this.bgid="11";
+    this.ff="Arial Black";
+    this.fs=undefined;
+    this.fc="white";
+    this.divheight="190px";
+    this.textplace="center";
+  }}  getbg12(){if(this.bgvalid){
+    this.bg="assets/images/background/bg12.jpg";
+    this.bgid="12";
     this.ff="Arial Black";
     this.fs=undefined;
     this.fc="white";
