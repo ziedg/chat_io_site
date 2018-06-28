@@ -82,14 +82,9 @@ export class Home {
   public imageFromLink: boolean = false;
 
   bglist=false;
-  bg="";
-  bgid="";
-  ff="";
-  fs="";
-  fc="";
-  divheight;
   bgvalid=true;
-  textplace="";
+  pubclass="";
+  pubbg=false;
   /* tag search */
   searchValue: string;
   listTagSearchUsers: Array<User> = [];
@@ -233,7 +228,10 @@ export class Home {
     }, 1000);
 
   }
-
+  Classname(){
+    if(this.pubbg)
+    return this.pubclass;
+  }
   bglistf(){
     if(this.bglist == true)
       this.bglist = false;
@@ -242,71 +240,75 @@ export class Home {
   }
   getbg0(){
     if(this.bgvalid){
-    this.bg="";
-    this.bgid=undefined;
-    this.ff=undefined;
-    this.fs=undefined;
-    this.fc=undefined;
-    this.divheight=undefined;
-    this.textplace="";
+      this.pubbg=false;
+      this.pubclass="";
   }}
   getbg1(){if(this.bgvalid){
-    this.bg="assets/images/background/bg1.jpg";
-    this.bgid="1";
-    this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="gray";
-    this.divheight="190px";
-    this.textplace="center";
+    this.pubbg=true;
+    this.pubclass="pubdes1";
   }}
 
   getbg2(){
     if(this.bgvalid){
-    this.bg="assets/images/background/bg2.jpg";
-    this.bgid="2";
-    this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="#f2f2f2";
-    this.divheight="190px";
-    this.textplace="center";
+    this.pubbg=true;
+    this.pubclass="pubdes2";
   }}
   getbg3(){if(this.bgvalid){
-    this.bg="assets/images/background/bg3.jpg";
-    this.bgid="3";
-    this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="burlywood";
-    this.divheight="190px";
-    this.textplace="center";
+    this.pubbg=true;
+    this.pubclass="pubdes3";
   }}
   getbg4(){if(this.bgvalid){
-    this.bg="assets/images/background/bg4.jpg";
-    this.bgid="4";
-    this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="white";
-    this.divheight="190px";
-    this.textplace="center";
+    this.pubbg=true;
+    this.pubclass="pubdes4";
   }}
   getbg5(){if(this.bgvalid){
-    this.bg="assets/images/background/bg5.jpeg";
-    this.bgid="5";
-    this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="darkblue";
-    this.divheight="190px";
-    this.textplace="center";
+    this.pubbg=true;
+    this.pubclass="pubdes5";
   }}
   getbg6(){if(this.bgvalid){
-    this.bg="assets/images/background/bg6.jpeg";
-    this.bgid="6";
-    this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="white";
-    this.divheight="190px";
-    this.textplace="center";
+    this.pubbg=true;
+    this.pubclass="pubdes6";
   }}
-
+  getbg7(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes7";
+  }}
+  getbg8(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes8";
+  }}
+  getbg9(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes9";
+  }}
+  getbg10(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes10";
+  }}
+  getbg11(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes11";
+  }}
+  getbg12(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes12";
+  }}
+  getbg13(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes13";
+  }}
+  getbg14(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes14";
+  }}
+  getbg15(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes15";
+  }}
+  getbg16(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes16";
+  }}
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
     this.user.isNewInscri = false;
@@ -675,10 +677,7 @@ export class Home {
     data.append("publyoutubeLink", this.youtubeLink);
     data.append("publfacebookLink", this.facebookLink);
     data.append("publPicture", this.uploadedPicture);
-    data.append("pubGid", this.bgid);
-    data.append("pubFontFamily", this.ff);
-    data.append("pubFontSize", this.fs);
-    data.append("pubColor", this.fc);
+    data.append("publClass", this.pubclass);
     // clear title value
     this.form.reset();
 
