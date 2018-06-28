@@ -4,6 +4,7 @@
   "discussion": "Discussion",
   "notifications": "Notifications",
   "profile": "Profile",
+  "Ou_message": "O",
   "login_speegar_description": "le permite compartir sus mejores chistes y videos con su entorno",
   "login_message": " Conéctese para compartir sus mejores videos y chistes con su entorno",
   "login_button_facebook_login": "Iniciar sesión con Facebook",
@@ -185,5 +186,7 @@
   "conditions_generales": "Condiciones generales",
   "a_propos":"A propósito de nosotros",
   "fb_friends": "Sugerencias para ti",
-  "fb_label": "amigo facebook"
+  "fb_label": "amigo facebook",
+  "Like":"LOL" ,
+  "Dislike":"Disgusto"
 }

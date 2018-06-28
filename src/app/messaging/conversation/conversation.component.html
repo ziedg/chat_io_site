@@ -9,23 +9,25 @@
  
 		<ul class="message-thread">
 			<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)">
-				<img *ngIf="alignMessage(message.toUserId) == false" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" />
-				<p class="messageContent">
-					{{message.message}}
-				</p>
-			</li>
+				<!-- <div *ngFor="let m of message"> -->
+					<img *ngIf="alignMessage(message.toUserId) == false" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" />
+					<p class="messageContent">
+						{{message.message}}
+					</p>
+				<!-- </div> -->
+				</li>
 		</ul>
 		<div class="message-typer">
 				<form [formGroup]="messageForm" novalidate>
 					<div>
-						<i class="fas fa-camera"></i>
+						<i class="fa fa-camera"></i>
 						<div class="embed-submit-field">
 							<input class="message" 
 								type="text"
 								placeholder="Message" 
 								(keyup)="sendMessage()" 
 								formControlName="message"/>
-							<button type="submit" (click)="sendMessageBtn()"><i class="fas fa-arrow-up"></i></button>
+							<button type="submit" (click)="sendMessageBtn()">Envoyer</button>
 						</div>
 					</div>
 				</form>

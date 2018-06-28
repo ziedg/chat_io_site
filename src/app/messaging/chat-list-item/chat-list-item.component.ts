@@ -21,11 +21,6 @@ export class ChatListItemComponent implements OnInit {
     this.userImage = "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&h=350";
   }
 
-  ngOnInit() {
-    console.log(this.myLastMessage);
-    if(this.myLastMessage){
-      this.lastMessage = "Vous : "+this.lastMessage;
-    }
-  }
+  ngOnInit() {}
 
 }

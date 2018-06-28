@@ -16,6 +16,10 @@ export class PublicationBean {
     public nbSignals : number;
     public publTitle  : string;
     public publText : string;
+    public pubGid : string;
+    public pubFontFamily : string;
+    public pubFontSize : string;
+    public pubColor : string;
     //public publLink
     public publPictureLink : string;
     public publyoutubeLink : string;
@@ -32,7 +36,7 @@ export class PublicationBean {
     // for sharedPub
     public originalPublicationId:string;
     public originalDatePublication:string;
-    public originalProfileFirstName:string;    
+    public originalProfileFirstName:string;
     public originalProfileLastName:string;
     public originalProfileId:string;
     public originalProfilePicture:string;

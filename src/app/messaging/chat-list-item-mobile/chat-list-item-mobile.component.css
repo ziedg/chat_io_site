@@ -11,7 +11,7 @@
 .corps{
     color: #7E7E7E;
     line-height: 12px;
-    margin-top: 10px;
+    margin-top: 5px;
     width: 80%;
     float: right;
 }
@@ -53,6 +53,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1;
 }
 .topdiv>p:nth-child(2){
     font-size: 9pt;

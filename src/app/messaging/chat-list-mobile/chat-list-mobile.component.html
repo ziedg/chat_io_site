@@ -19,15 +19,16 @@
 	  </div>
 	</div>
 </div>
-<app-suggestions-mobile></app-suggestions-mobile>
+<div class="row suggestions">
+		<div *ngFor="let s of suggestions">
+				<app-suggestions-mobile user="s"></app-suggestions-mobile>
+		</div>
+</div>
 <!-- <p class="sub">Messages Récents</p> -->
 <hr *ngIf="chatListUsers.length > 0">
 <div class="users-list" *ngFor="let user of chatListUsers">
 	<app-chat-list-item-mobile [class.active]="isUserSelected(user.id)" (click)="selectUser(user)"  user="{{user.firstName}} {{user.lastName}}"
-		userImage="{{user.profilePicture}}"></app-chat-list-item-mobile>
+		userImage="{{user.profilePicture}}"  lastMessage="{{user.lastMessage.message}}" date="{{user.lastMessage.date}}"></app-chat-list-item-mobile>
 </div>
 <hr *ngIf="chatListUsers.length == 0">
-<app-chat-list-item-mobile  user="Test" date="23 juin 2018"></app-chat-list-item-mobile>
-<app-chat-list-item-mobile  lastMessage="BonjourjemappellemonsieurrobertlolBonjourjemappellemonsieurrobertlolBonjourjemappellemonsieurrobertlol" user="Test" [notread]="true" [myLastMessage]="true" date="23 juin 2018"></app-chat-list-item-mobile>
-<app-chat-list-item-mobile  user="Test" [myLastMessage]="false" date="23 juin 2018"></app-chat-list-item-mobile>
 </div>

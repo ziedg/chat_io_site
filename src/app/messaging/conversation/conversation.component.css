@@ -41,7 +41,7 @@
 
 .message-thread {
 	overflow-y: scroll;
-	list-style-type: none;
+	/* list-style-type: none; */
 	height: 60vh;
 	width: 100%;
 	margin: 0px !important;
@@ -49,9 +49,10 @@
     padding-top: 17px !important;
 }
 .message-thread li{
-    margin: 10px 0;
+    margin: 2px 0;
     font-weight: normal;
     position: relative;
+    clear: both;
 }
 .message-thread img{
     font-weight: normal;
@@ -62,7 +63,7 @@
     content: '';
     position: absolute;
     left: 40px;
-    bottom: 1%;
+    bottom: 0;
     width: 0;
     height: 0;
     border: 10px solid transparent;
@@ -74,11 +75,7 @@
 }
 
 .message-thread>li:not(.self-message):not(.mydate){
-    margin-top: 0% !important;
-    display: inline-block;
-}
-.message-thread>li:last-child>.messageContent{
-    margin-bottom: 60px;
+    margin-top: 2% !important;
 }
 .profilePicture{
 	width: 40px;
@@ -95,14 +92,17 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     font-weight: normal;
+    margin-bottom: 2px;
 }
 
-.start{
-    border-top-right-radius: 15px;
+.message-thread>.self-message:first-of-type p{
+    border-bottom-right-radius: 5px !important;
+    border-top-right-radius: 15px !important;
 }
 
-.end{
-    border-bottom-right-radius: 15px;
+.message-thread>.self-message:last-of-type p{
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 15px !important;
 }
 
 .messageContent{
@@ -113,7 +113,7 @@
 	margin: 0px 0px 0px 45px;
 	padding: 5px 15px;
 	min-height: 10px;
-	max-width: 70%;
+	/* max-width: 70%; */
 	border-radius: 15px;
 	border:solid 1px transparent;
 	line-height: 1.4;
@@ -169,17 +169,15 @@
     top: 6px;
     background-color:transparent;
     border:none;
-    color:white;
-    background-color: #E5E5E5;
+    color:#039803;
     -moz-border-radius: 70px; 
     -webkit-border-radius: 70px; 
     border-radius: 70px;
-    width: 30px;
-    padding: 5px 5px;
+    padding: 5px 10px;
 }
 
 .activebtn{
-    background-color: #039803 !important;
+    background-color: transparent !important;
 }
 
 .img-circle{
@@ -191,4 +189,13 @@
     font-size: 8pt;
     margin: 0 !important;
     color: #c0c0c0;
+}
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
 }

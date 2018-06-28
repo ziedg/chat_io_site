@@ -24,7 +24,7 @@
 
         <div class="col-xs-12 separatorBox" *ngIf="loacationPath=='/login/sign-in' || loacationPath=='/login/sign-up' ">
           <div class="semiSeparator"></div>
-          Ou
+          {{'Ou_message' | translate }}
           <div class="semiSeparator"></div>
         </div>
         <div class="col-xs-12" *ngIf="loacationPath=='/login/sign-in' || loacationPath=='/login/sign-up' ">
@@ -78,9 +78,9 @@
         <a [routerLink]="['/support/team']">{{'footer_team' | translate }}</a>
         <span class="pull-right copyrightSignature">
             <div class="login-lang">
-                  <button (click)="useLanguage('en')">English (US)</button>
-                  <button (click)="useLanguage('fr')">Français (France)</button>
-                  <button (click)="useLanguage('es')">Español</button>
+                  <button [ngClass]="{'selected-language':'en' == selectedLanguage}" (click)="useLanguage('en')">English (US)</button>
+                  <button [ngClass]="{'selected-language':'fr' == selectedLanguage}" (click)="useLanguage('fr')">Français (France)</button>
+                  <button [ngClass]="{'selected-language':'es' == selectedLanguage}" (click)="useLanguage('es')">Español</button>
             </div>
 
               <p style="float:right !important;margin:5px 4px 25px 0"> {{'footer_copyright' | translate }} </p>
