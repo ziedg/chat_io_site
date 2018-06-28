@@ -254,8 +254,8 @@ export class Home {
     this.bg="assets/images/background/bg1.jpg";
     this.bgid="1";
     this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="gray";
+    this.fs="17px";
+    this.fc="white";
     this.divheight="190px";
     this.textplace="center";
   }}
@@ -264,9 +264,9 @@ export class Home {
     if(this.bgvalid){
     this.bg="assets/images/background/bg2.jpg";
     this.bgid="2";
-    this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="#f2f2f2";
+    this.ff="cursive";
+    this.fs="17px";
+    this.fc="white";
     this.divheight="190px";
     this.textplace="center";
   }}
@@ -274,16 +274,16 @@ export class Home {
     this.bg="assets/images/background/bg3.jpg";
     this.bgid="3";
     this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="burlywood";
+    this.fs="17px";
+    this.fc="white";
     this.divheight="190px";
     this.textplace="center";
   }}
   getbg4(){if(this.bgvalid){
     this.bg="assets/images/background/bg4.jpg";
     this.bgid="4";
-    this.ff="Arial Black";
-    this.fs=undefined;
+    this.ff="cursive";
+    this.fs="17px";
     this.fc="white";
     this.divheight="190px";
     this.textplace="center";
@@ -292,16 +292,16 @@ export class Home {
     this.bg="assets/images/background/bg5.jpg";
     this.bgid="5";
     this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="darkblue";
+    this.fs="17px";
+    this.fc="white";
     this.divheight="190px";
     this.textplace="center";
   }}
   getbg6(){if(this.bgvalid){
     this.bg="assets/images/background/bg6.jpg";
     this.bgid="6";
-    this.ff="Arial Black";
-    this.fs=undefined;
+    this.ff="cursive";
+    this.fs="17px";
     this.fc="white";
     this.divheight="190px";
     this.textplace="center";
@@ -310,7 +310,7 @@ export class Home {
     this.bg="assets/images/background/bg7.jpg";
     this.bgid="7";
     this.ff="Arial Black";
-    this.fs=undefined;
+    this.fs="17px";
     this.fc="white";
     this.divheight="190px";
     this.textplace="center";
@@ -318,8 +318,8 @@ export class Home {
   getbg8(){if(this.bgvalid){
     this.bg="assets/images/background/bg8.jpg";
     this.bgid="8";
-    this.ff="Arial Black";
-    this.fs=undefined;
+    this.ff="cursive";
+    this.fs="17px";
     this.fc="white";
     this.divheight="190px";
     this.textplace="center";
@@ -328,8 +328,8 @@ export class Home {
     this.bg="assets/images/background/bg9.jpg";
     this.bgid="9";
     this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="white";
+    this.fs="17px";
+    this.fc="black";
     this.divheight="190px";
     this.textplace="center";
   }}
@@ -337,7 +337,7 @@ export class Home {
     this.bg="assets/images/background/bg10.jpg";
     this.bgid="10";
     this.ff="Arial Black";
-    this.fs=undefined;
+    this.fs="17px";
     this.fc="white";
     this.divheight="190px";
     this.textplace="center";
@@ -345,21 +345,57 @@ export class Home {
   getbg11(){if(this.bgvalid){
     this.bg="assets/images/background/bg11.jpg";
     this.bgid="11";
-    this.ff="Arial Black";
-    this.fs=undefined;
-    this.fc="white";
+    this.ff="cursive";
+    this.fs="17px";
+    this.fc="darkblue";
     this.divheight="190px";
     this.textplace="center";
-  }}  getbg12(){if(this.bgvalid){
+  }}
+  getbg12(){if(this.bgvalid){
     this.bg="assets/images/background/bg12.jpg";
     this.bgid="12";
     this.ff="Arial Black";
-    this.fs=undefined;
+    this.fs="17px";
     this.fc="white";
     this.divheight="190px";
     this.textplace="center";
   }}
-
+  getbg13(){if(this.bgvalid){
+    this.bg="assets/images/background/bg13.jpg";
+    this.bgid="13";
+    this.ff="cursive";
+    this.fs="17px";
+    this.fc="white";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg14(){if(this.bgvalid){
+    this.bg="assets/images/background/bg14.jpg";
+    this.bgid="14";
+    this.ff="cursive";
+    this.fs="17px";
+    this.fc="black";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg15(){if(this.bgvalid){
+    this.bg="assets/images/background/bg15.jpg";
+    this.bgid="15";
+    this.ff="Arial Black";
+    this.fs="17px";
+    this.fc="black";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
+  getbg16(){if(this.bgvalid){
+    this.bg="assets/images/background/bg16.jpg";
+    this.bgid="16";
+    this.ff="cursive";
+    this.fs="17px";
+    this.fc="white";
+    this.divheight="190px";
+    this.textplace="center";
+  }}
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
     this.user.isNewInscri = false;

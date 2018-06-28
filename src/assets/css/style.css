@@ -3203,8 +3203,8 @@ facebook-friends .user .user-img {
   margin: 15% auto;
   z-index: 101;
 }
-.suggestions-box::-webkit-scrollbar { 
-    display: none; 
+.suggestions-box::-webkit-scrollbar {
+    display: none;
 }
 
 .white-box-interactions {
@@ -3252,7 +3252,7 @@ facebook-friends .user .user-img {
     border-radius: 4px;
     top: 50%;
     transform: translateY(-50%);
-    
+
   }
 }
 .no-interactions {
@@ -3265,7 +3265,7 @@ facebook-friends .user .user-img {
 .interactions-tab {
   overflow: hidden;
   border-bottom: 1px solid #ccc;
- 
+
 }
 
 /* Style the buttons inside the tab */
