@@ -15,6 +15,7 @@ export class GifSlider implements AfterViewInit {
   gifLimitIndex: number = 15;
   firstGifRequest = true;
   @Output() myEvent = new EventEmitter();
+  @Output() myToggleEvent = new EventEmitter();
 
   offset_x_pos: number = 0;
   sliderWidth: number = 100;
@@ -93,6 +94,10 @@ export class GifSlider implements AfterViewInit {
   gifPreview(urlGIF) {
     //console.log("chiiiild");
     this.myEvent.emit(urlGIF);
+  }
+
+  toggleGifSlider(){
+    this.myToggleEvent.emit();
   }
 
 }
