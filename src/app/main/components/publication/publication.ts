@@ -257,7 +257,7 @@ export class Publication {
     this.ff=this.publicationBean.pubFontFamily;
     this.fs=this.publicationBean.pubFontSize;
     this.fc=this.publicationBean.pubColor;
-    if(this.publicationBean.pubGid==""){
+    if(this.publicationBean.pubGid==""||this.publicationBean.pubGid==undefined){
       this.divheight="";
       this.textplace="";
 }
