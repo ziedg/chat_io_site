@@ -58,7 +58,7 @@
              <a [routerLink]="['/main/profile',publicationBean.originalProfileId]"
                        style="display:inline;">
               {{publicationBean.originalProfileFirstName +"
-              "+publicationBean.originalProfileLastName }}
+              "+publicationBean.originalProfileLastName }} 
             </a>
 
         </header>
@@ -70,7 +70,9 @@
       </div>
     </div>
 
-    <div class="content" [ngStyle]="{'background-image': 'url(' + bg + ')','height': divheight}" *ngIf="!publicationBean.isShared">
+    <div class="content" [ngStyle]="{'background-image': 'url(' + bg + ')','height': divheight}"
+    style=" display: inline"
+    *ngIf="!publicationBean.isShared">
       <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]" class="publication-text">
         {{publicationBean.publTitle}} </h4>
       <span *ngIf="publicationBean.publText !== 'null'
@@ -82,7 +84,7 @@
             <span [ngStyle]="{'fontFamily': ff, 'fontSize': fs, 'color': fc}" [innerHTML]="firstPubText"></span>
             <a *ngIf="longPubText && !longPubTextShow"
                 (click)="longPubTextShow=true"
-                style="margin-top: 0; display: inline">
+                style="display: inline">
                 {{"publication_open_last_part" | translate }}</a>
             <span *ngIf="longPubText && longPubTextShow" [ngStyle]="{'fontFamily': ff, 'fontSize': fs, 'color': fc}" [innerHTML]="lastPubText">
             </span>
@@ -224,7 +226,7 @@
 
             <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px" >
                 <div *ngIf="InteractionsLikes.length == 0" class="no-interactions ">No likes yet.</div>
-                <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0">
+                <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsLikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
                         <div class="user-img-shared"
@@ -248,7 +250,7 @@
 
             <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px">
                 <div *ngIf="InteractionsDislikes.length == 0" class="no-interactions">No dislikes yet.</div>
-                <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0">
+                <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsDislikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
                         <div class="user-img-shared"
@@ -256,7 +258,7 @@
                         </div>
                         <div class="user-name">
                           <header><a [routerLink]="['/main/profile', user._id]">
-                            {{user.profilefirstname}} {{user.profilelastname}}
+                            {{user.profilefirstname}} {{user.profilelastname}} 
                           </a></header>
                         </div>
                         <div class="subscribe-no-number" style="min-width:12px">

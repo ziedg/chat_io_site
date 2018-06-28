@@ -100,27 +100,7 @@
                    #publishDivRef style="width: calc(100% - 80px)"></div>
 
 
-              <!-- tag new publication -->
-              <!--
-              <div class="" >
-                <span> tag Search user</span>
-                <div class="" >
-                  <div *ngIf="listTagSearchUsers">
-                    <article *ngFor="let result of listTagSearchUsers">
-                      <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
-                      </div>
-                      <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
-                      </div>
-                      <div class="">
-                        {{result.firstName}} {{result.lastName}}
-                      </div>
-                    </article>
-                  </div>
-                </div>
-              </div>
-              -->
-
-              <!-- tag new publication end -->
+             
 
               <div class="file-input-holder">
                 <div class="file-input">
@@ -168,7 +148,8 @@
 
               </div>
 
-              <gif-slider style="width:100%;" *ngIf="showGifSlider" (myEvent)="previewGIF($event)"></gif-slider>
+              
+              <gif-slider style="width:100%;" *ngIf="showGifSlider" (myEvent)="previewGIF($event)" (myToggleEvent)="toggleGifSlider()"></gif-slider>
 
             </div>
 
