@@ -160,7 +160,8 @@ export class Profile {
         response => {
         if (response.status == 0) {
           userDisplayed.isFollowed = true;
-
+          this.loadMore =true;
+         this.loadFirstPosts();
           userDisplayed.nbSubscribers++;
 
         }
@@ -187,8 +188,10 @@ export class Profile {
         response => {
         if (response.status == 0) {
           userDisplayed.isFollowed = false;
-
+          this.loadMore =true;
+          this.loadFirstPosts();
           userDisplayed.nbSubscribers--;
+
         }
       },
         err => {
