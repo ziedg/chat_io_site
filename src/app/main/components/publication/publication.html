@@ -284,18 +284,18 @@
                              [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
                         </div>
                         <div class="user-name">
-                          <header><a [routerLink]="['/main/profile', user._id]">
+                          <header><a [routerLink]="['/main/profile', user.userId]">
                             {{user.profilefirstname}} {{user.profilelastname}}
                           </a></header>
                         </div>
                         <div class="subscribe-no-number" style="min-width:12px" >
                           <button (click)="toggleSubscribe(user)" style="float:none"
-                          *ngIf="user.isSubscribed === 'false'"
+                          *ngIf="user.isSubscribed === 'false' && user.userId !== profileId"
                           [ngStyle]="{'background-color':'#090'}">
                               {{ 'profile_subscribe' | translate }}
                           </button>
                           <button (click)="toggleSubscribe(user)" style="float:none"
-                          *ngIf="user.isSubscribed === 'true'"
+                          *ngIf="user.isSubscribed === 'true' && user.userId !== profileId"
                           [ngStyle]="{'background-color':'#ccc'}">
                                abonné
                           </button>
@@ -315,18 +315,18 @@
                              [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
                         </div>
                         <div class="user-name">
-                          <header><a [routerLink]="['/main/profile', user._id]">
+                          <header><a [routerLink]="['/main/profile', user.userId]">
                             {{user.profilefirstname}} {{user.profilelastname}}
                           </a></header>
                         </div>
                         <div class="subscribe-no-number" style="min-width:12px">
                           <button (click)="toggleSubscribe(user)" style="float:none"
-                          *ngIf="user.isSubscribed === 'false'"
+                          *ngIf="user.isSubscribed === 'false' && user.userId !== profileId"
                           [ngStyle]="{'background-color':'#090'}">
                               {{ 'profile_subscribe' | translate }}
                           </button>
                           <button (click)="toggleSubscribe(user)" style="float:none"
-                          *ngIf="user.isSubscribed === 'true'"
+                          *ngIf="user.isSubscribed === 'true'  && user.userId !== profileId"
                           [ngStyle]="{'background-color':'#ccc'}">
                                abonné
                           </button>
