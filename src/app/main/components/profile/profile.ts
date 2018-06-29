@@ -521,9 +521,6 @@ reportPub(userDisplayed:User) {
 
         if (response.status == "0") {
 
-
-
-
           if (this.loginService.isWasConnectedWithFacebook){
             let fuser = this.loginService.getFacebookUser();
             if( fuser && fuser.profilePicture)
@@ -536,6 +533,14 @@ reportPub(userDisplayed:User) {
           localStorage.setItem('user', JSON.stringify(response.profile));
           this.loginService.actualize();
           this.changePhotoCancel();
+          
+          this.publicationBeanList= this.publicationBeanList.map((pub:PublicationBean)=>{
+            return {
+              ...pub,
+              profilePicture:response.profile.profilePicture,
+              profilePictureMin:response.profile.profilePictureMin
+            }
+          })
 
           this.uploadedProfilePicture = null;
           jQuery("#file-profile").val("");

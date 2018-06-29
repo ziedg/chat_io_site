@@ -860,7 +860,8 @@ a {
 }
 
 .main-header .notification-holder,
-.recherche-results-holder {
+.recherche-results-holder,
+.recherche-results-holder-msg {
 
   position: absolute;
   background-color: white;
@@ -917,7 +918,8 @@ a {
   white-space: pre;
 }
 
-.recherche-results-holder {
+.recherche-results-holder,
+.recherche-results-holder-msg {
   width: 259px;
   right: -14px;
   top: 40px;
@@ -931,7 +933,8 @@ a {
   cursor: pointer;
 }
 
-.header-center .upper-arrow-search {
+.header-center .upper-arrow-search,
+.upper-arrow-search-msg {
   top: 109%;
   left: 50%;
   z-index: 4;
