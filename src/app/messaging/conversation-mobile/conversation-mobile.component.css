@@ -84,6 +84,10 @@
     margin: 10px 0;
     font-weight: normal;
     position: relative;
+    clear: both;
+}
+.message-thread li:last-child{
+    margin-bottom: 40px;
 }
 .message-thread img{
     font-weight: normal;
@@ -94,7 +98,7 @@
     content: '';
     position: absolute;
     left: 40px;
-    bottom: 1%;
+    bottom: 0;
     width: 0;
     height: 0;
     border: 10px solid transparent;
@@ -105,13 +109,6 @@
     transform: rotate(-35deg);
 }
 
-.message-thread>li:not(.self-message):not(.mydate){
-    margin-top: 5% !important;
-    display: inline-block;
-}
-.message-thread>li:last-child>.messageContent{
-    margin-bottom: 60px;
-}
 .profilePicture{
 	width: 40px;
 	max-height: 40px;
@@ -124,8 +121,8 @@
 	background-color: #039803 !important;
 	float: right !important;
     border-radius: 15px;
-    border-bottom-right-radius: 1px;
     font-weight: normal;
+    margin-bottom:5px;
 }
 
 
