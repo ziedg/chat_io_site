@@ -33,6 +33,8 @@ export class EditProfile {
   public errLinkTwitter = "";
   errorMessage:string = null;
 
+  namePattern :RegExp= /^(\S{1,10})( \S{1,10}){0,2} *$/;
+
   constructor(public translate:TranslateService,
               private route:ActivatedRoute,
               private http:Http,
@@ -41,21 +43,22 @@ export class EditProfile {
               private loginService:LoginService) {
 
     this.loginService.redirect();
+  }
 
+  ngOnInit() {
+    this.loginService.actualize();
+    this.user = this.loginService.getUser();
     this.form = new FormGroup({
-      lastName: new FormControl('', Validators.required),
-      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl(this.user.lastName, [Validators.required,
+      Validators.pattern(this.namePattern)]),
+      firstName: new FormControl(this.user.firstName, [Validators.required,
+        Validators.pattern(this.namePattern)]),
       userDiscrip: new FormControl(),
       genre: new FormControl(),
       linkFB: new FormControl(),
       linkTwitter: new FormControl(),
       linkYoutube: new FormControl()
     });
-  }
-
-  ngOnInit() {
-    this.loginService.actualize();
-    this.user = this.loginService.getUser();
     this.changeDetector.markForCheck();
 
   }

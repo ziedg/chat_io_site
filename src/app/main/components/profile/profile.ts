@@ -42,7 +42,7 @@ export class Profile {
   public publicationBeanList:Array<PublicationBean> = [];
   public user:User = new User();
   public userDisplayed:User = new User();
-
+  btn_subscribe_locked:boolean=false;
 
   selectedMenuElement = 0;
 
@@ -146,6 +146,10 @@ export class Profile {
 
 
   subscribe(userDisplayed:User) {
+if (this.btn_subscribe_locked){
+  return ;
+}
+    this.btn_subscribe_locked=true;
     let body = JSON.stringify({
       profileId: userDisplayed._id
     });
@@ -170,11 +174,17 @@ export class Profile {
       },
       () => {
         this.changeDetector.markForCheck();
+        this.btn_subscribe_locked=false;
+
       }
     );
   }
 
   unsubscribe(userDisplayed:User) {
+    if (this.btn_subscribe_locked){
+      return ;
+    }
+        this.btn_subscribe_locked=true;
     let body = JSON.stringify({
       profileId: userDisplayed._id
     });
@@ -198,6 +208,8 @@ export class Profile {
       },
       () => {
         this.changeDetector.markForCheck();
+        this.btn_subscribe_locked=false;
+
       }
     );
   }
