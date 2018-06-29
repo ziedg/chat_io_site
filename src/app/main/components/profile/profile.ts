@@ -533,15 +533,21 @@ reportPub(userDisplayed:User) {
           localStorage.setItem('user', JSON.stringify(response.profile));
           this.loginService.actualize();
           this.changePhotoCancel();
-          
-          this.publicationBeanList= this.publicationBeanList.map((pub:PublicationBean)=>{
+        
+            this.publicationBeanList= this.publicationBeanList.map((pub:PublicationBean)=>{
             return {
               ...pub,
               profilePicture:response.profile.profilePicture,
+              profilePictureMin:response.profile.profilePictureMin,
+              comments:pub.comments.map((comment)=>{
+               return {
+                 ...comment ,
+                 profilePicture:response.profile.profilePicture,
               profilePictureMin:response.profile.profilePictureMin
+               }
+              })
             }
           })
-
           this.uploadedProfilePicture = null;
           jQuery("#file-profile").val("");
           this.profilePictLoad = false;
