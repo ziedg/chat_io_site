@@ -87,6 +87,8 @@ export class Publication {
   pubclass="";
   pubbg=false;
 
+  public profileId ;
+
   public InteractionsLikes: Array<MinifiedUser> = [];
   public InteractionsDislikes: Array<MinifiedUser> = [];
   displayedNumberInteractions = 10;
@@ -110,6 +112,7 @@ export class Publication {
     loginService.actualize();
 
     this.user = loginService.user;
+    this.profileId = this.user._id;
     this.listEmoji = emojiService.getEmojiList();
     this.pubImgId = "imgDefault";
     this.formComment = new FormGroup({

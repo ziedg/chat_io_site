@@ -53,8 +53,8 @@
   "main_more_notifications": "Ver más",
   "main_no_notification": "Sin notificación ",
   "publication_shared_text": " Compartió la publicación de ",
-  "publication_like": "LOL",
-  "publication_dislike": "Disgusto",
+  "publication_like": "Me gusta",
+  "publication_perfect": "Perfecto",
   "publication_display_comments": "Mostrar comentarios",
   "publication_hide_comments": "Ocultar comentarios",
   "publication_unfollow": "No seguir más",
@@ -189,5 +189,5 @@
   "fb_friends": "Sugerencias para ti",
   "fb_label": "amigo facebook",
   "Like": "Me gusta",
-  "Dislike": "Disgusto"
+  "Perfect": "Perfecto"
 }

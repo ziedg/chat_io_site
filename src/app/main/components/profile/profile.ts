@@ -164,6 +164,8 @@ if (this.btn_subscribe_locked){
         response => {
         if (response.status == 0) {
           userDisplayed.isFollowed = true;
+          this.loadMore =true;
+         this.loadFirstPosts();
           userDisplayed.nbSubscribers++;
 
         }
@@ -196,8 +198,10 @@ if (this.btn_subscribe_locked){
         response => {
         if (response.status == 0) {
           userDisplayed.isFollowed = false;
-
+          this.loadMore =true;
+          this.loadFirstPosts();
           userDisplayed.nbSubscribers--;
+
         }
       },
         err => {
