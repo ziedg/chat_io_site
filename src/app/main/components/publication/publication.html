@@ -288,9 +288,16 @@
                             {{user.profilefirstname}} {{user.profilelastname}}
                           </a></header>
                         </div>
-                        <div class="subscribe-no-number" style="min-width:12px">
-                          <button (click)="subscribeUser($event, user.userId)" style="float:none">
+                        <div class="subscribe-no-number" style="min-width:12px" >
+                          <button (click)="toggleSubscribe(user)" style="float:none"
+                          *ngIf="user.isSubscribed === 'false'"
+                          [ngStyle]="{'background-color':'#090'}">
                               {{ 'profile_subscribe' | translate }}
+                          </button>
+                          <button (click)="toggleSubscribe(user)" style="float:none"
+                          *ngIf="user.isSubscribed === 'true'"
+                          [ngStyle]="{'background-color':'#ccc'}">
+                               abonné
                           </button>
                         </div>
                       </div>
@@ -313,8 +320,15 @@
                           </a></header>
                         </div>
                         <div class="subscribe-no-number" style="min-width:12px">
-                          <button (click)="subscribe(user.userId)" style="float:none">
+                          <button (click)="toggleSubscribe(user)" style="float:none"
+                          *ngIf="user.isSubscribed === 'false'"
+                          [ngStyle]="{'background-color':'#090'}">
                               {{ 'profile_subscribe' | translate }}
+                          </button>
+                          <button (click)="toggleSubscribe(user)" style="float:none"
+                          *ngIf="user.isSubscribed === 'true'"
+                          [ngStyle]="{'background-color':'#ccc'}">
+                               abonné
                           </button>
                         </div>
                       </div>

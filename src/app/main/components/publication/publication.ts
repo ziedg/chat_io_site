@@ -693,7 +693,6 @@ export class Publication {
   addLike() {
     if (this.publicationBean.isDisliked)
       this.removeDislike();
-      console.log(this.publicationBean._id);
     let body = JSON.stringify({
       publId: this.publicationBean._id,
       profileId: this.user._id,
@@ -824,7 +823,10 @@ export class Publication {
                   response => {
                     this.InteractionsLikes = response.message.likes.slice();
                     this.InteractionsDislikes = response.message.dislikes.slice();
+                    console.log(this.InteractionsLikes);
                     console.log(this.InteractionsDislikes);
+                    
+                    
                 },
                 err => {
                 },
@@ -888,7 +890,7 @@ export class Publication {
     currentelem.className += " active";
   }
 
-  subscribeUser(event, userId) {
+  subscribeUser(userId) {
     let body = JSON.stringify({
       profileId: userId
     });
@@ -902,8 +904,7 @@ export class Publication {
       .subscribe(
         response => {
           if (response.status == 0) {
-            event.target.style.backgroundColor = "#ccc";
-            event.target.innerHTML = "Abonné"
+            console.log("subscribe done");
           }
         },
         err => {
@@ -915,7 +916,7 @@ export class Publication {
 
   }
 
-  unsubscribeUser(event, userId){
+  unsubscribeUser(userId){
     let body = JSON.stringify({
       profileId: userId
     });
@@ -928,8 +929,7 @@ export class Publication {
       .subscribe(
         response => {
         if (response.status == 0) {
-          event.target.style.backgroundColor = "#090";
-            event.target.innerHTML = "S'abonner"
+          console.log("unsubscribed done");
         }
       },
         err => {
@@ -938,6 +938,32 @@ export class Publication {
         this.changeDetector.markForCheck();
       }
     );
+  }
+
+  toggleSubscribe(user){
+      if(user.isSubscribed === "true"){
+        this.unsubscribeUser(user.userId);
+        var like = this.InteractionsLikes.filter(x => x.userId === user.userId)[0];
+        if(like != undefined){
+          like.isSubscribed = "false";
+        }
+        var dislike = this.InteractionsDislikes.filter(x => x.userId === user.userId)[0];
+        if(dislike != undefined){
+          dislike.isSubscribed = "false";
+        }
+      } else {
+        if(user.isSubscribed === "false"){
+          this.subscribeUser(user.userId);
+          var like = this.InteractionsLikes.filter(x => x.userId === user.userId)[0];
+          if(like != undefined){
+            like.isSubscribed = "true";
+          }
+          var dislike = this.InteractionsDislikes.filter(x => x.userId === user.userId)[0];
+          if(dislike != undefined){
+            dislike.isSubscribed = "true";
+          }
+        }
+    }
   }
 
   addToComment(emoji) {
