@@ -53,8 +53,8 @@
   "main_more_notifications": "See more",
   "main_no_notification": "No notification ",
   "publication_shared_text": " Shared the post of   ",
-  "publication_like": "LOL",
-  "publication_dislike": "Dislike",
+  "publication_like": "Like",
+  "publication_perfect": "Perfect",
   "publication_display_comments": "Display comments",
   "publication_hide_comments": "Hide  comments ",
   "publication_unfollow": "Do not follow",
@@ -189,5 +189,5 @@
   "fb_friends": "Suggestions for you",
   "fb_label": "facebook friend",
   "Like": "Like",
-  "Dislike": "Dislike"
+  "Perfect": "Perfect"
 }
