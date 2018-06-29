@@ -1311,6 +1311,7 @@ section.widget {
   color: black;
   position: relative;
   top: -3px;
+  margin-left : 25px;
 }
 
 .widget button {
