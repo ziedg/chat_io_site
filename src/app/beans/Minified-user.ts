@@ -4,5 +4,6 @@ export class MinifiedUser {
 	public profilefirstName: string;
 	public profilelastName: string;
 	public profilepicture: string;
+	public isSubscribed : string;
 
 }

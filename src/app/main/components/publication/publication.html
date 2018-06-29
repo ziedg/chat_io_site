@@ -70,7 +70,7 @@
       </div>
     </div>
 
-    <div class="content" [ngClass]="{'pubbg1': pubclass=='pubdes1',
+    <div class="content" style="display: table-cell;vertical-align: middle;" [ngClass]="{'pubbg1': pubclass=='pubdes1',
                                                                           'pubbg2': pubclass=='pubdes2',
                                                                           'pubbg3': pubclass=='pubdes3',
                                                                           'pubbg4': pubclass=='pubdes4',
@@ -113,6 +113,7 @@
                                                                           'pubdes15': pubclass=='pubdes15',
                                                                           'pubdes16': pubclass=='pubdes16'
                                                                           }"
+                  style="width: 600px"
                   [innerHTML]="firstPubText"></span>
             <a *ngIf="longPubText && !longPubTextShow"
                 (click)="longPubTextShow=true"
@@ -135,6 +136,7 @@
                                                                           'pubdes15': pubclass=='pubdes15',
                                                                           'pubdes16': pubclass=='pubdes16'
                                                                           }"
+                  style="width: 600px"
                   [innerHTML]="lastPubText">
             </span>
             </span>
@@ -265,7 +267,7 @@
                   {{ 'Like' | translate }}
               </button>
               <button id="nulle" class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fd4000">
-                  {{ 'Dislike' | translate }}
+                  {{ 'Perfect' | translate }}
               </button>
               <button class="interactions-tablinks" style="float:right" (click)="closeModalInteractions()">
                   &#10006;
@@ -274,7 +276,9 @@
 
 
             <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px" >
-                <div *ngIf="InteractionsLikes.length == 0" class="no-interactions ">No likes yet.</div>
+                <div *ngIf="InteractionsLikes.length == 0" class="no-interactions ">
+                  
+                </div>
                 <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsLikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
@@ -282,13 +286,20 @@
                              [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
                         </div>
                         <div class="user-name">
-                          <header><a [routerLink]="['/main/profile', user._id]">
+                          <header><a [routerLink]="['/main/profile', user.userId]">
                             {{user.profilefirstname}} {{user.profilelastname}}
                           </a></header>
                         </div>
-                        <div class="subscribe-no-number" style="min-width:12px">
-                          <button (click)="subscribeUser($event, user.userId)" style="float:none">
+                        <div class="subscribe-no-number" style="min-width:12px" >
+                          <button (click)="toggleSubscribe(user)" style="float:none"
+                          *ngIf="user.isSubscribed === 'false' && user.userId !== profileId"
+                          [ngStyle]="{'background-color':'#090'}">
                               {{ 'profile_subscribe' | translate }}
+                          </button>
+                          <button (click)="toggleSubscribe(user)" style="float:none"
+                          *ngIf="user.isSubscribed === 'true' && user.userId !== profileId"
+                          [ngStyle]="{'background-color':'#ccc'}">
+                               abonné
                           </button>
                         </div>
                       </div>
@@ -298,7 +309,9 @@
             </div>
 
             <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px">
-                <div *ngIf="InteractionsDislikes.length == 0" class="no-interactions">No dislikes yet.</div>
+                <div *ngIf="InteractionsDislikes.length == 0" class="no-interactions">
+                 
+                </div>
                 <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsDislikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
@@ -306,13 +319,20 @@
                              [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
                         </div>
                         <div class="user-name">
-                          <header><a [routerLink]="['/main/profile', user._id]">
+                          <header><a [routerLink]="['/main/profile', user.userId]">
                             {{user.profilefirstname}} {{user.profilelastname}}
                           </a></header>
                         </div>
                         <div class="subscribe-no-number" style="min-width:12px">
-                          <button (click)="subscribe(user.userId)" style="float:none">
+                          <button (click)="toggleSubscribe(user)" style="float:none"
+                          *ngIf="user.isSubscribed === 'false' && user.userId !== profileId"
+                          [ngStyle]="{'background-color':'#090'}">
                               {{ 'profile_subscribe' | translate }}
+                          </button>
+                          <button (click)="toggleSubscribe(user)" style="float:none"
+                          *ngIf="user.isSubscribed === 'true'  && user.userId !== profileId"
+                          [ngStyle]="{'background-color':'#ccc'}">
+                               abonné
                           </button>
                         </div>
                       </div>
@@ -343,7 +363,7 @@
         <div class="dislike-holder" (click)="addOrRemoveDislike()" [class.active]="publicationBean.isDisliked">
           <button class="dislike">
             <div class="hint-social">
-               {{ 'publication_dislike' | translate }}
+               {{ 'publication_perfect' | translate }}
             </div>
             <img class="social-emoji" src="assets/images/new/thumb-down-active.png" style="margin-top:4px"
                  *ngIf="publicationBean.isDisliked">

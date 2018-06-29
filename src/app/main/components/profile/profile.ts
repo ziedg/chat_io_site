@@ -42,7 +42,7 @@ export class Profile {
   public publicationBeanList:Array<PublicationBean> = [];
   public user:User = new User();
   public userDisplayed:User = new User();
-
+  btn_subscribe_locked:boolean=false;
 
   selectedMenuElement = 0;
 
@@ -146,6 +146,10 @@ export class Profile {
 
 
   subscribe(userDisplayed:User) {
+if (this.btn_subscribe_locked){
+  return ;
+}
+    this.btn_subscribe_locked=true;
     let body = JSON.stringify({
       profileId: userDisplayed._id
     });
@@ -160,7 +164,8 @@ export class Profile {
         response => {
         if (response.status == 0) {
           userDisplayed.isFollowed = true;
-
+          this.loadMore =true;
+         this.loadFirstPosts();
           userDisplayed.nbSubscribers++;
 
         }
@@ -169,11 +174,17 @@ export class Profile {
       },
       () => {
         this.changeDetector.markForCheck();
+        this.btn_subscribe_locked=false;
+
       }
     );
   }
 
   unsubscribe(userDisplayed:User) {
+    if (this.btn_subscribe_locked){
+      return ;
+    }
+        this.btn_subscribe_locked=true;
     let body = JSON.stringify({
       profileId: userDisplayed._id
     });
@@ -187,14 +198,18 @@ export class Profile {
         response => {
         if (response.status == 0) {
           userDisplayed.isFollowed = false;
-
+          this.loadMore =true;
+          this.loadFirstPosts();
           userDisplayed.nbSubscribers--;
+
         }
       },
         err => {
       },
       () => {
         this.changeDetector.markForCheck();
+        this.btn_subscribe_locked=false;
+
       }
     );
   }
@@ -521,9 +536,6 @@ reportPub(userDisplayed:User) {
 
         if (response.status == "0") {
 
-
-
-
           if (this.loginService.isWasConnectedWithFacebook){
             let fuser = this.loginService.getFacebookUser();
             if( fuser && fuser.profilePicture)
@@ -536,7 +548,21 @@ reportPub(userDisplayed:User) {
           localStorage.setItem('user', JSON.stringify(response.profile));
           this.loginService.actualize();
           this.changePhotoCancel();
-
+        
+            this.publicationBeanList= this.publicationBeanList.map((pub:PublicationBean)=>{
+            return {
+              ...pub,
+              profilePicture:response.profile.profilePicture,
+              profilePictureMin:response.profile.profilePictureMin,
+              comments:pub.comments.map((comment)=>{
+               return {
+                 ...comment ,
+                 profilePicture:response.profile.profilePicture,
+              profilePictureMin:response.profile.profilePictureMin
+               }
+              })
+            }
+          })
           this.uploadedProfilePicture = null;
           jQuery("#file-profile").val("");
           this.profilePictLoad = false;
