@@ -2640,6 +2640,10 @@ facebook-friends .user .user-img {
   word-wrap: break-word;
 }
 
+.comment-text {
+  width: calc(100% - 30px)!important;
+}
+
 @media (max-width: 767px) {
   .publication-text {
     margin-left: 9px;
