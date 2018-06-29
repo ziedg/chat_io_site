@@ -33,7 +33,7 @@ export class GifSlider implements AfterViewInit {
     this.gifService.loadMoreGifs();
     this.ListOfGifs = gifService.getGifList();
     for (let i = 0; i < this.ListOfGifs.length; i++) {
-      var GifObject = {Post: this.ListOfGifs[i]["media"][0]["tinygif"]["url"], Preview: this.ListOfGifs[i]["media"][0]["nanogif"]["url"]};
+      var GifObject = {Post: this.ListOfGifs[i]["media"][0]["gif"]["url"], Preview: this.ListOfGifs[i]["media"][0]["nanogif"]["url"]};
       // this.UrlGifList[i].Post = this.ListOfGifs[i]["media"][0]["nanogif"]["url"];
       // this.UrlGifList[i].Preview = this.ListOfGifs[i]["media"][0]["tinygif"]["url"];
       this.UrlGifList.push(GifObject); //UrlGifList is undefined
@@ -53,10 +53,10 @@ export class GifSlider implements AfterViewInit {
     this.NewListOfGifs = this.gifService.getGifList();
     this.gifService.loadMoreGifs();
     //console.log(this.NewListOfGifs);
-    let currentLength = this.UrlGifList.length;
+    //let currentLength = this.UrlGifList.length;
     for (let i = 0; i < this.NewListOfGifs.length; i++) {
-      this.UrlGifList[currentLength] = this.NewListOfGifs[i]["media"][0]["nanogif"]["url"];
-      currentLength++;
+      var GifObject = {Post: this.NewListOfGifs[i]["media"][0]["gif"]["url"], Preview: this.NewListOfGifs[i]["media"][0]["nanogif"]["url"]};
+      this.UrlGifList.push(GifObject); 
     }
     //console.log(currentLength);
     this.gifLimitIndex += 15;
