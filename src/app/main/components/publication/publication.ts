@@ -238,9 +238,9 @@ export class Publication {
       // Let's refresh the list.
       this.changeDetector.markForCheck();
     }, 1000 * 60); // 1 minute
-  
 
-  
+
+
 
 
     // Get the modal
@@ -283,8 +283,8 @@ export class Publication {
 
 		var txt = this.publicationBean.publText;
 
+    // divide long publication to 2 parts
 		const word_letters:number = 5;
-
     const words_max:number = 70;
     const words_marge:number = 10;
 
@@ -848,8 +848,8 @@ export class Publication {
                     this.InteractionsDislikes = response.message.dislikes.slice();
                     console.log(this.InteractionsLikes);
                     console.log(this.InteractionsDislikes);
-                    
-                    
+
+
                 },
                 err => {
                 },

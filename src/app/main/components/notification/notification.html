@@ -23,7 +23,7 @@
              (click)="goTo('post',notif.publId,notif._id)">
             <span *ngIf="notif.profiles &&notif.profiles.length==1">
               <span class="notif-a">
-                {{notif.profiles[notif.profiles.length-1].firstName}} {{notif.profiles[notif.profiles.length-1].lastName}}
+                {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
               </span>
               <span>{{ 'main_comment_notification' | translate }}</span>
             </span>
@@ -32,7 +32,7 @@
                 {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName} }}
               </span>
               <span *ngIf="notif.profiles.length>2" class="notif-a">
-                {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1 } }}
+                {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[notif.profiles.length-1].firstName, number: notif.profiles.length-1 } }}
               </span>
               <span>{{ 'main_comments_notification' | translate }}</span>
             </span>
@@ -50,7 +50,7 @@
                 {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName} }}
               </span>
               <span *ngIf="notif.profiles.length>2" class="notif-a">
-                {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1 } }}
+                {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[notif.profiles.length-1].firstName, number: notif.profiles.length-1 } }}
               </span>
               <span>{{ 'main_reagirs_notification' | translate}}</span>
             </span>
