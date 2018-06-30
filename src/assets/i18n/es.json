@@ -189,5 +189,9 @@
   "fb_friends": "Sugerencias para ti",
   "fb_label": "amigo facebook",
   "Like": "Me gusta",
-  "Perfect": "Perfecto"
+  "Perfect": "Perfecto",
+  "errLastName":"",
+  "errFistName":"",
+  "LastName_too_long":"apellido demasiado largo",
+  "FirstName_too_long":"primer nombre demasiado largo"
 }
