@@ -121,6 +121,11 @@ export class Publication {
     });
 
   }
+  preventLink(e, isGif){
+    if (isGif){e.preventDefault();}
+    
+
+  }
   unsubscribe(post:PublicationBean) {
     let body = JSON.stringify({
       profileId: post.profileId
