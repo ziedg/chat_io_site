@@ -352,11 +352,11 @@
             <div class="hint-social">
               {{ 'publication_like' | translate }}
             </div>
-            <img class="social-emoji social-emoji-like-active"  style="margin-bottom:2px"
-                 src="assets/images/new/like1-active.png"
+            <img class="social-emoji social-emoji-like"  
+                 src="assets/images/new/publication/like1-full.png"
                  *ngIf="publicationBean.isLiked">
-            <img class="social-emoji desaturated social-emoji-like" style="margin-bottom:2px"
-                 src="assets/images/new/like1-outline.png"
+            <img class="social-emoji desaturated social-emoji-like" 
+                 src="assets/images/new/publication/like1-outline.png"
                  *ngIf="!publicationBean.isLiked"></button>
         </div>
 
@@ -365,10 +365,10 @@
             <div class="hint-social">
                {{ 'publication_perfect' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/new/heart-active.png"
+            <img class="social-emoji" src="assets/images/new/heart-active.png" style="margin-bottom:1px;width:28px"
                  *ngIf="publicationBean.isDisliked">
             <img class="social-emoji"
-                 src="assets/images/new/heart.png"
+                 src="assets/images/new/heart.png" style="margin-bottom:1px;width:28px"
                  *ngIf="!publicationBean.isDisliked">
           </button>
         </div>
