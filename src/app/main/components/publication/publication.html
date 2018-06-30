@@ -70,7 +70,7 @@
       </div>
     </div>
 
-    <div class="content" style="display: table-cell;vertical-align: middle;" [ngClass]="{'pubbg1': pubclass=='pubdes1',
+    <div class="content"  [ngClass]="{'pubbg1': pubclass=='pubdes1',
                                                                           'pubbg2': pubclass=='pubdes2',
                                                                           'pubbg3': pubclass=='pubdes3',
                                                                           'pubbg4': pubclass=='pubdes4',
@@ -352,10 +352,10 @@
             <div class="hint-social">
               {{ 'publication_like' | translate }}
             </div>
-            <img class="social-emoji social-emoji-like"  
+            <img class="social-emoji social-emoji-like"
                  src="assets/images/new/publication/like1-full.png"
                  *ngIf="publicationBean.isLiked">
-            <img class="social-emoji desaturated social-emoji-like" 
+            <img class="social-emoji desaturated social-emoji-like"
                  src="assets/images/new/publication/like1-outline.png" style="margin-bottom:1px"
                  *ngIf="!publicationBean.isLiked"></button>
         </div>
@@ -375,7 +375,7 @@
         <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
             <button class="social-button">
 
-              <img class="social-emoji" src="assets/images/new/comment-active.png" 
+              <img class="social-emoji" src="assets/images/new/comment-active.png"
               *ngIf="commentsDisplayed">
               <img class="social-emoji desaturated"
               src="assets/images/new/comment.png"
