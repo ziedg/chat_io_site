@@ -892,7 +892,7 @@ export class Publication {
     }
     else if(tabName === 'Dislikes') {
       document.getElementById("lol").style.borderBottom = "none";
-      document.getElementById("nulle").style.borderBottom = "1px solid #fd4000";
+      document.getElementById("nulle").style.borderBottom = "1px solid #fb001e";
     }
 
     tabcontent = document.getElementsByClassName("interactions-tabcontent");

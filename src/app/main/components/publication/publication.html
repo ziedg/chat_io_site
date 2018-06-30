@@ -266,7 +266,7 @@
               <button id="lol" class="interactions-tablinks" (click)="openTab('Likes')" style="color: #2aaa2a;border-bottom: 1px solid #2aaa2a">
                   {{ 'Like' | translate }}
               </button>
-              <button id="nulle" class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fd4000">
+              <button id="nulle" class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fb001e">
                   {{ 'Perfect' | translate }}
               </button>
               <button class="interactions-tablinks" style="float:right" (click)="closeModalInteractions()">
@@ -277,7 +277,7 @@
 
             <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px" >
                 <div *ngIf="InteractionsLikes.length == 0" class="no-interactions ">
-                  
+                  No likes yet.
                 </div>
                 <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsLikes">
@@ -310,7 +310,7 @@
 
             <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px">
                 <div *ngIf="InteractionsDislikes.length == 0" class="no-interactions">
-                 
+                  This post ain't got no love yet.
                 </div>
                 <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsDislikes">
@@ -352,11 +352,11 @@
             <div class="hint-social">
               {{ 'publication_like' | translate }}
             </div>
-            <img class="social-emoji social-emoji-like-active"  style="margin-bottom:4px"
-                 src="assets/images/new/publication/like-full.png"
+            <img class="social-emoji social-emoji-like-active"  style="margin-bottom:2px"
+                 src="assets/images/new/like1-active.png"
                  *ngIf="publicationBean.isLiked">
-            <img class="social-emoji desaturated social-emoji-like" style="margin-bottom:4px"
-                 src="assets/images/new/publication/like-outline.png"
+            <img class="social-emoji desaturated social-emoji-like" style="margin-bottom:2px"
+                 src="assets/images/new/like1-outline.png"
                  *ngIf="!publicationBean.isLiked"></button>
         </div>
 
@@ -365,10 +365,10 @@
             <div class="hint-social">
                {{ 'publication_perfect' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/new/thumb-down-active.png" style="margin-top:4px"
+            <img class="social-emoji" src="assets/images/new/heart-active.png"
                  *ngIf="publicationBean.isDisliked">
-            <img class="social-emoji desaturated"
-                 src="assets/images/new/thumb-down.png" style="margin-top:4px"
+            <img class="social-emoji"
+                 src="assets/images/new/heart.png"
                  *ngIf="!publicationBean.isDisliked">
           </button>
         </div>

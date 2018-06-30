@@ -41,22 +41,19 @@ export class ConversationMobileComponent implements OnInit{
     private loginService :LoginService,
     private db: AngularFireDatabase,
     private chatService: ChatService
-  ) { 
-    
+  ) {
     this.user =this.loginService.getUser();
     this.userId=this.user._id;
 		this.messageForm =new FormBuilder().group({
 			message: new MessageValidation
     });
     jQuery(".navigation-bottom").addClass('hidden-xs');
-    
   }
 
   ngOnInit(){
-    this.emitterService.userEmitter
-    .subscribe((selectedUser: User) => {
-        this.selectedUser = selectedUser;
-    },err => console.log(err), () => console.log('done'));
+    this.emitterService.userEmitter.subscribe((selectedUser: User) => {
+      this.selectedUser = selectedUser;
+    });
     this.emitterService.conversationEmitter.subscribe((data) => {
       if(data==undefined)
       {
@@ -66,7 +63,7 @@ export class ConversationMobileComponent implements OnInit{
         this.messages = data;
       }
       this.messageLoading = true;
-  },err => console.log(err), () => console.log('done'));
+    });
   }
 
   sendMessage(){
@@ -76,9 +73,11 @@ export class ConversationMobileComponent implements OnInit{
       jQuery(".embed-submit-field button").removeClass('activebtn');
     }
   }
+
   sendHome(){
     this.router.navigate(['/main/messaging']);
   }
+
   sendMessageBtn() {
     //if (event.keyCode === 13) {
         const message = this.messageForm.controls['message'].value.trim();
@@ -132,6 +131,7 @@ export class ConversationMobileComponent implements OnInit{
         }
       });
   }
+  
   alignMessage(userId: string): boolean {
     return this.userId === userId ? false : true;
   }

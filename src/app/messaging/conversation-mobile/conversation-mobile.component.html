@@ -1,19 +1,19 @@
-<div class="myContainer" *ngIf="messageLoading">
+<div class="myContainer">
 	<div class="header-mobile">
 		<div>
 			<a class="homebtn" (click)="sendHome()">
 				<i  class="fa fa-chevron-left"></i>
 			</a>
-			<div *ngIf="selectedUser !== null && selectedUser.firstName">
+			<div *ngIf="selectedUser !== null">
 				<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
 			</div>
 		</div>
 	</div>
 	<div class="message-wrapper">
 		<div class="message-container">
-			<ul class="message-thread">
+			<ul class="message-thread" *ngIf="messageLoading">
 				<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)">
-					<!-- <img *ngIf="alignMessage(message.toUserId) == false" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" /> -->
+					<img *ngIf="alignMessage(message.toUserId) == false && selectedUser !== null" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" />
 					<p class="messageContent">
 						{{message.message}}
 					</p>
