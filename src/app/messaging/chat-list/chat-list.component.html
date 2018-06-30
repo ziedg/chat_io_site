@@ -2,7 +2,6 @@
 	<img alt="search-icon" class="outline-icon" src="assets/images/new/search-icon.png">
 	<input #searchBar placeholder="Rechercher" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)" (focus)="onFocus()">
 
-	<div class="upper-arrow-search-msg upper-arrow"></div>
 	<div class="recherche-results-holder-msg recherche-results-holder-1" style="display:none;" *ngIf="listSearchUsers">
 	  <div class="recherche-results" *ngIf="listSearchUsers.length>0">
 		<article *ngFor="let result of listSearchUsers" (click)="loadUser(result)">
@@ -15,7 +14,7 @@
 		  </div>
 		</article>
 	  </div>
-	 
+
 	</div>
 </div>
 <div class="suggestions-corps " *ngIf="chatListUsers.length == 0">
