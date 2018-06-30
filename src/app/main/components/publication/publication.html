@@ -277,7 +277,7 @@
 
             <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px" >
                 <div *ngIf="InteractionsLikes.length == 0" class="no-interactions ">
-                  
+                  No likes yet.
                 </div>
                 <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsLikes">
@@ -310,7 +310,7 @@
 
             <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px">
                 <div *ngIf="InteractionsDislikes.length == 0" class="no-interactions">
-                 
+                  This post ain't got no love yet.
                 </div>
                 <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsDislikes">
