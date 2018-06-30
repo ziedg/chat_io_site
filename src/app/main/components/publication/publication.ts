@@ -39,7 +39,7 @@ declare var swal: any;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Publication {
-
+  intervalHolder: any;
   commentContent = "";
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
@@ -224,9 +224,18 @@ export class Publication {
   displayComments(){
     this.commentsDisplayed = !this.commentsDisplayed ;
   }
+  ngOnDestroy(): void {
+    clearInterval(this.intervalHolder);
+ }
 
   ngOnInit() {
+    this.intervalHolder = setInterval(() => {
+      // Let's refresh the list.
+      this.changeDetector.markForCheck();
+    }, 1000 * 60); // 1 minute
+  
 
+  
 
 
     // Get the modal
@@ -638,9 +647,13 @@ export class Publication {
   public activateSignal() {
     this.signalButton = !this.signalButton;
   }
-
+  //setTimeout(updateClock, 1000);
+  // updatePublicationTime(publishDateString: string): string {
+  //   return setTimeout( this.getPublicationTime(publishDateString), 10000);
+  // }
 
   getPublicationTime(publishDateString: string): string {
+    //console.log("after 10 seconds"+publishDateString);
     if (this.isFixedPublishDate)
       return this.fixedPublishDate;
     let date = new Date();
@@ -672,6 +685,8 @@ export class Publication {
       this.fixedPublishDate = diffDate.min +  this.translateCode("prefix_date_minutes");
     else
       this.fixedPublishDate = this.translateCode("prefix_date_now");
+
+    //setTimeout(this.getPublicationTime(publishDateString), 10000);
     return this.fixedPublishDate;
   }
 
@@ -877,7 +892,7 @@ export class Publication {
     }
     else if(tabName === 'Dislikes') {
       document.getElementById("lol").style.borderBottom = "none";
-      document.getElementById("nulle").style.borderBottom = "1px solid #fd4000";
+      document.getElementById("nulle").style.borderBottom = "1px solid #fb001e";
     }
 
     tabcontent = document.getElementsByClassName("interactions-tabcontent");

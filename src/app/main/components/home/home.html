@@ -111,7 +111,8 @@
                      formControlName="publicationTitle" class="new-publication-title">
 
               <div id="publishDiv"
-                   [ngClass]="{                                           'pubdes1': pubclass=='pubdes1',
+                   [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText, 'post-title-enable':titleEnable,
+                                                                          'pubdes1': pubclass=='pubdes1',
                                                                           'pubdes2': pubclass=='pubdes2',
                                                                           'pubdes3': pubclass=='pubdes3',
                                                                           'pubdes4': pubclass=='pubdes4',
@@ -126,9 +127,7 @@
                                                                           'pubdes13': pubclass=='pubdes13',
                                                                           'pubdes14': pubclass=='pubdes14',
                                                                           'pubdes15': pubclass=='pubdes15',
-                                                                          'pubdes16': pubclass=='pubdes16'
-                                                                          }"
-                   [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText, 'post-title-enable':titleEnable}"
+                                                                          'pubdes16': pubclass=='pubdes16'}"
                    (paste)="updatePublishTextOnPaste($event)"
                    contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)"
                    #publishDivRef style="width: calc(100% - 80px)"></div>
