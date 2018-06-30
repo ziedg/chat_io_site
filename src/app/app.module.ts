@@ -101,7 +101,7 @@ import {AvailablePicture} from "./main/components/profile/pipes/AvailablePicture
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
         {provide: APP_BASE_HREF, useValue: '/'},
-        AngularFireDatabase
+        AngularFireDatabase,
     ],
 
 })

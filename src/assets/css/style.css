@@ -4269,9 +4269,9 @@ input.loginInput {
 /*Footer*************/
 
 .footerContainer {
-  width: 100%;
+  width: 900px;
   margin: 0 auto;
-  padding: 0 200px;
+  padding-right: 40px;
 }
 
 .footerContainer a {
@@ -4326,11 +4326,12 @@ input.loginInput {
 
 .login-footer {
   background-color: #ffffff;
-  border-top: 1px solid #e1e1e1;
-  position: absolute;
-  bottom: 0;
   margin-right: 0 !important;
   margin-left: 0 !important;
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+  height: 200px
+
 }
 
 .mobile-login-lang-container {

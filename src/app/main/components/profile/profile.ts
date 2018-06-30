@@ -66,7 +66,7 @@ export class Profile {
   loadMore =true;
 
 
-  const descriptionMaxLength:number = 360;
+  descriptionMaxLength:number = 360;
 
 
   constructor(public translate:TranslateService,

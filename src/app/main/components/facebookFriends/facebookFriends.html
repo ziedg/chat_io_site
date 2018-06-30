@@ -15,14 +15,9 @@
        [infiniteScrollThrottle]="0" (scrolled)="onScrollDown()">
   <article *ngFor="let profile of facebookProfiles">
       <span class="user user-fb">
-        <div class="user-img" *ngIf="profile.profilePictureMin"
-							[routerLink]="['/main/profile',profile._id]"
-							[ngStyle]="{'background-image': 'url(' + profile.profilePictureMin + ')'}">
-        </div>
-        <div class="user-img" *ngIf="!profile.profilePictureMin"
-							[routerLink]="['/main/profile',profile._id]"
-             	[ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
-        </div>
+        <img src="{{profile | AvailablePicture}}"
+              class="user-img"
+              [routerLink]="['/main/profile',profile._id]">
         <div class="user-name" style="margin-right:0;margin-left:0;">
           <header style="text-align: center"><a [routerLink]="['/main/profile',profile._id]" class="fb-link-name">
             {{profile.firstName}} {{profile.lastName}}

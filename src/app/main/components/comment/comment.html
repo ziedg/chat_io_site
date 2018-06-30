@@ -1,14 +1,6 @@
 <!-- comments -->
 <div class="comment-holder" *ngIf="!commentBean.deleted">
-  <div class="user-img for-comment radiused-img"
-       *ngIf="commentBean.profilePictureMin"
-       [ngStyle]="{'background-image': 'url(' + commentBean.profilePictureMin + ')'}">
-  </div>
-
-  <div class="user-img for-comment radiused-img"
-       *ngIf="!commentBean.profilePictureMin"
-       [ngStyle]="{'background-image': 'url(' + commentBean.profilePicture + ')'}">
-  </div>
+  <img class="user-img for-comment radiused-img" src="{{commentBean | AvailablePicture}}">
 
   <div class="comment-content">
     <div class="row name-and-text-comment">
