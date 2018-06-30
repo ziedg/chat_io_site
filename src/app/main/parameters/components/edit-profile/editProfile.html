@@ -1,29 +1,38 @@
 <div class="row">
-  <form class="col-xs-12" [formGroup]="form" #f="ngForm" (ngSubmit)="saveData()">
+  <form class="col-xs-12" [formGroup]="form" (ngSubmit)="saveData()">
 
     <div class="col-md-4 col-sm-4 col-xs-12 label-param">
       {{ 'update_profile_last_name' | translate }}
     </div>
 
     <div class="col-md-8 col-sm-8 col-xs-12 input-param">
-      <input (keyup)="checkLastName()" value="{{user.lastName}}" formControlName="lastName"
+      <input (keyup)="checkLastName()"  formControlName="lastName"
              [ngClass]="{'invalidInput': (errLastName && errLastName.length>0),
              'validInput': (errLastName.length==0)}" id="lastName"
         />
 
       <p *ngIf="errLastName && errLastName.length>0" class="msgErreur">{{errLastName}}</p>
+<div *ngIf="form.controls['lastName'].errors">
+  <p *ngIf="form.controls['lastName'].errors.pattern" class="msgErreur">Name too long</p>
+</div>
+      
+
     </div>
     <div class="col-md-4 col-sm-4 col-xs-12 label-param">
       {{ 'update_profile_first_name' | translate }}
     </div>
 
     <div class="col-md-8 col-sm-8 col-xs-12 input-param">
-      <input (keyup)="checkFirstName()" value="{{user.firstName}}" formControlName="firstName"
+      <input (keyup)="checkFirstName()"  formControlName="firstName"
              [ngClass]="{'invalidInput': (errFistName && errFistName.length>0),
              'validInput': (errFistName.length==0)}" id="firstName"
         />
 
       <p *ngIf="errFistName && errFistName.length>0" class="msgErreur">{{errFistName}}</p>
+      <div *ngIf="form.controls['firstName'].errors">
+        <p *ngIf="form.controls['firstName'].errors.pattern" class="msgErreur">Name too long</p>
+      </div>
+
     </div>
 
 
@@ -34,7 +43,7 @@
       <textarea id="userDiscrip" style="border-color: #09a012!important" name='userDiscrip'>{{user.about}}</textarea>
     </div>
     <div class="col-md-12 col-sm-12 button-param centered-text padding-bottom-50">
-      <button>
+      <button [disabled]="!form.valid">
         {{ 'update_profile_button' | translate }}
       </button>
       <!--<a class="hidden-xs hidden-sm">Désactivez temporairement mon compte</a>-->

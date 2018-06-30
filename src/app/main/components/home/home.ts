@@ -343,7 +343,6 @@ export class Home {
     // console.log(caretPosition);
 
     let text = publishDivRef.textContent;
-    console.log(text[text.length - 1]);
     if (!this.tagDropdownActive && // text.search(/.*?\ \@$/g) > 0) {
       text[text.length - 2] == ' ' &&
       text[text.length - 1] == '@') {

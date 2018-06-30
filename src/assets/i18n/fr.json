@@ -53,8 +53,8 @@
   "main_more_notifications": "Voir plus",
   "main_no_notification": "Pas de notifications",
   "publication_shared_text": " a partagé la publication de ",
-  "publication_like": "LOL",
-  "publication_dislike": "Nulle",
+  "publication_like": "J'aime",
+  "publication_perfect": "Parfait",
   "publication_display_comments": "Afficher les commentaires",
   "publication_hide_comments": "Masquer les commentaires",
   "publication_unfollow": "Ne plus suivre",
@@ -175,7 +175,7 @@
   "publication_open_last_part": "... Lire la suite",
   "top_blagueurs_show_more": "Afficher plus..",
   "SP_AUTORISATION_NOTIF": "Speegar a besoin de votre autorisation pour",
-  "ACTIVER_NOTIF_BUREAU": "activer les notification de bureau.",
+  "ACTIVER_NOTIF_BUREAU": "activer les notifications de bureau.",
   "FIL_ACTUALITES": "Fil d'actualité",
   "MESSENGER": "Messenger",
   "subscribers": "abonnés",
@@ -189,5 +189,5 @@
   "fb_friends": "Suggestions pour vous",
   "fb_label": "amis facebook",
   "Like":"J'aime" ,
-  "Dislike":"Je n'aime pas"
+  "Perfect":"Parfait"
 }

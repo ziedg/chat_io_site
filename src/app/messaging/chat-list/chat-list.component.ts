@@ -47,9 +47,42 @@ noSearchResults: Boolean = false;
    ngOnInit(){
     this.user =this.loginService.getUser();
     this.userId=this.user._id;
+    this.getLoggedInUser(this.userId)
     this.getChatList();
     this.getSuggestionsList();
     jQuery(".navigation-bottom").addClass('hidden-xs');
+
+    jQuery(document).click(function(e) {
+      if (
+        jQuery(e.target).closest(".recherche-results-holder-msg").length === 0
+      ) {
+        jQuery(".recherche-results-holder-msg").hide();
+        jQuery(".upper-arrow-search-msg").hide();
+      }
+    });
+
+   }
+
+   getLoggedInUser(userId){
+    this.http.get(
+      environment.SERVER_URL + pathUtils.GET_PROFILE + userId,
+      AppSettings.OPTIONS)
+      .map((res:Response) => res.json())
+      .subscribe(
+        response => {
+
+        if (response.status == "0") {
+
+          this.user= response.user;
+        }
+
+      },
+        err => {
+      },
+      () => {
+        this.changeDetector.markForCheck();
+      }
+    );
    }
   getChatList(){
     /*
@@ -149,15 +182,21 @@ return fullName.includes(name);
 }
 
 filterSubscriptionsByName(name){
-  return this.user.subscriptionsDetails.filter((user)=>{
-  let fullName=user.firstName + ' ' + user.lastName;
-  return fullName.includes(name);
-  });
+  if(this.user.subscriptionsDetails){
+    
+    return this.user.subscriptionsDetails.filter((user)=>{
+      let fullName=user.firstName + ' ' + user.lastName;
+      return fullName.includes(name);
+      });
+  }
+  
   }
 
 onFocus(){
+  if (this.searchBar.nativeElement.value.length>=1){
     this.searchBar.nativeElement.style.display = "block!important";
     this.onChange(this.searchBar.nativeElement.value);
+  }  
 }
 
 onChange(newValue: string) {
@@ -223,14 +262,14 @@ getListSearchUsers(key: string) {
 
 
 enableAutocomplete() {
-  jQuery(".recherche-results-holder").show();
-  jQuery(".upper-arrow-search").show();
+  jQuery(".recherche-results-holder-msg").show();
+  jQuery(".upper-arrow-search-msg").show();
   this.changeDetector.markForCheck();
 }
 
 disableAutocomplete() {
-  jQuery(".recherche-results-holder-1").hide();
-  jQuery(".upper-arrow-search").hide();
+  jQuery(".recherche-results-holder-msg").hide();
+  jQuery(".upper-arrow-search-msg").hide();
 }
 
 
