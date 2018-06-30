@@ -10,13 +10,10 @@
     <article style="margin-top: 10px; display: flex;" [class.unseen-notification]="notif.isSeen=='false'"
              *ngIf="notif.type !='subscribe'"
              (click)="goTo('post',notif.publId,notif._id)">
-      <div class="user-img for-notif"
-           *ngIf="notif.profiles &&notif.profiles.length>0 &&notif.profiles[notif.profiles.length-1].profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePictureMin + ')'}"></div>
+      <img class="user-img for-notif"
+           *ngIf="notif.profiles &&notif.profiles.length>0"
+           src="{{notif.profiles[notif.profiles.length-1] | AvailablePicture}}">
 
-      <div class="user-img for-notif"
-           *ngIf="notif.profiles &&notif.profiles.length>0 && !notif.profiles[notif.profiles.length-1].profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
 
       <div class="notif-content">
         <div *ngIf="notif.type =='comment'" class="comment-text"

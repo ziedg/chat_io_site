@@ -7,7 +7,7 @@
   <div class="row">
     <div class="home-sidebar col-md-2 hidden-sm hidden-xs">
       <div class="home-sidebar-container" #homeSidebarLeft>
-        <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
+        <div><span><img class="user-img home-sidebar-icon" src="{{user | AvailablePicture}}"
                         [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}"></span>
           <span><a style="color:black" [routerLink]="['/main/profile',user._id]">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span>
         </div>
@@ -98,13 +98,9 @@
                                                                           }"
                (input)="veriftextsize(publishDivRef)" id="pub-holder">
             <div class="pub-holder-holder" >
-              <div class="user-img for-add" *ngIf="user.profilePictureMin&&!pubbg"
-                   [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
-              </div>
-
-              <div class="user-img for-add" *ngIf="!user.profilePictureMin"
-                   [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}">
-              </div>
+              <img src="{{ user | AvailablePicture }}"
+                    class="user-img for-add"
+                    *ngIf="!pubbg">
 
 
               <input id="pub-title-input" placeholder="{{ 'home_publish_title' | translate }}" *ngIf="titleEnable"

@@ -18,10 +18,8 @@
 
     <div *ngIf="listTagSearchUsers && !showRecentSearch">
       <article *ngFor="let result of listTagSearchUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
-        <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
-        </div>
-        <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
-        </div>
+        <img class="user-img"
+              src="{{result | AvailablePicture}}">
         <div class="">
           {{result.firstName}} {{result.lastName}}
         </div>

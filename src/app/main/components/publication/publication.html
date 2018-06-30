@@ -9,17 +9,9 @@
              *ngIf="publicationBean.confidentiality=='PRIVATE'"></i>
           {{getPublicationTime(publicationBean.datePublication) | translate}}
         </div>
-      <div class="user-img"
+      <img class="user-img"
            [routerLink]="['/main/profile',publicationBean.profileId]"
-           *ngIf="publicationBean.profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePictureMin + ')', cursor: 'pointer'}">
-      </div>
-
-      <div class="user-img"
-            [routerLink]="['/main/profile',publicationBean.profileId]"
-           *ngIf="!publicationBean.profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePicture + ')', cursor: 'pointer'}">
-      </div>
+           src="{{publicationBean | AvailablePicture}}">
 
 
       <div class="user-name" *ngIf="publicationBean.profileId">
@@ -42,13 +34,8 @@
              *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
           {{getPublicationTime(publicationBean.datePublication)}}
         </div>
-      <div class="user-img" *ngIf="publicationBean.profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePictureMin + ')'}">
-      </div>
-
-      <div class="user-img" *ngIf="!publicationBean.profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePicture + ')'}">
-      </div>
+      <img class="user-img"
+           src="{{publicationBean | AvailablePicture}}">
 
       <div class="user-name" *ngIf="publicationBean.profileId">
         <header><a style="display:inline;" [routerLink]="['/main/profile',publicationBean.profileId]">
@@ -426,13 +413,8 @@
     </div>
     <div [class.comment-with-picture]="uploadedPictureComment">
       <div *ngIf="commentsDisplayed" class="comment-holder form-comment">
-        <div class="user-img for-comment" *ngIf="user.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + user.profilePictureMin + ')'}"
-             ></div>
-
-        <div class="user-img for-comment" *ngIf="!user.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}"
-             ></div>
+        <img class="user-img for-comment"
+             src="{{user | AvailablePicture}}">
 
         <form (ngSubmit)="publishComment()" [formGroup]="formComment" #f="ngForm">
           <textarea placeholder="Votre commentaire ..."
