@@ -356,7 +356,7 @@
                  src="assets/images/new/publication/like1-full.png"
                  *ngIf="publicationBean.isLiked">
             <img class="social-emoji desaturated social-emoji-like" 
-                 src="assets/images/new/publication/like1-outline.png"
+                 src="assets/images/new/publication/like1-outline.png" style="margin-bottom:1px"
                  *ngIf="!publicationBean.isLiked"></button>
         </div>
 
@@ -365,7 +365,7 @@
             <div class="hint-social">
                {{ 'publication_perfect' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/new/heart-active.png" style="margin-bottom:1px;width:28px"
+            <img class="social-emoji" src="assets/images/new/heart-active.png" style="margin-bottom:1px;width:29px"
                  *ngIf="publicationBean.isDisliked">
             <img class="social-emoji"
                  src="assets/images/new/heart.png" style="margin-bottom:1px;width:28px"
@@ -375,7 +375,7 @@
         <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
             <button class="social-button">
 
-              <img class="social-emoji" src="assets/images/new/comment-active.png"
+              <img class="social-emoji" src="assets/images/new/comment-active.png" 
               *ngIf="commentsDisplayed">
               <img class="social-emoji desaturated"
               src="assets/images/new/comment.png"
