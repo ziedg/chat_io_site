@@ -51,81 +51,145 @@
   height: 190px;
   vertical-align: middle;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg2{
   background-image: url("../images/background/bg2.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg3{
   background-image: url("../images/background/bg3.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg4{
   background-image: url("../images/background/bg4.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg5{
   background-image: url("../images/background/bg5.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg6{
   background-image: url("../images/background/bg6.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg7{
   background-image: url("../images/background/bg7.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg8{
   background-image: url("../images/background/bg8.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg9{
   background-image: url("../images/background/bg9.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg10{
   background-image: url("../images/background/bg10.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg11{
   background-image: url("../images/background/bg11.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg12{
   background-image: url("../images/background/bg12.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg13{
   background-image: url("../images/background/bg13.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg14{
   background-image: url("../images/background/bg14.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg15{
   background-image: url("../images/background/bg15.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg16{
   background-image: url("../images/background/bg16.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubdes1{
   font-family: "Arial Black";
