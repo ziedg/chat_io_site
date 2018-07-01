@@ -1,0 +1,67 @@
+:focus {
+  outline: none;
+}
+
+/* == Unicodes cheatsheet ==
+   http://fontawesome.bootstrapcheatsheets.com
+*/
+.toggle-icon {
+  width: 28px;
+  height: 28px;
+  font-size: 19px!important;
+  position: relative;
+  color: #666;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+.toggle-icon:before, .toggle-icon:after {
+  position: absolute;
+  top: 2px;
+  left: 4.8px;
+  transition: all .3s ease-out;
+  content: "";
+  font-family: fontawesome;
+}
+.toggle-icon:hover:before {
+  transform: scale(1.2);
+}
+.toggle-icon:active:before {
+  transition: none;
+  transform: scale(1);
+}
+.toggle-icon:after {
+  opacity: 0;
+}
+.toggle-icon.checked {
+  color: white;
+  background-color: #fb001e;
+  border-radius: 50%;
+}
+.toggle-icon.checked:before {
+  content: "";
+}
+.toggle-icon.checked:after {
+  content: "";
+  color: #fb001e;
+  animation: likeFly .6s ease-in;
+}
+
+@keyframes heartbeat {
+  from {
+    opacity: 1;
+  }
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+@keyframes likeFly {
+  from {
+    opacity: 1;
+  }
+  to {
+    transform: scale(3) rotate(45deg) translateY(-90px);
+    opacity: 0;
+  }
+}

@@ -10,7 +10,8 @@ import * as pathUtils from '../../../utils/path.utils';
 
 @Component({
   selector: 'app-suggestions',
-  templateUrl: './suggestions.component.html'
+  templateUrl: './suggestions.component.html',
+  styleUrls: ['./suggestions.component.css']
 })
 export class SuggestionsComponent implements OnInit {
   popularProfiles: Array<User> = [];

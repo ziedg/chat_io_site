@@ -410,17 +410,11 @@
                  *ngIf="!publicationBean.isLiked"></button>
         </div>
 
-        <div class="dislike-holder" (click)="addOrRemoveDislike()" [class.active]="publicationBean.isDisliked">
-          <button class="dislike">
+        <div class="dislike-holder">
             <div class="hint-social">
                {{ 'publication_perfect' | translate }}
             </div>
-            <img class="social-emoji" src="assets/images/new/heart-active.png" style="margin-bottom:1px;width:29px"
-                 *ngIf="publicationBean.isDisliked">
-            <img class="social-emoji"
-                 src="assets/images/new/heart.png" style="margin-bottom:1px;width:28px"
-                 *ngIf="!publicationBean.isDisliked">
-          </button>
+            <love-reaction checked="publicationBean.isDisliked"></love-reaction>
         </div>
         <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
             <button class="social-button">
