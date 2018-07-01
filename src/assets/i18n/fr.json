@@ -190,8 +190,8 @@
   "fb_label": "amis facebook",
   "Like":"J'aime" ,
   "Perfect":"Parfait",
-  "errLastName":"",
-  "errFistName":"",
+  "errLastName":"Le nom est obligatoire",
+  "errFistName":"Le prénom est obligatoire",
   "LastName_too_long":"Nom trés long",
   "FirstName_too_long":"Prénom trop long"
 }

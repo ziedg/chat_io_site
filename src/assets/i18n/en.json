@@ -114,8 +114,8 @@
   "update_password_new_password": "New password  ",
   "update_password_confirm_password": "Confirm the new password ",
   "update_password_button": "Modify ",
-  "update_profile_last_name": "First name ",
-  "update_profile_first_name": "Last name ",
+  "update_profile_last_name": "Last name ",
+  "update_profile_first_name": "First name ",
   "update_profile_description": "Description",
   "update_profile_facebook_link": "Facebook link ",
   "update_profile_youtube_link": "Youtube link ",
@@ -190,8 +190,8 @@
   "fb_label": "facebook friend",
   "Like": "Like",
   "Perfect": "Perfect",
-  "errLastName":"",
-  "errFistName":"",
+  "errLastName":"Last name is required",
+  "errFistName":"First name is required",
   "LastName_too_long":"Last name too long",
   "FirstName_too_long":"First name too long"
 }
