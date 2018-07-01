@@ -33,86 +33,163 @@
   src: url(../fonts/lato/Lato-Black_0.ttf);
 }
 /*------------------------------publication-class-------------------------*/
+
+.bglist{
+
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    margin-left:25px;
+    margin-right:55px;
+    padding-bottom:3px;
+}
+.bglist::-webkit-scrollbar { 
+  display: none; 
+}
 .pubbg1{
   background-image: url("../images/background/bg1.jpg");
   height: 190px;
   vertical-align: middle;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg2{
   background-image: url("../images/background/bg2.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg3{
   background-image: url("../images/background/bg3.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg4{
   background-image: url("../images/background/bg4.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg5{
   background-image: url("../images/background/bg5.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg6{
   background-image: url("../images/background/bg6.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg7{
   background-image: url("../images/background/bg7.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg8{
   background-image: url("../images/background/bg8.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg9{
   background-image: url("../images/background/bg9.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg10{
   background-image: url("../images/background/bg10.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg11{
   background-image: url("../images/background/bg11.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg12{
   background-image: url("../images/background/bg12.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg13{
   background-image: url("../images/background/bg13.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg14{
   background-image: url("../images/background/bg14.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg15{
   background-image: url("../images/background/bg15.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubbg16{
   background-image: url("../images/background/bg16.jpg");
   height: 190px;
   background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
 }
 .pubdes1{
   font-family: "Arial Black";
@@ -546,7 +623,7 @@
   }
 
   .content .img-preview:hover {
-    opacity: 0.8;
+    /* opacity: 0.8; */
   }
 
   .link-preview .fa-times:hover {
@@ -2470,6 +2547,16 @@ facebook-friends .user .user-img {
   cursor: pointer;
   display: inline-block;
 }
+.navigation-arrow-container-bglist {
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  position: absolute;
+  top: 14%;
+  cursor: pointer;
+  display: inline-block;
+}
 
 .navigation-arrow-container:hover {
   background-color: rgba(0, 0, 0, 0.37);
@@ -2488,7 +2575,19 @@ facebook-friends .user .user-img {
   margin-left: 5.5px;
   margin-bottom: 2px;
 }
+.left-navigation-arrow-bglist {
+  width: 50%;
+  height: 50%;
+  margin-left: 4px;
+  margin-bottom: 2px;
+}
 
+.right-navigation-arrow-bglist {
+  width: 50%;
+  height: 50%;
+  margin-left: 5.5px;
+  margin-bottom: 2px;
+}
 @media (max-width: 767px) {
   .navigation-arrow-container {
     display: none;
@@ -2549,6 +2648,7 @@ facebook-friends .user .user-img {
   background-size: cover;
   background-position: center;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .user-img-shared {

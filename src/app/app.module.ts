@@ -49,6 +49,9 @@ import { httpFactory } from './utils/factories/http.factory';
 import { GifSlider } from './main/components/gif-slider/gif-slider';
 import {AvailablePicture} from "./main/components/profile/pipes/AvailablePicture.pipe";
 
+
+import { LoveReaction} from './main/components/publication/reactions/love-reaction/love-reaction'
+
 /** Factories */
 @NgModule({
     imports: [
@@ -77,7 +80,7 @@ import {AvailablePicture} from "./main/components/profile/pipes/AvailablePicture
     // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, AvailablePicture],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, AvailablePicture],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,
