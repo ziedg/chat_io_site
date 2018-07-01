@@ -2310,9 +2310,20 @@ textarea:focus {
   margin: 25px 0;
   position: relative;
 }
+.publicationwithbg {
+  padding: 15px 0px 0px 0px;;
+  margin: 25px 0;
+  position: relative;
+}
 
 .shared-publication {
   background-color: white;
+  padding: 0px;
+  margin: 10px 0 0;
+  position: relative;
+  width: 100%;
+}
+.shared-publicationwithbg {
   padding: 0px;
   margin: 10px 0 0;
   position: relative;

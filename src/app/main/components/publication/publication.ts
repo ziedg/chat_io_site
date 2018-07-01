@@ -123,7 +123,7 @@ export class Publication {
   }
   preventLink(e, isGif){
     if (isGif){e.preventDefault();}
-    
+
 
   }
   unsubscribe(post:PublicationBean) {
@@ -266,7 +266,8 @@ export class Publication {
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 
-    this.pubclass=this.publicationBean.publClass;
+    if(this.publicationBean.publClass){this.pubbg=true;
+    this.pubclass=this.publicationBean.publClass;}
 
     var pub_txt
     if(this.publicationBean.isShared) {
