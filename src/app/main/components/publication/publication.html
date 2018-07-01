@@ -414,7 +414,7 @@
             <div class="hint-social">
                {{ 'publication_perfect' | translate }}
             </div>
-            <love-reaction checked="publicationBean.isDisliked"></love-reaction>
+            <love-reaction [checked]="publicationBean.isDisliked"></love-reaction>
         </div>
         <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
             <button class="social-button">

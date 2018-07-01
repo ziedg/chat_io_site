@@ -2548,6 +2548,7 @@ facebook-friends .user .user-img {
   background-size: cover;
   background-position: center;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .user-img-shared {
