@@ -559,7 +559,7 @@
   }
 
   .content .img-preview:hover {
-    opacity: 0.8;
+    /* opacity: 0.8; */
   }
 
   .link-preview .fa-times:hover {
