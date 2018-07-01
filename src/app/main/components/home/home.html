@@ -194,6 +194,15 @@
                 <b class="gif-btn">{{ 'home_publish_GIF' | translate }}</b>
               </span>
 
+              <span class="youtube-video-in hidden-xs" style="line-height: 23px;display:none">
+                  <input class="yt-in-url youtube-input-popup"
+                         placeholder="{{ 'home_publish_youtube_placeholder' | translate }}" style="display:none;"
+                         (change)="updateYoutubeFacebook()" formControlName="publicationYoutubeLink">
+  
+  
+                  <i class="fa fa-youtube-play" (click)="changeYoutubeInput()"></i>
+                </span>
+  
 
 
               <input type="file" id="file-image" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
