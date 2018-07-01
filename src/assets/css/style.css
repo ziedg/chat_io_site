@@ -33,6 +33,19 @@
   src: url(../fonts/lato/Lato-Black_0.ttf);
 }
 /*------------------------------publication-class-------------------------*/
+
+.bglist{
+
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    margin-left:25px;
+    margin-right:55px;
+    padding-bottom:3px;
+}
+.bglist::-webkit-scrollbar { 
+  display: none; 
+}
 .pubbg1{
   background-image: url("../images/background/bg1.jpg");
   height: 190px;
@@ -2469,6 +2482,16 @@ facebook-friends .user .user-img {
   cursor: pointer;
   display: inline-block;
 }
+.navigation-arrow-container-bglist {
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  position: absolute;
+  top: 14%;
+  cursor: pointer;
+  display: inline-block;
+}
 
 .navigation-arrow-container:hover {
   background-color: rgba(0, 0, 0, 0.37);
@@ -2487,7 +2510,19 @@ facebook-friends .user .user-img {
   margin-left: 5.5px;
   margin-bottom: 2px;
 }
+.left-navigation-arrow-bglist {
+  width: 50%;
+  height: 50%;
+  margin-left: 4px;
+  margin-bottom: 2px;
+}
 
+.right-navigation-arrow-bglist {
+  width: 50%;
+  height: 50%;
+  margin-left: 5.5px;
+  margin-bottom: 2px;
+}
 @media (max-width: 767px) {
   .navigation-arrow-container {
     display: none;

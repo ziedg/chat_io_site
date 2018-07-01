@@ -946,6 +946,16 @@ export class Home {
 
   }
 
+  
+  sideScroll(direction,speed,distance,step){
+    var Container = jQuery(".bglist");
+    if(direction == 'left'){
+      Container.animate( { scrollLeft: '-=460' }, 1000);
+    }else{
+      Container.animate( { scrollLeft: '+=460' }, 1000);
+    }
+  }
+
   closeLinkAPI() {
     this.link.initialise();
   }
