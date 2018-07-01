@@ -31,12 +31,12 @@ export class ChatListItemComponent implements OnInit {
 
     let yyyy = today.getFullYear();
     if(dd<10){
-    dd='0'+dd;
+    var day='0'+dd;
     } 
     if(mm<10){
-    mm='0'+mm;
+    var month='0'+mm;
     } 
-    var currentDate = dd+'-'+mm+'-'+yyyy;
+    var currentDate = day+'-'+month+'-'+yyyy;
     return currentDate
 
   }
