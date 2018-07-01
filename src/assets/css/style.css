@@ -1328,6 +1328,7 @@ section.widget {
   position: relative;
   top: -3px;
   margin-left : 25px;
+  z-index: 2;
 }
 
 .widget button {
@@ -2310,9 +2311,21 @@ textarea:focus {
   margin: 25px 0;
   position: relative;
 }
+.publicationwithbg {
+  padding: 15px 0px 0px 0px;;
+  margin: 25px 0;
+  position: relative;
+}
 
 .shared-publication {
   background-color: white;
+  padding: 0px;
+  margin: 10px 0 0;
+  position: relative;
+  width: 100%;
+}
+.shared-publicationwithbg {
+  text-align: center;
   padding: 0px;
   margin: 10px 0 0;
   position: relative;
@@ -4269,9 +4282,9 @@ input.loginInput {
 /*Footer*************/
 
 .footerContainer {
-  width: 100%;
+  width: 900px;
   margin: 0 auto;
-  padding: 0 200px;
+  padding-right: 40px;
 }
 
 .footerContainer a {
@@ -4326,11 +4339,12 @@ input.loginInput {
 
 .login-footer {
   background-color: #ffffff;
-  border-top: 1px solid #e1e1e1;
-  position: absolute;
-  bottom: 0;
   margin-right: 0 !important;
   margin-left: 0 !important;
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+  height: 200px
+
 }
 
 .mobile-login-lang-container {
