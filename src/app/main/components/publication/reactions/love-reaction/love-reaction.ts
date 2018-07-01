@@ -8,8 +8,4 @@ import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 export class LoveReaction {
   @Input('checked') checked:boolean = false;
   @ViewChild('button') button : ElementRef;
-
-  toggleRecation() {
-    this.checked = !this.checked;
-  }
 }

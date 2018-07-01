@@ -24,6 +24,13 @@
   font-family: fontawesome;
 }
 .toggle-icon:hover:before {
+  animation-name: heartBeating;
+  animation-iteration-count: infinite;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-in-out;
+}
+.toggle-icon.checked:hover:before {
+  animation: none;
   transform: scale(1.2);
 }
 .toggle-icon:active:before {
@@ -47,7 +54,13 @@
   animation: likeFly .6s ease-in;
 }
 
-@keyframes heartbeat {
+@keyframes heartBeating {
+  0% { transform: scale(1);}
+  50% { transform: scale(1.2);}
+  100% { transform: scale(1);}
+}
+
+@keyframes heartBeat {
   from {
     opacity: 1;
   }
