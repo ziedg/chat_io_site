@@ -2324,6 +2324,7 @@ textarea:focus {
   width: 100%;
 }
 .shared-publicationwithbg {
+  text-align: center;
   padding: 0px;
   margin: 10px 0 0;
   position: relative;
