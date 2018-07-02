@@ -397,25 +397,22 @@
 
     <div class="social-staff">
       <div class="like-dislike">
-        <div class="like-holder" (click)="addOrRemoveLike()" [class.active]="publicationBean.isLiked">
-          <button class="like">
+        <div class="like-holder">
             <div class="hint-social">
               {{ 'publication_like' | translate }}
             </div>
-            <img class="social-emoji social-emoji-like"
-                 src="assets/images/new/publication/like1-full.png"
-                 *ngIf="publicationBean.isLiked">
-            <img class="social-emoji desaturated social-emoji-like"
-                 src="assets/images/new/publication/like1-outline.png" style="margin-bottom:2px"
-                 *ngIf="!publicationBean.isLiked"></button>
+            <like-reaction [checked]="publicationBean.isLiked"
+                            (click)="addOrRemoveLike()"
+                            style="display:block; width: 28px; height: 28px;"></like-reaction>
         </div>
 
-        <div class="dislike-holder" style="padding-left: 10px; padding-top: 4px;">
+        <div class="dislike-holder" style="padding-left: 10px;">
             <div class="hint-social">
                {{ 'publication_perfect' | translate }}
             </div>
             <love-reaction [checked]="publicationBean.isDisliked"
-                            (click)="addOrRemoveDislike()"></love-reaction>
+                            (click)="addOrRemoveDislike()"
+                            style="display:block; width: 28px; height: 28px;"></love-reaction>
         </div>
         <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
             <button class="social-button">

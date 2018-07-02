@@ -51,6 +51,7 @@ import {AvailablePicture} from "./main/components/profile/pipes/AvailablePicture
 
 
 import { LoveReaction} from './main/components/publication/reactions/love-reaction/love-reaction'
+import { LikeReaction} from './main/components/publication/reactions/like-reaction/like-reaction'
 
 /** Factories */
 @NgModule({
@@ -80,7 +81,7 @@ import { LoveReaction} from './main/components/publication/reactions/love-reacti
     // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, AvailablePicture],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, LikeReaction, AvailablePicture],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,
