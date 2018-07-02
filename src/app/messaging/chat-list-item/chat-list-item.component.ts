@@ -13,32 +13,14 @@ export class ChatListItemComponent implements OnInit {
   @Input() notread;
   @Input() date;
   constructor() { 
-    
-    this.date =this.getCurrentDate();
-    this.notread = true;
-    this.myLastMessage = false;
-    this.lastMessage = "";
-    this.user = "";
-    this.userImage = "";
+    this.date = "02:46";
+    this.notread = false;
+    this.myLastMessage = true;
+    this.lastMessage = "Bonjour";
+    this.user = "Leyana";
+    this.userImage = "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&h=350";
   }
 
   ngOnInit() {}
-
-  getCurrentDate(){
-    var today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth()+1; 
-
-    let yyyy = today.getFullYear();
-    if(dd<10){
-    var day='0'+dd;
-    } 
-    if(mm<10){
-    var month='0'+mm;
-    } 
-    var currentDate = day+'-'+month+'-'+yyyy;
-    return currentDate
-
-  }
 
 }

@@ -84,10 +84,10 @@
   "publication_popup_notification_report_title": "Signalée !",
   "publication_popup_notification_report_text": "Cette publication a été Signalée.",
   "prefix_date_yesterday": "hier",
-  "prefix_date_now": "1 min",
-  "prefix_date_days": " jrs",
-  "prefix_date_hours": " hrs",
-  "prefix_date_minutes": " mins",
+  "prefix_date_now": "1min",
+  "prefix_date_days": "jrs",
+  "prefix_date_hours": "hrs",
+  "prefix_date_minutes": "mins",
   "prefix_date_one_hour": "1h",
   "home_welcome": "Bienvenue chez Speegar! ",
   "home_welcome_text_first_part": "Nous voudrions vous remercier pour votre inscription et vous informer que Speegar est un site dédié à vous faire rire! ",
@@ -189,5 +189,10 @@
   "fb_friends": "Suggestions pour vous",
   "fb_label": "amis facebook",
   "Like":"J'aime" ,
-  "Perfect":"Parfait"
+  "Perfect":"Parfait",
+  "errLastName":"Le nom est obligatoire",
+  "errFistName":"Le prénom est obligatoire",
+  "LastName_too_long":"Nom trés long",
+  "FirstName_too_long":"Prénom trop long",
+  "popular":"Populaires"
 }

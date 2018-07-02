@@ -5,7 +5,7 @@ import { MessagingRoutingModule } from './messaging-routing.module';
 import { MessagingComponent } from './messaging.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { ConversationComponent } from './conversation/conversation.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
 import { ChatListItemComponent } from './chat-list-item/chat-list-item.component';
 import { HeaderMobileComponent } from './header-mobile/header-mobile.component';
 import { ConversationMobileComponent } from './conversation-mobile/conversation-mobile.component';
@@ -19,19 +19,8 @@ import { SuggestionsMobileComponent } from './suggestions-mobile/suggestions-mob
     CommonModule,
     MessagingRoutingModule,
     ReactiveFormsModule,
-    FormsModule,
+    FormsModule
   ],
-  declarations: [
-    MessagingComponent,
-    ChatListComponent,
-    ConversationComponent,
-    ChatListItemComponent,
-    HeaderMobileComponent,
-    ConversationMobileComponent,
-    SuggestionsComponent,
-    ChatListMobileComponent,
-    ChatListItemMobileComponent,
-    SuggestionsMobileComponent,
-  ]
+  declarations: [MessagingComponent, ChatListComponent, ConversationComponent, ChatListItemComponent, HeaderMobileComponent, ConversationMobileComponent, SuggestionsComponent, ChatListMobileComponent, ChatListItemMobileComponent, SuggestionsMobileComponent]
 })
 export class MessagingModule { }

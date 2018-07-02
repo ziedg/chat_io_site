@@ -6,7 +6,7 @@
    http://fontawesome.bootstrapcheatsheets.com
 */
 .toggle-icon {
-  width: 29px;
+  width: 28px;
   height: 28px;
   font-size: 19px!important;
   position: relative;
@@ -14,6 +14,11 @@
   cursor: pointer;
   border: none;
   background-color: transparent;
+  /*
+  transition-property: transform;
+  transition-timing-function: ease-in-out;
+  transition-duration: .3s;
+  */
 }
 .toggle-icon:before, .toggle-icon:after {
   position: absolute;
@@ -23,16 +28,19 @@
   content: "";
   font-family: fontawesome;
 }
-.toggle-icon:hover:before {
-  animation-name: heartBeating;
-  animation-iteration-count: one;
-  animation-duration: .9s;
-  animation-timing-function: ease-in-out;
+.toggle-icon:before {
+  transition-duration: .3s;
+  transition-timing-function: ease-in;
 }
-.toggle-icon.checked:hover:before {
-  animation: none;
+
+.toggle-icon:hover:before{
+  transform: scale(1.4);
+}
+
+.toggle-icon.checked:hover:before{
   transform: scale(1.2);
 }
+
 .toggle-icon:active:before {
   transition: none;
   transform: scale(1);
@@ -43,7 +51,6 @@
 .toggle-icon.checked {
   color: white;
   padding:2px;
-  
   background-color: #fb001e;
   border-radius: 50%;
 }
@@ -63,18 +70,14 @@
 }
 
 @keyframes heartBeat {
-  from {
-    opacity: 1;
-  }
+  from { opacity: 1;}
   to {
     transform: scale(3);
     opacity: 0;
   }
 }
 @keyframes likeFly {
-  from {
-    opacity: 1;
-  }
+  from { opacity: 1;}
   to {
     transform: scale(3) rotate(45deg) translateY(-90px);
     opacity: 0;

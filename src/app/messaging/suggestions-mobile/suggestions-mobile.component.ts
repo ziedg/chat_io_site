@@ -10,6 +10,8 @@ export class SuggestionsMobileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("heeere");
+    console.log(this.user);
   }
 
 }

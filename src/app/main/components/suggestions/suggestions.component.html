@@ -8,9 +8,12 @@
     <div class="msg-draggable">
     </div>
     <div class="user col-xs-12 draggable">
-      <img class="user-img-shared"
-           src="{{user | AvailablePicture}}">
-
+      <div class="user-img-shared" *ngIf="user.profilePictureMin"
+           [ngStyle]="{'background-image': 'url('+user.profilePictureMin+')'}">
+      </div>
+      <div class="user-img-shared" *ngIf="!user.profilePictureMin"
+           [ngStyle]="{'background-image': 'url('+user.profilePicture+')'}">
+      </div>
       <div class="user-name">
         <header><a [routerLink]="['/main/profile', user._id]">
           {{user.firstName}} {{user.lastName}}

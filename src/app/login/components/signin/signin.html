@@ -2,7 +2,7 @@
   <div class="col-xs-12">
     <input (click)="errorMessage=null" class="loginInput"
            [ngClass]="{invalidInput:(f.form.controls.email.touched && !f.form.controls.email.valid)}"
-           name="email" type="email" placeholder="{{ 'sign_in_email_placeholder' | translate }}"
+           name="email" type="text" placeholder="{{ 'sign_in_email_placeholder' | translate }}"
            formControlName="email"/>
   </div>
   <div class="col-xs-12">

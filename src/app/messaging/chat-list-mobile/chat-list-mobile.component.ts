@@ -106,6 +106,7 @@ noSearchResults: Boolean = false;
        for(let i=0;i<users.length;i++){
        this.suggestions.push(users[i]);
        } 
+   
     })
   }
 
@@ -121,6 +122,7 @@ selectUser(user:User): void {
   this.selectedUserId = user._id;
      /* Sending selected users information to other component. */
      this.emitterService.emitUser(user);
+
       /* calling method to get the messages */
     this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId })
     .subscribe((response) => {
@@ -161,10 +163,11 @@ onFocus(){
 }
 
 onChange(newValue: string) {
+  console.log(newValue)
   this.listSearchUsers = [];
   this.enableAutocomplete();
   this.changeDetector.markForCheck();
-  if (newValue.length >= 1) {
+  if (newValue.length > 1) {
       let searchInHistory=this.filterChatListUsersByName(newValue);
         if (searchInHistory && searchInHistory.length>0){
         this.listSearchUsers=searchInHistory
