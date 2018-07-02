@@ -121,8 +121,8 @@ noSearchResults: Boolean = false;
 selectUser(user:User): void {
   this.selectedUserId = user._id;
      /* Sending selected users information to other component. */
-     this.emitterService.emitUser(user);
-
+     //this.emitterService.emitUser(user);
+     this.emitterService.user = user;
       /* calling method to get the messages */
     this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId })
     .subscribe((response) => {

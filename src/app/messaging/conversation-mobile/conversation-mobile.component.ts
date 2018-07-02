@@ -51,9 +51,11 @@ export class ConversationMobileComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.emitterService.userEmitter.subscribe((selectedUser: User) => {
-      this.selectedUser = selectedUser;
-    });
+    // this.emitterService.userEmitter.subscribe((selectedUser: User) => {
+    //   this.selectedUser = selectedUser;
+    // });
+    
+    this.selectedUser =this.emitterService.user;
     this.emitterService.conversationEmitter.subscribe((data) => {
       if(data==undefined)
       {

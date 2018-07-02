@@ -6,7 +6,9 @@ export class EmitterService {
 
 userEmitter=new EventEmitter<User>();
 conversationEmitter =new EventEmitter<any>();
-  constructor() { }
+
+public user: User; 
+constructor() { }
 
   emitUser(user){
     this.userEmitter.emit(user);
