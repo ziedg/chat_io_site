@@ -16,7 +16,6 @@
   transform: translateY(-50%) scale(1.3);
 }
 
-
 .like-center::after {
   clear: both;
   content: "";
