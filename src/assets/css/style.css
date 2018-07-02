@@ -1404,6 +1404,7 @@ section.widget {
   color: black;
   position: relative;
   top: -3px;
+  margin-left : 25px;
   z-index: 2;
 }
 
@@ -2439,13 +2440,6 @@ textarea:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-}
-.messenger-section{
-  padding : 3px;
-  margin-bottom: 2px;
-  margin-left: 10px;
-  color: #777;
-  
 }
 
 .fb-suggestions-container {
@@ -4732,16 +4726,6 @@ input.loginInput {
   font-size: 14px;
   padding-left: 15px;
   text-transform: capitalize;
-  
-}
-.exclude input{
-  height: 100%;
-  border: 1px solid #eee;
-  border-radius: 3px;
-  width: 60%;
-  font-size: 14px;
-  padding-left: 15px;
-  text-transform: none;
 }
 
 .alert-email {
@@ -4825,7 +4809,6 @@ input.loginInput {
 @media (max-width: 992px) {
   .input-param input {
     width: 100%;
-    
   }
 
   .label-param {
