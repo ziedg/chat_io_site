@@ -6,8 +6,8 @@
    http://fontawesome.bootstrapcheatsheets.com
 */
 .toggle-icon {
-  width: 28px;
-  height: 26px;
+  width: 29px;
+  height: 28px;
   font-size: 19px!important;
   position: relative;
   color: #666;
@@ -25,7 +25,7 @@
 }
 .toggle-icon:hover:before {
   animation-name: heartBeating;
-  animation-iteration-count: infinite;
+  animation-iteration-count: one;
   animation-duration: .9s;
   animation-timing-function: ease-in-out;
 }
@@ -42,6 +42,8 @@
 }
 .toggle-icon.checked {
   color: white;
+  padding:2px;
+  
   background-color: #fb001e;
   border-radius: 50%;
 }
