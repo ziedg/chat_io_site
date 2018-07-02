@@ -86,9 +86,6 @@
     position: relative;
     clear: both;
 }
-.message-thread li:last-child>.messageContent{
-    margin-bottom: 40px;
-}
 .regular-message img{
     display:none;
 }
