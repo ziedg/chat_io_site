@@ -9,17 +9,9 @@
              *ngIf="publicationBean.confidentiality=='PRIVATE'"></i>
           {{getPublicationTime(publicationBean.datePublication) | translate}}
         </div>
-      <div class="user-img"
+      <img class="user-img"
            [routerLink]="['/main/profile',publicationBean.profileId]"
-           *ngIf="publicationBean.profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePictureMin + ')', cursor: 'pointer'}">
-      </div>
-
-      <div class="user-img"
-            [routerLink]="['/main/profile',publicationBean.profileId]"
-           *ngIf="!publicationBean.profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePicture + ')', cursor: 'pointer'}">
-      </div>
+           src="{{publicationBean | AvailablePicture}}">
 
 
       <div class="user-name" *ngIf="publicationBean.profileId">
@@ -42,13 +34,8 @@
              *ngIf="publicationBean.confidentiality=='PUBLIC'"></i>
           {{getPublicationTime(publicationBean.datePublication)}}
         </div>
-      <div class="user-img" *ngIf="publicationBean.profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePictureMin + ')'}">
-      </div>
-
-      <div class="user-img" *ngIf="!publicationBean.profilePictureMin"
-           [ngStyle]="{'background-image': 'url(' + publicationBean.profilePicture + ')'}">
-      </div>
+      <img class="user-img"
+           src="{{publicationBean | AvailablePicture}}">
 
       <div class="user-name" *ngIf="publicationBean.profileId">
         <header><a style="display:inline;" [routerLink]="['/main/profile',publicationBean.profileId]">
@@ -70,7 +57,7 @@
       </div>
     </div>
 
-    <div class="content"  [ngClass]="{'pubbg1': pubclass=='pubdes1',
+    <div class="content"  [ngClass]="{                                    'pubbg1': pubclass=='pubdes1',
                                                                           'pubbg2': pubclass=='pubdes2',
                                                                           'pubbg3': pubclass=='pubdes3',
                                                                           'pubbg4': pubclass=='pubdes4',
@@ -145,7 +132,7 @@
       <div class="link-preview" *ngIf="link.isSet">
         <div class="noPadding" *ngIf="link.image">
           <a href="{{link.url}}" target="_blank" style="width:100%">
-            <img class="img-preview" [src]="link.image"/>
+            <img class="img-preview" [src]="link.image" (click)="preventLink($event, link.isGif)"/>
           </a>
         </div>
         <div class="descriptions" *ngIf="!link.isGif">
@@ -192,9 +179,26 @@
     </div>
 
 
-    <div class="content" *ngIf="publicationBean.isShared">
+    <div class="content" [ngClass]="{                                     'pubbg1': pubclass=='pubdes1',
+                                                                          'pubbg2': pubclass=='pubdes2',
+                                                                          'pubbg3': pubclass=='pubdes3',
+                                                                          'pubbg4': pubclass=='pubdes4',
+                                                                          'pubbg5': pubclass=='pubdes5',
+                                                                          'pubbg6': pubclass=='pubdes6',
+                                                                          'pubbg7': pubclass=='pubdes7',
+                                                                          'pubbg8': pubclass=='pubdes8',
+                                                                          'pubbg9': pubclass=='pubdes9',
+                                                                          'pubbg10': pubclass=='pubdes10',
+                                                                          'pubbg11': pubclass=='pubdes11',
+                                                                          'pubbg12': pubclass=='pubdes12',
+                                                                          'pubbg13': pubclass=='pubdes13',
+                                                                          'pubbg14': pubclass=='pubdes14',
+                                                                          'pubbg15': pubclass=='pubdes15',
+                                                                          'pubbg16': pubclass=='pubdes16'
+                                                                          }"
+         *ngIf="publicationBean.isShared">
 
-      <article class="publication shared-publication">
+      <article [ngClass]="{'publication shared-publication':!pubbg,'publicationwithbg shared-publicationwithbg':pubbg}">
         <div [ngClass]="{'content' : true, 'arabic-text': arabicText}">
           <h4 *ngIf="publicationBean.publTitle != 'null'" [routerLink]="['/main/post',publicationBean._id]">
             {{publicationBean.publTitle}} </h4>
@@ -202,14 +206,60 @@
                   && publicationBean.publText !=='undefined'
                   && publicationBean.publText.length > 0">
                 <!--[innerHTML]="linkView.transformATextHaveALink(publicationBean.publText)">-->
-                <span [innerHTML]="firstPubText" style="padding-left:7px"></span>
+                <span [innerHTML]="firstPubText" style="padding-left:7px" [ngClass]="{ 'pubdes1': pubclass=='pubdes1',
+                                                                          'pubdes2': pubclass=='pubdes2',
+                                                                          'pubdes3': pubclass=='pubdes3',
+                                                                          'pubdes4': pubclass=='pubdes4',
+                                                                          'pubdes5': pubclass=='pubdes5',
+                                                                          'pubdes6': pubclass=='pubdes6',
+                                                                          'pubdes7': pubclass=='pubdes7',
+                                                                          'pubdes8': pubclass=='pubdes8',
+                                                                          'pubdes9': pubclass=='pubdes9',
+                                                                          'pubdes10': pubclass=='pubdes10',
+                                                                          'pubdes11': pubclass=='pubdes11',
+                                                                          'pubdes12': pubclass=='pubdes12',
+                                                                          'pubdes13': pubclass=='pubdes13',
+                                                                          'pubdes14': pubclass=='pubdes14',
+                                                                          'pubdes15': pubclass=='pubdes15',
+                                                                          'pubdes16': pubclass=='pubdes16'
+                                                                          }"></span>
                 <a *ngIf="longPubText && !longPubTextShow"
                     (click)="longPubTextShow=true"
                     style="margin-top: 0; display:inline">
                     {{"publication_open_last_part" | translate }}</a>
-                <span *ngIf="longPubText && longPubTextShow" [innerHTML]="lastPubText">
+                <span *ngIf="longPubText && longPubTextShow" [innerHTML]="lastPubText" [ngClass]="{                                           'pubdes1': pubclass=='pubdes1',
+                                                                          'pubdes2': pubclass=='pubdes2',
+                                                                          'pubdes3': pubclass=='pubdes3',
+                                                                          'pubdes4': pubclass=='pubdes4',
+                                                                          'pubdes5': pubclass=='pubdes5',
+                                                                          'pubdes6': pubclass=='pubdes6',
+                                                                          'pubdes7': pubclass=='pubdes7',
+                                                                          'pubdes8': pubclass=='pubdes8',
+                                                                          'pubdes9': pubclass=='pubdes9',
+                                                                          'pubdes10': pubclass=='pubdes10',
+                                                                          'pubdes11': pubclass=='pubdes11',
+                                                                          'pubdes12': pubclass=='pubdes12',
+                                                                          'pubdes13': pubclass=='pubdes13',
+                                                                          'pubdes14': pubclass=='pubdes14',
+                                                                          'pubdes15': pubclass=='pubdes15',
+                                                                          'pubdes16': pubclass=='pubdes16'
+                                                                          }">
                 </span>
             </span>
+          <div class="link-preview" *ngIf="link.isSet">
+            <div class="noPadding" *ngIf="link.image">
+              <a href="{{link.url}}" target="_blank" style="width:100%">
+                <img class="img-preview" [src]="link.image" (click)="preventLink($event, link.isGif)"/>
+              </a>
+            </div>
+            <div class="descriptions" *ngIf="!link.isGif">
+              <a href="{{link.url}}" target="_blank">
+                <h4>{{link.title}}</h4>
+              </a>
+              <p>{{link.description}}</p>
+              <a href="{{link.url}}" target="_blank" class="subLink">{{link.url}}</a>
+            </div>
+          </div>
           <img class="myImg" *ngIf="publicationBean.publPictureLink" src="{{imageBaseUrl + publicationBean.publPictureLink}}">
 
           <!-- The Modal -->
@@ -347,25 +397,22 @@
 
     <div class="social-staff">
       <div class="like-dislike">
-        <div class="like-holder" (click)="addOrRemoveLike()" [class.active]="publicationBean.isLiked">
-          <button class="like">
+        <div class="like-holder">
             <div class="hint-social">
               {{ 'publication_like' | translate }}
             </div>
-            <img class="social-emoji social-emoji-like"
-                 src="assets/images/new/publication/like1-full.png"
-                 *ngIf="publicationBean.isLiked">
-            <img class="social-emoji desaturated social-emoji-like"
-                 src="assets/images/new/publication/like1-outline.png" style="margin-bottom:1px"
-                 *ngIf="!publicationBean.isLiked"></button>
+            <like-reaction [checked]="publicationBean.isLiked"
+                            (click)="addOrRemoveLike()"
+                            style="display:block; width: 28px; height: 28px;"></like-reaction>
         </div>
 
-        <div class="dislike-holder" style="padding-left: 10px; padding-bottom: 4px;">
+        <div class="dislike-holder" style="padding-left: 10px;">
             <div class="hint-social">
                {{ 'publication_perfect' | translate }}
             </div>
             <love-reaction [checked]="publicationBean.isDisliked"
-                            (click)="addOrRemoveDislike()"></love-reaction>
+                            (click)="addOrRemoveDislike()"
+                            style="display:block; width: 28px; height: 28px;"></love-reaction>
         </div>
         <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
             <button class="social-button">
@@ -421,13 +468,8 @@
     </div>
     <div [class.comment-with-picture]="uploadedPictureComment">
       <div *ngIf="commentsDisplayed" class="comment-holder form-comment">
-        <div class="user-img for-comment" *ngIf="user.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + user.profilePictureMin + ')'}"
-             ></div>
-
-        <div class="user-img for-comment" *ngIf="!user.profilePictureMin"
-             [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}"
-             ></div>
+        <img class="user-img for-comment"
+             src="{{user | AvailablePicture}}">
 
         <form (ngSubmit)="publishComment()" [formGroup]="formComment" #f="ngForm">
           <textarea placeholder="Votre commentaire ..."

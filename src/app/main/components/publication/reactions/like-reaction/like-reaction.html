@@ -1,0 +1,7 @@
+<div class="like-center">
+  <img *ngIf="!checked" src="assets/images/new/publication/like1-outline.png" class="thumb">
+  <img *ngIf="checked" class="thumb thumb-animation d-none" src="assets/images/new/publication/like1-full.png">
+  <div class="circle-wrap">
+    <div [ngClass]="{'circle-lg': true, 'circle-lg-animation': checked}"></div>
+  </div>
+</div>
