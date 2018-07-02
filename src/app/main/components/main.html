@@ -17,7 +17,10 @@
       <div class="recherche-results-holder recherche-results-holder-1" style="display:none;" *ngIf="listSearchUsers">
         <div class="recherche-results" *ngIf="!showRecentSearch">
           <article *ngFor="let result of listSearchUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
-            <img src="{{result | AvailablePicture}}" class="user-img">
+            <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
+            </div>
+            <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
+            </div>
             <div class="">
               {{result.firstName}} {{result.lastName}}
             </div>
@@ -25,8 +28,9 @@
         </div>
         <div class="recherche-results" *ngIf="showRecentSearch">
           <article *ngFor="let result of RecentSearchList" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
+            <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
 
-            <img src="{{result | AvailablePicture}}" class="user-img">
+            <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}"></div>
 
             <div class="">
               {{result.firstName}} {{result.lastName}}
@@ -78,9 +82,8 @@
               <span *ngFor="let notif of listNotif">
 
                 <article [class.seen-notification]="notif.isSeen === 'false'" *ngIf="notif.type !='subscribe'" (click)="goTo('post',notif.publId,notif._id)">
-                  <img class="user-img for-notif"
-                  *ngIf="notif.profiles && notif.profiles.length > 0"
-                  src="{{notif.profiles[notif.profiles.length-1] | AvailablePicture}}">
+                  <div class="user-img for-notif" *ngIf="notif.profiles && notif.profiles.length > 0&&notif.profiles[notif.profiles.length-1].profilePictureMin" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePictureMin + ')'}">
+                    </div>
 
 
                   <div class="notif-content">

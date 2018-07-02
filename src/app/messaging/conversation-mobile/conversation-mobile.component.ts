@@ -56,7 +56,7 @@ export class ConversationMobileComponent implements OnInit{
     // });
     console.log("iniiiiiiiiiiiiit");
     this.listenForMessages(this.userId);
-    this.selectedUser =this.emitterService.user;
+    this.selectedUser =this.emitterService.getSelectedUser();
     this.emitterService.conversationEmitter.subscribe((data) => {
       if(data==undefined)
       {

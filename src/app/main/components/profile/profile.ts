@@ -66,9 +66,6 @@ export class Profile {
   loadMore =true;
 
 
-  descriptionMaxLength:number = 360;
-
-
   constructor(public translate:TranslateService,
               private linkView:LinkView,
               private linkPreview:LinkPreview,
@@ -80,6 +77,8 @@ export class Profile {
               private changeDetector:ChangeDetectorRef) {
 
     this.loginService.redirect();
+
+
     this.lastPostId = "";
     this.publicationBeanList = [];
 
@@ -549,7 +548,7 @@ reportPub(userDisplayed:User) {
           localStorage.setItem('user', JSON.stringify(response.profile));
           this.loginService.actualize();
           this.changePhotoCancel();
-
+        
             this.publicationBeanList= this.publicationBeanList.map((pub:PublicationBean)=>{
             return {
               ...pub,

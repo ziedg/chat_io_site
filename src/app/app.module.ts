@@ -104,7 +104,7 @@ import { LoveReaction} from './main/components/publication/reactions/love-reacti
         },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
         {provide: APP_BASE_HREF, useValue: '/'},
-        AngularFireDatabase,
+        AngularFireDatabase
     ],
 
 })
