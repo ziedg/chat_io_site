@@ -667,11 +667,11 @@ export class Publication {
     }
     else if (diffDate.day && diffDate.day == 1) {
       this.fixedPublishDate =this.translateCode("prefix_date_yesterday");
-      this.isFixedPublishDate = true;
+      //this.isFixedPublishDate = true;
     }
     else if (diffDate.day > 0) {
       this.fixedPublishDate = diffDate.day + this.translateCode("prefix_date_days");;
-      this.isFixedPublishDate = true;
+      //this.isFixedPublishDate = true;
     }
     else if ((diffDate.hour) && (diffDate.hour == 1)) {
       this.fixedPublishDate = this.translateCode("prefix_date_one_hour");

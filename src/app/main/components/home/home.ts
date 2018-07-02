@@ -1074,8 +1074,9 @@ console.log("analyyyze");
     language = language.toLowerCase();
     // jQuery(".dropdown-menu-translate").hide();
     localStorage.setItem('userLang', language);
+    this.translate.use(language);
     this.translate.setDefaultLang(language);
-    location.reload();
+    //location.reload();
     //console.log(localStorage.getItem('userLang')) ;
   }
 
