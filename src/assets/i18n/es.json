@@ -193,5 +193,6 @@
   "errLastName":"el apellido es requerido",
   "errFistName":"el primer nombre es requerido",
   "LastName_too_long":"apellido demasiado largo",
-  "FirstName_too_long":"primer nombre demasiado largo"
+  "FirstName_too_long":"primer nombre demasiado largo",
+  "popular":"Popular"
 }
