@@ -4725,6 +4725,16 @@ input.loginInput {
   font-size: 14px;
   padding-left: 15px;
   text-transform: capitalize;
+  
+}
+.exclude input{
+  height: 100%;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  width: 60%;
+  font-size: 14px;
+  padding-left: 15px;
+  text-transform: none;
 }
 
 .alert-email {
@@ -4808,6 +4818,7 @@ input.loginInput {
 @media (max-width: 992px) {
   .input-param input {
     width: 100%;
+    
   }
 
   .label-param {
