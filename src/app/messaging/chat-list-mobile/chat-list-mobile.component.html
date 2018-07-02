@@ -19,7 +19,7 @@
 	</div>
 </div>
 <div>
-		<p class="messenger-section" style="padding-left:8px">suggestions</p>
+		<p class="messenger-section">suggestions</p>
 		<div class="fb-suggestions-container" style="padding-top:6px">
 		<div *ngFor="let s of suggestions">
 				<app-suggestions-mobile [user]="s" (click)="loadUser(s)"></app-suggestions-mobile>
