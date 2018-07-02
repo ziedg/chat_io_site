@@ -5,9 +5,8 @@
 				<i  class="fa fa-chevron-left"></i>
 			</a>
 			<div *ngIf="selectedUser !== null">
-				<!--Please add the necessary styling and add the profile picture
-						<img [src]="selectedUser.profilePicture" width="50" height="50" class="img-circle" alt="">
-					 -->
+				<!--Please add the necessary styling and add the profile picture-->
+					<img [src]="selectedUser.profilePicture" width="50" height="50" class="img-circle" alt="">
 					<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
 			</div>
 		</div>
