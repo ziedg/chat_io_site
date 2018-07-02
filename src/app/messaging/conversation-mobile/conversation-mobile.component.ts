@@ -54,7 +54,8 @@ export class ConversationMobileComponent implements OnInit{
     // this.emitterService.userEmitter.subscribe((selectedUser: User) => {
     //   this.selectedUser = selectedUser;
     // });
-    
+    console.log("iniiiiiiiiiiiiit");
+    this.listenForMessages(this.userId);
     this.selectedUser =this.emitterService.user;
     this.emitterService.conversationEmitter.subscribe((data) => {
       if(data==undefined)
@@ -110,6 +111,7 @@ export class ConversationMobileComponent implements OnInit{
   }
   
   listenForMessages(userId: string): void {
+    console.log("listeninggggggggg");
     this.userId = userId;
     this.s = this.db.object('notifications/'+this.userId+'/messaging');
       console.log('notifications/'+this.userId+'/messaging');
