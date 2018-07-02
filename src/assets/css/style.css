@@ -2440,6 +2440,13 @@ textarea:focus {
   display: -ms-flexbox;
   display: -webkit-flex;
 }
+.messenger-section{
+  padding : 3px;
+  margin-bottom: 2px;
+  margin-left: 10px;
+  color: #777;
+  
+}
 
 .fb-suggestions-container {
   display: flex;
