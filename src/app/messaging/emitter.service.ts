@@ -7,10 +7,11 @@ export class EmitterService {
 userEmitter=new EventEmitter<User>();
 conversationEmitter =new EventEmitter<any>();
 
-public user: User; 
+public selectedUser: User; 
 constructor() { }
 
   emitUser(user){
+    this.selectedUser=user
     this.userEmitter.emit(user);
     }
     
@@ -18,5 +19,8 @@ constructor() { }
       this.conversationEmitter.emit(conversation);
       }
 
+      getSelectedUser(){
+        return this.selectedUser;
+      }
 }
 

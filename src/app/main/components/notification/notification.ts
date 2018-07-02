@@ -81,7 +81,9 @@ export class Notification implements OnInit {
     if(this.showNoNotif || this.noMoreNotif){
       return ;
     }
-    this.getNotifications();
+    if(this.lastNotifId.length>0){
+      this.getNotifications();
+    }
   }
 
 
