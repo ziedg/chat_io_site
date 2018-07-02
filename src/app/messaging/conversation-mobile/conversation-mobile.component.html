@@ -5,16 +5,14 @@
 				<i  class="fa fa-chevron-left"></i>
 			</a>
 			<div *ngIf="selectedUser !== null">
-				<!--Please add the necessary styling and add the profile picture-->
-					<img [src]="selectedUser.profilePicture" width="50" height="50" class="img-circle" alt="">
-					<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
+				<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
 			</div>
 		</div>
 	</div>
 	<div class="message-wrapper">
 		<div class="message-container">
 			<ul class="message-thread" *ngIf="messageLoading">
-				<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)">
+				<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)">
 					<img *ngIf="alignMessage(message.toUserId) == false && selectedUser !== null" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" />
 					<p class="messageContent">
 						{{message.message}}

@@ -133,4 +133,18 @@ export class ConversationMobileComponent implements OnInit{
   alignMessage(userId: string): boolean {
     return this.userId === userId ? false : true;
   }
+
+  lastMessage(message : any): boolean{
+    let i = this.messages.indexOf(message);
+    if(this.messages[i+1] !== null && this.messages[i+1] !== undefined){
+      if(this.messages[i+1].fromUserId == message.fromUserId){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+    
+  }
 }
