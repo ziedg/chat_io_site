@@ -16,19 +16,17 @@
      #searchResults2>
   <div class="recherche-results recherche-results-2">
 
-    <div *ngIf="listTagSearchUsers && !showRecentSearch">
-      <article *ngFor="let result of listTagSearchUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
-        <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}">
-        </div>
-        <div class="user-img" *ngIf="!result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePicture + ')'}">
-        </div>
+    <div *ngIf="listSearchUsers && !showRecentSearch">
+      <article *ngFor="let result of listSearchUsers" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture,result.profilePictureMin)">
+        <img class="user-img"
+              src="{{result | AvailablePicture}}">
         <div class="">
           {{result.firstName}} {{result.lastName}}
         </div>
       </article>
     </div>
 
-    <div *ngIf="listTagSearchUsers && showRecentSearch">
+    <div *ngIf="listSearchUsers && showRecentSearch">
       <article *ngFor="let result of RecentSearchList" (click)="saveRecentRech(result._id,result.firstName,result.lastName,result.profilePicture)">
         <div class="user-img" *ngIf="result.profilePictureMin" [ngStyle]="{'background-image': 'url(' + result.profilePictureMin + ')'}"></div>
 
