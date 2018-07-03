@@ -317,7 +317,7 @@
                   {{ 'Like' | translate }}
               </button>
               <button id="nulle" class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fb001e">
-                  {{ 'Perfect' | translate }}
+                  {{ 'Love' | translate }}
               </button>
               <button class="interactions-tablinks" style="float:right" (click)="closeModalInteractions()">
                   &#10006;
@@ -408,7 +408,7 @@
 
         <div class="dislike-holder" style="padding-left: 10px;">
             <div class="hint-social">
-               {{ 'publication_perfect' | translate }}
+               {{ 'publication_love' | translate }}
             </div>
             <love-reaction [checked]="publicationBean.isDisliked"
                             (click)="addOrRemoveDislike()"
