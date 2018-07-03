@@ -22,6 +22,8 @@ import { DateService } from '../../services/dateService';
 
 export class Notification implements OnInit {
     lastNotifId="";
+    index=12;
+    isLock: boolean = false;
     showButtonMoreNotif:Boolean=false;
     showNoNotif:Boolean=false;
     listNotif : Array <NotificationBean> = [];
@@ -35,7 +37,7 @@ export class Notification implements OnInit {
                 private loginService:LoginService,
                 private changeDetector: ChangeDetectorRef) {
         this.listNotif=[];
-
+        this.lastNotifId="";
       this.loginService.redirect();
       this.user = this.loginService.getUser();
 
@@ -43,15 +45,16 @@ export class Notification implements OnInit {
     }
 
   loadFirstNotifactions() {
-    this.lastNotifId = "";
     this.listNotif = [];
     this.getNotifications();
   }
 
 
   getNotifications() {
+    this.isLock=true;
+    var indexx =this.index.toString();
     this.http.get(
-      environment.SERVER_URL + pathUtils.GET_NOTIFICATIONS + this.lastNotifId,
+      environment.SERVER_URL + pathUtils.GET_NOTIFICATIONS.replace("INDEX",indexx).replace("LAST",this.lastNotifId),
       AppSettings.OPTIONS)
       .map((res:Response) => res.json())
       .subscribe(
@@ -63,10 +66,13 @@ export class Notification implements OnInit {
             this.listNotif.push(response[i]);
             this.lastNotifId = response[i]._id;
           }
-          this.showButtonMoreNotif = response.length == 5;
+          this.index=5;
+          this.isLock=false;
+          
         } else {
           this.showNoNotif = true;
-          this.showButtonMoreNotif = false;
+
+          this.isLock=false;
         }
       },
         err => {
@@ -78,7 +84,7 @@ export class Notification implements OnInit {
   }
 
   onScrollDown(){
-    if(this.showNoNotif || this.noMoreNotif){
+    if(this.showNoNotif || this.noMoreNotif || this.isLock){
       return ;
     }
     this.getNotifications();

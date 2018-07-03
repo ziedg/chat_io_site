@@ -12,7 +12,7 @@
 	<div class="message-wrapper">
 		<div class="message-container">
 			<ul class="message-thread" *ngIf="messageLoading">
-				<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)">
+				<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)">
 					<img *ngIf="alignMessage(message.toUserId) == false && selectedUser !== null" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" />
 					<p class="messageContent">
 						{{message.message}}

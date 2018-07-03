@@ -233,9 +233,9 @@ export class Publication {
       // Let's refresh the list.
       this.changeDetector.markForCheck();
     }, 1000 * 60); // 1 minute
-  
 
-  
+
+
 
 
     // Get the modal
@@ -261,7 +261,9 @@ export class Publication {
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 
-    this.pubclass=this.publicationBean.publClass;
+    if(this.publicationBean.publClass){
+      this.pubclass=this.publicationBean.publClass;
+      this.pubbg=true;}
 
     var pub_txt
     if(this.publicationBean.isShared) {
@@ -667,11 +669,11 @@ export class Publication {
     }
     else if (diffDate.day && diffDate.day == 1) {
       this.fixedPublishDate =this.translateCode("prefix_date_yesterday");
-      this.isFixedPublishDate = true;
+      //this.isFixedPublishDate = true;
     }
     else if (diffDate.day > 0) {
       this.fixedPublishDate = diffDate.day + this.translateCode("prefix_date_days");;
-      this.isFixedPublishDate = true;
+      //this.isFixedPublishDate = true;
     }
     else if ((diffDate.hour) && (diffDate.hour == 1)) {
       this.fixedPublishDate = this.translateCode("prefix_date_one_hour");
@@ -843,8 +845,8 @@ export class Publication {
                     this.InteractionsDislikes = response.message.dislikes.slice();
                     console.log(this.InteractionsLikes);
                     console.log(this.InteractionsDislikes);
-                    
-                    
+
+
                 },
                 err => {
                 },

@@ -42,6 +42,7 @@ declare const gapi: any;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Main {
+  index="5";
   showSearchMobile: boolean;
   autocomplete = false;
   notification = false;
@@ -311,7 +312,7 @@ export class Main {
   getNotifications() {
     this.http
       .get(
-        environment.SERVER_URL + pathUtils.GET_NOTIFICATIONS + this.lastNotifId,
+        environment.SERVER_URL + pathUtils.GET_NOTIFICATIONS.replace("INDEX",this.index).replace("LAST",this.lastNotifId),
         AppSettings.OPTIONS
       )
       .map((res: Response) => res.json())
@@ -325,8 +326,9 @@ export class Main {
 
             for (var i = 0; i < response.length; i++) {
 
-              if(response[i]._id)
+              if(response[i]._id && response[i].type!='message')
                   arr.push(response[i]);
+             
 
               this.lastNotifId = response[i]._id;
 

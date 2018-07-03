@@ -14,7 +14,7 @@
     overflow: hidden;
     z-index: 10000;
     background: #fafafa;
-    height:50px;
+    height:55px;
     border-bottom: 1px solid #efefef;
 }
 .header-mobile div>img{
@@ -29,7 +29,7 @@
 .homebtn i{
     color:black;
     position: absolute;
-    top:18px;
+    top:19px;
     left: 10px;
     box-shadow: none;
     border: none;
@@ -55,7 +55,7 @@
 	font-size:10pt;
 }
 .message-wrapper{
-    margin-top:40px;
+    margin-top:37px;
     background-color: white;
     position: relative;
     overflow-y: scroll;
@@ -81,20 +81,20 @@
     padding-top: 17px !important;
 }
 .message-thread li{
-    margin: 10px 0;
+    margin: 2px 0;
     font-weight: normal;
     position: relative;
     clear: both;
 }
-.message-thread li:last-child{
-    margin-bottom: 40px;
+.regular-message img{
+    display:none;
 }
 .message-thread img{
     font-weight: normal;
     position: absolute;
-    bottom:0;
+    bottom:-10px;
 }
-.message-thread>li:not(.self-message):not(.mydate):after { 
+.message-thread>li:not(.self-message):not(.mydate):not(.regular-message):after{ 
     content: '';
     position: absolute;
     left: 40px;
@@ -122,7 +122,7 @@
 	float: right !important;
     border-radius: 15px;
     font-weight: normal;
-    margin-bottom:5px;
+    margin-bottom:2px;
 }
 
 

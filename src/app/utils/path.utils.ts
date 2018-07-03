@@ -8,7 +8,7 @@ export const RESET_PASSWORD:string = 'resetPwd';
 
 export const MARK_VIEW:string = 'markView';
 
-export const GET_NOTIFICATIONS:string = 'getNotifications?lastNotificationId=';
+export const GET_NOTIFICATIONS:string = 'getNotifications?lastNotificationId=LAST&index=INDEX';
 
 export const CHECK_NEW_NOTIFICATIONS:string = 'checkNewNotifications';
 
