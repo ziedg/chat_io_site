@@ -398,9 +398,7 @@ export class Home {
 
 
   /*----------------------------------*/
-loadProfile(){
-  this.loadingProfile = true;
-}
+
   checkArabic(text) {
     this.arabicText = this.arabicRegex.test(text[0]);
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -25,7 +25,7 @@ class MessageValidation {
   templateUrl: './conversation.component.html',
   styleUrls: ['./conversation.component.css']
 })
-export class ConversationComponent  {
+export class ConversationComponent implements OnInit {
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
   public selectedUser: User = null;
@@ -46,7 +46,9 @@ export class ConversationComponent  {
 		});;
   }
 
-
+ngOnInit(){
+  //this.listenForMessages(this.user._id);
+}
   ngOnChanges(changes: any) {
     /* Fetching selected users information from other component. */
     this.emitterService.userEmitter
@@ -96,6 +98,7 @@ sendMessageBtn() {
 }
 
 listenForMessages(userId: string): void {
+  console.log("deeeeesktop listen");
   this.userId = userId;
   this.s = this.db.object('notifications/'+this.userId+'/messaging');
     console.log('notifications/'+this.userId+'/messaging');

@@ -9,8 +9,8 @@
       <div class="home-sidebar-container" #homeSidebarLeft>
         <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
                         [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}"></span>
-          <span *ngIf="!loadingProfile"><a style="color:black" (click)="loadProfile()"[routerLink]="['/main/profile',user._id]">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span>
-          <span *ngIf="loadingProfile" class="loadingProfile"><a style="color:black" > Loading… </a></span>
+          <span ><a style="color:black" [routerLink]="['/main/profile',user._id]">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span>
+          
           
         </div>
         <div><span><img class="home-sidebar-icon" src="assets/images/new/home-grey.png"></span>

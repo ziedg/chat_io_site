@@ -44,9 +44,7 @@ export class TopBlagueursAndDecov {
     this.user = loginService.user;
     this.loadPopularProfiles();
   }
-  loadProfile(index){
-    this.loadingProfile[index] = true;
-  }
+  
 
   loadMoreProfiles() {
 
