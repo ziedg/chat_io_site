@@ -326,7 +326,7 @@ export class Main {
 
             for (var i = 0; i < response.length; i++) {
 
-              if(response[i]._id)
+              if(response[i]._id && response[i].type!='message')
                   arr.push(response[i]);
 
               this.lastNotifId = response[i]._id;
