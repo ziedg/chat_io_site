@@ -163,11 +163,10 @@ onFocus(){
 }
 
 onChange(newValue: string) {
-  console.log(newValue)
   this.listSearchUsers = [];
   this.enableAutocomplete();
   this.changeDetector.markForCheck();
-  if (newValue.length > 1) {
+  if (newValue.length >= 1) {
       let searchInHistory=this.filterChatListUsersByName(newValue);
         if (searchInHistory && searchInHistory.length>0){
         this.listSearchUsers=searchInHistory
