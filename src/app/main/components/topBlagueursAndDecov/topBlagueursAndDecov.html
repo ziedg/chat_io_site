@@ -10,8 +10,11 @@
              [routerLink]="['/main/profile',profile._id]">
         <div class="user-name">
           <header>
-            <a [routerLink]="['/main/profile',profile._id]">
+            <a *ngIf="!loadingProfile[i]" (click)="loadProfile(i)" [routerLink]="['/main/profile',profile._id]">
               {{profile.firstName}} {{profile.lastName}}
+            </a>
+            <a *ngIf="loadingProfile[i]">
+                Loading...
             </a>
           </header>
           <div class="subscribe">

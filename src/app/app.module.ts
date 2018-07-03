@@ -48,10 +48,12 @@ import { FakeComponent } from './shared/fake.component';
 import { httpFactory } from './utils/factories/http.factory';
 import { GifSlider } from './main/components/gif-slider/gif-slider';
 import {AvailablePicture} from "./main/components/profile/pipes/AvailablePicture.pipe";
+import { ProfileService } from '../app/main/components/profile/profile.service';
 
 
 import { LoveReaction} from './main/components/publication/reactions/love-reaction/love-reaction'
 import { LikeReaction} from './main/components/publication/reactions/like-reaction/like-reaction'
+import { PublicationService } from './main/components/profile/publication.service';
 
 /** Factories */
 @NgModule({
@@ -98,6 +100,8 @@ import { LikeReaction} from './main/components/publication/reactions/like-reacti
         EmitterService,
         ChatService,
         ResetPasswordService,
+        ProfileService,
+        PublicationService,
         {
           provide: Http, useFactory: httpFactory,
           deps: [XHRBackend, RequestOptions, Injector],

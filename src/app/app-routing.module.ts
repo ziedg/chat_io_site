@@ -13,6 +13,8 @@ import { FakeComponent } from './shared/fake.component';
 import { MessagingComponent } from './messaging/messaging.component';
 import {SearchMobile} from "./main/components/search-mobile/search-mobile.component";
 import {ConversationMobileComponent} from './messaging/conversation-mobile/conversation-mobile.component';
+import { ProfileResolver } from './main/components/profile/profile.resolver';
+import { PublicationResolver } from './main/components/profile/publication.resolver';
 
 export const routes: Routes = [
     {path: 'redirect', component: FakeComponent},
@@ -30,7 +32,7 @@ export const routes: Routes = [
         children: [
             {path: '', redirectTo: 'home', pathMatch: 'full'},
             {path: 'home', component: Home },
-            {path: 'profile/:id', component: Profile},
+            {path: 'profile/:id', component: Profile, resolve: { publication: PublicationResolver, profile: ProfileResolver  }},
             {
                 path: 'parameters', loadChildren: './main/parameters/parameters.module#ProfileParametersModule'
             },
@@ -64,6 +66,10 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    ProfileResolver,
+    PublicationResolver
+  ]
 })
 export class AppRoutingModule {}

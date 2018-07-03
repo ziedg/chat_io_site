@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/map';
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,9 @@ import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
 import { LinkPreview } from '../../services/linkPreview';
 import { LinkView } from '../../services/linkView';
+
+
+
 
 declare var $:any;
 declare var jQuery:any;
@@ -31,7 +34,9 @@ declare const gapi:any;
 })
 
 
-export class Profile {
+export class Profile implements OnInit{
+  data: any ="Initializeeed";
+
   private isNotFound:boolean = false;
 
   uploadedProfilePicture:File;
@@ -88,8 +93,33 @@ export class Profile {
       this.changeDetector.markForCheck();
       if (this.route.snapshot.params['id'] != this.lastRouterProfileId) {
         this.lastRouterProfileId = this.route.snapshot.params['id'];
-        this.getProfile(this.route.snapshot.params['id']);
-        this.publicationBeanList = [];
+        // this.getProfile(this.route.snapshot.params['id']);
+        
+         this.data = this.route.snapshot.data;
+        
+        let profileResponse = this.data.profile;
+        let publicationResponse = this.data.publication;    
+          if (profileResponse.status == "0") {
+
+            this.userDisplayed = profileResponse.user;
+            this.title.setTitle(this.userDisplayed.firstName + " " + this.userDisplayed.lastName);
+            
+            //this.loadFirstPosts();
+            this.isLock = true;
+            this.showLoading = true;
+            console.log("first pub");
+            this.publicationBeanList = [];
+            this.putIntoList(publicationResponse);
+            if(publicationResponse.length === 0){this.loadMore=false}
+            this.changeDetector.markForCheck();
+            if(publicationResponse.length === 0){this.loadMore=false}
+
+
+          } else {
+            this.isNotFound = true;
+          }
+
+      
 
       }
       window.scrollTo(0, 0);
@@ -97,7 +127,10 @@ export class Profile {
 
   }
 
+  
+// Not Used
   getProfile(userId:string) {
+    
     if (this.user) {
       this.http.get(
         environment.SERVER_URL + pathUtils.GET_PROFILE + userId,
@@ -105,7 +138,7 @@ export class Profile {
         .map((res:Response) => res.json())
         .subscribe(
           response => {
-
+            
           if (response.status == "0") {
 
             this.userDisplayed = response.user;
@@ -326,7 +359,7 @@ reportPub(userDisplayed:User) {
 
     }
   }
-
+// Not Used
   loadFirstPosts() {
     this.isLock = true;
     this.showLoading = true;
@@ -420,6 +453,7 @@ reportPub(userDisplayed:User) {
   }
 
   ngOnInit() {
+    
     jQuery(document).click(function (e) {
       if (jQuery(e.target).closest(".white-box-edit").length === 0 && jQuery(e.target).closest(".profile-edit").length === 0) {
         jQuery(".modal-edit-profile").fadeOut(300);

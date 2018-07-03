@@ -5111,6 +5111,9 @@ input.loginInput {
   border-top-color: white;
   animation: spin 750ms infinite linear;
 }
+.loadingProfile {
+  
+}
 
 /***Loading design */
 
