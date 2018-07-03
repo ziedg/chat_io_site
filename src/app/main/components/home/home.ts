@@ -159,7 +159,7 @@ export class Home {
   ngOnInit() {
     jQuery(".navigation-bottom").removeClass('hidden-xs');
     window.onscroll = () => {
-      let k = this.selectLanguageRef.nativeElement.offsetTop;
+     // let k = this.selectLanguageRef.nativeElement.offsetTop;
       /*
       console.log("---------------");
       console.log(k);
