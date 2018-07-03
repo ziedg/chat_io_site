@@ -233,9 +233,9 @@ export class Publication {
       // Let's refresh the list.
       this.changeDetector.markForCheck();
     }, 1000 * 60); // 1 minute
-  
 
-  
+
+
 
 
     // Get the modal
@@ -261,7 +261,9 @@ export class Publication {
 
     const arabic:RegExp = /[\u0600-\u06FF]/;
 
-    this.pubclass=this.publicationBean.publClass;
+    if(this.publicationBean.publClass){
+      this.pubclass=this.publicationBean.publClass;
+      this.pubbg=true;}
 
     var pub_txt
     if(this.publicationBean.isShared) {
@@ -843,8 +845,8 @@ export class Publication {
                     this.InteractionsDislikes = response.message.dislikes.slice();
                     console.log(this.InteractionsLikes);
                     console.log(this.InteractionsDislikes);
-                    
-                    
+
+
                 },
                 err => {
                 },
