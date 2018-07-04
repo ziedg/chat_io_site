@@ -236,6 +236,9 @@
 
 </div>
 
+<!--
+<mobile-navigation></mobile-navigation>
+-->
 
 <div class="hidden-lg hidden-md hidden-sm navigation-bottom">
   <div class="home-icon outline-icon-container"
@@ -243,7 +246,7 @@
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="home-icon"
-         src="assets/images/new/nav-icons/{{icons.home.icon}}-full.png">
+         src="assets/images/new/nav-icons/home-icon-full.png">
     <span class="outline-icon-text">{{"home" | translate}}</span>
   </div>
   <div class="search-icon outline-icon-container"
@@ -259,28 +262,28 @@
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="messaging-icon"
-         src="assets/images/new/nav-icons/{{icons.messaging.icon}}-full.png">
+         src="assets/images/new/nav-icons/messaging-icon-full.png">
     <span class="outline-icon-text">{{"Discussion" | translate}}</span>
   </div>
   <div class="notifications-icon outline-icon-container"
        [routerLink]="['/main', 'notification']"
+       style="position:relative"
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="notifications-icon"
-         src="assets/images/new/nav-icons/{{icons.notifications.icon}}-full.png">
+         src="assets/images/new/nav-icons/notifications-icon-full.png">
     <span class="outline-icon-text">{{"notifications" | translate}}</span>
+    <div class="cercle-notice" style="top:0; right: 33px" *ngIf="nbNewNotifications">{{nbNewNotifications}}</div>
   </div>
   <div class="profile-icon outline-icon-container"
-        *ngIf="user"
        [routerLink]="['/main', 'profile', user._id]"
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
          alt="user-icon"
-         src="assets/images/new/nav-icons/{{icons.profile.icon}}-full.png">
+         src="assets/images/new/nav-icons/user-icon-full.png">
     <span class="outline-icon-text">{{"profile" | translate}}</span>
   </div>
 </div>
-
 
 
 
