@@ -29,7 +29,7 @@
 }
 .toggle-icon:before {
   background-image: url('../../../../../../assets/images/new/publication/like-outline.png');
-  width:30px;
+  width:31px;
   transition-duration: .3s;
   transition-timing-function: ease-in;
 }
