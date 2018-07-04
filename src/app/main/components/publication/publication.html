@@ -313,11 +313,15 @@
       <div class="white-box-interactions">
 
           <div class="interactions-tab">
-              <button id="lol" class="interactions-tablinks" (click)="openTab('Likes')" style="color: #2aaa2a;border-bottom: 1px solid #2aaa2a">
-                  {{ 'Like' | translate }}
+              <button *ngIf="publicationBean.nbLikes != 0"
+               id="lol" class="interactions-tablinks"  style="color: #2aaa2a;border-bottom: 1px solid #2aaa2a">
+                  <img src ="assets/images/new/publication/like-active.png" (click)="openTab('Likes')" style="width:25px">
+                  <span style="padding-left: 10px;font-weight:bold">{{publicationBean.nbLikes}}</span>
               </button>
-              <button id="nulle" class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fb001e">
-                  {{ 'Love' | translate }}
+              <button *ngIf="publicationBean.nbDislikes != 0"
+               id="nulle" class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fb001e">
+                <img src ="assets/images/new/publication/heart-active.png" (click)="openTab('Likes')" style="width:25px">
+                <span style="padding-left: 10px;font-weight:bold">{{publicationBean.nbDislikes}}</span>
               </button>
               <button class="interactions-tablinks" style="float:right" (click)="closeModalInteractions()">
                   &#10006;
