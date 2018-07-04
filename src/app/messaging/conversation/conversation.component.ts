@@ -36,6 +36,7 @@ export class ConversationComponent implements OnInit {
   public messages = [];
   public messageLoading = true;
   private s: AngularFireObject<any>;
+  private msgFirstCheck: Boolean = true;  
 
   constructor(private emitterService: EmitterService,
     private router: Router,
@@ -105,7 +106,7 @@ listenForMessages(userId: string): void {
     var item = this.s.valueChanges()
     this.s.snapshotChanges().subscribe(action => {
       var notif = action.payload.val();
-      if (notif !== null) {
+      if (notif !== null && !this.msgFirstCheck) {
         this.chatService.getMessage(notif.msgId).subscribe(
           message => {
             if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
@@ -123,6 +124,8 @@ listenForMessages(userId: string): void {
           },
           err => console.log('Could send message to server, reason: ', err)
         );
+      }else{
+        this.msgFirstCheck = false;
       }
     });
   }
