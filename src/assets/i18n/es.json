@@ -195,5 +195,7 @@
   "LastName_too_long":"apellido demasiado largo",
   "FirstName_too_long":"primer nombre demasiado largo",
   "popular":"Popular",
-  "suggestions":"sugerencias"
+  "suggestions":"sugerencias",
+  "send_msg":"enviar a",
+  "you : ":"usted : "
 }
