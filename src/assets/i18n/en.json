@@ -197,5 +197,7 @@
   "popular":"Popular",
   "suggestions":"suggestions",
   "send_msg":"send",
-  "you : ":"you : "
+  "you : ":"you : ",
+  "recent_messages":"recent messages",
+  "Select_User":"Select a user to chat"
 }
