@@ -318,9 +318,9 @@
                   <img src ="assets/images/new/publication/like-active.png" (click)="openTab('Likes')" style="width:25px">
                   <span style="padding-left: 10px;font-weight:bold">{{publicationBean.nbLikes}}</span>
               </button>
-              <button *ngIf="publicationBean.nbDislikes != 0"
-               id="nulle" class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fb001e">
-                <img src ="assets/images/new/publication/heart-active.png" (click)="openTab('Likes')" style="width:25px">
+              <button *ngIf="publicationBean.nbDislikes != 0" id="nulle" class="interactions-tablinks" 
+               (click)="openTab('Dislikes')" style="color:#fb001e" [ngStyle]="publicationBean.nbLikes == 0 && {'border-bottom':'1px solid #fb001e'}">
+                <img src ="assets/images/new/publication/heart-active.png" (click)="openTab('Dislikes')" style="width:25px">
                 <span style="padding-left: 10px;font-weight:bold">{{publicationBean.nbDislikes}}</span>
               </button>
               <button class="interactions-tablinks" style="float:right" (click)="closeModalInteractions()">
@@ -330,9 +330,6 @@
 
 
             <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px" >
-                <div *ngIf="InteractionsLikes.length == 0" class="no-interactions ">
-                  No likes yet.
-                </div>
                 <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsLikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
@@ -362,10 +359,8 @@
                   </section>
             </div>
 
-            <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px">
-                <div *ngIf="InteractionsDislikes.length == 0" class="no-interactions">
-                  This post ain't got no love yet.
-                </div>
+            <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px"
+            [ngStyle]="publicationBean.nbLikes == 0 && {'display':'block'}">
                 <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
                     <div class="container-draggable"  *ngFor="let user of InteractionsDislikes">
                       <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
