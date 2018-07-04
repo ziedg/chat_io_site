@@ -29,7 +29,6 @@
 }
 .toggle-icon:before {
   background-image: url('../../../../../../assets/images/new/publication/like-outline.png');
-  width:30px;
   transition-duration: .3s;
   transition-timing-function: ease-in;
 }
