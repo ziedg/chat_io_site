@@ -55,6 +55,7 @@ import { LoveReaction} from './main/components/publication/reactions/love-reacti
 import { LikeReaction} from './main/components/publication/reactions/like-reaction/like-reaction'
 import { PublicationService } from './main/components/profile/publication.service';
 
+
 /** Factories */
 @NgModule({
     imports: [
@@ -102,6 +103,7 @@ import { PublicationService } from './main/components/profile/publication.servic
         ResetPasswordService,
         ProfileService,
         PublicationService,
+        
         {
           provide: Http, useFactory: httpFactory,
           deps: [XHRBackend, RequestOptions, Injector],

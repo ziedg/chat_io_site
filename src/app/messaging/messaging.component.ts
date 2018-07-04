@@ -20,7 +20,7 @@ user;
 
   public conversation = 'CONVERSATION';
   public selectedUserInfo = 'SELECTEDUSERINFO';
-  showOnDesktop = true;
+  public desktop:boolean = true;
   @ViewChild('chatList') chatListComponent: ChatListComponent;
   @ViewChild('conversation') conversationComponent: ConversationComponent;
   
@@ -32,6 +32,7 @@ user;
     private router:Router,
     private http: Http
   ) { 
+    this.desktop = true;
 }
   
 ngOnInit(){
@@ -39,12 +40,16 @@ ngOnInit(){
   this.user=this.loginService.getUser();
   console.log("rouuuuuuut"+this.router.url);
   /* Calling Compoenent method to Listen for Incoming Messages*/
-  this.conversationComponent.listenForMessages(this.user._id);
-  // if (this.router.url.indexOf("mobile")>0){
-  //   this.showOnDesktop = false;
-  // }else{
+  if(this.conversationComponent){
+    this.conversationComponent.listenForMessages(this.user._id);
+  }
+  
+  if (this.router.url.indexOf("mobile")>0){
+    this.desktop = false;
+  }
+  //<div *ngIf="desktop">
     
-  // } *ngIf="showOnDesktop"
+  
   
 }
 
