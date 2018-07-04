@@ -199,7 +199,7 @@ export class Publication {
 
   focused(element){
     if (window.matchMedia('(max-width: 768px)').matches) {
-      jQuery("#"+element.commentTextareaId).parent().parent().css({"position":"fixed","bottom":"34px","background-color":"white","z-index":"10000"});
+      jQuery("#"+element.commentTextareaId).parent().parent().css({"position":"fixed","bottom":"34px","background-color":"white","z-index":"10000", "left": "0"});
       jQuery("#"+element.commentTextareaId).blur(function(){
         jQuery("#"+element.commentTextareaId).parent().parent().css({"position":"unset"});
       });
@@ -278,12 +278,14 @@ export class Publication {
       //console.log("arabic text!");
     }
 
+
+    // divide long publication into 2 parts
 		var txt = this.publicationBean.publText;
 
 		const word_letters:number = 5;
 
-    const words_max:number = 70;
-    const words_marge:number = 10;
+    const words_max:number = 40;
+    const words_marge:number = 8;
 
     const letters_max:number = words_max * word_letters;
     const letters_marge:number = words_marge * word_letters;

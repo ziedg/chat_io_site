@@ -192,7 +192,8 @@
   flex-direction:column;
 }
 .pubdes1{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh); 
   padding:20px;
   color: white;
@@ -201,7 +202,8 @@
   margin-left: 6vh;
 }
 .pubdes2{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);  
   padding:20px;
   color: white;
@@ -210,7 +212,8 @@
   margin-left: 6vh;
 }
 .pubdes3{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -218,7 +221,8 @@
   margin-left: 6vh;
 }
 .pubdes4{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -226,7 +230,8 @@
   margin-left: 6vh;
 }
 .pubdes5{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -234,7 +239,8 @@
   margin-left: 6vh;
 }
 .pubdes6{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -242,7 +248,8 @@
   margin-left: 6vh;
 }
 .pubdes7{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -250,7 +257,8 @@
   margin-left: 6vh;
 }
 .pubdes8{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -258,7 +266,8 @@
   margin-left: 6vh;
 }
 .pubdes9{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -266,7 +275,8 @@
   margin-left: 6vh;
 }
 .pubdes10{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -274,7 +284,8 @@
   margin-left: 6vh;
 }
 .pubdes11{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: black;
   text-align: center;
@@ -282,7 +293,8 @@
   margin-left: 6vh;
 }
 .pubdes12{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -290,7 +302,8 @@
   margin-left: 6vh;
 }
 .pubdes13{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -298,7 +311,8 @@
   margin-left: 6vh;
 }
 .pubdes14{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -306,7 +320,8 @@
   margin-left: 6vh;
 }
 .pubdes15{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -314,7 +329,8 @@
   margin-left: 6vh;
 }
 .pubdes16{
-  font-family: "Arial Black";
+  font-family: "Arial";
+  font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
@@ -1333,6 +1349,7 @@ section.widget {
   margin: 0 0 10px 0;
   box-sizing: border-box;
   position: relative;
+  z-index: 2;
 }
 
 section.widget {
@@ -2017,7 +2034,6 @@ section.widget {
   background-color: #009900;
   font-size: 14px;
   color: white;
-  border-radius: 4px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   text-align: center;
@@ -2781,7 +2797,7 @@ facebook-friends .user .user-img {
   justify-content: space-between;
   border-top: solid 1px #ddd;
   padding-top: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   width: 100%;
   position: relative;
 }
@@ -2935,7 +2951,7 @@ facebook-friends .user .user-img {
   display: inline-flex;
   display: -webkit-box;
   display: -ms-flexbox;
-  margin: 0 2px 7px 2px;
+  margin: 0 0 7px 0;
   align-items: flex-start;
   width: 100%;
 }
@@ -3031,11 +3047,12 @@ facebook-friends .user .user-img {
   display: -webkit-flex;
   color: #999;
   justify-content: space-between;
+  width: 40px;
 }
 
 .form-more .fa {
-  margin-right: 5px;
   cursor: pointer;
+  padding: 0 5px;
 }
 
 @media (max-width: 325px) {
@@ -3071,9 +3088,7 @@ facebook-friends .user .user-img {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  padding-right: 125px;
+  padding-right: 120px;
 }
 
 .comment-holder .textarea div {
@@ -6193,6 +6208,7 @@ img[src="undefined"] {
 
 .social-emoji {
   width: 22px;
+  padding-bottom:2px;
 }
 
 .social-emoji-like {

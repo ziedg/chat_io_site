@@ -96,20 +96,26 @@
 
 
       <div class="header-segement description-holder description-holder-1">
-        <span *ngIf="!editDescriptionEnable">
-          <span *ngIf="userDisplayed.about">{{userDisplayed.about}}</span>
+        <ng-template [ngIf]="!editDescriptionEnable">
+          <span *ngIf="userDisplayed.about">{{userDisplayed.about | slice:0:descriptionMaxLength}}</span>    
           <span *ngIf="!userDisplayed.about && user._id==userDisplayed._id" (click)="editDescription()" class="hidden-sm hidden-xs">
             {{ 'profile_description_empty' | translate }}
           </span>
 
 
           <i *ngIf="user._id==userDisplayed._id" class="fa fa-pencil hidden-sm hidden-xs" aria-hidden="true" (click)="editDescription()"></i>
-        </span>
+        </ng-template>
 
         <div class="edit-decription row" *ngIf="editDescriptionEnable && user._id==userDisplayed._id">
           <div class="col-lg-9 col-md-8 col-sm-12">
             <form>
-              <textarea id="descEdit" style="display:block" (keydown.Enter)="saveDescriptionWithEnter($event)">{{userDisplayed.about}}</textarea>
+                <textarea id="descEdit"
+                          style="display:block"
+                          maxlength="360"
+                          (keydown.Enter)="saveDescriptionWithEnter($event)">
+                  {{userDisplayed.about | slice:0:descriptionMaxLength}}
+                </textarea>
+
               <button (click)="saveDescription()" style="display: inline-block;margin-top: 5px;border: 1px solid #009900;background-color: white;">
                 {{ 'profile_description_button_save' | translate }}
               </button>
@@ -145,7 +151,7 @@
   </div>
   <div class="header-segement description-holder description-holder-2">
     <span *ngIf="!editDescriptionEnable">
-      <span *ngIf="userDisplayed.about">{{userDisplayed.about}}</span>
+      <span *ngIf="userDisplayed.about">{{userDisplayed.about | slice:0:descriptionMaxLength}}}}</span>
     </span>
 
 

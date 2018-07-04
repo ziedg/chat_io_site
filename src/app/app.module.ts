@@ -54,6 +54,8 @@ import { ProfileService } from '../app/main/components/profile/profile.service';
 import { LoveReaction} from './main/components/publication/reactions/love-reaction/love-reaction'
 import { LikeReaction} from './main/components/publication/reactions/like-reaction/like-reaction'
 import { PublicationService } from './main/components/profile/publication.service';
+import { MobileNavigation } from './main/components/mobile-navigation/mobile-navigation';
+
 
 /** Factories */
 @NgModule({
@@ -83,7 +85,7 @@ import { PublicationService } from './main/components/profile/publication.servic
     // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, LikeReaction, AvailablePicture],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, LikeReaction, AvailablePicture, MobileNavigation],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,
@@ -102,6 +104,7 @@ import { PublicationService } from './main/components/profile/publication.servic
         ResetPasswordService,
         ProfileService,
         PublicationService,
+        
         {
           provide: Http, useFactory: httpFactory,
           deps: [XHRBackend, RequestOptions, Injector],
