@@ -50,7 +50,7 @@ export class Main {
   user: User = new User();
   listSearchUsers: Array<User> = [];
   listNotif: Array<NotificationBean> = [];
-  nbNewNotifications: number = -1;
+  nbNewNotifications: number = 0;
   searchValue: string;
   showRecentSearch: Boolean;
   RecentSearchList;
@@ -70,6 +70,7 @@ export class Main {
   private subscriptionJson = '';
   private isSubscribed = false;
   private registration = undefined;
+  private notifFirstCheck: Boolean = true;  
   // end Notification vars
 
 
@@ -421,7 +422,7 @@ export class Main {
       .subscribe(
         response => {
           if (response.status == 0) {
-            console.log(response)
+
             this.nbNewNotifications += response.nbNewNotifications;
           }
         },
@@ -514,8 +515,10 @@ export class Main {
       console.log(JSON.stringify(item));
       this.s.snapshotChanges().subscribe(action => {
         var notif = action.payload.val();
-        if (notif !== null){
+        if (notif !== null && !this.notifFirstCheck){
           this.nbNewNotifications++;
+        }else{
+          this.notifFirstCheck = false;
         }
       });
 
