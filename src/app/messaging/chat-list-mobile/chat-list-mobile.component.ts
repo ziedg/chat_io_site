@@ -62,7 +62,7 @@ noSearchResults: Boolean = false;
     .subscribe((users:any[])=>{
        for(let i=0;i<users.length;i++){
         if(users[i].lastMessage.fromUserId == this.userId){
-          users[i].lastMessage.message = "Vous : "+users[i].lastMessage.message;
+          users[i].lastMessage.message = "{{'you : '| translate}} "+users[i].lastMessage.message;
         }
         let dateMsg = new Date(users[i].lastMessage.date);
         let actualDate = new Date(Date.now());

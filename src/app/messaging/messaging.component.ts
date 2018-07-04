@@ -37,8 +37,6 @@ user;
   
 ngOnInit(){
   this.loginService.redirect();
-  this.user=this.loginService.getUser();
-  console.log("rouuuuuuut"+this.router.url);
   /* Calling Compoenent method to Listen for Incoming Messages*/
   if(this.conversationComponent){
     this.conversationComponent.listenForMessages(this.user._id);

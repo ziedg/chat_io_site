@@ -48,7 +48,7 @@
 }
 .pubbg1{
   background-image: url("../images/background/bg1.jpg");
-  height: 190px;
+  height: 250px;
   vertical-align: middle;
   background-size:cover;
   display: flex;
@@ -58,7 +58,7 @@
 }
 .pubbg2{
   background-image: url("../images/background/bg2.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -67,7 +67,7 @@
 }
 .pubbg3{
   background-image: url("../images/background/bg3.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -76,7 +76,7 @@
 }
 .pubbg4{
   background-image: url("../images/background/bg4.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -85,7 +85,7 @@
 }
 .pubbg5{
   background-image: url("../images/background/bg5.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -94,7 +94,7 @@
 }
 .pubbg6{
   background-image: url("../images/background/bg6.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -103,7 +103,7 @@
 }
 .pubbg7{
   background-image: url("../images/background/bg7.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -112,7 +112,7 @@
 }
 .pubbg8{
   background-image: url("../images/background/bg8.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -121,7 +121,7 @@
 }
 .pubbg9{
   background-image: url("../images/background/bg9.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -130,7 +130,7 @@
 }
 .pubbg10{
   background-image: url("../images/background/bg10.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -139,7 +139,7 @@
 }
 .pubbg11{
   background-image: url("../images/background/bg11.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -148,7 +148,7 @@
 }
 .pubbg12{
   background-image: url("../images/background/bg12.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -157,7 +157,7 @@
 }
 .pubbg13{
   background-image: url("../images/background/bg13.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -166,7 +166,7 @@
 }
 .pubbg14{
   background-image: url("../images/background/bg14.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -175,7 +175,7 @@
 }
 .pubbg15{
   background-image: url("../images/background/bg15.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -184,7 +184,7 @@
 }
 .pubbg16{
   background-image: url("../images/background/bg16.jpg");
-  height: 190px;
+  height: 250px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -193,7 +193,8 @@
 }
 .pubdes1{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh); 
+  padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -201,7 +202,8 @@
 }
 .pubdes2{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);  
+  padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -209,7 +211,7 @@
 }
 .pubdes3{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -217,7 +219,7 @@
 }
 .pubdes4{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -225,7 +227,7 @@
 }
 .pubdes5{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -233,7 +235,7 @@
 }
 .pubdes6{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -241,7 +243,7 @@
 }
 .pubdes7{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -249,7 +251,7 @@
 }
 .pubdes8{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -257,7 +259,7 @@
 }
 .pubdes9{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -265,7 +267,7 @@
 }
 .pubdes10{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -273,7 +275,7 @@
 }
 .pubdes11{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: black;
   text-align: center;
   display: table-cell;
@@ -281,7 +283,7 @@
 }
 .pubdes12{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -289,7 +291,7 @@
 }
 .pubdes13{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -297,7 +299,7 @@
 }
 .pubdes14{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -305,7 +307,7 @@
 }
 .pubdes15{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -313,7 +315,7 @@
 }
 .pubdes16{
   font-family: "Arial Black";
-  font-size: calc(0.2vw + 2vh);
+  font-size: calc(0.2vw + 3vh);   padding:20px;
   color: white;
   text-align: center;
   display: table-cell;
