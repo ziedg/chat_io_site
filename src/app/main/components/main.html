@@ -273,7 +273,7 @@
          alt="notifications-icon"
          src="assets/images/new/nav-icons/notifications-icon-full.png">
     <span class="outline-icon-text">{{"notifications" | translate}}</span>
-    <div class="cercle-notice" style="top:0; right: 33px" *ngIf="nbNewNotifications">{{nbNewNotifications}}</div>
+    <div class="cercle-notice" style="top:0; right: calc(50% - 25px)" *ngIf="nbNewNotifications>0">{{nbNewNotifications}}</div>
   </div>
   <div class="profile-icon outline-icon-container"
        [routerLink]="['/main', 'profile', user._id]"

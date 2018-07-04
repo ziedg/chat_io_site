@@ -199,7 +199,7 @@ export class Publication {
 
   focused(element){
     if (window.matchMedia('(max-width: 768px)').matches) {
-      jQuery("#"+element.commentTextareaId).parent().parent().css({"position":"fixed","bottom":"34px","background-color":"white","z-index":"10000"});
+      jQuery("#"+element.commentTextareaId).parent().parent().css({"position":"fixed","bottom":"34px","background-color":"white","z-index":"10000", "left": "0"});
       jQuery("#"+element.commentTextareaId).blur(function(){
         jQuery("#"+element.commentTextareaId).parent().parent().css({"position":"unset"});
       });
