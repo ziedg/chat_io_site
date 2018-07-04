@@ -2797,7 +2797,7 @@ facebook-friends .user .user-img {
   justify-content: space-between;
   border-top: solid 1px #ddd;
   padding-top: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   width: 100%;
   position: relative;
 }
