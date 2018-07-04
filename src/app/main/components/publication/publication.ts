@@ -845,8 +845,8 @@ export class Publication {
                   response => {
                     this.InteractionsLikes = response.message.likes.slice();
                     this.InteractionsDislikes = response.message.dislikes.slice();
-                    console.log(this.InteractionsLikes);
-                    console.log(this.InteractionsDislikes);
+                    //console.log(this.InteractionsLikes);
+                    //console.log(this.InteractionsDislikes);
 
 
                 },
@@ -877,7 +877,6 @@ export class Publication {
   openModalInteractions(){
     this.modalInteractions = true;
     this.getInteractions();
-
   }
 
   closeModalInteractions(){
@@ -894,7 +893,7 @@ export class Publication {
       document.getElementById("nulle").style.borderBottom = "none";
       document.getElementById("lol").style.borderBottom = "1px solid #2aaa2a";
     }
-    else if(tabName === 'Dislikes') {
+    else if(tabName === 'Dislikes' && this.publicationBean.nbLikes != 0) {
       document.getElementById("lol").style.borderBottom = "none";
       document.getElementById("nulle").style.borderBottom = "1px solid #fb001e";
     }
@@ -926,7 +925,7 @@ export class Publication {
       .subscribe(
         response => {
           if (response.status == 0) {
-            console.log("subscribe done");
+            
           }
         },
         err => {
@@ -951,7 +950,7 @@ export class Publication {
       .subscribe(
         response => {
         if (response.status == 0) {
-          console.log("unsubscribed done");
+          
         }
       },
         err => {

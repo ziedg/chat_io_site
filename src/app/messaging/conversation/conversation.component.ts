@@ -6,6 +6,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { User } from '../../beans/user';
 import { ChatService } from '../../messanging/chat.service';
 import { EmitterService } from '../emitter.service';
+import { LoginService } from '../../login/services/loginService';
 declare var jQuery: any;
 class MessageValidation {
 	constructor() {
@@ -31,7 +32,7 @@ export class ConversationComponent implements OnInit {
   public selectedUser: User = null;
 	public messageForm: FormGroup;
 	private userId: string = null;
-
+  public user ;
   public messages = [];
   public messageLoading = true;
   private s: AngularFireObject<any>;
@@ -39,15 +40,17 @@ export class ConversationComponent implements OnInit {
   constructor(private emitterService:EmitterService,
     private router:Router,
     private db: AngularFireDatabase,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private loginService:LoginService
   ) { 
 		this.messageForm =new FormBuilder().group({
 			message: new MessageValidation
-		});;
+    });;
+    this.user=this.loginService.getUser();
   }
 
 ngOnInit(){
-  //this.listenForMessages(this.user._id);
+  this.listenForMessages(this.user._id);
 }
   ngOnChanges(changes: any) {
     /* Fetching selected users information from other component. */
@@ -64,6 +67,7 @@ ngOnInit(){
       }
       else{
         this.messages = data;
+        console.log(this.messages);
       }
   });
 }
@@ -98,12 +102,9 @@ sendMessageBtn() {
 }
 
 listenForMessages(userId: string): void {
-  console.log("deeeeesktop listen");
   this.userId = userId;
   this.s = this.db.object('notifications/'+this.userId+'/messaging');
-    console.log('notifications/'+this.userId+'/messaging');
     var item = this.s.valueChanges()
-    console.log(JSON.stringify(item));
     this.s.snapshotChanges().subscribe(action => {
       var notif = action.payload.val();
       if (notif !== null){
@@ -111,10 +112,13 @@ listenForMessages(userId: string): void {
           message => {
             if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
               this.messages = [...this.messages, message];
+              console.log(this.messages);
               setTimeout(() => {
-                console.log('scroll')
+                console.log(document.querySelector(`.message-thread`))
                 document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
               }, 100);
+          }else{
+          this.chatService.newIncomingMessage(message)  
           }
           },
           err =>  console.log('Could send message to server, reason: ', err)
@@ -124,7 +128,11 @@ listenForMessages(userId: string): void {
 }
 
 alignMessage(userId: string): boolean {
+  
   return this.userId === userId ? false : true;
+}
+show(messages){
+  
 }
 
 sendMessage(){
