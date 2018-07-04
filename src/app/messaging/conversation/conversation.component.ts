@@ -66,7 +66,6 @@ ngOnInit(){
       }
       else {
         this.messages = data;
-        console.log(this.messages);
       }
     });
   }
@@ -110,8 +109,10 @@ listenForMessages(userId: string): void {
         this.chatService.getMessage(notif.msgId).subscribe(
           message => {
             if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
+              this.chatService.markMessageAsSeen(notif.msgId)
+              .subscribe(message=>{
+              })
               this.messages = [...this.messages, message];
-              console.log(this.messages);
               setTimeout(() => {
                 console.log(document.querySelector(`.message-thread`))
                 document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
