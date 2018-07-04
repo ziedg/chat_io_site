@@ -1331,6 +1331,7 @@ section.widget {
   margin: 0 0 10px 0;
   box-sizing: border-box;
   position: relative;
+  z-index: 2;
 }
 
 section.widget {

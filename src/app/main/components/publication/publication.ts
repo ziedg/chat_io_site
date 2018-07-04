@@ -278,6 +278,8 @@ export class Publication {
       //console.log("arabic text!");
     }
 
+
+    // divide long publication into 2 parts
 		var txt = this.publicationBean.publText;
 
 		const word_letters:number = 5;
