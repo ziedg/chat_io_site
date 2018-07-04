@@ -293,7 +293,7 @@ export class Main {
 
             for (var i = 0; i < response.length; i++) {
 
-              if(response[i]._id && response[i].type!='message')
+              if(response[i]._id && response[i].type!='message'  && response[i].profiles.length > 0)
                   arr.push(response[i]);
              
 
