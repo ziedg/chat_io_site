@@ -284,8 +284,8 @@ export class Publication {
 
 		const word_letters:number = 5;
 
-    const words_max:number = 70;
-    const words_marge:number = 10;
+    const words_max:number = 40;
+    const words_marge:number = 8;
 
     const letters_max:number = words_max * word_letters;
     const letters_marge:number = words_marge * word_letters;
