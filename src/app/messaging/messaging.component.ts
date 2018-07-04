@@ -38,9 +38,9 @@ user;
 ngOnInit(){
   this.loginService.redirect();
   /* Calling Compoenent method to Listen for Incoming Messages*/
-  if(this.conversationComponent){
+ /* if(this.conversationComponent){
     this.conversationComponent.listenForMessages(this.user._id);
-  }
+  }*/
   
   if (this.router.url.indexOf("mobile")>0){
     this.desktop = false;
