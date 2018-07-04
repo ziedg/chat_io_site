@@ -37,7 +37,6 @@ getSuggestions(userId) {
   }
 
   getMessage(msgId) {
-    console.log(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + msgId)
     return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + msgId )
       .map((response) => {
         return response.json()
@@ -47,6 +46,13 @@ getSuggestions(userId) {
 
   sendMessage(msg) {
     return this.http.post(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}`, msg, AppSettings.OPTIONS);
+  }
+
+  markMessageAsSeen(msgId){
+    return this.http.put(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + msgId ,'')
+    .map((response) => {
+      return response.json()
+    });
   }
   newIncomingMessage(message){
   this.messageEmitter.next(message)
