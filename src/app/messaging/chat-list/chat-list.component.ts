@@ -50,6 +50,7 @@ noSearchResults: Boolean = false;
     this.getLoggedInUser(this.userId)
     this.getChatList();
     this.getSuggestionsList();
+    this.reactToNewMessages();
     jQuery(".navigation-bottom").addClass('hidden-xs');
 
     jQuery(document).click(function(e) {
@@ -62,6 +63,8 @@ noSearchResults: Boolean = false;
     });
 
    }
+
+
 
    getLoggedInUser(userId){
     this.http.get(
@@ -141,6 +144,42 @@ noSearchResults: Boolean = false;
    
     })
   }
+
+reactToNewMessages(){
+  this.chatService.messageEmitter.subscribe(message=>{
+    let profiles=this.chatListUsers.filter(user=>user._id == message.fromUserId);
+    if (profiles[0]){
+          console.log(profiles[0])    
+    }else {
+           profiles=this.suggestions.filter(user=>user._id == message.fromUserId);
+          if (profiles[0]){
+            console.log(profiles[0])    
+          }else {
+            this.http.get(
+              environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
+              AppSettings.OPTIONS)
+              .map((res:Response) => res.json())
+              .subscribe(
+                response => {
+        
+                if (response.status == "0") {
+        
+                  let profile= response.user;
+                  console.log(profile)
+                }
+        
+              },
+                err => {
+              },
+              () => {
+                this.changeDetector.markForCheck();
+              }
+            );
+          }
+    }
+    console.log(message)
+  })
+}
 
   isUserSelected(userId: string): boolean {
     if (!this.selectedUserId) {
