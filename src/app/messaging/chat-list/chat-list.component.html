@@ -18,7 +18,7 @@
 	</div>
 </div>
 <div class="suggestions-corps " *ngIf="chatListUsers.length == 0">
-		<p class="sub">Suggestions <span>{{suggestions.length}}</span></p>
+		<!-- <p class="sub">Suggestions <span>{{suggestions.length}}</span></p> -->
 		<div *ngFor="let s of suggestions" class="row suggestions">
 				<app-suggestions user="s"></app-suggestions>
 		</div>

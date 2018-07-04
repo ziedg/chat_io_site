@@ -108,7 +108,6 @@ export class ConversationMobileComponent implements OnInit{
   }
   
   listenForMessages(userId: string): void {
-    console.log("listeninggggggggg");
     this.userId = userId;
     this.s = this.db.object('notifications/'+this.userId+'/messaging');
       console.log('notifications/'+this.userId+'/messaging');
