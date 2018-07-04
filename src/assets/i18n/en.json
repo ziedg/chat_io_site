@@ -195,7 +195,5 @@
   "LastName_too_long":"Last name too long",
   "FirstName_too_long":"First name too long",
   "popular":"Popular",
-  "suggestions":"suggestions",
-  "send_msg":"send",
-  "you : ":"you : "
+  "suggestions":"suggestions"
 }
