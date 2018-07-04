@@ -194,6 +194,5 @@
   "errFistName":"Le prénom est obligatoire",
   "LastName_too_long":"Nom trés long",
   "FirstName_too_long":"Prénom trop long",
-  "popular":"Populaires",
-  "suggestions":"suggestions"
+  "popular":"Populaires"
 }
