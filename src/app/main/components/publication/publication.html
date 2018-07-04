@@ -225,7 +225,7 @@
                                                                           }"></span>
                 <a *ngIf="longPubText && !longPubTextShow"
                     (click)="longPubTextShow=true"
-                    style="display:inline">
+                    style="margin-top: 0; display:inline">
                     {{"publication_open_last_part" | translate }}</a>
                 <span *ngIf="longPubText && longPubTextShow" [innerHTML]="lastPubText" [ngClass]="{                                           'pubdes1': pubclass=='pubdes1',
                                                                           'pubdes2': pubclass=='pubdes2',
@@ -405,7 +405,7 @@
                             style="display:block; width: 28px; height: 28px;"></like-reaction>
         </div>
 
-        <div class="dislike-holder" style="padding-left: 13px;">
+        <div class="dislike-holder" style="padding-left: 10px;">
             <div class="hint-social">
                {{ 'publication_love' | translate }}
             </div>
