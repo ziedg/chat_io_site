@@ -1,6 +1,6 @@
 .item{
     margin: 0;
-    padding: 10px 5px;
+    padding: 10px 5px 5px 5px;
     border-bottom: 1px solid #efefef;
 }
 .item:hover{

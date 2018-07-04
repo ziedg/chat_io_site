@@ -278,12 +278,14 @@ export class Publication {
       //console.log("arabic text!");
     }
 
+
+    // divide long publication into 2 parts
 		var txt = this.publicationBean.publText;
 
 		const word_letters:number = 5;
 
-    const words_max:number = 70;
-    const words_marge:number = 10;
+    const words_max:number = 40;
+    const words_marge:number = 8;
 
     const letters_max:number = words_max * word_letters;
     const letters_marge:number = words_marge * word_letters;
@@ -843,8 +845,8 @@ export class Publication {
                   response => {
                     this.InteractionsLikes = response.message.likes.slice();
                     this.InteractionsDislikes = response.message.dislikes.slice();
-                    console.log(this.InteractionsLikes);
-                    console.log(this.InteractionsDislikes);
+                    //console.log(this.InteractionsLikes);
+                    //console.log(this.InteractionsDislikes);
 
 
                 },
@@ -875,7 +877,6 @@ export class Publication {
   openModalInteractions(){
     this.modalInteractions = true;
     this.getInteractions();
-
   }
 
   closeModalInteractions(){
@@ -892,7 +893,7 @@ export class Publication {
       document.getElementById("nulle").style.borderBottom = "none";
       document.getElementById("lol").style.borderBottom = "1px solid #2aaa2a";
     }
-    else if(tabName === 'Dislikes') {
+    else if(tabName === 'Dislikes' && this.publicationBean.nbLikes != 0) {
       document.getElementById("lol").style.borderBottom = "none";
       document.getElementById("nulle").style.borderBottom = "1px solid #fb001e";
     }
@@ -924,7 +925,7 @@ export class Publication {
       .subscribe(
         response => {
           if (response.status == 0) {
-            console.log("subscribe done");
+            
           }
         },
         err => {
@@ -949,7 +950,7 @@ export class Publication {
       .subscribe(
         response => {
         if (response.status == 0) {
-          console.log("unsubscribed done");
+          
         }
       },
         err => {

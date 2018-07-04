@@ -70,6 +70,8 @@ export class Profile implements OnInit{
   profilePictLoad:boolean = false;
   loadMore =true;
 
+  descriptionMaxLength:number = 360;
+
 
   constructor(public translate:TranslateService,
               private linkView:LinkView,
