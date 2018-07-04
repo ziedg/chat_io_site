@@ -57,9 +57,12 @@
 .message-thread img{
     font-weight: normal;
     position: absolute;
-    bottom:0;
+    bottom:-10px;
 }
-.message-thread>li:not(.self-message):not(.mydate):after { 
+.regular-message img{
+    display:none;
+}
+.message-thread>li:not(.self-message):not(.mydate):not(.regular-message):after { 
     content: '';
     position: absolute;
     left: 40px;
@@ -74,9 +77,6 @@
     transform: rotate(-35deg);
 }
 
-.message-thread>li:not(.self-message):not(.mydate){
-    margin-top: 2% !important;
-}
 .profilePicture{
 	width: 40px;
 	max-height: 40px;
