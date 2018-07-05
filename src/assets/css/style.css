@@ -2044,9 +2044,6 @@ section.widget {
   -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
   -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
   transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
-  position: absolute;
-  bottom: 0;
-  right: -80px;
 }
 
 @media (max-width: 325px) {
@@ -3038,7 +3035,6 @@ facebook-friends .user .user-img {
 
 .form-more {
   position: absolute;
-  right: 80px;
   font-size: 18px;
   bottom: 9px;
   display: flex;
@@ -3047,7 +3043,7 @@ facebook-friends .user .user-img {
   display: -webkit-flex;
   color: #999;
   justify-content: space-between;
-  width: 40px;
+  right: 0;
 }
 
 .form-more .fa {
@@ -3088,7 +3084,7 @@ facebook-friends .user .user-img {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  padding-right: 120px;
+  padding-right: 125px;
 }
 
 .comment-holder .textarea div {
