@@ -719,6 +719,7 @@ export class Home {
       this.errorTimed();
 
     }
+  this.getbg0();
   }
 
   veriftextsize(publishDivRef){
@@ -949,6 +950,7 @@ export class Home {
 
   closeBglist(){
     this.bglist = false;
+    this.getbg0();
   }
   sideScroll(direction,speed,distance,step){
     var Container = jQuery(".bglist");

@@ -233,7 +233,7 @@
   font-family: "Arial";
   font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
-  color: white;
+  color: black;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
@@ -242,7 +242,7 @@
   font-family: "Arial";
   font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
-  color: white;
+  color: black;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
@@ -269,7 +269,7 @@
   font-family: "Arial";
   font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
-  color: white;
+  color: #0b3d4c;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
