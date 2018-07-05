@@ -128,7 +128,7 @@
   "comment_popup_confirmation_delete_button": "Oui, supprimez-le!",
   "comment_popup_cancel_delete_button": "Annuler",
   "comment_popup_notification_delete_title": "Supprimé !",
-  "comment_popup_notification_delete_text": "Votre commentaire a été supprimé.",
+  "comment_popup_notification_delete_text": "Ce commentaire a été supprimé.",
   "profile_update_picture_popup_notification_title": "Photo de profil !",
   "profile_update_picture_popup_notification_text": "Votre photo de profil a été modifiée",
   "profile_already_subscribed": "Abonné(e)",
