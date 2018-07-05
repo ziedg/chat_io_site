@@ -234,10 +234,13 @@ export class Home {
     return this.pubclass;
   }
   bglistf(){
-    if(this.bglist == true)
-      this.bglist = false;
-    else
-      this.bglist = true;
+    this.bglist = !this.bglist;
+    this.toggling_bglistf()
+  }
+
+  toggling_bglistf(){
+    if(this.bglist) { this.showGifSlider = false; this.resetPreviewGIF();}
+    else { this.pubbg = false; this.pubclass=""; }
   }
   getbg0(){
     if(this.bgvalid){
@@ -534,8 +537,12 @@ export class Home {
     this.link.isGif = true;
     this.linkLoading = false;
     jQuery(".file-input-holder").hide();
+  }
 
-
+  resetPreviewGIF() {
+    this.link.url = "";
+    this.link.isSet = false;
+    this.link.isGif = false;
   }
 
   updatePublishTextOnPaste($event) {
@@ -611,6 +618,9 @@ export class Home {
     this.closeLinkAPI();
     this.isEmpty = true;
     this.changeDetector.markForCheck();
+
+    this.bglist = false;
+    this.showGifSlider = false;
   }
 
   publish() {
@@ -951,6 +961,7 @@ export class Home {
   closeBglist(){
     this.bglist = false;
     this.getbg0();
+    this.toggling_bglistf();
   }
   sideScroll(direction,speed,distance,step){
     var Container = jQuery(".bglist");
@@ -1094,6 +1105,7 @@ console.log("analyyyze");
 
   toggleGifSlider() {
     this.showGifSlider = !this.showGifSlider;
+    if(this.showGifSlider) { this.bglist = false; this.pubbg = false; this.pubclass="";}
 }
 
 }

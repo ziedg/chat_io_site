@@ -6232,12 +6232,6 @@ img[src="undefined"] {
     display: none;
   }
 
-  .pub-bg-container {
-    /*margin-left: -15px;
-    width: calc(100% + 30px);
-    */
-  }
-
   .bglist {
     margin-left: -15px;
     margin-right: -15px;
@@ -6247,4 +6241,8 @@ img[src="undefined"] {
 .pub-bg-container {
   bottom: 0;
   position: absolute;
+}
+
+.position-absolute {
+  position: absolute!important;
 }
