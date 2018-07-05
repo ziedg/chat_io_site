@@ -664,7 +664,19 @@ export class Publication {
     var j = ++this.i;
 
     if (3 * j <= this.allListComments.length) {
-      this.listComments = this.allListComments.slice(0, j * 3);
+
+
+
+
+        if (this.allListComments.length - 3 * j < 3)
+        this.listComments = this.allListComments.slice(
+          0,
+          this.allListComments.length
+        );
+        else
+        this.listComments = this.allListComments.slice(0, 3 * j);
+
+
 
       this.afficheMoreComments = true;
       this.changeDetector.markForCheck();
@@ -953,7 +965,6 @@ export class Publication {
       .subscribe(
         response => {
           if (response.status == 0) {
-
           }
         },
         err => {},
