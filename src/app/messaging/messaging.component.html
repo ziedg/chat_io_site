@@ -1,10 +1,10 @@
 <main role="main" class="container messengerDiv">
-	<div class="row row-eq-height hidden-xs hidden-sm">
+	<div  class="row row-eq-height hidden-xs hidden-sm" >
 		<div class="col-md-1"></div>
 		<div class="col-md-3 chat-list">
 			<app-chat-list #chatList [conversation]="conversation" [selectedUserInfo]="selectedUserInfo"></app-chat-list>
 		</div>
-		<div class="col-md-7">
+		<div class="col-md-7"   >
 			<app-conversation #conversation [conversation]="conversation" [selectedUserInfo]="selectedUserInfo"></app-conversation>
 		</div>
 		<div class="col-md-1"></div>

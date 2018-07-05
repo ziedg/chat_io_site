@@ -50,7 +50,7 @@ export class Main {
   user: User = new User();
   listSearchUsers: Array<User> = [];
   listNotif: Array<NotificationBean> = [];
-  nbNewNotifications: number = -1;
+  nbNewNotifications: number = 0;
   searchValue: string;
   showRecentSearch: Boolean;
   RecentSearchList;
@@ -61,8 +61,6 @@ export class Main {
   public showNotif:boolean=true;
   private s: AngularFireObject<any>;
 
-  icons;
-
   @ViewChild("searchResults2") searchRes2: ElementRef;
   @ViewChild("searchMobileInput") searchInput: ElementRef;
 
@@ -70,6 +68,7 @@ export class Main {
   private subscriptionJson = '';
   private isSubscribed = false;
   private registration = undefined;
+  private notifFirstCheck: Boolean = true;  
   // end Notification vars
 
 
@@ -88,48 +87,17 @@ export class Main {
     private elementRef: ElementRef,
     private renderer: Renderer2,
 
-
     //Notiifcation
     private notificationService: NotificationService,
 
-
     //Angular Notification Listener
-    private db: AngularFireDatabase,
+    private db: AngularFireDatabase) {
 
-
-    ) {
       this.user=this.loginService.getUser();
          if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
-    this.showButtonMoreNotif = false;
-    this.listNotif = [];
-
-    this.icons = {
-      messaging: {
-        icon: "messaging-icon",
-        type: "outline"
-      },
-      home: {
-        icon: "home-icon",
-        type: "outline"
-      },
-      search: {
-        icon: "search-icon",
-        type: "outline"
-      },
-      notifications: {
-        icon: "notifications-icon",
-        type: "outline"
-      },
-      profile: {
-        icon: "user-icon",
-        type: "outline"
-      },
-      outline: "outline",
-      full: "full",
-      activeIcon: "home",
-      wasActiveIcon: ""
-    };
+      this.showButtonMoreNotif = false;
+      this.listNotif = [];
   }
 
 
@@ -326,8 +294,9 @@ export class Main {
 
             for (var i = 0; i < response.length; i++) {
 
-              if(response[i]._id)
+              if(response[i]._id && response[i].type!='message'  && response[i].profiles.length > 0)
                   arr.push(response[i]);
+             
 
               this.lastNotifId = response[i]._id;
 
@@ -420,7 +389,7 @@ export class Main {
       .subscribe(
         response => {
           if (response.status == 0) {
-            console.log(response)
+
             this.nbNewNotifications += response.nbNewNotifications;
           }
         },
@@ -513,8 +482,10 @@ export class Main {
       console.log(JSON.stringify(item));
       this.s.snapshotChanges().subscribe(action => {
         var notif = action.payload.val();
-        if (notif !== null){
+        if (notif !== null && !this.notifFirstCheck){
           this.nbNewNotifications++;
+        }else{
+          this.notifFirstCheck = false;
         }
       });
 

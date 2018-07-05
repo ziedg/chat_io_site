@@ -11,7 +11,7 @@
     border-bottom: 1px solid #efefef;
 }
 .header-mobile img{
-    background-color: #4c9a21;
+    background-color: transparent;
     height: 30px;
 }
 .header-mobile div>img{

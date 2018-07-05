@@ -953,7 +953,7 @@ export class Publication {
       .subscribe(
         response => {
           if (response.status == 0) {
-            console.log("subscribe done");
+
           }
         },
         err => {},

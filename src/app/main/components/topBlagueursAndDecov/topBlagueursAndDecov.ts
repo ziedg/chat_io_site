@@ -25,6 +25,7 @@ export class TopBlagueursAndDecov {
   public popularProfiles: Array<User> = [];
   displayedNumberPopularProfiles = 4;
   displayShowMore: boolean = true;
+  loadingProfile = [];
   //changes
   lastPopularProfileID;
   //
@@ -43,6 +44,7 @@ export class TopBlagueursAndDecov {
     this.user = loginService.user;
     this.loadPopularProfiles();
   }
+  
 
   loadMoreProfiles() {
 

@@ -4,10 +4,12 @@ import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
 import * as pathUtils from '../utils/path.utils';
 import { AppSettings } from '../shared/conf/app-settings';
+import { Subject } from 'rxjs';
 
 
 @Injectable()
 export class ChatService {
+  messageEmitter=new Subject<any>();
   ServerUrl;
   constructor(
     private http: Http
@@ -35,7 +37,6 @@ getSuggestions(userId) {
   }
 
   getMessage(msgId) {
-    console.log(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + msgId)
     return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + msgId )
       .map((response) => {
         return response.json()
@@ -46,5 +47,16 @@ getSuggestions(userId) {
   sendMessage(msg) {
     return this.http.post(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}`, msg, AppSettings.OPTIONS);
   }
+
+  markMessageAsSeen(msgId){
+    return this.http.put(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + msgId ,'')
+    .map((response) => {
+      return response.json()
+    });
+  }
+  newIncomingMessage(message){
+  this.messageEmitter.next(message)
+ }
+  
 
 }

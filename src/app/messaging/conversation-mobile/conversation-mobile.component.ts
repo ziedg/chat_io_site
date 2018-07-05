@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 
 import { User } from '../../beans/user';
@@ -26,8 +26,10 @@ class MessageValidation {
   styleUrls: ['./conversation-mobile.component.css']
 })
 export class ConversationMobileComponent implements OnInit{
+  firstListen: boolean = true;
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
+  data: any ="Initializeeed";
   public selectedUser: User = null;
 	public messageForm: FormGroup;
 	private userId: string = null;
@@ -38,12 +40,29 @@ export class ConversationMobileComponent implements OnInit{
 
   constructor(private emitterService:EmitterService,
     private router:Router,
+    private route:ActivatedRoute,
     private loginService :LoginService,
     private db: AngularFireDatabase,
     private chatService: ChatService
   ) {
     this.user =this.loginService.getUser();
     this.userId=this.user._id;
+
+    this.selectedUser =this.emitterService.getSelectedUser();
+
+    this.data = this.route.snapshot.data;
+    let allMessages = this.data.messages;
+    if(allMessages==undefined)
+      {
+        this.messages=[];
+      }
+      else{
+        this.messages = allMessages;
+        console.log(this.messages);
+      }
+      this.messageLoading = true;
+
+    
 		this.messageForm =new FormBuilder().group({
 			message: new MessageValidation
     });
@@ -53,17 +72,20 @@ export class ConversationMobileComponent implements OnInit{
   ngOnInit(){
     
     this.listenForMessages(this.userId);
-    this.selectedUser =this.emitterService.getSelectedUser();
-    this.emitterService.conversationEmitter.subscribe((data) => {
-      if(data==undefined)
-      {
-        this.messages=[];
-      }
-      else{
-        this.messages = data;
-      }
-      this.messageLoading = true;
-    });
+    
+    // convoemitter is the cause
+    // this.emitterService.conversationEmitter.subscribe((data) => {
+    //   if(data==undefined)
+    //   {
+    //     this.messages=[];
+    //   }
+    //   else{
+    //     this.messages = data;
+    //     console.log(this.messages);
+    //   }
+    //   this.messageLoading = true;
+    // });
+    
   }
 
   sendMessage(){
@@ -108,7 +130,7 @@ export class ConversationMobileComponent implements OnInit{
   }
   
   listenForMessages(userId: string): void {
-    console.log("listeninggggggggg");
+    console.log("mobiiiile listen");
     this.userId = userId;
     this.s = this.db.object('notifications/'+this.userId+'/messaging');
       console.log('notifications/'+this.userId+'/messaging');
@@ -119,13 +141,15 @@ export class ConversationMobileComponent implements OnInit{
         if (notif !== null){
           this.chatService.getMessage(notif.msgId).subscribe(
             message => {
-              if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
+              if (!this.firstListen && this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
                 this.messages = [...this.messages, message];
+                console.log(this.messages);
                 setTimeout(() => {
-                  console.log('scroll')
+                  console.log(document.querySelector(`.message-thread`))
                   document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
                 }, 100);
             }
+            this.firstListen = false;
             },
             err =>  console.log('Could send message to server, reason: ', err)
           );
