@@ -233,7 +233,7 @@
   font-family: "Arial";
   font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
-  color: white;
+  color: black;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
@@ -242,7 +242,7 @@
   font-family: "Arial";
   font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
-  color: white;
+  color: black;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
@@ -269,7 +269,7 @@
   font-family: "Arial";
   font-weight: bolder;
   font-size: calc(0.2vw + 3vh);   padding:20px;
-  color: white;
+  color: #0b3d4c;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
@@ -2794,7 +2794,7 @@ facebook-friends .user .user-img {
   justify-content: space-between;
   border-top: solid 1px #ddd;
   padding-top: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   width: 100%;
   position: relative;
 }
@@ -6204,6 +6204,7 @@ img[src="undefined"] {
 
 .social-emoji {
   width: 22px;
+  padding-bottom:2px;
 }
 
 .social-emoji-like {

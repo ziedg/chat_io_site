@@ -194,5 +194,10 @@
   "errFistName":"First name is required",
   "LastName_too_long":"Last name too long",
   "FirstName_too_long":"First name too long",
-  "popular":"Popular"
+  "popular":"Popular",
+  "suggestions":"suggestions",
+  "send_msg":"send",
+  "you : ":"you : ",
+  "recent_messages":"recent messages",
+  "Select_User":"Select a user to chat"
 }

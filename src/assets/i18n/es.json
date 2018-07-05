@@ -194,5 +194,9 @@
   "errFistName":"el primer nombre es requerido",
   "LastName_too_long":"apellido demasiado largo",
   "FirstName_too_long":"primer nombre demasiado largo",
-  "popular":"Popular"
+  "popular":"Popular",
+  "suggestions":"sugerencias",
+  "send_msg":"enviar a",
+  "you : ":"usted : ",
+  "recent_messages":"mensajes recientes"
 }
