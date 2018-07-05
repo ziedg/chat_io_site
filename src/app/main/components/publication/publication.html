@@ -147,7 +147,7 @@
            src="{{imageBaseUrl+ publicationBean.publPictureLink}}">
 
        <!-- The Modal -->
-       <div id="myModal" class="modal">
+      <div id="myModal" class="modal">
 
         <!-- The Close Button -->
         <span class="close-button-x">&#10006;</span>
@@ -350,7 +350,7 @@
                           <button (click)="toggleSubscribe(user)" style="float:none"
                           *ngIf="user.isSubscribed === 'true' && user.userId !== profileId"
                           [ngStyle]="{'background-color':'#ccc'}">
-                               abonné
+                          {{'profile_already_subscribed' | translate }}
                           </button>
                         </div>
                       </div>
@@ -492,7 +492,7 @@
 
           <div class="form-more">
             <i class="fa fa-camera" (click)="addPhoto()"></i>
-            <i class="fa fa-smile-o toggleEmoji" (click)="toggleEmoji()"></i>
+            <i class="fa fa-smile-o toggleEmoji" (click)="toggleEmoji()" style="padding-right: 10px;"></i>
             <button class="comment-publish" type="submit" *ngIf="!loadingComment">
                  <!-- {{ 'publication_comment_button' | translate }} -->
                  <object data="/assets/other/send.svg" type="image/svg+xml"
