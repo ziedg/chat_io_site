@@ -6236,3 +6236,8 @@ img[src="undefined"] {
     margin-right: -15px;
   }
 }
+
+.pub-bg-container {
+  bottom: 0;
+  position: absolute;
+}
