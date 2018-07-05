@@ -663,25 +663,23 @@ export class Publication {
   loadMoreComments(i: number) {
     var j = ++this.i;
 
-    if (3 * j <= this.allListComments.length) {
+
 
 
 
 
         if (this.allListComments.length - 3 * j < 3)
+        {
         this.listComments = this.allListComments.slice(
           0,
           this.allListComments.length
         );
-        else
-        this.listComments = this.allListComments.slice(0, 3 * j);
-
-
-
-      this.afficheMoreComments = true;
+        this.afficheMoreComments = false;
       this.changeDetector.markForCheck();
     } else {
-      this.afficheMoreComments = false;
+      this.listComments = this.allListComments.slice(0, 3 * j);
+
+      this.afficheMoreComments =true;
       this.changeDetector.markForCheck();
     }
   }
