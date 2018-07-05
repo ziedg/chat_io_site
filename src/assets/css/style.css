@@ -2011,11 +2011,11 @@ section.widget {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   cursor: pointer;
-  margin: -8px auto;
-  padding: 0px 10px;
+  margin: -13px 10px;
+  padding: 10px 10px 0 10px;
   line-height: 34px;
   border: none;
-  background-color: #009900;
+  background-color:transparent;
   font-size: 14px;
   color: white;
   border-radius: 4px;
@@ -2031,7 +2031,7 @@ section.widget {
   transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
   position: absolute;
   bottom: 0;
-  right: -80px;
+  right: -60px;
 }
 
 @media (max-width: 325px) {
@@ -3023,7 +3023,7 @@ facebook-friends .user .user-img {
 
 .form-more {
   position: absolute;
-  right: 80px;
+  right: 55px;
   font-size: 18px;
   bottom: 9px;
   display: flex;
@@ -3052,11 +3052,11 @@ facebook-friends .user .user-img {
 .comment-holder input,
 .comment-holder textarea,
 .comment-holder .textarea {
-  width: 100%;
+  width: 85%;
   max-width: 100%;
   margin: 0;
-  padding: 6px 9px;
-  margin-left: 0px;
+  padding: 10px 0 0 13px;
+  margin-left: 5px;
   display: flex;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3066,15 +3066,16 @@ facebook-friends .user .user-img {
   box-sizing: border-box;
   font-family: inherit;
   font-size: 14px;
-  border: solid 1px #ddd !important;
+  font-weight: bold;
+  color:#C1C4C8;
   overflow: auto;
   outline: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
   padding-right: 125px;
+  border: 1px solid #E5E5E5;
+  border-radius: 50px;
 }
 
 .comment-holder .textarea div {
@@ -3118,6 +3119,7 @@ facebook-friends .user .user-img {
   max-height: var(--img-w);
   max-width: var(--img-w);
   margin: 0;
+  padding: 2px;
 }
 
 .radiused-img {
@@ -5286,7 +5288,7 @@ input.loginInput {
   display: block;
   /* For Firefox */
 
-  color: #ccc;
+  color: #A1A0A3;
 }
 
 .edit-decription button {
