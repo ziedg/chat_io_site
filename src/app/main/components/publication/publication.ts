@@ -1,54 +1,58 @@
-import 'rxjs/add/operator/map';
+import "rxjs/add/operator/map";
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Http, Response } from '@angular/http';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { Ng2ImgMaxService } from 'ng2-img-max';
-import { timer } from 'rxjs/observable/timer';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component
+} from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Http, Response } from "@angular/http";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+import { Router } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+import { Ng2ImgMaxService } from "ng2-img-max";
+import { timer } from "rxjs/observable/timer";
 
-import { environment } from '../../../../environments/environment';
-import { CommentBean } from '../../../beans/comment-bean';
-import { EmojiListBean } from '../../../beans/emoji-list-bean';
-import { LinkBean } from '../../../beans/linkBean';
-import { PublicationBean } from '../../../beans/publication-bean';
-import { User } from '../../../beans/user';
-import { MinifiedUser } from '../../../beans/Minified-user';
-import { LoginService } from '../../../login/services/loginService';
-import { AppSettings } from '../../../shared/conf/app-settings';
-import * as pathUtils from '../../../utils/path.utils';
-import { DateService } from '../../services/dateService';
-import { EmojiService } from '../../services/emojiService';
-import { LinkView } from '../../services/linkView';
-import { PostService } from '../../services/postService';
-import { SeoService } from '../../services/seo-service';
-import * as _ from 'lodash';
-
-
+import { environment } from "../../../../environments/environment";
+import { CommentBean } from "../../../beans/comment-bean";
+import { EmojiListBean } from "../../../beans/emoji-list-bean";
+import { LinkBean } from "../../../beans/linkBean";
+import { PublicationBean } from "../../../beans/publication-bean";
+import { User } from "../../../beans/user";
+import { MinifiedUser } from "../../../beans/Minified-user";
+import { LoginService } from "../../../login/services/loginService";
+import { AppSettings } from "../../../shared/conf/app-settings";
+import * as pathUtils from "../../../utils/path.utils";
+import { DateService } from "../../services/dateService";
+import { EmojiService } from "../../services/emojiService";
+import { LinkView } from "../../services/linkView";
+import { PostService } from "../../services/postService";
+import { SeoService } from "../../services/seo-service";
+import * as _ from "lodash";
 
 declare var jQuery: any;
 declare var swal: any;
 
 @Component({
   moduleId: module.id,
-  selector: 'publication',
-  inputs: ['publicationBean'],
-  templateUrl: 'publication.html',
+  selector: "publication",
+  inputs: ["publicationBean"],
+  templateUrl: "publication.html",
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Publication {
   intervalHolder: any;
   commentContent = "";
+
+  public i: number = 1;
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
   public publicationBean: PublicationBean;
-	// TODO: check publicationBean access
+  // TODO: check publicationBean access
   private afficheCommentsLoading = false;
-  private afficheMoreComments = false;
+  public afficheMoreComments = false;
   public signalButton = false;
-  private listComments: Array<CommentBean> = [];
+  public listComments: Array<CommentBean> = [];
   private nbMaxAddComments = 3;
   private nbComments = 0;
   private nbDisplayedComments = 0;
@@ -76,18 +80,18 @@ export class Publication {
   emojiHoverId = "";
   commentTextareaId = "";
   public link: LinkBean = new LinkBean();
-  commentsDisplayed : boolean;
+  commentsDisplayed: boolean;
   /* long publication settings */
   private longPubText: boolean = false;
   private longPubTextShow: boolean = false;
   private firstPubText: string = "";
   private lastPubText: string = "";
-  pub_text:string = "";
-  arabicText:boolean = false;
-  pubclass="";
-  pubbg=false;
+  pub_text: string = "";
+  arabicText: boolean = false;
+  pubclass = "";
+  pubbg = false;
 
-  public profileId ;
+  public profileId;
 
   public InteractionsLikes: Array<MinifiedUser> = [];
   public InteractionsDislikes: Array<MinifiedUser> = [];
@@ -96,19 +100,22 @@ export class Publication {
   public modalInteractions = false;
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
+  allListComments: CommentBean[];
 
-  constructor(public translate:TranslateService,
-              public seoService: SeoService,
-              private postService: PostService,
-              private linkView: LinkView,
-              private emojiService: EmojiService,
-              private http: Http,
-              private router: Router,
-              private sanitizer: DomSanitizer,
-              private loginService: LoginService,
-              private changeDetector: ChangeDetectorRef,
-              private dateService: DateService,
-             private ng2ImgMaxService:Ng2ImgMaxService) {
+  constructor(
+    public translate: TranslateService,
+    public seoService: SeoService,
+    private postService: PostService,
+    private linkView: LinkView,
+    private emojiService: EmojiService,
+    private http: Http,
+    private router: Router,
+    private sanitizer: DomSanitizer,
+    private loginService: LoginService,
+    private changeDetector: ChangeDetectorRef,
+    private dateService: DateService,
+    private ng2ImgMaxService: Ng2ImgMaxService
+  ) {
     loginService.actualize();
 
     this.user = loginService.user;
@@ -116,117 +123,147 @@ export class Publication {
     this.listEmoji = emojiService.getEmojiList();
     this.pubImgId = "imgDefault";
     this.formComment = new FormGroup({
-      pubComment: new FormControl('', Validators.required),
-      commentText: new FormControl('', Validators.required)
+      pubComment: new FormControl("", Validators.required),
+      commentText: new FormControl("", Validators.required)
     });
-
   }
-  unsubscribe(post:PublicationBean) {
+  unsubscribe(post: PublicationBean) {
     let body = JSON.stringify({
       profileId: post.profileId
     });
 
-    this.http.post(
-      environment.SERVER_URL + pathUtils.UNSUBSCRIBE,
-      body,
-      AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.UNSUBSCRIBE,
+        body,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
       .subscribe(
         response => {
-        if (response.status == 0) {
-          this.user.isFollowed = false;
-          this.user.nbSubscribers--;
+          if (response.status == 0) {
+            this.user.isFollowed = false;
+            this.user.nbSubscribers--;
+          }
+        },
+        err => {},
+        () => {
+          this.changeDetector.markForCheck();
         }
-      },
-        err => {
-      },
-      () => {
-        this.changeDetector.markForCheck();
-      }
-    );
+      );
   }
   deletePub() {
     swal({
       title: this.translateCode("publication_popup_confirmation_title"),
       text: this.translateCode("publication_popup_confirmation_delete_text"),
       showCancelButton: true,
-      cancelButtonColor: '#999',
+      cancelButtonColor: "#999",
       confirmButtonColor: "#6bac6f",
-      confirmButtonText: this.translateCode("publication_popup_confirmation_delete_button"),
+      confirmButtonText: this.translateCode(
+        "publication_popup_confirmation_delete_button"
+      ),
       cancelButtonText: this.translateCode("publication_popup_cancel_button"),
-      allowOutsideClick: true,
-    }).then(function () {
+      allowOutsideClick: true
+    }).then(
+      function() {
         this.doDeletePub();
         this.closeModalPub();
         swal({
-          title: this.translateCode("publication_popup_notification_delete_title"),
-          text: this.translateCode("publication_popup_notification_delete_text"),
+          title: this.translateCode(
+            "publication_popup_notification_delete_title"
+          ),
+          text: this.translateCode(
+            "publication_popup_notification_delete_text"
+          ),
           type: "success",
           timer: 1000,
           showConfirmButton: false
-        }).then(function () {
-        }, function (dismiss) {
-        });
+        }).then(function() {}, function(dismiss) {});
         this.changeDetector.markForCheck();
-
       }.bind(this),
-      function (dismiss) {
-        if (dismiss === 'overlay') {
+      function(dismiss) {
+        if (dismiss === "overlay") {
         }
-      });
+      }
+    );
   }
 
   doDeletePub() {
     this.publicationBean.displayed = false;
     this.changeDetector.markForCheck();
     var body;
-      body = JSON.stringify({
-        publId: this.publicationBean._id,
-      });
+    body = JSON.stringify({
+      publId: this.publicationBean._id
+    });
 
-      this.http.post(environment.SERVER_URL +  pathUtils.REMOVE_PUBLICATION , body, AppSettings.OPTIONS)
-        .map((res: Response) => res.json())
-        .subscribe(
-          response => {
-          },
-          err => {
-          },
-          () => {
-            this.changeDetector.markForCheck();
-          }
-        );
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.REMOVE_PUBLICATION,
+        body,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {},
+        err => {},
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
   }
 
-  focused(element){
-    if (window.matchMedia('(max-width: 768px)').matches) {
-      jQuery("#"+element.commentTextareaId).parent().parent().css({"position":"fixed","bottom":"34px","background-color":"white","z-index":"10000"});
-      jQuery("#"+element.commentTextareaId).blur(function(){
-        jQuery("#"+element.commentTextareaId).parent().parent().css({"position":"unset"});
+  focused(element) {
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      jQuery("#" + element.commentTextareaId)
+        .parent()
+        .parent()
+        .css({
+          position: "fixed",
+          bottom: "34px",
+          "background-color": "white",
+          "z-index": "10000"
+        });
+      jQuery("#" + element.commentTextareaId).blur(function() {
+        jQuery("#" + element.commentTextareaId)
+          .parent()
+          .parent()
+          .css({ position: "unset" });
       });
     }
-
   }
+
+  // initComments() {
+
+  //   if (this.publicationBean.comments.length > this.nbMaxAddComments) {
+  //     this.afficheMoreComments = true;
+  //     this.nbComments = this.nbMaxAddComments;
+  //     for (let i = 0; i < this.nbComments; i++)
+  //       this.listComments.push(this.publicationBean.comments[i]);
+  //   }
+  //   else {
+
+  //     for (let i = 0; i < this.nbComments; i++)
+
+  //       this.listComments.push(this.publicationBean.comments[i]);
+  //   }
+
+  // }
 
   initComments() {
-    if (this.publicationBean.comments.length > this.nbMaxAddComments) {
-      this.afficheMoreComments = true;
-      this.nbComments = this.nbMaxAddComments;
-      for (let i = 0; i < this.nbComments; i++)
-        this.listComments.push(this.publicationBean.comments[i]);
-    }
-    else {
-      this.nbComments = this.publicationBean.comments.length;
-      for (let i = 0; i < this.nbComments; i++)
-        this.listComments.push(this.publicationBean.comments[i]);
-    }
+    this.allListComments = this.publicationBean.comments;
+
+    this.afficheMoreComments = true;
+    this.changeDetector.markForCheck();
+
+    this.listComments = this.allListComments.slice(0, this.nbMaxAddComments);
   }
 
-  displayComments(){
-    this.commentsDisplayed = !this.commentsDisplayed ;
+  displayComments() {
+    this.commentsDisplayed = !this.commentsDisplayed;
   }
   ngOnDestroy(): void {
     clearInterval(this.intervalHolder);
- }
+  }
 
   ngOnInit() {
     this.intervalHolder = setInterval(() => {
@@ -234,112 +271,105 @@ export class Publication {
       this.changeDetector.markForCheck();
     }, 1000 * 60); // 1 minute
 
-
-
-
-
     // Get the modal
-     var popupmodal = document.getElementById('myModal');
+    var popupmodal = document.getElementById("myModal");
 
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = jQuery('.myImg');
-         var popupmodalImg = jQuery("#img01");
-         jQuery('.myImg').click(function(){
-            popupmodal.style.display = "block";
-            var popupnewSrc = this.src;
-             popupmodalImg.attr('src', popupnewSrc);
-        });
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = jQuery(".myImg");
+    var popupmodalImg = jQuery("#img01");
+    jQuery(".myImg").click(function() {
+      popupmodal.style.display = "block";
+      var popupnewSrc = this.src;
+      popupmodalImg.attr("src", popupnewSrc);
+    });
 
-       // Get the <span> element that closes the modal
-         var popupspan = document.getElementsByClassName("close-button")[0];
+    // Get the <span> element that closes the modal
+    var popupspan = document.getElementsByClassName("close-button")[0];
 
-       // When the user clicks on <span> (x), close the modal
-       if(popupspan || popupspan != undefined){
-        popupspan.addEventListener("click",function(){
-          popupmodal.style.display = "none";
-        });}
+    // When the user clicks on <span> (x), close the modal
+    if (popupspan || popupspan != undefined) {
+      popupspan.addEventListener("click", function() {
+        popupmodal.style.display = "none";
+      });
+    }
 
-    const arabic:RegExp = /[\u0600-\u06FF]/;
+    const arabic: RegExp = /[\u0600-\u06FF]/;
 
-    if(this.publicationBean.publClass){
-      this.pubclass=this.publicationBean.publClass;
-      this.pubbg=true;}
+    if (this.publicationBean.publClass) {
+      this.pubclass = this.publicationBean.publClass;
+      this.pubbg = true;
+    }
 
-    var pub_txt
-    if(this.publicationBean.isShared) {
+    var pub_txt;
+    if (this.publicationBean.isShared) {
+      pub_txt = this.publicationBean.publText;
+    } else {
       pub_txt = this.publicationBean.publText;
     }
-    else {
-      pub_txt = this.publicationBean.publText;
-    }
-    if(pub_txt !== null
-        && pub_txt.length) {
+    if (pub_txt !== null && pub_txt.length) {
       this.arabicText = arabic.test(pub_txt[0]);
       //console.log("arabic text!");
     }
 
-		var txt = this.publicationBean.publText;
+    var txt = this.publicationBean.publText;
 
-		const word_letters:number = 5;
+    const word_letters: number = 5;
 
-    const words_max:number = 70;
-    const words_marge:number = 10;
+    const words_max: number = 70;
+    const words_marge: number = 10;
 
-    const letters_max:number = words_max * word_letters;
-    const letters_marge:number = words_marge * word_letters;
+    const letters_max: number = words_max * word_letters;
+    const letters_marge: number = words_marge * word_letters;
 
+    const lines_max: number = 4;
 
-		const lines_max:number = 4;
+    var regex_url: RegExp = /(^|br>|\s)\s?((https?:\/\/)?([a-z0-9]{1,12}\.){1,2}[a-z]{2,3}(\/[^\s<]*)?\s?(?=(\s|<br|$)))/gim;
+    txt = txt.replace(regex_url, '$1<a href="$2">$2</a>');
 
+    var regex_long_url: RegExp = /(>[^<]{30})([^<]{10,})(<\/a>)/gi;
+    txt = txt.replace(regex_long_url, " $1...$3");
 
-		var regex_url:RegExp = /(^|br>|\s)\s?((https?:\/\/)?([a-z0-9]{1,12}\.){1,2}[a-z]{2,3}(\/[^\s<]*)?\s?(?=(\s|<br|$)))/gim;
-		txt = txt.replace(regex_url, '$1<a href="$2">$2</a>');
+    if (txt !== "null" && txt !== "undefined" && txt.length > 0) {
+      var line_parts = txt.split("<br>");
+      if (line_parts.length > lines_max) {
+        this.firstPubText = line_parts.slice(0, lines_max).join("<br>");
+        this.lastPubText = line_parts
+          .slice(lines_max, line_parts.length)
+          .join("<br>");
+        this.longPubText = true;
+      } else {
+        var parts = txt.split(" ");
+        if (parts.length > words_max) {
+          this.longPubText = true;
 
-		var regex_long_url:RegExp = /(>[^<]{30})([^<]{10,})(<\/a>)/gi;
-		txt = txt.replace(regex_long_url, ' $1...$3')
+          let words_cut: number;
+          if (parts.length - words_max < words_marge)
+            words_cut = parts.length - words_marge;
+          else words_cut = words_max;
 
+          this.firstPubText = parts.slice(0, words_cut).join(" ");
+          this.lastPubText = parts.slice(words_cut, parts.length).join(" ");
+          //console.log("cut words");
+        } else if (txt.length > letters_max) {
+          this.longPubText = true;
 
-    if(txt !== 'null' && txt !=='undefined' && txt.length > 0) {
-			var line_parts = txt.split('<br>');
-			if(line_parts.length > lines_max ){
-        this.firstPubText = line_parts.slice(0, lines_max).join('<br>');
-				this.lastPubText = line_parts.slice(lines_max, line_parts.length ).join('<br>');
-				this.longPubText = true;
-			}
-			else {
-				var parts = txt.split(' ');
-	      if(parts.length > words_max){
-	        this.longPubText = true;
+          let letters_cut: number;
+          if (txt.length - letters_max < letters_marge)
+            letters_cut = txt.length - letters_marge;
+          else letters_cut = letters_max;
 
-	        let words_cut:number;
-	        if(parts.length - words_max < words_marge) words_cut = parts.length - words_marge;
-	        else words_cut = words_max;
-
-	        this.firstPubText = parts.slice(0, words_cut).join(' ');
-	        this.lastPubText = parts.slice(words_cut, parts.length ).join(' ');
-	        //console.log("cut words");
-	      }
-	      else if(txt.length > letters_max) {
-	        this.longPubText = true;
-
-	        let letters_cut:number;
-	        if(txt.length - letters_max < letters_marge) letters_cut = txt.length - letters_marge;
-	        else letters_cut = letters_max;
-
-	        var cut_end:number = txt.slice(0, letters_cut).lastIndexOf(' ');
-	        this.firstPubText = txt.slice(0, cut_end);
-	        this.lastPubText = txt.slice(cut_end);
-	        //console.log("cut letters");
-	      }
-	      else {
-	        this.firstPubText = txt;
-	      }
-			}
+          var cut_end: number = txt.slice(0, letters_cut).lastIndexOf(" ");
+          this.firstPubText = txt.slice(0, cut_end);
+          this.lastPubText = txt.slice(cut_end);
+          //console.log("cut letters");
+        } else {
+          this.firstPubText = txt;
+        }
+      }
       //console.log("long text : " + this.longPubText);
     }
 
     //onsole.log(this.publicationBean);
-
 
     this.changeDetector.markForCheck();
     if (this.publicationBean.publExternalLink) {
@@ -351,57 +381,64 @@ export class Publication {
     this.changeDetector.markForCheck();
     if (this.publicationBean) {
       //console.log(this.publicationBean._id);
-      this.pubLink = urlEncode(environment.SERVER_URL + "main/post/" + this.publicationBean._id);
-      this.shareLink = "https://www.facebook.com/sharer/sharer.php?u=" + this.pubLink + "&amp;src=sdkpreparse";
+      this.pubLink = urlEncode(
+        environment.SERVER_URL + "main/post/" + this.publicationBean._id
+      );
+      this.shareLink =
+        "https://www.facebook.com/sharer/sharer.php?u=" +
+        this.pubLink +
+        "&amp;src=sdkpreparse";
 
       this.nbDisplayedComments = this.publicationBean.comments.length;
 
       //Youtube Loading
       if (this.publicationBean.publyoutubeLink) {
-        this.linkYtb = "https://www.youtube.com/embed/" + this.publicationBean.publyoutubeLink;
+        this.linkYtb =
+          "https://www.youtube.com/embed/" +
+          this.publicationBean.publyoutubeLink;
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkYtb);
-
-      }
-      else if (this.publicationBean.publfacebookLink) {
-        this.linkFb = "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +
-        this.publicationBean.publfacebookLink +
-        "%2F&show_text=0&height=580&appId";
+      } else if (this.publicationBean.publfacebookLink) {
+        this.linkFb =
+          "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +
+          this.publicationBean.publfacebookLink +
+          "%2F&show_text=0&height=580&appId";
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkFb);
+      } else {
+        this.url = this.sanitizer.bypassSecurityTrustResourceUrl("");
       }
-      else {
-        this.url = this.sanitizer.bypassSecurityTrustResourceUrl('');
-      }
-      jQuery(document).click(function (e) {
-
-        if (jQuery(e.target).closest(".sub-menu").length === 0 && jQuery(e.target).closest(".dots").length === 0) {
+      jQuery(document).click(function(e) {
+        if (
+          jQuery(e.target).closest(".sub-menu").length === 0 &&
+          jQuery(e.target).closest(".dots").length === 0
+        ) {
           closeSignal();
         }
-        if (jQuery(e.target).closest(".emoji-hover").length === 0 && jQuery(e.target).closest(".toggleEmoji").length === 0) {
+        if (
+          jQuery(e.target).closest(".emoji-hover").length === 0 &&
+          jQuery(e.target).closest(".toggleEmoji").length === 0
+        ) {
           // this.emojiToggleActive = false;
           closeEmoji();
         }
       });
-      jQuery(".textarea").keydown(function (e) {
+      jQuery(".textarea").keydown(function(e) {
         if (e.keyCode == 13 && !e.shiftKey) {
           e.preventDefault();
         }
-
       });
-
     }
-    var publishCommentWithEnter = function () {
+    var publishCommentWithEnter = function() {
       alert(this.publicationBean._id);
-    }.bind(this)
-    var loadChanges = function () {
+    }.bind(this);
+    var loadChanges = function() {
       this.changeDetector.markForCheck();
     }.bind(this);
 
-
-    var closeEmoji = function () {
+    var closeEmoji = function() {
       jQuery("#" + this.emojiHoverId).hide();
       this.changeDetector.markForCheck();
     }.bind(this);
-    var closeSignal = function () {
+    var closeSignal = function() {
       this.signalButton = false;
       this.changeDetector.markForCheck();
     }.bind(this);
@@ -409,35 +446,39 @@ export class Publication {
     this.initComments();
   }
 
-  checkEnter(event) {
-
-  }
+  checkEnter(event) {}
 
   publishComment() {
-		var txt:string = this.commentInputHtml;
-		txt = txt.replace(/(\&nbsp;|\ )+/g, ' ')
-							.replace(/(\<.?br\>)+/g, '<br>')
-							.replace(/^\<.?br\>|\<.?br\>$/g,'');
+    var txt: string = this.commentInputHtml;
+    txt = txt
+      .replace(/(\&nbsp;|\ )+/g, " ")
+      .replace(/(\<.?br\>)+/g, "<br>")
+      .replace(/^\<.?br\>|\<.?br\>$/g, "");
 
-		var white_space_regex:RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
-		var white_space_only = white_space_regex.test(txt);
+    var white_space_regex: RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
+    var white_space_only = white_space_regex.test(txt);
     if (!commentToSend && white_space_only && !this.uploadedPictureComment) {
       return;
     }
 
-		var commentToSend = this.emojiService.getCommentTextFromHtml(txt);
+    var commentToSend = this.emojiService.getCommentTextFromHtml(txt);
 
     this.loadingComment = true;
     this.changeDetector.markForCheck();
     var data = new FormData();
 
-    data.append('commentText', commentToSend);
-    data.append('profileId', this.user._id);
-    data.append('publId', this.publicationBean._id);
-    data.append('commentPicture', this.uploadedPictureComment);
+    data.append("commentText", commentToSend);
+    data.append("profileId", this.user._id);
+    data.append("publId", this.publicationBean._id);
+    data.append("commentPicture", this.uploadedPictureComment);
     this.changeDetector.markForCheck();
 
-    this.http.post(environment.SERVER_URL + pathUtils.ADD_COMMENT, data, AppSettings.OPTIONS_POST)
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.ADD_COMMENT,
+        data,
+        AppSettings.OPTIONS_POST
+      )
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -453,30 +494,24 @@ export class Publication {
               this.changeDetector.markForCheck();
               this.commentInputHtml = "";
               jQuery("#" + this.commentTextareaId).empty();
-              jQuery("#" + this.pubImgId).attr('src', "");
+              jQuery("#" + this.pubImgId).attr("src", "");
               jQuery("#" + this.pubImgId).hide();
               this.uploadedPictureComment = null;
               this.loadingComment = false;
             }
-
-          }
-          else {
+          } else {
             console.error(response);
             this.loadingComment = false;
-
           }
         },
-        err => {
-        },
-        () => {
-        }
+        err => {},
+        () => {}
       );
-
   }
 
   //uploading Photo click event
   addPhoto() {
-    jQuery(("." + this.pubImgId)).click();
+    jQuery("." + this.pubImgId).click();
   }
 
   //uploading photo or GIF
@@ -484,21 +519,23 @@ export class Publication {
     var inputValue = $event.target;
     if (inputValue != null && null != inputValue.files[0]) {
       this.uploadedPictureComment = inputValue.files[0];
-      this.ng2ImgMaxService.compress([this.uploadedPictureComment], 0.5).subscribe((compressedImage)=>{
-        this.ng2ImgMaxService.resize([compressedImage], 360, 200).subscribe((result)=>{
-       this.uploadedPictureComment=result;
-       previewFile(this.uploadedPictureComment, this.pubImgId);
-      })
-      });
-
-    }
-    else {
+      this.ng2ImgMaxService
+        .compress([this.uploadedPictureComment], 0.5)
+        .subscribe(compressedImage => {
+          this.ng2ImgMaxService
+            .resize([compressedImage], 360, 200)
+            .subscribe(result => {
+              this.uploadedPictureComment = result;
+              previewFile(this.uploadedPictureComment, this.pubImgId);
+            });
+        });
+    } else {
       this.uploadedPictureComment = null;
     }
   }
 
   resetCommentPicture() {
-    jQuery("#" + this.pubImgId).attr('src', "");
+    jQuery("#" + this.pubImgId).attr("src", "");
     jQuery("#" + this.pubImgId).hide();
     this.uploadedPictureComment = null;
   }
@@ -511,24 +548,24 @@ export class Publication {
       confirmButtonColor: "#6bac6f",
       confirmButtonText: this.translateCode("publication_popup_YES"),
       cancelButtonText: this.translateCode("publication_popup_NO"),
-      cancelButtonColor: '#999',
+      cancelButtonColor: "#999",
       allowOutsideClick: true
-    }).then(function () {
+    }).then(
+      function() {
         swal({
-          title: this.translateCode("publication_popup_notification_share_title"),
-          text:  this.translateCode("publication_popup_notification_share_text"),
+          title: this.translateCode(
+            "publication_popup_notification_share_title"
+          ),
+          text: this.translateCode("publication_popup_notification_share_text"),
           type: "success",
           timer: 1000,
           showConfirmButton: false
-        }).then(function () {
-        }, function (dismiss) {
-        });
+        }).then(function() {}, function(dismiss) {});
         this.doSharePub(post);
       }.bind(this),
-      function (dismiss) {
+      function(dismiss) {
         // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-        if (dismiss === 'overlay') {
-
+        if (dismiss === "overlay") {
         }
       }
     );
@@ -539,34 +576,34 @@ export class Publication {
     var alreadySharedPubId;
     if (post.isShared) {
       pubId = post.originalPublicationId;
-     alreadySharedPubId =this.publicationBean._id ;
-    }
-    else {
+      alreadySharedPubId = this.publicationBean._id;
+    } else {
       pubId = this.publicationBean._id;
     }
     let body = JSON.stringify({
       publId: pubId,
-      alreadySharedPubId : alreadySharedPubId,
+      alreadySharedPubId: alreadySharedPubId,
       profileId: this.user._id
     });
-    this.http.post(environment.SERVER_URL + pathUtils.SHARE_PUBLICATION, body, AppSettings.OPTIONS)
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.SHARE_PUBLICATION,
+        body,
+        AppSettings.OPTIONS
+      )
       .map((res: Response) => res.json())
       .subscribe(
         response => {
           if (response) {
-            if (response.status = "0") {
-
+            if ((response.status = "0")) {
               var element: PublicationBean = response.publication;
               this.postService.putNewPub(element, true);
               this.changeDetector.markForCheck();
             }
           }
         },
-        err => {
-        },
-        () => {
-
-        }
+        err => {},
+        () => {}
       );
   }
 
@@ -575,29 +612,32 @@ export class Publication {
       title: this.translateCode("publication_popup_report_title"),
       text: this.translateCode("publication_popup_report_text"),
       showCancelButton: true,
-      cancelButtonColor: '#999',
+      cancelButtonColor: "#999",
       confirmButtonColor: "#6bac6f",
       confirmButtonText: this.translateCode("publication_popup_confirm"),
       cancelButtonText: this.translateCode("publication_popup_cancel_button"),
-      input: 'textarea',
-    }).then(function (text) {
+      input: "textarea"
+    }).then(
+      function(text) {
         if (text) {
           this.doReportPub(text);
           swal({
-            title: this.translateCode("publication_popup_notification_report_title"),
-            text: this.translateCode("publication_popup_notification_report_text"),
+            title: this.translateCode(
+              "publication_popup_notification_report_title"
+            ),
+            text: this.translateCode(
+              "publication_popup_notification_report_text"
+            ),
             type: "success",
             timer: 1000,
             showConfirmButton: false
-          }).then(function () {
-          }, function (dismiss) {
-          });
+          }).then(function() {}, function(dismiss) {});
           this.changeDetector.markForCheck();
         }
-
       }.bind(this),
-      function (dismiss) {
-        if (dismiss === 'overlay') {}
+      function(dismiss) {
+        if (dismiss === "overlay") {
+        }
       }
     );
     this.closeModalPub();
@@ -610,41 +650,56 @@ export class Publication {
       publId: this.publicationBean._id,
       profileId: this.user._id
     });
-    this.http.post(environment.SERVER_URL +  pathUtils.REPORT_PUBLICATION, body, AppSettings.OPTIONS)
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.REPORT_PUBLICATION,
+        body,
+        AppSettings.OPTIONS
+      )
       .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-
-        },
-        err => {
-        },
-        () => {
-        }
-      );
+      .subscribe(response => {}, err => {}, () => {});
   }
 
-
   loadMoreComments(i: number) {
-    this.afficheCommentsLoading = true;
-    this.afficheMoreComments = false;
-    if (i >= this.nbMaxAddComments) {
-      this.afficheCommentsLoading = false;
+    var j = ++this.i;
+
+    if (3 * j <= this.allListComments.length) {
+      this.listComments = this.allListComments.slice(0, j * 3);
+
       this.afficheMoreComments = true;
       this.changeDetector.markForCheck();
-    }
-    else if ((this.listComments.length) >= this.publicationBean.comments.length) {
-      this.afficheCommentsLoading = false;
+    } else {
       this.afficheMoreComments = false;
       this.changeDetector.markForCheck();
     }
-    else {
-      setTimeout(() => {
-        this.listComments.push(this.publicationBean.comments[i + this.nbComments]);
-        this.changeDetector.markForCheck();
-        this.loadMoreComments(i + 1);
-      }, 0);
-    }
   }
+
+  // loadMoreComments(i: number) {
+
+  //   this.afficheCommentsLoading = true;
+  //   this.afficheMoreComments = false;
+  //   if (i >= this.publicationBean.comments.length) {
+  //     this.afficheCommentsLoading = false;
+  //     this.afficheMoreComments = true;
+  //     this.changeDetector.markForCheck();
+  //   }
+  //   // else if ((this.listComments.length) >= this.publicationBean.comments.length) {
+  //   //   this.afficheCommentsLoading = false;
+  //   //   this.afficheMoreComments = false;
+  //   //   this.changeDetector.markForCheck();
+  //   // }
+  //   else {
+  //     i+=3;
+
+  //     setTimeout(() => {
+  //       if(!this.listComments.includes(this.publicationBean.comments[i+this.nbComments]))
+  //       for(let j =i;i<this.nbMaxAddComments+i;j++)
+  //       this.listComments.push(this.publicationBean.comments[i]);
+  //       this.changeDetector.markForCheck();
+  //       this.loadMoreComments(i);
+  //     }, 0);
+  //   }
+  // }
 
   public activateSignal() {
     this.signalButton = !this.signalButton;
@@ -656,89 +711,79 @@ export class Publication {
 
   getPublicationTime(publishDateString: string): string {
     //console.log("after 10 seconds"+publishDateString);
-    if (this.isFixedPublishDate)
-      return this.fixedPublishDate;
+    if (this.isFixedPublishDate) return this.fixedPublishDate;
     let date = new Date();
-    let currentDate = new Date(date.valueOf() + date.getTimezoneOffset() * 60000);
+    let currentDate = new Date(
+      date.valueOf() + date.getTimezoneOffset() * 60000
+    );
     let publishDate = this.dateService.convertIsoToDate(publishDateString);
 
     let diffDate = this.dateService.getdiffDate(publishDate, currentDate);
     if (diffDate.day > 28) {
       this.fixedPublishDate = this.dateService.convertPublishDate(publishDate);
       this.isFixedPublishDate = true;
-    }
-    else if (diffDate.day && diffDate.day == 1) {
-      this.fixedPublishDate =this.translateCode("prefix_date_yesterday");
+    } else if (diffDate.day && diffDate.day == 1) {
+      this.fixedPublishDate = this.translateCode("prefix_date_yesterday");
       //this.isFixedPublishDate = true;
-    }
-    else if (diffDate.day > 0) {
-      this.fixedPublishDate = diffDate.day + this.translateCode("prefix_date_days");;
+    } else if (diffDate.day > 0) {
+      this.fixedPublishDate =
+        diffDate.day + this.translateCode("prefix_date_days");
       //this.isFixedPublishDate = true;
-    }
-    else if ((diffDate.hour) && (diffDate.hour == 1)) {
+    } else if (diffDate.hour && diffDate.hour == 1) {
       this.fixedPublishDate = this.translateCode("prefix_date_one_hour");
       this.isFixedPublishDate = true;
-    }
-    else if ((diffDate.hour) && (diffDate.hour > 0)) {
-      this.fixedPublishDate = diffDate.hour + this.translateCode("prefix_date_hours");
+    } else if (diffDate.hour && diffDate.hour > 0) {
+      this.fixedPublishDate =
+        diffDate.hour + this.translateCode("prefix_date_hours");
       this.isFixedPublishDate = true;
-    }
-    else if ((diffDate.min) && (diffDate.min > 1))
-      this.fixedPublishDate = diffDate.min +  this.translateCode("prefix_date_minutes");
-    else
-      this.fixedPublishDate = this.translateCode("prefix_date_now");
+    } else if (diffDate.min && diffDate.min > 1)
+      this.fixedPublishDate =
+        diffDate.min + this.translateCode("prefix_date_minutes");
+    else this.fixedPublishDate = this.translateCode("prefix_date_now");
 
     //setTimeout(this.getPublicationTime(publishDateString), 10000);
     return this.fixedPublishDate;
   }
 
   addOrRemoveLike() {
-    if (!this.publicationBean.isLiked)
-    { if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes == 0) {
+    if (!this.publicationBean.isLiked) {
+      if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes == 0) {
         this.addLike();
         this.publicationBean.nbLikes = 0;
         this.publicationBean.nbDislikes = 0;
-      }else {
+      } else {
         this.addLike();
       }
+    } else this.removeLike();
+    if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes < 0) {
+      this.publicationBean.nbLikes = 0;
+      this.publicationBean.nbDislikes = 0;
     }
-    else
-      this.removeLike();
-      if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes < 0) {
-        this.publicationBean.nbLikes =0;
-        this.publicationBean.nbDislikes = 0;
-      }
   }
 
   addLike() {
-    if (this.publicationBean.isDisliked)
-      this.removeDislike();
+    if (this.publicationBean.isDisliked) this.removeDislike();
     let body = JSON.stringify({
       publId: this.publicationBean._id,
       profileId: this.user._id,
-      profilefirstname : this.user.firstName,
-      profilelastname : this.user.lastName,
-      profilepicture : this.user.profilePictureMin
-
+      profilefirstname: this.user.firstName,
+      profilelastname: this.user.lastName,
+      profilepicture: this.user.profilePictureMin
     });
 
     //console.log(this.publicationBean._id);
 
-    this.http.post(environment.SERVER_URL + pathUtils.LIKE_PUBLICATION, body, AppSettings.OPTIONS)
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.LIKE_PUBLICATION,
+        body,
+        AppSettings.OPTIONS
+      )
       .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-
-        },
-        err => {
-        },
-        () => {
-        }
-      );
+      .subscribe(response => {}, err => {}, () => {});
 
     this.publicationBean.isLiked = true;
     this.publicationBean.nbLikes++;
-
   }
 
   removeLike() {
@@ -746,62 +791,53 @@ export class Publication {
       publId: this.publicationBean._id,
       profileId: this.user._id
     });
-    this.http.post(environment.SERVER_URL +  pathUtils.REMOVE_LIKE_PUBLICATION, body, AppSettings.OPTIONS)
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.REMOVE_LIKE_PUBLICATION,
+        body,
+        AppSettings.OPTIONS
+      )
       .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-
-        },
-        err => {
-        },
-        () => {
-        }
-      );
+      .subscribe(response => {}, err => {}, () => {});
 
     this.publicationBean.isLiked = false;
     this.publicationBean.nbLikes--;
   }
 
   addOrRemoveDislike() {
-    if (!this.publicationBean.isDisliked)
-    { if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes == 0) {
+    if (!this.publicationBean.isDisliked) {
+      if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes == 0) {
         this.addDislike();
         this.publicationBean.nbLikes = 0;
         this.publicationBean.nbDislikes = 0;
-      }else{
+      } else {
         this.addDislike();
       }
+    } else this.removeDislike();
+    if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes < 0) {
+      this.publicationBean.nbLikes = 0;
+      this.publicationBean.nbDislikes = 0;
     }
-    else
-      this.removeDislike();
-      if(this.publicationBean.nbLikes+this.publicationBean.nbDislikes < 0) {
-        this.publicationBean.nbLikes =0;
-        this.publicationBean.nbDislikes = 0;
-      }
   }
 
   addDislike() {
-    if (this.publicationBean.isLiked)
-      this.removeLike();
+    if (this.publicationBean.isLiked) this.removeLike();
 
     let body = JSON.stringify({
       publId: this.publicationBean._id,
       profileId: this.user._id,
-      profilefirstname : this.user.firstName,
-      profilelastname : this.user.lastName,
-      profilepicture : this.user.profilePictureMin
+      profilefirstname: this.user.firstName,
+      profilelastname: this.user.lastName,
+      profilepicture: this.user.profilePictureMin
     });
-    this.http.post(environment.SERVER_URL +  pathUtils.DISLIKE_PUBLICATION, body, AppSettings.OPTIONS)
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.DISLIKE_PUBLICATION,
+        body,
+        AppSettings.OPTIONS
+      )
       .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-        },
-        err => {
-        },
-        () => {
-
-        }
-      );
+      .subscribe(response => {}, err => {}, () => {});
 
     this.publicationBean.isDisliked = true;
     this.publicationBean.nbDislikes++;
@@ -812,48 +848,42 @@ export class Publication {
       publId: this.publicationBean._id,
       profileId: this.user._id
     });
-    this.http.post(environment.SERVER_URL +   pathUtils.REMOVE_DISLIKE_PUBLICATION, body, AppSettings.OPTIONS)
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.REMOVE_DISLIKE_PUBLICATION,
+        body,
+        AppSettings.OPTIONS
+      )
       .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-        },
-        err => {
-        },
-        () => {
-
-        }
-      );
+      .subscribe(response => {}, err => {}, () => {});
     this.publicationBean.isDisliked = false;
     this.publicationBean.nbDislikes--;
   }
 
   getInteractions() {
-    var url: string = environment.SERVER_URL + pathUtils.GET_SOCIAL_INTERACTIONS;
+    var url: string =
+      environment.SERVER_URL + pathUtils.GET_SOCIAL_INTERACTIONS;
 
     let body = JSON.stringify({
       publId: this.publicationBean._id,
       page: this.interactionsPage
     });
 
-            this.http.post(url,body,
-                AppSettings.OPTIONS)
-                .map((res: Response) => res.json())
-                .subscribe(
-
-                  response => {
-                    this.InteractionsLikes = response.message.likes.slice();
-                    this.InteractionsDislikes = response.message.dislikes.slice();
-                    console.log(this.InteractionsLikes);
-                    console.log(this.InteractionsDislikes);
-
-
-                },
-                err => {
-                },
-                () => {
-                  this.changeDetector.markForCheck();
-                }
-              );
+    this.http
+      .post(url, body, AppSettings.OPTIONS)
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+          this.InteractionsLikes = response.message.likes.slice();
+          this.InteractionsDislikes = response.message.dislikes.slice();
+          console.log(this.InteractionsLikes);
+          console.log(this.InteractionsDislikes);
+        },
+        err => {},
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
   }
 
   public toggleEmoji() {
@@ -872,13 +902,12 @@ export class Publication {
     this.modalPub = false;
   }
 
-  openModalInteractions(){
+  openModalInteractions() {
     this.modalInteractions = true;
     this.getInteractions();
-
   }
 
-  closeModalInteractions(){
+  closeModalInteractions() {
     this.modalInteractions = false;
   }
 
@@ -886,27 +915,26 @@ export class Publication {
     this.selectedEmojiTab = tab;
   }
 
-  openTab(tabName){
+  openTab(tabName) {
     var i, tabcontent, tablinks;
-    if(tabName === 'Likes') {
+    if (tabName === "Likes") {
       document.getElementById("nulle").style.borderBottom = "none";
       document.getElementById("lol").style.borderBottom = "1px solid #2aaa2a";
-    }
-    else if(tabName === 'Dislikes') {
+    } else if (tabName === "Dislikes") {
       document.getElementById("lol").style.borderBottom = "none";
       document.getElementById("nulle").style.borderBottom = "1px solid #fb001e";
     }
 
     tabcontent = document.getElementsByClassName("interactions-tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+      tabcontent[i].style.display = "none";
     }
     tablinks = document.getElementsByClassName("interactions-tablinks");
     for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     var currentelem = document.getElementById(tabName);
-    currentelem.style.display = "block"
+    currentelem.style.display = "block";
     currentelem.className += " active";
   }
 
@@ -915,11 +943,12 @@ export class Publication {
       profileId: userId
     });
 
-    this.http.post(
-      environment.SERVER_URL + pathUtils.SUBSCRIBE,
-      body,
-      AppSettings.OPTIONS
-    )
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.SUBSCRIBE,
+        body,
+        AppSettings.OPTIONS
+      )
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -927,74 +956,86 @@ export class Publication {
             console.log("subscribe done");
           }
         },
-        err => {
-        },
+        err => {},
         () => {
           this.changeDetector.markForCheck();
         }
       );
-
   }
 
-  unsubscribeUser(userId){
+  unsubscribeUser(userId) {
     let body = JSON.stringify({
       profileId: userId
     });
 
-    this.http.post(
-      environment.SERVER_URL + pathUtils.UNSUBSCRIBE,
-      body,
-      AppSettings.OPTIONS)
-      .map((res:Response) => res.json())
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.UNSUBSCRIBE,
+        body,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
       .subscribe(
         response => {
-        if (response.status == 0) {
-          console.log("unsubscribed done");
+          if (response.status == 0) {
+            console.log("unsubscribed done");
+          }
+        },
+        err => {},
+        () => {
+          this.changeDetector.markForCheck();
         }
-      },
-        err => {
-      },
-      () => {
-        this.changeDetector.markForCheck();
-      }
-    );
+      );
   }
 
-  toggleSubscribe(user){
-      if(user.isSubscribed === "true"){
-        this.unsubscribeUser(user.userId);
-        var like = this.InteractionsLikes.filter(x => x.userId === user.userId)[0];
-        if(like != undefined){
-          like.isSubscribed = "false";
+  toggleSubscribe(user) {
+    if (user.isSubscribed === "true") {
+      this.unsubscribeUser(user.userId);
+      var like = this.InteractionsLikes.filter(
+        x => x.userId === user.userId
+      )[0];
+      if (like != undefined) {
+        like.isSubscribed = "false";
+      }
+      var dislike = this.InteractionsDislikes.filter(
+        x => x.userId === user.userId
+      )[0];
+      if (dislike != undefined) {
+        dislike.isSubscribed = "false";
+      }
+    } else {
+      if (user.isSubscribed === "false") {
+        this.subscribeUser(user.userId);
+        var like = this.InteractionsLikes.filter(
+          x => x.userId === user.userId
+        )[0];
+        if (like != undefined) {
+          like.isSubscribed = "true";
         }
-        var dislike = this.InteractionsDislikes.filter(x => x.userId === user.userId)[0];
-        if(dislike != undefined){
-          dislike.isSubscribed = "false";
+        var dislike = this.InteractionsDislikes.filter(
+          x => x.userId === user.userId
+        )[0];
+        if (dislike != undefined) {
+          dislike.isSubscribed = "true";
         }
-      } else {
-        if(user.isSubscribed === "false"){
-          this.subscribeUser(user.userId);
-          var like = this.InteractionsLikes.filter(x => x.userId === user.userId)[0];
-          if(like != undefined){
-            like.isSubscribed = "true";
-          }
-          var dislike = this.InteractionsDislikes.filter(x => x.userId === user.userId)[0];
-          if(dislike != undefined){
-            dislike.isSubscribed = "true";
-          }
-        }
+      }
     }
   }
 
   addToComment(emoji) {
-      this.commentInputHtml += this.afficheComment(" " + emoji.shortcut);
+    this.commentInputHtml += this.afficheComment(" " + emoji.shortcut);
   }
 
   afficheComment(comment): string {
-    var img = '<img class="emoji" style="align:absmiddle; top : 0;" src="assets/images/basic/';
+    var img =
+      '<img class="emoji" style="align:absmiddle; top : 0;" src="assets/images/basic/';
     for (var i = 0; i < this.listEmoji.length; i++) {
       for (var j = 0; j < this.listEmoji[i].list.length; j++) {
-        comment = this.replaceAll(comment, this.listEmoji[i].list[j].shortcut, img + this.listEmoji[i].list[j].imageName + '.png" />');
+        comment = this.replaceAll(
+          comment,
+          this.listEmoji[i].list[j].shortcut,
+          img + this.listEmoji[i].list[j].imageName + '.png" />'
+        );
       }
     }
     return comment;
@@ -1017,7 +1058,6 @@ export class Publication {
   }
 
   linkAPI() {
-
     var linkURL = this.publicationBean.publExternalLink;
     if (linkURL.search(".gif") >= 0) {
       var checker = linkURL.substr(linkURL.length - 8, 8);
@@ -1034,9 +1074,11 @@ export class Publication {
       }
     }
 
-    this.http.get(
-      environment.SERVER_URL +  pathUtils.GET_OPEN_GRAPH_DATA + linkURL
-      , AppSettings.OPTIONS)
+    this.http
+      .get(
+        environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
+        AppSettings.OPTIONS
+      )
       .map((res: Response) => res.json())
       .subscribe(
         response => {
@@ -1051,28 +1093,22 @@ export class Publication {
               this.link.imageHeight = response.results.data.ogImage.height;
               if (a.substring(a.length - 3, a.length) == "gif")
                 this.link.isGif = true;
-              else
-                this.link.isGif = false;
-            }
-            else {
+              else this.link.isGif = false;
+            } else {
               this.link.image = null;
               this.link.imageWidth = 0;
               this.link.imageHeight = 0;
             }
             this.link.isSet = true;
 
-
             this.changeDetector.markForCheck();
-          }
-          else {
+          } else {
             console.error("error in link API; " + linkURL);
-
           }
         },
         err => {
           //error
           console.error("error in link API; " + linkURL);
-
         },
         () => {
           //final
@@ -1082,17 +1118,16 @@ export class Publication {
 
   translateCode(code) {
     let message;
-    this.translate.get(code).subscribe((resTranslate:string) => {
+    this.translate.get(code).subscribe((resTranslate: string) => {
       message = resTranslate;
     });
     return message;
   }
 
-  shortNumber(n:number):string {
-    return n < 1000 ? n+"" : (n/1000+"k").replace(".", ",");
+  shortNumber(n: number): string {
+    return n < 1000 ? n + "" : (n / 1000 + "k").replace(".", ",");
   }
 }
-
 
 function urlEncode(source: string): string {
   source = replaceAllNew(source, ":", "%3A");
@@ -1105,23 +1140,24 @@ function replaceAllNew(comment, search, replacement) {
   return comment.split(search).join(replacement);
 }
 function previewFile(uploadedFile, elementId) {
-  var preview = jQuery('#preview-image');
+  var preview = jQuery("#preview-image");
   var file = uploadedFile;
   var reader = new FileReader();
 
-  reader.addEventListener("load", function () {
-    //preview.att.src = reader.result;
+  reader.addEventListener(
+    "load",
+    function() {
+      //preview.att.src = reader.result;
 
-    jQuery("#" + elementId).attr('src', reader.result);
-    jQuery("#" + elementId).fadeIn(500);
-    //console.log(reader.result);
-    //test
-
-  }, false);
+      jQuery("#" + elementId).attr("src", reader.result);
+      jQuery("#" + elementId).fadeIn(500);
+      //console.log(reader.result);
+      //test
+    },
+    false
+  );
 
   if (file) {
     reader.readAsDataURL(file);
   }
-
-
 }
