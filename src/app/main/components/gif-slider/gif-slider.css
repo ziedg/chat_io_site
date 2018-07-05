@@ -68,3 +68,22 @@
 .slider-btn-after {
   right: 0;
 }
+
+@media(max-width: 767px) {
+  .slider-container {
+    margin-left: -15px;
+    width: calc(100% + 30px)
+  }
+  .slider-sub-container {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .slides-container {
+    overflow: auto;
+  }
+
+  .fa-times, .slider-btn {
+    display: none;
+  }
+}
