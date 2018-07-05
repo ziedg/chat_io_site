@@ -869,9 +869,9 @@ a {
   position: absolute;
   top: -10px;
   right: -9px;
-  border-radius: 5px;
-  background-color: #dc0d17;
-  background-image: linear-gradient(#fa3c45, #dc0d17);
+  border-radius: 50%;
+  background-color: #ff0000;
+  background-image: linear-gradient(#fa3c45, #ff000c);
   color: white;
   display: flex;
   display: -webkit-box;
