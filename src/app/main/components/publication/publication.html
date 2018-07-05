@@ -350,7 +350,7 @@
                           <button (click)="toggleSubscribe(user)" style="float:none"
                           *ngIf="user.isSubscribed === 'true' && user.userId !== profileId"
                           [ngStyle]="{'background-color':'#ccc'}">
-                               abonné
+                          {{'profile_already_subscribed' | translate }}
                           </button>
                         </div>
                       </div>
@@ -467,7 +467,7 @@
     </div>
     <div [class.comment-with-picture]="uploadedPictureComment">
       <div *ngIf="commentsDisplayed" class="comment-holder form-comment">
-        <img class="user-img for-comment"
+        <img class="user-img for-comment img-circle"
              src="{{user | AvailablePicture}}">
 
         <form (ngSubmit)="publishComment()" [formGroup]="formComment" #f="ngForm">
@@ -494,7 +494,9 @@
             <i class="fa fa-camera" (click)="addPhoto()"></i>
             <i class="fa fa-smile-o toggleEmoji" (click)="toggleEmoji()" style="padding-right: 10px;"></i>
             <button class="comment-publish" type="submit" *ngIf="!loadingComment">
-                 {{ 'publication_comment_button' | translate }}
+                 <!-- {{ 'publication_comment_button' | translate }} -->
+                 <object data="/assets/other/send.svg" type="image/svg+xml"
+                    width="20" height="20" fill="#000"></object>
             </button>
             <button class="comment-publish comment-loading" *ngIf="loadingComment" disabled>
               <div class="loading"></div>
