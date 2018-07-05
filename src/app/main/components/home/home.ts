@@ -729,7 +729,7 @@ export class Home {
       for(let i=0;i<line_parts.length;i++){
         nb=nb+(line_parts[i].length/39);
         if(line_parts[i].length%39!=0) nb++;}
-      if(nb>8){
+      if(nb>6){
         this.getbg0();
         this.bgvalid=false;
       }
