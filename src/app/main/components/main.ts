@@ -69,7 +69,7 @@ export class Main {
   private isSubscribed = false;
   private registration = undefined;
   private notifFirstCheck: Boolean = true;
-  nbNewMessageNotification: Number;
+  nbNewMessageNotification: Number =0;
   // end Notification vars
 
 
