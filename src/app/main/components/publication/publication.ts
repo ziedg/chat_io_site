@@ -8,10 +8,11 @@ import {
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Http, Response } from "@angular/http";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
-import { Router } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { Ng2ImgMaxService } from "ng2-img-max";
 import { timer } from "rxjs/observable/timer";
+import { Location } from '@angular/common';
 
 import { environment } from "../../../../environments/environment";
 import { CommentBean } from "../../../beans/comment-bean";
@@ -43,7 +44,7 @@ declare var swal: any;
 export class Publication {
   intervalHolder: any;
   commentContent = "";
-
+  public hiddenContent: boolean;
   public i: number = 1;
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
@@ -114,8 +115,16 @@ export class Publication {
     private loginService: LoginService,
     private changeDetector: ChangeDetectorRef,
     private dateService: DateService,
-    private ng2ImgMaxService: Ng2ImgMaxService
+    private ng2ImgMaxService: Ng2ImgMaxService,
+    private location: Location
   ) {
+    if(location.path() != ''){
+      if(location.path().indexOf('/main/post') != -1){
+        this.hiddenContent = true;
+      }else{
+        this.hiddenContent = false;
+      }
+    }
     loginService.actualize();
 
     this.user = loginService.user;
@@ -218,16 +227,20 @@ export class Publication {
         .parent()
         .parent()
         .css({
-          position: "fixed",
-          bottom: "34px",
-          "background-color": "white",
-          "z-index": "10000"
+          'margin': "0px",
+          'position': "fixed",
+          'bottom': "0",
+          'background-color': "white",
+          'z-index': "10000",
+          'left':'0'
         });
+      jQuery(".navigation-bottom").hide();
       jQuery("#" + element.commentTextareaId).blur(function() {
         jQuery("#" + element.commentTextareaId)
           .parent()
           .parent()
-          .css({ position: "unset" });
+          .css({ position: "unset", margin: "0 0 12px 0" });
+        jQuery(".navigation-bottom").show();
       });
     }
   }
@@ -498,6 +511,7 @@ export class Publication {
               jQuery("#" + this.pubImgId).hide();
               this.uploadedPictureComment = null;
               this.loadingComment = false;
+              this.router.navigateByUrl('/main/post/'+this.publicationBean._id)
             }
           } else {
             console.error(response);
@@ -1138,6 +1152,7 @@ export class Publication {
   shortNumber(n: number): string {
     return n < 1000 ? n + "" : (n / 1000 + "k").replace(".", ",");
   }
+  
 }
 
 function urlEncode(source: string): string {

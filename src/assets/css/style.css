@@ -529,7 +529,7 @@
   .form-more .fa:hover {
     color: #666;
   }
-
+  
   .commenter-name:hover {
     color: #1b3978;
   }
@@ -2027,7 +2027,7 @@ section.widget {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   cursor: pointer;
-  margin: -13px 10px;
+  margin: 0px 26px;
   padding: 10px 10px 0 10px;
   line-height: 34px;
   border: none;
@@ -3038,15 +3038,35 @@ facebook-friends .user .user-img {
 
 .form-more {
   position: absolute;
-  right: 55px;
+  right: 70px;
   font-size: 18px;
-  bottom: 9px;
+  bottom: 13px;
   display: flex;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   color: #999;
   justify-content: space-between;
+}
+
+.toggleEmoji{
+  width:30px;
+  height:20px;
+  margin-right:10px;
+}
+
+.addPhoto{
+  width:20px;
+  height:20px;
+  margin-right:10px;
+}
+
+.publishImage{
+  background-image: url(/assets/images/new/sendcomment.png);
+  width:20px;
+  height:20px;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .form-more .fa {
@@ -3070,7 +3090,7 @@ facebook-friends .user .user-img {
   width: 85%;
   max-width: 100%;
   margin: 0;
-  padding: 10px 0 0 13px;
+  padding: 7px 0 0 13px;
   margin-left: 5px;
   display: flex;
   display: -webkit-box;
@@ -3082,7 +3102,7 @@ facebook-friends .user .user-img {
   font-family: inherit;
   font-size: 14px;
   font-weight: bold;
-  color:#C1C4C8;
+  /* color:#C1C4C8; */
   overflow: auto;
   outline: none;
   -webkit-box-shadow: none;
@@ -3100,7 +3120,7 @@ facebook-friends .user .user-img {
 
 @media (max-width: 768px) {
   .comment-holder .textarea {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
@@ -3128,7 +3148,7 @@ facebook-friends .user .user-img {
 
 .for-comment {
   border-radius: 0;
-  --img-w: 35px !important;
+  --img-w: 45px !important;
   height: var(--img-w);
   width: var(--img-w);
   max-height: var(--img-w);
@@ -4104,6 +4124,10 @@ top-blagueurs-decov .widget .subscribe button {
 @media (max-width: 768px) {
   .login-body {
     margin-top: 0;
+  }
+  
+  .form-more{
+    right:42px;
   }
 }
 
