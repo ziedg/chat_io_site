@@ -412,7 +412,7 @@ checkNewMessageNotification(){
   .map((res: Response) => res.json())
   .subscribe(
     response => {
-      if (response.status == 0) {
+      if (response.status == 1) {
 
        this.nbNewMessageNotification+=response.nbNewMessageNotifications;
       }
