@@ -234,6 +234,7 @@ export class Publication {
           'z-index': "10000",
           'left':'0'
         });
+      jQuery('.publishImage').show();
       jQuery(".navigation-bottom").hide();
       jQuery("#" + element.commentTextareaId).blur(function() {
         jQuery("#" + element.commentTextareaId)
