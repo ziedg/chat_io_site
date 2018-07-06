@@ -130,7 +130,7 @@ noSearchResults: Boolean = false;
             users[i].lastMessage.date = hours+":"+minutes;
           }
           this.chatListUsers.push(users[i]);
-          console.log(this.chatListUsers);
+          
        } 
    
     })
@@ -154,8 +154,6 @@ noSearchResults: Boolean = false;
                 else{
                   this.chatListUsers[elementPos].lastMessage.message = message.message;
                 }
-                
-                
                 
                 let actualDate = new Date(Date.now());
                 let hours = actualDate.getHours().toString();

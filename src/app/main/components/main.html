@@ -48,12 +48,22 @@
 				<i class="fa fa-user" [routerLink]="['/main/suggestions']"></i>
 			</article>
 
-      <article
-               class="hidden-xs"
-               style="margin-right: 10px; cursor: pointer;">
+
+      <article  [routerLink]="['/main/messaging']"  class="notification-parent hidden-xs">
+
         <div class="noPadding">
-          <img class="home-sidebar-icon" style="width:25px" src="assets/images/new/chat-grey.png">
+
+            <div   class="cercle-notice" *ngIf="nbNewMessageNotification > 0">
+                {{nbNewMessageNotification}}
+
+
+
+
+
+                </div>
+                <i  class=" fa fa-comments fa-lg"> </i>
         </div>
+
       </article>
 
 <!--
@@ -82,7 +92,7 @@
               <span *ngFor="let notif of listNotif">
 
                 <article [class.seen-notification]="notif.isSeen === 'false'" *ngIf="notif.type !='subscribe'" (click)="goTo('post',notif.publId,notif._id)">
-                  <div class="user-img for-notif" *ngIf="notif.profiles && notif.profiles.length > 0&&notif.profiles[0].profilePictureMin" [ngStyle]="{'background-image': 'url(' + notif.profiles[0].profilePictureMin + ')'}">
+                  <div class="user-img for-notif" *ngIf="notif.profiles && notif.profiles.length > 0&&notif.profiles[notif.profiles.length -1].profilePictureMin" [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length -1].profilePictureMin + ')'}">
                     </div>
 
 
@@ -97,11 +107,11 @@
                       </span>
                       <span *ngIf="notif.profiles &&notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
-                          {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName}
+                          {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[1].firstName, second: notif.profiles[0].firstName}
                           }}
                         </span>
                         <span *ngIf="notif.profiles.length>2" class="notif-a">
-                          {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1
+                          {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[notif.profiles.length -1].firstName, number: notif.profiles.length-1
                           } }}
                         </span>
                         <span>{{ 'main_comments_notification' | translate }}</span>
@@ -118,11 +128,11 @@
                       </span>
                       <span *ngIf=" notif.profiles && notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
-                          {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[0].firstName, second: notif.profiles[1].firstName}  }}
+                          {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[1].firstName, second: notif.profiles[0].firstName}  }}
                     >
                         </span>
                         <span *ngIf="notif.profiles.length>2" class="notif-a">
-                          {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1
+                          {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[notif.profiles.length -1].firstName, number: notif.profiles.length-1
                           } }}
                         </span>
                         <span>{{ 'main_reagirs_notification' | translate}}</span>
@@ -273,7 +283,7 @@
          alt="notifications-icon"
          src="assets/images/new/nav-icons/notifications-icon-full.png">
     <span class="outline-icon-text">{{"notifications" | translate}}</span>
-    <div class="cercle-notice" style="top:0; right: calc(50% - 25px)" *ngIf="nbNewNotifications>0">{{nbNewNotifications}}</div>
+    <div class="cercle-notice" style="top:0; right: calc(53% - 25px)" *ngIf="nbNewNotifications>0">{{nbNewNotifications}}</div>
   </div>
   <div class="profile-icon outline-icon-container"
        [routerLink]="['/main', 'profile', user._id]"

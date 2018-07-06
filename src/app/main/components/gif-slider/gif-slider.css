@@ -83,7 +83,16 @@
     overflow: auto;
   }
 
-  .fa-times, .slider-btn {
+  .slider-btn {
     display: none;
+  }
+
+  .slider-container {
+    overflow: visible;
+  }
+
+  .fa-times {
+    top: -20px!important;
+    right: 20px!important;
   }
 }

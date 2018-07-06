@@ -188,7 +188,8 @@
 
             </div>
 
-            <div *ngIf="bglist" class="pub-bg-container col-md-12 col-xs-12 noPadding" >
+            <div *ngIf="bglist"
+                  [ngClass]="{'pub-bg-container col-md-12 col-xs-12 noPadding':true, 'position-absolute': pubbg}">
               <div class="navigation-arrow-container-bglist" style="left:3px;z-index:1"
               (click)="sideScroll('left',25,100,100)">
               <img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png"></div>

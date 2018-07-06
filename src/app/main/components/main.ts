@@ -68,7 +68,8 @@ export class Main {
   private subscriptionJson = '';
   private isSubscribed = false;
   private registration = undefined;
-  private notifFirstCheck: Boolean = true;  
+  private notifFirstCheck: Boolean = true;
+  nbNewMessageNotification: Number =0;
   // end Notification vars
 
 
@@ -107,6 +108,7 @@ export class Main {
     //got it thank you amine :p
 
     this.checkNewNotifications();
+    this.checkNewMessageNotification();
     if (this.user!==null)
     this.listenForNotifications(this.user._id);
 
@@ -296,7 +298,7 @@ export class Main {
 
               if(response[i]._id && response[i].type!='message'  && response[i].profiles.length > 0)
                   arr.push(response[i]);
-             
+
 
               this.lastNotifId = response[i]._id;
 
@@ -312,7 +314,7 @@ export class Main {
 
              this.listNotif = arr;
              this.listNotif.forEach(item => {
-               console.log(item._id)
+               console.log(item)
              })
 
 
@@ -399,6 +401,38 @@ export class Main {
         }
       );
   }
+
+
+checkNewMessageNotification(){
+  this.http
+  .get(
+    environment.SERVER_URL + pathUtils.CHECK_NEW_MESSAGE_NOTIFICATIONS,
+    AppSettings.OPTIONS
+  )
+  .map((res: Response) => res.json())
+  .subscribe(
+    response => {
+      if (response.status == 1) {
+
+       this.nbNewMessageNotification+=response.nbNewMessageNotifications;
+       console.log(this.nbNewMessageNotification);
+      }
+    },
+    err => {},
+    () => {
+      this.changeDetector.markForCheck();
+    }
+  );
+}
+
+
+
+
+
+
+
+
+
 /*
   loadNotif() {
     setInterval(() => {

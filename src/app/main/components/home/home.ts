@@ -234,81 +234,101 @@ export class Home {
     return this.pubclass;
   }
   bglistf(){
-    if(this.bglist == true)
-      this.bglist = false;
-    else
-      this.bglist = true;
+    this.bglist = !this.bglist;
+    this.toggling_bglistf()
+  }
+
+  toggling_bglistf(){
+    if(this.bglist) { this.showGifSlider = false; this.resetPreviewGIF();}
+    else { this.pubbg = false; this.pubclass=""; }
   }
   getbg0(){
     if(this.bgvalid){
       this.pubbg=false;
       this.pubclass="";
+      this.resetPreview();
   }}
   getbg1(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes1";
+    this.resetPreview();
   }}
 
   getbg2(){
     if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes2";
+    this.resetPreview();
   }}
   getbg3(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes3";
+    this.resetPreview();
   }}
   getbg4(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes4";
+    this.resetPreview();
   }}
   getbg5(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes5";
+    this.resetPreview();
   }}
   getbg6(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes6";
+    this.resetPreview();
   }}
   getbg7(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes7";
+    this.resetPreview();
   }}
   getbg8(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes8";
+    this.resetPreview();
   }}
   getbg9(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes9";
+    this.resetPreview();
   }}
   getbg10(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes10";
+    this.resetPreview();
   }}
   getbg11(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes11";
+    this.resetPreview();
   }}
   getbg12(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes12";
+    this.resetPreview();
   }}
   getbg13(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes13";
+    this.resetPreview();
   }}
   getbg14(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes14";
+    this.resetPreview();
   }}
   getbg15(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes15";
+    this.resetPreview();
   }}
   getbg16(){if(this.bgvalid){
     this.pubbg=true;
     this.pubclass="pubdes16";
+    this.resetPreview();
   }}
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
@@ -534,14 +554,47 @@ export class Home {
     this.link.isGif = true;
     this.linkLoading = false;
     jQuery(".file-input-holder").hide();
+  }
 
+  resetPreviewGIF() {
+    this.link.url = "";
+    this.link.isSet = false;
+    this.link.isGif = false;
+    
+  }
 
+  resetPreview() {
+    this.link.url = "";
+    this.link.isSet = false;
+    this.link.isGif = false;
+    jQuery("#file-image").val("");
+    jQuery("#file-image-gif").val("");
+    jQuery("#preview-image").attr("src", "");
+    jQuery("#preview-image").fadeOut();
+    this.uploadedPicture = null;
+    this.imageFromLink = false;
+    this.uploadedPicture = null;
+    this.titleEnable = false;
+    this.youtubeInput = false;
+    this.youtubeLink = "";
+    this.facebookInput = false;
+    this.facebookLink = "";
+    jQuery(".yt-in-url").val("");
+    jQuery(".youtube-preview").html("");
+    jQuery(".facebook-preview").html("");
+    this.changeDetector.markForCheck();
   }
 
   updatePublishTextOnPaste($event) {
     $event.preventDefault();
     let text = $event.clipboardData.getData("text/plain");
     this.link.isGif = false;
+    if(this.pubbg){
+      
+      text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
+      document.execCommand("insertHTML", false, text);
+      return;
+    }
     if (
       text.search("youtube.com/watch") >= 0 ||
       text.search("youtu.be/") >= 0
@@ -611,6 +664,9 @@ export class Home {
     this.closeLinkAPI();
     this.isEmpty = true;
     this.changeDetector.markForCheck();
+
+    this.bglist = false;
+    this.showGifSlider = false;
   }
 
   publish() {
@@ -951,6 +1007,7 @@ export class Home {
   closeBglist(){
     this.bglist = false;
     this.getbg0();
+    this.toggling_bglistf();
   }
   sideScroll(direction,speed,distance,step){
     var Container = jQuery(".bglist");
@@ -1094,6 +1151,7 @@ console.log("analyyyze");
 
   toggleGifSlider() {
     this.showGifSlider = !this.showGifSlider;
+    if(this.showGifSlider) { this.bglist = false; this.pubbg = false; this.pubclass="";}
 }
 
 }

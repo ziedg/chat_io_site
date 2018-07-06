@@ -1081,6 +1081,11 @@ export class Publication {
   deactivateAnimation() {
     this.likeAnimation = false;
   }
+  preventLink(e, isGif){
+    if(isGif){
+      e.preventDefault();
+    }
+  }
 
   linkAPI() {
     var linkURL = this.publicationBean.publExternalLink;
