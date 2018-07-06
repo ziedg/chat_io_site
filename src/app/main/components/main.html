@@ -48,12 +48,22 @@
 				<i class="fa fa-user" [routerLink]="['/main/suggestions']"></i>
 			</article>
 
-      <article
-               class="hidden-xs"
-               style="margin-right: 10px; cursor: pointer;">
+
+      <article  [routerLink]="['/main/messaging']"  class="notification-parent hidden-xs">
+
         <div class="noPadding">
-          <img class="home-sidebar-icon" style="width:25px" src="assets/images/new/chat-grey.png">
+
+            <div   class="cercle-notice" *ngIf="nbNewMessageNotification > 0">
+                {{nbNewMessageNotification}}
+
+
+
+
+
+                </div>
+                <i  class=" fa fa-comments fa-lg"> </i>
         </div>
+
       </article>
 
 <!--
@@ -252,7 +262,8 @@
   <div class="search-icon outline-icon-container"
        [routerLink]="['/main', 'search-mobile']"
        [routerLinkActive]="['active-nav-icon']">
-    <img class="outline-icon"
+    <img style="width:22px"
+         class="outline-icon"
          alt="search-icon"
          src="assets/images/new/nav-icons/popular.png">
     <span class="outline-icon-text">{{"popular" | translate}}</span>
