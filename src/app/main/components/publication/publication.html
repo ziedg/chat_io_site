@@ -507,11 +507,11 @@
       </div>
     </div>
     <!-- comments -->
+    <comment *ngFor="let commentBean of myComments" [commentBean]="commentBean" [publicationBean]="publicationBean" [(nbDisplayedComments)]="nbDisplayedComments">
+    </comment>
     <div class="comments-holder" *ngIf="commentsDisplayed && hiddenContent">
-
       <comment *ngFor="let commentBean of listComments" [commentBean]="commentBean" [publicationBean]="publicationBean" [(nbDisplayedComments)]="nbDisplayedComments">
       </comment>
-
       <loading-bar *ngIf="afficheCommentsLoading"></loading-bar>
       <!-- more comments -->
       <div *ngIf="afficheMoreComments" class="comment-holder plus-comment" (click)="loadMoreComments(0)">
