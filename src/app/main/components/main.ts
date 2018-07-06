@@ -415,6 +415,7 @@ checkNewMessageNotification(){
       if (response.status == 1) {
 
        this.nbNewMessageNotification+=response.nbNewMessageNotifications;
+       console.log(this.nbNewMessageNotification);
       }
     },
     err => {},
