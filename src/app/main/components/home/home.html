@@ -188,8 +188,14 @@
 
             </div>
 
-            <div *ngIf="bglist"
-                  [ngClass]="{'pub-bg-container col-md-12 col-xs-12 noPadding':true, 'position-absolute': pubbg}">
+            
+        </div>
+
+
+          </div>
+        <div *ngIf="bglist" class="row" style="padding:2px 15px">
+          <div 
+                  [ngClass]="{'pub-bg-container col-md-12 col-xs-12 noPadding':true}">
               <div class="navigation-arrow-container-bglist" style="left:3px;z-index:1"
               (click)="sideScroll('left',25,100,100)">
               <img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png"></div>
@@ -219,83 +225,79 @@
             <span><img style="border-radius: 5px" src="assets/images/background/bg14min.jpg" (click)="getbg14()"></span>&nbsp;
             <span><img style="border-radius: 5px" src="assets/images/background/bg15min.jpg" (click)="getbg15()"></span>&nbsp;
             <span><img style="border-radius: 5px" src="assets/images/background/bg16min.jpg" (click)="getbg16()"></span>
+            </div>
           </div>
         </div>
-
-
-          </div>
-          
-          
-
+        <div class="row" style="padding:0 15px">
           <div class="col-md-12 col-xs-12 add-head" style="border-bottom: 0">
-            <div class="col-md-5 col-xs-6 add-buttons noPadding" style="display: flex; align-items: center">
+           <div class="col-md-5 col-xs-6 add-buttons noPadding" style="display: flex; align-items: center">
 
-              <span class="picture-pub-in" (click)="addPhoto()" style="margin-right: 5px; line-height: 22px;">
-                <i class="fa fa-picture-o" style="font-size: 20px;"></i>
-              </span>
+             <span class="picture-pub-in" (click)="addPhoto()" style="margin-right: 5px; line-height: 22px;">
+               <i class="fa fa-picture-o" style="font-size: 20px;"></i>
+             </span>
 
-              <span (click)="toggleGifSlider()" style="line-height: 46Px">
-                <b class="gif-btn">{{ 'home_publish_GIF' | translate }}</b>
-              </span>
+             <span (click)="toggleGifSlider()" style="line-height: 46Px">
+               <b class="gif-btn">{{ 'home_publish_GIF' | translate }}</b>
+             </span>
 
-              <span class="youtube-video-in hidden-xs" style="line-height: 23px;display:none">
-                  <input class="yt-in-url youtube-input-popup"
-                         placeholder="{{ 'home_publish_youtube_placeholder' | translate }}" style="display:none;"
-                         (change)="updateYoutubeFacebook()" formControlName="publicationYoutubeLink">
-  
-  
-                  <i class="fa fa-youtube-play" (click)="changeYoutubeInput()"></i>
-                </span>
-  
+             <span class="youtube-video-in hidden-xs" style="line-height: 23px;display:none">
+                 <input class="yt-in-url youtube-input-popup"
+                        placeholder="{{ 'home_publish_youtube_placeholder' | translate }}" style="display:none;"
+                        (change)="updateYoutubeFacebook()" formControlName="publicationYoutubeLink">
+ 
+ 
+                 <i class="fa fa-youtube-play" (click)="changeYoutubeInput()"></i>
+               </span>
+ 
 
 
-              <input type="file" id="file-image" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
-              <input type="file" id="file-image-gif" style="display:none" accept=".gif"
-                     (change)="uploadPhotoGIF($event)">
+             <input type="file" id="file-image" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
+             <input type="file" id="file-image-gif" style="display:none" accept=".gif"
+                    (change)="uploadPhotoGIF($event)">
 
-              <div><i class="fas fa fa-th-large" style="font-size: 20px;margin-top:7px" (click)="bglistf()"></i></div>
-            </div>
-            <div class="col-md-7 col-xs-6 share-button"
-                 style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
-              <div class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
-                <div>
-                  <header (click)="disableSelectMenu()">
-                    {{ 'home_publish_visibility_header' | translate }}
-                  </header>
-                  <div [class.hide]="selectedMenuElement!=0">
-                    <i class="fa fa-globe"></i>
-                    {{ 'home_publish_visibility_all' | translate }}
-                  </div>
-                  <div [class.hide]="selectedMenuElement!=1">
-                    <i class="fa fa-users"></i>
-                    {{ 'home_publish_visibility_subscribers' | translate }}
-                  </div>
-                  <div class="select-menu" style="display:none;">
-                    <header (click)="disbaleSelectMenu()">
-                      {{ 'home_publish_visibility_header' | translate }}
-                    </header>
-                    <div class="select-choice" (click)="changeSelectMenu(0)">
-                      <i class="fa fa-globe"></i>
-                      {{ 'home_publish_visibility_all' | translate }}
-                    </div>
-                    <div class="select-choice" (click)="changeSelectMenu(1)">
-                      <i class="fa fa-users"></i>
-                      {{ 'home_publish_visibility_subscribers' | translate }}
-                    </div>
-                  </div>
-                </div>
-                <i class="fa fa-caret-down"></i>
-              </div>
-              <button class="publish-button" type="submit" *ngIf="!loadingPublish">
-                {{ 'home_publish_button' | translate }}
-              </button>
-              <button class="publish-button loading-button" *ngIf="loadingPublish" disabled>
-                <div class="loading"></div>
-              </button>
-            </div>
+             <div><i class="fas fa fa-th-large" style="font-size: 20px;margin-top:7px" (click)="bglistf()"></i></div>
+           </div>
+           <div class="col-md-7 col-xs-6 share-button"
+                style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
+             <div class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
+               <div>
+                 <header (click)="disableSelectMenu()">
+                   {{ 'home_publish_visibility_header' | translate }}
+                 </header>
+                 <div [class.hide]="selectedMenuElement!=0">
+                   <i class="fa fa-globe"></i>
+                   {{ 'home_publish_visibility_all' | translate }}
+                 </div>
+                 <div [class.hide]="selectedMenuElement!=1">
+                   <i class="fa fa-users"></i>
+                   {{ 'home_publish_visibility_subscribers' | translate }}
+                 </div>
+                 <div class="select-menu" style="display:none;">
+                   <header (click)="disbaleSelectMenu()">
+                     {{ 'home_publish_visibility_header' | translate }}
+                   </header>
+                   <div class="select-choice" (click)="changeSelectMenu(0)">
+                     <i class="fa fa-globe"></i>
+                     {{ 'home_publish_visibility_all' | translate }}
+                   </div>
+                   <div class="select-choice" (click)="changeSelectMenu(1)">
+                     <i class="fa fa-users"></i>
+                     {{ 'home_publish_visibility_subscribers' | translate }}
+                   </div>
+                 </div>
+               </div>
+               <i class="fa fa-caret-down"></i>
+             </div>
+             <button class="publish-button" type="submit" *ngIf="!loadingPublish">
+               {{ 'home_publish_button' | translate }}
+             </button>
+             <button class="publish-button loading-button" *ngIf="loadingPublish" disabled>
+               <div class="loading"></div>
+             </button>
+           </div>
+         
           </div>
-
-        </div>
+         </div>
 
 
       </form>
