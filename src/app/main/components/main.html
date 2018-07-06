@@ -48,12 +48,22 @@
 				<i class="fa fa-user" [routerLink]="['/main/suggestions']"></i>
 			</article>
 
-      <article
-               class="hidden-xs"
-               style="margin-right: 10px; cursor: pointer;">
+
+      <article  [routerLink]="['/main/messaging']"  class="notification-parent hidden-xs">
+
         <div class="noPadding">
-          <img [routerLink]="['/main/messaging']" class="home-sidebar-icon" style="width:25px" src="assets/images/new/chat-grey.png">
+
+            <div   class="cercle-notice" *ngIf="nbNewMessageNotification > 0">
+                {{nbNewMessageNotification}}
+
+
+
+
+
+                </div>
+                <i  class=" fa fa-comments fa-lg"> </i>
         </div>
+
       </article>
 
 <!--
