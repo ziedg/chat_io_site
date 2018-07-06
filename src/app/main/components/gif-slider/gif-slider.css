@@ -6,7 +6,7 @@
   */
   overflow: hidden;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
   position: relative;
 }
 
@@ -67,4 +67,32 @@
 
 .slider-btn-after {
   right: 0;
+}
+
+@media(max-width: 767px) {
+  .slider-container {
+    margin-left: -15px;
+    width: calc(100% + 30px)
+  }
+  .slider-sub-container {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .slides-container {
+    overflow: auto;
+  }
+
+  .slider-btn {
+    display: none;
+  }
+
+  .slider-container {
+    overflow: visible;
+  }
+
+  .fa-times {
+    top: -20px!important;
+    right: 20px!important;
+  }
 }

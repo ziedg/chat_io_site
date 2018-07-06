@@ -915,10 +915,12 @@ export class Publication {
   openModalInteractions() {
     this.modalInteractions = true;
     this.getInteractions();
+    document.body.style.overflow = "hidden";
   }
 
   closeModalInteractions() {
     this.modalInteractions = false;
+    document.body.style.overflow = "auto";
   }
 
   changeEmojiTab(tab) {

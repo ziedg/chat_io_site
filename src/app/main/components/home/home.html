@@ -188,7 +188,45 @@
 
             </div>
 
+            <div *ngIf="bglist"
+                  [ngClass]="{'pub-bg-container col-md-12 col-xs-12 noPadding':true, 'position-absolute': pubbg}">
+              <div class="navigation-arrow-container-bglist" style="left:3px;z-index:1"
+              (click)="sideScroll('left',25,100,100)">
+              <img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png"></div>
+            
+              <div class="navigation-arrow-container-bglist" style="right:32px;z-index:1"
+              (click)="sideScroll('right',25,100,100)">
+              <img class="right-navigation-arrow" src="assets/images/new/right-arrow-white.png"></div>
+  
+              <div class="navigation-arrow-container-bglist" style="right:10px;z-index:1;background-color:transparent"
+              (click)="closeBglist()">
+              <p style="color: #666;margin-left:5px;margin-top:1px"> &#x2715; </p></div>
+            <div class="bglist">
+            <span><img style="border: 1px solid gray; border-radius: 5px" src="assets/images/background/bg0.png" (click)="getbg0()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg1min.jpg" (click)="getbg1()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg2min.jpg" (click)="getbg2()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg3min.jpg" (click)="getbg3()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg4min.jpg" (click)="getbg4()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg5min.jpg" (click)="getbg5()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg6min.jpg" (click)="getbg6()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg7min.jpg" (click)="getbg7()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg8min.jpg" (click)="getbg8()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg9min.jpg" (click)="getbg9()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg10min.jpg" (click)="getbg10()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg11min.jpg" (click)="getbg11()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg12min.jpg" (click)="getbg12()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg13min.jpg" (click)="getbg13()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg14min.jpg" (click)="getbg14()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg15min.jpg" (click)="getbg15()"></span>&nbsp;
+            <span><img style="border-radius: 5px" src="assets/images/background/bg16min.jpg" (click)="getbg16()"></span>
           </div>
+        </div>
+
+
+          </div>
+          
+          
+
           <div class="col-md-12 col-xs-12 add-head" style="border-bottom: 0">
             <div class="col-md-5 col-xs-6 add-buttons noPadding" style="display: flex; align-items: center">
 
@@ -215,13 +253,6 @@
               <input type="file" id="file-image-gif" style="display:none" accept=".gif"
                      (change)="uploadPhotoGIF($event)">
 
-              <div class="change-privacy hidden-lg hidden-md hidden-sm"
-                   style="position:unset; margin-right: 5px; line-height: 10px;">
-                <i class="fa fa-globe" style="vertical-align: middle;margin-bottom:2px" [class.hide]="selectedMenuElement!=0"
-                   (click)="changeSelectMenu(1)"></i>
-                <i class="fa fa-users" style="vertical-align: middle;margin-bottom:2px" [class.hide]="selectedMenuElement!=1"
-                   (click)="changeSelectMenu(0)"></i>
-              </div>
               <div><i class="fas fa fa-th-large" style="font-size: 20px;margin-top:7px" (click)="bglistf()"></i></div>
             </div>
             <div class="col-md-7 col-xs-6 share-button"
@@ -255,12 +286,6 @@
                 </div>
                 <i class="fa fa-caret-down"></i>
               </div>
-              <div class="change-privacy hidden-lg hidden-md hidden-xs" style="position:unset; margin-right: 12px">
-                <i class="fa fa-globe" style="vertical-align: middle" [class.hide]="selectedMenuElement!=0"
-                   (click)="changeSelectMenu(1)"></i>
-                <i class="fa fa-users" style="vertical-align: middle" [class.hide]="selectedMenuElement!=1"
-                   (click)="changeSelectMenu(0)"></i>
-              </div>
               <button class="publish-button" type="submit" *ngIf="!loadingPublish">
                 {{ 'home_publish_button' | translate }}
               </button>
@@ -269,38 +294,6 @@
               </button>
             </div>
           </div>
-          <div *ngIf="bglist" class="col-md-12 col-xs-12 noPadding" >
-              <div class="navigation-arrow-container-bglist" style="left:3px;z-index:1"
-              (click)="sideScroll('left',25,100,100)">
-              <img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png"></div>
-            
-              <div class="navigation-arrow-container-bglist" style="right:32px;z-index:1"
-              (click)="sideScroll('right',25,100,100)">
-              <img class="right-navigation-arrow" src="assets/images/new/right-arrow-white.png"></div>
-
-              <div class="navigation-arrow-container-bglist" style="right:10px;z-index:1;background-color:transparent"
-              (click)="closeBglist()">
-              <p style="color: #666;margin-left:5px;margin-top:1px"> &#x2715; </p></div>
-            <div class="bglist">
-            <span><img style="border: 1px solid gray; border-radius: 5px" src="assets/images/background/bg0.png" (click)="getbg0()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg1min.jpg" (click)="getbg1()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg2min.jpg" (click)="getbg2()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg3min.jpg" (click)="getbg3()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg4min.jpg" (click)="getbg4()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg5min.jpg" (click)="getbg5()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg6min.jpg" (click)="getbg6()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg7min.jpg" (click)="getbg7()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg8min.jpg" (click)="getbg8()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg9min.jpg" (click)="getbg9()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg10min.jpg" (click)="getbg10()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg11min.jpg" (click)="getbg11()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg12min.jpg" (click)="getbg12()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg13min.jpg" (click)="getbg13()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg14min.jpg" (click)="getbg14()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg15min.jpg" (click)="getbg15()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg16min.jpg" (click)="getbg16()"></span>
-          </div>
-        </div>
 
         </div>
 

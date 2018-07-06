@@ -9,6 +9,7 @@ import { ChatService } from '../../messanging/chat.service';
 import { AppSettings } from '../../shared/conf/app-settings';
 import * as pathUtils from '../../utils/path.utils';
 import { EmitterService } from '../emitter.service';
+import { AngularFireObject, AngularFireDatabase } from 'angularfire2/database';
 
 declare var jQuery: any;
 
@@ -27,6 +28,8 @@ export class ChatListComponent implements OnInit {
   public chatListUsers: any[] = [];
   public suggestions: any[] = [];
   private selectedUserId: string = null;
+  private s: AngularFireObject<any>;
+  private msgFirstCheck: Boolean = true;  
 //
 autocomplete = false;
 listSearchUsers = [];
@@ -41,6 +44,7 @@ noSearchResults: Boolean = false;
     private loginService :LoginService,
     private changeDetector: ChangeDetectorRef,
     private router:Router,
+    private db: AngularFireDatabase,
     private http: Http
   ) { }
 
@@ -51,6 +55,7 @@ noSearchResults: Boolean = false;
     this.getChatList();
     this.getSuggestionsList();
     this.reactToNewMessages();
+    this.listenForAllMessages(this.userId);
     jQuery(".navigation-bottom").addClass('hidden-xs');
 
     jQuery(document).click(function(e) {
@@ -125,10 +130,56 @@ noSearchResults: Boolean = false;
             users[i].lastMessage.date = hours+":"+minutes;
           }
           this.chatListUsers.push(users[i]);
+          console.log(this.chatListUsers);
        } 
    
     })
   }
+
+  listenForAllMessages(userId: string): void {
+    this.userId = userId;
+    this.s = this.db.object('notifications/'+this.userId+'/messaging');
+      var item = this.s.valueChanges()
+      this.s.snapshotChanges().subscribe(action => {
+        var notif = action.payload.val();
+        if (notif !== null && !this.msgFirstCheck) {
+          this.chatService.getMessage(notif.msgId).subscribe(
+            message => {
+              
+                var elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
+               
+                if(notif.senderId == this.userId){
+                  this.chatListUsers[elementPos].lastMessage.message = "Vous : "+message.message;
+                }
+                else{
+                  this.chatListUsers[elementPos].lastMessage.message = message.message;
+                }
+                
+                
+                
+                let actualDate = new Date(Date.now());
+                let hours = actualDate.getHours().toString();
+                let minutes = actualDate.getMinutes().toString();
+                console.log(actualDate);
+                if(hours.length==1){
+                  hours = "0"+hours;
+                }
+                if(minutes.length==1){
+                  minutes = "0"+minutes;
+                }
+                
+                this.chatListUsers[elementPos].lastMessage.date = hours+":"+minutes;
+          
+            },
+            err => console.log('Could send message to server, reason: ', err)
+          );
+        }else{
+          this.msgFirstCheck = false;
+        }
+      });
+    }
+
+
   getSuggestionsList(){
     /*
      les abonnées dont il n'a pas fait des conversations avec encore
