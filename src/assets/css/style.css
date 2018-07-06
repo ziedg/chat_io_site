@@ -3020,7 +3020,7 @@ facebook-friends .user .user-img {
 
 .form-comment {
   margin-top: 0;
-  padding: 0;
+  padding: 0 0 0 10px;
 }
 
 .comment-holder form {
@@ -3065,6 +3065,7 @@ facebook-friends .user .user-img {
   background-image: url(/assets/images/new/sendcomment.png);
   width:20px;
   height:20px;
+  display: none;
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -3101,7 +3102,6 @@ facebook-friends .user .user-img {
   box-sizing: border-box;
   font-family: inherit;
   font-size: 14px;
-  font-weight: bold;
   /* color:#C1C4C8; */
   overflow: auto;
   outline: none;
@@ -3120,7 +3120,7 @@ facebook-friends .user .user-img {
 
 @media (max-width: 768px) {
   .comment-holder .textarea {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
@@ -4127,7 +4127,7 @@ top-blagueurs-decov .widget .subscribe button {
   }
   
   .form-more{
-    right:42px;
+    right:25px;
   }
 }
 
