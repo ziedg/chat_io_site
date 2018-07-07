@@ -593,7 +593,7 @@ export class Home {
       
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
-      return;
+      return 1;
     }
     if (
       text.search("youtube.com/watch") >= 0 ||

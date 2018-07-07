@@ -4790,6 +4790,11 @@ input.loginInput {
   text-transform: capitalize;
 }
 
+.input-param-pass input {
+  
+  text-transform: none;
+}
+
 .alert-email {
   font-size: 12px;
   color: #229999;
@@ -4871,7 +4876,10 @@ input.loginInput {
 @media (max-width: 992px) {
   .input-param input {
     width: 100%;
+    
+    
   }
+  
 
   .label-param {
     text-align: right;
