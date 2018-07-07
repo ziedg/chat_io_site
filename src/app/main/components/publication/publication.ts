@@ -268,8 +268,14 @@ export class Publication {
 
   initComments() {
     this.allListComments = this.publicationBean.comments;
-
     this.afficheMoreComments = true;
+    if(this.allListComments.length <3)
+    {
+      this.afficheMoreComments = false;
+
+    }
+
+
     this.changeDetector.markForCheck();
 
     this.listComments = this.allListComments.slice(0, this.nbMaxAddComments);
