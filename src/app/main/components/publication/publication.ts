@@ -699,7 +699,7 @@ export class Publication {
 
 
 
-    if (this.allListComments.length - 3 * j < 3) {
+    if (this.allListComments.length - 3 * j < 1) {
       this.listComments = this.allListComments.slice(
         0,
         this.allListComments.length
