@@ -1412,6 +1412,9 @@ section.widget {
 }
 
 .header-segement.description-holder {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
   text-align: left;
   font-size: 14px;
   width: 100%;
