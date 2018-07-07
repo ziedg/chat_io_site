@@ -44,7 +44,7 @@ declare var swal: any;
 export class Publication {
   intervalHolder: any;
   commentContent = "";
-  public hiddenContent: boolean;
+  public hiddenContent: boolean = true;
   public i: number = 1;
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
@@ -119,11 +119,13 @@ export class Publication {
     private ng2ImgMaxService: Ng2ImgMaxService,
     private location: Location
   ) {
-    if (location.path() != '') {
-      if (location.path().indexOf('/main/post') != -1) {
-        this.hiddenContent = true;
-      } else {
-        this.hiddenContent = false;
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      if (location.path() != '') {
+        if (location.path().indexOf('/main/post') != -1) {
+          this.hiddenContent = true;
+        } else {
+          this.hiddenContent = false;
+        }
       }
     }
     loginService.actualize();
@@ -269,18 +271,17 @@ export class Publication {
   initComments() {
     this.allListComments = this.publicationBean.comments;
 
-    if(this.allListComments.length <=3)
-    {
+    if (this.allListComments.length <= 3) {
       this.afficheMoreComments = false;
       this.listComments = this.allListComments.slice(0, this.allListComments.length);
 
     }
-  else{
-    this.afficheMoreComments = true;
+    else {
+      this.afficheMoreComments = true;
 
-    this.listComments = this.allListComments.slice(0, this.nbMaxAddComments);
-  }
-  this.changeDetector.markForCheck();
+      this.listComments = this.allListComments.slice(0, this.nbMaxAddComments);
+    }
+    this.changeDetector.markForCheck();
 
 
   }
