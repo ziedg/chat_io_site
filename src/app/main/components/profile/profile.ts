@@ -72,7 +72,8 @@ export class Profile implements OnInit{
 
   descriptionMaxLength:number = 360;
 
-
+  loadingSub = false;
+  online: any;
   constructor(public translate:TranslateService,
               private linkView:LinkView,
               private linkPreview:LinkPreview,
@@ -184,6 +185,9 @@ export class Profile implements OnInit{
 if (this.btn_subscribe_locked){
   return ;
 }
+    this.online = window.navigator.onLine;
+    if(this.online){
+      this.loadingSub = true;
     this.btn_subscribe_locked=true;
     let body = JSON.stringify({
       profileId: userDisplayed._id
@@ -209,16 +213,21 @@ if (this.btn_subscribe_locked){
       },
       () => {
         this.changeDetector.markForCheck();
+        this.loadingSub = false;
         this.btn_subscribe_locked=false;
 
       }
     );
+  }
   }
 
   unsubscribe(userDisplayed:User) {
     if (this.btn_subscribe_locked){
       return ;
     }
+    this.online = window.navigator.onLine;
+    if (this.online) {
+      this.loadingSub = true;
         this.btn_subscribe_locked=true;
     let body = JSON.stringify({
       profileId: userDisplayed._id
@@ -243,11 +252,12 @@ if (this.btn_subscribe_locked){
       },
       () => {
         this.changeDetector.markForCheck();
+        this.loadingSub = false;
         this.btn_subscribe_locked=false;
 
       }
     );
-  }
+  }}
 
 reportPub(userDisplayed:User) {
     swal({
