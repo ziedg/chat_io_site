@@ -71,6 +71,8 @@
   "publication_popup_confirmation_title": "Estás seguro ?",
   "publication_popup_confirmation_delete_text": "No puedes recuperar esta publicación !",
   "publication_popup_confirmation_delete_button": "Sí, eliminarlo !",
+  "publication_popup_notification_unsubscribe_title": "unsubscribed",
+  "publication_popup_notification_unsubscribe_text": "you are no longer subscribed to this person",
   "publication_popup_notification_delete_title": "eliminarlo !",
   "publication_popup_notification_delete_text": "Tu publicación ha sido borrada .",
   "publication_popup_confirmation_share_text": "Te gustaría compartir esta publicación  ? ",

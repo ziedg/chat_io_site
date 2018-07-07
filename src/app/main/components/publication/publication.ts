@@ -154,14 +154,31 @@ export class Publication {
           if (response.status == 0) {
             this.user.isFollowed = false;
             this.user.nbSubscribers--;
-          }
-        },
+            this.unsubscribeMessage();
+            }
+          },
         err => { },
-        () => {
-          this.changeDetector.markForCheck();
-        }
-      );
+          () => {
+              this.changeDetector.markForCheck();
+            }
+        );
   }
+unsubscribeMessage() {
+swal({
+title: this.translateCode(
+"publication_popup_notification_unsubscribe_title"
+),
+text: this.translateCode(
+"publication_popup_notification_unsubscribe_text"
+),
+type: "success",
+timer: 2000,
+showConfirmButton: false
+}).then(function () {
+}, function (dismiss) {
+});
+}
+
   deletePub() {
     swal({
       title: this.translateCode("publication_popup_confirmation_title"),

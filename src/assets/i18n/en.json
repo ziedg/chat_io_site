@@ -71,6 +71,8 @@
   "publication_popup_confirmation_title": "Are you sure  ?",
   "publication_popup_confirmation_delete_text": "You can't  retrieve your post !",
   "publication_popup_confirmation_delete_button": "Yes ,delete it !",
+  "publication_popup_notification_unsubscribe_title": "unsubscribed",
+  "publication_popup_notification_unsubscribe_text": "you are no longer subscribed to this person",
   "publication_popup_notification_delete_title": "Deleted !",
   "publication_popup_notification_delete_text": "Your post has been erased .",
   "publication_popup_confirmation_share_text": "Would you like to share this post  ? ",
