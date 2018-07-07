@@ -268,18 +268,23 @@ export class Publication {
 
   initComments() {
     this.allListComments = this.publicationBean.comments;
-    this.afficheMoreComments = true;
-    if(this.allListComments.length <3)
+
+    if(this.allListComments.length <=3)
     {
       this.afficheMoreComments = false;
+      this.listComments = this.allListComments.slice(0, this.allListComments.length);
 
     }
-
-
-    this.changeDetector.markForCheck();
+  else{
+    this.afficheMoreComments = true;
 
     this.listComments = this.allListComments.slice(0, this.nbMaxAddComments);
   }
+  this.changeDetector.markForCheck();
+
+
+  }
+
 
   displayComments() {
     this.commentsDisplayed = !this.commentsDisplayed;
