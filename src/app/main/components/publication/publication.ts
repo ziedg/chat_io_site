@@ -100,7 +100,7 @@ export class Publication {
   displayedNumberInteractions = 10;
   interactionsPage = 0;
   public modalInteractions = false;
-
+  interactionsLoaded:boolean=false;
   imageBaseUrl = environment.IMAGE_BASE_URL;
   allListComments: CommentBean[];
 
@@ -934,12 +934,15 @@ showConfirmButton: false
       .map((res: Response) => res.json())
       .subscribe(
         response => {
+          this.interactionsLoaded=true;
           this.InteractionsLikes = response.message.likes.slice();
           this.InteractionsDislikes = response.message.dislikes.slice();
           console.log(this.InteractionsLikes);
           console.log(this.InteractionsDislikes);
         },
-        err => { },
+        err => { 
+          this.interactionsLoaded=true;
+        },
         () => {
           this.changeDetector.markForCheck();
         }
@@ -970,6 +973,7 @@ showConfirmButton: false
 
   closeModalInteractions() {
     this.modalInteractions = false;
+    this.interactionsLoaded=false;
     document.body.style.overflow = "auto";
   }
 
