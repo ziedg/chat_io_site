@@ -325,6 +325,7 @@ showConfirmButton: false
     var popupmodalImg = jQuery("#img01");
     jQuery(".myImg").click(function () {
       popupmodal.style.display = "block";
+      document.body.style.overflow = "hidden";
       var popupnewSrc = this.src;
       popupmodalImg.attr("src", popupnewSrc);
     });
@@ -336,6 +337,7 @@ showConfirmButton: false
     if (popupspan || popupspan != undefined) {
       popupspan.addEventListener("click", function () {
         popupmodal.style.display = "none";
+        document.body.style.overflow = "auto";
       });
     }
 
