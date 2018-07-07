@@ -8,10 +8,11 @@ import {
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Http, Response } from "@angular/http";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
-import { Router } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { Ng2ImgMaxService } from "ng2-img-max";
 import { timer } from "rxjs/observable/timer";
+import { Location } from '@angular/common';
 
 import { environment } from "../../../../environments/environment";
 import { CommentBean } from "../../../beans/comment-bean";
@@ -43,7 +44,7 @@ declare var swal: any;
 export class Publication {
   intervalHolder: any;
   commentContent = "";
-
+  public hiddenContent: boolean = true;
   public i: number = 1;
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
@@ -53,6 +54,7 @@ export class Publication {
   public afficheMoreComments = false;
   public signalButton = false;
   public listComments: Array<CommentBean> = [];
+  public myComments: Array<CommentBean> = [];
   private nbMaxAddComments = 3;
   private nbComments = 0;
   private nbDisplayedComments = 0;
@@ -114,8 +116,18 @@ export class Publication {
     private loginService: LoginService,
     private changeDetector: ChangeDetectorRef,
     private dateService: DateService,
-    private ng2ImgMaxService: Ng2ImgMaxService
+    private ng2ImgMaxService: Ng2ImgMaxService,
+    private location: Location
   ) {
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      if (location.path() != '') {
+        if (location.path().indexOf('/main/post') != -1) {
+          this.hiddenContent = true;
+        } else {
+          this.hiddenContent = false;
+        }
+      }
+    }
     loginService.actualize();
 
     this.user = loginService.user;
@@ -144,14 +156,31 @@ export class Publication {
           if (response.status == 0) {
             this.user.isFollowed = false;
             this.user.nbSubscribers--;
-          }
-        },
-        err => {},
-        () => {
-          this.changeDetector.markForCheck();
-        }
-      );
+            this.unsubscribeMessage();
+            }
+          },
+        err => { },
+          () => {
+              this.changeDetector.markForCheck();
+            }
+        );
   }
+unsubscribeMessage() {
+swal({
+title: this.translateCode(
+"publication_popup_notification_unsubscribe_title"
+),
+text: this.translateCode(
+"publication_popup_notification_unsubscribe_text"
+),
+type: "success",
+timer: 2000,
+showConfirmButton: false
+}).then(function () {
+}, function (dismiss) {
+});
+}
+
   deletePub() {
     swal({
       title: this.translateCode("publication_popup_confirmation_title"),
@@ -165,7 +194,7 @@ export class Publication {
       cancelButtonText: this.translateCode("publication_popup_cancel_button"),
       allowOutsideClick: true
     }).then(
-      function() {
+      function () {
         this.doDeletePub();
         this.closeModalPub();
         swal({
@@ -178,10 +207,10 @@ export class Publication {
           type: "success",
           timer: 1000,
           showConfirmButton: false
-        }).then(function() {}, function(dismiss) {});
+        }).then(function () { }, function (dismiss) { });
         this.changeDetector.markForCheck();
       }.bind(this),
-      function(dismiss) {
+      function (dismiss) {
         if (dismiss === "overlay") {
         }
       }
@@ -204,8 +233,8 @@ export class Publication {
       )
       .map((res: Response) => res.json())
       .subscribe(
-        response => {},
-        err => {},
+        response => { },
+        err => { },
         () => {
           this.changeDetector.markForCheck();
         }
@@ -218,17 +247,24 @@ export class Publication {
         .parent()
         .parent()
         .css({
-          position: "fixed",
-          bottom: "34px",
-          "background-color": "white",
-          "z-index": "10000"
+          'margin': "0px",
+          'position': "fixed",
+          'bottom': "0",
+          'background-color': "white",
+          'z-index': "10000",
+          'left': '0'
         });
-      jQuery("#" + element.commentTextareaId).blur(function() {
+      jQuery('.publishImage').show();
+      jQuery(".navigation-bottom").hide();
+      jQuery("#" + element.commentTextareaId).blur(function () {
         jQuery("#" + element.commentTextareaId)
           .parent()
           .parent()
-          .css({ position: "unset" });
+          .css({ position: "unset", margin: "0 0 12px 0" });
+        jQuery(".navigation-bottom").show();
       });
+    } else {
+      jQuery('.publishImage').show();
     }
   }
 
@@ -252,11 +288,21 @@ export class Publication {
   initComments() {
     this.allListComments = this.publicationBean.comments;
 
-    this.afficheMoreComments = true;
+    if (this.allListComments.length <= 3) {
+      this.afficheMoreComments = false;
+      this.listComments = this.allListComments.slice(0, this.allListComments.length);
+
+    }
+    else {
+      this.afficheMoreComments = true;
+
+      this.listComments = this.allListComments.slice(0, this.nbMaxAddComments);
+    }
     this.changeDetector.markForCheck();
 
-    this.listComments = this.allListComments.slice(0, this.nbMaxAddComments);
+
   }
+
 
   displayComments() {
     this.commentsDisplayed = !this.commentsDisplayed;
@@ -277,7 +323,7 @@ export class Publication {
     // Get the image and insert it inside the modal - use its "alt" text as a caption
     var img = jQuery(".myImg");
     var popupmodalImg = jQuery("#img01");
-    jQuery(".myImg").click(function() {
+    jQuery(".myImg").click(function () {
       popupmodal.style.display = "block";
       var popupnewSrc = this.src;
       popupmodalImg.attr("src", popupnewSrc);
@@ -288,7 +334,7 @@ export class Publication {
 
     // When the user clicks on <span> (x), close the modal
     if (popupspan || popupspan != undefined) {
-      popupspan.addEventListener("click", function() {
+      popupspan.addEventListener("click", function () {
         popupmodal.style.display = "none";
       });
     }
@@ -406,7 +452,7 @@ export class Publication {
       } else {
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl("");
       }
-      jQuery(document).click(function(e) {
+      jQuery(document).click(function (e) {
         if (
           jQuery(e.target).closest(".sub-menu").length === 0 &&
           jQuery(e.target).closest(".dots").length === 0
@@ -421,24 +467,24 @@ export class Publication {
           closeEmoji();
         }
       });
-      jQuery(".textarea").keydown(function(e) {
+      jQuery(".textarea").keydown(function (e) {
         if (e.keyCode == 13 && !e.shiftKey) {
           e.preventDefault();
         }
       });
     }
-    var publishCommentWithEnter = function() {
+    var publishCommentWithEnter = function () {
       alert(this.publicationBean._id);
     }.bind(this);
-    var loadChanges = function() {
+    var loadChanges = function () {
       this.changeDetector.markForCheck();
     }.bind(this);
 
-    var closeEmoji = function() {
+    var closeEmoji = function () {
       jQuery("#" + this.emojiHoverId).hide();
       this.changeDetector.markForCheck();
     }.bind(this);
-    var closeSignal = function() {
+    var closeSignal = function () {
       this.signalButton = false;
       this.changeDetector.markForCheck();
     }.bind(this);
@@ -446,15 +492,15 @@ export class Publication {
     this.initComments();
   }
 
-  checkEnter(event) {}
+  checkEnter(event) { }
 
   publishComment() {
     var txt: string = this.commentInputHtml;
     txt = txt
       .replace(/(\&nbsp;|\ )+/g, " ")
       .replace(/(\<.?br\>)+/g, "<br>")
-      .replace(/^\<.?br\>|\<.?br\>$/g, "");
-
+      .replace(/^\<.?br\>|\<.?br\>$/g, "")
+      .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
     var white_space_regex: RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
     var white_space_only = white_space_regex.test(txt);
     if (!commentToSend && white_space_only && !this.uploadedPictureComment) {
@@ -498,14 +544,17 @@ export class Publication {
               jQuery("#" + this.pubImgId).hide();
               this.uploadedPictureComment = null;
               this.loadingComment = false;
+              if (window.matchMedia("(max-width: 768px)").matches) {
+                this.myComments.unshift(response.comment);
+              }
             }
           } else {
             console.error(response);
             this.loadingComment = false;
           }
         },
-        err => {},
-        () => {}
+        err => { },
+        () => { }
       );
   }
 
@@ -551,7 +600,7 @@ export class Publication {
       cancelButtonColor: "#999",
       allowOutsideClick: true
     }).then(
-      function() {
+      function () {
         swal({
           title: this.translateCode(
             "publication_popup_notification_share_title"
@@ -560,10 +609,10 @@ export class Publication {
           type: "success",
           timer: 1000,
           showConfirmButton: false
-        }).then(function() {}, function(dismiss) {});
+        }).then(function () { }, function (dismiss) { });
         this.doSharePub(post);
       }.bind(this),
-      function(dismiss) {
+      function (dismiss) {
         // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
         if (dismiss === "overlay") {
         }
@@ -602,8 +651,8 @@ export class Publication {
             }
           }
         },
-        err => {},
-        () => {}
+        err => { },
+        () => { }
       );
   }
 
@@ -618,7 +667,7 @@ export class Publication {
       cancelButtonText: this.translateCode("publication_popup_cancel_button"),
       input: "textarea"
     }).then(
-      function(text) {
+      function (text) {
         if (text) {
           this.doReportPub(text);
           swal({
@@ -631,11 +680,11 @@ export class Publication {
             type: "success",
             timer: 1000,
             showConfirmButton: false
-          }).then(function() {}, function(dismiss) {});
+          }).then(function () { }, function (dismiss) { });
           this.changeDetector.markForCheck();
         }
       }.bind(this),
-      function(dismiss) {
+      function (dismiss) {
         if (dismiss === "overlay") {
         }
       }
@@ -657,7 +706,7 @@ export class Publication {
         AppSettings.OPTIONS
       )
       .map((res: Response) => res.json())
-      .subscribe(response => {}, err => {}, () => {});
+      .subscribe(response => { }, err => { }, () => { });
   }
 
   loadMoreComments(i: number) {
@@ -668,18 +717,17 @@ export class Publication {
 
 
 
-        if (this.allListComments.length - 3 * j < 3)
-        {
-        this.listComments = this.allListComments.slice(
-          0,
-          this.allListComments.length
-        );
-        this.afficheMoreComments = false;
+    if (this.allListComments.length - 3 * j < 1) {
+      this.listComments = this.allListComments.slice(
+        0,
+        this.allListComments.length
+      );
+      this.afficheMoreComments = false;
       this.changeDetector.markForCheck();
     } else {
       this.listComments = this.allListComments.slice(0, 3 * j);
 
-      this.afficheMoreComments =true;
+      this.afficheMoreComments = true;
       this.changeDetector.markForCheck();
     }
   }
@@ -790,7 +838,7 @@ export class Publication {
         AppSettings.OPTIONS
       )
       .map((res: Response) => res.json())
-      .subscribe(response => {}, err => {}, () => {});
+      .subscribe(response => { }, err => { }, () => { });
 
     this.publicationBean.isLiked = true;
     this.publicationBean.nbLikes++;
@@ -808,7 +856,7 @@ export class Publication {
         AppSettings.OPTIONS
       )
       .map((res: Response) => res.json())
-      .subscribe(response => {}, err => {}, () => {});
+      .subscribe(response => { }, err => { }, () => { });
 
     this.publicationBean.isLiked = false;
     this.publicationBean.nbLikes--;
@@ -847,7 +895,7 @@ export class Publication {
         AppSettings.OPTIONS
       )
       .map((res: Response) => res.json())
-      .subscribe(response => {}, err => {}, () => {});
+      .subscribe(response => { }, err => { }, () => { });
 
     this.publicationBean.isDisliked = true;
     this.publicationBean.nbDislikes++;
@@ -865,7 +913,7 @@ export class Publication {
         AppSettings.OPTIONS
       )
       .map((res: Response) => res.json())
-      .subscribe(response => {}, err => {}, () => {});
+      .subscribe(response => { }, err => { }, () => { });
     this.publicationBean.isDisliked = false;
     this.publicationBean.nbDislikes--;
   }
@@ -889,7 +937,7 @@ export class Publication {
           console.log(this.InteractionsLikes);
           console.log(this.InteractionsDislikes);
         },
-        err => {},
+        err => { },
         () => {
           this.changeDetector.markForCheck();
         }
@@ -967,7 +1015,7 @@ export class Publication {
           if (response.status == 0) {
           }
         },
-        err => {},
+        err => { },
         () => {
           this.changeDetector.markForCheck();
         }
@@ -992,7 +1040,7 @@ export class Publication {
             console.log("unsubscribed done");
           }
         },
-        err => {},
+        err => { },
         () => {
           this.changeDetector.markForCheck();
         }
@@ -1067,8 +1115,8 @@ export class Publication {
   deactivateAnimation() {
     this.likeAnimation = false;
   }
-  preventLink(e, isGif){
-    if(isGif){
+  preventLink(e, isGif) {
+    if (isGif) {
       e.preventDefault();
     }
   }
@@ -1143,6 +1191,7 @@ export class Publication {
   shortNumber(n: number): string {
     return n < 1000 ? n + "" : (n / 1000 + "k").replace(".", ",");
   }
+
 }
 
 function urlEncode(source: string): string {
@@ -1162,7 +1211,7 @@ function previewFile(uploadedFile, elementId) {
 
   reader.addEventListener(
     "load",
-    function() {
+    function () {
       //preview.att.src = reader.result;
 
       jQuery("#" + elementId).attr("src", reader.result);

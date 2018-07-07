@@ -5,6 +5,8 @@
   bottom: 0;
   top: 0;
   background-color: white;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .suggestions{
   padding:10px 10px 0 10px;

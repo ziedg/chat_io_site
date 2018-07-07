@@ -141,6 +141,7 @@ listenForMessages(userId: string): void {
       jQuery(".embed-submit-field button").removeClass('activebtn');
     }
   }
+  
   lastMessage(message: any): boolean {
     let i = this.messages.indexOf(message);
     if (this.messages[i + 1] !== null && this.messages[i + 1] !== undefined) {

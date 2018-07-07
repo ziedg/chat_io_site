@@ -69,7 +69,7 @@ export class Main {
   private isSubscribed = false;
   private registration = undefined;
   private notifFirstCheck: Boolean = true;
-  nbNewMessageNotification: Number=0;
+  nbNewMessageNotification: Number =0;
   // end Notification vars
 
 
@@ -414,8 +414,8 @@ checkNewMessageNotification(){
     response => {
       if (response.status == 1) {
 
-       this.nbNewMessageNotification+=response.nbNewMessageNotifications
-       ;
+       this.nbNewMessageNotification+=response.nbNewMessageNotifications;
+       console.log(this.nbNewMessageNotification);
       }
     },
     err => {},

@@ -11,10 +11,7 @@ export const MARK_VIEW:string = 'markView';
 export const GET_NOTIFICATIONS:string = 'getNotifications?lastNotificationId=LAST&index=INDEX';
 
 export const CHECK_NEW_NOTIFICATIONS:string = 'checkNewNotifications';
-export const CHECK_NEW_MESSAGE_NOTIFICATIONS:string = 'checkNewMessageNotifications';
-
-
-
+export const CHECK_NEW_MESSAGE_NOTIFICATIONS:string='checkNewMessageNotifications';
 export const FIND_PROFILE:string = 'findProfile?ProfileName=';
 
 export const GET_OPEN_GRAPH_DATA:string = 'getOpenGraphData?url=';
