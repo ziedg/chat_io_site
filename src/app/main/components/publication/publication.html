@@ -35,8 +35,12 @@
           <a style="display:inline;" [routerLink]="['/main/profile',publicationBean.profileId]">
             {{publicationBean.profileFirstName}} {{publicationBean.profileLastName}}
           </a>
-          <span style="font-weight: normal">{{ 'publication_shared_text' | translate }}</span>
-          <a [routerLink]="['/main/profile',publicationBean.originalProfileId]" style="display:inline;">
+          <span *ngIf="publicationBean.originalProfileId!==publicationBean.profileId"
+           style="font-weight: normal">{{ 'publication_shared_text' | translate }}</span>
+           <span *ngIf="publicationBean.originalProfileId===publicationBean.profileId"
+           style="font-weight: normal">{{ 'publication_shared_text_own_pub' | translate }}</span>
+          <a *ngIf="publicationBean.originalProfileId!==publicationBean.profileId"
+          [routerLink]="['/main/profile',publicationBean.originalProfileId]" style="display:inline;">
             {{publicationBean.originalProfileFirstName +" "+publicationBean.originalProfileLastName }}
           </a>
 
