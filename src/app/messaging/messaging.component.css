@@ -25,6 +25,8 @@
   }
 .chat-list{
 	background-color:white;
+	overflow-y: scroll;
+    max-height: 78vh;
 }
 @media(max-width:767px){
 	.messengerDiv{
