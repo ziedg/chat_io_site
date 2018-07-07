@@ -87,7 +87,8 @@
 
           <div class="upper-arrow upper-arrow-notification"></div>
           <div class="notification-holder" style="display:none">
-            <div  *ngIf="showNotif"  class="notifcations">
+            <div class="loader-notifications-main" *ngIf="!loaded"></div>
+            <div  *ngIf="showNotif && loaded"  class="notifcations">
 
               <span *ngFor="let notif of listNotif">
 
@@ -183,6 +184,7 @@
 
 
                 </span>
+                <div class="loader-more-notifications-main" *ngIf="!moreLoaded"></div>
 
               </div>
               <div style="text-align: center;" *ngIf="showButtonMoreNotif" (click)="getNotifications()">
