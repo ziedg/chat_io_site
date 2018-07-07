@@ -31,6 +31,7 @@ autocomplete = false;
 listSearchUsers = [];
 searchValue: string;
 noSearchResults: Boolean = false;
+loaded: Boolean = false;
 @ViewChild("searchBar") searchBar: ElementRef;
 
 //
@@ -90,6 +91,7 @@ noSearchResults: Boolean = false;
         }
         this.chatListUsers.push(users[i]);
        } 
+       this.loaded = true;
    
     })
   }
@@ -124,11 +126,11 @@ selectUser(user:User): void {
      this.emitterService.emitUser(user);
 
       /* calling method to get the messages */
-  //   this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId })
-  //   .subscribe((response) => {
-  //     /* Sending conversation between two users to other component. */
-  //     this.emitterService.emitConversation(response);
-  // });
+    this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId })
+    .subscribe((response) => {
+      /* Sending conversation between two users to other component. */
+      this.emitterService.emitConversation(response);
+  });
   
   this.router.navigate(['/main/mobile/'+user._id]);
 }

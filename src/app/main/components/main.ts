@@ -70,6 +70,8 @@ export class Main {
   private registration = undefined;
   private notifFirstCheck: Boolean = true;
   nbNewMessageNotification: Number =0;
+  loaded: Boolean = false;
+  moreLoaded: Boolean = true;
   // end Notification vars
 
 
@@ -275,11 +277,15 @@ export class Main {
   loadFirstNotifactions() {
     this.lastNotifId = "";
     this.listNotif = [];
-    this.getNotifications();
+    
+    this.showNotificationList();
+    // setTimeout(3000,this.getNotifications());
+    this.getNotifications()
   }
 
 
   getNotifications() {
+    this.moreLoaded = false;
     this.http
       .get(
         environment.SERVER_URL + pathUtils.GET_NOTIFICATIONS.replace("INDEX",this.index).replace("LAST",this.lastNotifId),
@@ -303,7 +309,9 @@ export class Main {
               this.lastNotifId = response[i]._id;
 
             }
-
+            
+            this.loaded = true;
+            this.moreLoaded = true;
             arr = _.uniqWith(this.listNotif, _.isEqual);
             arr = _.uniqBy(this.listNotif, notif => {
               return notif._id;
@@ -328,7 +336,7 @@ export class Main {
         err => {},
         () => {
           this.nbNewNotifications = 0;
-          this.showNotificationList();
+          
           this.changeDetector.markForCheck();
         }
       );
@@ -449,6 +457,7 @@ checkNewMessageNotification(){
   hideNotificationList() {
     jQuery(".notification-holder").hide();
     jQuery(".upper-arrow-notification").hide();
+    this.loaded = false;
   }
 
   translateCode(code) {

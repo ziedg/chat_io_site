@@ -29,7 +29,7 @@ export class ConversationMobileComponent implements OnInit{
   firstListen: boolean = true;
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
-  data: any ="Initializeeed";
+  //data: any ="Initializeeed";
   public selectedUser: User = null;
 	public messageForm: FormGroup;
 	private userId: string = null;
@@ -37,6 +37,7 @@ export class ConversationMobileComponent implements OnInit{
   public messages = [];
   public messageLoading = false;
   private s: AngularFireObject<any>;
+  loaded: Boolean = false;
 
   constructor(private emitterService:EmitterService,
     private router:Router,
@@ -49,18 +50,31 @@ export class ConversationMobileComponent implements OnInit{
     this.userId=this.user._id;
 
     this.selectedUser =this.emitterService.getSelectedUser();
-
-    this.data = this.route.snapshot.data;
-    let allMessages = this.data.messages;
-    if(allMessages==undefined)
+// with the Resolver
+    // this.data = this.route.snapshot.data;
+    // let allMessages = this.data.messages;
+    // if(allMessages==undefined)
+    //   {
+    //     this.messages=[];
+    //   }
+    //   else{
+    //     this.messages = allMessages;
+    //     console.log(this.messages);
+    //   }
+    //   this.messageLoading = true;
+// Without the Resolver
+    this.emitterService.conversationEmitter.subscribe((data) => {
+      if(data==undefined)
       {
         this.messages=[];
       }
       else{
-        this.messages = allMessages;
+        this.loaded = true;
+        this.messages = data;
         console.log(this.messages);
       }
       this.messageLoading = true;
+});    
 
     
 		this.messageForm =new FormBuilder().group({
@@ -73,18 +87,8 @@ export class ConversationMobileComponent implements OnInit{
     
     this.listenForMessages(this.userId);
     
-    // convoemitter is the cause
-    // this.emitterService.conversationEmitter.subscribe((data) => {
-    //   if(data==undefined)
-    //   {
-    //     this.messages=[];
-    //   }
-    //   else{
-    //     this.messages = data;
-    //     console.log(this.messages);
-    //   }
-    //   this.messageLoading = true;
-    // });
+    
+    
     
   }
 
