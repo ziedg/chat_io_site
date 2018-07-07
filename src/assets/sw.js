@@ -1,4 +1,3 @@
-
 // -------------------------------------------------------
 // background sync
 // -------------------------------------------------------
@@ -76,6 +75,10 @@ self.addEventListener('push', event => {
     icon:data.notification.icon,
     badge: data.notification.icon
   };
+  
+  if(data.notification.tag){
+      options.tag=data.notification.tag;
+  }
 
   event.waitUntil(self.registration.showNotification(title, options));
 });
