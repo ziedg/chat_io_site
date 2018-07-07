@@ -1,11 +1,14 @@
+<div class="loader-notifications" *ngIf="!loaded"></div>
+
 <div class="notifcations"
-     *ngIf="user"
+     *ngIf="user && loaded"
      infinite-scroll
      [infiniteScrollDistance]="0"
      [infiniteScrollThrottle]="0"
      style="padding: 0 6px"
      (scrolled)="onScrollDown()">
-
+  
+  
   <div *ngFor="let notif of listNotif">
     <article style="margin-top: 10px; display: flex;" [class.unseen-notification]="notif.isSeen=='false'"
              *ngIf="notif.type !='subscribe'"

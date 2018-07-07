@@ -29,6 +29,7 @@ export class Notification implements OnInit {
     listNotif : Array <NotificationBean> = [];
     user:User = new User();
     noMoreNotif:Boolean=false;
+    loaded: Boolean = false;
 
     constructor(public translate:TranslateService,
                 private dateService:DateService,
@@ -68,6 +69,7 @@ export class Notification implements OnInit {
           }
           this.index=5;
           this.isLock=false;
+          this.loaded = true;
           
         } else {
           this.showNoNotif = true;
