@@ -5219,7 +5219,7 @@ input.loginInput {
   100% { transform: rotate(360deg); }
 }
 .loading {
-  margin: 4px auto;
+  margin: 0 auto;
   border-radius: 50%;
   width: 21px;
   height: 21px;
