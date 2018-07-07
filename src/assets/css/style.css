@@ -1486,7 +1486,7 @@ section.widget {
   color: #12a012;
   box-shadow: none;
   border: solid 1px #ccc;
-  padding: 0 10px;
+  padding: 0 !important;
   margin: 3px 0 0;
   border-radius: 5px;
   border-style: solid;
@@ -1507,11 +1507,8 @@ section.widget {
   margin-right: 8px;
 }
 
-.sub-profile-btn-old.loading-button {
-  position: relative;
-  padding-top: 0;
-  padding-bottom: 0;
-  height: 35px;
+.loading-button {
+  bottom:0;
 }
 
 .sub-profile-btn-old.active {
@@ -5220,6 +5217,7 @@ input.loginInput {
 }
 .loading {
   margin: 0 auto;
+  padding:0 !important;
   border-radius: 50%;
   width: 21px;
   height: 21px;
