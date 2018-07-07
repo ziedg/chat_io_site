@@ -499,8 +499,8 @@ showConfirmButton: false
     txt = txt
       .replace(/(\&nbsp;|\ )+/g, " ")
       .replace(/(\<.?br\>)+/g, "<br>")
-      .replace(/^\<.?br\>|\<.?br\>$/g, "");
-
+      .replace(/^\<.?br\>|\<.?br\>$/g, "")
+      .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
     var white_space_regex: RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
     var white_space_only = white_space_regex.test(txt);
     if (!commentToSend && white_space_only && !this.uploadedPictureComment) {
