@@ -437,7 +437,9 @@
   .publish-button.loading-button:hover {
     background-color: #55aa55;
   }
-
+  .sub-profile-btn-old.loading-button:hover {
+    background-color: #55aa55;
+  }
   .delete-photo-post:hover {
     background-color: white;
     color: #008800;
@@ -1503,6 +1505,13 @@ section.widget {
   border-radius: 3px;
   line-height: 30px;
   margin-right: 8px;
+}
+
+.sub-profile-btn-old.loading-button {
+  position: relative;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 35px;
 }
 
 .sub-profile-btn-old.active {
