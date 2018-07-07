@@ -15,7 +15,7 @@ import {SearchMobile} from "./main/components/search-mobile/search-mobile.compon
 import {ConversationMobileComponent} from './messaging/conversation-mobile/conversation-mobile.component';
 import { ProfileResolver } from './main/components/profile/profile.resolver';
 import { PublicationResolver } from './main/components/profile/publication.resolver';
-import { MessageResolver } from './messaging/conversation-mobile/messages.resolver';
+//import { MessageResolver } from './messaging/conversation-mobile/messages.resolver';
 
 export const routes: Routes = [
     {path: 'redirect', component: FakeComponent},
@@ -43,7 +43,7 @@ export const routes: Routes = [
             {path: 'notification', component: Notification},
             {path: '404', component: NotFoundPage},
             {path: 'messaging',component: MessagingComponent },
-            {path: 'mobile/:stringid', component: ConversationMobileComponent, resolve: {messages: MessageResolver}},
+            {path: 'mobile/:stringid', component: ConversationMobileComponent /*, resolve: {messages: MessageResolver}*/},
             {path: '**', redirectTo: '404'}
         ]
     },
@@ -71,7 +71,7 @@ export const routes: Routes = [
   providers: [
     ProfileResolver,
     PublicationResolver,
-    MessageResolver
+    /*MessageResolver*/
   ]
 })
 export class AppRoutingModule {}
