@@ -11,8 +11,6 @@ export class DetectUrls implements PipeTransform {
 
 
     transform(txt:string):string {
-        console.log("detect urls");
-        console.log(this.regex_url.test(txt));
         txt = txt.replace(this.regex_url, '$1<a href="$2" target="_blank">$2</a>');
         txt = txt.replace(this.regex_long_url, " $1...$3");
         return txt;
