@@ -29,7 +29,7 @@ export class ChatListComponent implements OnInit {
   public suggestions: any[] = [];
   private selectedUserId: string = null;
   private s: AngularFireObject<any>;
-  private msgFirstCheck: Boolean = true;  
+  private msgFirstCheck: Boolean = true;
 //
 autocomplete = false;
 listSearchUsers = [];
@@ -101,6 +101,8 @@ noSearchResults: Boolean = false;
      return users.json();
      })
     .subscribe((users:any[])=>{
+      console.log('chat list');
+      console.log(users);
        for(let i=0;i<users.length;i++){
           if(users[i].lastMessage.fromUserId == this.userId){
             users[i].lastMessage.message = "Vous : "+users[i].lastMessage.message;
@@ -130,9 +132,9 @@ noSearchResults: Boolean = false;
             users[i].lastMessage.date = hours+":"+minutes;
           }
           this.chatListUsers.push(users[i]);
-          
-       } 
-   
+
+       }
+
     })
   }
 
@@ -145,16 +147,16 @@ noSearchResults: Boolean = false;
         if (notif !== null && !this.msgFirstCheck) {
           this.chatService.getMessage(notif.msgId).subscribe(
             message => {
-              
+
                 var elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
-               
+
                 if(notif.senderId == this.userId){
                   this.chatListUsers[elementPos].lastMessage.message = "Vous : "+message.message;
                 }
                 else{
                   this.chatListUsers[elementPos].lastMessage.message = message.message;
                 }
-                
+
                 let actualDate = new Date(Date.now());
                 let hours = actualDate.getHours().toString();
                 let minutes = actualDate.getMinutes().toString();
@@ -165,9 +167,9 @@ noSearchResults: Boolean = false;
                 if(minutes.length==1){
                   minutes = "0"+minutes;
                 }
-                
+
                 this.chatListUsers[elementPos].lastMessage.date = hours+":"+minutes;
-          
+
             },
             err => console.log('Could send message to server, reason: ', err)
           );
@@ -189,8 +191,8 @@ noSearchResults: Boolean = false;
     .subscribe((users:any[])=>{
        for(let i=0;i<users.length;i++){
        this.suggestions.push(users[i]);
-       } 
-   
+       }
+
     })
   }
 
@@ -198,11 +200,11 @@ reactToNewMessages(){
   this.chatService.messageEmitter.subscribe(message=>{
     let profiles=this.chatListUsers.filter(user=>user._id == message.fromUserId);
     if (profiles[0]){
-          console.log(profiles[0])    
+          console.log(profiles[0])
     }else {
            profiles=this.suggestions.filter(user=>user._id == message.fromUserId);
           if (profiles[0]){
-            console.log(profiles[0])    
+            console.log(profiles[0])
           }else {
             this.http.get(
               environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
@@ -210,13 +212,13 @@ reactToNewMessages(){
               .map((res:Response) => res.json())
               .subscribe(
                 response => {
-        
+
                 if (response.status == "0") {
-        
+
                   let profile= response.user;
                   console.log(profile)
                 }
-        
+
               },
                 err => {
               },
@@ -236,7 +238,7 @@ reactToNewMessages(){
     }
     return this.selectedUserId === userId ? true : false;
 }
- 
+
 /* Method to select the user from the Chat list starts */
 selectUser(user: User): void {
     this.selectedUserId = user._id;
@@ -253,12 +255,12 @@ selectUser(user: User): void {
 
 /*Search functionnality*/
 loadUser(user) {
- 
+
   var found = this.chatListUsers.some(function (profile) {
     return profile._id ==user._id ;
   });
     if (!found) this.chatListUsers.push(user)
-  
+
   this.selectUser(user)
 }
 
@@ -271,20 +273,20 @@ return fullName.includes(name);
 
 filterSubscriptionsByName(name){
   if(this.user.subscriptionsDetails){
-    
+
     return this.user.subscriptionsDetails.filter((user)=>{
       let fullName=user.firstName + ' ' + user.lastName;
       return fullName.includes(name);
       });
   }
-  
+
   }
 
 onFocus(){
   if (this.searchBar.nativeElement.value.length>=1){
     this.searchBar.nativeElement.style.display = "block!important";
     this.onChange(this.searchBar.nativeElement.value);
-  }  
+  }
 }
 
 onChange(newValue: string) {
@@ -303,7 +305,7 @@ onChange(newValue: string) {
               this.getListSearchUsers(newValue);
             }
     }
-  } 
+  }
   this.changeDetector.markForCheck();
 }
 

@@ -31,7 +31,8 @@ getSuggestions(userId) {
     /* get messages between current user and the selected user from the list*/
     return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + users.fromUserId + '/' + users.toUserId)
       .map((response) => {
-        return response.json()
+        return response.json();
+        
       });
 
   }
@@ -57,6 +58,6 @@ getSuggestions(userId) {
   newIncomingMessage(message){
   this.messageEmitter.next(message)
  }
-  
+
 
 }
