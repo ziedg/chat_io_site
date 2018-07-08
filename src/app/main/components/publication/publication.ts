@@ -592,6 +592,7 @@ showConfirmButton: false
   }
 
   sharePub(post: PublicationBean) {
+    document.body.style.overflow = "hidden";
     swal({
       title: this.translateCode("publication_popup_confirmation_title"),
       text: this.translateCode("publication_popup_confirmation_share_text"),
@@ -613,11 +614,13 @@ showConfirmButton: false
           showConfirmButton: false
         }).then(function () { }, function (dismiss) { });
         this.doSharePub(post);
+        document.body.style.overflow = "auto";
       }.bind(this),
       function (dismiss) {
         // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
         if (dismiss === "overlay") {
         }
+        document.body.style.overflow = "auto";
       }
     );
   }
@@ -959,10 +962,12 @@ showConfirmButton: false
 
   openModalPub() {
     this.modalPub = true;
+    document.body.style.overflow = "hidden";
   }
 
   closeModalPub() {
     this.modalPub = false;
+    document.body.style.overflow = "auto";
   }
 
   openModalInteractions() {
