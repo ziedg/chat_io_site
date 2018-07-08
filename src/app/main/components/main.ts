@@ -11,7 +11,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
@@ -86,7 +85,6 @@ export class Main {
     private changeDetector: ChangeDetectorRef,
     private recentRechService: RecentRechService,
     private appRef: ApplicationRef,
-    private meta: Meta,
     private elementRef: ElementRef,
     private renderer: Renderer2,
 
@@ -114,12 +112,6 @@ export class Main {
     if (this.user!==null)
     this.listenForNotifications(this.user._id);
 
-
-    // meta tag to fix view on iDevices (like iPohne)
-    this.meta.addTag({
-      name: "viewport",
-      content: "width=device-width, initial-scale=1.0"
-    });
 
     jQuery(".recherche-results-holder").blur(function() {
       jQuery(".file-input-holder").hide();

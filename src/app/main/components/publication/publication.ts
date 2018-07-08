@@ -100,7 +100,7 @@ export class Publication {
   displayedNumberInteractions = 10;
   interactionsPage = 0;
   public modalInteractions = false;
-
+  interactionsLoaded:boolean=false;
   imageBaseUrl = environment.IMAGE_BASE_URL;
   allListComments: CommentBean[];
 
@@ -592,6 +592,7 @@ showConfirmButton: false
   }
 
   sharePub(post: PublicationBean) {
+    document.body.style.overflow = "hidden";
     swal({
       title: this.translateCode("publication_popup_confirmation_title"),
       text: this.translateCode("publication_popup_confirmation_share_text"),
@@ -613,11 +614,13 @@ showConfirmButton: false
           showConfirmButton: false
         }).then(function () { }, function (dismiss) { });
         this.doSharePub(post);
+        document.body.style.overflow = "auto";
       }.bind(this),
       function (dismiss) {
         // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
         if (dismiss === "overlay") {
         }
+        document.body.style.overflow = "auto";
       }
     );
   }
@@ -934,12 +937,15 @@ showConfirmButton: false
       .map((res: Response) => res.json())
       .subscribe(
         response => {
+          this.interactionsLoaded=true;
           this.InteractionsLikes = response.message.likes.slice();
           this.InteractionsDislikes = response.message.dislikes.slice();
           console.log(this.InteractionsLikes);
           console.log(this.InteractionsDislikes);
         },
-        err => { },
+        err => { 
+          this.interactionsLoaded=true;
+        },
         () => {
           this.changeDetector.markForCheck();
         }
@@ -956,10 +962,12 @@ showConfirmButton: false
 
   openModalPub() {
     this.modalPub = true;
+    document.body.style.overflow = "hidden";
   }
 
   closeModalPub() {
     this.modalPub = false;
+    document.body.style.overflow = "auto";
   }
 
   openModalInteractions() {
@@ -970,6 +978,7 @@ showConfirmButton: false
 
   closeModalInteractions() {
     this.modalInteractions = false;
+    this.interactionsLoaded=false;
     document.body.style.overflow = "auto";
   }
 
