@@ -6,7 +6,7 @@ import {Pipe, PipeTransform} from "@angular/core";
 })
 
 export class DetectUrls implements PipeTransform {
-    regex_url: RegExp = /(^|br>|\s)\s?((https?:\/\/)?([a-z0-9]{1,12}\.){1,2}[a-z]{2,3}(\/[^\s<]*)?\s?(?=(\s|<br|$)))/gim;
+    regex_url: RegExp = /(^|>|\s)\s?((https?:\/\/)?([a-z0-9]{1,12}\.){1,2}[a-z]{2,3}(\/[^\s<]*)?\s?(?=(\s|<|$)))/gim;
     regex_long_url: RegExp = /(>[^<]{30})([^<]{10,})(<\/a>)/gi;
 
 

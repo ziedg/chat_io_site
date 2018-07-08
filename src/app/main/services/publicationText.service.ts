@@ -1,15 +1,13 @@
 import { Injectable } from "@angular/core";
+import { DetectUrls } from "../pipes/detectUrls.pipe";
 
 
 @Injectable()
 export class PublicationTextService {
+  detectUrls = new DetectUrls();
 
     addUrls(txt:string):string{
-        let regex_url: RegExp = /(^|br>|\s)\s?((https?:\/\/)?([a-z0-9]{1,12}\.){1,2}[a-z]{2,3}(\/[^\s<]*)?\s?(?=(\s|<br|$)))/gim;
-        txt = txt.replace(regex_url, '$1<a href="$2" target="_blank">$2</a>');
-        let regex_long_url: RegExp = /(>[^<]{30})([^<]{10,})(<\/a>)/gi;
-        txt = txt.replace(regex_long_url, " $1...$3");
-        return txt;
+      return this.detectUrls.transform(txt);
     }
 
     divideText(txt:string){

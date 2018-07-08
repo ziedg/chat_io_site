@@ -60,9 +60,7 @@ export class Comment {
     this.commentText = this.removeWhiteSpaceComment(this.commentBean.commentText);
     if(this.commentText) {
       this.commentText = this.emojiService.AfficheWithEmoji(this.commentText);
-      this.commentText = this.publicationTextService.addUrls(this.commentText);
       let dividedText = this.publicationTextService.divideText(this.commentText);
-      console.log(dividedText);
       this.commentText = dividedText.firstPart;
       this.commentTextLastPart = dividedText.lastPart;
       this.isLongComment = dividedText.isLongText;

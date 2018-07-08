@@ -18,9 +18,9 @@
       </div>
       <div class="col-xs-12 comment-text"
            style="margin-bottom: 5px;">
-           <span [innerHTML]="commentText"></span>
+           <span innerHTML="{{commentText | DetectUrls}}"></span>
            <a *ngIf="isLongComment && !showLastPart" (click)="showLastPart = true">{{"publication_open_last_part" | translate }}</a>
-           <span *ngIf="isLongComment && showLastPart" [innerHTML]="commentTextLastPart">             
+           <span *ngIf="isLongComment && showLastPart" innerHTML="{{commentTextLastPart | DetectUrls }}">             
            </span>
       </div>
       <img *ngIf="commentBean.commentPicture"
