@@ -30,6 +30,7 @@ import { LinkView } from "../../services/linkView";
 import { PostService } from "../../services/postService";
 import { SeoService } from "../../services/seo-service";
 import * as _ from "lodash";
+import { PublicationTextService } from "../../services/publicationText.service";
 
 declare var jQuery: any;
 declare var swal: any;
@@ -84,8 +85,8 @@ export class Publication {
   public link: LinkBean = new LinkBean();
   commentsDisplayed: boolean;
   /* long publication settings */
-  private longPubText: boolean = false;
-  private longPubTextShow: boolean = false;
+  private isLongText: boolean = false;
+  private isLongTextShow: boolean = false;
   private firstPubText: string = "";
   private lastPubText: string = "";
   pub_text: string = "";
@@ -117,7 +118,8 @@ export class Publication {
     private changeDetector: ChangeDetectorRef,
     private dateService: DateService,
     private ng2ImgMaxService: Ng2ImgMaxService,
-    private location: Location
+    private location: Location,
+    private publicationTextService: PublicationTextService,
   ) {
     if (window.matchMedia("(max-width: 768px)").matches) {
       if (location.path() != '') {
@@ -361,61 +363,12 @@ showConfirmButton: false
 
     var txt = this.publicationBean.publText;
 
-    const word_letters: number = 5;
+    txt = this.publicationTextService.addUrls(txt);
+    let dividedText = this.publicationTextService.divideText(txt);
+    this.firstPubText = dividedText.firstPart;
+    this.lastPubText = dividedText.lastPart;
+    this.isLongText = dividedText.isLongText;
 
-    const words_max: number = 70;
-    const words_marge: number = 10;
-
-    const letters_max: number = words_max * word_letters;
-    const letters_marge: number = words_marge * word_letters;
-
-    const lines_max: number = 4;
-
-    var regex_url: RegExp = /(^|br>|\s)\s?((https?:\/\/)?([a-z0-9]{1,12}\.){1,2}[a-z]{2,3}(\/[^\s<]*)?\s?(?=(\s|<br|$)))/gim;
-    txt = txt.replace(regex_url, '$1<a href="$2">$2</a>');
-
-    var regex_long_url: RegExp = /(>[^<]{30})([^<]{10,})(<\/a>)/gi;
-    txt = txt.replace(regex_long_url, " $1...$3");
-
-    if (txt !== "null" && txt !== "undefined" && txt.length > 0) {
-      var line_parts = txt.split("<br>");
-      if (line_parts.length > lines_max) {
-        this.firstPubText = line_parts.slice(0, lines_max).join("<br>");
-        this.lastPubText = line_parts
-          .slice(lines_max, line_parts.length)
-          .join("<br>");
-        this.longPubText = true;
-      } else {
-        var parts = txt.split(" ");
-        if (parts.length > words_max) {
-          this.longPubText = true;
-
-          let words_cut: number;
-          if (parts.length - words_max < words_marge)
-            words_cut = parts.length - words_marge;
-          else words_cut = words_max;
-
-          this.firstPubText = parts.slice(0, words_cut).join(" ");
-          this.lastPubText = parts.slice(words_cut, parts.length).join(" ");
-          //console.log("cut words");
-        } else if (txt.length > letters_max) {
-          this.longPubText = true;
-
-          let letters_cut: number;
-          if (txt.length - letters_max < letters_marge)
-            letters_cut = txt.length - letters_marge;
-          else letters_cut = letters_max;
-
-          var cut_end: number = txt.slice(0, letters_cut).lastIndexOf(" ");
-          this.firstPubText = txt.slice(0, cut_end);
-          this.lastPubText = txt.slice(cut_end);
-          //console.log("cut letters");
-        } else {
-          this.firstPubText = txt;
-        }
-      }
-      //console.log("long text : " + this.longPubText);
-    }
 
     //onsole.log(this.publicationBean);
 

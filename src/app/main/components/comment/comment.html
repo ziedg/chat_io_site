@@ -17,8 +17,11 @@
         {{commentBean.profileFirstName}} {{commentBean.profileLastName}}
       </div>
       <div class="col-xs-12 comment-text"
-           [innerHTML]="afficheComment(commentBean.commentText)"
            style="margin-bottom: 5px;">
+           <span [innerHTML]="commentText"></span>
+           <a *ngIf="isLongComment && !showLastPart" (click)="showLastPart = true">{{"publication_open_last_part" | translate }}</a>
+           <span *ngIf="isLongComment && showLastPart" [innerHTML]="commentTextLastPart">             
+           </span>
       </div>
       <img *ngIf="commentBean.commentPicture"
            src="{{imageBaseUrl + commentBean.commentPicture}}"

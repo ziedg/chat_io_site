@@ -14,6 +14,7 @@ import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
 import { LinkPreview } from '../../services/linkPreview';
 import { LinkView } from '../../services/linkView';
+import { PublicationTextService } from '../../services/publicationText.service';
 
 
 
@@ -82,7 +83,8 @@ export class Profile implements OnInit{
               private http:Http,
               private router:Router,
               private loginService:LoginService,
-              private changeDetector:ChangeDetectorRef) {
+              private changeDetector:ChangeDetectorRef,
+              private publicationTextService: PublicationTextService) {
 
     this.loginService.redirect();
 
@@ -464,8 +466,7 @@ reportPub(userDisplayed:User) {
     jQuery(".modal-friends").fadeOut(300);
   }
 
-  ngOnInit() {
-    
+  ngOnInit() {    
     jQuery(document).click(function (e) {
       if (jQuery(e.target).closest(".white-box-edit").length === 0 && jQuery(e.target).closest(".profile-edit").length === 0) {
         jQuery(".modal-edit-profile").fadeOut(300);
