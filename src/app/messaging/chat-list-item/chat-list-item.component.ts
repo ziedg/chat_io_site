@@ -31,9 +31,14 @@ export class ChatListItemComponent  {
     let yyyy = today.getFullYear();
     if(dd<10){
     var day='0'+dd;
-    } 
+    } else{
+      var day= dd.toString();
+    }
+    
     if(mm<10){
     var month='0'+mm;
+    }else{
+      var month= mm.toString();
     } 
     var currentDate = day+'-'+month+'-'+yyyy;
     return currentDate
