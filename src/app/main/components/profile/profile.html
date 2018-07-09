@@ -283,6 +283,9 @@
 
 <div class="modal-other-profile-options" style="display:none">
   <div class="white-box-edit">
+    <article (click)="showSendMessagePopUp()">
+      {{ 'profile_menu_send_message' | translate}}
+    </article>
     <article (click)="reportPub(userDisplayed)">
       {{ 'profile_menu_signaler' | translate }}
     </article>

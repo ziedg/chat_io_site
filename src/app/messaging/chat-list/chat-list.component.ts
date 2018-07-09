@@ -346,7 +346,12 @@ getListSearchUsers(key: string) {
         this.changeDetector.markForCheck();
       }
     );
-}
+  }
+
+  onClickOutside(){
+    console.log("clicked outside chat-list");
+  }
+
 
 
 }
