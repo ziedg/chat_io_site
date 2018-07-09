@@ -26,6 +26,7 @@ export class ChatListComponent implements OnInit {
   private user;
   private userId: string = null;
   public chatListUsers: any[] = [];
+  public historyUsers:any[]=[]; 
   public suggestions: any[] = [];
   private selectedUserId: string = null;
   private s: AngularFireObject<any>;
@@ -132,7 +133,7 @@ noSearchResults: Boolean = false;
             users[i].lastMessage.date = hours+":"+minutes;
           }
           this.chatListUsers.push(users[i]);
-
+          this.historyUsers.push(users[i]);
        }
 
     })
@@ -259,7 +260,7 @@ loadUser(user) {
   var found = this.chatListUsers.some(function (profile) {
     return profile._id ==user._id ;
   });
-    if (!found) this.chatListUsers.push(user)
+    if (!found) this.chatListUsers.unshift(user)
 
   this.selectUser(user)
 }
@@ -289,22 +290,27 @@ onFocus(){
   }
 }
 
+onBlur(){
+  this.searchValue="";
+}
+
 onChange(newValue: string) {
-  this.listSearchUsers = [];
-  this.enableAutocomplete();
+  this.chatListUsers = [];
   this.changeDetector.markForCheck();
   if (newValue.length >=1) {
       let searchInHistory=this.filterChatListUsersByName(newValue);
         if (searchInHistory && searchInHistory.length>0){
-        this.listSearchUsers=searchInHistory
+        this.chatListUsers=searchInHistory
         }else{
          let searchInSubscriptions=this.filterSubscriptionsByName(newValue);
             if (searchInSubscriptions && searchInSubscriptions.length>0){
-             this.listSearchUsers=searchInSubscriptions;
+             this.chatListUsers=searchInSubscriptions;
             }else{
               this.getListSearchUsers(newValue);
             }
     }
+  }else{
+    this.chatListUsers=this.historyUsers;
   }
   this.changeDetector.markForCheck();
 }
@@ -320,17 +326,10 @@ getListSearchUsers(key: string) {
     .map((res:Response)=>res.json())
     .subscribe(
       response => {
-        this.listSearchUsers = [];
-        this.noSearchResults = false;
-        this.changeDetector.markForCheck();
-        for (var i = 0; i < this.listSearchUsers.length; i++) {
-          this.listSearchUsers.pop();
-          this.changeDetector.markForCheck();
-        }
         if (response.status == 0) {
           if (response.profiles)
             for (var i = 0; i < response.profiles.length; i++) {
-              this.listSearchUsers[i] = response.profiles[i];
+              this.chatListUsers[i] = response.profiles[i];
               this.changeDetector.markForCheck();
             }
         }
@@ -339,8 +338,7 @@ getListSearchUsers(key: string) {
         this.noSearchResults = true;
       },
       () => {
-        if (this.listSearchUsers.length == 0) {
-          this.disableAutocomplete();
+        if (this.chatListUsers.length == 0) {
           this.noSearchResults = true;
         } else {
           this.noSearchResults = false;
@@ -348,18 +346,6 @@ getListSearchUsers(key: string) {
         this.changeDetector.markForCheck();
       }
     );
-}
-
-
-enableAutocomplete() {
-  jQuery(".recherche-results-holder-msg").show();
-  jQuery(".upper-arrow-search-msg").show();
-  this.changeDetector.markForCheck();
-}
-
-disableAutocomplete() {
-  jQuery(".recherche-results-holder-msg").hide();
-  jQuery(".upper-arrow-search-msg").hide();
 }
 
 

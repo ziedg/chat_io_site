@@ -1,15 +1,12 @@
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #090; /* green */
+  border: none;
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  animation: spin 2s linear infinite;
-  margin-top:54%;
-  margin-left:36%;
-  background-color: transparent;
-  position: relative;
-  
+  width: 26px;
+  height: 26px;
+  animation: spin 0.9s linear infinite;
+  margin-top:7px;
+  margin-left:46%;
+  position: relative; 
 }
 
 @keyframes spin {

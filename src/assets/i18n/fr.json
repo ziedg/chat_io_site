@@ -72,8 +72,8 @@
   "publication_popup_confirmation_title": "Êtes-vous sûr ?",
   "publication_popup_confirmation_delete_text": "Vous ne serez pas en mesure de récupérer cette publication !",
   "publication_popup_confirmation_delete_button": "Oui, supprimez-la!",
-  "publication_popup_notification_unsubscribe_title": "unsubscribed",
-  "publication_popup_notification_unsubscribe_text": "you are no longer subscribed to this person",
+  "publication_popup_notification_unsubscribe_title": "désabonné",
+  "publication_popup_notification_unsubscribe_text": "Vous n'êtes plus abonné à cette personne",
   "publication_popup_notification_delete_title": "Supprimée !",
   "publication_popup_notification_delete_text": "Votre publication a été supprimée.",
   "publication_popup_confirmation_share_text": "Voulez-vous partager cette publication ?",
@@ -201,5 +201,8 @@
   "suggestions":"suggestions",
   "send_msg":"envoyer",
   "You : ":"vous : ",
-  "recent_messages":"messages récents"
+  "recent_messages":"messages récents",
+  "Not":"Pas",
+  "Login_as":"Se connecter en tant que",
+  "Change_account":"Changer de compte"
 }

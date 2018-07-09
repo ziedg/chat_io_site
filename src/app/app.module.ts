@@ -47,7 +47,6 @@ import { ChatService } from './messanging/chat.service';
 import { FakeComponent } from './shared/fake.component';
 import { httpFactory } from './utils/factories/http.factory';
 import { GifSlider } from './main/components/gif-slider/gif-slider';
-import {AvailablePicture} from "./main/components/profile/pipes/AvailablePicture.pipe";
 import { ProfileService } from '../app/main/components/profile/profile.service';
 
 
@@ -55,7 +54,12 @@ import { LoveReaction} from './main/components/publication/reactions/love-reacti
 import { LikeReaction} from './main/components/publication/reactions/like-reaction/like-reaction'
 import { PublicationService } from './main/components/profile/publication.service';
 import { MobileNavigation } from './main/components/mobile-navigation/mobile-navigation';
+import { PublicationTextService } from './main/services/publicationText.service';
 
+
+/* pipes */
+import {AvailablePicture} from "./main/pipes/AvailablePicture.pipe";
+import { DetectUrls } from './main/pipes/detectUrls.pipe';
 
 /** Factories */
 @NgModule({
@@ -85,7 +89,7 @@ import { MobileNavigation } from './main/components/mobile-navigation/mobile-nav
     // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, LikeReaction, AvailablePicture, MobileNavigation],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, LikeReaction, AvailablePicture, DetectUrls, MobileNavigation],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,
@@ -104,6 +108,7 @@ import { MobileNavigation } from './main/components/mobile-navigation/mobile-nav
         ResetPasswordService,
         ProfileService,
         PublicationService,
+        PublicationTextService,
         
         {
           provide: Http, useFactory: httpFactory,

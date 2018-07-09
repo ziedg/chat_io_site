@@ -103,7 +103,7 @@
 
       <div class="header-segement description-holder description-holder-1">
         <ng-template [ngIf]="!editDescriptionEnable">
-          <span *ngIf="userDisplayed.about">{{userDisplayed.about | slice:0:descriptionMaxLength}}</span>    
+          <span *ngIf="userDisplayed.about" innerHTML="{{userDisplayed.about | slice:0:descriptionMaxLength | DetectUrls}}"></span>    
           <span *ngIf="!userDisplayed.about && user._id==userDisplayed._id" (click)="editDescription()" class="hidden-sm hidden-xs">
             {{ 'profile_description_empty' | translate }}
           </span>
@@ -157,7 +157,7 @@
   </div>
   <div class="header-segement description-holder description-holder-2">
     <span *ngIf="!editDescriptionEnable">
-      <span *ngIf="userDisplayed.about">{{userDisplayed.about | slice:0:descriptionMaxLength}}}}</span>
+      <span *ngIf="userDisplayed.about" innerHTML="{{userDisplayed.about | slice:0:descriptionMaxLength | DetectUrls}}"></span>
     </span>
 
 
