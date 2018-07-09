@@ -36,14 +36,14 @@ export class ConversationComponent implements OnInit {
   public messages = [];
   public messageLoading = true;
   private s: AngularFireObject<any>;
-  private msgFirstCheck: Boolean = true;  
+  private msgFirstCheck: Boolean = true;
 
   constructor(private emitterService: EmitterService,
     private router: Router,
     private db: AngularFireDatabase,
     private chatService: ChatService,
     private loginService:LoginService
-  ) { 
+  ) {
 		this.messageForm =new FormBuilder().group({
 			message: new MessageValidation
     });;
@@ -119,7 +119,7 @@ listenForMessages(userId: string): void {
                 document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
               }, 100);
           }else{
-          this.chatService.newIncomingMessage(message)  
+          this.chatService.newIncomingMessage(message)
           }
           },
           err => console.log('Could send message to server, reason: ', err)
@@ -141,7 +141,7 @@ listenForMessages(userId: string): void {
       jQuery(".embed-submit-field button").removeClass('activebtn');
     }
   }
-  
+
   lastMessage(message: any): boolean {
     let i = this.messages.indexOf(message);
     if (this.messages[i + 1] !== null && this.messages[i + 1] !== undefined) {

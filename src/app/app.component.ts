@@ -2,6 +2,7 @@ import './operators';
 
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Meta } from '@angular/platform-browser';
 
 declare var FB:any
 declare global {
@@ -15,8 +16,9 @@ declare global {
 
   })
 export class AppComponent implements OnInit {
-  constructor(private translate: TranslateService) {
+  meta: Meta;
 
+  constructor(private translate: TranslateService) {
     let userLang = localStorage.getItem('userLang');
     if (!userLang) {
       userLang = navigator.language;
@@ -41,6 +43,18 @@ export class AppComponent implements OnInit {
         version    : 'v2.11'
       });
       FB.AppEvents.logPageView();
+
+    // get os info ---------------
+    let userAgent = navigator.userAgent || navigator.vendor; //|| window.opera;
+    let osRegExp: RegExp = /iPad|iPhone|iPod|android|windows phone/i;
+    if(osRegExp.test(userAgent)) {
+      console.log("-------------------> mobile")
+      this.meta.addTag({
+        name: "viewport",
+        content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      });
+    }
+    //----------------------------
     };
 
     (function(d, s, id){
