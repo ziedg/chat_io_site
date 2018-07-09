@@ -30,29 +30,29 @@ export class ConversationComponent implements OnInit {
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
   public selectedUser: User = null;
-	public messageForm: FormGroup;
-	private userId: string = null;
-  public user ;
+  public messageForm: FormGroup;
+  private userId: string = null;
+  public user;
   public messages = [];
   public messageLoading = true;
   private s: AngularFireObject<any>;
-  private msgFirstCheck: Boolean = true;  
+  private msgFirstCheck: Boolean = true;
 
   constructor(private emitterService: EmitterService,
     private router: Router,
     private db: AngularFireDatabase,
     private chatService: ChatService,
-    private loginService:LoginService
-  ) { 
-		this.messageForm =new FormBuilder().group({
-			message: new MessageValidation
+    private loginService: LoginService
+  ) {
+    this.messageForm = new FormBuilder().group({
+      message: new MessageValidation
     });;
-    this.user=this.loginService.getUser();
+    this.user = this.loginService.getUser();
   }
 
-ngOnInit(){
-  this.listenForMessages(this.user._id);
-}
+  ngOnInit() {
+    this.listenForMessages(this.user._id);
+  }
   ngOnChanges(changes: any) {
     /* Fetching selected users information from other component. */
     this.emitterService.userEmitter
@@ -100,9 +100,9 @@ ngOnInit(){
     //}
   }
 
-listenForMessages(userId: string): void {
-  this.userId = userId;
-  this.s = this.db.object('notifications/'+this.userId+'/messaging');
+  listenForMessages(userId: string): void {
+    this.userId = userId;
+    this.s = this.db.object('notifications/' + this.userId + '/messaging');
     var item = this.s.valueChanges()
     this.s.snapshotChanges().subscribe(action => {
       var notif = action.payload.val();
@@ -111,20 +111,20 @@ listenForMessages(userId: string): void {
           message => {
             if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
               this.chatService.markMessageAsSeen(notif.msgId)
-              .subscribe(message=>{
-              })
+                .subscribe(message => {
+                })
               this.messages = [...this.messages, message];
               setTimeout(() => {
                 console.log(document.querySelector(`.message-thread`))
                 document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
               }, 100);
-          }else{
-          this.chatService.newIncomingMessage(message)  
-          }
+            } else {
+              this.chatService.newIncomingMessage(message)
+            }
           },
           err => console.log('Could send message to server, reason: ', err)
         );
-      }else{
+      } else {
         this.msgFirstCheck = false;
       }
     });
@@ -141,7 +141,7 @@ listenForMessages(userId: string): void {
       jQuery(".embed-submit-field button").removeClass('activebtn');
     }
   }
-  
+
   lastMessage(message: any): boolean {
     let i = this.messages.indexOf(message);
     if (this.messages[i + 1] !== null && this.messages[i + 1] !== undefined) {
