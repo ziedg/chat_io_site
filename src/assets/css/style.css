@@ -2774,8 +2774,29 @@ facebook-friends .user .user-img {
 
 .comment-text {
   width: calc(100% - 30px)!important;
+  background-color: #efefef;
+  border-radius: 20px;
+  position: relative;
 }
 
+.comment-text::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-right-color: #efefef;
+  border-left: 0;
+  border-bottom: 0;
+  -webkit-transform: rotate(-35deg);
+  transform: rotate(-35deg);
+}
+
+.comment-text span{
+  display: inline-block;
+}
 @media (max-width: 767px) {
   .publication-text {
     margin-left: 9px;
@@ -2965,11 +2986,12 @@ facebook-friends .user .user-img {
   position: relative;
   display: flex;
   display: inline-flex;
-  display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   margin: 0 0 7px 0;
   align-items: flex-start;
   width: 100%;
+  padding: 0 0 0 10px;
 }
 
 .publication .form-comment {
@@ -3016,6 +3038,19 @@ facebook-friends .user .user-img {
   width: 100%;
 }
 
+.header-comment{
+  display:inline-flex;
+  display: -webkit-inline-flex;
+  display: -ms-flexbox;
+  display: -webkit-inline-flex;
+  padding-left:20px;
+}
+
+.comment-date button{
+  background:none!important;
+  border: none!important;
+}
+
 @media (max-width: 325px) {
   .plus-comment {
     font-size: 12px;
@@ -3056,7 +3091,7 @@ facebook-friends .user .user-img {
   position: absolute;
   right: 70px;
   font-size: 18px;
-  bottom: 13px;
+  bottom: 8px;
   display: flex;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3159,11 +3194,14 @@ facebook-friends .user .user-img {
   font-weight: bold;
   color: #3b5998;
   cursor: pointer;
+  text-transform: capitalize;
 }
 
 .like-comment {
   margin-left: 5px;
   text-align: left;
+  float:right;
+  margin-top:15px;
 }
 
 .like-comment div {
