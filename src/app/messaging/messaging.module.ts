@@ -13,13 +13,15 @@ import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { ChatListMobileComponent } from './chat-list-mobile/chat-list-mobile.component';
 import { ChatListItemMobileComponent } from './chat-list-item-mobile/chat-list-item-mobile.component';
 import { SuggestionsMobileComponent } from './suggestions-mobile/suggestions-mobile.component';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 @NgModule({
   imports: [
     CommonModule,
     MessagingRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ClickOutsideModule
   ],
   declarations: [MessagingComponent, ChatListComponent, ConversationComponent, ChatListItemComponent, HeaderMobileComponent, ConversationMobileComponent, SuggestionsComponent, ChatListMobileComponent, ChatListItemMobileComponent, SuggestionsMobileComponent]
 })

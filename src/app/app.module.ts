@@ -62,6 +62,9 @@ import {AvailablePicture} from "./main/pipes/AvailablePicture.pipe";
 import { DetectUrls } from './main/pipes/detectUrls.pipe';
 
 /** Factories */
+
+import { ClickOutsideModule } from 'ng-click-outside';
+
 @NgModule({
     imports: [
       BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
@@ -84,7 +87,8 @@ import { DetectUrls } from './main/pipes/detectUrls.pipe';
         storageBucket: "speegar-6deca.appspot.com",
         messagingSenderId: "861552240215"
       }),
-      AngularFireDatabaseModule
+      AngularFireDatabaseModule,
+      ClickOutsideModule
     ],
     // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
