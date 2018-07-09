@@ -126,7 +126,6 @@
                       <span *ngIf=" notif.profiles && notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
                           {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[1].firstName, second: notif.profiles[0].firstName}  }}
-                    >
                         </span>
                         <span *ngIf="notif.profiles.length>2" class="notif-a">
                           {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[notif.profiles.length -1].firstName, number: notif.profiles.length-1

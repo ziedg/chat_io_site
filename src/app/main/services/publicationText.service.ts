@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { DetectUrls } from "../pipes/detectUrls.pipe";
+import { DetectUrls } from "../../shared/pipes/DetectUrls.pipe";
 
 
 @Injectable()
 export class PublicationTextService {
-  detectUrls = new DetectUrls();
+  detectUrls = new DetectUrls
 
     addUrls(txt:string):string{
       return this.detectUrls.transform(txt);
