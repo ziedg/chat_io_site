@@ -202,5 +202,8 @@
   "send_msg":"send",
   "you : ":"you : ",
   "recent_messages":"recent messages",
-  "Select_User":"Select a user to chat"
+  "Select_User":"Select a user to chat",
+  "Not":"Not",
+  "Login_as":"Login as",
+  "Change_account":"Change account"
 }

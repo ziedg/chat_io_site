@@ -201,5 +201,8 @@
   "suggestions":"sugerencias",
   "send_msg":"enviar a",
   "you : ":"usted : ",
-  "recent_messages":"mensajes recientes"
+  "recent_messages":"mensajes recientes",
+  "Not":"No",
+  "Login_as":"Iniciar sesión como",
+  "Change_account":"Cambiar cuenta"
 }
