@@ -26,10 +26,11 @@ export class ChatListComponent implements OnInit {
   private user;
   private userId: string = null;
   public chatListUsers: any[] = [];
+  public historyUsers:any[]=[]; 
   public suggestions: any[] = [];
   private selectedUserId: string = null;
   private s: AngularFireObject<any>;
-  private msgFirstCheck: Boolean = true;  
+  private msgFirstCheck: Boolean = true;
 //
 autocomplete = false;
 listSearchUsers = [];
@@ -101,6 +102,8 @@ noSearchResults: Boolean = false;
      return users.json();
      })
     .subscribe((users:any[])=>{
+      console.log('chat list');
+      console.log(users);
        for(let i=0;i<users.length;i++){
           if(users[i].lastMessage.fromUserId == this.userId){
             users[i].lastMessage.message = "Vous : "+users[i].lastMessage.message;
@@ -130,9 +133,9 @@ noSearchResults: Boolean = false;
             users[i].lastMessage.date = hours+":"+minutes;
           }
           this.chatListUsers.push(users[i]);
-          
-       } 
-   
+          this.historyUsers.push(users[i]);
+       }
+
     })
   }
 
@@ -145,16 +148,16 @@ noSearchResults: Boolean = false;
         if (notif !== null && !this.msgFirstCheck) {
           this.chatService.getMessage(notif.msgId).subscribe(
             message => {
-              
+
                 var elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
-               
+
                 if(notif.senderId == this.userId){
                   this.chatListUsers[elementPos].lastMessage.message = "Vous : "+message.message;
                 }
                 else{
                   this.chatListUsers[elementPos].lastMessage.message = message.message;
                 }
-                
+
                 let actualDate = new Date(Date.now());
                 let hours = actualDate.getHours().toString();
                 let minutes = actualDate.getMinutes().toString();
@@ -165,9 +168,9 @@ noSearchResults: Boolean = false;
                 if(minutes.length==1){
                   minutes = "0"+minutes;
                 }
-                
+
                 this.chatListUsers[elementPos].lastMessage.date = hours+":"+minutes;
-          
+
             },
             err => console.log('Could send message to server, reason: ', err)
           );
@@ -189,8 +192,8 @@ noSearchResults: Boolean = false;
     .subscribe((users:any[])=>{
        for(let i=0;i<users.length;i++){
        this.suggestions.push(users[i]);
-       } 
-   
+       }
+
     })
   }
 
@@ -198,11 +201,11 @@ reactToNewMessages(){
   this.chatService.messageEmitter.subscribe(message=>{
     let profiles=this.chatListUsers.filter(user=>user._id == message.fromUserId);
     if (profiles[0]){
-          console.log(profiles[0])    
+          console.log(profiles[0])
     }else {
            profiles=this.suggestions.filter(user=>user._id == message.fromUserId);
           if (profiles[0]){
-            console.log(profiles[0])    
+            console.log(profiles[0])
           }else {
             this.http.get(
               environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
@@ -210,13 +213,13 @@ reactToNewMessages(){
               .map((res:Response) => res.json())
               .subscribe(
                 response => {
-        
+
                 if (response.status == "0") {
-        
+
                   let profile= response.user;
                   console.log(profile)
                 }
-        
+
               },
                 err => {
               },
@@ -236,7 +239,7 @@ reactToNewMessages(){
     }
     return this.selectedUserId === userId ? true : false;
 }
- 
+
 /* Method to select the user from the Chat list starts */
 selectUser(user: User): void {
     this.selectedUserId = user._id;
@@ -253,12 +256,12 @@ selectUser(user: User): void {
 
 /*Search functionnality*/
 loadUser(user) {
- 
+
   var found = this.chatListUsers.some(function (profile) {
     return profile._id ==user._id ;
   });
-    if (!found) this.chatListUsers.push(user)
-  
+    if (!found) this.chatListUsers.unshift(user)
+
   this.selectUser(user)
 }
 
@@ -271,39 +274,44 @@ return fullName.includes(name);
 
 filterSubscriptionsByName(name){
   if(this.user.subscriptionsDetails){
-    
+
     return this.user.subscriptionsDetails.filter((user)=>{
       let fullName=user.firstName + ' ' + user.lastName;
       return fullName.includes(name);
       });
   }
-  
+
   }
 
 onFocus(){
   if (this.searchBar.nativeElement.value.length>=1){
     this.searchBar.nativeElement.style.display = "block!important";
     this.onChange(this.searchBar.nativeElement.value);
-  }  
+  }
+}
+
+onBlur(){
+  this.searchValue="";
 }
 
 onChange(newValue: string) {
-  this.listSearchUsers = [];
-  this.enableAutocomplete();
+  this.chatListUsers = [];
   this.changeDetector.markForCheck();
   if (newValue.length >=1) {
       let searchInHistory=this.filterChatListUsersByName(newValue);
         if (searchInHistory && searchInHistory.length>0){
-        this.listSearchUsers=searchInHistory
+        this.chatListUsers=searchInHistory
         }else{
          let searchInSubscriptions=this.filterSubscriptionsByName(newValue);
             if (searchInSubscriptions && searchInSubscriptions.length>0){
-             this.listSearchUsers=searchInSubscriptions;
+             this.chatListUsers=searchInSubscriptions;
             }else{
               this.getListSearchUsers(newValue);
             }
     }
-  } 
+  }else{
+    this.chatListUsers=this.historyUsers;
+  }
   this.changeDetector.markForCheck();
 }
 
@@ -318,17 +326,10 @@ getListSearchUsers(key: string) {
     .map((res:Response)=>res.json())
     .subscribe(
       response => {
-        this.listSearchUsers = [];
-        this.noSearchResults = false;
-        this.changeDetector.markForCheck();
-        for (var i = 0; i < this.listSearchUsers.length; i++) {
-          this.listSearchUsers.pop();
-          this.changeDetector.markForCheck();
-        }
         if (response.status == 0) {
           if (response.profiles)
             for (var i = 0; i < response.profiles.length; i++) {
-              this.listSearchUsers[i] = response.profiles[i];
+              this.chatListUsers[i] = response.profiles[i];
               this.changeDetector.markForCheck();
             }
         }
@@ -337,8 +338,7 @@ getListSearchUsers(key: string) {
         this.noSearchResults = true;
       },
       () => {
-        if (this.listSearchUsers.length == 0) {
-          this.disableAutocomplete();
+        if (this.chatListUsers.length == 0) {
           this.noSearchResults = true;
         } else {
           this.noSearchResults = false;
@@ -346,18 +346,6 @@ getListSearchUsers(key: string) {
         this.changeDetector.markForCheck();
       }
     );
-}
-
-
-enableAutocomplete() {
-  jQuery(".recherche-results-holder-msg").show();
-  jQuery(".upper-arrow-search-msg").show();
-  this.changeDetector.markForCheck();
-}
-
-disableAutocomplete() {
-  jQuery(".recherche-results-holder-msg").hide();
-  jQuery(".upper-arrow-search-msg").hide();
 }
 
 

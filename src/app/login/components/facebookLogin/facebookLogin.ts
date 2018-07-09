@@ -124,6 +124,7 @@ export class FacebookLogin {
             },
             () => {
                 console.log('done');
+                console.log(friends);
             }
         );
     }

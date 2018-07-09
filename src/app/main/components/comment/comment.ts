@@ -14,6 +14,7 @@ import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
 import { DateService } from '../../services/dateService';
 import { EmojiService } from '../../services/emojiService';
+import { PublicationTextService } from '../../services/publicationText.service';
 
 declare var swal: any;
 
@@ -35,22 +36,35 @@ export class Comment {
   public InteractionsLikes: Array<User> = [];
   public InteractionsDislikes: Array<User> = [];
   private isFixedPublishDate: boolean = false;
-  private fixedPublishDate: string;
+  private fixedPublishDate: string
 
   imageBaseUrl = environment.IMAGE_BASE_URL;
+  commentText: string;
+  commentTextLastPart: string = "";
+  isLongComment: boolean = false;
+  showLastPart: boolean = false;
 
   constructor(public translate: TranslateService,
-    private http: Http,
-    private dateService: DateService,
-    private loginService: LoginService,
-    public emojiService: EmojiService,
-    private changeDetector: ChangeDetectorRef) {
+              private http: Http,
+              private dateService: DateService,
+              private loginService: LoginService,
+              public emojiService: EmojiService,
+              private changeDetector: ChangeDetectorRef,
+              private publicationTextService: PublicationTextService) {
     loginService.actualize();
     this.user = loginService.user;
     this.listEmoji = emojiService.getEmojiList();
   }
 
   ngOnInit() {
+    this.commentText = this.removeWhiteSpaceComment(this.commentBean.commentText);
+    if(this.commentText) {
+      this.commentText = this.emojiService.AfficheWithEmoji(this.commentText);
+      let dividedText = this.publicationTextService.divideText(this.commentText);
+      this.commentText = dividedText.firstPart;
+      this.commentTextLastPart = dividedText.lastPart;
+      this.isLongComment = dividedText.isLongText;
+    }
   }
 
   addOrRemoveLike() {
@@ -60,14 +74,9 @@ export class Comment {
       this.removeLike();
   }
 
-  afficheComment(comment): string {
-    var white_space_regex: RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
-    if (!white_space_regex.test(comment)) {
-      return this.emojiService.AfficheWithEmoji(comment);
-    }
-    else {
-      return '';
-    }
+  removeWhiteSpaceComment(comment): string {
+    let white_space_regex: RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
+    return white_space_regex.test(comment) ? '' : comment;
   }
 
   addOrRemoveDislike() {

@@ -1,11 +1,33 @@
 <section id="gif-slider-container" class="slider-container" #container>
-    <i class="fa fa-times" style="right: 5px; background-color:burlywood; position: absolute;top: 0px;cursor: pointer; color: green;" aria-hidden="true"  (click)="toggleGifSlider()"></i>
+    <i class="fa fa-times" style="right: 5px; background-color:transparent; position: absolute;top: 0px;cursor: pointer; color: green;" aria-hidden="true"  (click)="toggleGifSlider()"></i>
   <div class="slider-sub-container">
     <div class="slides-container" #slidesContainer>
         
-      <div *ngFor="let Url  of UrlGifList" class="slide">
-        <a (click)="gifPreview(Url.Post)"> <img class="gif-img" [src]="Url.Preview"  /></a>
+      <div *ngFor="let Url  of UrlGifList; let i = index" class="slide"  [ngStyle]="{'background-image': 'url(' + Url.Preview + ')' }" style="background-repeat: no-repeat;">
+        <div class="gif-img loader-img"  *ngIf="!Url.Show" ></div>
+        <a (click)="gifPreview(Url)"> <img class="gif-img" [src]="Url.Preview" *ngIf="Url.Show" /></a>
+        
       </div>
+
+      <div  class="slide"  *ngIf="isLoadingMoreGifs">
+        <div class="gif-img loader-img"  ></div>
+      </div>
+      <div  class="slide"  *ngIf="isLoadingMoreGifs">
+        <div class="gif-img loader-img"  ></div>
+      </div>
+      <div  class="slide"  *ngIf="isLoadingMoreGifs">
+        <div class="gif-img loader-img"  ></div>
+      </div>
+      <div  class="slide"  *ngIf="isLoadingMoreGifs">
+        <div class="gif-img loader-img"  ></div>
+      </div>
+      <div  class="slide"  *ngIf="isLoadingMoreGifs">
+        <div class="gif-img loader-img"  ></div>
+      </div>
+
+      <div class="gif-img initial-loader-img "  *ngIf="isLoadingInitialGifs" ></div>
+        
+      
     </div>
     <div>
       <span class="glyphicon glyphicon-chevron-left slider-btn slider-btn-before"

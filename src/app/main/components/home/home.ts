@@ -20,8 +20,9 @@ import {LinkPreview} from '../../services/linkPreview';
 import {LinkView} from '../../services/linkView';
 import {NotificationService} from '../../services/notification.service';
 import {PostService} from '../../services/postService';
-import { GifListBean } from '../../../beans/gif-list-bean';
-import { GifService } from '../../services/gifService';
+import { PublicationTextService } from "../../services/publicationText.service";
+
+
 
 
 declare var jQuery: any;
@@ -37,10 +38,12 @@ declare var window: any;
   templateUrl: "home.html",
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class Home {
   form;
   uploadedPicture: File;
   isLock: boolean = false;
+
   public publicationBeanList: Array<PublicationBean> = [];
   public user: User = new User();
 
@@ -51,7 +54,7 @@ export class Home {
   urlGIF = "https://9gag.com/gag/aq7W4rj";
   imageGIF = "https://images-cdn.9gag.com/photo/aq7W4rj_700b.jpg";
 
-  public GifList: Array<GifBean> = [];
+
 
   linkDomain = "";
   titleEnable = false;
@@ -120,7 +123,7 @@ export class Home {
               private postService: PostService,
               private linkView: LinkView,
               private linkPreview: LinkPreview,
-              private gifService: GifService,
+
               private title: Title,
               private http: Http,
               private router: Router,
@@ -130,6 +133,7 @@ export class Home {
               private renderer: Renderer2,
               //Notiifcation
               public notificationService: NotificationService,
+              private publicationTextService: PublicationTextService,
               private ref: ChangeDetectorRef) {
 
     this.isSubscribed = true;
@@ -156,6 +160,7 @@ export class Home {
 
     //this.GifList = gifService.getGifList().list;
   }
+
 
   ngOnInit() {
     jQuery(".navigation-bottom").removeClass('hidden-xs');
@@ -548,19 +553,33 @@ export class Home {
   }
 
   previewGIF(urlGIF){
+
     var linkURL = urlGIF;
+
     this.link.url = linkURL;
     this.link.isSet = true;
     this.link.isGif = true;
     this.linkLoading = false;
     jQuery(".file-input-holder").hide();
+    //var img2 = document.getElementById('gifImageId');
+
+    // if(img2){
+
+    //   img2.onload = function() {
+    //   console.log("shooooooooooooooooooooooooow");
+    //   //gifHasLoaded = true;
+
+    //   }
+    // }
+
+
   }
 
   resetPreviewGIF() {
     this.link.url = "";
     this.link.isSet = false;
     this.link.isGif = false;
-    
+
   }
 
   resetPreview() {
@@ -590,7 +609,7 @@ export class Home {
     let text = $event.clipboardData.getData("text/plain");
     this.link.isGif = false;
     if(this.pubbg){
-      
+
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
       return 1;
@@ -780,13 +799,15 @@ export class Home {
 
   veriftextsize(publishDivRef){
     let text = publishDivRef.textContent;
+    text = this.publicationTextService.addUrls(text);
+    let dividedText = this.publicationTextService.divideText(text);
     let nb=0;
     if(text !== 'null' && text !=='undefined' && text.length > 0) {
       var line_parts = text.split('<br>');
       for(let i=0;i<line_parts.length;i++){
         nb=nb+(line_parts[i].length/39);
         if(line_parts[i].length%39!=0) nb++;}
-      if(nb>6){
+      if(nb>6||dividedText.isLongText){
         this.getbg0();
         this.bgvalid=false;
       }
