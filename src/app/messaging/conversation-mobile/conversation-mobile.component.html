@@ -9,8 +9,8 @@
 			</div>
 		</div>
 	</div>
-	<img class="loader" *ngIf="loaded" src="/assets/images/new/loading.png">
-	<div class="message-wrapper" *ngIf="!loaded">
+	<img class="loader" *ngIf="!loaded" src="/assets/images/new/loading.png">
+	<div class="message-wrapper" *ngIf="loaded">
 		<div class="message-container">
 			<ul class="message-thread" >
 				<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)">
