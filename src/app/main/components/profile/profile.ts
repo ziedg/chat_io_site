@@ -146,8 +146,7 @@ export class Profile implements OnInit{
       input: 'textarea',
     }).then(function (text) {
         if (text) {
-          console.log(text);
-          this.doReportPub(text);
+          this.sendMessage(text)
           swal({
             title: this.translateCode("publication_popup_notification_report_title"),
             text: this.translateCode("profile_popup_notification_report_text"),
@@ -166,8 +165,8 @@ export class Profile implements OnInit{
     this.closeModalOtherProfile()
   }
 
-  sendMessage(messageInputElement){
-    const messageText = messageInputElement.value.trim();
+  sendMessage(text){
+    const messageText = text.trim();
     if (messageText === '' || messageText === undefined || messageText === null) {
       alert(`Message can't be empty.`);
     }else{
