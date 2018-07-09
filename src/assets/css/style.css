@@ -6358,3 +6358,7 @@ img[src="undefined"] {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   .form-more { bottom: 2px; }
 }
+
+.messageContent a {
+  color: black;
+}
