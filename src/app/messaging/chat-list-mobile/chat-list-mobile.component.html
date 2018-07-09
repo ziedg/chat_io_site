@@ -26,7 +26,7 @@
 		</div>
 </div>
 <!-- <p class="sub">Messages Récents</p> -->
-	<div class="loader" *ngIf="!loaded"></div>
+	<img class="loader" *ngIf="!loaded" src="/assets/images/new/loading.png">
 	<div  *ngIf="loaded">
 		<hr *ngIf="chatListUsers.length > 0">
 		<!-- <p *ngIf="chatListUsers.length > 0" class="messenger-section">messages récents</p> -->

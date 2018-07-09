@@ -1,12 +1,11 @@
 .loader {
-    border: 16px solid #fafafa; /* Light grey */
-    border-top: 16px solid #090; /* Blue */
+    border: none;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    animation: spin 2s linear infinite;
-    margin-top:74%;
-    margin-left:36%;
+    width: 26px;
+    height: 26px;
+    animation: spin 0.9s linear infinite;
+    margin-top:20%;
+    margin-left:46%;
     background-color: transparent;
     position: relative;
     
