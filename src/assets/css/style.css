@@ -2774,29 +2774,12 @@ facebook-friends .user .user-img {
 
 .comment-text {
   width: calc(100% - 30px)!important;
-  background-color: #efefef;
-  border-radius: 20px;
-  position: relative;
-}
-
-.comment-text::before{
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
-  border-right-color: #efefef;
-  border-left: 0;
-  border-bottom: 0;
-  -webkit-transform: rotate(-35deg);
-  transform: rotate(-35deg);
 }
 
 .comment-text span{
   display: inline-block;
 }
+
 @media (max-width: 767px) {
   .publication-text {
     margin-left: 9px;
@@ -2853,7 +2836,9 @@ facebook-friends .user .user-img {
 }
 
 .comment-content {
-  width: 100%;
+  background-color: #efefef;
+  border-radius: 20px;
+  margin-left: 10px;
 }
 
 .comment-holder .like-dislike {
@@ -3185,14 +3170,14 @@ facebook-friends .user .user-img {
 
 .name-and-text-comment,
 .like-comment {
-  margin-right: 15px !important;
+  /* margin-right: 15px !important; */
   flex-wrap: wrap;
-  padding-left: 15px;
+  padding-left: 10px;
 }
 
 .commenter-name {
   font-weight: bold;
-  color: #3b5998;
+  /* color: #3b5998; */
   cursor: pointer;
   text-transform: capitalize;
 }

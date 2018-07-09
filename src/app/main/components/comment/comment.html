@@ -12,7 +12,7 @@
         <div class="commenter-name" [routerLink]="['/main/profile',commentBean.profileId]">
           {{commentBean.profileFirstName}} {{commentBean.profileLastName}}
         </div>
-        <div style="font-size:12px" class="comment-date">
+        <div style="font-size:12px;margin-top: 2px;" class="comment-date">
           <button style="font-size:12px">
             <i class="fa fa-clock-o"></i>
             <span> {{getCommentTime(commentBean.dateComment)}} </span>
@@ -26,7 +26,7 @@
         </span>
         <div class="like-comment">
           <div class="like-dislike">
-            <div class="like-holder" (click)="addOrRemoveLike()" [class.active]="commentBean.isLiked" style="margin-right: 15px;">
+            <div class="like-holder" (click)="addOrRemoveLike()" [class.active]="commentBean.isLiked">
               <button class="like">
                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
               </button>
@@ -42,7 +42,7 @@
                 {{commentBean.nbDislikes}}
               </span>
             </div> -->
-            <div class="remove-holder" style="margin-right:10px" (click)="removeComment(commentBean)" *ngIf="commentBean.profileId == user._id || publicationBean.profileId == user._id">
+            <div class="remove-holder" (click)="removeComment(commentBean)" *ngIf="commentBean.profileId == user._id || publicationBean.profileId == user._id">
               <button class="like">
                 <i class="fa fa-trash-o"></i>
               </button>
