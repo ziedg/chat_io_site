@@ -269,7 +269,7 @@ export class Main {
   loadFirstNotifactions() {
     this.lastNotifId = "";
     this.listNotif = [];
-    
+
     this.showNotificationList();
     // setTimeout(3000,this.getNotifications());
     this.getNotifications()
@@ -294,14 +294,14 @@ export class Main {
 
             for (var i = 0; i < response.length; i++) {
 
-              if(response[i]._id && response[i].type!='message'  && response[i].profiles.length > 0)
+              if(response[i]._id && response[i].type!='message')
                   arr.push(response[i]);
 
 
               this.lastNotifId = response[i]._id;
 
             }
-            
+
             this.loaded = true;
             this.moreLoaded = true;
             arr = _.uniqWith(this.listNotif, _.isEqual);
@@ -313,9 +313,7 @@ export class Main {
 
 
              this.listNotif = arr;
-             this.listNotif.forEach(item => {
-               console.log(item)
-             })
+
 
 
             if (response.length == 5) this.showButtonMoreNotif = true;
@@ -328,7 +326,7 @@ export class Main {
         err => {},
         () => {
           this.nbNewNotifications = 0;
-          
+
           this.changeDetector.markForCheck();
         }
       );
@@ -512,13 +510,22 @@ checkNewMessageNotification(){
   listenForNotifications(userId: string): void {
 
     this.s = this.db.object('notifications/'+userId+'/notification');
-      console.log('notifications/'+userId+'/notification');
-      var item = this.s.valueChanges()
-      console.log(JSON.stringify(item));
       this.s.snapshotChanges().subscribe(action => {
         var notif = action.payload.val();
+
+
+
+
         if (notif !== null && !this.notifFirstCheck){
-          this.nbNewNotifications++;
+          if(notif.data.body == 'message'){
+               (this.nbNewMessageNotification as  any)+=1;
+          }
+          else
+          {
+            this.nbNewNotifications++;
+          }
+
+
         }else{
           this.notifFirstCheck = false;
         }
