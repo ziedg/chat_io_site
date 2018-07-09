@@ -148,8 +148,8 @@ export class Profile implements OnInit{
         if (text) {
           this.sendMessage(text)
           swal({
-            title: this.translateCode("publication_popup_notification_report_title"),
-            text: this.translateCode("profile_popup_notification_report_text"),
+            title: this.translateCode("publication_popup_notification_message_sent_title"),
+            text: this.translateCode("publication_popup_notification_message_sent_text"),
             type: "success",
             timer: 1000,
             showConfirmButton: false
