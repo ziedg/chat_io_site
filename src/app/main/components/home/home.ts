@@ -20,8 +20,8 @@ import {LinkPreview} from '../../services/linkPreview';
 import {LinkView} from '../../services/linkView';
 import {NotificationService} from '../../services/notification.service';
 import {PostService} from '../../services/postService';
-import { GifListBean } from '../../../beans/gif-list-bean';
-import { GifService } from '../../services/gifService';
+
+
 
 
 declare var jQuery: any;
@@ -37,10 +37,12 @@ declare var window: any;
   templateUrl: "home.html",
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class Home {
   form;
   uploadedPicture: File;
   isLock: boolean = false;
+  
   public publicationBeanList: Array<PublicationBean> = [];
   public user: User = new User();
 
@@ -51,8 +53,8 @@ export class Home {
   urlGIF = "https://9gag.com/gag/aq7W4rj";
   imageGIF = "https://images-cdn.9gag.com/photo/aq7W4rj_700b.jpg";
 
-  public GifList: Array<GifBean> = [];
-
+  
+  
   linkDomain = "";
   titleEnable = false;
   youtubeInput = false;
@@ -120,7 +122,7 @@ export class Home {
               private postService: PostService,
               private linkView: LinkView,
               private linkPreview: LinkPreview,
-              private gifService: GifService,
+              
               private title: Title,
               private http: Http,
               private router: Router,
@@ -156,7 +158,8 @@ export class Home {
 
     //this.GifList = gifService.getGifList().list;
   }
-
+  
+  
   ngOnInit() {
     jQuery(".navigation-bottom").removeClass('hidden-xs');
     window.onscroll = () => {
@@ -548,12 +551,26 @@ export class Home {
   }
 
   previewGIF(urlGIF){
+    
     var linkURL = urlGIF;
+    
     this.link.url = linkURL;
     this.link.isSet = true;
     this.link.isGif = true;
     this.linkLoading = false;
     jQuery(".file-input-holder").hide();
+    //var img2 = document.getElementById('gifImageId');
+    
+    // if(img2){
+      
+    //   img2.onload = function() {
+    //   console.log("shooooooooooooooooooooooooow");
+    //   //gifHasLoaded = true;
+      
+    //   }
+    // }
+    
+    
   }
 
   resetPreviewGIF() {

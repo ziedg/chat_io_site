@@ -10,10 +10,14 @@ import {GifService} from '../../services/gifService';
 export class GifSlider implements AfterViewInit {
 
   public UrlGifList = [];
-  ListOfGifs = [];
-  NewListOfGifs = [];
+  
+  
   gifLimitIndex: number = 15;
-  firstGifRequest = true;
+  
+  previousActiveGifIndex = -1;
+  isLoadingMoreGifs: boolean = false;
+  isLoadingInitialGifs: boolean = false;
+
   @Output() myEvent = new EventEmitter();
   @Output() myToggleEvent = new EventEmitter();
 
@@ -27,38 +31,39 @@ export class GifSlider implements AfterViewInit {
 
   @ViewChild('slidesContainer') slidesContainer: ElementRef;
   @ViewChild('container') container: ElementRef;
+  
+  
 
   constructor(private renderer: Renderer2,
-              private gifService: GifService) {
-    this.gifService.loadMoreGifs();
-    this.ListOfGifs = gifService.getGifList();
-    for (let i = 0; i < this.ListOfGifs.length; i++) {
-      var GifObject = {Post: this.ListOfGifs[i]["media"][0]["gif"]["url"], Preview: this.ListOfGifs[i]["media"][0]["nanogif"]["url"]};
-      // this.UrlGifList[i].Post = this.ListOfGifs[i]["media"][0]["nanogif"]["url"];
-      // this.UrlGifList[i].Preview = this.ListOfGifs[i]["media"][0]["tinygif"]["url"];
+              private gifService: GifService, ) {
+   this.isLoadingInitialGifs = true; 
+  this.gifService.getGifList().then((gifs: any[]) => {
+    
+    for (let i = 0; i < gifs.length; i++) {
+      var GifObject = {Post: gifs[i]["media"][0]["gif"]["url"], Preview: gifs[i]["media"][0]["nanogif"]["url"], Show: true};
+      
       this.UrlGifList.push(GifObject); //UrlGifList is undefined
 
     }
+    this.isLoadingInitialGifs = false;
+  });
+
+    
   }
 
   loadMoreGifs() {
-    this.gifService.loadMoreGifs();
-    //console.log(this.gifService.getGifList());
-
-
-    // if (this.firstGifRequest){
-    //   this.firstGifRequest = false;
-    //   this.gifService.loadMoreGifs();
-    //   }
-    this.NewListOfGifs = this.gifService.getGifList();
-    this.gifService.loadMoreGifs();
-    //console.log(this.NewListOfGifs);
-    //let currentLength = this.UrlGifList.length;
-    for (let i = 0; i < this.NewListOfGifs.length; i++) {
-      var GifObject = {Post: this.NewListOfGifs[i]["media"][0]["gif"]["url"], Preview: this.NewListOfGifs[i]["media"][0]["nanogif"]["url"]};
-      this.UrlGifList.push(GifObject); 
-    }
-    //console.log(currentLength);
+    this.isLoadingMoreGifs = true;
+    this.gifService.loadMoreGifs().then((gifs: any[]) => {
+    
+      for (let i = 0; i < gifs.length; i++) {
+        var GifObject = {Post: gifs[i]["media"][0]["gif"]["url"], Preview: gifs[i]["media"][0]["nanogif"]["url"], Show: true};
+        
+        this.UrlGifList.push(GifObject); //UrlGifList is undefined
+  
+      }
+      this.isLoadingMoreGifs = false;
+    });
+    
     this.gifLimitIndex += 15;
   }
 
@@ -72,7 +77,7 @@ export class GifSlider implements AfterViewInit {
 
 
   translate_it(n: number) {
-    //console.log("gif length: "+ (this.ListOfGifs.length-3));
+    
     let offset_x_n: any = this.offset_x_pos + n;
     console.log("offset_x_n: "+offset_x_n);
 
@@ -94,9 +99,21 @@ export class GifSlider implements AfterViewInit {
 
   }
 
-  gifPreview(urlGIF) {
+  gifPreview(Url) {
     //console.log("chiiiild");
+    var urlGIF = Url.Post;
+    var j = this.previousActiveGifIndex ;
+    
+    var i = this.UrlGifList.indexOf(Url);console.log("this is iiiii",i);
+    if(j != -1){
+      this.UrlGifList[j].Show = true;
+    }
+    this.UrlGifList[i].Show = false;
+    this.previousActiveGifIndex = i;
     this.myEvent.emit(urlGIF);
+    
+    
+
   }
 
   toggleGifSlider(){

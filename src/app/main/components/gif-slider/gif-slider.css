@@ -42,6 +42,33 @@
   height: 100%;
 }
 
+.loader-img {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid grey; /* Blue */
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  animation: spin 2s linear infinite;
+  margin-top:4%;
+  margin-left:27%;
+  background-color: transparent;
+  position: relative;
+  
+}
+.initial-loader-img {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid grey; /* Blue */
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  animation: spin 2s linear infinite;
+  margin-top:4%;
+  margin-left:40%;
+  background-color: transparent;
+  position: relative;
+  
+}
+
 .slide {
   /* background-color: orange; */
   overflow: hidden;
