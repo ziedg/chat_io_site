@@ -35,8 +35,10 @@ export class ConversationComponent implements OnInit {
   public user;
   public messages = [];
   public messageLoading = true;
+  public userLoading = false;
   private s: AngularFireObject<any>;
   private msgFirstCheck: Boolean = true;
+  
 
   constructor(private emitterService: EmitterService,
     private router: Router,
@@ -55,12 +57,15 @@ export class ConversationComponent implements OnInit {
   }
   ngOnChanges(changes: any) {
     /* Fetching selected users information from other component. */
+    
     this.emitterService.userEmitter
       .subscribe((selectedUser: User) => {
+        this.messageLoading = true;
         this.selectedUser = selectedUser;
       });
 
     this.emitterService.conversationEmitter.subscribe((data) => {
+      
       this.messageLoading = false;
       if (data == undefined) {
         this.messages = [];
