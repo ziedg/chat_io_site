@@ -97,6 +97,9 @@ export class ConversationComponent implements OnInit {
         () => console.log('Sent Message server.'),
         err => console.log('Could send message to server, reason: ', err));
 
+      //update user's own messages  in the chat list
+      this.emitterService.emitMyMessage(data);
+      
       this.messageForm.reset();
       setTimeout(() => {
         document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
@@ -114,6 +117,7 @@ export class ConversationComponent implements OnInit {
       if (notif !== null && !this.msgFirstCheck) {
         this.chatService.getMessage(notif.msgId).subscribe(
           message => {
+            //console.log("my msg yaaaaaaaaa");
             if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
               this.chatService.markMessageAsSeen(notif.msgId)
                 .subscribe(message => {
