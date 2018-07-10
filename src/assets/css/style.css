@@ -389,6 +389,14 @@
     z-index: 4;
   }
 
+  .messenger-icon-main{
+    width:27px;
+    height:24px;
+  }
+  .messenger-icon-main:hover{
+    filter:brightness(0.25);
+  }
+
   .more-not:hover {
     text-decoration: none !important;
     background-color: #009999 !important;
