@@ -603,9 +603,13 @@ export class Home {
     jQuery(".facebook-preview").html("");
     this.changeDetector.markForCheck();
   }
-
+  onDrop(event){
+    console.log('drooooooooooooop');
+    event.preventDefault();
+  }
   updatePublishTextOnPaste($event) {
     $event.preventDefault();
+    
     let text = $event.clipboardData.getData("text/plain");
     this.link.isGif = false;
     if(this.pubbg){

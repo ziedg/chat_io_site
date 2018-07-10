@@ -133,6 +133,7 @@
                                                                           'pubdes16': pubclass=='pubdes16'}"
                    (paste)="updatePublishTextOnPaste($event)"
                    contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)"
+                   (drop)="onDrop($event)"
                    #publishDivRef style="width: calc(100% - 80px)"></div>
 
 
