@@ -192,7 +192,6 @@ noSearchResults: Boolean = false;
        for(let i=0;i<users.length;i++){
        this.suggestions.push(users[i]);
        }
-
     })
   }
 
