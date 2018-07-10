@@ -86,6 +86,10 @@
   "publication_popup_confirm": "Confirm",
   "publication_popup_notification_report_title": "Reported !",
   "publication_popup_notification_report_text": "This post has been reported .",
+  "publication_popup_send_message_title": "Send a message",
+  "publication_popup_send_message_text": "Write your message",
+  "publication_popup_notification_message_sent_title": "Message sent",
+  "publication_popup_notification_message_sent_text": "Your message has been sent",
   "prefix_date_yesterday": "Yesterday ",
   "prefix_date_now": "1min",
   "prefix_date_days": "days",
@@ -148,6 +152,7 @@
   "profile_menu_cancel": "Cancel ",
   "profile_menu_bloquer": "Block ",
   "profile_menu_signaler": "Report ",
+  "profile_menu_send_message": "Send message",
   "popular_profiles_title": "Popular profils ",
   "profile_suggestions_title": "Seek new discoveries ",
   "profile_popup_report_title": "Report this person",
@@ -202,5 +207,8 @@
   "send_msg":"send",
   "you : ":"you : ",
   "recent_messages":"recent messages",
-  "Select_User":"Select a user to chat"
+  "Select_User":"Select a user to chat",
+  "Not":"Not",
+  "Login_as":"Login as",
+  "Change_account":"Change account"
 }

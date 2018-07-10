@@ -33,7 +33,6 @@ export class ChatListComponent implements OnInit {
   private msgFirstCheck: Boolean = true;
 //
 autocomplete = false;
-listSearchUsers = [];
 searchValue: string;
 noSearchResults: Boolean = false;
 @ViewChild("searchBar") searchBar: ElementRef;
@@ -132,8 +131,8 @@ noSearchResults: Boolean = false;
             }
             users[i].lastMessage.date = hours+":"+minutes;
           }
-          this.chatListUsers.push(users[i]);
-          this.historyUsers.push(users[i]);
+          this.chatListUsers.push(users[i])
+          this.historyUsers=this.chatListUsers.slice()
        }
 
     })
@@ -193,7 +192,6 @@ noSearchResults: Boolean = false;
        for(let i=0;i<users.length;i++){
        this.suggestions.push(users[i]);
        }
-
     })
   }
 
@@ -257,16 +255,18 @@ selectUser(user: User): void {
 /*Search functionnality*/
 loadUser(user) {
 
-  var found = this.chatListUsers.some(function (profile) {
+  var found = this.historyUsers.some(function (profile) {
     return profile._id ==user._id ;
   });
-    if (!found) this.chatListUsers.unshift(user)
+    if (!found) this.historyUsers.unshift(user)
 
   this.selectUser(user)
+  this.searchValue=""
+  this.chatListUsers=this.historyUsers.slice();
 }
 
 filterChatListUsersByName(name){
-return this.chatListUsers.filter((user)=>{
+return this.historyUsers.filter((user)=>{
 let fullName=user.firstName +' ' +user.lastName;
 return fullName.includes(name);
 });
@@ -290,9 +290,7 @@ onFocus(){
   }
 }
 
-onBlur(){
-  this.searchValue="";
-}
+
 
 onChange(newValue: string) {
   this.chatListUsers = [];
@@ -310,7 +308,7 @@ onChange(newValue: string) {
             }
     }
   }else{
-    this.chatListUsers=this.historyUsers;
+    this.chatListUsers=this.historyUsers.slice();
   }
   this.changeDetector.markForCheck();
 }
@@ -346,7 +344,13 @@ getListSearchUsers(key: string) {
         this.changeDetector.markForCheck();
       }
     );
-}
+  }
+
+  onClickOutside(){
+    this.searchValue="";
+    this.chatListUsers=this.historyUsers.slice();
+  }
+
 
 
 }

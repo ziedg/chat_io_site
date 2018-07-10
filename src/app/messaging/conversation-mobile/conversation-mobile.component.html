@@ -9,14 +9,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="loader" *ngIf="!loaded"></div>
+	<img class="loader" *ngIf="!loaded" src="/assets/images/new/loading.png">
 	<div class="message-wrapper" *ngIf="loaded">
 		<div class="message-container">
 			<ul class="message-thread" >
 				<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)">
 					<img *ngIf="alignMessage(message.toUserId) == false && selectedUser !== null" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" />
 					<p class="messageContent">
-						{{message.message}}
+						{{message.message | DetectUrls}}
 					</p>
 				</li>
 			</ul>

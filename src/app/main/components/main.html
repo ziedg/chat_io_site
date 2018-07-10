@@ -56,12 +56,8 @@
             <div   class="cercle-notice" *ngIf="nbNewMessageNotification > 0">
                 {{nbNewMessageNotification}}
 
-
-
-
-
                 </div>
-                <i  class=" fa fa-comments fa-lg"> </i>
+                <img class="messenger-icon-main" style="width:27px;height:24px" src="assets/images/new/chat-grey.png" />
         </div>
 
       </article>
@@ -87,7 +83,7 @@
 
           <div class="upper-arrow upper-arrow-notification"></div>
           <div class="notification-holder" style="display:none">
-            <div class="loader-notifications-main" *ngIf="!loaded"></div>
+            <img class="loader-notifications-main" *ngIf="!loaded"  src="/assets/images/new/loading.png" />
             <div  *ngIf="showNotif && loaded"  class="notifcations">
 
               <span *ngFor="let notif of listNotif">
@@ -130,7 +126,6 @@
                       <span *ngIf=" notif.profiles && notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
                           {{ 'main_notification_from_two_profiles' | translate:{first: notif.profiles[1].firstName, second: notif.profiles[0].firstName}  }}
-                    >
                         </span>
                         <span *ngIf="notif.profiles.length>2" class="notif-a">
                           {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[notif.profiles.length -1].firstName, number: notif.profiles.length-1
@@ -184,7 +179,7 @@
 
 
                 </span>
-                <div class="loader-more-notifications-main" *ngIf="!moreLoaded"></div>
+                <img class="loader-more-notifications-main" *ngIf="!moreLoaded" src="/assets/images/new/loading.png"/>
 
               </div>
               <div style="text-align: center;" *ngIf="showButtonMoreNotif" (click)="getNotifications()">
@@ -218,7 +213,7 @@
         </div>
       </article>
 
-      <article class="signout-button" class="hidden-sm hidden-xs">
+      <article class="signout-button" class="hidden-xs">
         <i class="fa fa-sort-desc" (click)="enableProfile()" style="font-size: 19px;position: relative;bottom: 2px; cursor: pointer"></i>
         <img src="assets/pictures/arrow-up.png" class="upper-arrow-profile" style="display: none;">
 

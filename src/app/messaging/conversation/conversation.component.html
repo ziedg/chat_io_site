@@ -11,16 +11,15 @@
 			<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)" (click)="show(message.toUserId)">
 				<!-- <div *ngFor="let m of message"> -->
 					<img *ngIf="alignMessage(message.toUserId) == false" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" />
-					<p class="messageContent">
-						{{message.message}}
-					</p>
+					<p class="messageContent" innerHTML="{{message.message | DetectUrls}}"></p>
 				<!-- </div> -->
-				</li>
+			</li>
 		</ul>
 		<div class="message-typer">
 				<form [formGroup]="messageForm" novalidate>
 					<div>
-						<i class="fa fa-camera"></i>
+						<!-- <i class="fa fa-camera" (click)="addPhoto()"></i>
+						<input type="file" class="imageUpload" style="display:none" accept="image/*" (change)="uploadPhoto($event)"> -->
 						<div class="embed-submit-field">
 							<input class="message" 
 								type="text"

@@ -56,12 +56,11 @@ import { PublicationService } from './main/components/profile/publication.servic
 import { MobileNavigation } from './main/components/mobile-navigation/mobile-navigation';
 import { PublicationTextService } from './main/services/publicationText.service';
 
-
-/* pipes */
-import {AvailablePicture} from "./main/pipes/AvailablePicture.pipe";
-import { DetectUrls } from './main/pipes/detectUrls.pipe';
-
 /** Factories */
+
+import { ClickOutsideModule } from 'ng-click-outside';
+import { SharedModule } from './shared/shared.module';
+
 @NgModule({
     imports: [
       BrowserModule, CommonModule, FormsModule, InfiniteScrollModule  ,
@@ -84,12 +83,14 @@ import { DetectUrls } from './main/pipes/detectUrls.pipe';
         storageBucket: "speegar-6deca.appspot.com",
         messagingSenderId: "861552240215"
       }),
-      AngularFireDatabaseModule
+      AngularFireDatabaseModule,
+      ClickOutsideModule,
+      SharedModule
     ],
     // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, LikeReaction, AvailablePicture, DetectUrls, MobileNavigation],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, LikeReaction, MobileNavigation],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,

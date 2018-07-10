@@ -134,8 +134,39 @@ export class Profile implements OnInit{
 
   }
 
-  sendMessage(messageInputElement){
-    const messageText = messageInputElement.value.trim();
+  showSendMessagePopUp(){
+    swal({
+      title: this.translateCode("publication_popup_send_message_title"),
+      text: this.translateCode("publication_popup_send_message_text"),
+      showCancelButton: true,
+      cancelButtonColor: '#999',
+      confirmButtonColor: "#6bac6f",
+      confirmButtonText: this.translateCode("publication_popup_confirm"),
+      cancelButtonText: this.translateCode("publication_popup_cancel_button"),
+      input: 'textarea',
+    }).then(function (text) {
+        if (text) {
+          this.sendMessage(text)
+          swal({
+            title: this.translateCode("publication_popup_notification_message_sent_title"),
+            text: this.translateCode("publication_popup_notification_message_sent_text"),
+            type: "success",
+            timer: 1000,
+            showConfirmButton: false
+          }).then(function () {}, function (dismiss) {});
+          this.changeDetector.markForCheck();
+        }
+      }.bind(this),
+      function (dismiss) {
+        if (dismiss === 'overlay') {}
+      }
+    );
+
+    this.closeModalOtherProfile()
+  }
+
+  sendMessage(text){
+    const messageText = text.trim();
     if (messageText === '' || messageText === undefined || messageText === null) {
       alert(`Message can't be empty.`);
     }else{
@@ -166,7 +197,6 @@ export class Profile implements OnInit{
             this.userDisplayed = response.user;
             this.title.setTitle(this.userDisplayed.firstName + " " + this.userDisplayed.lastName);
             this.loadFirstPosts();
-            console.log("first pub");
           } else {
             this.isNotFound = true;
           }
@@ -311,6 +341,7 @@ reportPub(userDisplayed:User) {
     this.closeModalOtherProfile()
     this.unsubscribe(userDisplayed);
   }
+
 
   doReportPub(text) {
     let body = JSON.stringify({
