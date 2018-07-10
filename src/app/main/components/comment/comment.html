@@ -1,9 +1,9 @@
 <!-- comments -->
 <div class="comment-holder" *ngIf="!commentBean.deleted">
-  <div class="user-img for-comment img-circle" *ngIf="commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePictureMin + ')'}">
+  <div class="user-img for-comment img-circle" *ngIf="commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePictureMin + ')'}" style="width:40px;height:40px">
   </div>
 
-  <div class="user-img for-comment img-circle" *ngIf="!commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePicture + ')'}">
+  <div class="user-img for-comment img-circle" *ngIf="!commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePicture + ')'}" style="width:40px;height:40px">
   </div>
 
   <div class="comment-content">
@@ -12,8 +12,8 @@
         <div class="commenter-name" [routerLink]="['/main/profile',commentBean.profileId]">
           {{commentBean.profileFirstName}} {{commentBean.profileLastName}}
         </div>
-        <div style="font-size:12px;margin-top: 2px;" class="comment-date">
-          <button style="font-size:12px">
+        <div style="font-size:12px" class="comment-date">
+          <button style="font-size:10px">
             <i class="fa fa-clock-o"></i>
             <span> {{getCommentTime(commentBean.dateComment)}} </span>
           </button>
@@ -26,7 +26,7 @@
         </span>
         <div class="like-comment">
           <div class="like-dislike">
-            <div class="like-holder" (click)="addOrRemoveLike()" [class.active]="commentBean.isLiked">
+            <div class="like-holder" (click)="addOrRemoveLike()" [class.active]="commentBean.isLiked" style="margin-right:5px;">
               <button class="like">
                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
               </button>

@@ -2976,7 +2976,7 @@ facebook-friends .user .user-img {
   margin: 0 0 7px 0;
   align-items: flex-start;
   width: 100%;
-  padding: 0 0 0 10px;
+  padding: 0 0 0 20px;
 }
 
 .publication .form-comment {
@@ -3180,13 +3180,14 @@ facebook-friends .user .user-img {
   /* color: #3b5998; */
   cursor: pointer;
   text-transform: capitalize;
+  font-size: 12px;
 }
 
 .like-comment {
   margin-left: 5px;
   text-align: left;
   float:right;
-  margin-top:15px;
+  margin-top:10px;
 }
 
 .like-comment div {
