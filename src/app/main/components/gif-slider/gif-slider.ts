@@ -54,7 +54,7 @@ export class GifSlider implements AfterViewInit {
   }
   swipeLeft(){
     let offset_x_n: any = this.offset_x_pos - 1;
-    console.log("offset_x_n: "+offset_x_n);
+    //console.log("offset_x_n: "+offset_x_n);
 
     if (offset_x_n == -this.gifLimitIndex) {
       console.log("max leeength");
@@ -64,9 +64,9 @@ export class GifSlider implements AfterViewInit {
     if (offset_x_n <= 0 && offset_x_n > -this.UrlGifList.length) {
 
       this.offset_x_pos = offset_x_n;
-      console.log("offset_x_pos: "+this.offset_x_pos);
+      //console.log("offset_x_pos: "+this.offset_x_pos);
       let offset_x = 3 * this.offset_x_pos * (this.sliderWidth + this.sliderMarginRight);
-      console.log("offset_x: "+offset_x);
+      //console.log("offset_x: "+offset_x);
       this.renderer.setStyle(this.slidesContainer.nativeElement,
         'transform',
         `translatex(${offset_x}px)`);
@@ -74,11 +74,11 @@ export class GifSlider implements AfterViewInit {
   }
   swipeRight(){
     let offset_x_n: any = this.offset_x_pos + 1;
-    console.log("offset_x_n: "+offset_x_n);
+    //console.log("offset_x_n: "+offset_x_n);
 
     if (offset_x_n == -this.gifLimitIndex) {
-      console.log("max leeength");
-      this.loadMoreGifs();
+      //console.log("max leeength");
+      //this.loadMoreGifs();
     }
 
     if (offset_x_n <= 0 && offset_x_n > -this.UrlGifList.length) {
@@ -121,10 +121,10 @@ export class GifSlider implements AfterViewInit {
   translate_it(n: number) {
     
     let offset_x_n: any = this.offset_x_pos + n;
-    console.log("offset_x_n: "+offset_x_n);
+    //console.log("offset_x_n: "+offset_x_n);
 
     if (offset_x_n == -this.gifLimitIndex) {
-      console.log("max leeength");
+      //console.log("max leeength");
       this.loadMoreGifs();
     }
 
@@ -146,13 +146,18 @@ export class GifSlider implements AfterViewInit {
     var urlGIF = Url.Post;
     var j = this.previousActiveGifIndex ;
     
-    var i = this.UrlGifList.indexOf(Url);console.log("this is iiiii",i);
+    var i = this.UrlGifList.indexOf(Url);
     if(j != -1){
       this.UrlGifList[j].Show = true;
     }
     this.UrlGifList[i].Show = false;
     this.previousActiveGifIndex = i;
+    this.gifService.removeAnimationEmitter.subscribe(a =>{
+      //console.log("receeeeeeeeeeived");
+      this.UrlGifList[i].Show = true;
+    });
     this.myEvent.emit(urlGIF);
+    
     
     
 

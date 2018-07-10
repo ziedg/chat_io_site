@@ -1,16 +1,4 @@
 
-<script>
-  var myElement = document.getElementById('myGifNavigation');
-
-// create a simple instance
-// by default, it only adds horizontal recognizers
-  var mc = new Hammer(myElement);
-
-// listen to events...
-  mc.on("panleft panright tap press", function(ev) {
-    console.log("mvt deteeeeeeect");
-});
-</script>
 <section id="gif-slider-container" class="slider-container" #container >
     <i class="fa fa-times" style="right: 5px; background-color:transparent; position: absolute;top: 0px;cursor: pointer; color: green;" aria-hidden="true"  (click)="toggleGifSlider()"></i>
   <div class="slider-sub-container" >
