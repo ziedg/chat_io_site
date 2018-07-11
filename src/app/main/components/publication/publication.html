@@ -295,7 +295,7 @@
 
           <div class="loader-interactions-main" *ngIf="!interactionsLoaded"> </div>
 
-<div *ngIf="interactionsLoaded"> 
+<div *ngIf="interactionsLoaded">
         <div class="interactions-tab">
           <button *ngIf="publicationBean.nbLikes != 0" id="lol" class="interactions-tablinks" style="color: #2aaa2a;border-bottom: 1px solid #2aaa2a">
             <img src="assets/images/new/publication/like-active.png" (click)="openTab('Likes')" style="width:25px">
@@ -316,7 +316,7 @@
           <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
             <div class="container-draggable" *ngFor="let user of InteractionsLikes">
               <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
-                <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
+                <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilePicture+')'}">
                 </div>
                 <div class="user-name">
                   <header>
@@ -345,7 +345,7 @@
           <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
             <div class="container-draggable" *ngFor="let user of InteractionsDislikes">
               <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
-                <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
+                <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilePicture+')'}">
                 </div>
                 <div class="user-name">
                   <header>

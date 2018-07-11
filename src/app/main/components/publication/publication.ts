@@ -784,7 +784,7 @@ showConfirmButton: false
       profileId: this.user._id,
       profilefirstname: this.user.firstName,
       profilelastname: this.user.lastName,
-      profilepicture: this.user.profilePictureMin
+      profilePicture: this.user.profilePictureMin
     });
 
     //console.log(this.publicationBean._id);
@@ -844,7 +844,7 @@ showConfirmButton: false
       profileId: this.user._id,
       profilefirstname: this.user.firstName,
       profilelastname: this.user.lastName,
-      profilepicture: this.user.profilePictureMin
+      profilePicture: this.user.profilePictureMin
     });
     this.http
       .post(
@@ -896,7 +896,7 @@ showConfirmButton: false
           console.log(this.InteractionsLikes);
           console.log(this.InteractionsDislikes);
         },
-        err => { 
+        err => {
           this.interactionsLoaded=true;
         },
         () => {
