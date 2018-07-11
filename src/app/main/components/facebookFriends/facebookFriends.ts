@@ -50,17 +50,22 @@ export class FacebookFriends {
             .map((res: Response) => res.json())
             .subscribe(
               response => {
-
-                Array.prototype.push.apply(this.facebookProfiles, response.message);
-                this.isValid = this.facebookProfiles.length != 0;
-
+                
+                if (response.status == 1){
+                  Array.prototype.push.apply(this.facebookProfiles, response.message);
+                }else {
+                  this.isValid = false;
+                }
+                
             },
             err => {
             },
             () => {
               this.changeDetector.markForCheck();
+              
             }
           );
+          
     } 
 
     loadPopularProfiles(Id_Profile?: string) {
@@ -78,7 +83,7 @@ export class FacebookFriends {
                                                  .map(el => {  el.ispop = true ; return el;} );
             Array.prototype.push.apply(this.facebookProfiles, response.profiles);
             this.isValid = this.facebookProfiles.length != 0;
-
+            
             //changes
             if (response.profiles && response.profiles.length) {
               this.lastPopularProfileID = response.profiles[response.profiles.length - 1]._id;
@@ -94,6 +99,7 @@ export class FacebookFriends {
     }
 
     subscribe(user: User) {
+        this.facebookProfiles.splice(this.facebookProfiles.indexOf(user), 1);
         let body = JSON.stringify({
           profileId: user._id
         });
@@ -107,7 +113,7 @@ export class FacebookFriends {
           .subscribe(
             response => {
               if (response.status == 0) {
-                this.facebookProfiles.splice(this.facebookProfiles.indexOf(user), 1);
+                
                 this.isValid = this.facebookProfiles.length != 0;
               }
             },
@@ -147,6 +153,7 @@ export class FacebookFriends {
     }
 
     ignore(user: User) {
+        this.facebookProfiles.splice(this.facebookProfiles.indexOf(user), 1);
         let body = JSON.stringify({
           profileId: user._id
         });
@@ -160,7 +167,7 @@ export class FacebookFriends {
           .subscribe(
             response => {
               if (response.status == 0) {
-                this.facebookProfiles.splice(this.facebookProfiles.indexOf(user), 1);
+                
                 this.isValid = this.facebookProfiles.length != 0;
               }
             },

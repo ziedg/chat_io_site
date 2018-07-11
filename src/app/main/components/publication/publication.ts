@@ -314,6 +314,7 @@ showConfirmButton: false
   }
 
   ngOnInit() {
+    var isWebkit = 'WebkitAppearance' in document.documentElement.style;
     this.intervalHolder = setInterval(() => {
       // Let's refresh the list.
       this.changeDetector.markForCheck();
@@ -763,7 +764,7 @@ showConfirmButton: false
 
   addOrRemoveLike() {
     if (!this.publicationBean.isLiked) {
-      if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes == 0) {
+      if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes == 0  && this.publicationBean.nbComments == 0 ) {
         this.addLike();
         this.publicationBean.nbLikes = 0;
         this.publicationBean.nbDislikes = 0;
@@ -822,7 +823,7 @@ showConfirmButton: false
 
   addOrRemoveDislike() {
     if (!this.publicationBean.isDisliked) {
-      if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes == 0) {
+      if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes == 0 && this.publicationBean.nbComments == 0 ) {
         this.addDislike();
         this.publicationBean.nbLikes = 0;
         this.publicationBean.nbDislikes = 0;
@@ -1115,13 +1116,28 @@ showConfirmButton: false
             this.link.title = response.results.data.ogTitle;
             this.link.description = response.results.data.ogDescription;
             if (response.results.data.ogImage) {
-              var a = response.results.data.ogImage.url;
-              this.link.image = response.results.data.ogImage.url;
-              this.link.imageWidth = response.results.data.ogImage.width;
-              this.link.imageHeight = response.results.data.ogImage.height;
-              if (a.substring(a.length - 3, a.length) == "gif")
-                this.link.isGif = true;
-              else this.link.isGif = false;
+              if(response.results.data.ogImage.length == 2)
+              {
+                
+              this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
+              console.log(response.results.data.ogImage[1].url);
+              //this.resetPreview(linkIsImage = true);
+              //console.log("image detected");
+              // jQuery("#preview-image").attr("src", this.link.image);
+              // jQuery(".file-input-holder").show();
+              // jQuery("#preview-image").show();
+              
+
+              }else{
+                var a = response.results.data.ogImage.url;
+                this.link.image = response.results.data.ogImage.url;
+                this.link.imageWidth = response.results.data.ogImage.width;
+                this.link.imageHeight = response.results.data.ogImage.height;
+                if (a.substring(a.length - 3, a.length) == "gif")
+                  this.link.isGif = true;
+                else this.link.isGif = false;
+              }
+              
             } else {
               this.link.image = null;
               this.link.imageWidth = 0;

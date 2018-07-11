@@ -94,6 +94,7 @@ export class TopBlagueursAndDecov {
 
 
   subscribe(user: User) {
+    this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
     let body = JSON.stringify({
       profileId: user._id
     });
@@ -107,7 +108,7 @@ export class TopBlagueursAndDecov {
       .subscribe(
         response => {
           if (response.status == 0) {
-            this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
+            //this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
             this.loadMore();
           }
         },
@@ -121,6 +122,7 @@ export class TopBlagueursAndDecov {
   }
 
   ignore(user: User) {
+    this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
     let body = JSON.stringify({
       profileId: user._id
     });
@@ -134,7 +136,7 @@ export class TopBlagueursAndDecov {
       .subscribe(
         response => {
           if (response.status == 0) {
-            this.popularProfiles.splice(this.popularProfiles.indexOf(user), 1);
+            
             this.loadMore();
           }
         },

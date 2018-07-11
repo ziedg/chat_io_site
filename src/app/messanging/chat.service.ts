@@ -27,13 +27,22 @@ getSuggestions(userId) {
   return this.http.get(`${this.ServerUrl}${pathUtils.GET_MESSAGING_SUGGESTIONS}` + userId);
 }
 
-  getMessages(users) {
+  getMessages(users,lastMessageId?) {
     /* get messages between current user and the selected user from the list*/
-    return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + users.fromUserId + '/' + users.toUserId)
+    if(!lastMessageId){
+      return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + users.fromUserId + '/' + users.toUserId)
       .map((response) => {
         return response.json();
         
       });
+    }else{
+      return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + users.fromUserId + '/' + users.toUserId +'/' +lastMessageId)
+      .map((response) => {
+        return response.json();
+        
+      });
+    }
+    
 
   }
 

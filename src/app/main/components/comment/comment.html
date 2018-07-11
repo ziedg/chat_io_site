@@ -1,66 +1,69 @@
 <!-- comments -->
 <div class="comment-holder" *ngIf="!commentBean.deleted">
-  <div class="user-img for-comment radiused-img"
-       *ngIf="commentBean.profilePictureMin"
-       [ngStyle]="{'background-image': 'url(' + commentBean.profilePictureMin + ')'}">
+  <div class="user-img for-comment img-circle" *ngIf="commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePictureMin + ')'}"
+    style="width:40px;height:40px;margin-right:10px;">
   </div>
 
-  <div class="user-img for-comment radiused-img"
-       *ngIf="!commentBean.profilePictureMin"
-       [ngStyle]="{'background-image': 'url(' + commentBean.profilePicture + ')'}">
+  <div class="user-img for-comment img-circle" *ngIf="!commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePicture + ')'}"
+    style="width:40px;height:40px;margin-right:10px;">
   </div>
-
-  <div class="comment-content">
-    <div class="row name-and-text-comment">
-      <div class="commenter-name col-xs-12"
-           [routerLink]="['/main/profile',commentBean.profileId]">
-        {{commentBean.profileFirstName}} {{commentBean.profileLastName}}
+  <div class="container-fluid" style="margin-left: 4px;padding-left: 0;">
+    <div class="row">
+      <div class="comment-content">
+        <div class="row name-and-text-comment">
+          <div class="header-comment">
+            <div class="commenter-name" [routerLink]="['/main/profile',commentBean.profileId]">
+              {{commentBean.profileFirstName}} {{commentBean.profileLastName}}
+            </div>
+          </div>
+          <div class="col-xs-12 comment-text" style="margin-bottom: 5px;max-width: 260px;word-wrap: break-word;overflow-x: hidden;">
+            <span innerHTML="{{commentText | DetectUrls}}"></span>
+            <a *ngIf="isLongComment && !showLastPart" (click)="showLastPart = true">{{"publication_open_last_part" | translate }}</a>
+            <span *ngIf="isLongComment && showLastPart" innerHTML="{{commentTextLastPart | DetectUrls }}">
+            </span>
+          </div>
+          <img *ngIf="commentBean.commentPicture" src="{{imageBaseUrl + commentBean.commentPicture}}" class="display-comment-picture"
+          />
+        </div>
       </div>
-      <div class="col-xs-12 comment-text"
-           style="margin-bottom: 5px;">
-           <span innerHTML="{{commentText | DetectUrls}}"></span>
-           <a *ngIf="isLongComment && !showLastPart" (click)="showLastPart = true">{{"publication_open_last_part" | translate }}</a>
-           <span *ngIf="isLongComment && showLastPart" innerHTML="{{commentTextLastPart | DetectUrls }}">             
-           </span>
+      <div class="remove-holder" style="margin-left: 10px;" (click)="removeComment(commentBean)" *ngIf="commentBean.profileId == user._id || publicationBean.profileId == user._id">
+        <button class="like">
+          <i class="fa fa-trash-o"></i>
+        </button>
       </div>
-      <img *ngIf="commentBean.commentPicture"
-           src="{{imageBaseUrl + commentBean.commentPicture}}"
-           class="display-comment-picture"/>
     </div>
-
-    <div class="like-comment col-xs-12 ">
-      <div class="like-dislike">
-        <div class="like-holder"
-             (click)="addOrRemoveLike()"
-             [class.active]="commentBean.isLiked">
-          <button class="like">
-            <i class="fa fa-thumbs-up"
-               aria-hidden="true"></i></button>
-          <span class="nbr">{{commentBean.nbLikes}}</span>
-        </div>
-        <div class="dislike-holder"
-                (click)="addOrRemoveDislike()"
-             [class.active]="commentBean.isDisliked">
-          <button class="dislike">
-            <i class="fa fa-thumbs-down"
-               aria-hidden="true"></i></button>
-          <span class="nbr">
-            {{commentBean.nbDislikes}}
-          </span>
-        </div>
-
-        <div class="remove-holder" style="margin-right:10px"
-             (click)="removeComment(commentBean)"
-             *ngIf="commentBean.profileId == user._id || publicationBean.profileId == user._id">
-          <button class="like">
-            <i class="fa fa-trash-o"></i>
-          </button>
-        </div>
-
-        <div style="font-size:12px">
-          <button style="font-size:12px"><i class="fa fa-clock-o"></i>
+    <div class="row">
+      <div class="like-comment col-xs-12">
+        <div style="font-size:12px;padding-top: 5px;" class="comment-date">
+          <button style="font-size:12px">
+            <i class="fa fa-clock-o"></i>
             <span> {{getCommentTime(commentBean.dateComment)}} </span>
           </button>
+        </div>
+        <div class="like-dislike">
+          <!-- <div class="like-holder" (click)="addOrRemoveLike()" [class.active]="commentBean.isLiked" style="margin-right:5px;padding-top: 8px;">
+            <button class="like">
+              <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+            </button>
+            <span class="nbr">{{commentBean.nbLikes}}</span>
+          </div> -->
+          <div class="like-holder">
+              <div class="hint-social">
+                {{ 'publication_like' | translate }}
+              </div>
+              <like-reaction class="mylikeholder" [checked]="commentBean.isLiked" (click)="addOrRemoveLike()" style="width: 14px; height: 14px;"></like-reaction>
+              <span class="nbr">{{commentBean.nbLikes}}</span>
+            </div>
+          <!-- <div class="dislike-holder"
+                        (click)="addOrRemoveDislike()"
+                     [class.active]="commentBean.isDisliked">
+                  <button class="dislike">
+                    <i class="fa fa-thumbs-down"
+                       aria-hidden="true"></i></button>
+                  <span class="nbr">
+                    {{commentBean.nbDislikes}}
+                  </span>
+                </div> -->
         </div>
       </div>
     </div>
