@@ -254,7 +254,7 @@ export class Home {
   }
 
   toggling_bglistf(){
-    if(this.bglist) { this.resetPreview(); this.bglist = true; }
+    if(this.bglist) { this.resetPreview(); this.bglist = true; this.showGifSlider = false;}
     else { this.pubbg = false; this.pubclass=""; }
   }
 
@@ -263,10 +263,12 @@ export class Home {
       if(i == 0) {
         this.pubbg=false;
         this.pubclass="";
+        this.resetPreview();
       }
       else {
         this.pubbg=true;
         this.pubclass="pubdes" + i;
+        this.resetPreview();
       }
     }
   }
@@ -275,6 +277,7 @@ export class Home {
     if(this.bgvalid){
       this.pubbg=false;
       this.pubclass="";
+      this.resetPreview();
   }}
 
   closeWelcomeMsg() {
@@ -567,11 +570,11 @@ export class Home {
     jQuery(".facebook-preview").html("");
     this.changeDetector.markForCheck();
 
-    this.bglist = false;
-    this.pubbg = false;
-    this.pubclass="";
-    this.showGifSlider = false;
-    this.resetPreviewGIF();
+    
+    // this.pubbg = false;
+    // this.pubclass="";
+    
+    //this.resetPreviewGIF();
   }
 
 
@@ -581,6 +584,7 @@ export class Home {
   }
   updatePublishTextOnPaste($event) {
     $event.preventDefault();
+    //this.resetPreview();
     
     let text = $event.clipboardData.getData("text/plain");
     this.link.isGif = false;
@@ -1157,7 +1161,10 @@ export class Home {
 
   toggleGifSlider() {
     this.showGifSlider = !this.showGifSlider;
-    if(this.showGifSlider) { this.resetPreview(); this.showGifSlider = true; }
+    if(this.showGifSlider) { 
+      this.resetPreview(); this.showGifSlider = true; 
+      this.bglist = false; this.pubbg = false; this.pubclass="";
+    }
   }
 
 }

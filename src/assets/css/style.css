@@ -3113,13 +3113,17 @@ facebook-friends .user .user-img {
   position: absolute;
   right: 70px;
   font-size: 18px;
-  bottom: 8px;
+  bottom: 12px;
   display: flex;
-  display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: -webkit-flex;
   color: #999;
   justify-content: space-between;
+}
+
+.safari{
+  bottom:8px!important;
 }
 
 .toggleEmoji{
@@ -6427,10 +6431,12 @@ img[src="undefined"] {
   position: absolute!important;
 }
 
-/* Safari css */
-/* @media screen and (-webkit-min-device-pixel-ratio:0) {
-  .form-more { bottom: 2px; }
-} */
+/* webkit css */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .mylikeholder>.toggle-icon {
+    height: 16px!important;
+  }
+}
 
 .messageContent a {
   color: black;
