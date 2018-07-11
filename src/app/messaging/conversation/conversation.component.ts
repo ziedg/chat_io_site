@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -26,7 +26,7 @@ class MessageValidation {
   templateUrl: './conversation.component.html',
   styleUrls: ['./conversation.component.css']
 })
-export class ConversationComponent implements OnInit {
+export class ConversationComponent implements OnInit, AfterViewInit{
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
   public selectedUser: User = null;
@@ -38,13 +38,16 @@ export class ConversationComponent implements OnInit {
   public userLoading = false;
   private s: AngularFireObject<any>;
   private msgFirstCheck: Boolean = true;
+
+  @ViewChild("messageThread") messageThread:ElementRef;
   
 
   constructor(private emitterService: EmitterService,
     private router: Router,
     private db: AngularFireDatabase,
     private chatService: ChatService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private renderer: Renderer2
   ) {
     this.messageForm = new FormBuilder().group({
       message: new MessageValidation
@@ -55,6 +58,20 @@ export class ConversationComponent implements OnInit {
   ngOnInit() {
     this.listenForMessages(this.user._id);
   }
+
+  ngAfterViewInit() {
+    document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
+  }
+
+  onScrollMessageThread() {
+    //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
+
+    if (!this.messageThread.nativeElement.scrollTop) {
+      console.log("reach the top of message thread");
+    }
+  }
+
+
   ngOnChanges(changes: any) {
     /* Fetching selected users information from other component. */
     
