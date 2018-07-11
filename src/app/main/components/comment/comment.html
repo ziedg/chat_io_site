@@ -16,7 +16,7 @@
               {{commentBean.profileFirstName}} {{commentBean.profileLastName}}
             </div>
           </div>
-          <div class="col-xs-12 comment-text" style="margin-bottom: 5px;max-width: 250px;word-wrap: break-word;overflow-x: hidden;">
+          <div class="col-xs-12 comment-text" style="margin-bottom: 5px;max-width: 260px;word-wrap: break-word;overflow-x: hidden;">
             <span innerHTML="{{commentText | DetectUrls}}"></span>
             <a *ngIf="isLongComment && !showLastPart" (click)="showLastPart = true">{{"publication_open_last_part" | translate }}</a>
             <span *ngIf="isLongComment && showLastPart" innerHTML="{{commentTextLastPart | DetectUrls }}">
@@ -34,8 +34,8 @@
     </div>
     <div class="row">
       <div class="like-comment col-xs-12">
-        <div style="font-size:12px;padding-top: 7px;" class="comment-date">
-          <button style="font-size:10px">
+        <div style="font-size:12px;padding-top: 5px;" class="comment-date">
+          <button style="font-size:12px">
             <i class="fa fa-clock-o"></i>
             <span> {{getCommentTime(commentBean.dateComment)}} </span>
           </button>
