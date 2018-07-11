@@ -893,6 +893,11 @@ export class Home {
 
   //uploading photo or GIF
   uploadPhoto($event) {
+    if(this.pubbg){
+      this.pubbg=false;
+      this.pubclass="";
+      jQuery(".textarea-publish").html("");
+    }
     let inputValue = $event.target;
     console.log($event);
 
