@@ -54,6 +54,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
       message: new MessageValidation
     });;
     this.user = this.loginService.getUser();
+    this.userId=this.user._id
   }
 
   ngOnInit() {
@@ -69,6 +70,12 @@ export class ConversationComponent implements OnInit, AfterViewInit{
 
     if (!this.messageThread.nativeElement.scrollTop && !this.isFirstLoaded) {
       console.log("reach the top of message thread");
+      this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
+      .subscribe((incomingMessages) => {
+        for(var i=incomingMessages.length-1; i>=0; i--) { 
+         this.messages.unshift(incomingMessages[i]);
+         } 
+    })
     }
 
     if(this.isFirstLoaded) this.isFirstLoaded = false;
