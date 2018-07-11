@@ -76,8 +76,7 @@ export class ConversationComponent implements OnInit, AfterContentChecked, DoChe
   }
 
   scrollMessageThreadBottom() {
-    console.log("scroll to bottom");
-    document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
+    this.messageThread.nativeElement.scrollTop = this.messageThread.nativeElement.scrollHeight;
   }
 
 
