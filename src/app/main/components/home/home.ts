@@ -535,7 +535,7 @@ export class Home {
 
   }
 
-  resetPreview(linkIsImage) {
+  resetPreview(linkIsImage?) {
     linkIsImage = linkIsImage || false;
     // this method resets all diffrent new publication types
 
