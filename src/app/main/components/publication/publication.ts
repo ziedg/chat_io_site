@@ -1115,13 +1115,28 @@ showConfirmButton: false
             this.link.title = response.results.data.ogTitle;
             this.link.description = response.results.data.ogDescription;
             if (response.results.data.ogImage) {
-              var a = response.results.data.ogImage.url;
-              this.link.image = response.results.data.ogImage.url;
-              this.link.imageWidth = response.results.data.ogImage.width;
-              this.link.imageHeight = response.results.data.ogImage.height;
-              if (a.substring(a.length - 3, a.length) == "gif")
-                this.link.isGif = true;
-              else this.link.isGif = false;
+              if(response.results.data.ogImage.length == 2)
+              {
+                
+              this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
+              console.log(response.results.data.ogImage[1].url);
+              //this.resetPreview(linkIsImage = true);
+              //console.log("image detected");
+              // jQuery("#preview-image").attr("src", this.link.image);
+              // jQuery(".file-input-holder").show();
+              // jQuery("#preview-image").show();
+              
+
+              }else{
+                var a = response.results.data.ogImage.url;
+                this.link.image = response.results.data.ogImage.url;
+                this.link.imageWidth = response.results.data.ogImage.width;
+                this.link.imageHeight = response.results.data.ogImage.height;
+                if (a.substring(a.length - 3, a.length) == "gif")
+                  this.link.isGif = true;
+                else this.link.isGif = false;
+              }
+              
             } else {
               this.link.image = null;
               this.link.imageWidth = 0;
