@@ -21,7 +21,7 @@ import {LinkView} from '../../services/linkView';
 import {NotificationService} from '../../services/notification.service';
 import {PostService} from '../../services/postService';
 import { PublicationTextService } from "../../services/publicationText.service";
-
+import {GifService} from '../../services/gifService';
 
 
 
@@ -31,6 +31,8 @@ declare var FB: any;
 declare var auth: any;
 declare const gapi: any;
 declare var window: any;
+
+
 
 @Component({
   moduleId: module.id,
@@ -123,7 +125,7 @@ export class Home {
               private postService: PostService,
               private linkView: LinkView,
               private linkPreview: LinkPreview,
-
+              private gifService: GifService,
               private title: Title,
               private http: Http,
               private router: Router,
@@ -553,24 +555,35 @@ export class Home {
   }
 
   previewGIF(urlGIF){
-
+    
     var linkURL = urlGIF;
-
     this.link.url = linkURL;
     this.link.isSet = true;
     this.link.isGif = true;
     this.linkLoading = false;
+    
+    
+    
     jQuery(".file-input-holder").hide();
-    //var img2 = document.getElementById('gifImageId');
+    
+    var gifImage = document.getElementById('gifImageId');
+    
+    if(gifImage){
+      
+      gifImage.onload = () => {
+      var a = "hello";
+      //console.log("shooooooooooooooooooooooooow");
+      this.gifService.removeAnimation(a);
+      //gifHasLoaded = true;
 
-    // if(img2){
-
-    //   img2.onload = function() {
-    //   console.log("shooooooooooooooooooooooooow");
-    //   //gifHasLoaded = true;
-
-    //   }
-    // }
+      }
+    }else{
+      var a = "hello";
+      //console.log("nulllllllllll");
+      this.gifService.removeAnimation(a);
+    }
+    
+    
 
 
   }
@@ -603,9 +616,13 @@ export class Home {
     jQuery(".facebook-preview").html("");
     this.changeDetector.markForCheck();
   }
-
+  onDrop(event){
+    console.log('drooooooooooooop');
+    event.preventDefault();
+  }
   updatePublishTextOnPaste($event) {
     $event.preventDefault();
+    
     let text = $event.clipboardData.getData("text/plain");
     this.link.isGif = false;
     if(this.pubbg){

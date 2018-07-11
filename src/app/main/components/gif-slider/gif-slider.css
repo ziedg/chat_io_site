@@ -107,7 +107,8 @@
   }
 
   .slides-container {
-    overflow: auto;
+    transition: 800ms ease;
+    display: flex;
   }
 
   .slider-btn {

@@ -56,6 +56,7 @@ export class ChatListComponent implements OnInit {
     this.getSuggestionsList();
     this.reactToNewMessages();
     this.listenForAllMessages(this.userId);
+    //this.updateMyMessages();
     jQuery(".navigation-bottom").addClass('hidden-xs');
 
     jQuery(document).click(function (e) {
@@ -67,9 +68,37 @@ export class ChatListComponent implements OnInit {
       }
     });
 
+   }
+   
+   updateMyMessages() {
+    
+    this.emitterService.myMessageEmitter.subscribe((data) => {
+      var elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.toUserId; }).indexOf(this.selectedUserId);
+      
+      if (this.chatListUsers[elementPos] == undefined){
+        elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.fromUserId; }).indexOf(this.selectedUserId);
+      }
+      
+      this.chatListUsers[elementPos].lastMessage.message = "Vous : "+data.message;
+      
+      let actualDate = new Date(Date.now());
+      let hours = actualDate.getHours().toString();
+      let minutes = actualDate.getMinutes().toString();
+      console.log(actualDate);
+      if(hours.length==1){
+        hours = "0"+hours;
+      }
+      if(minutes.length==1){
+        minutes = "0"+minutes;
+      }
+
+      this.chatListUsers[elementPos].lastMessage.date = hours+":"+minutes;
+    });
   }
-  
-  getLoggedInUser(userId) {
+
+
+
+   getLoggedInUser(userId){
     this.http.get(
       environment.SERVER_URL + pathUtils.GET_PROFILE + userId,
       AppSettings.OPTIONS)
@@ -134,35 +163,34 @@ export class ChatListComponent implements OnInit {
       })
   }
 
+  
+
   listenForAllMessages(userId: string): void {
     this.userId = userId;
-    this.s = this.db.object('notifications/' + this.userId + '/messaging');
-    var item = this.s.valueChanges()
-    this.s.snapshotChanges().subscribe(action => {
-      var notif = action.payload.val();
-      if (notif !== null && !this.msgFirstCheck) {
-        this.chatService.getMessage(notif.msgId).subscribe(
-          message => {
-
-            var elementPos = this.chatListUsers.map(function (x) { return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
-
-            if (notif.senderId == this.userId) {
-              this.chatListUsers[elementPos].lastMessage.message = "Vous : " + message.message;
-            }
-            else {
-              this.chatListUsers[elementPos].lastMessage.message = message.message;
-            }
-
-            let actualDate = new Date(Date.now());
-            let hours = actualDate.getHours().toString();
-            let minutes = actualDate.getMinutes().toString();
-            console.log(actualDate);
-            if (hours.length == 1) {
-              hours = "0" + hours;
-            }
-            if (minutes.length == 1) {
-              minutes = "0" + minutes;
-            }
+    this.s = this.db.object('notifications/'+this.userId+'/messaging');
+      var item = this.s.valueChanges()
+      this.s.snapshotChanges().subscribe(action => {
+        var notif = action.payload.val();
+        if (notif !== null && !this.msgFirstCheck) {
+          this.chatService.getMessage(notif.msgId).subscribe(
+            message => {
+              
+                var elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
+                if(this.chatListUsers[elementPos] == undefined){
+                  elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.toUserId; }).indexOf(notif.senderId);
+                }
+                this.chatListUsers[elementPos].lastMessage.message = message.message;
+                
+                let actualDate = new Date(Date.now());
+                let hours = actualDate.getHours().toString();
+                let minutes = actualDate.getMinutes().toString();
+                console.log(actualDate);
+                if(hours.length==1){
+                  hours = "0"+hours;
+                }
+                if(minutes.length==1){
+                  minutes = "0"+minutes;
+                }
 
             this.chatListUsers[elementPos].lastMessage.date = hours + ":" + minutes;
 
@@ -254,11 +282,12 @@ export class ChatListComponent implements OnInit {
 
     /* calling method to get the messages */
     this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId })
-      .subscribe((response) => {
-        /* Sending conversation between two users to other component. */
-        this.emitterService.emitConversation(response);
-      });
-  }
+    .subscribe((response) => {
+      /* Sending conversation between two users to other component. */
+      this.emitterService.emitConversation(response);
+  });
+  
+}
 
   /*Search functionnality*/
   loadUser(user) {
@@ -268,10 +297,11 @@ export class ChatListComponent implements OnInit {
     });
     if (!found) this.historyUsers.unshift(user)
 
-    this.selectUser(user)
-    this.searchValue = ""
-    this.chatListUsers = this.historyUsers.slice();
-  }
+  this.selectUser(user)
+  this.searchValue=""
+  this.chatListUsers=this.historyUsers.slice();
+  this.updateMyMessages();
+}
 
   filterChatListUsersByName(name) {
     return this.historyUsers.filter((user) => {

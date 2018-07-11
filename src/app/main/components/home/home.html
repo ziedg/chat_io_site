@@ -127,9 +127,11 @@
                                                                           'pubdes13': pubclass=='pubdes13',
                                                                           'pubdes14': pubclass=='pubdes14',
                                                                           'pubdes15': pubclass=='pubdes15',
-                                                                          'pubdes16': pubclass=='pubdes16'}" (paste)="updatePublishTextOnPaste($event)"
-                contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)" #publishDivRef
-                style="width: calc(100% - 80px)"></div>
+                                                                          'pubdes16': pubclass=='pubdes16'}"
+                   (paste)="updatePublishTextOnPaste($event)"
+                   contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)"
+                   (drop)="onDrop($event)"
+                   #publishDivRef style="width: calc(100% - 80px)"></div>
 
 
 
