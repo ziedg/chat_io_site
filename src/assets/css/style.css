@@ -2776,16 +2776,17 @@ facebook-friends .user .user-img {
   display: inline-block;
   width: 96%;
   margin-left: 7px;
+  margin-right:7px;
   margin-bottom: 5px;
   word-wrap: break-word;
 }
 
 .comment-text {
-  width: calc(100% - 30px)!important;
+  width: fit-content()!important;
 }
 
 .comment-text span{
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 @media (max-width: 767px) {
@@ -2845,8 +2846,10 @@ facebook-friends .user .user-img {
 
 .comment-content {
   background-color: #efefef;
-  border-radius: 20px;
+  border-radius: 10px;
   margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .comment-holder .like-dislike {
@@ -2858,6 +2861,21 @@ facebook-friends .user .user-img {
 }
 
 .like-dislike button {
+  box-shadow: none;
+  border: none;
+  color: #666;
+  padding: 0 2px;
+  margin-right: -2px;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+.remove-holder{
+  display: inline-block;
+}
+
+.remove-holder button{
   box-shadow: none;
   border: none;
   color: #666;
@@ -2979,12 +2997,27 @@ facebook-friends .user .user-img {
   position: relative;
   display: flex;
   display: inline-flex;
-  display: -webkit-flex;
+  display: -webkit-box;
   display: -ms-flexbox;
   margin: 0 0 7px 0;
   align-items: flex-start;
   width: 100%;
-  padding: 0 0 0 20px;
+  padding: 0 0 0 10px;
+}
+
+.mylikeholder>.toggle-icon {
+  margin-top: 10px;
+}
+
+.mylikeholder>.toggle-icon:before, .toggle-icon:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all .3s ease-out;
+  content: "";
+  background-size: cover;
+  width: 22px!important;
+  height: 22px!important;
 }
 
 .publication .form-comment {
@@ -2993,7 +3026,6 @@ facebook-friends .user .user-img {
 
 .comments-holder .comment-holder {
   padding-bottom: 5px;
-  border-bottom: 0.5px solid #efefef;
 }
 
 .comments-holder comment:last-child .comment-holder {
@@ -3032,11 +3064,8 @@ facebook-friends .user .user-img {
 }
 
 .header-comment{
-  display:inline-flex;
-  display: -webkit-inline-flex;
-  display: -ms-flexbox;
-  display: -webkit-inline-flex;
   padding-left:20px;
+  padding-right: 50px;
 }
 
 .comment-date button{
@@ -3194,8 +3223,10 @@ facebook-friends .user .user-img {
 .like-comment {
   margin-left: 5px;
   text-align: left;
-  float:right;
-  margin-top:10px;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
 }
 
 .like-comment div {
@@ -3800,6 +3831,9 @@ facebook-friends .user .user-img {
   font-weight: bold;
   margin-right: 0px;
   font-size: 1.1em;
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 3px;
 }
 
 .social-staff .nbr {
