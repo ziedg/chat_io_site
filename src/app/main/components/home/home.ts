@@ -538,7 +538,8 @@ export class Home {
 
   }
 
-  resetPreview() {
+  resetPreview(linkIsImage?) {
+    linkIsImage = linkIsImage || false;
     // this method resets all diffrent new publication types
 
 
@@ -553,8 +554,10 @@ export class Home {
     this.link.isGif = false;
     jQuery("#file-image").val("");
     jQuery("#file-image-gif").val("");
-    jQuery("#preview-image").attr("src", "");
-    jQuery("#preview-image").fadeOut();
+    if(!linkIsImage) {
+      jQuery("#preview-image").attr("src", "");
+      jQuery("#preview-image").fadeOut();
+    }
     this.uploadedPicture = null;
     this.imageFromLink = false;
     this.titleEnable = false;
@@ -590,47 +593,47 @@ export class Home {
       document.execCommand("insertHTML", false, text);
       return 1;
     }
-    if (
-      text.search("youtube.com/watch") >= 0 ||
-      text.search("youtu.be/") >= 0
-    ) {
-      this.youtubeInput = true;
-      jQuery(".yt-in-url").val(text);
-      this.changeDetector.markForCheck();
-      this.youtubeLink = text;
-      this.updateYoutubeFacebook();
-      return 1;
-    }
+    else {
+      let linkIsImage:boolean = false;
+      if (
+        text.search("youtube.com/watch") >= 0 ||
+        text.search("youtu.be/") >= 0
+      ) {
+        this.resetPreview();
 
-    if (
-      text.search("web.facebook.com") >= 0 || text.search("www.facebook.com") > 0 ||
-      text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0) {
-      this.facebookInput = true;
-      jQuery(".yt-in-url").val(text);
-      this.changeDetector.markForCheck();
-      this.facebookLink = text;
-      this.updateYoutubeFacebook();
-      return 1;
-    }
-    if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
-      //console.log("image detected");
-      jQuery("#preview-image").attr("src", text);
-      jQuery(".file-input-holder").show();
-      jQuery("#preview-image").show();
-      this.imageFromLink = true;
-      this.youtubeLink = null;
-      this.facebookLink = null;
+        this.youtubeInput = true;
+        jQuery(".yt-in-url").val(text);
+        this.changeDetector.markForCheck();
+        this.youtubeLink = text;
+        this.updateYoutubeFacebook();
+        return 1;
+      }
 
-      this.uploadedPicture = null;
-      jQuery(".youtube-preview").html("");
-      jQuery(".facebook-preview").html("");
-      this.link.isSet = false;
-      return 1;
+      if (text.search("web.facebook.com") >= 0 || text.search("www.facebook.com") > 0 ||
+          text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0) {
+        
+        this.resetPreview();
+
+        this.facebookInput = true;
+        jQuery(".yt-in-url").val(text);
+        this.changeDetector.markForCheck();
+        this.facebookLink = text;
+        this.updateYoutubeFacebook();
+        return 1;
+      }
+      if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
+        this.resetPreview(linkIsImage = true);
+        //console.log("image detected");
+        jQuery("#preview-image").attr("src", text);
+        jQuery(".file-input-holder").show();
+        jQuery("#preview-image").show();
+        return 1;
+      }
+      if(!linkIsImage) this.analyzeLink(text);
+      console.log("you will go out noooow");
+      text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
+      document.execCommand("insertHTML", false, text);
     }
-    this.analyzeLink(text);
-    console.log("you will go out noooow");
-    text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
-    document.execCommand("insertHTML", false, text);
   }
 
   resetPublishPicture() {
@@ -1119,6 +1122,10 @@ export class Home {
           console.error("error in link API;");
         },
         () => {
+          if(this.link.isSet) {
+            this.resetPreview();
+            this.link.isSet = true;
+          }
           this.linkLoading = false;
         }
       );
