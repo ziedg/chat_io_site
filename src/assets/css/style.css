@@ -2839,7 +2839,7 @@ facebook-friends .user .user-img {
   align-items: center;
   position: relative;
   color: #666;
-  margin-top: -7px;
+  margin-top: -10px;
   margin-left: 14px;
 
 }
@@ -3024,17 +3024,17 @@ facebook-friends .user .user-img {
   margin-bottom: 12px;
 }
 
-.comments-holder .comment-holder {
+/* .comments-holder .comment-holder {
   padding-bottom: 5px;
-}
+} */
 
 .comments-holder comment:last-child .comment-holder {
   border-bottom: none !important;
 }
 
-.comments-holder .comment-holder {
+/* .comments-holder .comment-holder {
   padding-bottom: 5px;
-}
+} */
 
 .comments-holder comment:last-child .comment-holder {
   border-bottom: none !important;
@@ -3202,6 +3202,12 @@ facebook-friends .user .user-img {
     width: calc(100% - 60px);
     width: -moz-calc(100% - 60px);
     width: -webkit-calc(100% - 60px);
+  }
+
+  .name-and-text-comment .comment-text{
+    max-width: calc(100vw - 100px)!important;
+    max-width: -moz-calc(100vw - 100px)!important;
+    max-width: -webkit-calc(100vw - 100px)!important;
   }
 }
 
@@ -6422,9 +6428,9 @@ img[src="undefined"] {
 }
 
 /* Safari css */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
+/* @media screen and (-webkit-min-device-pixel-ratio:0) {
   .form-more { bottom: 2px; }
-}
+} */
 
 .messageContent a {
   color: black;
