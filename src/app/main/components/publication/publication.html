@@ -316,7 +316,7 @@
           <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
             <div class="container-draggable" *ngFor="let user of InteractionsLikes">
               <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
-                <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilePicture+')'}">
+                <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
                 </div>
                 <div class="user-name">
                   <header>
@@ -345,7 +345,7 @@
           <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
             <div class="container-draggable" *ngFor="let user of InteractionsDislikes">
               <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
-                <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilePicture+')'}">
+                <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
                 </div>
                 <div class="user-name">
                   <header>

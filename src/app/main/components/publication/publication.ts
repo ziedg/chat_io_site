@@ -784,7 +784,7 @@ showConfirmButton: false
       profileId: this.user._id,
       profilefirstname: this.user.firstName,
       profilelastname: this.user.lastName,
-      profilePicture: this.user.profilePictureMin
+      profilepicture: this.user.profilePictureMin
     });
 
     //console.log(this.publicationBean._id);
@@ -844,7 +844,7 @@ showConfirmButton: false
       profileId: this.user._id,
       profilefirstname: this.user.firstName,
       profilelastname: this.user.lastName,
-      profilePicture: this.user.profilePictureMin
+      profilepicture: this.user.profilePictureMin
     });
     this.http
       .post(
