@@ -6431,10 +6431,12 @@ img[src="undefined"] {
   position: absolute!important;
 }
 
-/* Safari css */
-/* @media screen and (-webkit-min-device-pixel-ratio:0) {
-  .form-more { bottom: 2px; }
-} */
+/* webkit css */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .mylikeholder>.toggle-icon {
+    height: 16px!important;
+  }
+}
 
 .messageContent a {
   color: black;
