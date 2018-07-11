@@ -106,6 +106,9 @@ export class Home {
   //check if there is more post to retreive from server
   morePosts = true;
 
+  nb_bg:number = 17;
+  array_bg = [];
+
   // Notification vars
   private subscriptionJson = '';
   private isSubscribed: boolean = true;
@@ -137,6 +140,11 @@ export class Home {
               public notificationService: NotificationService,
               private publicationTextService: PublicationTextService,
               private ref: ChangeDetectorRef) {
+
+    for(let i:number=1; i<this.nb_bg; i++) {
+      this.array_bg.push(i);
+    }
+    console.log(this.array_bg);
 
     this.isSubscribed = true;
     this.loginService.redirect();
@@ -246,97 +254,29 @@ export class Home {
   }
 
   toggling_bglistf(){
-    if(this.bglist) { this.showGifSlider = false; this.resetPreviewGIF();}
+    if(this.bglist) { this.resetPreview(); this.bglist = true; }
     else { this.pubbg = false; this.pubclass=""; }
   }
+
+  getbg(i) {
+    if(this.bgvalid) {
+      if(i == 0) {
+        this.pubbg=false;
+        this.pubclass="";
+      }
+      else {
+        this.pubbg=true;
+        this.pubclass="pubdes" + i;
+      }
+    }
+  }
+
   getbg0(){
     if(this.bgvalid){
       this.pubbg=false;
       this.pubclass="";
-      this.resetPreview();
-  }}
-  getbg1(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes1";
-    this.resetPreview();
   }}
 
-  getbg2(){
-    if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes2";
-    this.resetPreview();
-  }}
-  getbg3(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes3";
-    this.resetPreview();
-  }}
-  getbg4(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes4";
-    this.resetPreview();
-  }}
-  getbg5(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes5";
-    this.resetPreview();
-  }}
-  getbg6(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes6";
-    this.resetPreview();
-  }}
-  getbg7(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes7";
-    this.resetPreview();
-  }}
-  getbg8(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes8";
-    this.resetPreview();
-  }}
-  getbg9(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes9";
-    this.resetPreview();
-  }}
-  getbg10(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes10";
-    this.resetPreview();
-  }}
-  getbg11(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes11";
-    this.resetPreview();
-  }}
-  getbg12(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes12";
-    this.resetPreview();
-  }}
-  getbg13(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes13";
-    this.resetPreview();
-  }}
-  getbg14(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes14";
-    this.resetPreview();
-  }}
-  getbg15(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes15";
-    this.resetPreview();
-  }}
-  getbg16(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes16";
-    this.resetPreview();
-  }}
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
     this.user.isNewInscri = false;
@@ -596,6 +536,15 @@ export class Home {
   }
 
   resetPreview() {
+    // this method resets all diffrent new publication types
+
+
+    // ------------- methods of publication types
+    // uploadPhoto()
+    // getbgX() -- bglistf() -- (y)
+    // toggleGifSlider() (y)
+    // updatePublishTextOnPaste() (y)
+
     this.link.url = "";
     this.link.isSet = false;
     this.link.isGif = false;
@@ -605,7 +554,6 @@ export class Home {
     jQuery("#preview-image").fadeOut();
     this.uploadedPicture = null;
     this.imageFromLink = false;
-    this.uploadedPicture = null;
     this.titleEnable = false;
     this.youtubeInput = false;
     this.youtubeLink = "";
@@ -615,18 +563,26 @@ export class Home {
     jQuery(".youtube-preview").html("");
     jQuery(".facebook-preview").html("");
     this.changeDetector.markForCheck();
+
+    this.bglist = false;
+    this.pubbg = false;
+    this.pubclass="";
+    this.showGifSlider = false;
+    this.resetPreviewGIF();
   }
+
+
   onDrop(event){
     console.log('drooooooooooooop');
     event.preventDefault();
   }
   updatePublishTextOnPaste($event) {
     $event.preventDefault();
+    this.resetPreview();
     
     let text = $event.clipboardData.getData("text/plain");
     this.link.isGif = false;
     if(this.pubbg){
-
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
       return 1;
@@ -899,15 +855,16 @@ export class Home {
       jQuery(".textarea-publish").html("");
     }
     let inputValue = $event.target;
-    console.log($event);
 
     if (inputValue != null && null != inputValue.files[0]) {
-      if(inputValue.files[0].name.endsWith(".gif") || inputValue.files[0].name.endsWith(".GIF")) {
+      let inputFile = inputValue.files[0];
+      this.resetPreview();
+      if(inputFile.name.endsWith(".gif") || inputFile.name.endsWith(".GIF")) {
         console.log("it ends with gif !");
         this.uploadPhotoGIF($event);
         return
       }
-      this.uploadedPicture = inputValue.files[0];
+      this.uploadedPicture = inputFile;
       //change
 
       this.ng2ImgMaxService
@@ -1073,7 +1030,7 @@ export class Home {
   analyzeLink(source) {
 
     let myArray = this.linkView.getListLinks(source);
-console.log("analyyyze");
+    console.log("analyyyze");
     if (!myArray.length) {
       return 1;
     }
@@ -1102,8 +1059,8 @@ console.log("analyyyze");
       //}
     }
           */
-    if (this.imageFromLink) {
-      return 1
+      if (this.imageFromLink) {
+        return 1
     }
 
 
@@ -1194,8 +1151,8 @@ console.log("analyyyze");
 
   toggleGifSlider() {
     this.showGifSlider = !this.showGifSlider;
-    if(this.showGifSlider) { this.bglist = false; this.pubbg = false; this.pubclass="";}
-}
+    if(this.showGifSlider) { this.resetPreview(); this.showGifSlider = true; }
+  }
 
 }
 

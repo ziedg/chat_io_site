@@ -13,10 +13,10 @@
 
 	<hr *ngIf="historyUsers.length > 0">
 
-	<div class="users-list" *ngFor="let user of chatListUsers">
+	<div class="users-list" *ngFor="let user of historyUsers">
 		<app-chat-list-item *ngIf="user.lastMessage ; else newUser"
-		[class.active]="isUserSelected(user.id)"
-		(click)="loadUser(user)"
+			[class.active]="isUserSelected(user.id)"
+			(click)="loadUser(user)"
 			[user]="user.firstName +' ' + user.lastName"
 			[userImage]="user.profilePicture"
 			[lastMessage]="user.lastMessage.message"
@@ -25,8 +25,8 @@
 
 		<ng-template #newUser>
 				<app-chat-list-item
-				[class.active]="isUserSelected(user.id)"
-				(click)="loadUser(user)"
+					[class.active]="isUserSelected(user.id)"
+					(click)="loadUser(user)"
 					[user]="user.firstName +' ' + user.lastName"
 					[userImage]="user.profilePicture" >
 				</app-chat-list-item>

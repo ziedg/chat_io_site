@@ -1,47 +1,52 @@
 <div class="notification-bar" id="subscribeMsg" *ngIf="notificationService.isSubscribed === false ">
   <span> {{ 'SP_AUTORISATION_NOTIF' | translate}} </span>
-  <span> <a (click)="notificationService.subscribeUser()">{{ 'ACTIVER_NOTIF_BUREAU' | translate}}</a></span>
+  <span>
+    <a (click)="notificationService.subscribeUser()">{{ 'ACTIVER_NOTIF_BUREAU' | translate}}</a>
+  </span>
 </div>
 
 <div *ngIf="user" class="container" id="container">
   <div class="row">
     <div class="home-sidebar col-md-2 hidden-sm hidden-xs">
       <div class="home-sidebar-container" #homeSidebarLeft>
-        <div><span><img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin"
-                        [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}"></span>
-          <span ><a style="color:black" [routerLink]="['/main/profile',user._id]">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a></span>
-          
-          
+        <div>
+          <span>
+            <img class="user-img home-sidebar-icon" *ngIf="user.profilePictureMin" [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
+          </span>
+          <span>
+            <a style="color:black" [routerLink]="['/main/profile',user._id]">{{loginService.getUser().firstName}} {{loginService.getUser().lastName}}</a>
+          </span>
+
+
         </div>
-        <div><span><img class="home-sidebar-icon" src="assets/images/new/home-grey.png"></span>
-          <span><a style="color:black;font-weight:bolder"
-                   routerLink="/redirect">{{ 'FIL_ACTUALITES' | translate}}</a></span></div>
-        <div [routerLink]="['/main/messaging']"><span><img class="home-sidebar-icon"
-                                                           src="assets/images/new/chat-grey.png"></span>
-          <span><a style="color:black" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a></span></div>
+        <div>
+          <span>
+            <img class="home-sidebar-icon" src="assets/images/new/home-grey.png">
+          </span>
+          <span>
+            <a style="color:black;font-weight:bolder" routerLink="/redirect">{{ 'FIL_ACTUALITES' | translate}}</a>
+          </span>
+        </div>
+        <div [routerLink]="['/main/messaging']">
+          <span>
+            <img class="home-sidebar-icon" src="assets/images/new/chat-grey.png">
+          </span>
+          <span>
+            <a style="color:black" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a>
+          </span>
+        </div>
         <hr style="width:120px;margin: 22px 0 28px 0">
         <div class="conditions-generales">
-          <div style="margin-bottom: 4px;"><a href="/support/cgu">{{'conditions_generales' | translate}}</a></div>
-          <div><a href="/support/about-us">{{'a_propos' | translate}}</a></div>
+          <div style="margin-bottom: 4px;">
+            <a href="/support/cgu">{{'conditions_generales' | translate}}</a>
+          </div>
+          <div>
+            <a href="/support/about-us">{{'a_propos' | translate}}</a>
+          </div>
         </div>
         <div class="copyright-home"> Speegar &copy; 2018</div>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div *ngIf="user" class="col-md-6 col-sm-7 col-xs-12 sub-container" style="height:100%;overflow-y:auto !important">
 
 
@@ -61,11 +66,7 @@
       </div>
 
 
-      <form class="col-xs-12 add-pub bordered noPadding"
-            (ngSubmit)="publish()"
-            [formGroup]="form"
-            #newPubForm
-            #f="ngForm">
+      <form class="col-xs-12 add-pub bordered noPadding" (ngSubmit)="publish()" [formGroup]="form" #newPubForm #f="ngForm">
 
         <div class="row add-row">
           <div class="col-md-12 col-xs-12 add-head">
@@ -97,24 +98,20 @@
                                                                           'pubbg15': pubclass=='pubdes15',
                                                                           'pubbg16': pubclass=='pubdes16',
                                                                           'pubcenter':pubbg
-                                                                          }"
-               (input)="veriftextsize(publishDivRef)" id="pub-holder">
-            <div class="pub-holder-holder" >
-              <div class="user-img for-add" *ngIf="user.profilePictureMin&&!pubbg"
-                   [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
+                                                                          }" (input)="veriftextsize(publishDivRef)" id="pub-holder">
+            <div class="pub-holder-holder">
+              <div class="user-img for-add" *ngIf="user.profilePictureMin&&!pubbg" [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
               </div>
 
-              <div class="user-img for-add" *ngIf="!user.profilePictureMin"
-                   [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}">
+              <div class="user-img for-add" *ngIf="!user.profilePictureMin" [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}">
               </div>
 
 
-              <input id="pub-title-input" placeholder="{{ 'home_publish_title' | translate }}" *ngIf="titleEnable"
-                     formControlName="publicationTitle" class="new-publication-title">
+              <input id="pub-title-input" placeholder="{{ 'home_publish_title' | translate }}" *ngIf="titleEnable" formControlName="publicationTitle"
+                class="new-publication-title">
 
-              <div id="publishDiv"
-                   [ngStyle]="pubbg && {'font-size':'calc(0.2vw + 3.3vh)','font-family': 'Arial','font-weight': 'bolder'}"
-                   [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText, 'post-title-enable':titleEnable,
+              <div id="publishDiv" [ngStyle]="pubbg && {'font-size':'calc(0.2vw + 3.3vh)','font-family': 'Arial','font-weight': 'bolder'}"
+                [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText, 'post-title-enable':titleEnable,
                                                                           'pubdes1': pubclass=='pubdes1',
                                                                           'pubdes2': pubclass=='pubdes2',
                                                                           'pubdes3': pubclass=='pubdes3',
@@ -143,8 +140,7 @@
                 <div class="file-input">
                   <div class="ajout-img-holder">
                     <img id="preview-image">
-                    <i class="fa fa-times delete-photo-post" aria-hidden="true" *ngIf="uploadedPicture || imageFromLink"
-                       (click)="resetPublishPicture()"></i>
+                    <i class="fa fa-times delete-photo-post" aria-hidden="true" *ngIf="uploadedPicture || imageFromLink" (click)="resetPublishPicture()"></i>
 
                   </div>
                 </div>
@@ -163,11 +159,11 @@
 
 
                 <div class="noPadding" *ngIf="link.isGif">
-                  <img id="gifImageId" class="img-preview" [src]="link.url"/>
+                  <img id="gifImageId" class="img-preview" [src]="link.url" />
                 </div>
 
                 <div class="noPadding" *ngIf="link.url && !link.isGif">
-                  <img class="img-preview" [src]="link.image"/>
+                  <img class="img-preview" [src]="link.image" />
                 </div>
                 <div class="descriptions" *ngIf="!link.isGif">
                   <a href="{{link.url}}" target="_blank">
@@ -187,120 +183,107 @@
               </div>
 
 
-              <gif-slider  style="width:100%;"  *ngIf="showGifSlider" (myEvent)="previewGIF($event)" (myToggleEvent)="toggleGifSlider()"></gif-slider>
+              <gif-slider style="width:100%;" *ngIf="showGifSlider" (myEvent)="previewGIF($event)" (myToggleEvent)="toggleGifSlider()"></gif-slider>
 
             </div>
 
-            
-        </div>
-
 
           </div>
+
+
+        </div>
         <div *ngIf="bglist" style="padding:5px 15px 0px">
-          <div 
-                  [ngClass]="{'pub-bg-container col-md-12 col-xs-12 noPadding':true}">
-              <div class="navigation-arrow-container-bglist" style="left:3px;z-index:1"
-              (click)="sideScroll('left',25,100,100)">
-              <img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png"></div>
-            
-              <div class="navigation-arrow-container-bglist" style="right:32px;z-index:1"
-              (click)="sideScroll('right',25,100,100)">
-              <img class="right-navigation-arrow" src="assets/images/new/right-arrow-white.png"></div>
-  
-              <div class="navigation-arrow-container-bglist" style="right:10px;z-index:1;background-color:transparent"
-              (click)="closeBglist()">
-              <p style="color: #666;margin-left:5px;margin-top:1px"> &#x2715; </p></div>
+          <div [ngClass]="{'pub-bg-container col-md-12 col-xs-12 noPadding':true}">
+            <div class="navigation-arrow-container-bglist" style="left:3px;z-index:1" (click)="sideScroll('left',25,100,100)">
+              <img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png">
+            </div>
+
+            <div class="navigation-arrow-container-bglist" style="right:32px;z-index:1" (click)="sideScroll('right',25,100,100)">
+              <img class="right-navigation-arrow" src="assets/images/new/right-arrow-white.png">
+            </div>
+
+            <div class="navigation-arrow-container-bglist" style="right:10px;z-index:1;background-color:transparent" (click)="closeBglist()">
+              <p style="color: #666;margin-left:5px;margin-top:1px"> &#x2715; </p>
+            </div>
             <div class="bglist">
-            <span><img style="border: 1px solid gray; border-radius: 5px" src="assets/images/background/bg0.png" (click)="getbg0()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg1min.jpg" (click)="getbg1()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg2min.jpg" (click)="getbg2()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg3min.jpg" (click)="getbg3()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg4min.jpg" (click)="getbg4()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg5min.jpg" (click)="getbg5()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg6min.jpg" (click)="getbg6()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg7min.jpg" (click)="getbg7()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg8min.jpg" (click)="getbg8()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg9min.jpg" (click)="getbg9()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg10min.jpg" (click)="getbg10()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg11min.jpg" (click)="getbg11()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg12min.jpg" (click)="getbg12()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg13min.jpg" (click)="getbg13()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg14min.jpg" (click)="getbg14()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg15min.jpg" (click)="getbg15()"></span>&nbsp;
-            <span><img style="border-radius: 5px" src="assets/images/background/bg16min.jpg" (click)="getbg16()"></span>
+              <span style="margin-right: 5px;">
+                <img style="border: 1px solid gray; border-radius: 5px" src="assets/images/background/bg0.png" (click)="getbg0()">
+              </span>
+              <span *ngFor="let n of array_bg" style="margin-right: 5px">
+                <img style="border-radius: 5px" src="assets/images/background/bg{{n}}min.jpg" (click)="getbg(n)">
+              </span>
             </div>
           </div>
         </div>
-        <div class="row" style="padding:0 15px">
+        <div class="row" style="padding:5px 15px">
           <div class="col-md-12 col-xs-12 add-head" style="border-bottom: 0">
-           <div class="col-md-5 col-xs-6 add-buttons noPadding" style="display: flex; align-items: center">
+            <div class="col-md-5 col-xs-6 add-buttons noPadding" style="display: flex; align-items: center">
 
-             <span class="picture-pub-in" (click)="addPhoto()" style="margin-right: 5px; line-height: 22px;">
-               <i class="fa fa-picture-o" style="font-size: 20px;"></i>
-             </span>
+              <span class="picture-pub-in" (click)="addPhoto()" style="margin-right: 5px; line-height: 0;">
+                <i class="fa fa-picture-o" style="font-size: 20px;"></i>
+              </span>
 
-             <span (click)="toggleGifSlider()" style="line-height: 46Px">
-               <img style="width:26px;height:20px;margin-right:16px;padding-bottom:1px" src ="assets/images/new/gif-icon.png">
-             </span>
+              <span (click)="toggleGifSlider()" style="line-height: 18px;cursor:pointer;">
+                <img style="width:26px;height:19px;margin-right:16px;padding-bottom:2px" src="assets/images/new/gif-icon.png">
+              </span>
 
-             <span class="youtube-video-in hidden-xs" style="line-height: 23px;display:none">
-                 <input class="yt-in-url youtube-input-popup"
-                        placeholder="{{ 'home_publish_youtube_placeholder' | translate }}" style="display:none;"
-                        (change)="updateYoutubeFacebook()" formControlName="publicationYoutubeLink">
- 
- 
-                 <i class="fa fa-youtube-play" (click)="changeYoutubeInput()"></i>
-               </span>
- 
+              <span class="youtube-video-in hidden-xs" style="line-height: 23px;display:none">
+                <input class="yt-in-url youtube-input-popup" placeholder="{{ 'home_publish_youtube_placeholder' | translate }}" style="display:none;"
+                  (change)="updateYoutubeFacebook()" formControlName="publicationYoutubeLink">
 
 
-             <input type="file" id="file-image" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
-             <input type="file" id="file-image-gif" style="display:none" accept=".gif"
-                    (change)="uploadPhotoGIF($event)">
+                <i class="fa fa-youtube-play" (click)="changeYoutubeInput()"></i>
+              </span>
 
-             <div style="padding-top:7px"><i class="fas fa fa-th-large" style="font-size: 20px" (click)="bglistf()"></i></div>
-           </div>
-           <div class="col-md-7 col-xs-6 share-button"
-                style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
-             <div class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
-               <div>
-                 <header (click)="disableSelectMenu()">
-                   {{ 'home_publish_visibility_header' | translate }}
-                 </header>
-                 <div [class.hide]="selectedMenuElement!=0">
-                   <i class="fa fa-globe"></i>
-                   {{ 'home_publish_visibility_all' | translate }}
-                 </div>
-                 <div [class.hide]="selectedMenuElement!=1">
-                   <i class="fa fa-users"></i>
-                   {{ 'home_publish_visibility_subscribers' | translate }}
-                 </div>
-                 <div class="select-menu" style="display:none;">
-                   <header (click)="disbaleSelectMenu()">
-                     {{ 'home_publish_visibility_header' | translate }}
-                   </header>
-                   <div class="select-choice" (click)="changeSelectMenu(0)">
-                     <i class="fa fa-globe"></i>
-                     {{ 'home_publish_visibility_all' | translate }}
-                   </div>
-                   <div class="select-choice" (click)="changeSelectMenu(1)">
-                     <i class="fa fa-users"></i>
-                     {{ 'home_publish_visibility_subscribers' | translate }}
-                   </div>
-                 </div>
-               </div>
-               <i class="fa fa-caret-down"></i>
-             </div>
-             <button class="publish-button" type="submit" *ngIf="!loadingPublish">
-               {{ 'home_publish_button' | translate }}
-             </button>
-             <button class="publish-button loading-button" *ngIf="loadingPublish" disabled>
-               <div class="loading"></div>
-             </button>
-           </div>
-         
+
+
+              <input type="file" id="file-image" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
+              <input type="file" id="file-image-gif" style="display:none" accept=".gif" (change)="uploadPhotoGIF($event)">
+
+              <div style="line-height:0;margin-top:2px;">
+                <i class="fas fa fa-th-large" style="font-size: 20px" (click)="bglistf()"></i>
+              </div>
+            </div>
+            <div class="col-md-7 col-xs-6 share-button" style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
+              <div class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
+                <div>
+                  <header (click)="disableSelectMenu()">
+                    {{ 'home_publish_visibility_header' | translate }}
+                  </header>
+                  <div [class.hide]="selectedMenuElement!=0">
+                    <i class="fa fa-globe"></i>
+                    {{ 'home_publish_visibility_all' | translate }}
+                  </div>
+                  <div [class.hide]="selectedMenuElement!=1">
+                    <i class="fa fa-users"></i>
+                    {{ 'home_publish_visibility_subscribers' | translate }}
+                  </div>
+                  <div class="select-menu" style="display:none;">
+                    <header (click)="disbaleSelectMenu()">
+                      {{ 'home_publish_visibility_header' | translate }}
+                    </header>
+                    <div class="select-choice" (click)="changeSelectMenu(0)">
+                      <i class="fa fa-globe"></i>
+                      {{ 'home_publish_visibility_all' | translate }}
+                    </div>
+                    <div class="select-choice" (click)="changeSelectMenu(1)">
+                      <i class="fa fa-users"></i>
+                      {{ 'home_publish_visibility_subscribers' | translate }}
+                    </div>
+                  </div>
+                </div>
+                <i class="fa fa-caret-down"></i>
+              </div>
+              <button class="publish-button" type="submit" *ngIf="!loadingPublish">
+                {{ 'home_publish_button' | translate }}
+              </button>
+              <button class="publish-button loading-button" *ngIf="loadingPublish" disabled>
+                <div class="loading"></div>
+              </button>
+            </div>
+
           </div>
-         </div>
+        </div>
 
 
       </form>
@@ -319,8 +302,7 @@
         </div>
 
 
-        <div *ngIf="user" infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0"
-             (scrolled)="onScrollDown()">
+        <div *ngIf="user" infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0" (scrolled)="onScrollDown()">
           <div *ngFor=" let publicationBean of publicationBeanList; let i= index">
 
             <publication [publicationBean]="publicationBean">
@@ -366,14 +348,14 @@
         <section class="hidden-sm hidden-xs widget bordered" style="padding:15px" #selectLanguage>
 
 
-        <span *ngFor="let language of translationLanguages; let i = index"
-              (click)="onSelectLanguage(language.value)">
-            <a class="language-option" style="cursor: pointer"
-               [ngClass]="{'selected-language':language.value === selectedLanguage}">{{ language.name }}</a>
-            <span *ngIf="i === 1"><br></span>
-        </span>
+          <span *ngFor="let language of translationLanguages; let i = index" (click)="onSelectLanguage(language.value)">
+            <a class="language-option" style="cursor: pointer" [ngClass]="{'selected-language':language.value === selectedLanguage}">{{ language.name }}</a>
+            <span *ngIf="i === 1">
+              <br>
+            </span>
+          </span>
 
-      </section>
+        </section>
       </div>
 
 
