@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, ViewChild, ElementRef, AfterContentChecked, DoCheck } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -26,7 +26,7 @@ class MessageValidation {
   templateUrl: './conversation.component.html',
   styleUrls: ['./conversation.component.css']
 })
-export class ConversationComponent implements OnInit, AfterViewInit{
+export class ConversationComponent implements OnInit, AfterContentChecked, DoCheck {
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
   public selectedUser: User = null;
@@ -59,8 +59,12 @@ export class ConversationComponent implements OnInit, AfterViewInit{
     this.listenForMessages(this.user._id);
   }
 
-  ngAfterViewInit() {
-    document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
+  ngAfterContentChecked() {
+    this.scrollMessageThreadBottom();
+  }
+
+  ngDoCheck() {
+    this.scrollMessageThreadBottom();
   }
 
   onScrollMessageThread() {
@@ -69,6 +73,11 @@ export class ConversationComponent implements OnInit, AfterViewInit{
     if (!this.messageThread.nativeElement.scrollTop) {
       console.log("reach the top of message thread");
     }
+  }
+
+  scrollMessageThreadBottom() {
+    console.log("scroll to bottom");
+    document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
   }
 
 
