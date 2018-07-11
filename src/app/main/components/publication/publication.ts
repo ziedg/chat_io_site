@@ -314,6 +314,7 @@ showConfirmButton: false
   }
 
   ngOnInit() {
+    var isWebkit = 'WebkitAppearance' in document.documentElement.style;
     this.intervalHolder = setInterval(() => {
       // Let's refresh the list.
       this.changeDetector.markForCheck();

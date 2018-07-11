@@ -7,7 +7,7 @@
 			<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
 		</div>
  
-		<ul class="message-thread">
+		<ul class="message-thread" (scroll)="onScrollMessageThread()" #messageThread>
 			<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)" (click)="show(message.toUserId)">
 				<!-- <div *ngFor="let m of message"> -->
 					<img *ngIf="alignMessage(message.toUserId) == false" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" />

@@ -454,7 +454,7 @@
             [(contenteditableModel)]="commentInputHtml" (keydown.Enter)="publishComment()">
           </div>
 
-          <div class="form-more">
+          <div class="form-more" [class.safari]="isWebkit">
             <img src="/assets/images/new/camera.png" class="addPhoto" (click)="addPhoto()"/>
             <img src="/assets/images/new/smiley.png" class="toggleEmoji" (click)="toggleEmoji()" style="padding-right: 10px;" />
             <button class="comment-publish" type="submit" *ngIf="!loadingComment">
