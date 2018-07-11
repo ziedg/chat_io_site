@@ -10,7 +10,7 @@
   
   
   <div *ngFor="let notif of listNotif">
-    <article style="margin-top: 10px; display: flex;" [class.seen-notification]="notif.isSeen=='true'"
+    <article style="margin-top: 10px; display: flex;" [class.unseen-notification]="notif.isSeen=='false'"
              *ngIf="notif.type !='subscribe'"
              (click)="goTo('post',notif.publId,notif._id)">
       <div class="user-img for-notif"
@@ -83,7 +83,7 @@
       </div>
 
     </article>
-    <article style="margin-top: 10px; display: flex;" [class.seen-notification]="notif.isSeen=='true'"
+    <article style="margin-top: 10px; display: flex;" [class.unseen-notification]="notif.isSeen=='false'"
              *ngIf=" notif.type =='subscribe'"
              (click)="goTo('profile',notif.profiles[0]._id,notif._id)">
       <div class="user-img for-notif"

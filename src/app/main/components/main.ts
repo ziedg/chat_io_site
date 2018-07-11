@@ -274,11 +274,7 @@ export class Main {
     // setTimeout(3000,this.getNotifications());
     this.getNotifications()
   }
-  resetNotifications(){
-    console.log("triggered");
-    this.nbNewNotifications=0;
-    this.changeDetector.markForCheck();
-  }
+
 
   getNotifications() {
     this.moreLoaded = false;

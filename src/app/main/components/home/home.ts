@@ -21,7 +21,7 @@ import {LinkView} from '../../services/linkView';
 import {NotificationService} from '../../services/notification.service';
 import {PostService} from '../../services/postService';
 import { PublicationTextService } from "../../services/publicationText.service";
-import {GifService} from '../../services/gifService';
+
 
 
 
@@ -31,8 +31,6 @@ declare var FB: any;
 declare var auth: any;
 declare const gapi: any;
 declare var window: any;
-
-
 
 @Component({
   moduleId: module.id,
@@ -106,9 +104,6 @@ export class Home {
   //check if there is more post to retreive from server
   morePosts = true;
 
-  nb_bg:number = 17;
-  array_bg = [];
-
   // Notification vars
   private subscriptionJson = '';
   private isSubscribed: boolean = true;
@@ -128,7 +123,7 @@ export class Home {
               private postService: PostService,
               private linkView: LinkView,
               private linkPreview: LinkPreview,
-              private gifService: GifService,
+
               private title: Title,
               private http: Http,
               private router: Router,
@@ -140,11 +135,6 @@ export class Home {
               public notificationService: NotificationService,
               private publicationTextService: PublicationTextService,
               private ref: ChangeDetectorRef) {
-
-    for(let i:number=1; i<this.nb_bg; i++) {
-      this.array_bg.push(i);
-    }
-    console.log(this.array_bg);
 
     this.isSubscribed = true;
     this.loginService.redirect();
@@ -254,32 +244,97 @@ export class Home {
   }
 
   toggling_bglistf(){
-    if(this.bglist) { this.resetPreview(); this.bglist = true; this.showGifSlider = false;}
+    if(this.bglist) { this.showGifSlider = false; this.resetPreviewGIF();}
     else { this.pubbg = false; this.pubclass=""; }
   }
-
-  getbg(i) {
-    if(this.bgvalid) {
-      if(i == 0) {
-        this.pubbg=false;
-        this.pubclass="";
-        this.resetPreview();
-      }
-      else {
-        this.pubbg=true;
-        this.pubclass="pubdes" + i;
-        this.resetPreview();
-      }
-    }
-  }
-
   getbg0(){
     if(this.bgvalid){
       this.pubbg=false;
       this.pubclass="";
       this.resetPreview();
   }}
+  getbg1(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes1";
+    this.resetPreview();
+  }}
 
+  getbg2(){
+    if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes2";
+    this.resetPreview();
+  }}
+  getbg3(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes3";
+    this.resetPreview();
+  }}
+  getbg4(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes4";
+    this.resetPreview();
+  }}
+  getbg5(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes5";
+    this.resetPreview();
+  }}
+  getbg6(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes6";
+    this.resetPreview();
+  }}
+  getbg7(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes7";
+    this.resetPreview();
+  }}
+  getbg8(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes8";
+    this.resetPreview();
+  }}
+  getbg9(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes9";
+    this.resetPreview();
+  }}
+  getbg10(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes10";
+    this.resetPreview();
+  }}
+  getbg11(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes11";
+    this.resetPreview();
+  }}
+  getbg12(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes12";
+    this.resetPreview();
+  }}
+  getbg13(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes13";
+    this.resetPreview();
+  }}
+  getbg14(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes14";
+    this.resetPreview();
+  }}
+  getbg15(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes15";
+    this.resetPreview();
+  }}
+  getbg16(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes16";
+    this.resetPreview();
+  }}
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
     this.user.isNewInscri = false;
@@ -498,35 +553,24 @@ export class Home {
   }
 
   previewGIF(urlGIF){
-    
+
     var linkURL = urlGIF;
+
     this.link.url = linkURL;
     this.link.isSet = true;
     this.link.isGif = true;
     this.linkLoading = false;
-    
-    
-    
     jQuery(".file-input-holder").hide();
-    
-    var gifImage = document.getElementById('gifImageId');
-    
-    if(gifImage){
-      
-      gifImage.onload = () => {
-      var a = "hello";
-      //console.log("shooooooooooooooooooooooooow");
-      this.gifService.removeAnimation(a);
-      //gifHasLoaded = true;
+    //var img2 = document.getElementById('gifImageId');
 
-      }
-    }else{
-      var a = "hello";
-      //console.log("nulllllllllll");
-      this.gifService.removeAnimation(a);
-    }
-    
-    
+    // if(img2){
+
+    //   img2.onload = function() {
+    //   console.log("shooooooooooooooooooooooooow");
+    //   //gifHasLoaded = true;
+
+    //   }
+    // }
 
 
   }
@@ -538,29 +582,17 @@ export class Home {
 
   }
 
-  resetPreview(linkIsImage?) {
-    linkIsImage = linkIsImage || false;
-    // this method resets all diffrent new publication types
-
-
-    // ------------- methods of publication types
-    // uploadPhoto()
-    // getbgX() -- bglistf() -- (y)
-    // toggleGifSlider() (y)
-    // updatePublishTextOnPaste() (y)
-
+  resetPreview() {
     this.link.url = "";
     this.link.isSet = false;
     this.link.isGif = false;
     jQuery("#file-image").val("");
     jQuery("#file-image-gif").val("");
-    if(!linkIsImage) {
-      jQuery("#preview-image").attr("src", "");
-      jQuery("#preview-image").fadeOut();
-    }
+    jQuery("#preview-image").attr("src", "");
+    jQuery("#preview-image").fadeOut();
     this.uploadedPicture = null;
     this.imageFromLink = false;
-    
+    this.uploadedPicture = null;
     this.titleEnable = false;
     this.youtubeInput = false;
     this.youtubeLink = "";
@@ -570,72 +602,59 @@ export class Home {
     jQuery(".youtube-preview").html("");
     jQuery(".facebook-preview").html("");
     this.changeDetector.markForCheck();
-
-    
-    // this.pubbg = false;
-    // this.pubclass="";
-    
-    //this.resetPreviewGIF();
   }
 
-
-  onDrop(event){
-    console.log('drooooooooooooop');
-    event.preventDefault();
-  }
   updatePublishTextOnPaste($event) {
     $event.preventDefault();
-    //this.resetPreview();
-    
     let text = $event.clipboardData.getData("text/plain");
     this.link.isGif = false;
     if(this.pubbg){
+
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
       return 1;
     }
-    else {
-      let linkIsImage:boolean = false;
-      if (
-        text.search("youtube.com/watch") >= 0 ||
-        text.search("youtu.be/") >= 0
-      ) {
-        this.resetPreview();
-
-        this.youtubeInput = true;
-        jQuery(".yt-in-url").val(text);
-        this.changeDetector.markForCheck();
-        this.youtubeLink = text;
-        this.updateYoutubeFacebook();
-        return 1;
-      }
-
-      if (text.search("web.facebook.com") >= 0 || text.search("www.facebook.com") > 0 ||
-          text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0) {
-        
-        this.resetPreview();
-
-        this.facebookInput = true;
-        jQuery(".yt-in-url").val(text);
-        this.changeDetector.markForCheck();
-        this.facebookLink = text;
-        this.updateYoutubeFacebook();
-        return 1;
-      }
-      if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
-        this.resetPreview(linkIsImage = true);
-        console.log(text);
-        this.imageFromLink = true;
-        jQuery("#preview-image").attr("src", text);
-        jQuery(".file-input-holder").show();
-        jQuery("#preview-image").show();
-        return 1;
-      }
-      if(!linkIsImage) {this.resetPreview(); this.analyzeLink(text);  console.log("yoooooooooo")}
-      console.log("you will go out noooow");
-      text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
-      document.execCommand("insertHTML", false, text);
+    if (
+      text.search("youtube.com/watch") >= 0 ||
+      text.search("youtu.be/") >= 0
+    ) {
+      this.youtubeInput = true;
+      jQuery(".yt-in-url").val(text);
+      this.changeDetector.markForCheck();
+      this.youtubeLink = text;
+      this.updateYoutubeFacebook();
+      return 1;
     }
+
+    if (
+      text.search("web.facebook.com") >= 0 || text.search("www.facebook.com") > 0 ||
+      text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0) {
+      this.facebookInput = true;
+      jQuery(".yt-in-url").val(text);
+      this.changeDetector.markForCheck();
+      this.facebookLink = text;
+      this.updateYoutubeFacebook();
+      return 1;
+    }
+    if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
+      //console.log("image detected");
+      jQuery("#preview-image").attr("src", text);
+      jQuery(".file-input-holder").show();
+      jQuery("#preview-image").show();
+      this.imageFromLink = true;
+      this.youtubeLink = null;
+      this.facebookLink = null;
+
+      this.uploadedPicture = null;
+      jQuery(".youtube-preview").html("");
+      jQuery(".facebook-preview").html("");
+      this.link.isSet = false;
+      return 1;
+    }
+    this.analyzeLink(text);
+    console.log("you will go out noooow");
+    text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
+    document.execCommand("insertHTML", false, text);
   }
 
   resetPublishPicture() {
@@ -857,22 +876,16 @@ export class Home {
 
   //uploading photo or GIF
   uploadPhoto($event) {
-    if(this.pubbg){
-      this.pubbg=false;
-      this.pubclass="";
-      jQuery(".textarea-publish").html("");
-    }
     let inputValue = $event.target;
+    console.log($event);
 
     if (inputValue != null && null != inputValue.files[0]) {
-      let inputFile = inputValue.files[0];
-      this.resetPreview();
-      if(inputFile.name.endsWith(".gif") || inputFile.name.endsWith(".GIF")) {
+      if(inputValue.files[0].name.endsWith(".gif") || inputValue.files[0].name.endsWith(".GIF")) {
         console.log("it ends with gif !");
         this.uploadPhotoGIF($event);
         return
       }
-      this.uploadedPicture = inputFile;
+      this.uploadedPicture = inputValue.files[0];
       //change
 
       this.ng2ImgMaxService
@@ -1038,15 +1051,14 @@ export class Home {
   analyzeLink(source) {
 
     let myArray = this.linkView.getListLinks(source);
-    
+console.log("analyyyze");
     if (!myArray.length) {
-      console.log("analyyyze");
       return 1;
     }
     let linkURL = myArray[0];
     //check if linkURL refers to speegar.com
     if (linkURL == this.link.url) {
-      console.log("analyyyzeeeee");
+
       return 1;
     }
 
@@ -1068,14 +1080,13 @@ export class Home {
       //}
     }
           */
-    //   if (this.imageFromLink) {
-    //     console.log("aaaaanalyyyze");
-    //     return 1
-    // }
+    if (this.imageFromLink) {
+      return 1
+    }
 
 
     this.linkLoading = true;
-    
+
     this.http
       .get(
         environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
@@ -1098,28 +1109,19 @@ export class Home {
             this.link.title = response.results.data.ogTitle;
             this.link.description = response.results.data.ogDescription;
             if (response.results.data.ogImage) {
-              if(response.results.data.ogImage.length == 2)
-              {
-                
-              this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
-              console.log(response.results.data.ogImage[1].url);
-              //this.resetPreview(linkIsImage = true);
-              //console.log("image detected");
-              // jQuery("#preview-image").attr("src", this.link.image);
-              // jQuery(".file-input-holder").show();
-              // jQuery("#preview-image").show();
-              
-
-              }else{
-              
+              var a = response.results.data.ogImage.url;
               this.link.image = response.results.data.ogImage.url;
-              console.log(response.results.data.ogImage);
+              console.log(this.link.image);
               this.link.imageWidth = response.results.data.ogImage.width;
               this.link.imageHeight = response.results.data.ogImage.height;
-
-              }
-              
-              
+              /*
+              if (a.search(/(\.gif)$/i) > 0) {
+                this.link.isGif = true;
+                this.link.url = this.link.image;
+              } else {
+                this.link.isGif = false;
+                this.linkLoading = false;
+              }*/
             } else {
               this.link.image = null;
               this.link.imageWidth = 0;
@@ -1135,10 +1137,6 @@ export class Home {
           console.error("error in link API;");
         },
         () => {
-          if(this.link.isSet) {
-            //this.resetPreview();
-            this.link.isSet = true;
-          }
           this.linkLoading = false;
         }
       );
@@ -1174,11 +1172,8 @@ export class Home {
 
   toggleGifSlider() {
     this.showGifSlider = !this.showGifSlider;
-    if(this.showGifSlider) { 
-      this.resetPreview(); this.showGifSlider = true; 
-      this.bglist = false; this.pubbg = false; this.pubclass="";
-    }
-  }
+    if(this.showGifSlider) { this.bglist = false; this.pubbg = false; this.pubclass="";}
+}
 
 }
 

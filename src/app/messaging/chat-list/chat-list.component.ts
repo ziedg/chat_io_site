@@ -26,40 +26,40 @@ export class ChatListComponent implements OnInit {
   private user;
   private userId: string = null;
   public chatListUsers: any[] = [];
-  public historyUsers: any[] = [];
+  public historyUsers:any[]=[]; 
   public suggestions: any[] = [];
   private selectedUserId: string = null;
   private s: AngularFireObject<any>;
   private msgFirstCheck: Boolean = true;
-  //
-  autocomplete = false;
-  searchValue: string;
-  noSearchResults: Boolean = false;
-  @ViewChild("searchBar") searchBar: ElementRef;
+//
+autocomplete = false;
+listSearchUsers = [];
+searchValue: string;
+noSearchResults: Boolean = false;
+@ViewChild("searchBar") searchBar: ElementRef;
 
-  //
+//
   constructor(
-    private emitterService: EmitterService,
-    private chatService: ChatService,
-    private loginService: LoginService,
+    private emitterService :EmitterService,
+    private chatService:ChatService,
+    private loginService :LoginService,
     private changeDetector: ChangeDetectorRef,
-    private router: Router,
+    private router:Router,
     private db: AngularFireDatabase,
     private http: Http
   ) { }
 
-  ngOnInit() {
-    this.user = this.loginService.getUser();
-    this.userId = this.user._id;
+   ngOnInit(){
+    this.user =this.loginService.getUser();
+    this.userId=this.user._id;
     this.getLoggedInUser(this.userId)
     this.getChatList();
     this.getSuggestionsList();
     this.reactToNewMessages();
     this.listenForAllMessages(this.userId);
-    //this.updateMyMessages();
     jQuery(".navigation-bottom").addClass('hidden-xs');
 
-    jQuery(document).click(function (e) {
+    jQuery(document).click(function(e) {
       if (
         jQuery(e.target).closest(".recherche-results-holder-msg").length === 0
       ) {
@@ -69,32 +69,6 @@ export class ChatListComponent implements OnInit {
     });
 
    }
-   
-   updateMyMessages() {
-    
-    this.emitterService.myMessageEmitter.subscribe((data) => {
-      var elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.toUserId; }).indexOf(this.selectedUserId);
-      
-      if (this.chatListUsers[elementPos] == undefined){
-        elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.fromUserId; }).indexOf(this.selectedUserId);
-      }
-      
-      this.chatListUsers[elementPos].lastMessage.message = "Vous : "+data.message;
-      
-      let actualDate = new Date(Date.now());
-      let hours = actualDate.getHours().toString();
-      let minutes = actualDate.getMinutes().toString();
-      console.log(actualDate);
-      if(hours.length==1){
-        hours = "0"+hours;
-      }
-      if(minutes.length==1){
-        minutes = "0"+minutes;
-      }
-
-      this.chatListUsers[elementPos].lastMessage.date = hours+":"+minutes;
-    });
-  }
 
 
 
@@ -102,68 +76,68 @@ export class ChatListComponent implements OnInit {
     this.http.get(
       environment.SERVER_URL + pathUtils.GET_PROFILE + userId,
       AppSettings.OPTIONS)
-      .map((res: Response) => res.json())
+      .map((res:Response) => res.json())
       .subscribe(
         response => {
-          if (response.status == "0") {
-            this.user = response.user;
-          }
-        },
-        err => {
-        },
-        () => {
-          this.changeDetector.markForCheck();
-        }
-      );
-  }
 
-  getChatList() {
+        if (response.status == "0") {
+
+          this.user= response.user;
+        }
+
+      },
+        err => {
+      },
+      () => {
+        this.changeDetector.markForCheck();
+      }
+    );
+   }
+  getChatList(){
     /*
      l'historique des personnes dont il a fait des conversations avec +dernier message pour chacun
      */
     this.chatService.getList(this.userId)
-      .map(users => {
-        return users.json();
-      })
-      .subscribe((users: any[]) => {
-        console.log('chat list');
-        console.log(users);
-        for (let i = 0; i < users.length; i++) {
-          if (users[i].lastMessage.fromUserId == this.userId) {
-            users[i].lastMessage.message = "Vous : " + users[i].lastMessage.message;
+    .map(users=>{
+     return users.json();
+     })
+    .subscribe((users:any[])=>{
+      console.log('chat list');
+      console.log(users);
+       for(let i=0;i<users.length;i++){
+          if(users[i].lastMessage.fromUserId == this.userId){
+            users[i].lastMessage.message = "Vous : "+users[i].lastMessage.message;
           }
           let dateMsg = new Date(users[i].lastMessage.date);
           let actualDate = new Date(Date.now());
           let year = dateMsg.getFullYear();
           let month = dateMsg.getMonth() + 1;
           let day = dateMsg.getDate();
-          if ((actualDate.getFullYear() - year > 0) ||
-            ((actualDate.getMonth() + 1) - month > 0) ||
-            (actualDate.getDate() - day > 0)) {
-            users[i].lastMessage.date = day + "-" + month + "-" + year;
-          } else {
+          if((actualDate.getFullYear() - year > 0)||
+            ((actualDate.getMonth()+1) - month > 0)||
+            (actualDate.getDate() - day > 0)){
+            users[i].lastMessage.date = day +"-"+month+"-"+year;
+          }else{
             let hours;
             let minutes;
-            if (dateMsg.getHours().toString().length == 1) {
-              hours = "0" + dateMsg.getHours().toString();
-            } else {
+            if(dateMsg.getHours().toString().length==1){
+              hours = "0"+dateMsg.getHours().toString();
+            }else{
               hours = dateMsg.getHours().toString();
             }
-            if (dateMsg.getMinutes().toString().length == 1) {
-              minutes = "0" + dateMsg.getMinutes().toString();
-            } else {
+            if(dateMsg.getMinutes().toString().length==1){
+              minutes = "0"+dateMsg.getMinutes().toString();
+            }else{
               minutes = dateMsg.getMinutes().toString();
             }
-            users[i].lastMessage.date = hours + ":" + minutes;
+            users[i].lastMessage.date = hours+":"+minutes;
           }
-          this.chatListUsers.push(users[i])
-          this.historyUsers = this.chatListUsers.slice()
-        }
+          this.chatListUsers.push(users[i]);
+          this.historyUsers.push(users[i]);
+       }
 
-      })
+    })
   }
-
-  
 
   listenForAllMessages(userId: string): void {
     this.userId = userId;
@@ -174,13 +148,16 @@ export class ChatListComponent implements OnInit {
         if (notif !== null && !this.msgFirstCheck) {
           this.chatService.getMessage(notif.msgId).subscribe(
             message => {
-              
+
                 var elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
-                if(this.chatListUsers[elementPos] == undefined){
-                  elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.toUserId; }).indexOf(notif.senderId);
+
+                if(notif.senderId == this.userId){
+                  this.chatListUsers[elementPos].lastMessage.message = "Vous : "+message.message;
                 }
-                this.chatListUsers[elementPos].lastMessage.message = message.message;
-                
+                else{
+                  this.chatListUsers[elementPos].lastMessage.message = message.message;
+                }
+
                 let actualDate = new Date(Date.now());
                 let hours = actualDate.getHours().toString();
                 let minutes = actualDate.getMinutes().toString();
@@ -192,201 +169,187 @@ export class ChatListComponent implements OnInit {
                   minutes = "0"+minutes;
                 }
 
-            this.chatListUsers[elementPos].lastMessage.date = hours + ":" + minutes;
+                this.chatListUsers[elementPos].lastMessage.date = hours+":"+minutes;
 
-          },
-          err => console.log('Could send message to server, reason: ', err)
-        );
-      } else {
-        this.msgFirstCheck = false;
-      }
-    });
-  }
+            },
+            err => console.log('Could send message to server, reason: ', err)
+          );
+        }else{
+          this.msgFirstCheck = false;
+        }
+      });
+    }
 
 
-  getSuggestionsList() {
+  getSuggestionsList(){
     /*
      les abonnées dont il n'a pas fait des conversations avec encore
      */
     this.chatService.getSuggestions(this.userId)
-      .map(users => {
-        return users.json();
-      })
-      .subscribe((users: any[]) => {
-        for (let i = 0; i < users.length; i++) {
-          this.suggestions.push(users[i]);
-        }
-      })
+    .map(users=>{
+     return users.json();
+     })
+    .subscribe((users:any[])=>{
+       for(let i=0;i<users.length;i++){
+       this.suggestions.push(users[i]);
+       }
+
+    })
   }
 
-  reactToNewMessages() {
-    this.chatService.messageEmitter.subscribe(message => {
-      let profiles = this.historyUsers.filter(user => user._id == message.fromUserId);
-      if (profiles[0]) {
-        let index = this.historyUsers.findIndex(user => user._id == message.fromUserId);
-        this.historyUsers.splice(index,1);
-        profiles[0].lastMessage = message;
-        this.historyUsers.unshift(profiles[0]);
-        this.changeDetector.markForCheck();
-        console.log(profiles[0])
-      } else {
-        profiles = this.suggestions.filter(user => user._id == message.fromUserId);
-        if (profiles[0]) {
-          profiles[0].lastMessage = message;
-          this.historyUsers.unshift(profiles[0]);
-          this.changeDetector.markForCheck();
+reactToNewMessages(){
+  this.chatService.messageEmitter.subscribe(message=>{
+    let profiles=this.chatListUsers.filter(user=>user._id == message.fromUserId);
+    if (profiles[0]){
           console.log(profiles[0])
-        } else {
-          this.http.get(
-            environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
-            AppSettings.OPTIONS)
-            .map((res: Response) => res.json())
-            .subscribe(
-              response => {
+    }else {
+           profiles=this.suggestions.filter(user=>user._id == message.fromUserId);
+          if (profiles[0]){
+            console.log(profiles[0])
+          }else {
+            this.http.get(
+              environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
+              AppSettings.OPTIONS)
+              .map((res:Response) => res.json())
+              .subscribe(
+                response => {
+
                 if (response.status == "0") {
-                  let profile= {
-                    _id:response.user._id,
-                    firstName:response.user.firstName,
-                    lastName:response.user.lastName,
-                    profilePicture:response.user.profilePicture,
-                    lastMessage: message
-                  }
-                  this.historyUsers.unshift(profile);
+
+                  let profile= response.user;
                   console.log(profile)
                 }
+
               },
-              err => {
+                err => {
               },
               () => {
                 this.changeDetector.markForCheck();
               }
             );
-        }
-      }
-      console.log(message)
-    })
-  }
+          }
+    }
+    console.log(message)
+  })
+}
 
   isUserSelected(userId: string): boolean {
     if (!this.selectedUserId) {
-      return false;
+        return false;
     }
     return this.selectedUserId === userId ? true : false;
-  }
+}
 
-  /* Method to select the user from the Chat list starts */
-  selectUser(user: User): void {
+/* Method to select the user from the Chat list starts */
+selectUser(user: User): void {
     this.selectedUserId = user._id;
-    /* Sending selected users information to other component. */
-    this.emitterService.emitUser(user);
+     /* Sending selected users information to other component. */
+     this.emitterService.emitUser(user);
 
-    /* calling method to get the messages */
+      /* calling method to get the messages */
     this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId })
     .subscribe((response) => {
       /* Sending conversation between two users to other component. */
       this.emitterService.emitConversation(response);
   });
-  
 }
 
-  /*Search functionnality*/
-  loadUser(user) {
+/*Search functionnality*/
+loadUser(user) {
 
-    var found = this.historyUsers.some(function (profile) {
-      return profile._id == user._id;
-    });
-    if (!found) this.historyUsers.unshift(user)
+  var found = this.chatListUsers.some(function (profile) {
+    return profile._id ==user._id ;
+  });
+    if (!found) this.chatListUsers.unshift(user)
 
   this.selectUser(user)
-  this.searchValue=""
-  this.chatListUsers=this.historyUsers.slice();
-  this.updateMyMessages();
 }
 
-  filterChatListUsersByName(name) {
-    return this.historyUsers.filter((user) => {
-      let fullName = user.firstName + ' ' + user.lastName;
+filterChatListUsersByName(name){
+return this.chatListUsers.filter((user)=>{
+let fullName=user.firstName +' ' +user.lastName;
+return fullName.includes(name);
+});
+}
+
+filterSubscriptionsByName(name){
+  if(this.user.subscriptionsDetails){
+
+    return this.user.subscriptionsDetails.filter((user)=>{
+      let fullName=user.firstName + ' ' + user.lastName;
       return fullName.includes(name);
-    });
-  }
-
-  filterSubscriptionsByName(name) {
-    if (this.user.subscriptionsDetails) {
-
-      return this.user.subscriptionsDetails.filter((user) => {
-        let fullName = user.firstName + ' ' + user.lastName;
-        return fullName.includes(name);
       });
-    }
+  }
 
   }
 
-  onFocus() {
-    if (this.searchBar.nativeElement.value.length >= 1) {
-      this.searchBar.nativeElement.style.display = "block!important";
-      this.onChange(this.searchBar.nativeElement.value);
-    }
+onFocus(){
+  if (this.searchBar.nativeElement.value.length>=1){
+    this.searchBar.nativeElement.style.display = "block!important";
+    this.onChange(this.searchBar.nativeElement.value);
   }
+}
+
+onBlur(){
+  this.searchValue="";
+}
+
+onChange(newValue: string) {
+  this.chatListUsers = [];
+  this.changeDetector.markForCheck();
+  if (newValue.length >=1) {
+      let searchInHistory=this.filterChatListUsersByName(newValue);
+        if (searchInHistory && searchInHistory.length>0){
+        this.chatListUsers=searchInHistory
+        }else{
+         let searchInSubscriptions=this.filterSubscriptionsByName(newValue);
+            if (searchInSubscriptions && searchInSubscriptions.length>0){
+             this.chatListUsers=searchInSubscriptions;
+            }else{
+              this.getListSearchUsers(newValue);
+            }
+    }
+  }else{
+    this.chatListUsers=this.historyUsers;
+  }
+  this.changeDetector.markForCheck();
+}
 
 
 
-  onChange(newValue: string) {
-    this.chatListUsers = [];
-    this.changeDetector.markForCheck();
-    if (newValue.length >= 1) {
-      let searchInHistory = this.filterChatListUsersByName(newValue);
-      if (searchInHistory && searchInHistory.length > 0) {
-        this.chatListUsers = searchInHistory
-      } else {
-        let searchInSubscriptions = this.filterSubscriptionsByName(newValue);
-        if (searchInSubscriptions && searchInSubscriptions.length > 0) {
-          this.chatListUsers = searchInSubscriptions;
-        } else {
-          this.getListSearchUsers(newValue);
+getListSearchUsers(key: string) {
+  this.http
+    .get(
+      environment.SERVER_URL + pathUtils.FIND_PROFILE + key,
+      AppSettings.OPTIONS
+    )
+    .map((res:Response)=>res.json())
+    .subscribe(
+      response => {
+        if (response.status == 0) {
+          if (response.profiles)
+            for (var i = 0; i < response.profiles.length; i++) {
+              this.chatListUsers[i] = response.profiles[i];
+              this.changeDetector.markForCheck();
+            }
         }
-      }
-    } else {
-      this.chatListUsers = this.historyUsers.slice();
-    }
-    this.changeDetector.markForCheck();
-  }
-
-
-
-  getListSearchUsers(key: string) {
-    this.http
-      .get(
-        environment.SERVER_URL + pathUtils.FIND_PROFILE + key,
-        AppSettings.OPTIONS
-      )
-      .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-          if (response.status == 0) {
-            if (response.profiles)
-              this.chatListUsers = response.profiles.filter((profile) =>
-                profile._id !== this.userId
-              )
-            this.changeDetector.markForCheck();
-          }
-        },
-        err => {
+      },
+      err => {
+        this.noSearchResults = true;
+      },
+      () => {
+        if (this.chatListUsers.length == 0) {
           this.noSearchResults = true;
-        },
-        () => {
-          if (this.chatListUsers.length == 0) {
-            this.noSearchResults = true;
-          } else {
-            this.noSearchResults = false;
-          }
-          this.changeDetector.markForCheck();
+        } else {
+          this.noSearchResults = false;
         }
-      );
+        this.changeDetector.markForCheck();
+      }
+    );
   }
 
-  onClickOutside() {
-    this.searchValue = "";
-    this.chatListUsers = this.historyUsers.slice();
+  onClickOutside(){
+    console.log("clicked outside chat-list");
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2, ViewChild, ElementRef, AfterContentChecked, AfterContentInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -26,7 +26,7 @@ class MessageValidation {
   templateUrl: './conversation.component.html',
   styleUrls: ['./conversation.component.css']
 })
-export class ConversationComponent implements OnInit, AfterViewInit{
+export class ConversationComponent implements OnInit {
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
   public selectedUser: User = null;
@@ -35,73 +35,33 @@ export class ConversationComponent implements OnInit, AfterViewInit{
   public user;
   public messages = [];
   public messageLoading = true;
-  public userLoading = false;
   private s: AngularFireObject<any>;
   private msgFirstCheck: Boolean = true;
-  isFirstLoaded: boolean = true;
-
-  @ViewChild("messageThread") messageThread:ElementRef;
-  
 
   constructor(private emitterService: EmitterService,
     private router: Router,
     private db: AngularFireDatabase,
     private chatService: ChatService,
-    private loginService: LoginService,
-    private renderer: Renderer2
+    private loginService: LoginService
   ) {
     this.messageForm = new FormBuilder().group({
       message: new MessageValidation
     });;
     this.user = this.loginService.getUser();
-    this.userId=this.user._id
   }
 
   ngOnInit() {
     this.listenForMessages(this.user._id);
   }
-
-  ngAfterViewInit() {
-    this.scrollMessageThreadBottom();
-  }
-
-  onScrollMessageThread() {
-    //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
-
-    if (!this.messageThread.nativeElement.scrollTop && !this.isFirstLoaded) {
-      console.log("reach the top of message thread");
-      this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
-      .subscribe((incomingMessages) => {
-        for(var i=incomingMessages.length-1; i>=0; i--) { 
-         this.messages.unshift(incomingMessages[i]);
-         } 
-    })
-    }
-
-    if(this.isFirstLoaded) this.isFirstLoaded = false;
-  }
-
-  scrollMessageThreadBottom() {
-    this.isFirstLoaded = true;
-    let msgThread = this.messageThread.nativeElement;
-    console.log("scroll to bottom");
-    setTimeout(()=>msgThread.scrollTop = msgThread.scrollHeight, 500);
-  }
-
-
   ngOnChanges(changes: any) {
     /* Fetching selected users information from other component. */
-    
     this.emitterService.userEmitter
       .subscribe((selectedUser: User) => {
-        this.messageLoading = true;
         this.selectedUser = selectedUser;
       });
 
     this.emitterService.conversationEmitter.subscribe((data) => {
-      
       this.messageLoading = false;
-      this.scrollMessageThreadBottom();
       if (data == undefined) {
         this.messages = [];
       }
@@ -132,9 +92,6 @@ export class ConversationComponent implements OnInit, AfterViewInit{
         () => console.log('Sent Message server.'),
         err => console.log('Could send message to server, reason: ', err));
 
-      //update user's own messages  in the chat list
-      this.emitterService.emitMyMessage(data);
-      
       this.messageForm.reset();
       setTimeout(() => {
         document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
@@ -152,7 +109,6 @@ export class ConversationComponent implements OnInit, AfterViewInit{
       if (notif !== null && !this.msgFirstCheck) {
         this.chatService.getMessage(notif.msgId).subscribe(
           message => {
-            //console.log("my msg yaaaaaaaaa");
             if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
               this.chatService.markMessageAsSeen(notif.msgId)
                 .subscribe(message => {

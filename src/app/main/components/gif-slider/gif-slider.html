@@ -1,8 +1,7 @@
-
-<section id="gif-slider-container" class="slider-container" #container >
+<section id="gif-slider-container" class="slider-container" #container>
     <i class="fa fa-times" style="right: 5px; background-color:transparent; position: absolute;top: 0px;cursor: pointer; color: green;" aria-hidden="true"  (click)="toggleGifSlider()"></i>
-  <div class="slider-sub-container" >
-    <div class="slides-container" #slidesContainer (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
+  <div class="slider-sub-container">
+    <div class="slides-container" #slidesContainer>
         
       <div *ngFor="let Url  of UrlGifList; let i = index" class="slide"  [ngStyle]="{'background-image': 'url(' + Url.Preview + ')' }" style="background-repeat: no-repeat;">
         <div class="gif-img loader-img"  *ngIf="!Url.Show" ></div>
@@ -30,7 +29,7 @@
         
       
     </div>
-    <div id="myGifNavigation" >
+    <div>
       <span class="glyphicon glyphicon-chevron-left slider-btn slider-btn-before"
             (click)="translate_it(1);"></span>
       <span class="glyphicon glyphicon-chevron-right slider-btn slider-btn-after"
