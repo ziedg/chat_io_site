@@ -560,6 +560,7 @@ export class Home {
     }
     this.uploadedPicture = null;
     this.imageFromLink = false;
+    
     this.titleEnable = false;
     this.youtubeInput = false;
     this.youtubeLink = "";
@@ -623,13 +624,14 @@ export class Home {
       }
       if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
         this.resetPreview(linkIsImage = true);
-        //console.log("image detected");
+        console.log(text);
+        this.imageFromLink = true;
         jQuery("#preview-image").attr("src", text);
         jQuery(".file-input-holder").show();
         jQuery("#preview-image").show();
         return 1;
       }
-      if(!linkIsImage) this.analyzeLink(text);
+      if(!linkIsImage) {this.resetPreview(); this.analyzeLink(text);  console.log("yoooooooooo")}
       console.log("you will go out noooow");
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
@@ -1036,14 +1038,15 @@ export class Home {
   analyzeLink(source) {
 
     let myArray = this.linkView.getListLinks(source);
-    console.log("analyyyze");
+    
     if (!myArray.length) {
+      console.log("analyyyze");
       return 1;
     }
     let linkURL = myArray[0];
     //check if linkURL refers to speegar.com
     if (linkURL == this.link.url) {
-
+      console.log("analyyyzeeeee");
       return 1;
     }
 
@@ -1065,13 +1068,14 @@ export class Home {
       //}
     }
           */
-      if (this.imageFromLink) {
-        return 1
-    }
+    //   if (this.imageFromLink) {
+    //     console.log("aaaaanalyyyze");
+    //     return 1
+    // }
 
 
     this.linkLoading = true;
-
+    
     this.http
       .get(
         environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
@@ -1094,19 +1098,28 @@ export class Home {
             this.link.title = response.results.data.ogTitle;
             this.link.description = response.results.data.ogDescription;
             if (response.results.data.ogImage) {
-              var a = response.results.data.ogImage.url;
+              if(response.results.data.ogImage.length == 2)
+              {
+                
+              this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
+              console.log(response.results.data.ogImage[1].url);
+              //this.resetPreview(linkIsImage = true);
+              //console.log("image detected");
+              // jQuery("#preview-image").attr("src", this.link.image);
+              // jQuery(".file-input-holder").show();
+              // jQuery("#preview-image").show();
+              
+
+              }else{
+              
               this.link.image = response.results.data.ogImage.url;
-              console.log(this.link.image);
+              console.log(response.results.data.ogImage);
               this.link.imageWidth = response.results.data.ogImage.width;
               this.link.imageHeight = response.results.data.ogImage.height;
-              /*
-              if (a.search(/(\.gif)$/i) > 0) {
-                this.link.isGif = true;
-                this.link.url = this.link.image;
-              } else {
-                this.link.isGif = false;
-                this.linkLoading = false;
-              }*/
+
+              }
+              
+              
             } else {
               this.link.image = null;
               this.link.imageWidth = 0;
@@ -1123,7 +1136,7 @@ export class Home {
         },
         () => {
           if(this.link.isSet) {
-            this.resetPreview();
+            //this.resetPreview();
             this.link.isSet = true;
           }
           this.linkLoading = false;
