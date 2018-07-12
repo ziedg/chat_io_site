@@ -30,7 +30,7 @@
 	<div  *ngIf="loaded">
 		<hr *ngIf="chatListUsers.length > 0">
 		<!-- <p *ngIf="chatListUsers.length > 0" class="messenger-section">messages récents</p> -->
-			<div class="users-list" *ngFor="let user of chatListUsers">
+			<div class="users-list" *ngFor="let user of historyUsers">
 				<app-chat-list-item-mobile [class.active]="isUserSelected(user.id)" (click)="selectUser(user)"  user="{{user.firstName}} {{user.lastName}}"
 					userImage="{{user.profilePicture}}"  lastMessage="{{user.lastMessage.message}}" date="{{user.lastMessage.date}}"></app-chat-list-item-mobile>
 			</div>
