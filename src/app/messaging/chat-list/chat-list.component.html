@@ -20,7 +20,8 @@
 			[user]="user.firstName +' ' + user.lastName"
 			[userImage]="user.profilePicture"
 			[lastMessage]="user.lastMessage.message"
-			[date]="user.lastMessage.date">
+			[date]="user.lastMessage.date"
+			[notread]="!user.lastMessage.isSeen">
 		</app-chat-list-item>
 
 		<ng-template #newUser>

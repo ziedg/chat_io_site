@@ -72,6 +72,7 @@ export class ConversationComponent implements OnInit {
       }
       else {
         this.messages = data;
+        jQuery(".message-thread").animate({scrollTop: jQuery('.message-thread').prop("scrollHeight")}, 500);
       }
     });
   }

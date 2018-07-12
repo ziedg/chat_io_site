@@ -5,7 +5,7 @@ import { Resolve, ActivatedRouteSnapshot, ActivatedRoute, RouterStateSnapshot } 
 import { Observable } from 'rxjs/Observable';
 
 
-import { LoginService } from 'app/login/services/loginService';
+import { LoginService } from '../../../app/login/services/loginService';
 
 @Injectable()
 export class MessageResolver implements Resolve<any> {

@@ -22,7 +22,7 @@ declare var jQuery: any;
 export class ChatListComponent implements OnInit {
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
-
+  private notread: boolean;
   private user;
   private userId: string = null;
   public chatListUsers: any[] = [];
@@ -71,7 +71,6 @@ export class ChatListComponent implements OnInit {
    }
    
    updateMyMessages() {
-    
     this.emitterService.myMessageEmitter.subscribe((data) => {
       var elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.toUserId; }).indexOf(this.selectedUserId);
       
@@ -227,6 +226,7 @@ export class ChatListComponent implements OnInit {
         this.historyUsers.splice(index,1);
         profiles[0].lastMessage = message;
         this.historyUsers.unshift(profiles[0]);
+        this.notread = true;
         this.changeDetector.markForCheck();
         console.log(profiles[0])
       } else {
@@ -234,6 +234,7 @@ export class ChatListComponent implements OnInit {
         if (profiles[0]) {
           profiles[0].lastMessage = message;
           this.historyUsers.unshift(profiles[0]);
+          this.notread = true;
           this.changeDetector.markForCheck();
           console.log(profiles[0])
         } else {
@@ -252,6 +253,7 @@ export class ChatListComponent implements OnInit {
                     lastMessage: message
                   }
                   this.historyUsers.unshift(profile);
+                  this.notread = true;
                   console.log(profile)
                 }
               },
@@ -298,6 +300,7 @@ export class ChatListComponent implements OnInit {
     if (!found) this.historyUsers.unshift(user)
 
   this.selectUser(user)
+  user.lastMessage.isSeen = true;
   this.searchValue=""
   this.chatListUsers=this.historyUsers.slice();
   this.updateMyMessages();
