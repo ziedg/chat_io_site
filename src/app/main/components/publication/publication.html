@@ -292,6 +292,7 @@
 
     <interactions-modal *ngIf="showInteractionsModal"
                         [pubId]="publicationBean._id"
+                        [user]="publicationBean.user"
                         [nbLikes]="publicationBean.nbLikes"
                         [nbDislikes]="publicationBean.nbDislikes"
                         (closeModal)="showInteractionsModal = false"></interactions-modal>
