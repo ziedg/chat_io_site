@@ -26,7 +26,8 @@
 								placeholder="Message" 
 								(keyup)="sendMessage()" 
 								formControlName="message"/>
-							<button type="submit" (click)="sendMessageBtn()">Envoyer</button>
+							<button type="submit" (click)="sendMessageBtn()" *ngIf="messageForm.controls['message'].value">Envoyer</button>
+							<button id="not-active" *ngIf="!messageForm.controls['message'].value" disabled >Envoyer</button>
 						</div>
 					</div>
 				</form>

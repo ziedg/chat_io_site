@@ -163,6 +163,7 @@
     border: 1px solid #E5E5E5;
     border-radius: 50px;
 }
+
 .embed-submit-field button{
     position: absolute;
     right: 5px;
@@ -174,6 +175,10 @@
     -webkit-border-radius: 70px; 
     border-radius: 70px;
     padding: 5px 10px;
+}
+#not-active{
+    
+    color:grey;
 }
 
 .activebtn{
