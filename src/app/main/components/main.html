@@ -57,7 +57,7 @@
                 {{nbNewMessageNotification}}
 
                 </div>
-                <img class="messenger-icon-main" style="width:27px;height:24px" src="assets/images/new/chat-grey.png" />
+                <img style="width:27px;height:24px" src="assets/images/new/chat-grey.png" />
         </div>
 
       </article>
@@ -83,7 +83,7 @@
 
           <div class="upper-arrow upper-arrow-notification"></div>
           <div class="notification-holder" style="display:none">
-            <img class="loader-notifications-main" *ngIf="!loaded"  src="/assets/images/new/loading.png" />
+            <div class="loader-notifications-main" *ngIf="!loaded"></div>
             <div  *ngIf="showNotif && loaded"  class="notifcations">
 
               <span *ngFor="let notif of listNotif">
@@ -179,7 +179,7 @@
 
 
                 </span>
-                <img class="loader-more-notifications-main" *ngIf="!moreLoaded" src="/assets/images/new/loading.png"/>
+                <div class="loader-more-notifications-main" *ngIf="!moreLoaded"></div>
 
               </div>
               <div style="text-align: center;" *ngIf="showButtonMoreNotif" (click)="getNotifications()">
@@ -274,7 +274,6 @@
   </div>
   <div class="notifications-icon outline-icon-container"
        [routerLink]="['/main', 'notification']"
-       (click)="resetNotifications()"
        style="position:relative"
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"

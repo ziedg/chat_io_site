@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'chat-suggestion',
+  selector: 'app-suggestions',
   templateUrl: './suggestions.component.html',
   styleUrls: ['./suggestions.component.css']
 })

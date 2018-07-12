@@ -136,7 +136,7 @@
       <div id="myModal" class="modal">
 
         <!-- The Close Button -->
-        <span class="close-button-x">&#10005;</span>
+        <span class="close-button-x">&#10006;</span>
         <span class="close-button" onclick="document.getElementById('myModal').style.display='none'">×</span>
 
         <!-- Modal Content (The Image) -->
@@ -293,10 +293,9 @@
     <div class="modal-interactions" *ngIf="modalInteractions">
       <div class="white-box-interactions">
 
-          <img class="loader-interactions-main" *ngIf="!interactionsLoaded" src="/assets/images/new/loading.png">
+          <div class="loader-interactions-main" *ngIf="!interactionsLoaded"> </div>
 
-
-<div *ngIf="interactionsLoaded"> 
+<div *ngIf="interactionsLoaded">
         <div class="interactions-tab">
           <button *ngIf="publicationBean.nbLikes != 0" id="lol" class="interactions-tablinks" style="color: #2aaa2a;border-bottom: 1px solid #2aaa2a">
             <img src="assets/images/new/publication/like-active.png" (click)="openTab('Likes')" style="width:25px">
@@ -454,7 +453,7 @@
             [(contenteditableModel)]="commentInputHtml" (keydown.Enter)="publishComment()">
           </div>
 
-          <div class="form-more" [class.safari]="isWebkit">
+          <div class="form-more">
             <img src="/assets/images/new/camera.png" class="addPhoto" (click)="addPhoto()"/>
             <img src="/assets/images/new/smiley.png" class="toggleEmoji" (click)="toggleEmoji()" style="padding-right: 10px;" />
             <button class="comment-publish" type="submit" *ngIf="!loadingComment">

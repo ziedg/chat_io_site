@@ -314,7 +314,6 @@ showConfirmButton: false
   }
 
   ngOnInit() {
-    var isWebkit = 'WebkitAppearance' in document.documentElement.style;
     this.intervalHolder = setInterval(() => {
       // Let's refresh the list.
       this.changeDetector.markForCheck();
@@ -897,7 +896,7 @@ showConfirmButton: false
           console.log(this.InteractionsLikes);
           console.log(this.InteractionsDislikes);
         },
-        err => { 
+        err => {
           this.interactionsLoaded=true;
         },
         () => {

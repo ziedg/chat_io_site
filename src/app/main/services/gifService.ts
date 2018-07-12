@@ -1,5 +1,5 @@
 
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 
 
@@ -89,17 +89,11 @@ export var getMoreGifs: boolean = false;
 
 @Injectable()
 export class GifService {
-
-removeAnimationEmitter = new EventEmitter<any>();
      
     constructor(){
      }
 
 
-removeAnimation(a){
-this.removeAnimationEmitter.emit(a);
-console.log("emitteeeeeeeeed");
-}
 
 
 async getGifList(){
@@ -123,9 +117,9 @@ async loadMoreGifs(){
     var trendingRes;
     var jsonRes
     
-     await httpGetAsync(url).then(responseText => {anonRes = responseText; });
-     await tenorCallback_anonid(anonRes).then(responseText => {trendingRes = responseText; });
-     await httpGetAsync(trendingRes).then(responseText => {jsonRes = responseText; });
+     await httpGetAsync(url).then(responseText => {anonRes = responseText; console.log(anonRes)});
+     await tenorCallback_anonid(anonRes).then(responseText => {trendingRes = responseText; console.log(trendingRes)});
+     await httpGetAsync(trendingRes).then(responseText => {jsonRes = responseText; console.log(jsonRes)});
      const gifs = await tenorCallback_trending(jsonRes);
      return gifs;
 }
