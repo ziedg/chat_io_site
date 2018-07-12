@@ -38,6 +38,7 @@ export class ConversationMobileComponent implements OnInit{
   public messageLoading = false;
   private s: AngularFireObject<any>;
   loaded: Boolean = false;
+  private msgFirstCheck: Boolean = true;
 
   constructor(private emitterService:EmitterService,
     private router:Router,
@@ -134,29 +135,37 @@ export class ConversationMobileComponent implements OnInit{
   }
   
   listenForMessages(userId: string): void {
-    console.log("mobiiiile listen");
+    
     this.userId = userId;
     this.s = this.db.object('notifications/'+this.userId+'/messaging');
-      console.log('notifications/'+this.userId+'/messaging');
-      var item = this.s.valueChanges()
-      console.log(JSON.stringify(item));
+      
+     
+     
       this.s.snapshotChanges().subscribe(action => {
         var notif = action.payload.val();
-        if (notif !== null){
+        if (notif !== null && !this.msgFirstCheck){
           this.chatService.getMessage(notif.msgId).subscribe(
             message => {
-              if (!this.firstListen && this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
-                this.messages = [...this.messages, message];
-                console.log(this.messages);
-                setTimeout(() => {
-                  console.log(document.querySelector(`.message-thread`))
-                  document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
-                }, 100);
+              
+              if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
+                this.chatService.markMessageAsSeen(notif.msgId)
+                .subscribe(message => {
+                })
+              this.messages = [...this.messages, message];
+              setTimeout(() => {
+                
+                document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
+              }, 100);
+            }else{
+              
+              this.chatService.newIncomingMessage(message)
             }
-            this.firstListen = false;
+            
             },
             err =>  console.log('Could send message to server, reason: ', err)
           );
+        } else {
+          this.msgFirstCheck = false;
         }
       });
   }
