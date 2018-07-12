@@ -218,6 +218,10 @@
     width: 30px;
     padding: 5px 5px;
 }
+#not-active{
+    
+    color:grey;
+}
 
 .activebtn{
     background-color: #039803 !important;
