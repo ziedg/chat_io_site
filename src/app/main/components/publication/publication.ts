@@ -764,7 +764,7 @@ showConfirmButton: false
 
   addOrRemoveLike() {
     if (!this.publicationBean.isLiked) {
-      if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes == 0) {
+      if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes == 0  && this.publicationBean.nbComments == 0 ) {
         this.addLike();
         this.publicationBean.nbLikes = 0;
         this.publicationBean.nbDislikes = 0;
@@ -823,7 +823,7 @@ showConfirmButton: false
 
   addOrRemoveDislike() {
     if (!this.publicationBean.isDisliked) {
-      if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes == 0) {
+      if (this.publicationBean.nbLikes + this.publicationBean.nbDislikes == 0 && this.publicationBean.nbComments == 0 ) {
         this.addDislike();
         this.publicationBean.nbLikes = 0;
         this.publicationBean.nbDislikes = 0;

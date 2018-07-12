@@ -204,5 +204,6 @@
   "recent_messages":"mensajes recientes",
   "Not":"No",
   "Login_as":"Iniciar sesión como",
-  "Change_account":"Cambiar cuenta"
+  "Change_account":"Cambiar cuenta",
+  "Select_user":"Seleccionar un usuario para chatear"    
 }

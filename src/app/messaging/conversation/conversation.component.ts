@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, ViewChild, ElementRef, AfterContentChecked, AfterContentInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -38,6 +38,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
   public userLoading = false;
   private s: AngularFireObject<any>;
   private msgFirstCheck: Boolean = true;
+  isFirstLoaded: boolean = true;
 
   @ViewChild("messageThread") messageThread:ElementRef;
   
@@ -53,6 +54,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
       message: new MessageValidation
     });;
     this.user = this.loginService.getUser();
+    this.userId=this.user._id
   }
 
   ngOnInit() {
@@ -60,15 +62,30 @@ export class ConversationComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit() {
-    document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
+    this.scrollMessageThreadBottom();
   }
 
   onScrollMessageThread() {
     //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
 
-    if (!this.messageThread.nativeElement.scrollTop) {
+    if (!this.messageThread.nativeElement.scrollTop && !this.isFirstLoaded) {
       console.log("reach the top of message thread");
+      this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
+      .subscribe((incomingMessages) => {
+        for(var i=incomingMessages.length-1; i>=0; i--) { 
+         this.messages.unshift(incomingMessages[i]);
+         } 
+    })
     }
+
+    if(this.isFirstLoaded) this.isFirstLoaded = false;
+  }
+
+  scrollMessageThreadBottom() {
+    this.isFirstLoaded = true;
+    let msgThread = this.messageThread.nativeElement;
+    console.log("scroll to bottom");
+    setTimeout(()=>msgThread.scrollTop = msgThread.scrollHeight, 500);
   }
 
 
@@ -84,6 +101,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
     this.emitterService.conversationEmitter.subscribe((data) => {
       
       this.messageLoading = false;
+      this.scrollMessageThreadBottom();
       if (data == undefined) {
         this.messages = [];
       }
