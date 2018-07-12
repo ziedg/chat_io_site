@@ -894,29 +894,6 @@ showConfirmButton: false
     this.selectedEmojiTab = tab;
   }
 
-  openTab(tabName) {
-    var i, tabcontent, tablinks;
-    if (tabName === "Likes") {
-      document.getElementById("nulle").style.borderBottom = "none";
-      document.getElementById("lol").style.borderBottom = "1px solid #2aaa2a";
-    } else if (tabName === "Dislikes") {
-      document.getElementById("lol").style.borderBottom = "none";
-      document.getElementById("nulle").style.borderBottom = "1px solid #fb001e";
-    }
-
-    tabcontent = document.getElementsByClassName("interactions-tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("interactions-tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    var currentelem = document.getElementById(tabName);
-    currentelem.style.display = "block";
-    currentelem.className += " active";
-  }
-
   subscribeUser(userId) {
     let body = JSON.stringify({
       profileId: userId
