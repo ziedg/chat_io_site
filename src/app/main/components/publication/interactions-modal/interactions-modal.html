@@ -1,0 +1,84 @@
+<div class="modal-interactions">
+  <div class="white-box-interactions" (clickOutside)="clickOutside()">
+    <img class="loader-interactions-main" *ngIf="!interactionsLoaded" src="/assets/images/new/loading.png">
+
+
+    <div *ngIf="interactionsLoaded">
+      <div class="interactions-tab">
+        <button *ngIf="nbLikes != 0" id="lol" class="interactions-tablinks" style="color: #2aaa2a;border-bottom: 1px solid #2aaa2a">
+          <img src="assets/images/new/publication/like-active.png" (click)="openTab('Likes')" style="width:25px">
+          <span style="padding-left: 10px;font-weight:bold">{{nbLikes}}</span>
+        </button>
+        <button *ngIf="nbDislikes != 0" id="nulle" class="interactions-tablinks" (click)="openTab('Dislikes')" style="color:#fb001e"
+          [ngStyle]="nbLikes == 0 && {'border-bottom':'1px solid #fb001e'}">
+          <img src="assets/images/new/publication/heart-active.png" (click)="openTab('Dislikes')" style="width:25px">
+          <span style="padding-left: 10px;font-weight:bold">{{nbDislikes}}</span>
+        </button>
+        <button class="interactions-tablinks" style="float:right" (click)="closeModalInteractions()">
+          &#10006;
+        </button>
+      </div>
+
+
+      <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px">
+        <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
+          <div class="container-draggable" *ngFor="let user of InteractionsLikes">
+            <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
+              <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
+              </div>
+              <div class="user-name">
+                <header>
+                  <a [routerLink]="['/main/profile', user.userId]">
+                    {{user.profilefirstname}} {{user.profilelastname}}
+                  </a>
+                </header>
+              </div>
+              <div class="subscribe-no-number" style="min-width:12px">
+                <button (click)="toggleSubscribe(user)" style="float:none" *ngIf="user.isSubscribed === 'false' && user.userId !== profileId"
+                  [ngStyle]="{'background-color':'#090'}">
+                  {{ 'profile_subscribe' | translate }}
+                </button>
+                <button (click)="toggleSubscribe(user)" style="float:none" *ngIf="user.isSubscribed === 'true' && user.userId !== profileId"
+                  [ngStyle]="{'background-color':'#ccc'}">
+                  {{'profile_already_subscribed' | translate }}
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px" [ngStyle]="nbLikes == 0 && {'display':'block'}">
+        <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
+          <div class="container-draggable" *ngFor="let user of InteractionsDislikes">
+            <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
+              <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
+              </div>
+              <div class="user-name">
+                <header>
+                  <a [routerLink]="['/main/profile', user.userId]">
+                    {{user.profilefirstname}} {{user.profilelastname}}
+                  </a>
+                </header>
+              </div>
+              <div class="subscribe-no-number" style="min-width:12px">
+                <button (click)="toggleSubscribe(user)" style="float:none" *ngIf="user.isSubscribed === 'false' && user.userId !== profileId"
+                  [ngStyle]="{'background-color':'#090'}">
+                  {{ 'profile_subscribe' | translate }}
+                </button>
+                <button (click)="toggleSubscribe(user)" style="float:none" *ngIf="user.isSubscribed === 'true'  && user.userId !== profileId"
+                  [ngStyle]="{'background-color':'#ccc'}">
+                  abonné
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+  </div>
+</div>

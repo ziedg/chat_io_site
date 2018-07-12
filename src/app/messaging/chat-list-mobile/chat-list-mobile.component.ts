@@ -9,6 +9,7 @@ import { ChatService } from '../../messanging/chat.service';
 import { AppSettings } from '../../shared/conf/app-settings';
 import * as pathUtils from '../../utils/path.utils';
 import { EmitterService } from '../emitter.service';
+import { AngularFireObject, AngularFireDatabase } from '../../../../node_modules/angularfire2/database';
 
 declare var jQuery: any;
 
@@ -24,8 +25,11 @@ export class ChatListMobileComponent implements OnInit {
   private user;
   private userId: string = null;
   public chatListUsers: any[] = [];
+  public historyUsers: any[] = [];
   public suggestions: any[] = [];
   private selectedUserId: string = null;
+  private s: AngularFireObject<any>;
+  private msgFirstCheck: Boolean = true;
 //
 autocomplete = false;
 listSearchUsers = [];
@@ -41,6 +45,7 @@ loaded: Boolean = false;
     private loginService :LoginService,
     private changeDetector: ChangeDetectorRef,
     private router:Router,
+    private db: AngularFireDatabase,
     private http: Http
   ) { }
 
@@ -49,6 +54,8 @@ loaded: Boolean = false;
     this.userId=this.user._id;
     this.getChatList();
     this.getSuggestionsList();
+    //this.listenForAllMessages(this.userId);
+    this.reactToNewMessages();
     jQuery(".navigation-bottom").addClass('hidden-xs');
    }
   getChatList(){
@@ -90,9 +97,152 @@ loaded: Boolean = false;
           users[i].lastMessage.date = hours+":"+minutes;
         }
         this.chatListUsers.push(users[i]);
+        
+        //console.log(this.chatListUsers);
        } 
        this.loaded = true;
-   
+       this.sortChatList();
+       this.historyUsers = this.chatListUsers.slice();
+    })
+  }
+
+  sortChatList(){
+    this.chatListUsers.sort(function(a,b){
+      if(a.lastMessage.date.includes("-") && b.lastMessage.date.includes("-")){
+        let a_day = Number(a.lastMessage.date.split("-")[0]);  
+        let b_day = Number(b.lastMessage.date.split("-")[0]);
+        let a_month = Number(a.lastMessage.date.split("-")[1]); 
+        let b_month = Number(b.lastMessage.date.split("-")[1]);
+        let a_year = Number(a.lastMessage.date.split("-")[2]); 
+        let b_year = Number(b.lastMessage.date.split("-")[2]);
+        return a_year < b_year ? -1 : a_year > b_year ? 1 :  a_month < b_month ? -1 : a_month > b_month ? 1 : a_day < b_day ? -1 : a_day > b_day ? 1 : 0;
+      }else if (a.lastMessage.date.includes(":") && b.lastMessage.date.includes(":")){
+        let a_hours =Number( a.lastMessage.date.split(":")[0]); 
+        let b_hours = Number(b.lastMessage.date.split(":")[0]);
+        let a_minutes = Number(a.lastMessage.date.split(":")[1]); 
+        let b_minutes = Number(b.lastMessage.date.split(":")[1]);
+        return a_hours < b_hours ? 1 : a_hours > b_hours ? -1 :  a_minutes < b_minutes ? 1 : a_minutes > b_minutes ? -1 : 0;
+      }
+      else if (a.lastMessage.date.includes(":") && b.lastMessage.date.includes("-")){
+        
+        return -1;
+      }else {
+        return 1
+      }
+      
+      
+    });
+
+  }
+
+  listenForAllMessages(userId: string): void {
+    this.userId = userId;
+    this.s = this.db.object('notifications/'+this.userId+'/messaging');
+      var item = this.s.valueChanges()
+      this.s.snapshotChanges().subscribe(action => {
+        var notif = action.payload.val();
+        if (notif !== null && !this.msgFirstCheck) {
+          this.chatService.getMessage(notif.msgId).subscribe(
+            message => {
+              
+                var elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
+                if(this.chatListUsers[elementPos] == undefined){
+                  elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.toUserId; }).indexOf(notif.senderId);
+                }
+                this.chatListUsers[elementPos].lastMessage.message = message.message;
+                
+                let actualDate = new Date(Date.now());
+                let hours = actualDate.getHours().toString();
+                let minutes = actualDate.getMinutes().toString();
+                
+                if(hours.length==1){
+                  hours = "0"+hours;
+                }
+                if(minutes.length==1){
+                  minutes = "0"+minutes;
+                }
+
+            this.chatListUsers[elementPos].lastMessage.date = hours + ":" + minutes;
+            console.log(hours + ":" + minutes);
+
+          },
+          err => console.log('Could send message to server, reason: ', err)
+        );
+      } else {
+        this.msgFirstCheck = false;
+      }
+    });
+  }
+
+  reactToNewMessages() {
+    this.chatService.messageEmitter.subscribe(message => {
+      let profiles = this.historyUsers.filter(user => user._id == message.fromUserId);
+      if (profiles[0]) {
+        let index = this.historyUsers.findIndex(user => user._id == message.fromUserId);
+        this.historyUsers.splice(index,1);
+        profiles[0].lastMessage.message = message.message;
+        let actualDate = new Date(Date.now());
+        let hours = actualDate.getHours().toString();
+        let minutes = actualDate.getMinutes().toString();
+        
+        if(hours.length==1){
+          hours = "0"+hours;
+        }
+        if(minutes.length==1){
+          minutes = "0"+minutes;
+        }
+
+        profiles[0].lastMessage.date = hours + ":" + minutes;
+        this.historyUsers.unshift(profiles[0]);
+        this.changeDetector.markForCheck();
+        console.log(profiles[0])
+      } else {
+        profiles = this.suggestions.filter(user => user._id == message.fromUserId);
+        if (profiles[0]) {
+          profiles[0].lastMessage.message = message.message;
+        let actualDate = new Date(Date.now());
+        let hours = actualDate.getHours().toString();
+        let minutes = actualDate.getMinutes().toString();
+        
+        if(hours.length==1){
+          hours = "0"+hours;
+        }
+        if(minutes.length==1){
+          minutes = "0"+minutes;
+        }
+
+        profiles[0].lastMessage.date = hours + ":" + minutes;
+          this.historyUsers.unshift(profiles[0]);
+          this.changeDetector.markForCheck();
+          console.log(profiles[0])
+        } else {
+          this.http.get(
+            environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
+            AppSettings.OPTIONS)
+            .map((res: Response) => res.json())
+            .subscribe(
+              response => {
+                if (response.status == "0") {
+                  let profile= {
+                    _id:response.user._id,
+                    firstName:response.user.firstName,
+                    lastName:response.user.lastName,
+                    profilePicture:response.user.profilePicture,
+                    lastMessage: message
+                  }
+                  this.historyUsers.unshift(profile);
+                  console.log(profile)
+                }
+              },
+              err => {
+              },
+              () => {
+                this.changeDetector.markForCheck();
+              }
+            );
+        }
+      }
+      console.log(message)
     })
   }
 
@@ -138,16 +288,17 @@ selectUser(user:User): void {
 /*Search functionnality*/
 loadUser(user) {
  
-  var found = this.chatListUsers.some(function (profile) {
+  var found = this.historyUsers.some(function (profile) {
     return profile._id ==user._id ;
   });
-    if (!found) this.chatListUsers.push(user)
+    if (!found) this.historyUsers.push(user)
   
-  this.selectUser(user)
+  this.selectUser(user);
+  this.chatListUsers=this.historyUsers.slice();
 }
 
 filterChatListUsersByName(name){
-return this.chatListUsers.filter((user)=>{
+return this.historyUsers.filter((user)=>{
 let fullName=user.firstName +' ' +user.lastName;
 return fullName.includes(name);
 });

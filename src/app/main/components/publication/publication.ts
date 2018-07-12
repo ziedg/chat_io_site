@@ -95,15 +95,10 @@ export class Publication {
   pubbg = false;
 
   public profileId;
-
-  public InteractionsLikes: Array<MinifiedUser> = [];
-  public InteractionsDislikes: Array<MinifiedUser> = [];
-  displayedNumberInteractions = 10;
-  interactionsPage = 0;
-  public modalInteractions = false;
-  interactionsLoaded:boolean=false;
-  imageBaseUrl = environment.IMAGE_BASE_URL;
   allListComments: CommentBean[];
+  showInteractionsModal: boolean = false;
+
+  
 
   constructor(
     public translate: TranslateService,
@@ -876,35 +871,6 @@ showConfirmButton: false
     this.publicationBean.nbDislikes--;
   }
 
-  getInteractions() {
-    var url: string =
-      environment.SERVER_URL + pathUtils.GET_SOCIAL_INTERACTIONS;
-
-    let body = JSON.stringify({
-      publId: this.publicationBean._id,
-      page: this.interactionsPage
-    });
-
-    this.http
-      .post(url, body, AppSettings.OPTIONS)
-      .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-          this.interactionsLoaded=true;
-          this.InteractionsLikes = response.message.likes.slice();
-          this.InteractionsDislikes = response.message.dislikes.slice();
-          console.log(this.InteractionsLikes);
-          console.log(this.InteractionsDislikes);
-        },
-        err => {
-          this.interactionsLoaded=true;
-        },
-        () => {
-          this.changeDetector.markForCheck();
-        }
-      );
-  }
-
   public toggleEmoji() {
     jQuery("#" + this.emojiHoverId).toggle();
   }
@@ -923,128 +889,10 @@ showConfirmButton: false
     document.body.style.overflow = "auto";
   }
 
-  openModalInteractions() {
-    this.modalInteractions = true;
-    this.getInteractions();
-    document.body.style.overflow = "hidden";
-  }
-
-  closeModalInteractions() {
-    this.modalInteractions = false;
-    this.interactionsLoaded=false;
-    document.body.style.overflow = "auto";
-  }
-
   changeEmojiTab(tab) {
     this.selectedEmojiTab = tab;
   }
-
-  openTab(tabName) {
-    var i, tabcontent, tablinks;
-    if (tabName === "Likes") {
-      document.getElementById("nulle").style.borderBottom = "none";
-      document.getElementById("lol").style.borderBottom = "1px solid #2aaa2a";
-    } else if (tabName === "Dislikes") {
-      document.getElementById("lol").style.borderBottom = "none";
-      document.getElementById("nulle").style.borderBottom = "1px solid #fb001e";
-    }
-
-    tabcontent = document.getElementsByClassName("interactions-tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("interactions-tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    var currentelem = document.getElementById(tabName);
-    currentelem.style.display = "block";
-    currentelem.className += " active";
-  }
-
-  subscribeUser(userId) {
-    let body = JSON.stringify({
-      profileId: userId
-    });
-
-    this.http
-      .post(
-        environment.SERVER_URL + pathUtils.SUBSCRIBE,
-        body,
-        AppSettings.OPTIONS
-      )
-      .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-          if (response.status == 0) {
-          }
-        },
-        err => { },
-        () => {
-          this.changeDetector.markForCheck();
-        }
-      );
-  }
-
-  unsubscribeUser(userId) {
-    let body = JSON.stringify({
-      profileId: userId
-    });
-
-    this.http
-      .post(
-        environment.SERVER_URL + pathUtils.UNSUBSCRIBE,
-        body,
-        AppSettings.OPTIONS
-      )
-      .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-          if (response.status == 0) {
-            console.log("unsubscribed done");
-          }
-        },
-        err => { },
-        () => {
-          this.changeDetector.markForCheck();
-        }
-      );
-  }
-
-  toggleSubscribe(user) {
-    if (user.isSubscribed === "true") {
-      this.unsubscribeUser(user.userId);
-      var like = this.InteractionsLikes.filter(
-        x => x.userId === user.userId
-      )[0];
-      if (like != undefined) {
-        like.isSubscribed = "false";
-      }
-      var dislike = this.InteractionsDislikes.filter(
-        x => x.userId === user.userId
-      )[0];
-      if (dislike != undefined) {
-        dislike.isSubscribed = "false";
-      }
-    } else {
-      if (user.isSubscribed === "false") {
-        this.subscribeUser(user.userId);
-        var like = this.InteractionsLikes.filter(
-          x => x.userId === user.userId
-        )[0];
-        if (like != undefined) {
-          like.isSubscribed = "true";
-        }
-        var dislike = this.InteractionsDislikes.filter(
-          x => x.userId === user.userId
-        )[0];
-        if (dislike != undefined) {
-          dislike.isSubscribed = "true";
-        }
-      }
-    }
-  }
-
+  
   addToComment(emoji) {
     this.commentInputHtml += this.afficheComment(" " + emoji.shortcut);
   }
