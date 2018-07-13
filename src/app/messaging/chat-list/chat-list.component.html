@@ -24,8 +24,8 @@
 					<app-suggestions user="s"></app-suggestions>
 			</div>
 	</div>
-	<hr *ngIf="chatListUsers.length > 0">
-	<div class="users-list" *ngFor="let user of chatListUsers">
+	<hr *ngIf="historyUsers.length > 0">
+	<div class="users-list" *ngFor="let user of historyUsers">
 		<app-chat-list-item *ngIf="user.lastMessage ; else newUser"
 		[class.active]="isUserSelected(user.id)"
 		(click)="selectUser(user)"

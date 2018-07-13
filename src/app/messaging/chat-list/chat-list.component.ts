@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
-import { environment } from 'environments/environment';
+import { environment } from '../../../environments/environment';
 
 import { User } from '../../beans/user';
 import { LoginService } from '../../login/services/loginService';
@@ -57,7 +57,7 @@ export class ChatListComponent implements OnInit {
     this.getSuggestionsList();
     this.reactToNewMessages();
     //this.listenForAllMessages(this.userId);
-    //this.updateMyMessages();
+    this.updateMyMessages();
     jQuery(".navigation-bottom").addClass('hidden-xs');
 
     jQuery(document).click(function (e) {
@@ -128,8 +128,6 @@ export class ChatListComponent implements OnInit {
         return users.json();
       })
       .subscribe((users: any[]) => {
-        console.log('chat list');
-        console.log(users);
         for (let i = 0; i < users.length; i++) {
           if (users[i].lastMessage.fromUserId == this.userId) {
             users[i].lastMessage.message = "Vous : " + users[i].lastMessage.message;
@@ -159,71 +157,74 @@ export class ChatListComponent implements OnInit {
             users[i].lastMessage.date = hours + ":" + minutes;
           }
           this.chatListUsers.push(users[i]);
-
-        this.sortChatList();
-      }})
+        }
+      },
+        err => { console.log(err) },
+        () => {
+          this.sortChatList();
+          this.historyUsers = this.chatListUsers.slice();
+        });
   }
 
-  sortChatList(){
-    console.log("aaaaaaaaaaaaaywa");
-    this.chatListUsers.sort(function(a,b){
-      if(a.lastMessage.date.includes("-") && b.lastMessage.date.includes("-")){
-        let a_day = Number(a.lastMessage.date.split("-")[0]);  
+  sortChatList() {
+    this.chatListUsers.sort(function (a, b) {
+      if (a.lastMessage.date.includes("-") && b.lastMessage.date.includes("-")) {
+        let a_day = Number(a.lastMessage.date.split("-")[0]);
         let b_day = Number(b.lastMessage.date.split("-")[0]);
-        let a_month = Number(a.lastMessage.date.split("-")[1]); 
+        let a_month = Number(a.lastMessage.date.split("-")[1]);
         let b_month = Number(b.lastMessage.date.split("-")[1]);
-        let a_year = Number(a.lastMessage.date.split("-")[2]); 
+        let a_year = Number(a.lastMessage.date.split("-")[2]);
         let b_year = Number(b.lastMessage.date.split("-")[2]);
-        return a_year < b_year ? -1 : a_year > b_year ? 1 :  a_month < b_month ? -1 : a_month > b_month ? 1 : a_day < b_day ? -1 : a_day > b_day ? 1 : 0;
-      }else if (a.lastMessage.date.includes(":") && b.lastMessage.date.includes(":")){
-        let a_hours =Number( a.lastMessage.date.split(":")[0]); 
+        return a_year < b_year ? -1 : a_year > b_year ? 1 : a_month < b_month ? -1 : a_month > b_month ? 1 : a_day < b_day ? -1 : a_day > b_day ? 1 : 0;
+      } else if (a.lastMessage.date.includes(":") && b.lastMessage.date.includes(":")) {
+        let a_hours = Number(a.lastMessage.date.split(":")[0]);
         let b_hours = Number(b.lastMessage.date.split(":")[0]);
-        let a_minutes = Number(a.lastMessage.date.split(":")[1]); 
+        let a_minutes = Number(a.lastMessage.date.split(":")[1]);
         let b_minutes = Number(b.lastMessage.date.split(":")[1]);
-        return a_hours < b_hours ? 1 : a_hours > b_hours ? -1 :  a_minutes < b_minutes ? 1 : a_minutes > b_minutes ? -1 : 0;
+        return a_hours < b_hours ? 1 : a_hours > b_hours ? -1 : a_minutes < b_minutes ? 1 : a_minutes > b_minutes ? -1 : 0;
       }
-      else if (a.lastMessage.date.includes(":") && b.lastMessage.date.includes("-")){
-        
+      else if (a.lastMessage.date.includes(":") && b.lastMessage.date.includes("-")) {
+
         return -1;
-      }else {
+      } else {
         return 1
       }
-      
-      
+
+
     });
 
   }
 
   listenForAllMessages(userId: string): void {
     this.userId = userId;
-    this.s = this.db.object('notifications/'+this.userId+'/messaging');
-      var item = this.s.valueChanges()
-      this.s.snapshotChanges().subscribe(action => {
-        var notif = action.payload.val();
-        if (notif !== null && !this.msgFirstCheck) {
-          this.chatService.getMessage(notif.msgId).subscribe(
-            message => {
-              
-                var elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
-                if(this.chatListUsers[elementPos] == undefined){
-                  elementPos = this.chatListUsers.map(function(x) {return x.lastMessage.toUserId; }).indexOf(notif.senderId);
-                }
-                this.chatListUsers[elementPos].lastMessage.message = message.message;
-                
-                let actualDate = new Date(Date.now());
-                let hours = actualDate.getHours().toString();
-                let minutes = actualDate.getMinutes().toString();
-                
-                if(hours.length==1){
-                  hours = "0"+hours;
-                }
-                if(minutes.length==1){
-                  minutes = "0"+minutes;
-                }
+    this.s = this.db.object('notifications/' + this.userId + '/messaging');
+    var item = this.s.valueChanges()
+    this.s.snapshotChanges().subscribe(action => {
+      var notif = action.payload.val();
+      if (notif !== null && !this.msgFirstCheck) {
+        this.chatService.getMessage(notif.msgId).subscribe(
+          message => {
+
+            var elementPos = this.chatListUsers.map(function (x) { return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
+            if (this.chatListUsers[elementPos] == undefined) {
+              elementPos = this.chatListUsers.map(function (x) { return x.lastMessage.toUserId; }).indexOf(notif.senderId);
+            }
+            this.chatListUsers[elementPos].lastMessage.message = message.message;
+
+            let actualDate = new Date(Date.now());
+            let hours = actualDate.getHours().toString();
+            let minutes = actualDate.getMinutes().toString();
+
+            if (hours.length == 1) {
+              hours = "0" + hours;
+            }
+            if (minutes.length == 1) {
+              minutes = "0" + minutes;
+            }
 
             this.chatListUsers[elementPos].lastMessage.date = hours + ":" + minutes;
             this.historyUsers = this.chatListUsers.slice();
-            
+
 
           },
           err => console.log('Could send message to server, reason: ', err)
@@ -256,17 +257,17 @@ export class ChatListComponent implements OnInit {
       let profiles = this.historyUsers.filter(user => user._id == message.fromUserId);
       if (profiles[0]) {
         let index = this.historyUsers.findIndex(user => user._id == message.fromUserId);
-        this.historyUsers.splice(index,1);
+        this.historyUsers.splice(index, 1);
         profiles[0].lastMessage.message = message.message;
         let actualDate = new Date(Date.now());
         let hours = actualDate.getHours().toString();
         let minutes = actualDate.getMinutes().toString();
-        
-        if(hours.length==1){
-          hours = "0"+hours;
+
+        if (hours.length == 1) {
+          hours = "0" + hours;
         }
-        if(minutes.length==1){
-          minutes = "0"+minutes;
+        if (minutes.length == 1) {
+          minutes = "0" + minutes;
         }
 
         profiles[0].lastMessage.date = hours + ":" + minutes;
@@ -293,7 +294,6 @@ export class ChatListComponent implements OnInit {
               .map((res: Response) => res.json())
               .subscribe(
                 response => {
-
                   if (response.status == "0") {
                     let profile = {
                       _id: response.user._id,
@@ -317,7 +317,8 @@ export class ChatListComponent implements OnInit {
           }
         }
         console.log(message)
-      }})
+      }
+    })
   }
 
   isUserSelected(userId: string): boolean {
@@ -389,20 +390,20 @@ export class ChatListComponent implements OnInit {
     this.chatListUsers = [];
     this.changeDetector.markForCheck();
     if (newValue.length >= 1) {
-      
-      
+
+
       let searchInHistory = this.filterChatListUsersByName(newValue);
       if (searchInHistory && searchInHistory.length > 0) {
-        
+
         this.chatListUsers = searchInHistory
       } else {
-        
+
         let searchInSubscriptions = this.filterSubscriptionsByName(newValue);
-        
+
         if (searchInSubscriptions && searchInSubscriptions.length > 0) {
           this.chatListUsers = searchInSubscriptions;
         } else {
-          
+
           this.getListSearchUsers(newValue);
         }
       }
