@@ -245,6 +245,7 @@ export class ChatListComponent implements OnInit {
         return users.json();
       })
       .subscribe((users: any[]) => {
+        console.log(users)
         for (let i = 0; i < users.length; i++) {
           this.suggestions.push(users[i]);
         }
@@ -382,9 +383,6 @@ export class ChatListComponent implements OnInit {
     }
   }
 
-  onBlur() {
-    this.searchValue = "";
-  }
 
   onChange(newValue: string) {
     this.chatListUsers = [];
@@ -408,7 +406,7 @@ export class ChatListComponent implements OnInit {
         }
       }
     } else {
-      this.chatListUsers = this.historyUsers;
+      this.chatListUsers = this.historyUsers.slice();
     }
     this.changeDetector.markForCheck();
   }
@@ -447,7 +445,8 @@ export class ChatListComponent implements OnInit {
   }
 
   onClickOutside() {
-    console.log("clicked outside chat-list");
+    this.searchValue = "";
+    this.chatListUsers = this.historyUsers.slice();
   }
 
 
