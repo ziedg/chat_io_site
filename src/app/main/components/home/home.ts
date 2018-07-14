@@ -84,7 +84,7 @@ export class Home {
   public arabicText: boolean = false;
   arabicRegex: RegExp = /[\u0600-\u06FF]/;
   public imageFromLink: boolean = false;
-
+  joke="";
   bglist=false;
   bgvalid=true;
   pubclass="";
@@ -233,6 +233,10 @@ export class Home {
       document.documentElement.scrollTop = 0;
     }, 1000);
 
+  }
+  ngAfterViewChecked(){
+    this.selectedLanguage = localStorage.getItem('userLang');
+    this.joke_sentence();
   }
   Classname(){
     if(this.pubbg)
@@ -1157,10 +1161,18 @@ console.log("analyyyze");
     localStorage.setItem('userLang', language);
     this.translate.use(language);
     this.translate.setDefaultLang(language);
+    this.joke_sentence();
     //location.reload();
     //console.log(localStorage.getItem('userLang')) ;
   }
-
+  
+  joke_sentence(){
+    
+    if (this.selectedLanguage==='fr'){this.joke="votre blague ici"}
+    else if (this.selectedLanguage==='en'){this.joke="type your joke here"}
+    else this.joke="escribe tu broma aquí";
+    $('#publishDiv').attr('placeholder',this.joke);
+  }
   toggleTranslateDropdown() {
     jQuery(".dropdown-menu-translate").toggle();
   }
