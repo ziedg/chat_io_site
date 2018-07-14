@@ -61,8 +61,9 @@ export class Publication {
   private nbDisplayedComments = 0;
   public user: User = new User();
   public dateDisplay = "";
-  public listLink: Array<string
-  public  imageBaseUrl = environment.IMAGE_BASE_URL;
+  public listLink: Array<string>;
+  public imageBaseUrl = environment.IMAGE_BASE_URL;
+ 
   formComment;
   selectedEmojiTab = 0;
   emojiOpacity = 0;
