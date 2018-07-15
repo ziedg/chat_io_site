@@ -210,5 +210,7 @@
   "Select_user":"Select a user to chat",
   "Not":"Not",
   "Login_as":"Login as",
-  "Change_account":"Change account"
+  "Change_account":"Change account",
+  "more_recent":"More recent",
+  "fb_suggestions":"facebook suggestions"
 }

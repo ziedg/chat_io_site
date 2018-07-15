@@ -332,10 +332,10 @@
         <div class="filters hidden-xs" *ngIf="false">
           <div class="filter-right">
             <article [class.active]="menuFilter == 'recent'" (click)="changeMenuFilter('recent')">
-              Plus recent
+              {{'more_recent' | translate}}
             </article>
             <article [class.active]="menuFilter == 'popular'" (click)="changeMenuFilter('popular')">
-              Populaire
+              {{'popular' | translate}}
             </article>
           </div>
         </div>
@@ -350,7 +350,7 @@
 
             <div *ngIf="i == 2">
               <facebook-friends></facebook-friends>
-              <div style="color:transparent">facebook suggestions</div>
+              <div style="color:transparent">{{'fb_suggestions' | translate}}</div>
             </div>
 
           </div>
