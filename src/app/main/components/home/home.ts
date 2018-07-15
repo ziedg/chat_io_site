@@ -893,8 +893,8 @@ export class Home {
   errorTimed() {
     jQuery("#errorMsgDisplay").fadeIn(500);
     $("html, body").scrollTop(
-      $("#errorMsgDisplay").offset().top - $(".main-header").innerHeight() - 10
-    );
+      $("#errorMsgDisplay").offset().top - $(".main-header").innerHeight() - $(".welcome-msg").innerHeight()
+       );
     //document.querySelector("#errorMsgDisplay").scroll; //.scrollIntoView({ behavior: 'smooth' });
     setTimeout(() => {
       jQuery("#errorMsgDisplay").fadeOut(1000);
