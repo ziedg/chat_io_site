@@ -2764,6 +2764,14 @@ facebook-friends .user .user-img {
     width: 65px;
   }
 }
+@media (min-width: 767px) {
+  .post-pic-icon{
+    margin-top:5px;
+  }
+  .gif-button-desktop{
+    height:19px !important;
+  }
+}
 .cancel-background-button{
   position: relative;
   padding: 0;
