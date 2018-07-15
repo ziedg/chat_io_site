@@ -212,5 +212,6 @@
   "Login_as":"Se connecter en tant que",
   "Change_account":"Changer de compte",
   "more_recent":"Plus récent",
-  "fb_suggestions":"suggestions facebook"
+  "fb_suggestions":"suggestions facebook",
+  "Loading_messages":"Chargement..."
 }
