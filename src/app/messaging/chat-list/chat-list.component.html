@@ -24,7 +24,7 @@
 		<ng-template #newUser>
 				<app-chat-list-item
 				[class.active]="isUserSelected(user.id)"
-				(click)="selectUser(user)"
+				(click)="loadUser(user)"
 					[user]="user.firstName +' ' + user.lastName"
 					[userImage]="user.profilePicture" >
 				</app-chat-list-item>
