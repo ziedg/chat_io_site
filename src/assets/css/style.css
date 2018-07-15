@@ -43,12 +43,12 @@
     margin-right:55px;
     padding-bottom:3px;
 }
-.bglist::-webkit-scrollbar { 
-  display: none; 
+.bglist::-webkit-scrollbar {
+  display: none;
 }
 .pubbg1{
   background-image: url("../images/background/bg1.jpg");
-  height: 250px;
+  height: 190px;
   vertical-align: middle;
   background-size:cover;
   display: flex;
@@ -58,7 +58,7 @@
 }
 .pubbg2{
   background-image: url("../images/background/bg2.jpg");
-  height: 250px;
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -67,7 +67,7 @@
 }
 .pubbg3{
   background-image: url("../images/background/bg3.jpg");
-  height: 250px;
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -76,7 +76,7 @@
 }
 .pubbg4{
   background-image: url("../images/background/bg4.jpg");
-  height: 250px;
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -85,7 +85,7 @@
 }
 .pubbg5{
   background-image: url("../images/background/bg5.jpg");
-  height: 250px;
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -94,7 +94,7 @@
 }
 .pubbg6{
   background-image: url("../images/background/bg6.jpg");
-  height: 250px;
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -102,8 +102,8 @@
   flex-direction:column;
 }
 .pubbg7{
-  background-image: url("../images/background/bg7.jpg");
-  height: 250px;
+  background-image: url("/images/background/background_1.jpg");
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -111,8 +111,8 @@
   flex-direction:column;
 }
 .pubbg8{
-  background-image: url("../images/background/bg8.jpg");
-  height: 250px;
+  background-image: url("/images/background/background_2.jpg");
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -120,8 +120,8 @@
   flex-direction:column;
 }
 .pubbg9{
-  background-image: url("../images/background/bg9.jpg");
-  height: 250px;
+  background-image: url("/images/background/background_3.png");
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -129,8 +129,8 @@
   flex-direction:column;
 }
 .pubbg10{
-  background-image: url("../images/background/bg10.jpg");
-  height: 250px;
+  background-image: url("/images/background/background_4.jpg");
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -138,8 +138,8 @@
   flex-direction:column;
 }
 .pubbg11{
-  background-image: url("../images/background/bg11.jpg");
-  height: 250px;
+  background-image: url("/images/background/background_5.jpg");
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -147,8 +147,8 @@
   flex-direction:column;
 }
 .pubbg12{
-  background-image: url("../images/background/bg12.jpg");
-  height: 250px;
+  background-image: url("/images/background/background_6.jpg");
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -156,8 +156,8 @@
   flex-direction:column;
 }
 .pubbg13{
-  background-image: url("../images/background/bg13.jpg");
-  height: 250px;
+  background-image: url("/images/background/background_7.jpg");
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -165,8 +165,8 @@
   flex-direction:column;
 }
 .pubbg14{
-  background-image: url("../images/background/bg14.jpg");
-  height: 250px;
+  background-image: url("/images/background/background_8.png");
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -174,8 +174,8 @@
   flex-direction:column;
 }
 .pubbg15{
-  background-image: url("../images/background/bg15.jpg");
-  height: 250px;
+  background-image: url("/images/background/background_9.jpg");
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -183,8 +183,71 @@
   flex-direction:column;
 }
 .pubbg16{
-  background-image: url("../images/background/bg16.jpg");
-  height: 250px;
+  background-image: url("/images/background/background_10.png");
+  height: 190px;
+  background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
+}
+.pubbg17{
+  background-image: url("/images/background/background_11.jpg");
+  height: 190px;
+  background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
+}
+.pubbg18{
+  background-image: url("/images/background/background_12.jpg");
+  height: 190px;
+  background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
+}
+.pubbg19{
+  background-image: url("/images/background/background_13.jpg");
+  height: 190px;
+  background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
+}
+.pubbg20{
+  background-image: url("/images/background/background_14.png");
+  height: 190px;
+  background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
+}
+.pubbg21{
+  background-image: url("/images/background/bg22.jpg");
+  height: 190px;
+  background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
+}
+.pubbg22{
+  background-image: url("/images/background/bg27.png");
+  height: 190px;
+  background-size:cover;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
+}
+.pubbg23{
+  background-image: url("/images/background/bg32.jpg");
+  height: 190px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -194,7 +257,7 @@
 .pubdes1{
   font-family: "Arial";
   font-weight: bolder;
-  font-size: calc(0.2vw + 3.3vh); 
+  font-size: calc(0.2vw + 3.3vh);
   padding:20px;
   color: white;
   text-align: center;
@@ -204,7 +267,7 @@
 .pubdes2{
   font-family: "Arial";
   font-weight: bolder;
-  font-size: calc(0.2vw + 3.3vh);  
+  font-size: calc(0.2vw + 3.3vh);
   padding:20px;
   color: white;
   text-align: center;
@@ -251,7 +314,7 @@
   font-family: "Arial";
   font-weight: bolder;
   font-size: calc(0.2vw + 3.3vh);   padding:20px;
-  color: white;
+  color: #042254;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
@@ -260,7 +323,7 @@
   font-family: "Arial";
   font-weight: bolder;
   font-size: calc(0.2vw + 3.3vh);   padding:20px;
-  color: white;
+  color: #733326;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
@@ -278,7 +341,7 @@
   font-family: "Arial";
   font-weight: bolder;
   font-size: calc(0.2vw + 3.3vh);   padding:20px;
-  color: white;
+  color: #298a7b;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
@@ -296,7 +359,7 @@
   font-family: "Arial";
   font-weight: bolder;
   font-size: calc(0.2vw + 3.3vh);   padding:20px;
-  color: white;
+  color: #02628a;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
@@ -314,7 +377,7 @@
   font-family: "Arial";
   font-weight: bolder;
   font-size: calc(0.2vw + 3.3vh);   padding:20px;
-  color: white;
+  color: black;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
@@ -333,6 +396,69 @@
   font-weight: bolder;
   font-size: calc(0.2vw + 3.3vh);   padding:20px;
   color: white;
+  text-align: center;
+  display: table-cell;
+  margin-left: 6vh;
+}
+.pubdes17{
+  font-family: "Arial";
+  font-weight: bolder;
+  font-size: calc(0.2vw + 3.3vh);   padding:20px;
+  color: white;
+  text-align: center;
+  display: table-cell;
+  margin-left: 6vh;
+}
+.pubdes18{
+  font-family: "Arial";
+  font-weight: bolder;
+  font-size: calc(0.2vw + 3.3vh);   padding:20px;
+  color: white;
+  text-align: center;
+  display: table-cell;
+  margin-left: 6vh;
+}
+.pubdes19{
+  font-family: "Arial";
+  font-weight: bolder;
+  font-size: calc(0.2vw + 3.3vh);   padding:20px;
+  color: white;
+  text-align: center;
+  display: table-cell;
+  margin-left: 6vh;
+}
+.pubdes20{
+  font-family: "Arial";
+  font-weight: bolder;
+  font-size: calc(0.2vw + 3.3vh);   padding:20px;
+  color: white;
+  text-align: center;
+  display: table-cell;
+  margin-left: 6vh;
+}
+.pubdes21{
+  font-family: "Arial";
+  font-weight: bolder;
+  font-size: calc(0.2vw + 3.3vh);   padding:20px;
+  color: black;
+  text-align: center;
+  display: table-cell;
+  margin-left: 6vh;
+}
+.pubdes22{
+  font-family: "Arial";
+  font-weight: bolder;
+  font-size: calc(0.2vw + 3.3vh);   padding:20px;
+  color: white;
+  text-align: center;
+  display: table-cell;
+  margin-left: 6vh;
+}
+.pubdes23{
+  font-family: "Arial";
+  font-weight: bolder;
+  font-size: calc(0.2vw + 3.3vh);   padding:20px;
+  color: black;
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
@@ -531,7 +657,7 @@
   .form-more .fa:hover {
     color: #666;
   }
-  
+
   .commenter-name:hover {
     color: #1b3978;
   }
@@ -2591,7 +2717,7 @@ facebook-friends .user .user-img {
   width: 20px;
   height: 20px;
   background-color: rgba(0, 0, 0, 0.25);
-  border-radius: 50%;
+  border-radius: 20%;
   position: absolute;
   top: 14%;
   cursor: pointer;
@@ -3147,7 +3273,7 @@ facebook-friends .user .user-img {
 
 @media (max-width: 768px) {
   .comment-holder .textarea {
-    font-size: 14px; 
+    font-size: 14px;
     width: calc(100% - 60px);
     width: -moz-calc(100% - 60px);
     width: -webkit-calc(100% - 60px);
@@ -4148,14 +4274,13 @@ top-blagueurs-decov .widget .subscribe button {
   margin: 0;
   height: 100%;
   width: 100%;
-  padding-top: 20px;
 }
 
 @media (max-width: 768px) {
   .login-body {
     margin-top: 0;
   }
-  
+
   .form-more{
     right:37px;
   }
@@ -4512,6 +4637,7 @@ input.loginInput {
 }
 
 .login-footer {
+  margin-top: 10px;
   background-color: #ffffff;
   margin-right: 0 !important;
   margin-left: 0 !important;
@@ -4803,7 +4929,7 @@ input.loginInput {
 }
 
 .input-param-pass input {
-  
+
   text-transform: none;
 }
 
@@ -4888,10 +5014,10 @@ input.loginInput {
 @media (max-width: 992px) {
   .input-param input {
     width: 100%;
-    
-    
+
+
   }
-  
+
 
   .label-param {
     text-align: right;
@@ -5186,7 +5312,7 @@ input.loginInput {
   margin-left:46%;
   background-color: transparent;
   position: relative;
-  
+
 }
 
 .loader-notifications-main {
@@ -5199,7 +5325,7 @@ input.loginInput {
   margin-left:45%;
   background-color: transparent;
   position: relative;
-  
+
 }
 
 .loader-more-notifications-main {
@@ -5213,7 +5339,7 @@ input.loginInput {
   margin-left:44%;
   background-color: transparent;
   position: relative;
-  
+
 }
 
 .loader-interactions-main {
@@ -5226,7 +5352,7 @@ input.loginInput {
   margin-left:44%;
   background-color: white;
   position: relative;
-  
+
 }
 
 @keyframes spin {
@@ -5244,7 +5370,7 @@ input.loginInput {
   animation: spin 750ms infinite linear;
 }
 .loadingProfile {
-  
+
 }
 
 /***Loading design */
