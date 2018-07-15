@@ -133,6 +133,7 @@
                                                                           'pubdes16': pubclass=='pubdes16'}"
                    (paste)="updatePublishTextOnPaste($event)"
                    contenteditable="true" placeholder=" " (keyup)="checkTyping(publishDivRef)"
+                   (drop)="onDrop($event)"
                    #publishDivRef style="width: calc(100% - 80px)"></div>
 
 
@@ -181,6 +182,9 @@
               <div class="facebook-preview">
 
               </div>
+              <!-- <div class="facebook-preview-mobile" style="display: none;">
+
+                </div> -->
               <div class="youtube-preview">
 
               </div>
