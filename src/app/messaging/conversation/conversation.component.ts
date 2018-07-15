@@ -157,6 +157,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
               this.chatService.markMessageAsSeen(notif.msgId)
                 .subscribe(message => {
                 })
+              this.emitterService.updateLastMessage(message)
               this.messages = [...this.messages, message];
               setTimeout(() => {
                 console.log(document.querySelector(`.message-thread`))
