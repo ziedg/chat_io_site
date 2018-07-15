@@ -83,8 +83,11 @@
 
           <div class="upper-arrow upper-arrow-notification"></div>
           <div class="notification-holder" style="display:none">
-            <div class="loader-notifications-main" *ngIf="!loaded"></div>
-            <div  *ngIf="showNotif && loaded"  class="notifcations">
+              <!--  -->
+            <div *ngIf="!loaded" >
+                <img class="loader-notifications-main"  src="/assets/images/new/loading.png">
+            </div>
+            <div  *ngIf="showNotif && loaded "  class="notifcations">
 
               <span *ngFor="let notif of listNotif">
 
@@ -179,7 +182,9 @@
 
 
                 </span>
-                <div class="loader-more-notifications-main" *ngIf="!moreLoaded"></div>
+                <div  *ngIf="!moreLoaded && !showNoNotif">
+                    <img class="loader-more-notifications-main"  src="/assets/images/new/loading.png">
+                </div>
 
               </div>
               <div style="text-align: center;" *ngIf="showButtonMoreNotif" (click)="getNotifications()">
