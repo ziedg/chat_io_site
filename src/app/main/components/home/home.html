@@ -217,17 +217,13 @@
         <div *ngIf="bglist" style="padding:5px 15px 0px">
           <div 
                   [ngClass]="{'pub-bg-container col-md-12 col-xs-12 noPadding':true}">
-              <div class="navigation-arrow-container-bglist" style="left:3px;z-index:1"
+              <div class="navigation-arrow-container-bglist" style="left:-1px;margin-top:1px;z-index:1"
               (click)="sideScroll('left',25,100,100)">
               <img class="left-navigation-arrow" src="assets/images/new/left-arrow-white.png"></div>
             
-              <div class="navigation-arrow-container-bglist" style="right:32px;z-index:1"
+              <div class="navigation-arrow-container-bglist" style="right:1px;margin-top:1px;z-index:1"
               (click)="sideScroll('right',25,100,100)">
               <img class="right-navigation-arrow" src="assets/images/new/right-arrow-white.png"></div>
-  
-              <div class="navigation-arrow-container-bglist" style="right:10px;z-index:1;background-color:transparent"
-              (click)="closeBglist()">
-              <p style="color: #666;margin-left:5px;margin-top:1px"> &#x2715; </p></div>
             <div class="bglist">
             <span><img style="border: 1px solid gray; border-radius: 5px" src="assets/images/background/bg0.png" (click)="getbg0()"></span>&nbsp;
             <span><img style="border-radius: 5px" src="assets/images/background/bg1min.jpg" (click)="getbg1()"></span>&nbsp;
@@ -288,7 +284,10 @@
            </div>
            <div class="col-md-7 col-xs-6 share-button"
                 style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
-             <div class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
+                <button *ngIf="bglist" class="publish-button" 
+                style="right:10px;z-index:1;background-color:transparent;border:1px solid #ccc" (click)="closeBglist()">
+                <p style="color: black;margin-top: 8%;"> Annuler </p></button>
+             <div *ngIf="!bglist" class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
                <div>
                  <header (click)="disableSelectMenu()">
                    {{ 'home_publish_visibility_header' | translate }}
