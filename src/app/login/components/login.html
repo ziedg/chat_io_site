@@ -58,7 +58,7 @@
                 {{'login_link_sign_in' | translate }}
               </a>
             </div>
-            <div class="col-xs-12" *ngIf="loacationPath == '/login/facebook-login'">
+            <div class="col-xs-12" *ngIf="loacationPath == '/login/facebook-login'  ||  loacationPath == '/login/forget-password' ">
               {{'login_link_sign_up_text' | translate }}
               <a class="linkBlue" [routerLink]="['/login/sign-up']">
                 {{'login_link_sign_up' | translate }}

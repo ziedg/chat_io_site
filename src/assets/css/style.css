@@ -43,8 +43,8 @@
     margin-right:55px;
     padding-bottom:3px;
 }
-.bglist::-webkit-scrollbar { 
-  display: none; 
+.bglist::-webkit-scrollbar {
+  display: none;
 }
 .pubbg1{
   background-image: url("../images/background/bg1.jpg");
@@ -257,7 +257,7 @@
 .pubdes1{
   font-family: "Arial";
   font-weight: bolder;
-  font-size: calc(0.2vw + 3.3vh); 
+  font-size: calc(0.2vw + 3.3vh);
   padding:20px;
   color: white;
   text-align: center;
@@ -267,7 +267,7 @@
 .pubdes2{
   font-family: "Arial";
   font-weight: bolder;
-  font-size: calc(0.2vw + 3.3vh);  
+  font-size: calc(0.2vw + 3.3vh);
   padding:20px;
   color: white;
   text-align: center;
@@ -657,7 +657,7 @@
   .form-more .fa:hover {
     color: #666;
   }
-  
+
   .commenter-name:hover {
     color: #1b3978;
   }
@@ -3267,7 +3267,7 @@ facebook-friends .user .user-img {
 
 @media (max-width: 768px) {
   .comment-holder .textarea {
-    font-size: 14px; 
+    font-size: 14px;
     width: calc(100% - 60px);
     width: -moz-calc(100% - 60px);
     width: -webkit-calc(100% - 60px);
@@ -4268,14 +4268,13 @@ top-blagueurs-decov .widget .subscribe button {
   margin: 0;
   height: 100%;
   width: 100%;
-  padding-top: 20px;
 }
 
 @media (max-width: 768px) {
   .login-body {
     margin-top: 0;
   }
-  
+
   .form-more{
     right:37px;
   }
@@ -4632,6 +4631,7 @@ input.loginInput {
 }
 
 .login-footer {
+  margin-top: 10px;
   background-color: #ffffff;
   margin-right: 0 !important;
   margin-left: 0 !important;
@@ -4923,7 +4923,7 @@ input.loginInput {
 }
 
 .input-param-pass input {
-  
+
   text-transform: none;
 }
 
@@ -5008,10 +5008,10 @@ input.loginInput {
 @media (max-width: 992px) {
   .input-param input {
     width: 100%;
-    
-    
+
+
   }
-  
+
 
   .label-param {
     text-align: right;
@@ -5306,7 +5306,7 @@ input.loginInput {
   margin-left:46%;
   background-color: transparent;
   position: relative;
-  
+
 }
 
 .loader-notifications-main {
@@ -5320,7 +5320,7 @@ input.loginInput {
   margin-left:44%;
   background-color: white;
   position: relative;
-  
+
 }
 
 .loader-more-notifications-main {
@@ -5334,7 +5334,7 @@ input.loginInput {
   margin-left:44%;
   background-color: white;
   position: relative;
-  
+
 }
 
 .loader-interactions-main {
@@ -5348,7 +5348,7 @@ input.loginInput {
   margin-left:44%;
   background-color: white;
   position: relative;
-  
+
 }
 
 @keyframes spin {
@@ -5366,7 +5366,7 @@ input.loginInput {
   animation: spin 750ms infinite linear;
 }
 .loadingProfile {
-  
+
 }
 
 /***Loading design */
