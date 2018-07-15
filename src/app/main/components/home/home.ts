@@ -1075,7 +1075,7 @@ export class Home {
       try {
         jQuery(".youtube-preview").html("");      
         FB.api(
-          "/{videoId}",
+          "/"+videoId,
           function (response) {
             if (response && !response.error) {
               console.log(response.embed_html);
