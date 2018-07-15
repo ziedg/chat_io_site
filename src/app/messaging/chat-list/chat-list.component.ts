@@ -346,10 +346,10 @@ export class ChatListComponent implements OnInit {
   /*Search functionnality*/
   loadUser(user) {
 
-    var found = this.chatListUsers.some(function (profile) {
+    var found = this.historyUsers.some(function (profile) {
       return profile._id == user._id;
     });
-    if (!found) this.chatListUsers.unshift(user)
+    if (!found) this.historyUsers.unshift(user)
 
     this.selectUser(user)
     user.lastMessage.isSeen = true;
