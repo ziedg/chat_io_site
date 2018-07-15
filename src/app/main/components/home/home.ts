@@ -1078,7 +1078,7 @@ export class Home {
           "/"+videoId,
           function (response) {
             if (response && !response.error) {
-              console.log(response.embed_html);
+              console.log(response);
               jQuery(".facebook-preview").html(response.embed_html);
             }else console.log(response.error);
           }
