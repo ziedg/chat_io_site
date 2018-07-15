@@ -212,47 +212,6 @@ updateLastMessage(){
 
   }
 
-  listenForAllMessages(userId: string): void {
-    this.userId = userId;
-    this.s = this.db.object('notifications/' + this.userId + '/messaging');
-    var item = this.s.valueChanges()
-    this.s.snapshotChanges().subscribe(action => {
-      var notif = action.payload.val();
-      if (notif !== null && !this.msgFirstCheck) {
-        this.chatService.getMessage(notif.msgId).subscribe(
-          message => {
-
-            var elementPos = this.historyUsers.map(function (x) { return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
-            if (this.historyUsers[elementPos] == undefined) {
-              elementPos = this.historyUsers.map(function (x) { return x.lastMessage.toUserId; }).indexOf(notif.senderId);
-            }
-            this.historyUsers[elementPos].lastMessage.message = message.message;
-
-            let actualDate = new Date(Date.now());
-            let hours = actualDate.getHours().toString();
-            let minutes = actualDate.getMinutes().toString();
-
-            if (hours.length == 1) {
-              hours = "0" + hours;
-            }
-            if (minutes.length == 1) {
-              minutes = "0" + minutes;
-            }
-
-            this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
-            this.chatListUsers = this.historyUsers.slice();
-
-
-          },
-          err => console.log('Could send message to server, reason: ', err)
-        );
-      } else {
-        this.msgFirstCheck = false;
-      }
-    });
-  }
-
-
   getSuggestionsList() {
     /*
      les abonnées dont il n'a pas fait des conversations avec encore
@@ -272,7 +231,6 @@ updateLastMessage(){
 
   reactToNewMessages() {
     this.chatService.messageEmitter.subscribe(message => {
-
       let profiles = this.historyUsers.filter(user => user._id === message.fromUserId);
       if (profiles[0]) {
         let index = this.historyUsers.findIndex(user => user._id === message.fromUserId);
@@ -295,9 +253,20 @@ updateLastMessage(){
         this.notread = true;
         this.changeDetector.markForCheck();
       } else {
-        profiles = this.suggestions.filter(user => user._id === message.fromUserId);
+       let profiles = this.suggestions.filter(user => user._id === message.fromUserId);
         if (profiles[0]) {
           profiles[0].lastMessage = message;
+          let actualDate = new Date(Date.now());
+        let hours = actualDate.getHours().toString();
+        let minutes = actualDate.getMinutes().toString();
+
+        if (hours.length == 1) {
+          hours = "0" + hours;
+        }
+        if (minutes.length == 1) {
+          minutes = "0" + minutes;
+        }
+        profiles[0].lastMessage.date = hours + ":" + minutes;
           this.historyUsers.unshift(profiles[0]);
           this.chatListUsers=this.historyUsers.slice()
           this.notread = true;
