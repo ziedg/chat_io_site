@@ -93,7 +93,7 @@ export class ChatListComponent implements OnInit {
       }
 
       this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
-      this.chatListUsers=this.historyUsers.slice()
+      this.chatListUsers = this.historyUsers.slice()
     });
   }
 
@@ -286,41 +286,36 @@ export class ChatListComponent implements OnInit {
           this.changeDetector.markForCheck();
           console.log(profiles[0])
         } else {
-          profiles = this.suggestions.filter(user => user._id == message.fromUserId);
-          if (profiles[0]) {
-            console.log(profiles[0])
-          } else {
-            this.http.get(
-              environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
-              AppSettings.OPTIONS)
-              .map((res: Response) => res.json())
-              .subscribe(
-                response => {
-                  if (response.status == "0") {
-                    let profile = {
-                      _id: response.user._id,
-                      firstName: response.user.firstName,
-                      lastName: response.user.lastName,
-                      profilePicture: response.user.profilePicture,
-                      lastMessage: message
-                    }
-                    this.historyUsers.unshift(profile);
-                    this.notread = true;
-                    console.log(profile)
+          this.http.get(
+            environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
+            AppSettings.OPTIONS)
+            .map((res: Response) => res.json())
+            .subscribe(
+              response => {
+                if (response.status == "0") {
+                  let profile = {
+                    _id: response.user._id,
+                    firstName: response.user.firstName,
+                    lastName: response.user.lastName,
+                    profilePicture: response.user.profilePicture,
+                    lastMessage: message
                   }
-
-                },
-                err => {
-                },
-                () => {
-                  this.changeDetector.markForCheck();
+                  this.historyUsers.unshift(profile);
+                  this.notread = true;
+                  console.log(profile)
                 }
-              );
-          }
+
+              },
+              err => {
+              },
+              () => {
+                this.changeDetector.markForCheck();
+              }
+            );
         }
         console.log(message)
       }
-      this.chatListUsers=this.historyUsers.slice()
+      this.chatListUsers = this.historyUsers.slice()
     })
   }
 
@@ -353,7 +348,7 @@ export class ChatListComponent implements OnInit {
     if (!found) this.historyUsers.unshift(user)
 
     this.selectUser(user)
-    if(user.lastMessage){
+    if (user.lastMessage) {
       user.lastMessage.isSeen = true;
     }
     this.searchValue = ""
