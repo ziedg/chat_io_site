@@ -73,13 +73,13 @@ export class ChatListComponent implements OnInit {
 
   updateMyMessages() {
     this.emitterService.myMessageEmitter.subscribe((data) => {
-      var elementPos = this.chatListUsers.map(function (x) { return x.lastMessage.toUserId; }).indexOf(this.selectedUserId);
+      var elementPos = this.historyUsers.map(function (x) { return x.lastMessage.toUserId; }).indexOf(this.selectedUserId);
 
-      if (this.chatListUsers[elementPos] == undefined) {
-        elementPos = this.chatListUsers.map(function (x) { return x.lastMessage.fromUserId; }).indexOf(this.selectedUserId);
+      if (this.historyUsers[elementPos] == undefined) {
+        elementPos = this.historyUsers.map(function (x) { return x.lastMessage.fromUserId; }).indexOf(this.selectedUserId);
       }
 
-      this.chatListUsers[elementPos].lastMessage.message = "Vous : " + data.message;
+      this.historyUsers[elementPos].lastMessage.message = "Vous : " + data.message;
 
       let actualDate = new Date(Date.now());
       let hours = actualDate.getHours().toString();
@@ -92,7 +92,8 @@ export class ChatListComponent implements OnInit {
         minutes = "0" + minutes;
       }
 
-      this.chatListUsers[elementPos].lastMessage.date = hours + ":" + minutes;
+      this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
+      this.chatListUsers=this.historyUsers.slice()
     });
   }
 
@@ -205,11 +206,11 @@ export class ChatListComponent implements OnInit {
         this.chatService.getMessage(notif.msgId).subscribe(
           message => {
 
-            var elementPos = this.chatListUsers.map(function (x) { return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
-            if (this.chatListUsers[elementPos] == undefined) {
-              elementPos = this.chatListUsers.map(function (x) { return x.lastMessage.toUserId; }).indexOf(notif.senderId);
+            var elementPos = this.historyUsers.map(function (x) { return x.lastMessage.fromUserId; }).indexOf(notif.senderId);
+            if (this.historyUsers[elementPos] == undefined) {
+              elementPos = this.historyUsers.map(function (x) { return x.lastMessage.toUserId; }).indexOf(notif.senderId);
             }
-            this.chatListUsers[elementPos].lastMessage.message = message.message;
+            this.historyUsers[elementPos].lastMessage.message = message.message;
 
             let actualDate = new Date(Date.now());
             let hours = actualDate.getHours().toString();
@@ -222,8 +223,8 @@ export class ChatListComponent implements OnInit {
               minutes = "0" + minutes;
             }
 
-            this.chatListUsers[elementPos].lastMessage.date = hours + ":" + minutes;
-            this.historyUsers = this.chatListUsers.slice();
+            this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
+            this.chatListUsers = this.historyUsers.slice();
 
 
           },
@@ -245,6 +246,7 @@ export class ChatListComponent implements OnInit {
         return users.json();
       })
       .subscribe((users: any[]) => {
+        console.log(users)
         for (let i = 0; i < users.length; i++) {
           this.suggestions.push(users[i]);
         }
@@ -318,6 +320,7 @@ export class ChatListComponent implements OnInit {
         }
         console.log(message)
       }
+      this.chatListUsers=this.historyUsers.slice()
     })
   }
 
@@ -344,21 +347,22 @@ export class ChatListComponent implements OnInit {
 
   /*Search functionnality*/
   loadUser(user) {
-
-    var found = this.chatListUsers.some(function (profile) {
+    var found = this.historyUsers.some(function (profile) {
       return profile._id == user._id;
     });
-    if (!found) this.chatListUsers.unshift(user)
+    if (!found) this.historyUsers.unshift(user)
 
     this.selectUser(user)
-    user.lastMessage.isSeen = true;
+    if(user.lastMessage){
+      user.lastMessage.isSeen = true;
+    }
     this.searchValue = ""
     this.chatListUsers = this.historyUsers.slice();
     this.updateMyMessages();
   }
 
   filterChatListUsersByName(name) {
-    return this.chatListUsers.filter((user) => {
+    return this.historyUsers.filter((user) => {
       let fullName = user.firstName + ' ' + user.lastName;
       return fullName.includes(name);
     });
@@ -382,9 +386,6 @@ export class ChatListComponent implements OnInit {
     }
   }
 
-  onBlur() {
-    this.searchValue = "";
-  }
 
   onChange(newValue: string) {
     this.chatListUsers = [];
@@ -408,7 +409,7 @@ export class ChatListComponent implements OnInit {
         }
       }
     } else {
-      this.chatListUsers = this.historyUsers;
+      this.chatListUsers = this.historyUsers.slice();
     }
     this.changeDetector.markForCheck();
   }
@@ -447,7 +448,8 @@ export class ChatListComponent implements OnInit {
   }
 
   onClickOutside() {
-    console.log("clicked outside chat-list");
+    this.searchValue = "";
+    this.chatListUsers = this.historyUsers.slice();
   }
 
 

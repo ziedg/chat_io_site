@@ -1,5 +1,6 @@
 <div *ngIf='messageLoading' class="message-overlay">
-	<h3> {{selectedUser !== null && selectedUser.firstName ? 'Loading Messages' : ' Select a User to chat.' }}</h3>
+	<h3 *ngIf="selectedUser !== null && selectedUser.firstName" > 'Loading Messages'</h3>
+	<h3 *ngIf="!(selectedUser !== null && selectedUser.firstName)" >{{'Select_user' | translate }}</h3>
 </div>
 <div class="message-wrapper">
 	<div class="massege-container">
@@ -7,7 +8,7 @@
 			<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
 		</div>
  
-		<ul class="message-thread">
+		<ul class="message-thread" (scroll)="onScrollMessageThread()" #messageThread>
 			<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)" (click)="show(message.toUserId)">
 				<!-- <div *ngFor="let m of message"> -->
 					<img *ngIf="alignMessage(message.toUserId) == false" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" />
@@ -27,7 +28,6 @@
 								(keyup)="sendMessage()" 
 								formControlName="message"/>
 							<button type="submit" (click)="sendMessageBtn()">{{'send_msg' | translate}}</button>
-							<button id="not-active" *ngIf="!messageForm.controls['message'].value" disabled >{{'send_msg' | translate}}</button>
 						</div>
 					</div>
 				</form>
