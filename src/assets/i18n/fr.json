@@ -202,7 +202,7 @@
   "errFistName":"Le prénom est obligatoire",
   "LastName_too_long":"Nom trés long",
   "FirstName_too_long":"Prénom trop long",
-  "popular":"Populaires",
+  "popular":"Populaire",
   "suggestions":"suggestions",
   "send_msg":"envoyer",
   "You : ":"vous : ",
@@ -210,5 +210,6 @@
   "Select_user":"Sélectionnez un utilisateur pour discuter",
   "Not":"Pas",
   "Login_as":"Se connecter en tant que",
-  "Change_account":"Changer de compte"
+  "Change_account":"Changer de compte",
+  "more_recent":"plus récent"
 }
