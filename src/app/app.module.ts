@@ -61,6 +61,7 @@ import { PublicationTextService } from './main/services/publicationText.service'
 import { ClickOutsideModule } from 'ng-click-outside';
 import { SharedModule } from './shared/shared.module';
 import { InteractiosModal } from './main/components/publication/interactions-modal/interactions-modal';
+import { NotificationBar } from './main/components/home/notification-bar/notification-bar';
 
 @NgModule({
     imports: [
@@ -91,7 +92,7 @@ import { InteractiosModal } from './main/components/publication/interactions-mod
     // module dependencies
     declarations: [AppComponent, Comment, LoadingBar,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, LikeReaction, MobileNavigation, InteractiosModal],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, LikeReaction, MobileNavigation, InteractiosModal, NotificationBar],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,

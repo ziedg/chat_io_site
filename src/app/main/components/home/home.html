@@ -1,7 +1,4 @@
-<div class="notification-bar" id="subscribeMsg" *ngIf="notificationService.isSubscribed === false ">
-  <span> {{ 'SP_AUTORISATION_NOTIF' | translate}} </span>
-  <span> <a (click)="notificationService.subscribeUser()">{{ 'ACTIVER_NOTIF_BUREAU' | translate}}</a></span>
-</div>
+<notification-bar *ngIf="!notificationService.isSubscribed && !notificationService.isNotifBarClosed"></notification-bar>
 
 <div *ngIf="user" class="container" id="container">
   <div class="row">

@@ -6034,7 +6034,7 @@ body {
   }
 
   body {
-    padding-top: 0;
+    padding-top: 0!important;
     padding-bottom: 55px;
     background-color: #f1f1f1 !important;
   }

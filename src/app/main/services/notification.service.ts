@@ -12,11 +12,10 @@ import {BehaviorSubject} from "rxjs"
 })
 export class NotificationService {
   subscriptionJson = '';
-  isSubscribed = false;
+  isSubscribed:boolean = false;
   registration = undefined;
   public subscription ='';
-
-
+  isNotifBarClosed:boolean = false;
 
   constructor(private http: Http) { }
 
@@ -35,9 +34,7 @@ export class NotificationService {
 
   //subscribe user
   subscribeUser() {
-
-    document.body.style.paddingTop = "77px";
-    document.getElementById("subscribeMsg").style.display = "none";
+    //this.isNotifBarClosed = true;
     const applicationServerKey = urlB64ToUint8Array(VAPID_PUBLIC_KEY);
     this.registration.pushManager
       .subscribe({

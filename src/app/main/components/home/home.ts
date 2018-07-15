@@ -108,7 +108,6 @@ export class Home {
   // Notification vars
   private subscriptionJson = '';
   private isSubscribed: boolean = true;
-  private registration = undefined;
   private tagDropdownActive: boolean = false;
   private hashTagPos: number;
   private showGifSlider:boolean = false;
@@ -192,16 +191,7 @@ export class Home {
 
 
     this.selectedLanguage = localStorage.getItem('userLang');
-    //Notification Check
-    if ('serviceWorker' in navigator && 'PushManager' in window) {
-      navigator.serviceWorker.register('assets/sw.js').then(reg => {
-        this.registration = reg;
-        this.notificationService.init(reg);
-        //console.log('Service Worker and Push is supported');
-      });
-    } else {
-      //console.warn('Push messaging is not supported');
-    }
+
 
     jQuery("#publishDiv").on("paste", function (e) {
       e.preventDefault();
