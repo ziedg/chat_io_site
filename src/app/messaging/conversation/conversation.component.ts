@@ -133,8 +133,8 @@ export class ConversationComponent implements OnInit, AfterViewInit{
         err => console.log('Could send message to server, reason: ', err));
 
       //update user's own messages  in the chat list
-      this.emitterService.emitMyMessage(data);
-      
+      this.emitterService.updateLastMessage(data)
+
       this.messageForm.reset();
       setTimeout(() => {
         document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;

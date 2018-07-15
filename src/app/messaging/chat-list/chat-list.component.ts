@@ -57,7 +57,6 @@ export class ChatListComponent implements OnInit {
     this.getSuggestionsList();
     this.reactToNewMessages();
     //this.listenForAllMessages(this.userId);
-    this.updateMyMessages();
     this.updateLastMessage()
     jQuery(".navigation-bottom").addClass('hidden-xs');
 
@@ -74,34 +73,10 @@ export class ChatListComponent implements OnInit {
 
 updateLastMessage(){
   this.emitterService.lastMessageEmitter.subscribe((msg)=>{
-    var elementPos = this.historyUsers.map(function (user) { return user._id }).indexOf(msg.fromUserId)
-    console.log(elementPos)
-this.historyUsers[elementPos].lastMessage.message=msg.message
+    if (msg.fromUserId === this.userId){
+      let elementPos = this.historyUsers.map(function (x) { return x._id }).indexOf(msg.toUserId);
 
-let actualDate = new Date(Date.now());
-      let hours = actualDate.getHours().toString();
-      let minutes = actualDate.getMinutes().toString();
-      console.log(actualDate);
-      if (hours.length == 1) {
-        hours = "0" + hours;
-      }
-      if (minutes.length == 1) {
-        minutes = "0" + minutes;
-      }
-
-      this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
-      this.chatListUsers=this.historyUsers.slice()
-  })
-}
-  updateMyMessages() {
-    this.emitterService.myMessageEmitter.subscribe((data) => {
-      var elementPos = this.historyUsers.map(function (x) { return x.lastMessage.toUserId; }).indexOf(this.selectedUserId);
-
-      if (this.historyUsers[elementPos] == undefined) {
-        elementPos = this.historyUsers.map(function (x) { return x.lastMessage.fromUserId; }).indexOf(this.selectedUserId);
-      }
-
-      this.historyUsers[elementPos].lastMessage.message = "Vous : " + data.message;
+      this.historyUsers[elementPos].lastMessage.message = "Vous : " + msg.message;
 
       let actualDate = new Date(Date.now());
       let hours = actualDate.getHours().toString();
@@ -116,10 +91,30 @@ let actualDate = new Date(Date.now());
 
       this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
       this.chatListUsers=this.historyUsers.slice()
-    });
-  }
-
-
+    
+    }else{
+      let elementPos = this.historyUsers.map(function (user) { return user._id }).indexOf(msg.fromUserId)
+      console.log(elementPos)
+  this.historyUsers[elementPos].lastMessage.message=msg.message
+  
+  let actualDate = new Date(Date.now());
+        let hours = actualDate.getHours().toString();
+        let minutes = actualDate.getMinutes().toString();
+        console.log(actualDate);
+        if (hours.length == 1) {
+          hours = "0" + hours;
+        }
+        if (minutes.length == 1) {
+          minutes = "0" + minutes;
+        }
+  
+        this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
+        this.chatListUsers=this.historyUsers.slice()
+    }
+  
+  })
+}
+  
 
   getLoggedInUser(userId) {
     this.http.get(
@@ -278,9 +273,10 @@ let actualDate = new Date(Date.now());
 
   reactToNewMessages() {
     this.chatService.messageEmitter.subscribe(message => {
-      let profiles = this.historyUsers.filter(user => user._id == message.fromUserId);
+
+      let profiles = this.historyUsers.filter(user => user._id === message.fromUserId);
       if (profiles[0]) {
-        let index = this.historyUsers.findIndex(user => user._id == message.fromUserId);
+        let index = this.historyUsers.findIndex(user => user._id === message.fromUserId);
         this.historyUsers.splice(index, 1);
         profiles[0].lastMessage.message = message.message;
         let actualDate = new Date(Date.now());
@@ -296,17 +292,17 @@ let actualDate = new Date(Date.now());
 
         profiles[0].lastMessage.date = hours + ":" + minutes;
         this.historyUsers.unshift(profiles[0]);
+        this.chatListUsers=this.historyUsers.slice()
         this.notread = true;
         this.changeDetector.markForCheck();
-        console.log(profiles[0])
       } else {
-        profiles = this.suggestions.filter(user => user._id == message.fromUserId);
+        profiles = this.suggestions.filter(user => user._id === message.fromUserId);
         if (profiles[0]) {
           profiles[0].lastMessage = message;
           this.historyUsers.unshift(profiles[0]);
+          this.chatListUsers=this.historyUsers.slice()
           this.notread = true;
           this.changeDetector.markForCheck();
-          console.log(profiles[0])
         }  else {
             this.http.get(
               environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
@@ -315,16 +311,29 @@ let actualDate = new Date(Date.now());
               .subscribe(
                 response => {
                   if (response.status == "0") {
+                    let actualDate = new Date(Date.now());
+                    let hours = actualDate.getHours().toString();
+                    let minutes = actualDate.getMinutes().toString();
+                    if (hours.length == 1) {
+                      hours = "0" + hours;
+                    }
+                    if (minutes.length == 1) {
+                      minutes = "0" + minutes;
+                    }
+                     let newDate=hours + ":" + minutes;
                     let profile = {
                       _id: response.user._id,
                       firstName: response.user.firstName,
                       lastName: response.user.lastName,
                       profilePicture: response.user.profilePicture,
-                      lastMessage: message
+                      lastMessage: {
+                        ...message,
+                        date :newDate
+                      }
                     }
                     this.historyUsers.unshift(profile);
+                    this.chatListUsers=this.historyUsers.slice()
                     this.notread = true;
-                    console.log(profile)
                   }
 
                 },
@@ -335,10 +344,7 @@ let actualDate = new Date(Date.now());
                 }
               );
           }
-        }
-        console.log(message)
-      
-      this.chatListUsers=this.historyUsers.slice()
+        }      
     })
   }
 
@@ -376,7 +382,7 @@ let actualDate = new Date(Date.now());
     }
     this.searchValue = ""
     this.chatListUsers = this.historyUsers.slice();
-    this.updateMyMessages();
+    //this.updateMyMessages();
   }
 
   filterChatListUsersByName(name) {
