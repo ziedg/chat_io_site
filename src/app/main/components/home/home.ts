@@ -1074,9 +1074,8 @@ export class Home {
       //console.log("faceboook");
       try {
         jQuery(".youtube-preview").html("");      
-        var videoId
         FB.api(
-          "/{videoId}",
+          "/"+videoId,
           function (response) {
             if (response && !response.error) {
               console.log(response.embed_html);
