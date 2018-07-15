@@ -7,7 +7,6 @@ export class EmitterService {
 
 userEmitter=new EventEmitter<User>();
 conversationEmitter =new EventEmitter<any>();
-myMessageEmitter =new EventEmitter<any>();
 lastMessageEmitter=new EventEmitter<any>();
 public selectedUser: User;
   constructor(private _http:Http) { }
@@ -25,11 +24,7 @@ public selectedUser: User;
     return this.selectedUser;
   }
 
-  emitMyMessage(message){
-    console.log(message);
-    this.myMessageEmitter.emit(message);
-  }
-updateLastMessage(message){
+  updateLastMessage(message){
 this.lastMessageEmitter.emit(message)
 }
 
