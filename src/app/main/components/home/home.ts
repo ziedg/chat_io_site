@@ -1069,13 +1069,14 @@ export class Home {
     else if (videoLink.indexOf("web.facebook.com") > 0 || videoLink.indexOf("www.facebook.com") > 0 ||
       videoLink.indexOf("m.facebook.com") > 0 || videoLink.indexOf("mobile.facebook.com") > 0) {
       videoId = this.getIdFacebookVideo(videoLink);
+      console.log(videoId);
       var videoPage = this.getPageFacebookVideo(videoLink);
       //console.log("faceboook");
       try {
         jQuery(".youtube-preview").html("");      
-
+        var videoId
         FB.api(
-          "/{this.getIdFacebookVideo(videoLink)}",
+          "/{videoId}",
           function (response) {
             if (response && !response.error) {
               console.log(response.embed_html);
