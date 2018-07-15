@@ -1256,9 +1256,9 @@ export class Home {
   
   joke_sentence(){
     
-    if (this.selectedLanguage==='fr'){this.joke="votre blague ici"}
-    else if (this.selectedLanguage==='en'){this.joke="type your joke here"}
-    else this.joke="escribe tu broma aquí";
+    if (this.selectedLanguage==='fr'){this.joke="Votre blague ici ..."}
+    else if (this.selectedLanguage==='en'){this.joke="Your joke here ..."}
+    else this.joke="Tu broma aquí ...";
     $('#publishDiv').attr('placeholder',this.joke);
   }
   toggleTranslateDropdown() {
