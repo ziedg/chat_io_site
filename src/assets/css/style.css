@@ -2714,7 +2714,7 @@ facebook-friends .user .user-img {
   display: inline-block;
 }
 .navigation-arrow-container-bglist {
-  width: 21px;
+  width: 24px;
   height: 30px;
   background-color: #f2f2f2;
   border-radius: 4%;
@@ -2729,16 +2729,16 @@ facebook-friends .user .user-img {
 }
 
 .left-navigation-arrow {
-  width: 60%;
-  height: 60%;
-  margin-left: 3px;
+  width: 69%;
+  height: 55%;
+  margin-left: 4px;
   margin-top: 5px;
 }
 
 .right-navigation-arrow {
-  width: 60%;
-  height: 60%;
-  margin-left: 5px;
+  width: 69%;
+  height: 55%;
+  margin-left: 3px;
   margin-top: 5px;
 }
 .left-navigation-arrow-bglist {
