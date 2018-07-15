@@ -969,7 +969,7 @@ showConfirmButton: false
               {
                 
               this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
-              console.log(response.results.data.ogImage[1].url);
+              //console.log(response.results.data.ogImage[1].url);
               //this.resetPreview(linkIsImage = true);
               //console.log("image detected");
               // jQuery("#preview-image").attr("src", this.link.image);

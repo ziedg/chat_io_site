@@ -414,7 +414,7 @@ export class Home {
       text[text.length - 1] == '@') {
       this.tagDropdownActive = true;
       this.hashTagPos = text[text.length - 1];
-      console.log("detect tag is working");
+      //console.log("detect tag is working");
     }
     if (this.tagDropdownActive) {
       let tagText = text.split('@')[1];
@@ -469,7 +469,7 @@ export class Home {
   }
 
   putIntoList(response) {
-    console.log(response.pubGid);
+    //console.log(response.pubGid);
     if (!response.length) {
       this.showLoading = false;
       this.isLock = false;
@@ -529,7 +529,7 @@ export class Home {
         response => {
           //this.publicationBeanList = [];
           this.putIntoList(response);
-          console.log(this.publicationBeanList);
+          //console.log(this.publicationBeanList);
           if (response.length == 0) {
             this.morePosts = false
           }
@@ -665,7 +665,7 @@ export class Home {
     //this.resetPreviewGIF();
   }
   onDrop(event){
-    console.log('drooooooooooooop');
+    //console.log('drooooooooooooop');
     event.preventDefault();
   }
 
@@ -710,15 +710,15 @@ export class Home {
       }
       if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
         this.resetPreview(linkIsImage = true);
-        console.log(text);
+        //console.log(text);
         this.imageFromLink = true;
         jQuery("#preview-image").attr("src", text);
         jQuery(".file-input-holder").show();
         jQuery("#preview-image").show();
         return 1;
       }
-      if(!linkIsImage) {this.resetPreview(); this.analyzeLink(text);  console.log("yoooooooooo")}
-      console.log("you will go out noooow");
+      if(!linkIsImage) {this.resetPreview(); this.analyzeLink(text);  }
+      
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
     }
@@ -955,7 +955,7 @@ export class Home {
       let inputFile = inputValue.files[0];
       this.resetPreview();
       if(inputFile.name.endsWith(".gif") || inputFile.name.endsWith(".GIF")) {
-        console.log("it ends with gif !");
+        //console.log("it ends with gif !");
         this.uploadPhotoGIF($event);
         return
       }
@@ -1130,7 +1130,7 @@ export class Home {
   analyzeLink(source) {
 
     let myArray = this.linkView.getListLinks(source);
-console.log("analyyyze");
+//console.log("analyyyze");
     if (!myArray.length) {
       return 1;
     }
@@ -1192,7 +1192,7 @@ console.log("analyyyze");
               {
                 
               this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
-              console.log(response.results.data.ogImage[1].url);
+              //console.log(response.results.data.ogImage[1].url);
               //this.resetPreview(linkIsImage = true);
               //console.log("image detected");
               // jQuery("#preview-image").attr("src", this.link.image);
@@ -1203,7 +1203,7 @@ console.log("analyyyze");
               }else{
               
               this.link.image = response.results.data.ogImage.url;
-              console.log(response.results.data.ogImage);
+              //console.log(response.results.data.ogImage);
               this.link.imageWidth = response.results.data.ogImage.width;
               this.link.imageHeight = response.results.data.ogImage.height;
 

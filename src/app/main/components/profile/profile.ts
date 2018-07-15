@@ -114,7 +114,7 @@ export class Profile implements OnInit{
             //this.loadFirstPosts();
             this.isLock = true;
             this.showLoading = true;
-            console.log("first pub");
+            //console.log("first pub");
             this.publicationBeanList = [];
             this.putIntoList(publicationResponse);
             if(publicationResponse.length === 0){this.loadMore=false}

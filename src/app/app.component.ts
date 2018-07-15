@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
     let userAgent = navigator.userAgent || navigator.vendor; //|| window.opera;
     let osRegExp: RegExp = /iPad|iPhone|iPod|android|windows phone/i;
     if(osRegExp.test(userAgent)) {
-      console.log("-------------------> mobile")
+      //console.log("-------------------> mobile")
       this.meta.addTag({
         name: "viewport",
         content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"

@@ -57,7 +57,7 @@ export class GifSlider implements AfterViewInit {
     //console.log("offset_x_n: "+offset_x_n);
 
     if (offset_x_n == -this.gifLimitIndex) {
-      console.log("max leeength");
+      //console.log("max leeength");
       this.loadMoreGifs();
     }
 

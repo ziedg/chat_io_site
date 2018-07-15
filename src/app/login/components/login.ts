@@ -122,9 +122,9 @@ export class Login {
                 "/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location",
                 response => {
                   FB.api('me/?fields=friends', (friends => {
-                    console.log('friends');
-                    console.log(JSON.stringify('Facebook friends: ' + friends));
-                    console.log(friends);
+                    //console.log('friends');
+                    //console.log(JSON.stringify('Facebook friends: ' + friends));
+                   // console.log(friends);
 
 
                     this.getUserInformations(
@@ -165,7 +165,7 @@ export class Login {
 
       }
     );
-    console.log(response.data);
+    //console.log(response.data);
 
     this.changeDetector.markForCheck();
 
@@ -238,6 +238,6 @@ export class Login {
     localStorage.setItem('userLang', language);
     this.selectedLanguage = language;
     this.translate.setDefaultLang(language);
-    console.log(localStorage.getItem('userLang'));
+    //console.log(localStorage.getItem('userLang'));
   }
 }

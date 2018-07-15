@@ -69,7 +69,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
     //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
 
     if (!this.messageThread.nativeElement.scrollTop && !this.isFirstLoaded) {
-      console.log("reach the top of message thread");
+      //console.log("reach the top of message thread");
       this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
       .subscribe((incomingMessages) => {
         for(var i=incomingMessages.length-1; i>=0; i--) { 
@@ -84,7 +84,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
   scrollMessageThreadBottom() {
     this.isFirstLoaded = true;
     let msgThread = this.messageThread.nativeElement;
-    console.log("scroll to bottom");
+    //console.log("scroll to bottom");
     setTimeout(()=>msgThread.scrollTop = msgThread.scrollHeight, 500);
   }
 
@@ -129,7 +129,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
       this.messages = [...this.messages, data];
       /* calling method to send the messages */
       this.chatService.sendMessage(data).subscribe(
-        () => console.log('Sent Message server.'),
+        () => {},
         err => console.log('Could send message to server, reason: ', err));
 
       //update user's own messages  in the chat list
@@ -160,7 +160,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
               this.emitterService.updateLastMessage(message)
               this.messages = [...this.messages, message];
               setTimeout(() => {
-                console.log(document.querySelector(`.message-thread`))
+                //console.log(document.querySelector(`.message-thread`))
                 document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
               }, 100);
             } else {

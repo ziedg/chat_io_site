@@ -45,7 +45,7 @@ export class NotificationService {
         applicationServerKey: applicationServerKey
       })
       .then(subscription => {
-        console.log('User is subscribed.');
+        //console.log('User is subscribed.');
         this.updateSubscriptionOnServer(subscription);
         this.isSubscribed = true;
       })
@@ -59,7 +59,7 @@ private updateSubscriptionOnServer(subscription) {
     if (subscription) {
       this.subscriptionJson = subscription;
       this.addPushSubscriber(subscription).subscribe(
-        () => console.log('Sent push subscription object to server.'),
+        () => {},
         err =>  console.log('Could not send subscription object to server, reason: ', err));
     } else {
       this.subscriptionJson = '';
@@ -69,7 +69,7 @@ private updateSubscriptionOnServer(subscription) {
 
   removePushSubscriber(){
      const subs = this.subscription;
-     console.log(subs)
+     //console.log(subs)
     return  this.http.post(environment.SERVER_URL +'api/push-unsubscribe',subs,AppSettings.OPTIONS);
   }
 
@@ -85,7 +85,7 @@ public init(reg) {
 
     this.updateSubscriptionOnServer(subscription);
 
-    console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
+    //console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
     // if (!this.isSubscribed){
     //  this.subscribeUser()
     //}

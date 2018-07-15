@@ -163,7 +163,7 @@ export class ChatListMobileComponent implements OnInit {
             }
 
             this.chatListUsers[elementPos].lastMessage.date = hours + ":" + minutes;
-            console.log(hours + ":" + minutes);
+            //console.log(hours + ":" + minutes);
 
           },
           err => console.log('Could send message to server, reason: ', err)
@@ -195,7 +195,7 @@ export class ChatListMobileComponent implements OnInit {
         profiles[0].lastMessage.date = hours + ":" + minutes;
         this.historyUsers.unshift(profiles[0]);
         this.changeDetector.markForCheck();
-        console.log(profiles[0])
+        //console.log(profiles[0])
       } else {
         profiles = this.suggestions.filter(user => user._id == message.fromUserId);
         if (profiles[0]) {
@@ -214,7 +214,7 @@ export class ChatListMobileComponent implements OnInit {
           profiles[0].lastMessage.date = hours + ":" + minutes;
           this.historyUsers.unshift(profiles[0]);
           this.changeDetector.markForCheck();
-          console.log(profiles[0])
+          //console.log(profiles[0])
         } else {
           this.http.get(
             environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
@@ -231,7 +231,7 @@ export class ChatListMobileComponent implements OnInit {
                     lastMessage: message
                   }
                   this.historyUsers.unshift(profile);
-                  console.log(profile)
+                  //console.log(profile)
                 }
               },
               err => {
@@ -242,7 +242,7 @@ export class ChatListMobileComponent implements OnInit {
             );
         }
       }
-      console.log(message)
+      //console.log(message)
     })
   }
 

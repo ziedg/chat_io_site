@@ -64,8 +64,8 @@ function removeMessagesFromOutBox(response) {
 // -------------------------------------------------------
 
 self.addEventListener('push', event => {
-  console.log('[Service Worker] Push Received.');
-  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+  //console.log('[Service Worker] Push Received.');
+  //console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
   let data = JSON.parse(event.data.text())
   const title = data.notification.title;
 
@@ -99,8 +99,8 @@ self.addEventListener('notificationclick', event => {
 // logging
 // -------------------------------------------------------
 function swLog(eventName, event) {
-  console.log('[Service Worker] ' + eventName);
+  //console.log('[Service Worker] ' + eventName);
   if (event) {
-    console.log(event);
+    //console.log(event);
   }
 }

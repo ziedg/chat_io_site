@@ -71,7 +71,7 @@ export class ConversationMobileComponent implements OnInit {
       else {
         this.loaded = true;
         this.messages = data;
-        console.log(this.messages);
+        //console.log(this.messages);
       }
       this.messageLoading = true;
 
@@ -120,7 +120,7 @@ export class ConversationMobileComponent implements OnInit {
       this.messages = [...this.messages, data];
       /* calling method to send the messages */
       this.chatService.sendMessage(data).subscribe(
-        () => console.log('Sent Message server.'),
+        () => {},
         err => console.log('Could send message to server, reason: ', err));
 
       this.messageForm.reset();

@@ -413,7 +413,7 @@ checkNewMessageNotification(){
       if (response.status == 1) {
 
        this.nbNewMessageNotification+=response.nbNewMessageNotifications;
-       console.log(this.nbNewMessageNotification);
+       //console.log(this.nbNewMessageNotification);
       }
     },
     err => {},
@@ -471,7 +471,7 @@ checkNewMessageNotification(){
     this.registration.pushManager.getSubscription().then(subscription => {
       this.isSubscribed = !(subscription === null);
       this.updateSubscriptionOnServer(subscription);
-      console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
+      //console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
       if (!this.isSubscribed){
         this.subscribeUser()
       }
@@ -486,7 +486,7 @@ checkNewMessageNotification(){
         applicationServerKey: applicationServerKey
       })
       .then(subscription => {
-        console.log('User is subscribed.');
+        //console.log('User is subscribed.');
         this.updateSubscriptionOnServer(subscription);
         this.isSubscribed = true;
       })
@@ -499,7 +499,7 @@ checkNewMessageNotification(){
     if (subscription) {
       this.subscriptionJson = subscription;
       this.notificationService.addPushSubscriber(subscription).subscribe(
-        () => console.log('Sent push subscription object to server.'),
+        () => {},
         err =>  console.log('Could not send subscription object to server, reason: ', err));
     } else {
       this.subscriptionJson = '';

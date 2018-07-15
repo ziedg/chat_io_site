@@ -98,7 +98,7 @@ removeAnimationEmitter = new EventEmitter<any>();
 
 removeAnimation(a){
 this.removeAnimationEmitter.emit(a);
-console.log("emitteeeeeeeeed");
+//console.log("emitteeeeeeeeed");
 }
 
 

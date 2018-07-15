@@ -81,7 +81,7 @@ updateLastMessage(){
       let actualDate = new Date(Date.now());
       let hours = actualDate.getHours().toString();
       let minutes = actualDate.getMinutes().toString();
-      console.log(actualDate);
+      //console.log(actualDate);
       if (hours.length == 1) {
         hours = "0" + hours;
       }
@@ -99,7 +99,7 @@ updateLastMessage(){
   let actualDate = new Date(Date.now());
         let hours = actualDate.getHours().toString();
         let minutes = actualDate.getMinutes().toString();
-        console.log(actualDate);
+        //console.log(actualDate);
         if (hours.length == 1) {
           hours = "0" + hours;
         }
@@ -221,7 +221,7 @@ updateLastMessage(){
         return users.json();
       })
       .subscribe((users: any[]) => {
-        console.log(users)
+        //console.log(users)
         for (let i = 0; i < users.length; i++) {
           this.suggestions.push(users[i]);
         }
