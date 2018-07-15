@@ -58,6 +58,7 @@ export class ChatListComponent implements OnInit {
     this.reactToNewMessages();
     //this.listenForAllMessages(this.userId);
     this.updateMyMessages();
+    this.updateLastMessage()
     jQuery(".navigation-bottom").addClass('hidden-xs');
 
     jQuery(document).click(function (e) {
@@ -71,6 +72,27 @@ export class ChatListComponent implements OnInit {
 
   }
 
+updateLastMessage(){
+  this.emitterService.lastMessageEmitter.subscribe((msg)=>{
+    var elementPos = this.historyUsers.map(function (user) { return user._id }).indexOf(msg.fromUserId)
+    console.log(elementPos)
+this.historyUsers[elementPos].lastMessage.message=msg.message
+
+let actualDate = new Date(Date.now());
+      let hours = actualDate.getHours().toString();
+      let minutes = actualDate.getMinutes().toString();
+      console.log(actualDate);
+      if (hours.length == 1) {
+        hours = "0" + hours;
+      }
+      if (minutes.length == 1) {
+        minutes = "0" + minutes;
+      }
+
+      this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
+      this.chatListUsers=this.historyUsers.slice()
+  })
+}
   updateMyMessages() {
     this.emitterService.myMessageEmitter.subscribe((data) => {
       var elementPos = this.historyUsers.map(function (x) { return x.lastMessage.toUserId; }).indexOf(this.selectedUserId);
@@ -285,11 +307,7 @@ export class ChatListComponent implements OnInit {
           this.notread = true;
           this.changeDetector.markForCheck();
           console.log(profiles[0])
-        } else {
-          profiles = this.suggestions.filter(user => user._id == message.fromUserId);
-          if (profiles[0]) {
-            console.log(profiles[0])
-          } else {
+        }  else {
             this.http.get(
               environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
               AppSettings.OPTIONS)
@@ -319,7 +337,7 @@ export class ChatListComponent implements OnInit {
           }
         }
         console.log(message)
-      }
+      
       this.chatListUsers=this.historyUsers.slice()
     })
   }
