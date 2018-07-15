@@ -339,6 +339,41 @@ export class Home {
     this.pubclass="pubdes16";
     this.resetPreview();
   }}
+  getbg17(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes17";
+    this.resetPreview();
+  }}
+  getbg18(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes18";
+    this.resetPreview();
+  }}
+  getbg19(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes19";
+    this.resetPreview();
+  }}
+  getbg20(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes20";
+    this.resetPreview();
+  }}
+  getbg21(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes21";
+    this.resetPreview();
+  }}
+  getbg22(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes22";
+    this.resetPreview();
+  }}
+  getbg23(){if(this.bgvalid){
+    this.pubbg=true;
+    this.pubclass="pubdes23";
+    this.resetPreview();
+  }}
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
     this.user.isNewInscri = false;

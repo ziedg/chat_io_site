@@ -4,7 +4,7 @@
 		<input #searchBar placeholder="Rechercher" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)" (focus)="onFocus()" >
 
 	</div>
-	<div class="suggestions-corps " *ngIf="historyUsers.length == 0">
+	<div class="suggestions-corps " *ngIf="chatListUsers.length == 0">
 			<!-- <p class="sub">Suggestions <span>{{suggestions.length}}</span></p> -->
 			<div *ngFor="let s of suggestions" class="row suggestions">
 					<chat-suggestion (click)="loadUser(s)" [user]="s"></chat-suggestion>
