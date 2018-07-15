@@ -211,5 +211,7 @@
   "Not":"Not",
   "Login_as":"Login as",
   "Change_account":"Change account",
-  "more_recent":"More recent"
+  "more_recent":"More recent",
+  "fb_suggestions":"facebook suggestions",
+  "Loading_messages":"Loading..."
 }
