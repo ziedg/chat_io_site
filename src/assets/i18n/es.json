@@ -86,6 +86,10 @@
   "publication_popup_confirm": "Confirmar",
   "publication_popup_notification_report_title": "Reportado!",
   "publication_popup_notification_report_text": "Esta publicación ha sido reportada.",
+  "publication_popup_send_message_title": "Enviar un mensaje",
+  "publication_popup_send_message_text": "Escribe el mensaje para enviar",
+  "publication_popup_notification_message_sent_title": "Mensaje enviado",
+  "publication_popup_notification_message_sent_text": "su mensaje ha sido enviado",
   "prefix_date_yesterday": "Ayer",
   "prefix_date_now": "1min",
   "prefix_date_days": "dias",
@@ -148,6 +152,7 @@
   "profile_menu_cancel": "Cancelar",
   "profile_menu_bloquer": "Bloquear ",
   "profile_menu_signaler": "Informe",
+  "profile_menu_send_message": "Enviar mensaje",
   "popular_profiles_title": "Perfiles populares ",
   "profile_suggestions_title": "Buscar nuevos descubrimientos ",
   "profile_popup_report_title": "Denunciar a esta persona",
@@ -202,7 +207,8 @@
   "send_msg":"enviar a",
   "you : ":"usted : ",
   "recent_messages":"mensajes recientes",
+  "Select_user":"Seleccionar un usuario para chatear",
   "Not":"No",
   "Login_as":"Iniciar sesión como",
-  "Change_account":"Cambiar cuenta"
+  "Change_account":"Cambiar cuenta"   
 }

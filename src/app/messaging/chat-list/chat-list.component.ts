@@ -94,7 +94,6 @@ updateLastMessage(){
     
     }else{
       let elementPos = this.historyUsers.map(function (user) { return user._id }).indexOf(msg.fromUserId)
-      console.log(elementPos)
   this.historyUsers[elementPos].lastMessage.message=msg.message
   
   let actualDate = new Date(Date.now());
@@ -335,16 +334,16 @@ updateLastMessage(){
                     this.chatListUsers=this.historyUsers.slice()
                     this.notread = true;
                   }
-
+                  
                 },
-                err => {
-                },
-                () => {
-                  this.changeDetector.markForCheck();
-                }
+              err => {
+              },
+              () => {
+                this.changeDetector.markForCheck();
+              }
               );
-          }
-        }      
+              }  
+            }      
     })
   }
 
@@ -377,7 +376,7 @@ updateLastMessage(){
     if (!found) this.historyUsers.unshift(user)
 
     this.selectUser(user)
-    if(user.lastMessage){
+    if (user.lastMessage) {
       user.lastMessage.isSeen = true;
     }
     this.searchValue = ""
