@@ -159,6 +159,13 @@ export class Home {
     this.title.setTitle("Speegar");
 
     //this.GifList = gifService.getGifList().list;
+    FB.init({
+      appId      : '963422573811438',
+      status: true,  // enable cookies to allow the server to access
+      cookie: true,
+      xfbml      : true,
+      version    : 'v2.11'
+    });
   }
 
 
@@ -1065,12 +1072,23 @@ export class Home {
       var videoPage = this.getPageFacebookVideo(videoLink);
       //console.log("faceboook");
       try {
-        jQuery(".youtube-preview").html("");
-        jQuery(".facebook-preview").html(
-          '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
-          videoId +
-          '%2F&show_text=0&height=580&appId" width="500" height="580" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
-        );
+        jQuery(".youtube-preview").html("");      
+
+        FB.api(
+          "/{this.getIdFacebookVideo(videoLink)}",
+          function (response) {
+            if (response && !response.error) {
+              console.log(response.embed_html);
+              jQuery(".facebook-preview").html(response.embed_html);
+            }else console.log(response.error);
+          }
+      );
+      
+   /*   jQuery(".facebook-preview").html(
+        '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
+        videoId +
+        '%2F&show_text=0&height=580&appId" width="500" height="580" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
+      );*/
         // jQuery(".facebook-preview-mobile").html(
         //   '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
         //   videoId +
