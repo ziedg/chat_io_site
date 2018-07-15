@@ -210,5 +210,6 @@
   "Select_user":"Sélectionnez un utilisateur pour discuter",
   "Not":"Pas",
   "Login_as":"Se connecter en tant que",
-  "Change_account":"Changer de compte"
+  "Change_account":"Changer de compte",
+  "more_recent":"plus récent"
 }
