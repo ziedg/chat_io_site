@@ -1,5 +1,6 @@
 .comment-publish {
-    padding: 0 10px 0 12px;
+    padding: 0 10px 12px 12px;
+    align-self: flex-end;
 }
 
 
