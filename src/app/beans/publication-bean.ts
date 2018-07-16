@@ -21,6 +21,8 @@ export class PublicationBean {
     public publPictureLink : string;
     public publyoutubeLink : string;
     public publfacebookLink : string;
+    public publfacebookLinkHeight : number;
+    public publfacebookLinkWidth : number;
     public publExternalLink : string;
     //public fcbkLink
     //public twitterLink
