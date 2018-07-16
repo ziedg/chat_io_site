@@ -235,7 +235,7 @@
 
       <span *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0 && nbDisplayedComments != 0"> • </span>
       <span *ngIf="nbDisplayedComments != 0">
-        <a (click)="displayComments()">
+        <a [routerLink]="['/main/post',publicationBean._id]">
           {{shortNumber(nbDisplayedComments)}} {{ 'commentaires' | translate }}</a>
       </span>
     </div>

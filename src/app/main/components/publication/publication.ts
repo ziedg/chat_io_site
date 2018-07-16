@@ -106,22 +106,20 @@ export class Publication {
 
   
 
-  constructor(
-    public translate: TranslateService,
-    public seoService: SeoService,
-    private postService: PostService,
-    private linkView: LinkView,
-    private emojiService: EmojiService,
-    private http: Http,
-    private router: Router,
-    private sanitizer: DomSanitizer,
-    private loginService: LoginService,
-    private changeDetector: ChangeDetectorRef,
-    private dateService: DateService,
-    private ng2ImgMaxService: Ng2ImgMaxService,
-    private location: Location,
-    private publicationTextService: PublicationTextService,
-  ) {
+  constructor(public translate: TranslateService,
+              public seoService: SeoService,
+              private postService: PostService,
+              private linkView: LinkView,
+              private emojiService: EmojiService,
+              private http: Http,
+              private router: Router,
+              private sanitizer: DomSanitizer,
+              private loginService: LoginService,
+              private changeDetector: ChangeDetectorRef,
+              private dateService: DateService,
+              private ng2ImgMaxService: Ng2ImgMaxService,
+              private location: Location,
+              private publicationTextService: PublicationTextService,) {
     if (window.matchMedia("(max-width: 768px)").matches) {
       if (location.path() != '') {
         if (location.path().indexOf('/main/post') != -1) {
@@ -311,6 +309,11 @@ showConfirmButton: false
   }
 
   ngOnInit() {
+    // check if publication is opened in sperate link
+    if(this.router.routerState.snapshot.url.includes('post')) {
+      this.displayComments();
+    }
+
     this.intervalHolder = setInterval(() => {
       // Let's refresh the list.
       this.changeDetector.markForCheck();
