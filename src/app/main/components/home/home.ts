@@ -729,6 +729,7 @@ export class Home {
     jQuery("#file-image-gif").val("");
     jQuery("#preview-image").attr("src", "");
     jQuery("#preview-image").fadeOut();
+    jQuery(".file-input-holder").hide();
     this.uploadedPicture = null;
     this.titleEnable = false;
     this.youtubeInput = false;
@@ -857,9 +858,7 @@ export class Home {
   this.getbg0();
   }
 
-  test(){
-    console.log("aaaaaaaaaaaaa");
-  }
+  
 
   veriftextsize(publishDivRef){
     let text = publishDivRef.textContent;
