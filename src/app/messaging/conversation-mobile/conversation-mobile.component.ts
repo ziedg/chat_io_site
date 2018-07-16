@@ -1,12 +1,15 @@
-import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
-
+import { Http, Response } from '@angular/http';
+import {environment} from '../../../environments/environment'
+import * as pathUtils from '../../utils/path.utils';
 import { User } from '../../beans/user';
 import { ChatService } from '../../messanging/chat.service';
 import { LoginService } from '../../login/services/loginService';
 import { EmitterService } from '../emitter.service';
+import { AppSettings } from '../../shared/conf/app-settings';
 declare var jQuery: any;
 class MessageValidation {
   constructor() {
@@ -42,7 +45,7 @@ export class ConversationMobileComponent implements OnInit {
   private msgFirstCheck: Boolean = true;
   isFirstLoaded: boolean = true;
   loadMoreMessages :boolean =true ;
-  loadingMessages:boolean =true ;
+  loadingMessages:boolean =false ;
 
   @ViewChild("msgWrapper") msgWrapper:ElementRef;
 
@@ -51,14 +54,15 @@ export class ConversationMobileComponent implements OnInit {
     private route: ActivatedRoute,
     private loginService: LoginService,
     private db: AngularFireDatabase,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private http: Http,
+    private changeDetector:ChangeDetectorRef,
   ) {
 
     this.user = this.loginService.getUser();
     this.userId = this.user._id;
     this.selectedUserId = this.route.snapshot.params['stringid'];
-    this.selectedUser = this.emitterService.getSelectedUser();
-    
+    this.getProfile(this.selectedUserId);
      this.chatService.getMessages({ fromUserId: this.userId, toUserId:this.selectedUserId })
     .subscribe((response) => {
 
@@ -112,6 +116,31 @@ export class ConversationMobileComponent implements OnInit {
   }
 
 
+  getProfile(userId:string) {
+    
+      this.http.get(
+        environment.SERVER_URL + pathUtils.GET_PROFILE + userId,
+        AppSettings.OPTIONS)
+        .map((res:Response) => res.json())
+        .subscribe(
+          response => {
+            
+          if (response.status == "0") {
+
+            this.selectedUser = response.user;
+          } 
+
+        },
+          err => {
+        },
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
+    
+
+  }
+
   scrollMsgWrapperBottom() {
     this.isFirstLoaded = true;
     let wrapper = this.msgWrapper.nativeElement;
@@ -122,6 +151,7 @@ export class ConversationMobileComponent implements OnInit {
   onScrollMsgWrapper() {
     //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
     if (!this.msgWrapper.nativeElement.scrollTop && !this.isFirstLoaded) {
+      if (this.messages.length<20) this.loadMoreMessages=false
      // console.log("reach the top of message-wrapper");
       if(this.loadMoreMessages){
       //  console.log('loading more messages')
