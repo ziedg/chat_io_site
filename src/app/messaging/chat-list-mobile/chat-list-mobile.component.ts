@@ -271,17 +271,8 @@ export class ChatListMobileComponent implements OnInit {
 
   /* Method to select the user from the Chat list starts */
   selectUser(user: User): void {
-    this.selectedUserId = user._id;
     /* Sending selected users information to other component. */
     this.emitterService.emitUser(user);
-
-    /* calling method to get the messages */
-    this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId })
-      .subscribe((response) => {
-        /* Sending conversation between two users to other component. */
-        this.emitterService.emitConversation(response);
-      });
-
     this.router.navigate(['/main/mobile/' + user._id]);
   }
 

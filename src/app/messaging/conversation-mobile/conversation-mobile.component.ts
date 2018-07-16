@@ -47,10 +47,11 @@ export class ConversationMobileComponent implements OnInit {
     private db: AngularFireDatabase,
     private chatService: ChatService
   ) {
+
     this.user = this.loginService.getUser();
     this.userId = this.user._id;
-
     this.selectedUser = this.emitterService.getSelectedUser();
+    let selectedUserId = this.route.snapshot.params['stringid'];
     // with the Resolver
     // this.data = this.route.snapshot.data;
     // let allMessages = this.data.messages;
@@ -64,7 +65,7 @@ export class ConversationMobileComponent implements OnInit {
     //   }
     //   this.messageLoading = true;
     // Without the Resolver
-    this.emitterService.conversationEmitter.subscribe((data) => {
+    /*this.emitterService.conversationEmitter.subscribe((data) => {
       if (data == undefined) {
         this.messages = [];
       }
@@ -75,7 +76,7 @@ export class ConversationMobileComponent implements OnInit {
       }
       this.messageLoading = true;
 
-    });
+    });*/
 
 
     jQuery(".message-wrapper").animate({ scrollTop: jQuery('.message-thread').prop("scrollHeight") }, 500);
@@ -87,7 +88,19 @@ export class ConversationMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listenForMessages(this.userId);
+    this.chatService.getMessages({ fromUserId: this.userId, toUserId:this.selectedUser._id })
+    .subscribe((response) => {
+      if(response==undefined)
+         {
+           this.messages=[];
+        }
+        else{
+           this.messages = response;
+           this.loaded = true;
+
+         }      
+    });
+    this.listenForMessages();
   }
 
   sendMessage() {
@@ -131,9 +144,8 @@ export class ConversationMobileComponent implements OnInit {
     //}
   }
 
-  listenForMessages(userId: string): void {
+  listenForMessages(): void {
     
-    this.userId = userId;
     this.s = this.db.object('notifications/'+this.userId+'/messaging');
       
      
