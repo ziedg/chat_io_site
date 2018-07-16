@@ -1248,7 +1248,7 @@ export class Home {
     
     if (this.selectedLanguage==='fr'){this.joke="Votre blague ici ..."}
     else if (this.selectedLanguage==='en'){this.joke="Your joke here ..."}
-    else this.joke="Tu broma aquí ...";
+    else if(this.selectedLanguage==='es') this.joke="Tu broma aquí ...";
     $('#publishDiv').attr('placeholder',this.joke);
   }
   toggleTranslateDropdown() {
