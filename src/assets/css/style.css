@@ -2608,9 +2608,9 @@ textarea:focus {
 .user-fb {
   display: flex !important;
   position: relative;
-  padding: 16px;
+  padding: 15px;
   width: 170px;
-  height: 210px;
+  height: 200px;
   margin: 5px;
   align-items: center;
   justify-items: center;
