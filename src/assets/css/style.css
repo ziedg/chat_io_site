@@ -6480,8 +6480,3 @@ img[src="undefined"] {
 .messageContent a {
   color: black;
 }
-
-
-.comment-holder .textarea:focus {
-  min-height: 70px;
-}

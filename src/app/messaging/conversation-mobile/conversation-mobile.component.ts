@@ -43,9 +43,7 @@ export class ConversationMobileComponent implements OnInit {
   loadMoreMessages :boolean =true ;
   loadingMessages:boolean =true ;
 
-  @ViewChild("messageThread") messageThread:ElementRef;
   @ViewChild("msgWrapper") msgWrapper:ElementRef;
-
 
   constructor(private emitterService: EmitterService,
     private router: Router,
@@ -122,7 +120,7 @@ export class ConversationMobileComponent implements OnInit {
   onScrollMsgWrapper() {
     //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
     if (!this.msgWrapper.nativeElement.scrollTop && !this.isFirstLoaded) {
-      console.log("reach the top of message thread");
+      console.log("reach the top of message-wrapper");
       if(this.loadMoreMessages){
         console.log('loading more messages')
         this.loadingMessages=true;
