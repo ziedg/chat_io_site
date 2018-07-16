@@ -44,7 +44,7 @@ export class Home {
   form;
   uploadedPicture: File;
   isLock: boolean = false;
-  
+
   public publicationBeanList: Array<PublicationBean> = [];
   public user: User = new User();
 
@@ -1093,16 +1093,12 @@ export class Home {
               this.getMeta(response.results.data.ogImage.url,function(width, height){
                 //console.log(height);
                 //console.log(width);
-                self.setParams(width, height);
+                self.setParams(width, height, videoId, videoPage);
                 
               });
           }});
         jQuery(".youtube-preview").html("");
-        jQuery(".facebook-preview").html(
-          '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
-          videoId +
-          '%2F&show_text=0&height=580&appId" width="500" height="580" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
-        );
+
         // jQuery(".facebook-preview-mobile").html(
         //   '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
         //   videoId +
@@ -1137,7 +1133,7 @@ export class Home {
     this.resetPublish();
   }
 
-  setParams(width, height){
+  setParams(width, height, videoId, videoPage){
     if (width-height>300){
     this.facebookHeight="315";
     this.facebookWidth=width;
@@ -1146,6 +1142,11 @@ export class Home {
     this.facebookWidth=width;
     }
     this.loadingPublish = false;
+    jQuery(".facebook-preview").html(
+      '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
+      videoId +
+      '%2F&show_text=0&height='+this.facebookHeight+'&appId" width="500" height='+this.facebookHeight+'" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
+    );
   }
   closeBglist(){
     this.bglist = false;
