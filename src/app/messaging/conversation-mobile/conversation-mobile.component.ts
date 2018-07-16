@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -39,6 +39,11 @@ export class ConversationMobileComponent implements OnInit {
   private s: AngularFireObject<any>;
   loaded: Boolean = false;
   private msgFirstCheck: Boolean = true;
+  isFirstLoaded: boolean = true;
+  loadMoreMessages :boolean =true ;
+  loadingMessages:boolean =true ;
+
+  @ViewChild("messageThread") messageThread:ElementRef;
 
   constructor(private emitterService: EmitterService,
     private router: Router,
@@ -90,6 +95,7 @@ export class ConversationMobileComponent implements OnInit {
   ngOnInit() {
     this.chatService.getMessages({ fromUserId: this.userId, toUserId:this.selectedUser._id })
     .subscribe((response) => {
+
       if(response==undefined)
          {
            this.messages=[];
@@ -101,6 +107,41 @@ export class ConversationMobileComponent implements OnInit {
          }      
     });
     this.listenForMessages();
+  }
+
+  /*ngAfterViewInit() {
+    this.scrollMessageThreadBottom();
+  }*/
+
+
+  scrollMessageThreadBottom() {
+    this.isFirstLoaded = true;
+    let msgThread = this.messageThread.nativeElement;
+    //console.log("scroll to bottom");
+    setTimeout(()=>msgThread.scrollTop = msgThread.scrollHeight, 500);
+  }
+
+  onScrollMessageThread() {
+    //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
+
+    if (!this.messageThread.nativeElement.scrollTop && !this.isFirstLoaded) {
+      console.log("reach the top of message thread");
+      if(this.loadMoreMessages){
+        console.log('loading more messages')
+        this.loadingMessages=true;
+        this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
+        .subscribe((incomingMessages) => {
+          if (incomingMessages.length<20) this.loadMoreMessages=false; 
+          this.loadingMessages=false
+          for(var i=incomingMessages.length-1; i>=0; i--) { 
+           this.messages.unshift(incomingMessages[i]);
+           } 
+      })
+      }
+   
+    }
+
+    if(this.isFirstLoaded) this.isFirstLoaded = false;
   }
 
   sendMessage() {
