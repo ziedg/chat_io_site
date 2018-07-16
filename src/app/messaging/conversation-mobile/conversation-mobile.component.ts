@@ -43,9 +43,7 @@ export class ConversationMobileComponent implements OnInit {
   loadMoreMessages :boolean =true ;
   loadingMessages:boolean =true ;
 
-  @ViewChild("messageThread") messageThread:ElementRef;
   @ViewChild("msgWrapper") msgWrapper:ElementRef;
-
 
   constructor(private emitterService: EmitterService,
     private router: Router,
