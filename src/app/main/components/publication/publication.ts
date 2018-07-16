@@ -3,7 +3,9 @@ import "rxjs/add/operator/map";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component
+  Component,
+  ViewChild,
+  ElementRef
 } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Http, Response } from "@angular/http";
@@ -99,6 +101,8 @@ export class Publication {
   public profileId;
   allListComments: CommentBean[];
   showInteractionsModal: boolean = false;
+
+  @ViewChild("commentInput") commentInput: ElementRef;
 
   
 
@@ -242,29 +246,15 @@ showConfirmButton: false
 
   focused(element) {
     if (window.matchMedia("(max-width: 768px)").matches) {
-      jQuery("#" + element.commentTextareaId)
-        .parent()
-        .parent()
-        .css({
-          'margin': "0px",
-          'position': "fixed",
-          'bottom': "0",
-          'background-color': "white",
-          'z-index': "10000",
-          'left': '0'
-        });
-      jQuery('.publishImage').show();
       jQuery(".navigation-bottom").hide();
-      jQuery("#" + element.commentTextareaId).blur(function () {
-        jQuery("#" + element.commentTextareaId)
-          .parent()
-          .parent()
-          .css({ position: "unset", margin: "0 0 12px 0" });
-        jQuery(".navigation-bottom").show();
-      });
-    } else {
-      jQuery('.publishImage').show();
     }
+    jQuery('.publishImage').show();
+  }
+
+  scrollToCommentInput() {
+    let input = this.commentInput.nativeElement;
+    input.scrollIntoView(false);
+    //window.scrollTo(0, input.offsetTop + input.offsetHeight);
   }
 
   // initComments() {
