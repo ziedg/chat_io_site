@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -39,6 +39,13 @@ export class ConversationMobileComponent implements OnInit {
   private s: AngularFireObject<any>;
   loaded: Boolean = false;
   private msgFirstCheck: Boolean = true;
+  isFirstLoaded: boolean = true;
+  loadMoreMessages :boolean =true ;
+  loadingMessages:boolean =true ;
+
+  @ViewChild("messageThread") messageThread:ElementRef;
+  @ViewChild("msgWrapper") msgWrapper:ElementRef;
+
 
   constructor(private emitterService: EmitterService,
     private router: Router,
@@ -47,12 +54,25 @@ export class ConversationMobileComponent implements OnInit {
     private db: AngularFireDatabase,
     private chatService: ChatService
   ) {
+
     this.user = this.loginService.getUser();
     this.userId = this.user._id;
-
     this.selectedUser = this.emitterService.getSelectedUser();
-
-    this.emitterService.conversationEmitter.subscribe((data) => {
+    let selectedUserId = this.route.snapshot.params['stringid'];
+    // with the Resolver
+    // this.data = this.route.snapshot.data;
+    // let allMessages = this.data.messages;
+    // if(allMessages==undefined)
+    //   {
+    //     this.messages=[];
+    //   }
+    //   else{
+    //     this.messages = allMessages;
+    //     console.log(this.messages);
+    //   }
+    //   this.messageLoading = true;
+    // Without the Resolver
+    /*this.emitterService.conversationEmitter.subscribe((data) => {
       if (data == undefined) {
         this.messages = [];
       }
@@ -63,7 +83,7 @@ export class ConversationMobileComponent implements OnInit {
       }
       this.messageLoading = true;
 
-    });
+    });*/
 
 
     
@@ -75,7 +95,50 @@ export class ConversationMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listenForMessages(this.userId);
+    this.chatService.getMessages({ fromUserId: this.userId, toUserId:this.selectedUser._id })
+    .subscribe((response) => {
+
+      if(response==undefined)
+         {
+           this.messages=[];
+        }
+        else{
+           this.messages = response;
+           this.loaded = true;
+           this.scrollMsgWrapperBottom();
+         }      
+    });
+    this.listenForMessages();
+  }
+
+
+  scrollMsgWrapperBottom() {
+    this.isFirstLoaded = true;
+    let wrapper = this.msgWrapper.nativeElement;
+    //console.log("scroll to bottom");
+    setTimeout(()=>wrapper.scrollTop = wrapper.scrollHeight, 1000);
+  }
+
+  onScrollMsgWrapper() {
+    //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
+    if (!this.msgWrapper.nativeElement.scrollTop && !this.isFirstLoaded) {
+      console.log("reach the top of message thread");
+      if(this.loadMoreMessages){
+        console.log('loading more messages')
+        this.loadingMessages=true;
+        this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
+        .subscribe((incomingMessages) => {
+          if (incomingMessages.length<20) this.loadMoreMessages=false; 
+          this.loadingMessages=false
+          for(var i=incomingMessages.length-1; i>=0; i--) { 
+           this.messages.unshift(incomingMessages[i]);
+           } 
+      })
+      }
+   
+    }
+
+    if(this.isFirstLoaded) this.isFirstLoaded = false;
   }
 
   sendMessage() {
@@ -119,8 +182,8 @@ export class ConversationMobileComponent implements OnInit {
     //}
   }
 
-  listenForMessages(userId: string): void {
-    this.userId = userId;
+  listenForMessages(): void {
+    
     this.s = this.db.object('notifications/'+this.userId+'/messaging');
       this.s.snapshotChanges().subscribe(action => {
         var notif = action.payload.val();

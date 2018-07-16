@@ -44,7 +44,7 @@ export class Home {
   form;
   uploadedPicture: File;
   isLock: boolean = false;
-
+  
   public publicationBeanList: Array<PublicationBean> = [];
   public user: User = new User();
 
@@ -63,6 +63,8 @@ export class Home {
   youtubeLink = "";
   facebookInput = false;
   facebookLink = "";
+  facebookHeight = "0";
+  facebookWidth = "0";
   menuFilter = "recent";
   selectedMenuElement = 0;
   nbLoadedPosts = 10;
@@ -116,6 +118,7 @@ export class Home {
   @ViewChild("homeSideBarRight") homeSidebarRightRef: ElementRef;
   @ViewChild("newPubForm") newPubFormRef: ElementRef;
   @ViewChild("selectLanguage") selectLanguageRef: ElementRef;
+  userPublishInput: boolean = false;
 
   // end Notification vars
 
@@ -387,6 +390,7 @@ export class Home {
 
   checkTyping(publishDivRef) {
     let text = publishDivRef.textContent;
+    this.userPublishInput = text.length != 0;
     this.checkTag(publishDivRef);
     this.checkArabic(text);
 
@@ -727,6 +731,7 @@ export class Home {
     jQuery("#file-image-gif").val("");
     jQuery("#preview-image").attr("src", "");
     jQuery("#preview-image").fadeOut();
+    jQuery(".file-input-holder").hide();
     this.uploadedPicture = null;
     this.titleEnable = false;
     this.youtubeInput = false;
@@ -741,7 +746,7 @@ export class Home {
     this.closeLinkAPI();
     this.isEmpty = true;
     this.changeDetector.markForCheck();
-
+    this.userPublishInput = false;
     this.bglist = false;
     this.showGifSlider = false;
   }
@@ -809,6 +814,8 @@ export class Home {
     data.append("publText", this.form.value.publicationText);
     data.append("publyoutubeLink", this.youtubeLink);
     data.append("publfacebookLink", this.facebookLink);
+    data.append("publfacebookLinkWidth", this.facebookWidth);
+    data.append("publfacebookLinkHeight", this.facebookHeight);
     data.append("publPicture", this.uploadedPicture);
     data.append("publClass", this.pubclass);
     // clear title value
@@ -854,6 +861,8 @@ export class Home {
     }
   this.getbg0();
   }
+
+  
 
   veriftextsize(publishDivRef){
     let text = publishDivRef.textContent;
@@ -1065,6 +1074,29 @@ export class Home {
       var videoPage = this.getPageFacebookVideo(videoLink);
       //console.log("faceboook");
       try {
+        this.loadingPublish = true;
+     let linkURL = this.linkView.getListLinks(videoLink)[0];
+    this.http
+      .get(
+        environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+          if (response.results.success) {
+            this.link.image = response.results.data.ogImage.url;
+            //console.log(response.results.data.ogImage);
+            this.link.imageWidth = response.results.data.ogImage.width;
+            this.link.imageHeight = response.results.data.ogImage.height;
+            var self =this;
+              this.getMeta(response.results.data.ogImage.url,function(width, height){
+                console.log(height);
+                console.log(width);
+                self.setParams(width, height);
+                
+              });
+          }});
         jQuery(".youtube-preview").html("");
         jQuery(".facebook-preview").html(
           '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
@@ -1094,6 +1126,27 @@ export class Home {
 
   }
 
+  cancelPublication(){
+    // console.log(this.userPublishInput);
+    // console.log(this.youtubeLink);
+    // console.log(this.facebookLink);
+    // console.log(this.uploadedPicture);
+    // console.log(this.link.isSet);
+    // console.log(this.imageFromLink);
+    this.closeBglist();
+    this.resetPublish();
+  }
+
+  setParams(width, height){
+    if (width-height>300){
+    this.facebookHeight="315";
+    this.facebookWidth=width;
+  }else {
+      this.facebookHeight="560";
+    this.facebookWidth=width;
+    }
+    this.loadingPublish = false;
+  }
   closeBglist(){
     this.bglist = false;
     this.getbg0();
@@ -1196,7 +1249,7 @@ export class Home {
               //console.log(response.results.data.ogImage);
               this.link.imageWidth = response.results.data.ogImage.width;
               this.link.imageHeight = response.results.data.ogImage.height;
-
+              
               }
               
               
@@ -1225,6 +1278,13 @@ export class Home {
   }
 
 
+   
+   getMeta(url, callback) {
+    var img = new Image();
+    img.src = url;
+    img.onload = function() { callback(img.width, img.height); }
+}
+  
   pasteInnerHtml($event) {
     $event.preventDefault();
     var plainText = $event.clipboardData.getData("text/plain");
@@ -1248,7 +1308,7 @@ export class Home {
     
     if (this.selectedLanguage==='fr'){this.joke="Votre blague ici ..."}
     else if (this.selectedLanguage==='en'){this.joke="Your joke here ..."}
-    else this.joke="Tu broma aquí ...";
+    else if(this.selectedLanguage==='es') this.joke="Tu broma aquí ...";
     $('#publishDiv').attr('placeholder',this.joke);
   }
   toggleTranslateDropdown() {

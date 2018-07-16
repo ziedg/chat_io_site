@@ -3,7 +3,9 @@ import "rxjs/add/operator/map";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component
+  Component,
+  ViewChild,
+  ElementRef
 } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Http, Response } from "@angular/http";
@@ -40,6 +42,7 @@ declare var swal: any;
   selector: "publication",
   inputs: ["publicationBean"],
   templateUrl: "publication.html",
+  styleUrls: ["publication.css"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Publication {
@@ -100,24 +103,24 @@ export class Publication {
   allListComments: CommentBean[];
   showInteractionsModal: boolean = false;
 
+  @ViewChild("commentInput") commentInput: ElementRef;
+
   
 
-  constructor(
-    public translate: TranslateService,
-    public seoService: SeoService,
-    private postService: PostService,
-    private linkView: LinkView,
-    private emojiService: EmojiService,
-    private http: Http,
-    private router: Router,
-    private sanitizer: DomSanitizer,
-    private loginService: LoginService,
-    private changeDetector: ChangeDetectorRef,
-    private dateService: DateService,
-    private ng2ImgMaxService: Ng2ImgMaxService,
-    private location: Location,
-    private publicationTextService: PublicationTextService,
-  ) {
+  constructor(public translate: TranslateService,
+              public seoService: SeoService,
+              private postService: PostService,
+              private linkView: LinkView,
+              private emojiService: EmojiService,
+              private http: Http,
+              private router: Router,
+              private sanitizer: DomSanitizer,
+              private loginService: LoginService,
+              private changeDetector: ChangeDetectorRef,
+              private dateService: DateService,
+              private ng2ImgMaxService: Ng2ImgMaxService,
+              private location: Location,
+              private publicationTextService: PublicationTextService,) {
     if (window.matchMedia("(max-width: 768px)").matches) {
       if (location.path() != '') {
         if (location.path().indexOf('/main/post') != -1) {
@@ -242,28 +245,24 @@ showConfirmButton: false
 
   focused(element) {
     if (window.matchMedia("(max-width: 768px)").matches) {
-      jQuery("#" + element.commentTextareaId)
-        .parent()
-        .parent()
-        .css({
-          'margin': "0px",
-          'position': "fixed",
-          'bottom': "0",
-          'background-color': "white",
-          'z-index': "10000",
-          'left': '0'
-        });
-      jQuery('.publishImage').show();
       jQuery(".navigation-bottom").hide();
-      jQuery("#" + element.commentTextareaId).blur(function () {
-        jQuery("#" + element.commentTextareaId)
-          .parent()
-          .parent()
-          .css({ position: "unset", margin: "0 0 12px 0" });
-        jQuery(".navigation-bottom").show();
-      });
-    } else {
-      jQuery('.publishImage').show();
+    }
+    jQuery('.publishImage').show();
+  }
+
+  scrollToCommentInput() {
+    let marge:number = 200;
+    //input.scrollIntoView(false);
+    window.scroll(0, this.findScrollToWindow(this.commentInput.nativeElement) - marge);
+  }
+
+  findScrollToWindow(obj):number {
+    let curtop:number = 0;
+    if (obj.offsetParent) {
+        do {
+            curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+    return curtop;
     }
   }
 
@@ -311,6 +310,11 @@ showConfirmButton: false
   }
 
   ngOnInit() {
+    // check if publication is opened in sperate link
+    if(this.router.routerState.snapshot.url.includes('post')) {
+      this.displayComments();
+    }
+
     this.intervalHolder = setInterval(() => {
       // Let's refresh the list.
       this.changeDetector.markForCheck();
@@ -399,7 +403,7 @@ showConfirmButton: false
         this.linkFb =
           "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +
           this.publicationBean.publfacebookLink +
-          "%2F&show_text=0&height=580&appId";
+          "%2F&show_text=0&height="+this.publicationBean.publfacebookLinkHeight+"&appId";
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkFb);
       } else {
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl("");

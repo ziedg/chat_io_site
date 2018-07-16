@@ -7,7 +7,7 @@
 		<div class="opposite-user" *ngIf="selectedUser !== null && selectedUser.firstName">
 			<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
 		</div>
-
+        <loading-bar *ngIf="loadingMessages"> </loading-bar>
 		<ul class="message-thread" (scroll)="onScrollMessageThread()" #messageThread>
 			<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)"
 			 (click)="show(message.toUserId)">

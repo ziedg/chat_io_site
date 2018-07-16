@@ -172,40 +172,40 @@ export class ChatListComponent implements OnInit {
             (actualDate.getDate() - day > 0)) {
             switch (month) {
               case 1:
-                month_text = "Janvier";
+                month_text = "January";
                 break;
               case 2:
-                month_text = "Février";
+                month_text = "February";
                 break;
               case 3:
-                month_text = "Mars";
+                month_text = "March";
                 break;
               case 4:
-                month_text = "Avril";
+                month_text = "April";
                 break;
               case 5:
-                month_text = "Mai";
+                month_text = "May";
                 break;
               case 6:
-                month_text = "Juin";
+                month_text = "June";
                 break;
               case 7:
-                month_text = "Juillet";
+                month_text = "July";
                 break;
               case 8:
-                month_text = "Aout";
+                month_text = "August";
                 break;
               case 9:
-                month_text = "Septembre";
+                month_text = "September";
                 break;
               case 10:
-                month_text = "Octobre";
+                month_text = "October";
                 break;
               case 11:
-                month_text = "Novembre";
+                month_text = "November";
                 break;
               case 12:
-                month_text = "Décembre";
+                month_text = "December";
                 break;
             }
             users[i].lastMessage.date = day_text + " " + month_text + " " + year;

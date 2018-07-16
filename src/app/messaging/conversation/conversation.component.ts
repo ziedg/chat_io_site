@@ -39,6 +39,8 @@ export class ConversationComponent implements OnInit, AfterViewInit{
   private s: AngularFireObject<any>;
   private msgFirstCheck: Boolean = true;
   isFirstLoaded: boolean = true;
+  loadMoreMessages :boolean =true ;
+  loadingMessages:boolean =true ;
 
   @ViewChild("messageThread") messageThread:ElementRef;
   
@@ -69,13 +71,20 @@ export class ConversationComponent implements OnInit, AfterViewInit{
     //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
 
     if (!this.messageThread.nativeElement.scrollTop && !this.isFirstLoaded) {
-      //console.log("reach the top of message thread");
-      this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
-      .subscribe((incomingMessages) => {
-        for(var i=incomingMessages.length-1; i>=0; i--) { 
-         this.messages.unshift(incomingMessages[i]);
-         } 
-    })
+      console.log("reach the top of message thread");
+      if(this.loadMoreMessages){
+        console.log('loading more messages')
+        this.loadingMessages=true;
+        this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
+        .subscribe((incomingMessages) => {
+          if (incomingMessages.length<20) this.loadMoreMessages=false; 
+          this.loadingMessages=false
+          for(var i=incomingMessages.length-1; i>=0; i--) { 
+           this.messages.unshift(incomingMessages[i]);
+           } 
+      })
+      }
+   
     }
 
     if(this.isFirstLoaded) this.isFirstLoaded = false;
