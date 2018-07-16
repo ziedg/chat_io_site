@@ -166,9 +166,11 @@
         <!-- Modal Caption (Image Text) -->
         <div id="caption"></div>
       </div>
-      <div class="fb-video" data-href="https://web.facebook.com/islemtriki89/videos/10214053733995979/"  
-      data-allowfullscreen="true" data-width="500"></div>
-      
+
+      <div class="facebook-preview-publication" *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
+        <iframe width="500" height="580" [src]="url" frameborder="0" allowfullscreen>
+        </iframe>
+      </div>
       <div class="youtube-preview-publication" *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
         <iframe width="560" height="400" [src]="url" frameborder="0" allowfullscreen>
         </iframe>
@@ -298,9 +300,12 @@
             <!-- Modal Caption (Image Text) -->
             <div id="caption"></div>
           </div>
-          <div class="fb-video" data-href="https://web.facebook.com/islemtriki89/videos/10214053733995979/"  
-          data-allowfullscreen="true" data-width="500"></div>
-          
+
+          <div class="facebook-preview-publication" *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
+            <iframe width="500" height="580" [src]="url" frameborder="0" allowfullscreen>
+            </iframe>
+          </div>
+
           <div class="youtube-preview-publication" *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
             <iframe width="560" height="400" [src]="url" frameborder="0">
             </iframe>
