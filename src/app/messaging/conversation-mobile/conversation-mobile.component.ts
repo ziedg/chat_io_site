@@ -31,6 +31,7 @@ export class ConversationMobileComponent implements OnInit {
   @Input() selectedUserInfo: string;
   //data: any ="Initializeeed";
   public selectedUser: User = null;
+  public selectedUserId;
   public messageForm: FormGroup;
   private userId: string = null;
   private user: User = null;
@@ -55,8 +56,22 @@ export class ConversationMobileComponent implements OnInit {
 
     this.user = this.loginService.getUser();
     this.userId = this.user._id;
+    this.selectedUserId = this.route.snapshot.params['stringid'];
     this.selectedUser = this.emitterService.getSelectedUser();
-    let selectedUserId = this.route.snapshot.params['stringid'];
+    
+     this.chatService.getMessages({ fromUserId: this.userId, toUserId:this.selectedUserId })
+    .subscribe((response) => {
+
+      if(response==undefined)
+         {
+           this.messages=[];
+        }
+        else{
+           this.messages = response;
+           this.loaded = true;
+           this.scrollMsgWrapperBottom();
+         }      
+    });
     // with the Resolver
     // this.data = this.route.snapshot.data;
     // let allMessages = this.data.messages;
@@ -93,19 +108,6 @@ export class ConversationMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.chatService.getMessages({ fromUserId: this.userId, toUserId:this.selectedUser._id })
-    .subscribe((response) => {
-
-      if(response==undefined)
-         {
-           this.messages=[];
-        }
-        else{
-           this.messages = response;
-           this.loaded = true;
-           this.scrollMsgWrapperBottom();
-         }      
-    });
     this.listenForMessages();
   }
 
@@ -120,9 +122,9 @@ export class ConversationMobileComponent implements OnInit {
   onScrollMsgWrapper() {
     //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
     if (!this.msgWrapper.nativeElement.scrollTop && !this.isFirstLoaded) {
-      //console.log("reach the top of message thread");
+     // console.log("reach the top of message-wrapper");
       if(this.loadMoreMessages){
-        //console.log('loading more messages')
+      //  console.log('loading more messages')
         this.loadingMessages=true;
         this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
         .subscribe((incomingMessages) => {
