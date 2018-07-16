@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -51,19 +51,7 @@ export class ConversationMobileComponent implements OnInit {
     this.userId = this.user._id;
 
     this.selectedUser = this.emitterService.getSelectedUser();
-    // with the Resolver
-    // this.data = this.route.snapshot.data;
-    // let allMessages = this.data.messages;
-    // if(allMessages==undefined)
-    //   {
-    //     this.messages=[];
-    //   }
-    //   else{
-    //     this.messages = allMessages;
-    //     console.log(this.messages);
-    //   }
-    //   this.messageLoading = true;
-    // Without the Resolver
+
     this.emitterService.conversationEmitter.subscribe((data) => {
       if (data == undefined) {
         this.messages = [];
@@ -78,7 +66,7 @@ export class ConversationMobileComponent implements OnInit {
     });
 
 
-    jQuery(".message-wrapper").animate({ scrollTop: jQuery('.message-thread').prop("scrollHeight") }, 500);
+    
     this.messageForm = new FormBuilder().group({
       message: new MessageValidation
     });
@@ -132,12 +120,8 @@ export class ConversationMobileComponent implements OnInit {
   }
 
   listenForMessages(userId: string): void {
-    
     this.userId = userId;
     this.s = this.db.object('notifications/'+this.userId+'/messaging');
-      
-     
-     
       this.s.snapshotChanges().subscribe(action => {
         var notif = action.payload.val();
         if (notif !== null && !this.msgFirstCheck){

@@ -122,7 +122,7 @@ export class ChatListMobileComponent implements OnInit {
                 month_text = "Décembre";
                 break;
             }
-            users[i].lastMessage.date = day_text + "-" + month_text + "-" + year;
+            users[i].lastMessage.date = day_text + " " + month_text + " " + year;
           } else {
             let hours;
             let minutes;

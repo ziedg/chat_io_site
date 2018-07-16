@@ -4,7 +4,7 @@
 			<a class="homebtn" (click)="sendHome()">
 				<i  class="fa fa-chevron-left"></i>
 			</a>
-			<div *ngIf="selectedUser !== null">
+			<div *ngIf="selectedUser">
 				<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
 			</div>
 		</div>
