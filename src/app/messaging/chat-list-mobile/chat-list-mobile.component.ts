@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } fr
 import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-
+import { TranslateService } from '@ngx-translate/core';
 import { User } from '../../beans/user';
 import { LoginService } from '../../login/services/loginService';
 import { ChatService } from '../../messanging/chat.service';
@@ -41,6 +41,7 @@ export class ChatListMobileComponent implements OnInit {
 
   //
   constructor(
+    public translate: TranslateService,
     private emitterService: EmitterService,
     private chatService: ChatService,
     private loginService: LoginService,
@@ -57,6 +58,13 @@ export class ChatListMobileComponent implements OnInit {
     this.getSuggestionsList();
     //this.listenForAllMessages(this.userId);
     this.reactToNewMessages();
+  }
+  translateCode(code) {
+    let message;
+    this.translate.get(code).subscribe((resTranslate: string) => {
+      message = resTranslate;
+    });
+    return message;
   }
   getChatList() {
     /*
@@ -86,40 +94,40 @@ export class ChatListMobileComponent implements OnInit {
             (actualDate.getDate() - day > 0)) {
             switch (month) {
               case 1:
-                month_text = "Janvier";
+                month_text = this.translateCode("January");
                 break;
               case 2:
-                month_text = "Février";
+                month_text = this.translateCode("February");
                 break;
               case 3:
-                month_text = "Mars";
+                month_text = this.translateCode("March");
                 break;
               case 4:
-                month_text = "Avril";
+                month_text = this.translateCode("April");
                 break;
               case 5:
-                month_text = "Mai";
+                month_text = this.translateCode("May");
                 break;
               case 6:
-                month_text = "Juin";
+                month_text = this.translateCode("June");
                 break;
               case 7:
-                month_text = "Juillet";
+                month_text = this.translateCode("July");
                 break;
               case 8:
-                month_text = "Aout";
+                month_text = this.translateCode("August");
                 break;
               case 9:
-                month_text = "Septembre";
+                month_text = this.translateCode("September");
                 break;
               case 10:
-                month_text = "Octobre";
+                month_text = this.translateCode("October");
                 break;
               case 11:
-                month_text = "Novembre";
+                month_text = this.translateCode("November");
                 break;
               case 12:
-                month_text = "Décembre";
+                month_text = this.translateCode("December");
                 break;
             }
             users[i].lastMessage.date = day_text + "-" + month_text + "-" + year;
