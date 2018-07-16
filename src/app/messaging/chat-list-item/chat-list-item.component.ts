@@ -12,6 +12,7 @@ export class ChatListItemComponent  {
   @Input() userImage;
   @Input() notread;
   @Input() date;
+
   constructor() { 
     this.date =this.getCurrentDate();
     this.notread = true;

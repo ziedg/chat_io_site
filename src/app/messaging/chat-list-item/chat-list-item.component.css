@@ -29,8 +29,16 @@
     background-color:rgba(0, 0, 0, .05);;
 }
 
-.not-read>.corps>div>p{
+.not-read>.corps .topdiv>p{
     font-weight: bold;
+}
+
+.mine{
+    background-color:white!important;
+}
+
+.mine>.corps .topdiv>p{
+    font-weight: normal!important;
 }
 
 .not-read-text{

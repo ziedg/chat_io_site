@@ -25,7 +25,7 @@
     background-color:rgba(0, 0, 0, .05);;
 }
 
-.not-read>.corps>div>p{
+.not-read>.corps .topdiv>p{
     font-weight: bold;
 }
 

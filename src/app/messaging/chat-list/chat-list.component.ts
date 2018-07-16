@@ -231,6 +231,7 @@ export class ChatListComponent implements OnInit {
         () => {
           this.sortChatList();
           this.historyUsers = this.chatListUsers.slice();
+          console.log(this.historyUsers);
         });
   }
 
@@ -489,6 +490,8 @@ export class ChatListComponent implements OnInit {
     this.chatListUsers = this.historyUsers.slice();
   }
 
-
+  sameUser(userId: string) {
+    return userId == this.userId ? true : false;
+  }
 
 }
