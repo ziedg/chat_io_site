@@ -1,0 +1,26 @@
+.comment-publish {
+    padding: 0 10px 12px 12px;
+    align-self: flex-end;
+}
+
+
+.form-more {
+    font-size: 18px;
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    color: #999;
+    justify-content: space-between;
+    position: absolute;
+    right: 30px;
+    bottom: 12px;
+}
+
+.comment-holder .textarea {
+    flex-grow: 1;
+}
+
+.loading {
+    border-top-color: grey;
+}

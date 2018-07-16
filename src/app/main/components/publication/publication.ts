@@ -42,6 +42,7 @@ declare var swal: any;
   selector: "publication",
   inputs: ["publicationBean"],
   templateUrl: "publication.html",
+  styleUrls: ["publication.css"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Publication {

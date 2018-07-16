@@ -809,7 +809,7 @@
 
 body {
   margin: 0;
-  padding-top: 116px;
+  padding-top: 77px;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #fafafa !important;
   font-size: 14px;
@@ -2163,8 +2163,6 @@ section.widget {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   cursor: pointer;
-  margin: 0px 25px;
-  padding: 10px 10px 0 10px;
   line-height: 34px;
   border: none;
   background-color:transparent;
@@ -2180,21 +2178,13 @@ section.widget {
   -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
   -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
   transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
-  position: absolute;
-  bottom: 0;
-  right: -60px;
 }
 
 @media (max-width: 325px) {
   .comment-publish {
     font-size: 11px;
-    padding: 0px 6px;
-    margin: 0px 42px;
   }
 
-  .comment-publish.comment-loading {
-    padding: 5px 20px !important;
-  }
 
   .header-right .fa {
     font-size: 1.4em !important;
@@ -2202,7 +2192,6 @@ section.widget {
 }
 
 .comment-publish.comment-loading {
-  padding: 2.5px 23px !important;
   line-height: 20px;
 }
 
@@ -2214,8 +2203,6 @@ section.widget {
   }
   .comment-publish {
     font-size: 11px;
-    padding: 0px 6px;
-    margin: 0px 42px;
   }
 }
 
@@ -3192,29 +3179,13 @@ facebook-friends .user .user-img {
 }
 
 .comment-holder form {
-  width: 90%;
-  width: -webkit-calc(100% - 35px);
-  width: -moz-calc(100% - 35px);
-  width: calc(100% - 35px);
   position: relative;
   display: flex;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   align-items: center;
-}
-
-.form-more {
-  position: absolute;
-  right: 70px;
-  font-size: 18px;
-  bottom: 13px;
-  display: flex;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  color: #999;
-  justify-content: space-between;
+  width: calc(100% - 45px);
 }
 
 .toggleEmoji{
@@ -3256,19 +3227,15 @@ facebook-friends .user .user-img {
 .comment-holder input,
 .comment-holder textarea,
 .comment-holder .textarea {
-  width: calc(100% - 90px);
-  width: -moz-calc(100% - 90px);
-  width: -webkit-calc(100% - 90px);
-  max-width: 100%;
   margin: 0;
-  padding: 7px 0 0 13px;
+  padding: 8px 0 8px 13px;
   margin-left: 5px;
   display: flex;
   display: -webkit-box;
   display: -ms-flexbox;
   display: table-row-group;
   align-items: center;
-  min-height: 35px;
+  min-height: 40px;
   box-sizing: border-box;
   font-family: inherit;
   font-size: 14px;
@@ -6505,10 +6472,16 @@ img[src="undefined"] {
 }
 
 /* Safari css */
+/*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   .form-more { bottom: 2px; }
 }
-
+*/
 .messageContent a {
   color: black;
+}
+
+
+.comment-holder .textarea:focus {
+  min-height: 70px;
 }
