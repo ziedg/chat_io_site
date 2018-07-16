@@ -116,6 +116,7 @@ export class Home {
   @ViewChild("homeSideBarRight") homeSidebarRightRef: ElementRef;
   @ViewChild("newPubForm") newPubFormRef: ElementRef;
   @ViewChild("selectLanguage") selectLanguageRef: ElementRef;
+  userPublishInput: boolean = false;
 
   // end Notification vars
 
@@ -387,6 +388,7 @@ export class Home {
 
   checkTyping(publishDivRef) {
     let text = publishDivRef.textContent;
+    this.userPublishInput = text.length != 0;
     this.checkTag(publishDivRef);
     this.checkArabic(text);
 
@@ -741,7 +743,7 @@ export class Home {
     this.closeLinkAPI();
     this.isEmpty = true;
     this.changeDetector.markForCheck();
-
+    this.userPublishInput = false;
     this.bglist = false;
     this.showGifSlider = false;
   }
@@ -853,6 +855,10 @@ export class Home {
 
     }
   this.getbg0();
+  }
+
+  test(){
+    console.log("aaaaaaaaaaaaa");
   }
 
   veriftextsize(publishDivRef){
@@ -1092,6 +1098,17 @@ export class Home {
     }
 
 
+  }
+
+  cancelPublication(){
+    // console.log(this.userPublishInput);
+    // console.log(this.youtubeLink);
+    // console.log(this.facebookLink);
+    // console.log(this.uploadedPicture);
+    // console.log(this.link.isSet);
+    // console.log(this.imageFromLink);
+    this.closeBglist();
+    this.resetPublish();
   }
 
   closeBglist(){
