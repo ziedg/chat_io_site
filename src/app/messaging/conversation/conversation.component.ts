@@ -71,9 +71,9 @@ export class ConversationComponent implements OnInit, AfterViewInit{
     //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
 
     if (!this.messageThread.nativeElement.scrollTop && !this.isFirstLoaded) {
-      console.log("reach the top of message thread");
+      //console.log("reach the top of message thread");
       if(this.loadMoreMessages){
-        console.log('loading more messages')
+        //console.log('loading more messages')
         this.loadingMessages=true;
         this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
         .subscribe((incomingMessages) => {

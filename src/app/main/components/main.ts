@@ -71,6 +71,7 @@ export class Main {
   nbNewMessageNotification: Number =0;
   loaded: Boolean = false;
   moreLoaded: Boolean = true;
+  messagingOpen: boolean = false;
   // end Notification vars
 
 
@@ -93,6 +94,9 @@ export class Main {
 
     //Angular Notification Listener
     private db: AngularFireDatabase) {
+
+      // check if we are on messenger
+      this.messagingOpen =  this.router.routerState.snapshot.url.includes('messaging');
 
       this.user=this.loginService.getUser();
          if (!this.recentRechService.isEmptyList())
