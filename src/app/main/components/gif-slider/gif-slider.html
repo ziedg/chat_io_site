@@ -1,31 +1,53 @@
 <section id="gif-slider-container" class="slider-container" #container>
-    <i class="fa fa-times" style="right: 5px; background-color:transparent; position: absolute;top: 0px;cursor: pointer; color: green;" aria-hidden="true"  (click)="toggleGifSlider()"></i>
   <div class="slider-sub-container">
-    <div class="slides-container" #slidesContainer>
+    <div class="slides-container" #slidesContainer (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
         
       <div *ngFor="let Url  of UrlGifList; let i = index" class="slide"  [ngStyle]="{'background-image': 'url(' + Url.Preview + ')' }" style="background-repeat: no-repeat;">
-        <div class="gif-img loader-img"  *ngIf="!Url.Show" ></div>
+        <!-- *ngIf="Url.Show" -->
+        <div class="gif-img "  *ngIf="!Url.Show" >
+          <img class=" loader "  src="/assets/images/new/loading.png">
+        </div>
+        
         <a (click)="gifPreview(Url)"> <img class="gif-img" [src]="Url.Preview" *ngIf="Url.Show" /></a>
         
       </div>
 
       <div  class="slide"  *ngIf="isLoadingMoreGifs">
-        <div class="gif-img loader-img"  ></div>
+        <img class="loader"  src="/assets/images/new/loading.png">
       </div>
       <div  class="slide"  *ngIf="isLoadingMoreGifs">
-        <div class="gif-img loader-img"  ></div>
+          <img class="loader"  src="/assets/images/new/loading.png">
       </div>
       <div  class="slide"  *ngIf="isLoadingMoreGifs">
-        <div class="gif-img loader-img"  ></div>
+        <img class="loader"  src="/assets/images/new/loading.png">
+      </div> 
+      <div  class="slide"  *ngIf="isLoadingMoreGifs">
+        <img class="loader"  src="/assets/images/new/loading.png">
       </div>
       <div  class="slide"  *ngIf="isLoadingMoreGifs">
-        <div class="gif-img loader-img"  ></div>
+          <img class="loader"  src="/assets/images/new/loading.png">
       </div>
       <div  class="slide"  *ngIf="isLoadingMoreGifs">
-        <div class="gif-img loader-img"  ></div>
+        <img class="loader"  src="/assets/images/new/loading.png">
+      </div> 
+      <div  class="slide"  *ngIf="isLoadingMoreGifs">
+        <img class="loader"  src="/assets/images/new/loading.png">
+      </div> 
+      <div  class="slide"  *ngIf="isLoadingMoreGifs">
+        <img class="loader"  src="/assets/images/new/loading.png">
+      </div> 
+      <div  class="slide"  *ngIf="isLoadingMoreGifs">
+        <img class="loader"  src="/assets/images/new/loading.png">
+      </div> 
+      <div  class="slide"  *ngIf="isLoadingMoreGifs">
+        <img class="loader"  src="/assets/images/new/loading.png">
       </div>
 
-      <div class="gif-img initial-loader-img "  *ngIf="isLoadingInitialGifs" ></div>
+
+      
+      <div class="gif-img  " *ngIf="isLoadingInitialGifs"  >  
+        <img class="initial-loader-img"  src="/assets/images/new/loading.png">
+      </div>
         
       
     </div>
@@ -34,6 +56,7 @@
             (click)="translate_it(1);"></span>
       <span class="glyphicon glyphicon-chevron-right slider-btn slider-btn-after"
             (click)="translate_it(-1);"></span>
+            
     </div>
   </div>
 </section>

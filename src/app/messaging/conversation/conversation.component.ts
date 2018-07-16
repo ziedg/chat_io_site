@@ -93,7 +93,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
   scrollMessageThreadBottom() {
     this.isFirstLoaded = true;
     let msgThread = this.messageThread.nativeElement;
-    console.log("scroll to bottom");
+    //console.log("scroll to bottom");
     setTimeout(()=>msgThread.scrollTop = msgThread.scrollHeight, 500);
   }
 
@@ -124,11 +124,11 @@ export class ConversationComponent implements OnInit, AfterViewInit{
     //if (event.keyCode === 13) {
     const message = this.messageForm.controls['message'].value.trim();
     if (message === '' || message === undefined || message === null) {
-      alert(`Message can't be empty.`);
+      // alert(`Message can't be empty.`);
     } else if (this.userId === '') {
       this.router.navigate(['/']);
     } else if (this.selectedUser._id === '') {
-      alert(`Select a user to chat.`);
+      // alert(`Select a user to chat.`);
     } else {
       const data = {
         fromUserId: this.userId,
@@ -138,7 +138,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
       this.messages = [...this.messages, data];
       /* calling method to send the messages */
       this.chatService.sendMessage(data).subscribe(
-        () => console.log('Sent Message server.'),
+        () => {},
         err => console.log('Could send message to server, reason: ', err));
 
       //update user's own messages  in the chat list
@@ -169,7 +169,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
               this.emitterService.updateLastMessage(message)
               this.messages = [...this.messages, message];
               setTimeout(() => {
-                console.log(document.querySelector(`.message-thread`))
+                //console.log(document.querySelector(`.message-thread`))
                 document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
               }, 100);
             } else {

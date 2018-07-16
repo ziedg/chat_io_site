@@ -12,11 +12,10 @@ import {BehaviorSubject} from "rxjs"
 })
 export class NotificationService {
   subscriptionJson = '';
-  isSubscribed = false;
+  isSubscribed:boolean = false;
   registration = undefined;
   public subscription ='';
-
-
+  isNotifBarClosed:boolean = false;
 
   constructor(private http: Http) { }
 
@@ -35,9 +34,7 @@ export class NotificationService {
 
   //subscribe user
   subscribeUser() {
-
-    document.body.style.paddingTop = "77px";
-    document.getElementById("subscribeMsg").style.display = "none";
+    //this.isNotifBarClosed = true;
     const applicationServerKey = urlB64ToUint8Array(VAPID_PUBLIC_KEY);
     this.registration.pushManager
       .subscribe({
@@ -45,7 +42,7 @@ export class NotificationService {
         applicationServerKey: applicationServerKey
       })
       .then(subscription => {
-        console.log('User is subscribed.');
+        //console.log('User is subscribed.');
         this.updateSubscriptionOnServer(subscription);
         this.isSubscribed = true;
       })
@@ -59,7 +56,7 @@ private updateSubscriptionOnServer(subscription) {
     if (subscription) {
       this.subscriptionJson = subscription;
       this.addPushSubscriber(subscription).subscribe(
-        () => console.log('Sent push subscription object to server.'),
+        () => {},
         err =>  console.log('Could not send subscription object to server, reason: ', err));
     } else {
       this.subscriptionJson = '';
@@ -69,7 +66,7 @@ private updateSubscriptionOnServer(subscription) {
 
   removePushSubscriber(){
      const subs = this.subscription;
-     console.log(subs)
+     //console.log(subs)
     return  this.http.post(environment.SERVER_URL +'api/push-unsubscribe',subs,AppSettings.OPTIONS);
   }
 
@@ -85,7 +82,7 @@ public init(reg) {
 
     this.updateSubscriptionOnServer(subscription);
 
-    console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
+    //console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
     // if (!this.isSubscribed){
     //  this.subscribeUser()
     //}

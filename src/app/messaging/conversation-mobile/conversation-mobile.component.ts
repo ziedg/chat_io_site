@@ -72,7 +72,7 @@ export class ConversationMobileComponent implements OnInit {
       else {
         this.loaded = true;
         this.messages = data;
-        console.log(this.messages);
+        //console.log(this.messages);
       }
       this.messageLoading = true;
 
@@ -119,11 +119,11 @@ export class ConversationMobileComponent implements OnInit {
     //if (event.keyCode === 13) {
     const message = this.messageForm.controls['message'].value.trim();
     if (message === '' || message === undefined || message === null) {
-      alert(`Message can't be empty.`);
+      // alert(`Message can't be empty.`);
     } else if (this.userId === '') {
       this.router.navigate(['/']);
     } else if (this.selectedUser._id === '') {
-      alert(`Select a user to chat.`);
+      // alert(`Select a user to chat.`);
     } else {
       const data = {
         fromUserId: this.userId,
@@ -133,7 +133,7 @@ export class ConversationMobileComponent implements OnInit {
       this.messages = [...this.messages, data];
       /* calling method to send the messages */
       this.chatService.sendMessage(data).subscribe(
-        () => console.log('Sent Message server.'),
+        () => {},
         err => console.log('Could send message to server, reason: ', err));
 
       this.messageForm.reset();

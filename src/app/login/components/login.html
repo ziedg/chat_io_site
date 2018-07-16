@@ -45,16 +45,23 @@
     </span>
           </div>
           <div class="col-md-11 col-sm-12 col-xs-12 boxLogin2" [class.marginned]="loacationPath != '/login/sign-up'">
-            <div class="col-xs-12" *ngIf="loacationPath=='/login/sign-in'">
+
+            <div class="col-xs-12" *ngIf="loacationPath =='/login/sign-in'">
               {{'login_link_sign_up_text' | translate }}
               <a class="linkBlue" [routerLink]="['/login/sign-up']">
                 {{'login_link_sign_up' | translate }}
               </a>
             </div>
-            <div class="col-xs-12" *ngIf="loacationPath !='/login/sign-in'">
+            <div class="col-xs-12" *ngIf="loacationPath == '/login/sign-up'">
               {{'login_link_sign_in_text' | translate }}
-              <a class="linkBlue" [routerLink]="['/login/sign-up']">
+              <a class="linkBlue" [routerLink]="['/login/sign-in']">
                 {{'login_link_sign_in' | translate }}
+              </a>
+            </div>
+            <div class="col-xs-12" *ngIf="loacationPath == '/login/facebook-login'  ||  loacationPath == '/login/forget-password' ">
+              {{'login_link_sign_up_text' | translate }}
+              <a class="linkBlue" [routerLink]="['/login/sign-up']">
+                {{'login_link_sign_up' | translate }}
               </a>
             </div>
 

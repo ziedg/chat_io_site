@@ -77,6 +77,7 @@
     position: relative;
     overflow-y: scroll;
     max-height: 88vh;
+    padding: 10px 0;
 }
 .message-overlay {
 	height: 100%;
@@ -203,10 +204,11 @@
     padding: 20px 15px;
     border: 1px solid #E5E5E5;
     border-radius: 50px;
+    margin-left: -35px;
 }
 .embed-submit-field button{
     position: absolute;
-    right: 5px;
+    right: -20px;
     top: 6px;
     background-color:transparent;
     border:none;

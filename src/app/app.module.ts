@@ -58,6 +58,7 @@ import { httpFactory } from './utils/factories/http.factory';
 
 
 /** Factories */
+import { NotificationBar } from './main/components/home/notification-bar/notification-bar';
 
 @NgModule({
     imports: [
@@ -88,7 +89,7 @@ import { httpFactory } from './utils/factories/http.factory';
     // module dependencies
     declarations: [AppComponent, Comment,  NotFoundPage, Home, NotFound, Logout ,Notification,  Post, Profile, Main, Publication,
         TopBlagueursAndDecov,FacebookFriends, GoogleRecaptchaDirective,
-        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, LikeReaction, MobileNavigation, InteractiosModal],   // components and directives
+        FakeComponent, ContenteditableModel, SuggestionsComponent, SearchMobile, GifSlider, LoveReaction, LikeReaction, MobileNavigation, InteractiosModal, NotificationBar],   // components and directives
     bootstrap: [AppComponent],     // root component
     providers: [
         <Provider> ChangeDetectorRef,

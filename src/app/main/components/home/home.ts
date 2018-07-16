@@ -21,6 +21,7 @@ import {LinkView} from '../../services/linkView';
 import {NotificationService} from '../../services/notification.service';
 import {PostService} from '../../services/postService';
 import { PublicationTextService } from "../../services/publicationText.service";
+import { GifService } from '../../services/gifService';
 
 
 
@@ -107,7 +108,6 @@ export class Home {
   // Notification vars
   private subscriptionJson = '';
   private isSubscribed: boolean = true;
-  private registration = undefined;
   private tagDropdownActive: boolean = false;
   private hashTagPos: number;
   private showGifSlider:boolean = false;
@@ -116,6 +116,7 @@ export class Home {
   @ViewChild("homeSideBarRight") homeSidebarRightRef: ElementRef;
   @ViewChild("newPubForm") newPubFormRef: ElementRef;
   @ViewChild("selectLanguage") selectLanguageRef: ElementRef;
+  userPublishInput: boolean = false;
 
   // end Notification vars
 
@@ -123,7 +124,7 @@ export class Home {
               private postService: PostService,
               private linkView: LinkView,
               private linkPreview: LinkPreview,
-
+              private gifService: GifService,
               private title: Title,
               private http: Http,
               private router: Router,
@@ -191,16 +192,7 @@ export class Home {
 
 
     this.selectedLanguage = localStorage.getItem('userLang');
-    //Notification Check
-    if ('serviceWorker' in navigator && 'PushManager' in window) {
-      navigator.serviceWorker.register('assets/sw.js').then(reg => {
-        this.registration = reg;
-        this.notificationService.init(reg);
-        //console.log('Service Worker and Push is supported');
-      });
-    } else {
-      //console.warn('Push messaging is not supported');
-    }
+
 
     jQuery("#publishDiv").on("paste", function (e) {
       e.preventDefault();
@@ -248,7 +240,7 @@ export class Home {
   }
 
   toggling_bglistf(){
-    if(this.bglist) { this.showGifSlider = false; this.resetPreviewGIF();}
+    if(this.bglist) { this.resetPreview(); this.bglist = true; this.showGifSlider = false;}
     else { this.pubbg = false; this.pubclass=""; }
   }
   getbg0(){
@@ -396,6 +388,7 @@ export class Home {
 
   checkTyping(publishDivRef) {
     let text = publishDivRef.textContent;
+    this.userPublishInput = text.length != 0;
     this.checkTag(publishDivRef);
     this.checkArabic(text);
 
@@ -413,7 +406,7 @@ export class Home {
       text[text.length - 1] == '@') {
       this.tagDropdownActive = true;
       this.hashTagPos = text[text.length - 1];
-      console.log("detect tag is working");
+      //console.log("detect tag is working");
     }
     if (this.tagDropdownActive) {
       let tagText = text.split('@')[1];
@@ -468,7 +461,7 @@ export class Home {
   }
 
   putIntoList(response) {
-    console.log(response.pubGid);
+    //console.log(response.pubGid);
     if (!response.length) {
       this.showLoading = false;
       this.isLock = false;
@@ -528,7 +521,7 @@ export class Home {
         response => {
           //this.publicationBeanList = [];
           this.putIntoList(response);
-          console.log(this.publicationBeanList);
+          //console.log(this.publicationBeanList);
           if (response.length == 0) {
             this.morePosts = false
           }
@@ -600,16 +593,19 @@ export class Home {
     this.link.isGif = true;
     this.linkLoading = false;
     jQuery(".file-input-holder").hide();
-    //var img2 = document.getElementById('gifImageId');
+    var gifImageId = document.getElementById('gifImageId');
 
-    // if(img2){
+    if(gifImageId){
 
-    //   img2.onload = function() {
-    //   console.log("shooooooooooooooooooooooooow");
-    //   //gifHasLoaded = true;
+      gifImageId.onload = () => {
+        var a = "hello";
+        this.gifService.removeAnimation(a);
 
-    //   }
-    // }
+      }
+    }else{
+    var a = "hello";
+    this.gifService.removeAnimation(a);
+  }
 
 
   }
@@ -621,17 +617,29 @@ export class Home {
 
   }
 
-  resetPreview() {
+  resetPreview(linkIsImage?) {
+    linkIsImage = linkIsImage || false;
+    // this method resets all diffrent new publication types
+
+
+    // ------------- methods of publication types
+    // uploadPhoto()
+    // getbgX() -- bglistf() -- (y)
+    // toggleGifSlider() (y)
+    // updatePublishTextOnPaste() (y)
+
     this.link.url = "";
     this.link.isSet = false;
     this.link.isGif = false;
     jQuery("#file-image").val("");
     jQuery("#file-image-gif").val("");
-    jQuery("#preview-image").attr("src", "");
-    jQuery("#preview-image").fadeOut();
+    if(!linkIsImage) {
+      jQuery("#preview-image").attr("src", "");
+      jQuery("#preview-image").fadeOut();
+    }
     this.uploadedPicture = null;
     this.imageFromLink = false;
-    this.uploadedPicture = null;
+    
     this.titleEnable = false;
     this.youtubeInput = false;
     this.youtubeLink = "";
@@ -641,60 +649,73 @@ export class Home {
     jQuery(".youtube-preview").html("");
     jQuery(".facebook-preview").html("");
     this.changeDetector.markForCheck();
+
+    
+    // this.pubbg = false;
+    // this.pubclass="";
+    
+    //this.resetPreviewGIF();
+  }
+  onDrop(event){
+    //console.log('drooooooooooooop');
+    event.preventDefault();
   }
 
   updatePublishTextOnPaste($event) {
     $event.preventDefault();
+    //this.resetPreview();
+    
     let text = $event.clipboardData.getData("text/plain");
     this.link.isGif = false;
     if(this.pubbg){
-
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
       return 1;
     }
-    if (
-      text.search("youtube.com/watch") >= 0 ||
-      text.search("youtu.be/") >= 0
-    ) {
-      this.youtubeInput = true;
-      jQuery(".yt-in-url").val(text);
-      this.changeDetector.markForCheck();
-      this.youtubeLink = text;
-      this.updateYoutubeFacebook();
-      return 1;
-    }
+    else {
+      let linkIsImage:boolean = false;
+      if (
+        text.search("youtube.com/watch") >= 0 ||
+        text.search("youtu.be/") >= 0
+      ) {
+        this.resetPreview();
 
-    if (
-      text.search("web.facebook.com") >= 0 || text.search("www.facebook.com") > 0 ||
-      text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0) {
-      this.facebookInput = true;
-      jQuery(".yt-in-url").val(text);
-      this.changeDetector.markForCheck();
-      this.facebookLink = text;
-      this.updateYoutubeFacebook();
-      return 1;
-    }
-    if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
-      //console.log("image detected");
-      jQuery("#preview-image").attr("src", text);
-      jQuery(".file-input-holder").show();
-      jQuery("#preview-image").show();
-      this.imageFromLink = true;
-      this.youtubeLink = null;
-      this.facebookLink = null;
+        this.youtubeInput = true;
+        jQuery(".yt-in-url").val(text);
+        this.changeDetector.markForCheck();
+        this.youtubeLink = text;
+        this.updateYoutubeFacebook();
+        return 1;
+      }
 
-      this.uploadedPicture = null;
-      jQuery(".youtube-preview").html("");
-      jQuery(".facebook-preview").html("");
-      this.link.isSet = false;
-      return 1;
+      if (text.search("web.facebook.com") >= 0 || text.search("www.facebook.com") > 0 ||
+          text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0) {
+        
+        this.resetPreview();
+
+        this.facebookInput = true;
+        jQuery(".yt-in-url").val(text);
+        this.changeDetector.markForCheck();
+        this.facebookLink = text;
+        this.updateYoutubeFacebook();
+        return 1;
+      }
+      if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
+        this.resetPreview(linkIsImage = true);
+        //console.log(text);
+        this.imageFromLink = true;
+        jQuery("#preview-image").attr("src", text);
+        jQuery(".file-input-holder").show();
+        jQuery("#preview-image").show();
+        return 1;
+      }
+      if(!linkIsImage) {this.resetPreview(); this.analyzeLink(text);  }
+      
+      text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
+      document.execCommand("insertHTML", false, text);
     }
-    this.analyzeLink(text);
-    console.log("you will go out noooow");
-    text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
-    document.execCommand("insertHTML", false, text);
   }
+
 
   resetPublishPicture() {
     jQuery("#preview-image").attr("src", "");
@@ -708,6 +729,7 @@ export class Home {
     jQuery("#file-image-gif").val("");
     jQuery("#preview-image").attr("src", "");
     jQuery("#preview-image").fadeOut();
+    jQuery(".file-input-holder").hide();
     this.uploadedPicture = null;
     this.titleEnable = false;
     this.youtubeInput = false;
@@ -722,7 +744,7 @@ export class Home {
     this.closeLinkAPI();
     this.isEmpty = true;
     this.changeDetector.markForCheck();
-
+    this.userPublishInput = false;
     this.bglist = false;
     this.showGifSlider = false;
   }
@@ -836,6 +858,8 @@ export class Home {
   this.getbg0();
   }
 
+  
+
   veriftextsize(publishDivRef){
     let text = publishDivRef.textContent;
     text = this.publicationTextService.addUrls(text);
@@ -915,16 +939,22 @@ export class Home {
 
   //uploading photo or GIF
   uploadPhoto($event) {
+    if(this.pubbg){
+      this.pubbg=false;
+      this.pubclass="";
+      jQuery(".textarea-publish").html("");
+    }
     let inputValue = $event.target;
-    console.log($event);
 
     if (inputValue != null && null != inputValue.files[0]) {
-      if(inputValue.files[0].name.endsWith(".gif") || inputValue.files[0].name.endsWith(".GIF")) {
-        console.log("it ends with gif !");
+      let inputFile = inputValue.files[0];
+      this.resetPreview();
+      if(inputFile.name.endsWith(".gif") || inputFile.name.endsWith(".GIF")) {
+        //console.log("it ends with gif !");
         this.uploadPhotoGIF($event);
         return
       }
-      this.uploadedPicture = inputValue.files[0];
+      this.uploadedPicture = inputFile;
       //change
 
       this.ng2ImgMaxService
@@ -1046,6 +1076,11 @@ export class Home {
           videoId +
           '%2F&show_text=0&height=580&appId" width="500" height="580" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
         );
+        // jQuery(".facebook-preview-mobile").html(
+        //   '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
+        //   videoId +
+        //   '%2F&show_text=0&height=360&appId" width="230" height="360" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
+        // );
 
         this.uploadedPicture = null;
         this.closeLinkAPI();
@@ -1062,6 +1097,17 @@ export class Home {
     }
 
 
+  }
+
+  cancelPublication(){
+    // console.log(this.userPublishInput);
+    // console.log(this.youtubeLink);
+    // console.log(this.facebookLink);
+    // console.log(this.uploadedPicture);
+    // console.log(this.link.isSet);
+    // console.log(this.imageFromLink);
+    this.closeBglist();
+    this.resetPublish();
   }
 
   closeBglist(){
@@ -1090,7 +1136,7 @@ export class Home {
   analyzeLink(source) {
 
     let myArray = this.linkView.getListLinks(source);
-console.log("analyyyze");
+//console.log("analyyyze");
     if (!myArray.length) {
       return 1;
     }
@@ -1119,13 +1165,13 @@ console.log("analyyyze");
       //}
     }
           */
-    if (this.imageFromLink) {
-      return 1
-    }
+    // if (this.imageFromLink) {
+    //   return 1
+    // }
 
 
     this.linkLoading = true;
-
+    
     this.http
       .get(
         environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
@@ -1148,19 +1194,28 @@ console.log("analyyyze");
             this.link.title = response.results.data.ogTitle;
             this.link.description = response.results.data.ogDescription;
             if (response.results.data.ogImage) {
-              var a = response.results.data.ogImage.url;
+              if(response.results.data.ogImage.length == 2)
+              {
+                
+              this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
+              //console.log(response.results.data.ogImage[1].url);
+              //this.resetPreview(linkIsImage = true);
+              //console.log("image detected");
+              // jQuery("#preview-image").attr("src", this.link.image);
+              // jQuery(".file-input-holder").show();
+              // jQuery("#preview-image").show();
+              
+
+              }else{
+              
               this.link.image = response.results.data.ogImage.url;
-              console.log(this.link.image);
+              //console.log(response.results.data.ogImage);
               this.link.imageWidth = response.results.data.ogImage.width;
               this.link.imageHeight = response.results.data.ogImage.height;
-              /*
-              if (a.search(/(\.gif)$/i) > 0) {
-                this.link.isGif = true;
-                this.link.url = this.link.image;
-              } else {
-                this.link.isGif = false;
-                this.linkLoading = false;
-              }*/
+
+              }
+              
+              
             } else {
               this.link.image = null;
               this.link.imageWidth = 0;
@@ -1176,6 +1231,10 @@ console.log("analyyyze");
           console.error("error in link API;");
         },
         () => {
+          if(this.link.isSet) {
+            //this.resetPreview();
+            this.link.isSet = true;
+          }
           this.linkLoading = false;
         }
       );
@@ -1203,9 +1262,9 @@ console.log("analyyyze");
   
   joke_sentence(){
     
-    if (this.selectedLanguage==='fr'){this.joke="votre blague ici"}
-    else if (this.selectedLanguage==='en'){this.joke="type your joke here"}
-    else this.joke="escribe tu broma aquí";
+    if (this.selectedLanguage==='fr'){this.joke="Votre blague ici ..."}
+    else if (this.selectedLanguage==='en'){this.joke="Your joke here ..."}
+    else this.joke="Tu broma aquí ...";
     $('#publishDiv').attr('placeholder',this.joke);
   }
   toggleTranslateDropdown() {
@@ -1219,8 +1278,11 @@ console.log("analyyyze");
 
   toggleGifSlider() {
     this.showGifSlider = !this.showGifSlider;
-    if(this.showGifSlider) { this.bglist = false; this.pubbg = false; this.pubclass="";}
-}
+    if(this.showGifSlider) { 
+      this.resetPreview(); this.showGifSlider = true; 
+      this.bglist = false; this.pubbg = false; this.pubclass="";
+    }
+  }
 
 }
 

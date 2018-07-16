@@ -61,8 +61,8 @@ export class FacebookLogin {
                 FB.api('/me?fields=id,first_name,last_name,name,email,cover,birthday,gender,location', ( response => {
                   FB.api('/me/friends', ( friends => {
 
-                    console.log(JSON.stringify('Facebook friends: ' + friends));
-                    console.log(friends);
+                    //console.log(JSON.stringify('Facebook friends: ' + friends));
+                    //console.log(friends);
                     /* FB.api('/me/friends', ( friends => {
                                         console.log('friends');
                                         console.log(JSON.parse(JSON.stringify('friendsielnidsst:'+friends))) ;
@@ -123,8 +123,8 @@ export class FacebookLogin {
                 this.errorMessage = "Erreur technique."
             },
             () => {
-                console.log('done');
-                console.log(friends);
+                //('done');
+                //console.log(friends);
             }
         );
     }

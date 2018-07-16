@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } fr
 import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-
+import { TranslateService } from "@ngx-translate/core";
 import { User } from '../../beans/user';
 import { LoginService } from '../../login/services/loginService';
 import { ChatService } from '../../messanging/chat.service';
@@ -40,6 +40,7 @@ export class ChatListComponent implements OnInit {
 
   //
   constructor(
+    public translate: TranslateService,
     private emitterService: EmitterService,
     private chatService: ChatService,
     private loginService: LoginService,
@@ -71,49 +72,49 @@ export class ChatListComponent implements OnInit {
 
   }
 
-updateLastMessage(){
-  this.emitterService.lastMessageEmitter.subscribe((msg)=>{
-    if (msg.fromUserId === this.userId){
-      let elementPos = this.historyUsers.map(function (x) { return x._id }).indexOf(msg.toUserId);
+  updateLastMessage() {
+    this.emitterService.lastMessageEmitter.subscribe((msg) => {
+      if (msg.fromUserId === this.userId) {
+        let elementPos = this.historyUsers.map(function (x) { return x._id }).indexOf(msg.toUserId);
 
-      this.historyUsers[elementPos].lastMessage.message = "Vous : " + msg.message;
+        this.historyUsers[elementPos].lastMessage.message = this.translateCode("you : ") + msg.message;
 
-      let actualDate = new Date(Date.now());
-      let hours = actualDate.getHours().toString();
-      let minutes = actualDate.getMinutes().toString();
-      console.log(actualDate);
-      if (hours.length == 1) {
-        hours = "0" + hours;
-      }
-      if (minutes.length == 1) {
-        minutes = "0" + minutes;
-      }
-
-      this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
-      this.chatListUsers=this.historyUsers.slice()
-    
-    }else{
-      let elementPos = this.historyUsers.map(function (user) { return user._id }).indexOf(msg.fromUserId)
-  this.historyUsers[elementPos].lastMessage.message=msg.message
-  
-  let actualDate = new Date(Date.now());
+        let actualDate = new Date(Date.now());
         let hours = actualDate.getHours().toString();
         let minutes = actualDate.getMinutes().toString();
-        console.log(actualDate);
+        //console.log(actualDate);
         if (hours.length == 1) {
           hours = "0" + hours;
         }
         if (minutes.length == 1) {
           minutes = "0" + minutes;
         }
-  
+
         this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
-        this.chatListUsers=this.historyUsers.slice()
-    }
-  
-  })
-}
-  
+        this.chatListUsers = this.historyUsers.slice()
+
+      } else {
+        let elementPos = this.historyUsers.map(function (user) { return user._id }).indexOf(msg.fromUserId)
+        this.historyUsers[elementPos].lastMessage.message = msg.message
+
+        let actualDate = new Date(Date.now());
+        let hours = actualDate.getHours().toString();
+        let minutes = actualDate.getMinutes().toString();
+        //console.log(actualDate);
+        if (hours.length == 1) {
+          hours = "0" + hours;
+        }
+        if (minutes.length == 1) {
+          minutes = "0" + minutes;
+        }
+
+        this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
+        this.chatListUsers = this.historyUsers.slice()
+      }
+
+    })
+  }
+
 
   getLoggedInUser(userId) {
     this.http.get(
@@ -136,6 +137,13 @@ updateLastMessage(){
         }
       );
   }
+  translateCode(code) {
+    let message;
+    this.translate.get(code).subscribe((resTranslate: string) => {
+      message = resTranslate;
+    });
+    return message;
+  }
   getChatList() {
     /*
      l'historique des personnes dont il a fait des conversations avec +dernier message pour chacun
@@ -147,17 +155,60 @@ updateLastMessage(){
       .subscribe((users: any[]) => {
         for (let i = 0; i < users.length; i++) {
           if (users[i].lastMessage.fromUserId == this.userId) {
-            users[i].lastMessage.message = "Vous : " + users[i].lastMessage.message;
+            users[i].lastMessage.message = this.translateCode("you : ") + users[i].lastMessage.message;
           }
           let dateMsg = new Date(users[i].lastMessage.date);
           let actualDate = new Date(Date.now());
           let year = dateMsg.getFullYear();
           let month = dateMsg.getMonth() + 1;
           let day = dateMsg.getDate();
+          let day_text = day.toString();
+          if (day_text.length == 1) {
+            day_text = "0" + day_text;
+          }
+          let month_text = '';
           if ((actualDate.getFullYear() - year > 0) ||
             ((actualDate.getMonth() + 1) - month > 0) ||
             (actualDate.getDate() - day > 0)) {
-            users[i].lastMessage.date = day + "-" + month + "-" + year;
+            switch (month) {
+              case 1:
+                month_text = "Janvier";
+                break;
+              case 2:
+                month_text = "Février";
+                break;
+              case 3:
+                month_text = "Mars";
+                break;
+              case 4:
+                month_text = "Avril";
+                break;
+              case 5:
+                month_text = "Mai";
+                break;
+              case 6:
+                month_text = "Juin";
+                break;
+              case 7:
+                month_text = "Juillet";
+                break;
+              case 8:
+                month_text = "Aout";
+                break;
+              case 9:
+                month_text = "Septembre";
+                break;
+              case 10:
+                month_text = "Octobre";
+                break;
+              case 11:
+                month_text = "Novembre";
+                break;
+              case 12:
+                month_text = "Décembre";
+                break;
+            }
+            users[i].lastMessage.date = day_text + " " + month_text + " " + year;
           } else {
             let hours;
             let minutes;
@@ -221,7 +272,7 @@ updateLastMessage(){
         return users.json();
       })
       .subscribe((users: any[]) => {
-        console.log(users)
+        //console.log(users)
         for (let i = 0; i < users.length; i++) {
           this.suggestions.push(users[i]);
         }
@@ -249,70 +300,70 @@ updateLastMessage(){
 
         profiles[0].lastMessage.date = hours + ":" + minutes;
         this.historyUsers.unshift(profiles[0]);
-        this.chatListUsers=this.historyUsers.slice()
+        this.chatListUsers = this.historyUsers.slice()
         this.notread = true;
         this.changeDetector.markForCheck();
       } else {
-       let profiles = this.suggestions.filter(user => user._id === message.fromUserId);
+        let profiles = this.suggestions.filter(user => user._id === message.fromUserId);
         if (profiles[0]) {
           profiles[0].lastMessage = message;
           let actualDate = new Date(Date.now());
-        let hours = actualDate.getHours().toString();
-        let minutes = actualDate.getMinutes().toString();
+          let hours = actualDate.getHours().toString();
+          let minutes = actualDate.getMinutes().toString();
 
-        if (hours.length == 1) {
-          hours = "0" + hours;
-        }
-        if (minutes.length == 1) {
-          minutes = "0" + minutes;
-        }
-        profiles[0].lastMessage.date = hours + ":" + minutes;
+          if (hours.length == 1) {
+            hours = "0" + hours;
+          }
+          if (minutes.length == 1) {
+            minutes = "0" + minutes;
+          }
+          profiles[0].lastMessage.date = hours + ":" + minutes;
           this.historyUsers.unshift(profiles[0]);
-          this.chatListUsers=this.historyUsers.slice()
+          this.chatListUsers = this.historyUsers.slice()
           this.notread = true;
           this.changeDetector.markForCheck();
-        }  else {
-            this.http.get(
-              environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
-              AppSettings.OPTIONS)
-              .map((res: Response) => res.json())
-              .subscribe(
-                response => {
-                  if (response.status == "0") {
-                    let actualDate = new Date(Date.now());
-                    let hours = actualDate.getHours().toString();
-                    let minutes = actualDate.getMinutes().toString();
-                    if (hours.length == 1) {
-                      hours = "0" + hours;
-                    }
-                    if (minutes.length == 1) {
-                      minutes = "0" + minutes;
-                    }
-                     let newDate=hours + ":" + minutes;
-                    let profile = {
-                      _id: response.user._id,
-                      firstName: response.user.firstName,
-                      lastName: response.user.lastName,
-                      profilePicture: response.user.profilePicture,
-                      lastMessage: {
-                        ...message,
-                        date :newDate
-                      }
-                    }
-                    this.historyUsers.unshift(profile);
-                    this.chatListUsers=this.historyUsers.slice()
-                    this.notread = true;
+        } else {
+          this.http.get(
+            environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
+            AppSettings.OPTIONS)
+            .map((res: Response) => res.json())
+            .subscribe(
+              response => {
+                if (response.status == "0") {
+                  let actualDate = new Date(Date.now());
+                  let hours = actualDate.getHours().toString();
+                  let minutes = actualDate.getMinutes().toString();
+                  if (hours.length == 1) {
+                    hours = "0" + hours;
                   }
-                  
-                },
+                  if (minutes.length == 1) {
+                    minutes = "0" + minutes;
+                  }
+                  let newDate = hours + ":" + minutes;
+                  let profile = {
+                    _id: response.user._id,
+                    firstName: response.user.firstName,
+                    lastName: response.user.lastName,
+                    profilePicture: response.user.profilePicture,
+                    lastMessage: {
+                      ...message,
+                      date: newDate
+                    }
+                  }
+                  this.historyUsers.unshift(profile);
+                  this.chatListUsers = this.historyUsers.slice()
+                  this.notread = true;
+                }
+
+              },
               err => {
               },
               () => {
                 this.changeDetector.markForCheck();
               }
-              );
-              }  
-            }      
+            );
+        }
+      }
     })
   }
 
@@ -361,21 +412,15 @@ updateLastMessage(){
   }
 
   filterSubscriptionsByName(name) {
-    if (this.user.subscriptionsDetails) {
-
-      return this.user.subscriptionsDetails.filter((user) => {
-        let fullName = user.firstName + ' ' + user.lastName;
-        return fullName.includes(name);
-      });
-    }
-
+    return this.user.subscriptions.filter((user) => {
+      let fullName = user.firstName + ' ' + user.lastName;
+      return fullName.includes(name);
+    });
   }
 
   onFocus() {
-    if (this.searchBar.nativeElement.value.length >= 1) {
-      this.searchBar.nativeElement.style.display = "block!important";
-      this.onChange(this.searchBar.nativeElement.value);
-    }
+    this.searchBar.nativeElement.style.display = "block!important";
+    this.onChange(this.searchBar.nativeElement.value);
   }
 
 

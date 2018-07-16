@@ -1,6 +1,6 @@
 <div *ngIf='messageLoading' class="message-overlay">
-	<h3 *ngIf="selectedUser !== null && selectedUser.firstName" > 'Loading Messages'</h3>
-	<h3 *ngIf="!(selectedUser !== null && selectedUser.firstName)" >{{'Select_user' | translate }}</h3>
+	<h3 *ngIf="selectedUser !== null && selectedUser.firstName"> {{'Loading_messages' | translate }}</h3>
+	<h3 *ngIf="!(selectedUser !== null && selectedUser.firstName)">{{'Select_user' | translate }}</h3>
 </div>
 <div class="message-wrapper">
 	<div class="massege-container">
@@ -9,28 +9,27 @@
 		</div>
         <loading-bar *ngIf="loadingMessages"> </loading-bar>
 		<ul class="message-thread" (scroll)="onScrollMessageThread()" #messageThread>
-			<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)" (click)="show(message.toUserId)">
+			<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)"
+			 (click)="show(message.toUserId)">
 				<!-- <div *ngFor="let m of message"> -->
-					<img *ngIf="alignMessage(message.toUserId) == false" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" />
-					<p class="messageContent" innerHTML="{{message.message | DetectUrls}}"></p>
+				<img *ngIf="alignMessage(message.toUserId) == false" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle"
+				/>
+				<p class="messageContent" innerHTML="{{message.message | DetectUrls}}"></p>
 				<!-- </div> -->
 			</li>
 		</ul>
 		<div class="message-typer">
-				<form [formGroup]="messageForm" novalidate>
-					<div>
-						<!-- <i class="fa fa-camera" (click)="addPhoto()"></i>
+			<form [formGroup]="messageForm" novalidate>
+				<div>
+					<!-- <i class="fa fa-camera" (click)="addPhoto()"></i>
 						<input type="file" class="imageUpload" style="display:none" accept="image/*" (change)="uploadPhoto($event)"> -->
-						<div class="embed-submit-field">
-							<input class="message" 
-								type="text"
-								placeholder="Message" 
-								(keyup)="sendMessage()" 
-								formControlName="message"/>
-							<button type="submit" (click)="sendMessageBtn()">{{'send_msg' | translate}}</button>
-						</div>
+					<div class="embed-submit-field">
+						<input class="message" type="text" placeholder="Message" (keyup)="sendMessage()" formControlName="message" />
+						<button type="submit" (click)="sendMessageBtn()" *ngIf="messageForm.controls['message'].value">{{'send_msg' | translate}}</button>
+						<button id="not-active" type="submit" (click)="sendMessageBtn()" *ngIf="!messageForm.controls['message'].value">{{'send_msg' | translate}}</button>
 					</div>
-				</form>
-			</div>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>

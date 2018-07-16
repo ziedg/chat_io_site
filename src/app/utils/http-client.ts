@@ -130,17 +130,17 @@ export class HttpClient extends Http {
     intercept(observable: Observable<Response>): Observable<Response> {
         return observable.catch((err) => {
             if(err.status === Constants.HttpServletResponse.SC_FORBIDDEN) {
-                console.log('Unauthorized request');
+                //console.log('Unauthorized request');
                 //this.router.navigate( ['error'] );
                 return Observable.empty();
             }
             if (err.status === Constants.HttpServletResponse.SC_UNAUTHORIZED){
-                console.log('Forbidden request');
+                //console.log('Forbidden request');
                 //this.router.navigate( ['error'] );
                 return Observable.empty();
             }
             if (err.status === Constants.HttpServletResponse.SC_INTERNAL_SERVER_ERROR){
-                console.log('Internal server error');
+                //console.log('Internal server error');
                 //this.router.navigate( ['error'] );
                 return Observable.empty();
             }
