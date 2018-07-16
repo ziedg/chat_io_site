@@ -126,7 +126,7 @@ export class ConversationMobileComponent implements OnInit {
       if(this.loadMoreMessages){
       //  console.log('loading more messages')
         this.loadingMessages=true;
-        this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
+        this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId},this.messages[0]._id)
         .subscribe((incomingMessages) => {
           if (incomingMessages.length<20) this.loadMoreMessages=false; 
           this.loadingMessages=false
