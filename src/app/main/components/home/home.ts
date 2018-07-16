@@ -1091,8 +1091,8 @@ export class Home {
             this.link.imageHeight = response.results.data.ogImage.height;
             var self =this;
               this.getMeta(response.results.data.ogImage.url,function(width, height){
-                console.log(height);
-                console.log(width);
+                //console.log(height);
+                //console.log(width);
                 self.setParams(width, height);
                 
               });
