@@ -44,7 +44,7 @@ export class Home {
   form;
   uploadedPicture: File;
   isLock: boolean = false;
-  
+
   public publicationBeanList: Array<PublicationBean> = [];
   public user: User = new User();
 
@@ -87,7 +87,6 @@ export class Home {
   public arabicText: boolean = false;
   arabicRegex: RegExp = /[\u0600-\u06FF]/;
   public imageFromLink: boolean = false;
-  joke="";
   bglist=false;
   bgvalid=true;
   pubclass="";
@@ -227,10 +226,6 @@ export class Home {
       document.documentElement.scrollTop = 0;
     }, 1000);
 
-  }
-  ngAfterViewChecked(){
-    this.selectedLanguage = localStorage.getItem('userLang');
-    this.joke_sentence();
   }
   Classname(){
     if(this.pubbg)
@@ -1093,16 +1088,12 @@ export class Home {
               this.getMeta(response.results.data.ogImage.url,function(width, height){
                 //console.log(height);
                 //console.log(width);
-                self.setParams(width, height);
+                self.setParams(width, height, videoId, videoPage);
                 
               });
           }});
         jQuery(".youtube-preview").html("");
-        jQuery(".facebook-preview").html(
-          '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
-          videoId +
-          '%2F&show_text=0&height=580&appId" width="500" height="580" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
-        );
+
         // jQuery(".facebook-preview-mobile").html(
         //   '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
         //   videoId +
@@ -1137,7 +1128,7 @@ export class Home {
     this.resetPublish();
   }
 
-  setParams(width, height){
+  setParams(width, height, videoId, videoPage){
     if (width-height>300){
     this.facebookHeight="315";
     this.facebookWidth=width;
@@ -1146,6 +1137,11 @@ export class Home {
     this.facebookWidth=width;
     }
     this.loadingPublish = false;
+    jQuery(".facebook-preview").html(
+      '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
+      videoId +
+      '%2F&show_text=0&height='+this.facebookHeight+'&appId" width="500" height='+this.facebookHeight+'" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
+    );
   }
   closeBglist(){
     this.bglist = false;
@@ -1299,18 +1295,10 @@ export class Home {
     localStorage.setItem('userLang', language);
     this.translate.use(language);
     this.translate.setDefaultLang(language);
-    this.joke_sentence();
     //location.reload();
     //console.log(localStorage.getItem('userLang')) ;
   }
   
-  joke_sentence(){
-    
-    if (this.selectedLanguage==='fr'){this.joke="Votre blague ici ..."}
-    else if (this.selectedLanguage==='en'){this.joke="Your joke here ..."}
-    else if(this.selectedLanguage==='es') this.joke="Tu broma aquí ...";
-    $('#publishDiv').attr('placeholder',this.joke);
-  }
   toggleTranslateDropdown() {
     jQuery(".dropdown-menu-translate").toggle();
   }
