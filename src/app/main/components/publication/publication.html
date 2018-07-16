@@ -122,7 +122,7 @@
       </div>
 
       <div class="facebook-preview-publication" *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
-        <iframe width="500" height="580" [src]="url" frameborder="0" allowfullscreen>
+        <iframe width="500" height={{publicationBean.publfacebookLinkHeight}} [src]="url" frameborder="0" allowfullscreen >
         </iframe>
       </div>
       <div class="youtube-preview-publication" *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
@@ -210,7 +210,7 @@
           </div>
 
           <div class="facebook-preview-publication" *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
-            <iframe width="500" height="580" [src]="url" frameborder="0" allowfullscreen>
+            <iframe width="500" height={{publicationBean.publfacebookLinkHeight}}  [src]="url" frameborder="0" allowfullscreen>
             </iframe>
           </div>
 
@@ -320,70 +320,73 @@
           </textarea>
           <textarea placeholder="Votre commentaire ..." formControlName="commentText" style="display:none"></textarea>
           <input type="file" class="{{pubImgId}}" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
+            <div class="textarea text-left"
+                  id="{{commentTextareaId}}"
+                  placeholder="Votre commentaire ..."
+                  contenteditable="true"
+                  (focus)="focused(this)"
+                  [(contenteditableModel)]="commentInputHtml"
+                  (keydown)="scrollToCommentInput()">
+                  <!--(keydown.Enter)="publishComment()"-->
+            </div>
 
-          <div class="textarea text-left"
-                id="{{commentTextareaId}}"
-                placeholder="Votre commentaire ..."
-                contenteditable="true"
-                (focus)="focused(this)"
-                [(contenteditableModel)]="commentInputHtml"
-                (keydown.Enter)="publishComment()"
-                (keydown)="scrollToCommentInput()">
-          </div>
+            <div class="form-more">
+              <img src="/assets/images/new/camera.png" class="addPhoto" (click)="addPhoto()"/>
+              <img src="/assets/images/new/smiley.png" class="toggleEmoji" (click)="toggleEmoji()" style="padding-right: 10px;" />
+              <div class="emoji-hover" id="{{emojiHoverId}}">
+                <div class="emoji-header">
+                  <div class="emoji-categ tooltip-emoji" id="ppl" (click)="changeEmojiTab(0)">
+                    <img src="assets/images/basic/smiley.png" />
+                    <span class="tooltiptext">
+                      {{ 'publication_emoticon_people' | translate }}
+                      <div class="arrow-tooltip"></div>
+                    </span>
+                  </div>
+                  <div class="emoji-categ tooltip-emoji" id="ntr" (click)="changeEmojiTab(1)">
+                    <img src="assets/images/basic/evergreen_tree.png" />
+                    <span class="tooltiptext">
+                      {{ 'publication_emoticon_nature' | translate }}
+                      <div class="arrow-tooltip"></div>
+                    </span>
+                  </div>
+                  <div class="emoji-categ tooltip-emoji" id="objcts" (click)="changeEmojiTab(2)">
+                    <img src="assets/images/basic/radio.png" />
+                    <span class="tooltiptext">
+                      {{ 'publication_emoticon_objects' | translate }}
+                      <div class="arrow-tooltip"></div>
+                    </span>
+                  </div>
+                  <i class="fa fa-times close" aria-hidden="true" (click)="closeModalEmoji()"></i>
+                </div>
+                <div class="emoji-container" id="ppl-container" *ngIf="selectedEmojiTab==0">
+                  <div *ngFor="let emoji of listEmoji[0].list" (click)="addToComment(emoji)" class="emoji-elt">
+                    <img src="assets/images/basic/{{emoji.imageName}}.png" />
+                  </div>
+                </div>
+                <div class="emoji-container" id="ntr-container" *ngIf="selectedEmojiTab==1">
+                  <div *ngFor="let emoji of listEmoji[1].list" (click)="addToComment(emoji)" class="emoji-elt">
+                    <img src="assets/images/basic/{{emoji.imageName}}.png" />
+                  </div>
 
-          <div class="form-more">
-            <img src="/assets/images/new/camera.png" class="addPhoto" (click)="addPhoto()"/>
-            <img src="/assets/images/new/smiley.png" class="toggleEmoji" (click)="toggleEmoji()" style="padding-right: 10px;" />
-            <button class="comment-publish" type="submit" *ngIf="!loadingComment">
-              <!-- {{ 'publication_comment_button' | translate }} -->
-              <div class="publishImage"></div>
-            </button>
-            <button class="comment-publish comment-loading" *ngIf="loadingComment" disabled>
-              <div class="loading"></div>
-            </button>
-            <div class="emoji-hover" id="{{emojiHoverId}}">
-              <div class="emoji-header">
-                <div class="emoji-categ tooltip-emoji" id="ppl" (click)="changeEmojiTab(0)">
-                  <img src="assets/images/basic/smiley.png" />
-                  <span class="tooltiptext">
-                    {{ 'publication_emoticon_people' | translate }}
-                    <div class="arrow-tooltip"></div>
-                  </span>
                 </div>
-                <div class="emoji-categ tooltip-emoji" id="ntr" (click)="changeEmojiTab(1)">
-                  <img src="assets/images/basic/evergreen_tree.png" />
-                  <span class="tooltiptext">
-                    {{ 'publication_emoticon_nature' | translate }}
-                    <div class="arrow-tooltip"></div>
-                  </span>
-                </div>
-                <div class="emoji-categ tooltip-emoji" id="objcts" (click)="changeEmojiTab(2)">
-                  <img src="assets/images/basic/radio.png" />
-                  <span class="tooltiptext">
-                    {{ 'publication_emoticon_objects' | translate }}
-                    <div class="arrow-tooltip"></div>
-                  </span>
-                </div>
-                <i class="fa fa-times close" aria-hidden="true" (click)="closeModalEmoji()"></i>
-              </div>
-              <div class="emoji-container" id="ppl-container" *ngIf="selectedEmojiTab==0">
-                <div *ngFor="let emoji of listEmoji[0].list" (click)="addToComment(emoji)" class="emoji-elt">
-                  <img src="assets/images/basic/{{emoji.imageName}}.png" />
-                </div>
-              </div>
-              <div class="emoji-container" id="ntr-container" *ngIf="selectedEmojiTab==1">
-                <div *ngFor="let emoji of listEmoji[1].list" (click)="addToComment(emoji)" class="emoji-elt">
-                  <img src="assets/images/basic/{{emoji.imageName}}.png" />
-                </div>
-
-              </div>
-              <div class="emoji-container" id="objcts-container" *ngIf="selectedEmojiTab==2">
-                <div *ngFor="let emoji of listEmoji[2].list" (click)="addToComment(emoji)" class="emoji-elt">
-                  <img src="assets/images/basic/{{emoji.imageName}}.png" />
+                <div class="emoji-container" id="objcts-container" *ngIf="selectedEmojiTab==2">
+                  <div *ngFor="let emoji of listEmoji[2].list" (click)="addToComment(emoji)" class="emoji-elt">
+                    <img src="assets/images/basic/{{emoji.imageName}}.png" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          
+
+          <button class="comment-publish" type="submit" *ngIf="!loadingComment">
+            <!-- {{ 'publication_comment_button' | translate }} -->
+            <div class="publishImage"></div>
+          </button>
+          <button class="comment-publish comment-loading" *ngIf="loadingComment" disabled>
+            <div class="loading"></div>
+          </button>
+
+
         </form>
       </div>
       <div *ngIf="uploadedPictureComment" class="upload-comment-picture-cont">
