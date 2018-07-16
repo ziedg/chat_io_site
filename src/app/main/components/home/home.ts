@@ -87,7 +87,6 @@ export class Home {
   public arabicText: boolean = false;
   arabicRegex: RegExp = /[\u0600-\u06FF]/;
   public imageFromLink: boolean = false;
-  joke="";
   bglist=false;
   bgvalid=true;
   pubclass="";
@@ -227,10 +226,6 @@ export class Home {
       document.documentElement.scrollTop = 0;
     }, 1000);
 
-  }
-  ngAfterViewChecked(){
-    this.selectedLanguage = localStorage.getItem('userLang');
-    this.joke_sentence();
   }
   Classname(){
     if(this.pubbg)
@@ -1299,18 +1294,10 @@ export class Home {
     localStorage.setItem('userLang', language);
     this.translate.use(language);
     this.translate.setDefaultLang(language);
-    this.joke_sentence();
     //location.reload();
     //console.log(localStorage.getItem('userLang')) ;
   }
   
-  joke_sentence(){
-    
-    if (this.selectedLanguage==='fr'){this.joke="Votre blague ici ..."}
-    else if (this.selectedLanguage==='en'){this.joke="Your joke here ..."}
-    else if(this.selectedLanguage==='es') this.joke="Tu broma aquí ...";
-    $('#publishDiv').attr('placeholder',this.joke);
-  }
   toggleTranslateDropdown() {
     jQuery(".dropdown-menu-translate").toggle();
   }
