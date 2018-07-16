@@ -115,11 +115,11 @@ export class ConversationComponent implements OnInit, AfterViewInit{
     //if (event.keyCode === 13) {
     const message = this.messageForm.controls['message'].value.trim();
     if (message === '' || message === undefined || message === null) {
-      alert(`Message can't be empty.`);
+      // alert(`Message can't be empty.`);
     } else if (this.userId === '') {
       this.router.navigate(['/']);
     } else if (this.selectedUser._id === '') {
-      alert(`Select a user to chat.`);
+      // alert(`Select a user to chat.`);
     } else {
       const data = {
         fromUserId: this.userId,
