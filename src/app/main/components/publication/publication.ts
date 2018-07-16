@@ -252,9 +252,19 @@ showConfirmButton: false
   }
 
   scrollToCommentInput() {
-    let input = this.commentInput.nativeElement;
-    input.scrollIntoView(false);
-    //window.scrollTo(0, input.offsetTop + input.offsetHeight);
+    let marge:number = 120;
+    //input.scrollIntoView(false);
+    window.scroll(0, this.findScrollToWindow(this.commentInput.nativeElement) - marge);
+  }
+
+  findScrollToWindow(obj):number {
+    let curtop:number = 0;
+    if (obj.offsetParent) {
+        do {
+            curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+    return curtop;
+    }
   }
 
   // initComments() {

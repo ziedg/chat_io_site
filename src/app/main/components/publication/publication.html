@@ -312,7 +312,7 @@
       </div>
     </div>
     <div [class.comment-with-picture]="uploadedPictureComment">
-      <div *ngIf="commentsDisplayed" class="comment-holder form-comment">
+      <div *ngIf="commentsDisplayed" class="comment-holder form-comment" #commentInput>
         <img class="user-img for-comment img-circle" src="{{user | AvailablePicture}}">
 
         <form (ngSubmit)="publishComment()" [formGroup]="formComment" #f="ngForm">
@@ -328,8 +328,7 @@
                 (focus)="focused(this)"
                 [(contenteditableModel)]="commentInputHtml"
                 (keydown.Enter)="publishComment()"
-                (keydown)="scrollToCommentInput()"
-                #commentInput>
+                (keydown)="scrollToCommentInput()">
           </div>
 
           <div class="form-more">
