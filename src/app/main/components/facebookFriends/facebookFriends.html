@@ -23,7 +23,7 @@
 							[routerLink]="['/main/profile',profile._id]"
              	[ngStyle]="{'background-image': 'url(' + profile.profilePicture + ')'}">
         </div>
-        <div class="user-name" style="margin-right:0;margin-left:0;">
+        <div class="user-name" style="margin-right:0;margin-left:0;margin-top:-5px">
           <header style="text-align: center"><a [routerLink]="['/main/profile',profile._id]" class="fb-link-name">
             {{profile.firstName}} {{profile.lastName}}
           </a></header>
