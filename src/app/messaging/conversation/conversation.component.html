@@ -7,15 +7,13 @@
 		<div class="opposite-user" *ngIf="selectedUser !== null && selectedUser.firstName">
 			<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
 		</div>
-        <loading-bar *ngIf="loadingMessages"> </loading-bar>
+        <img class="loader" *ngIf="loadingMessages" src="/assets/images/new/loading.png">
 		<ul class="message-thread" (scroll)="onScrollMessageThread()" #messageThread>
 			<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)"
 			 (click)="show(message.toUserId)">
-				<!-- <div *ngFor="let m of message"> -->
 				<img *ngIf="alignMessage(message.toUserId) == false" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle"
 				/>
 				<p class="messageContent" innerHTML="{{message.message | DetectUrls}}"></p>
-				<!-- </div> -->
 			</li>
 		</ul>
 		<div class="message-typer">

@@ -4,11 +4,10 @@
     width: 26px;
     height: 26px;
     animation: spin 0.9s linear infinite;
-    margin-top:23%;
+    margin-top:5%;
     margin-left:46%;
     background-color: transparent;
     position: relative;
-    
 }
 
 @keyframes spin {
@@ -241,6 +240,6 @@
 
 @media (max-width: 768px){
     .message-thread>li:last-child{
-        margin-bottom:40px;
+        margin-bottom:80px;
     }
 }
