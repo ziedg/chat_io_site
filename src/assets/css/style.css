@@ -2608,7 +2608,7 @@ textarea:focus {
 .user-fb {
   display: flex !important;
   position: relative;
-  padding: 20px;
+  padding: 16px;
   width: 170px;
   height: 210px;
   margin: 5px;
@@ -2669,7 +2669,7 @@ top-blagueurs-decov .user .user-img {
 }
 
 facebook-friends .user .user-img {
-  --user-img-w: 60px;
+  --user-img-w: 70px;
   width: var(--user-img-w);
   height: var(--user-img-w);
   min-width: var(--user-img-w);
