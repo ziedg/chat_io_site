@@ -146,6 +146,7 @@
                    (paste)="updatePublishTextOnPaste($event)"
                    contenteditable="true" placeholder=" " (keyup)="checkTyping(publishDivRef)"
                    (drop)="onDrop($event)"
+                   
                    #publishDivRef style="width: calc(100% - 80px)"></div>
 
 
@@ -281,38 +282,10 @@
            </div>
            <div class="col-md-7 col-xs-6 share-button"
                 style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
-                <button *ngIf="bglist" class="publish-button" 
-                style="right:10px;z-index:1;background-color:transparent;border:1px solid #ccc" (click)="closeBglist()">
+                <button *ngIf="bglist || showGifSlider || (userPublishInput || youtubeLink || facebookLink || uploadedPicture|| link.isSet || imageFromLink)" class="publish-button" 
+                style="right:10px;z-index:1;background-color:transparent;border:1px solid #ccc" (click)="cancelPublication()">
                 <p style="color: black;margin-top: 8%;"> Annuler </p></button>
-             <div *ngIf="!bglist" class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
-               <div>
-                 <header (click)="disableSelectMenu()">
-                   {{ 'home_publish_visibility_header' | translate }}
-                 </header>
-                 <div [class.hide]="selectedMenuElement!=0">
-                   <i class="fa fa-globe"></i>
-                   {{ 'home_publish_visibility_all' | translate }}
-                 </div>
-                 <div [class.hide]="selectedMenuElement!=1">
-                   <i class="fa fa-users"></i>
-                   {{ 'home_publish_visibility_subscribers' | translate }}
-                 </div>
-                 <div class="select-menu" style="display:none;">
-                   <header (click)="disbaleSelectMenu()">
-                     {{ 'home_publish_visibility_header' | translate }}
-                   </header>
-                   <div class="select-choice" (click)="changeSelectMenu(0)">
-                     <i class="fa fa-globe"></i>
-                     {{ 'home_publish_visibility_all' | translate }}
-                   </div>
-                   <div class="select-choice" (click)="changeSelectMenu(1)">
-                     <i class="fa fa-users"></i>
-                     {{ 'home_publish_visibility_subscribers' | translate }}
-                   </div>
-                 </div>
-               </div>
-               <i class="fa fa-caret-down"></i>
-             </div>
+            
              <button class="publish-button" type="submit" *ngIf="!loadingPublish">
                {{ 'home_publish_button' | translate }}
              </button>
