@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } fr
 import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-
+import { TranslateService } from "@ngx-translate/core";
 import { User } from '../../beans/user';
 import { LoginService } from '../../login/services/loginService';
 import { ChatService } from '../../messanging/chat.service';
@@ -40,6 +40,7 @@ export class ChatListComponent implements OnInit {
 
   //
   constructor(
+    public translate: TranslateService,
     private emitterService: EmitterService,
     private chatService: ChatService,
     private loginService: LoginService,
@@ -76,7 +77,7 @@ export class ChatListComponent implements OnInit {
       if (msg.fromUserId === this.userId) {
         let elementPos = this.historyUsers.map(function (x) { return x._id }).indexOf(msg.toUserId);
 
-        this.historyUsers[elementPos].lastMessage.message = "Vous : " + msg.message;
+        this.historyUsers[elementPos].lastMessage.message = this.translateCode("you : ") + msg.message;
 
         let actualDate = new Date(Date.now());
         let hours = actualDate.getHours().toString();
@@ -136,6 +137,13 @@ export class ChatListComponent implements OnInit {
         }
       );
   }
+  translateCode(code) {
+    let message;
+    this.translate.get(code).subscribe((resTranslate: string) => {
+      message = resTranslate;
+    });
+    return message;
+  }
   getChatList() {
     /*
      l'historique des personnes dont il a fait des conversations avec +dernier message pour chacun
@@ -147,7 +155,7 @@ export class ChatListComponent implements OnInit {
       .subscribe((users: any[]) => {
         for (let i = 0; i < users.length; i++) {
           if (users[i].lastMessage.fromUserId == this.userId) {
-            users[i].lastMessage.message = "Vous : " + users[i].lastMessage.message;
+            users[i].lastMessage.message = this.translateCode("you : ") + users[i].lastMessage.message;
           }
           let dateMsg = new Date(users[i].lastMessage.date);
           let actualDate = new Date(Date.now());
