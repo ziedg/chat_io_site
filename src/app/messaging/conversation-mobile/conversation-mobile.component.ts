@@ -171,7 +171,9 @@ export class ConversationMobileComponent implements OnInit {
       this.messages = [...this.messages, data];
       /* calling method to send the messages */
       this.chatService.sendMessage(data).subscribe(
-        () => {},
+        () => {
+          this.scrollMsgWrapperBottom();
+        },
         err => console.log('Could send message to server, reason: ', err));
 
       this.messageForm.reset();
