@@ -210,3 +210,14 @@
     line-height: 0;
     visibility: hidden;
 }
+.loader {
+    border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    animation: spin 0.9s linear infinite;
+    margin-top:5%;
+    margin-left:46%;
+    background-color: transparent;
+    position: relative;
+}

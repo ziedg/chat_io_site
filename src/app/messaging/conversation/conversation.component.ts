@@ -40,7 +40,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
   private msgFirstCheck: Boolean = true;
   isFirstLoaded: boolean = true;
   loadMoreMessages :boolean =true ;
-  loadingMessages:boolean =true ;
+  loadingMessages:boolean =false ;
 
   @ViewChild("messageThread") messageThread:ElementRef;
   
@@ -72,6 +72,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
 
     if (!this.messageThread.nativeElement.scrollTop && !this.isFirstLoaded) {
       //console.log("reach the top of message thread");
+      if (this.messages.length<20) this.loadMoreMessages=false
       if(this.loadMoreMessages){
         //console.log('loading more messages')
         this.loadingMessages=true;
