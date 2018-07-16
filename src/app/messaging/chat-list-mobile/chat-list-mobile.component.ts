@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
-import { environment } from 'environments/environment';
-
+import { environment } from '../../../environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from '../../beans/user';
 import { LoginService } from '../../login/services/loginService';
 import { ChatService } from '../../messanging/chat.service';
@@ -24,6 +24,7 @@ export class ChatListMobileComponent implements OnInit {
 
   private user;
   private userId: string = null;
+  private notread: boolean;
   public chatListUsers: any[] = [];
   public historyUsers: any[] = [];
   public suggestions: any[] = [];
@@ -40,6 +41,7 @@ export class ChatListMobileComponent implements OnInit {
 
   //
   constructor(
+    public translate: TranslateService,
     private emitterService: EmitterService,
     private chatService: ChatService,
     private loginService: LoginService,
@@ -56,12 +58,17 @@ export class ChatListMobileComponent implements OnInit {
     this.getSuggestionsList();
     //this.listenForAllMessages(this.userId);
     this.reactToNewMessages();
-    jQuery(".navigation-bottom").addClass('hidden-xs');
+  }
+  translateCode(code) {
+    let message;
+    this.translate.get(code).subscribe((resTranslate: string) => {
+      message = resTranslate;
+    });
+    return message;
   }
   getChatList() {
     /*
-     l'historique des personnes dont il a fait des conversations avec 
-     sinon Les trois abonnements derniers des
+     l'historique des personnes dont il a fait des conversations avec +dernier message pour chacun
      */
     this.chatService.getList(this.userId)
       .map(users => {
@@ -77,10 +84,53 @@ export class ChatListMobileComponent implements OnInit {
           let year = dateMsg.getFullYear();
           let month = dateMsg.getMonth() + 1;
           let day = dateMsg.getDate();
+          let day_text = day.toString();
+          if (day_text.length == 1) {
+            day_text = "0" + day_text;
+          }
+          let month_text = '';
           if ((actualDate.getFullYear() - year > 0) ||
             ((actualDate.getMonth() + 1) - month > 0) ||
             (actualDate.getDate() - day > 0)) {
-            users[i].lastMessage.date = day + "-" + month + "-" + year;
+            switch (month) {
+              case 1:
+                month_text = this.translateCode("January");
+                break;
+              case 2:
+                month_text = this.translateCode("February");
+                break;
+              case 3:
+                month_text = this.translateCode("March");
+                break;
+              case 4:
+                month_text = this.translateCode("April");
+                break;
+              case 5:
+                month_text = this.translateCode("May");
+                break;
+              case 6:
+                month_text = this.translateCode("June");
+                break;
+              case 7:
+                month_text = this.translateCode("July");
+                break;
+              case 8:
+                month_text = this.translateCode("August");
+                break;
+              case 9:
+                month_text = this.translateCode("September");
+                break;
+              case 10:
+                month_text = this.translateCode("October");
+                break;
+              case 11:
+                month_text = this.translateCode("November");
+                break;
+              case 12:
+                month_text = this.translateCode("December");
+                break;
+            }
+            users[i].lastMessage.date = day_text + "-" + month_text + "-" + year;
           } else {
             let hours;
             let minutes;
@@ -97,13 +147,14 @@ export class ChatListMobileComponent implements OnInit {
             users[i].lastMessage.date = hours + ":" + minutes;
           }
           this.chatListUsers.push(users[i]);
-
-          //console.log(this.chatListUsers);
         }
-        this.loaded = true;
-        this.sortChatList();
-        this.historyUsers = this.chatListUsers.slice();
-      })
+      },
+        err => { console.log(err) },
+        () => {
+          this.loaded = true;
+          this.sortChatList();
+          this.historyUsers = this.chatListUsers.slice();
+        });
   }
 
   sortChatList() {
@@ -176,9 +227,9 @@ export class ChatListMobileComponent implements OnInit {
 
   reactToNewMessages() {
     this.chatService.messageEmitter.subscribe(message => {
-      let profiles = this.historyUsers.filter(user => user._id == message.fromUserId);
+      let profiles = this.historyUsers.filter(user => user._id === message.fromUserId);
       if (profiles[0]) {
-        let index = this.historyUsers.findIndex(user => user._id == message.fromUserId);
+        let index = this.historyUsers.findIndex(user => user._id === message.fromUserId);
         this.historyUsers.splice(index, 1);
         profiles[0].lastMessage.message = message.message;
         let actualDate = new Date(Date.now());
@@ -194,12 +245,13 @@ export class ChatListMobileComponent implements OnInit {
 
         profiles[0].lastMessage.date = hours + ":" + minutes;
         this.historyUsers.unshift(profiles[0]);
+        this.chatListUsers = this.historyUsers.slice()
+        this.notread = true;
         this.changeDetector.markForCheck();
-        //console.log(profiles[0])
       } else {
-        profiles = this.suggestions.filter(user => user._id == message.fromUserId);
+        let profiles = this.suggestions.filter(user => user._id === message.fromUserId);
         if (profiles[0]) {
-          profiles[0].lastMessage.message = message.message;
+          profiles[0].lastMessage = message;
           let actualDate = new Date(Date.now());
           let hours = actualDate.getHours().toString();
           let minutes = actualDate.getMinutes().toString();
@@ -210,11 +262,11 @@ export class ChatListMobileComponent implements OnInit {
           if (minutes.length == 1) {
             minutes = "0" + minutes;
           }
-
           profiles[0].lastMessage.date = hours + ":" + minutes;
           this.historyUsers.unshift(profiles[0]);
+          this.chatListUsers = this.historyUsers.slice()
+          this.notread = true;
           this.changeDetector.markForCheck();
-          //console.log(profiles[0])
         } else {
           this.http.get(
             environment.SERVER_URL + pathUtils.GET_PROFILE + message.fromUserId,
@@ -223,16 +275,31 @@ export class ChatListMobileComponent implements OnInit {
             .subscribe(
               response => {
                 if (response.status == "0") {
+                  let actualDate = new Date(Date.now());
+                  let hours = actualDate.getHours().toString();
+                  let minutes = actualDate.getMinutes().toString();
+                  if (hours.length == 1) {
+                    hours = "0" + hours;
+                  }
+                  if (minutes.length == 1) {
+                    minutes = "0" + minutes;
+                  }
+                  let newDate = hours + ":" + minutes;
                   let profile = {
                     _id: response.user._id,
                     firstName: response.user.firstName,
                     lastName: response.user.lastName,
                     profilePicture: response.user.profilePicture,
-                    lastMessage: message
+                    lastMessage: {
+                      ...message,
+                      date: newDate
+                    }
                   }
                   this.historyUsers.unshift(profile);
-                  //console.log(profile)
+                  this.chatListUsers = this.historyUsers.slice()
+                  this.notread = true;
                 }
+
               },
               err => {
               },
@@ -242,7 +309,6 @@ export class ChatListMobileComponent implements OnInit {
             );
         }
       }
-      //console.log(message)
     })
   }
 
@@ -287,14 +353,18 @@ export class ChatListMobileComponent implements OnInit {
 
   /*Search functionnality*/
   loadUser(user) {
-
     var found = this.historyUsers.some(function (profile) {
       return profile._id == user._id;
     });
-    if (!found) this.historyUsers.push(user)
+    if (!found) this.historyUsers.unshift(user)
 
-    this.selectUser(user);
+    this.selectUser(user)
+    if (user.lastMessage) {
+      user.lastMessage.isSeen = true;
+    }
+    this.searchValue = ""
     this.chatListUsers = this.historyUsers.slice();
+    //this.updateMyMessages();
   }
 
   filterChatListUsersByName(name) {
@@ -317,21 +387,28 @@ export class ChatListMobileComponent implements OnInit {
   }
 
   onChange(newValue: string) {
-    this.listSearchUsers = [];
-    this.enableAutocomplete();
+    this.chatListUsers = [];
     this.changeDetector.markForCheck();
     if (newValue.length >= 1) {
+
+
       let searchInHistory = this.filterChatListUsersByName(newValue);
       if (searchInHistory && searchInHistory.length > 0) {
-        this.listSearchUsers = searchInHistory
+
+        this.chatListUsers = searchInHistory
       } else {
+
         let searchInSubscriptions = this.filterSubscriptionsByName(newValue);
+
         if (searchInSubscriptions && searchInSubscriptions.length > 0) {
-          this.listSearchUsers = searchInSubscriptions;
+          this.chatListUsers = searchInSubscriptions;
         } else {
+
           this.getListSearchUsers(newValue);
         }
       }
+    } else {
+      this.chatListUsers = this.historyUsers.slice();
     }
     this.changeDetector.markForCheck();
   }
@@ -347,17 +424,10 @@ export class ChatListMobileComponent implements OnInit {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-          this.listSearchUsers = [];
-          this.noSearchResults = false;
-          this.changeDetector.markForCheck();
-          for (var i = 0; i < this.listSearchUsers.length; i++) {
-            this.listSearchUsers.pop();
-            this.changeDetector.markForCheck();
-          }
           if (response.status == 0) {
             if (response.profiles)
               for (var i = 0; i < response.profiles.length; i++) {
-                this.listSearchUsers[i] = response.profiles[i];
+                this.chatListUsers[i] = response.profiles[i];
                 this.changeDetector.markForCheck();
               }
           }
@@ -366,8 +436,7 @@ export class ChatListMobileComponent implements OnInit {
           this.noSearchResults = true;
         },
         () => {
-          if (this.listSearchUsers.length == 0) {
-            this.disableAutocomplete();
+          if (this.chatListUsers.length == 0) {
             this.noSearchResults = true;
           } else {
             this.noSearchResults = false;

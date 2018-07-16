@@ -83,56 +83,10 @@
                   && publicationBean.publText !=='undefined'
                   && publicationBean.publText.length > 0" [ngClass]="{'publication-text': true, 'arabic-text': arabicText}"
         [ngStyle]="{'textAlign': textplace}">
-        <span [ngClass]="{                                           'pubdes1': pubclass=='pubdes1',
-                                                                          'pubdes2': pubclass=='pubdes2',
-                                                                          'pubdes3': pubclass=='pubdes3',
-                                                                          'pubdes4': pubclass=='pubdes4',
-                                                                          'pubdes5': pubclass=='pubdes5',
-                                                                          'pubdes6': pubclass=='pubdes6',
-                                                                          'pubdes7': pubclass=='pubdes7',
-                                                                          'pubdes8': pubclass=='pubdes8',
-                                                                          'pubdes9': pubclass=='pubdes9',
-                                                                          'pubdes10': pubclass=='pubdes10',
-                                                                          'pubdes11': pubclass=='pubdes11',
-                                                                          'pubdes12': pubclass=='pubdes12',
-                                                                          'pubdes13': pubclass=='pubdes13',
-                                                                          'pubdes14': pubclass=='pubdes14',
-                                                                          'pubdes15': pubclass=='pubdes15',
-                                                                          'pubdes16': pubclass=='pubdes16',
-                                                                          'pubdes17': pubclass=='pubdes17',
-                                                                          'pubdes18': pubclass=='pubdes18',
-                                                                          'pubdes19': pubclass=='pubdes19',
-                                                                          'pubdes20': pubclass=='pubdes20',
-                                                                          'pubdes21': pubclass=='pubdes21',
-                                                                          'pubdes22': pubclass=='pubdes22',
-                                                                          'pubdes23': pubclass=='pubdes23'
-                                                                          }" style="width: 600px" [innerHTML]="firstPubText"></span>
+        <span class="{{pubclass}}" style="width: 600px" [innerHTML]="firstPubText"></span>
         <a *ngIf="isLongText && !isLongTextShow" (click)="isLongTextShow=true" style="display: inline">
           {{"publication_open_last_part" | translate }}</a>
-        <span *ngIf="isLongText && isLongTextShow" [ngClass]="{     'pubdes1': pubclass=='pubdes1',
-                                                                          'pubdes2': pubclass=='pubdes2',
-                                                                          'pubdes3': pubclass=='pubdes3',
-                                                                          'pubdes4': pubclass=='pubdes4',
-                                                                          'pubdes5': pubclass=='pubdes5',
-                                                                          'pubdes6': pubclass=='pubdes6',
-                                                                          'pubdes7': pubclass=='pubdes7',
-                                                                          'pubdes8': pubclass=='pubdes8',
-                                                                          'pubdes9': pubclass=='pubdes9',
-                                                                          'pubdes10': pubclass=='pubdes10',
-                                                                          'pubdes11': pubclass=='pubdes11',
-                                                                          'pubdes12': pubclass=='pubdes12',
-                                                                          'pubdes13': pubclass=='pubdes13',
-                                                                          'pubdes14': pubclass=='pubdes14',
-                                                                          'pubdes15': pubclass=='pubdes15',
-                                                                          'pubdes16': pubclass=='pubdes16',
-                                                                          'pubdes17': pubclass=='pubdes17',
-                                                                          'pubdes18': pubclass=='pubdes18',
-                                                                          'pubdes19': pubclass=='pubdes19',
-                                                                          'pubdes20': pubclass=='pubdes20',
-                                                                          'pubdes21': pubclass=='pubdes21',
-                                                                          'pubdes22': pubclass=='pubdes22',
-                                                                          'pubdes23': pubclass=='pubdes23'
-                                                                          }" style="width: 600px" [innerHTML]="lastPubText">
+        <span *ngIf="isLongText && isLongTextShow" class="{{pubclass}}" style="width: 600px" [innerHTML]="lastPubText">
         </span>
       </span>
 
@@ -216,56 +170,10 @@
                   && publicationBean.publText !=='undefined'
                   && publicationBean.publText.length > 0">
             <!--[innerHTML]="linkView.transformATextHaveALink(publicationBean.publText)">-->
-            <span [innerHTML]="firstPubText" style="padding-left:7px" [ngClass]="{ 'pubdes1': pubclass=='pubdes1',
-                                                                          'pubdes2': pubclass=='pubdes2',
-                                                                          'pubdes3': pubclass=='pubdes3',
-                                                                          'pubdes4': pubclass=='pubdes4',
-                                                                          'pubdes5': pubclass=='pubdes5',
-                                                                          'pubdes6': pubclass=='pubdes6',
-                                                                          'pubdes7': pubclass=='pubdes7',
-                                                                          'pubdes8': pubclass=='pubdes8',
-                                                                          'pubdes9': pubclass=='pubdes9',
-                                                                          'pubdes10': pubclass=='pubdes10',
-                                                                          'pubdes11': pubclass=='pubdes11',
-                                                                          'pubdes12': pubclass=='pubdes12',
-                                                                          'pubdes13': pubclass=='pubdes13',
-                                                                          'pubdes14': pubclass=='pubdes14',
-                                                                          'pubdes15': pubclass=='pubdes15',
-                                                                          'pubdes16': pubclass=='pubdes16',
-                                                                          'pubdes17': pubclass=='pubdes17',
-                                                                          'pubdes18': pubclass=='pubdes18',
-                                                                          'pubdes19': pubclass=='pubdes19',
-                                                                          'pubdes20': pubclass=='pubdes20',
-                                                                          'pubdes21': pubclass=='pubdes21',
-                                                                          'pubdes22': pubclass=='pubdes22',
-                                                                          'pubdes23': pubclass=='pubdes23'
-                                                                          }"></span>
+            <span [innerHTML]="firstPubText" style="padding-left:7px" class="{{pubclass}}"></span>
             <a *ngIf="isLongText && !isLongTextShow" (click)="isLongTextShow=true" style="margin-top: 0; display:inline">
               {{"publication_open_last_part" | translate }}</a>
-            <span *ngIf="isLongText && isLongTextShow" [innerHTML]="lastPubText" [ngClass]="{                                           'pubdes1': pubclass=='pubdes1',
-                                                                          'pubdes2': pubclass=='pubdes2',
-                                                                          'pubdes3': pubclass=='pubdes3',
-                                                                          'pubdes4': pubclass=='pubdes4',
-                                                                          'pubdes5': pubclass=='pubdes5',
-                                                                          'pubdes6': pubclass=='pubdes6',
-                                                                          'pubdes7': pubclass=='pubdes7',
-                                                                          'pubdes8': pubclass=='pubdes8',
-                                                                          'pubdes9': pubclass=='pubdes9',
-                                                                          'pubdes10': pubclass=='pubdes10',
-                                                                          'pubdes11': pubclass=='pubdes11',
-                                                                          'pubdes12': pubclass=='pubdes12',
-                                                                          'pubdes13': pubclass=='pubdes13',
-                                                                          'pubdes14': pubclass=='pubdes14',
-                                                                          'pubdes15': pubclass=='pubdes15',
-                                                                          'pubdes16': pubclass=='pubdes16',
-                                                                          'pubdes17': pubclass=='pubdes17',
-                                                                          'pubdes18': pubclass=='pubdes18',
-                                                                          'pubdes19': pubclass=='pubdes19',
-                                                                          'pubdes20': pubclass=='pubdes20',
-                                                                          'pubdes21': pubclass=='pubdes21',
-                                                                          'pubdes22': pubclass=='pubdes22',
-                                                                          'pubdes23': pubclass=='pubdes23'
-                                                                          }">
+            <span *ngIf="isLongText && isLongTextShow" [innerHTML]="lastPubText" class="{{pubclass}}">
             </span>
           </span>
           <div class="link-preview" *ngIf="link.isSet">
@@ -327,7 +235,7 @@
 
       <span *ngIf="publicationBean.nbLikes+publicationBean.nbDislikes != 0 && nbDisplayedComments != 0"> • </span>
       <span *ngIf="nbDisplayedComments != 0">
-        <a (click)="displayComments()">
+        <a [routerLink]="['/main/post',publicationBean._id]">
           {{shortNumber(nbDisplayedComments)}} {{ 'commentaires' | translate }}</a>
       </span>
     </div>
@@ -404,7 +312,7 @@
       </div>
     </div>
     <div [class.comment-with-picture]="uploadedPictureComment">
-      <div *ngIf="commentsDisplayed" class="comment-holder form-comment">
+      <div *ngIf="commentsDisplayed" class="comment-holder form-comment" #commentInput>
         <img class="user-img for-comment img-circle" src="{{user | AvailablePicture}}">
 
         <form (ngSubmit)="publishComment()" [formGroup]="formComment" #f="ngForm">
@@ -413,8 +321,14 @@
           <textarea placeholder="Votre commentaire ..." formControlName="commentText" style="display:none"></textarea>
           <input type="file" class="{{pubImgId}}" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
 
-          <div class="textarea text-left" id="{{commentTextareaId}}" placeholder="Votre commentaire ..." contenteditable="true" (focus)="focused(this)"
-            [(contenteditableModel)]="commentInputHtml" (keydown.Enter)="publishComment()">
+          <div class="textarea text-left"
+                id="{{commentTextareaId}}"
+                placeholder="Votre commentaire ..."
+                contenteditable="true"
+                (focus)="focused(this)"
+                [(contenteditableModel)]="commentInputHtml"
+                (keydown.Enter)="publishComment()"
+                (keydown)="scrollToCommentInput()">
           </div>
 
           <div class="form-more">

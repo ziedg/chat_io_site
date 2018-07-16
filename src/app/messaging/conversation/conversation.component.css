@@ -9,6 +9,10 @@
 	line-height: 17px;
 }
 
+#not-active{ 
+    color:grey;
+}
+
 .opposite-user>p:first-child{
 	text-transform: capitalize;
 	color:black;
@@ -167,7 +171,7 @@
 .embed-submit-field button{
     position: absolute;
     right: 5px;
-    top: 6px;
+    top: 5px;
     background-color:transparent;
     border:none;
     color:#039803;
@@ -175,6 +179,8 @@
     -webkit-border-radius: 70px; 
     border-radius: 70px;
     padding: 5px 10px;
+    font-size: larger;
+    font-weight: bold;
 }
 #not-active{
     
