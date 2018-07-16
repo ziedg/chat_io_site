@@ -281,10 +281,16 @@
            </div>
            <div class="col-md-7 col-xs-6 share-button"
                 style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
+
                 <button *ngIf="bglist" class="publish-button" 
                 style="right:10px;z-index:1;background-color:transparent;border:1px solid #ccc" (click)="closeBglist()">
                 <p style="color: black;margin-top: 8%;"> Annuler </p></button>
-             <div *ngIf="!bglist" class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
+
+                <button *ngIf="showGifSlider" class="publish-button" 
+                style="right:10px;z-index:1;background-color:transparent;border:1px solid #ccc" (click)="toggleGifSlider()">
+                <p style="color: black;margin-top: 8%;"> Annuler </p></button>
+
+                <div *ngIf="!bglist && !showGifSlider" class="dropdown hidden-sm hidden-xs" (click)="enableSelectMenu()">
                <div>
                  <header (click)="disableSelectMenu()">
                    {{ 'home_publish_visibility_header' | translate }}
