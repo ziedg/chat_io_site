@@ -84,7 +84,7 @@ export class ConversationMobileComponent implements OnInit {
     });*/
 
 
-    jQuery(".message-wrapper").animate({ scrollTop: jQuery('.message-thread').prop("scrollHeight") }, 500);
+    
     this.messageForm = new FormBuilder().group({
       message: new MessageValidation
     });
@@ -183,9 +183,6 @@ export class ConversationMobileComponent implements OnInit {
   listenForMessages(): void {
     
     this.s = this.db.object('notifications/'+this.userId+'/messaging');
-      
-     
-     
       this.s.snapshotChanges().subscribe(action => {
         var notif = action.payload.val();
         if (notif !== null && !this.msgFirstCheck){
