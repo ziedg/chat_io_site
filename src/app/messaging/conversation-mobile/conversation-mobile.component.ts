@@ -44,6 +44,8 @@ export class ConversationMobileComponent implements OnInit {
   loadingMessages:boolean =true ;
 
   @ViewChild("messageThread") messageThread:ElementRef;
+  @ViewChild("msgWrapper") msgWrapper:ElementRef;
+
 
   constructor(private emitterService: EmitterService,
     private router: Router,
@@ -103,28 +105,23 @@ export class ConversationMobileComponent implements OnInit {
         else{
            this.messages = response;
            this.loaded = true;
-
+           this.scrollMsgWrapperBottom();
          }      
     });
     this.listenForMessages();
   }
 
-  /*ngAfterViewInit() {
-    this.scrollMessageThreadBottom();
-  }*/
 
-
-  scrollMessageThreadBottom() {
+  scrollMsgWrapperBottom() {
     this.isFirstLoaded = true;
-    let msgThread = this.messageThread.nativeElement;
+    let wrapper = this.msgWrapper.nativeElement;
     //console.log("scroll to bottom");
-    setTimeout(()=>msgThread.scrollTop = msgThread.scrollHeight, 500);
+    setTimeout(()=>wrapper.scrollTop = wrapper.scrollHeight, 1000);
   }
 
-  onScrollMessageThread() {
+  onScrollMsgWrapper() {
     //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
-
-    if (!this.messageThread.nativeElement.scrollTop && !this.isFirstLoaded) {
+    if (!this.msgWrapper.nativeElement.scrollTop && !this.isFirstLoaded) {
       console.log("reach the top of message thread");
       if(this.loadMoreMessages){
         console.log('loading more messages')
