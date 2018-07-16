@@ -403,7 +403,7 @@ showConfirmButton: false
         this.linkFb =
           "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +
           this.publicationBean.publfacebookLink +
-          "%2F&show_text=0&height=580&appId";
+          "%2F&show_text=0&height="+this.publicationBean.publfacebookLinkHeight+"&appId";
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkFb);
       } else {
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl("");
