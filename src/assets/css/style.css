@@ -2933,7 +2933,7 @@ facebook-friends .user .user-img {
 .comment-text {
   display: inline-block;
   width: 96%;
-  margin-left: 7px;
+  margin-left: 0px;
   margin-bottom: 5px;
   word-wrap: break-word;
 }
@@ -2998,7 +2998,14 @@ facebook-friends .user .user-img {
 }
 
 .comment-content {
-  width: 100%;
+  background-color:#F0F1F3;
+  border-radius: 10px;
+  margin-left: 20px;
+}
+
+.date-comment button{
+  border:none;
+  background:transparent;
 }
 
 .comment-holder .like-dislike {
@@ -3296,14 +3303,13 @@ facebook-friends .user .user-img {
 
 .name-and-text-comment,
 .like-comment {
-  margin-right: 15px !important;
+  margin-right: 5px !important;
   flex-wrap: wrap;
-  padding-left: 15px;
 }
 
 .commenter-name {
   font-weight: bold;
-  color: #3b5998;
+  color: black;
   cursor: pointer;
 }
 
