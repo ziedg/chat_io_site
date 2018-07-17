@@ -394,7 +394,11 @@ export class Main {
         response => {
           if (response.status == 0) {
 
-            this.nbNewNotifications += response.nbNewNotifications;
+            const nbNotif =response.nbNewNotifications;
+
+            console.log(response);
+
+            this.nbNewNotifications =nbNotif;
           }
         },
         err => {},
@@ -526,7 +530,8 @@ checkNewMessageNotification(){
           }
           else
           {
-            this.nbNewNotifications++;
+            this.checkNewNotifications();
+
           }
 
 

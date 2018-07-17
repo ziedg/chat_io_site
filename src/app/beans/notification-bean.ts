@@ -9,5 +9,7 @@ export class NotificationBean {
     public isSeen : string;
     public date_notification: string;
     public profileId : string;
+    public publText:string;
+    public publType:string;
 
 }
