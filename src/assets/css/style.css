@@ -5810,18 +5810,6 @@ publication .user {
   margin-left: 7px;
 }
 
-@media (max-width: 400px) {
-  .suggestions-box .user-name {
-    max-width: 104px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .user-name header {
-    display: inline;
-  }
-}
-
 .btn-edit-profile-1 {
   position: relative;
   left: 12%;

@@ -15,9 +15,12 @@
            [ngStyle]="{'background-image': 'url('+user.profilePicture+')'}">
       </div>
       <div class="user-name">
-        <header><a [routerLink]="['/main/profile', user._id]">
+        <header>
+          <a [routerLink]="['/main/profile', user._id]">
           {{user.firstName}} {{user.lastName}}
-        </a></header>
+          </a>
+        </header>
+        <span class="nb-subscribers">{{user.nbSubscribers}} {{ 'profile_menu_followers' | translate }}</span>
       </div>
       <div class="subscribe-no-number" style="min-width:12px">
         <button (click)="subscribeClick($event, user)" style="float:none">
