@@ -38,7 +38,7 @@
           </button>
         </span>
         <span *ngIf="user._id!=userDisplayed._id" class="hidden-xs">
-          <button class="sub-profile-btn-old active">Contacter</button>
+          <button class="sub-profile-btn-old active" (click)="showSendMessagePopUp()">Contacter</button>
         </span>
 
         <div class="profile-edit hidden-xs">
@@ -63,7 +63,7 @@
         </button>
       </span>
       <span *ngIf="user._id!=userDisplayed._id" class="hidden-md hidden-lg hidden-sm">
-        <button class="sub-profile-btn-old active">Contacter</button>
+        <button class="sub-profile-btn-old active" (click)="showSendMessagePopUp()" >Contacter</button>
       </span>
 
       <div class="header-segement edit-profile-mobile hidden-lg hidden-md hidden-sm" *ngIf="user._id==userDisplayed._id">
