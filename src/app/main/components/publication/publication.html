@@ -121,7 +121,13 @@
         <div id="caption"></div>
       </div>
 
-      <div class="facebook-preview-publication" *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
+      <div class="facebook-responsive-short" 
+      *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null' && publicationBean.publfacebookLinkHeight=='315'">
+        <iframe width="500" height={{publicationBean.publfacebookLinkHeight}} [src]="url" frameborder="0" allowfullscreen >
+        </iframe>
+      </div>
+      <div class="facebook-responsive-long" 
+      *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null' && publicationBean.publfacebookLinkHeight=='560'">
         <iframe width="500" height={{publicationBean.publfacebookLinkHeight}} [src]="url" frameborder="0" allowfullscreen >
         </iframe>
       </div>
@@ -209,11 +215,17 @@
             <div id="caption"></div>
           </div>
 
-          <div class="facebook-preview-publication" *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
+          <div class="facebook-responsive-short" 
+          *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null' && publicationBean.publfacebookLinkHeight=='315'">
             <iframe width="500" height={{publicationBean.publfacebookLinkHeight}}  [src]="url" frameborder="0" allowfullscreen>
             </iframe>
           </div>
-
+          <div class="facebook-responsive-long" 
+          
+          *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null' && publicationBean.publfacebookLinkHeight=='560'">
+            <iframe width="500" height={{publicationBean.publfacebookLinkHeight}}  [src]="url" frameborder="0" allowfullscreen>
+            </iframe>
+          </div>
           <div class="youtube-preview-publication" *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">
             <iframe width="560" height="400" [src]="url" frameborder="0">
             </iframe>
