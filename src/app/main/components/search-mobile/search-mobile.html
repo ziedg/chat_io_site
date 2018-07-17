@@ -3,8 +3,12 @@
 <div class="search-mobile col-xs-12 typeEffect hidden-lg hidden-md hidden-sm">
   <div class="mobile-header-center">
     <div class="header-center">
-      <input class="search" placeholder="{{ 'main_search_placeholder' | translate }}" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)"
-             (focus)="onFocus()" #searchMobileInput>
+      <input class="search"
+              placeholder="{{ 'main_search_placeholder' | translate }}"
+              [(ngModel)]="searchValue"
+              (ngModelChange)="onChange($event)"
+             (focus)="onFocus();"
+             #searchMobileInput>
       <i class="fa fa-search" style="padding: 12px;margin-top: 0;margin-left: -46px;" aria-hidden="true"></i>
       <i class="fa fa-times-circle" aria-hidden="true" (click)="clearSearchMobile()"></i>
     </div>
@@ -12,8 +16,8 @@
 </div>
 
 
-<div class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm"
-     #searchResults2>
+<div *ngIf="searchValue.length > 0"
+      class="recherche-results-holder recherche-results-holder-2 hidden-lg hidden-md hidden-sm">
   <div class="recherche-results recherche-results-2">
 
     <div *ngIf="listSearchUsers && !showRecentSearch">
