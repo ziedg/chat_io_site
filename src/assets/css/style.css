@@ -6001,9 +6001,6 @@ body {
     display: none;
   }
 
-  .sub-main-header {
-  }
-
   .logo img {
     position: static;
     bottom: 0;
@@ -6476,6 +6473,9 @@ img[src="undefined"] {
 @media(max-width: 767px) {
   .navigation-arrow-container-bglist {
     display: none;
+  }
+  home [infinite-scroll]{
+    margin-bottom: -13px;
   }
 
   .bglist {
