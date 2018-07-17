@@ -79,7 +79,7 @@ else if(!(data.notification.tag))
 }
 else
 {
-    url=`https://integration.speegar.com/main/post/${tag}`
+    url=`https://integration.speegar.com/main/post/${data.notification.tag}`
 }
   
   
