@@ -743,6 +743,7 @@ export class Home {
     this.changeDetector.markForCheck();
     this.userPublishInput = false;
     this.bglist = false;
+    this.bgvalid=true;
     this.showGifSlider = false;
   }
 
@@ -860,21 +861,65 @@ export class Home {
   
 
   veriftextsize(publishDivRef){
+    
     let text = publishDivRef.textContent;
+    
     text = this.publicationTextService.addUrls(text);
     let dividedText = this.publicationTextService.divideText(text);
+    //console.log(dividedText);
     let nb=0;
     if(text !== 'null' && text !=='undefined' && text.length > 0) {
       var line_parts = text.split('<br>');
+      //
       for(let i=0;i<line_parts.length;i++){
         nb=nb+(line_parts[i].length/39);
-        if(line_parts[i].length%39!=0) nb++;}
+        if(line_parts[i].length%39!=0) nb++;
+      }
+      if(this.pubbg){
       if(nb>6||dividedText.isLongText){
+        //console.log("waaaaaaaaaaaaaaaaaaaaaa");
         this.getbg0();
         this.bgvalid=false;
       }
       else{this.bgvalid=true;}
+    }
   }
+  }
+
+  verifNbrOfLines(publishDivRef){
+    let divHeight = parseInt(publishDivRef.offsetHeight);
+    let divWidth = parseInt(publishDivRef.offsetWidth);
+    let lineHeight = parseInt(jQuery("#publishDiv").css('font-size'));
+    let text = publishDivRef.textContent;
+    
+    var lines = Math.round(divHeight / lineHeight) ;
+    // onBackgroundSwitch();
+    if(this.pubbg){
+      console.log(lines);
+      if(lines>7 || ( (divWidth >= 300 && text.length >= 37) || ( divWidth < 300 && text.length >= 22) ) ){
+        
+          this.getbg0();
+          this.bgvalid=false;
+        
+        
+      }
+      else{
+        this.bgvalid=true;
+      }
+
+    }else{
+      // length + nbr of lines
+      if(divWidth >= 300 && text.length >= 155) {
+        this.bgvalid=false;
+      }else if(divWidth < 300 && text.length >= 130){
+        this.bgvalid=false;
+      }
+      else{
+        this.bgvalid=true;
+      }
+      
+    }
+    
   }
 
   enableTitlePost() {

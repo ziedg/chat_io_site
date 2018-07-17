@@ -102,7 +102,7 @@
                                                                           'pubbg23': pubclass=='pubdes23',
                                                                           'pubcenter':pubbg
                                                                           }"
-               (input)="veriftextsize(publishDivRef)" id="pub-holder">
+               (input)="veriftextsize(publishDivRef)" (input)="verifNbrOfLines(publishDivRef)" id="pub-holder">
             <div class="pub-holder-holder" >
               <div class="user-img for-add" *ngIf="user.profilePictureMin&&!pubbg"
                    [ngStyle]="{backgroundImage: 'url(' + user.profilePictureMin + ')'}">
