@@ -53,8 +53,11 @@ export class PublicationTextService {
           }
 
           if(!result.isLongText) {
+            console.log(txt);
+            txt=txt.replace(/<\/div><div>/g,"<br>");
+            console.log(txt);
             let line_parts = txt.split("<br>");
-            if (line_parts.length > lines_max) {
+            if (line_parts.length > lines_max ) {
               result.firstPart = line_parts.slice(0, lines_max).join("<br>");
               result.lastPart = line_parts
                 .slice(lines_max, line_parts.length)
