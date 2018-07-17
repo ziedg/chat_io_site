@@ -2400,6 +2400,33 @@ textarea:focus {
     -webkit-transition: 1s ease-in-out;
   }
 }
+.facebook-responsive-short{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+}
+.facebook-responsive-short iframe {
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
+
+.facebook-responsive-long{
+  overflow:hidden;
+  padding-bottom:110%;
+  position:relative;
+  height:0;
+}
+.facebook-responsive-long iframe {
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
 
 .upper-form-add div.not-btn {
   cursor: default;
