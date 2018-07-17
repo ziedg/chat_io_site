@@ -82,14 +82,21 @@ self.addEventListener('push', event => {
 
   event.waitUntil(self.registration.showNotification(title, options));
 });
-
-
+ var url='';
+if(tag=='msg'){
+    url="https://integration.speegar.com/main/messaging"
+    
+}
+else
+{
+    url=`https://integration.speegar.com/main/post/${tag}`
+}
 self.addEventListener('notificationclick', event => {
   swLog('Notification click Received.');
 
   event.notification.close();
 
-  event.waitUntil(clients.openWindow('https://speegar.com/'));
+  event.waitUntil(clients.openWindow(url));
 });
 
 
