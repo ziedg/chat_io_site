@@ -62,13 +62,13 @@ function removeMessagesFromOutBox(response) {
 // -------------------------------------------------------
 // push
 // -------------------------------------------------------
-
+   var url='';
 self.addEventListener('push', event => {
   //console.log('[Service Worker] Push Received.');
   //console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
   let data = JSON.parse(event.data.text())
   const title = data.notification.title;
-   var url='';
+
 if(data.notification.tag=='msg'){
     url="https://integration.speegar.com/main/messaging"
     
