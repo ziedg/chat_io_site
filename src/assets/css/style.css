@@ -6481,13 +6481,13 @@ img[src="undefined"] {
 
 
 .profile-chat {
-  width: 40px;
+  width: 30px;
 }
 
 .profile-btn-mobile {
   margin: 0;
   position: unset;
-  margin-right: 20px;
+  margin-right: 12px;
 }
 
 @media(max-width: 767px) {
