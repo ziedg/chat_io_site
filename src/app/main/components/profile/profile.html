@@ -33,12 +33,14 @@
           <button class="sub-profile-btn-old loading-button" *ngIf="loadingSub" disabled>
             <div class="loading"></div>
           </button>
-          <button *ngIf="userDisplayed.isFollowed && !loadingSub" (click)="unsubscribe(userDisplayed)" class="sub-profile-btn-old active">
+          <button *ngIf="userDisplayed.isFollowed && !loadingSub"
+          (click)="unsubscribe(userDisplayed)" class="sub-profile-btn-old active">
             {{ 'profile_already_subscribed' | translate }}
           </button>
         </span>
-        <span *ngIf="user._id!=userDisplayed._id" class="hidden-xs">
-          <button class="sub-profile-btn-old active">Contacter</button>
+        <span  class="hidden-xs">
+          <button [routerLink]="['/', 'main', 'messaging']"
+                  class="sub-profile-btn-old active">Contacter</button>
         </span>
 
         <div class="profile-edit hidden-xs">
@@ -51,19 +53,28 @@
         </div>
       </h3>
 
-      <span *ngIf="user._id!=userDisplayed._id" class="hidden-md hidden-lg hidden-sm">
-        <button *ngIf="!userDisplayed.isFollowed && !loadingSub" (click)="subscribe(userDisplayed)" class="sub-profile-btn-old">
+      <span *ngIf="user._id!=userDisplayed._id" class="hidden-md hidden-lg hidden-sm" style="display: flex; align-items: center">
+        <button *ngIf="!userDisplayed.isFollowed && !loadingSub"
+              (click)="subscribe(userDisplayed)"
+              class="sub-profile-btn-old profile-btn-mobile">
           {{ 'profile_subscribe' | translate }}
         </button>
-        <button class="sub-profile-btn-old loading-button" *ngIf="loadingSub" disabled>
+        <button class="sub-profile-btn-old loading-button profile-btn-mobile"
+                *ngIf="loadingSub"
+                disabled>
           <div class="loading"></div>
         </button>
-        <button *ngIf="userDisplayed.isFollowed && !loadingSub" (click)="unsubscribe(userDisplayed)" class="sub-profile-btn-old active">
+        <button *ngIf="userDisplayed.isFollowed && !loadingSub"
+                (click)="unsubscribe(userDisplayed)"
+                class="sub-profile-btn-old active profile-btn-mobile">
           {{ 'profile_already_subscribed' | translate }}
         </button>
-      </span>
-      <span *ngIf="user._id!=userDisplayed._id" class="hidden-md hidden-lg hidden-sm">
-        <button class="sub-profile-btn-old active">Contacter</button>
+
+        <img *ngIf="user._id!=userDisplayed._id"
+              [routerLink]="['/', 'main', 'messaging']"
+              src="assets/images/new/profile-chat.png"
+              class="profile-chat hidden-md hidden-lg hidden-sm">
+
       </span>
 
       <div class="header-segement edit-profile-mobile hidden-lg hidden-md hidden-sm" *ngIf="user._id==userDisplayed._id">
