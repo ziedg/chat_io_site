@@ -2350,13 +2350,19 @@ textarea:focus {
 }
 
 .youtube-preview,
+.youtube-preview-publication{
+  margin: 0 0 -5px;
+  text-align: center;
+}
 .facebook-preview,
-.youtube-preview-publication,
 .facebook-preview-publication {
 
   margin: 0 0 -5px;
   text-align: center;
-
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
 }
 
 .youtube-preview iframe,
@@ -2384,10 +2390,14 @@ textarea:focus {
   .facebook-preview-publication iframe {
     width: 100%;
     margin: 0px;
-    height: 230px;
     display: inline-block;
     transition: 1s ease-in-out;
     -webkit-transition: 1s ease-in-out;
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
   }
 
   .youtube-preview iframe,

@@ -1180,13 +1180,17 @@ export class Home {
   }else {
       this.facebookHeight="560";
     this.facebookWidth=width;
+    document.getElementById("facebook").style.paddingBottom = (height/width)*100+"%";
+    document.getElementById("facebook").style.width=560+"px";
     }
     this.loadingPublish = false;
     jQuery(".facebook-preview").html(
       '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
       videoId +
-      '%2F&show_text=0&height='+this.facebookHeight+'&appId" width="500" height='+this.facebookHeight+'" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
+      '%2F&show_text=0&height='+this.facebookHeight+'&appId" width="500" height='+this.facebookHeight+'" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"'+
+      '></iframe>'
     );
+
   }
   closeBglist(){
     this.bglist = false;
