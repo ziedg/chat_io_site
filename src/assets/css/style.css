@@ -2513,7 +2513,7 @@ textarea:focus {
   padding: 0;
   margin-left: 0px;
   flex-grow: 1;
-  margin-top: 7px;
+  margin-top: 13px;
 }
 
 #pub-holder input {
@@ -6078,7 +6078,7 @@ body {
   }
 
   #pub-holder .textarea-publish {
-    margin-top: 12px;
+    margin-top: 16px;
     font-size: 17px;
   }
 
