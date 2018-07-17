@@ -38,9 +38,10 @@
             {{ 'profile_already_subscribed' | translate }}
           </button>
         </span>
-        <span  class="hidden-xs">
-          <button [routerLink]="['/', 'main', 'messaging']"
-                  class="sub-profile-btn-old active">Contacter</button>
+        <span *ngIf="user._id!=userDisplayed._id" class="hidden-xs">
+          <button class="sub-profile-btn-old active"
+                  (click)="showSendMessagePopUp()">Contacter</button>
+
         </span>
 
         <div class="profile-edit hidden-xs">
@@ -69,12 +70,10 @@
                 class="sub-profile-btn-old active profile-btn-mobile">
           {{ 'profile_already_subscribed' | translate }}
         </button>
-
         <img *ngIf="user._id!=userDisplayed._id"
-              [routerLink]="['/', 'main', 'messaging']"
               src="assets/images/new/profile-chat.png"
+              (click)="showSendMessagePopUp()"
               class="profile-chat hidden-md hidden-lg hidden-sm">
-
       </span>
 
       <div class="header-segement edit-profile-mobile hidden-lg hidden-md hidden-sm" *ngIf="user._id==userDisplayed._id">
