@@ -33,9 +33,15 @@
           <button class="sub-profile-btn-old loading-button" *ngIf="loadingSub" disabled>
             <div class="loading"></div>
           </button>
+          
           <button *ngIf="userDisplayed.isFollowed && !loadingSub" (click)="unsubscribe(userDisplayed)" class="sub-profile-btn-old active">
             {{ 'profile_already_subscribed' | translate }}
           </button>
+          <button  (click)="showSendMessagePopUp()" class="sub-profile-btn-old active">
+            Contacter
+          </button>
+          
+          
         </span>
         <span *ngIf="user._id!=userDisplayed._id" class="hidden-xs">
           <button class="sub-profile-btn-old active">Contacter</button>
@@ -60,6 +66,9 @@
         </button>
         <button *ngIf="userDisplayed.isFollowed && !loadingSub" (click)="unsubscribe(userDisplayed)" class="sub-profile-btn-old active">
           {{ 'profile_already_subscribed' | translate }}
+        </button>
+        <button  (click)="showSendMessagePopUp()" class="sub-profile-btn-old active">
+          Contacter
         </button>
       </span>
       <span *ngIf="user._id!=userDisplayed._id" class="hidden-md hidden-lg hidden-sm">
