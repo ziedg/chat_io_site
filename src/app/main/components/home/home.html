@@ -315,8 +315,11 @@
         </div>
 
 
-        <div *ngIf="user" infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0"
-             (scrolled)="onScrollDown()">
+        <div *ngIf="user"
+              infinite-scroll
+              [infiniteScrollDistance]="1"
+              [infiniteScrollThrottle]="0"
+              (scrolled)="onScrollDown()">
           <div *ngFor=" let publicationBean of publicationBeanList; let i= index">
 
             <publication [publicationBean]="publicationBean">

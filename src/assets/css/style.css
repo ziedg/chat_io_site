@@ -6011,9 +6011,6 @@ body {
     display: none;
   }
 
-  .sub-main-header {
-  }
-
   .logo img {
     position: static;
     bottom: 0;
@@ -6483,9 +6480,22 @@ img[src="undefined"] {
 }
 
 
+.profile-chat {
+  width: 30px;
+}
+
+.profile-btn-mobile {
+  margin: 0;
+  position: unset;
+  margin-right: 12px;
+}
+
 @media(max-width: 767px) {
   .navigation-arrow-container-bglist {
     display: none;
+  }
+  home [infinite-scroll]{
+    margin-bottom: -13px;
   }
 
   .bglist {
