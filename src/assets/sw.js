@@ -83,9 +83,13 @@ self.addEventListener('push', event => {
   event.waitUntil(self.registration.showNotification(title, options));
 });
  var url='';
-if(tag=='msg'){
+if(data.notification.tag=='msg'){
     url="https://integration.speegar.com/main/messaging"
     
+}
+else if(!(data.notification.tag))
+{
+ url=`https://integration.speegar.com`
 }
 else
 {
