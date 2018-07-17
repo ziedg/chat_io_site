@@ -11,7 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
@@ -96,7 +96,11 @@ export class Main {
     private db: AngularFireDatabase) {
 
       // check if we are on messenger
-      this.messagingOpen =  this.router.routerState.snapshot.url.includes('messaging');
+      router.events.filter((event: any) => event instanceof NavigationEnd)
+        .subscribe(event => {
+          this.messagingOpen = /^\/main\/messaging/.test(event.url);
+          console.log(this.messagingOpen, event.url);
+      });
 
       this.user=this.loginService.getUser();
          if (!this.recentRechService.isEmptyList())
