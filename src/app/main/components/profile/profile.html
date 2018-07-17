@@ -37,6 +37,9 @@
             {{ 'profile_already_subscribed' | translate }}
           </button>
         </span>
+        <span *ngIf="user._id!=userDisplayed._id" class="hidden-xs">
+          <button class="sub-profile-btn-old active">Contacter</button>
+        </span>
 
         <div class="profile-edit hidden-xs">
           <div *ngIf="user._id!=userDisplayed._id" class="three-dots" (click)="openModalOtherProfile()">
@@ -58,6 +61,9 @@
         <button *ngIf="userDisplayed.isFollowed && !loadingSub" (click)="unsubscribe(userDisplayed)" class="sub-profile-btn-old active">
           {{ 'profile_already_subscribed' | translate }}
         </button>
+      </span>
+      <span *ngIf="user._id!=userDisplayed._id" class="hidden-md hidden-lg hidden-sm">
+        <button class="sub-profile-btn-old active">Contacter</button>
       </span>
 
       <div class="header-segement edit-profile-mobile hidden-lg hidden-md hidden-sm" *ngIf="user._id==userDisplayed._id">
