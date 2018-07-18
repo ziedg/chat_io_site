@@ -369,7 +369,10 @@ export class Main {
     this.hideNotificationList();
     this.router.navigate(["/main/" + source, parm]);
   }
-
+  navigateNotif() {
+    this.nbNewNotifications=0;
+    this.router.navigate(["/main/notification"]);
+  }
   markView(notifId) {
     let body = JSON.stringify({
       notificationId: notifId
