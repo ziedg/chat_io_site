@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, OnDestroy, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -28,7 +28,7 @@ class MessageValidation {
   templateUrl: './conversation-mobile.component.html',
   styleUrls: ['./conversation-mobile.component.css']
 })
-export class ConversationMobileComponent implements OnInit {
+export class ConversationMobileComponent implements OnInit, OnDestroy {
   firstListen: boolean = true;
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
@@ -57,25 +57,25 @@ export class ConversationMobileComponent implements OnInit {
     private chatService: ChatService,
     private http: Http,
     private changeDetector:ChangeDetectorRef,
-  ) {
+    private renderer: Renderer2) {
 
     this.user = this.loginService.getUser();
     this.userId = this.user._id;
     this.selectedUserId = this.route.snapshot.params['stringid'];
+    this.isFirstLoaded = true;
     this.getProfile(this.selectedUserId);
      this.chatService.getMessages({ fromUserId: this.userId, toUserId:this.selectedUserId })
     .subscribe((response) => {
-
-      if(response==undefined)
-         {
-           this.messages=[];
-        }
-        else{
-           this.messages = response;
-           this.loaded = true;
-           this.scrollMsgWrapperBottom();
-         }      
+      if(response==undefined){
+        this.messages=[];
+      }
+      else{
+        this.messages = response;
+        this.loaded = true;
+        this.scrollMsgWrapperBottom();
+      }
     });
+    
     // with the Resolver
     // this.data = this.route.snapshot.data;
     // let allMessages = this.data.messages;
@@ -113,11 +113,12 @@ export class ConversationMobileComponent implements OnInit {
 
   ngOnInit() {
     this.listenForMessages();
+    this.renderer.setStyle(document.querySelector(".main-header"), "display", "none");
+    this.renderer.setStyle(document.body, "padding-bottom", "0");
   }
 
 
   getProfile(userId:string) {
-    
       this.http.get(
         environment.SERVER_URL + pathUtils.GET_PROFILE + userId,
         AppSettings.OPTIONS)
@@ -142,10 +143,10 @@ export class ConversationMobileComponent implements OnInit {
   }
 
   scrollMsgWrapperBottom() {
-    this.isFirstLoaded = true;
+    let delay:number = this.isFirstLoaded ? 500 : 20;
+    setTimeout(()=>wrapper.scrollTop = wrapper.scrollHeight, delay);
     let wrapper = this.msgWrapper.nativeElement;
     //console.log("scroll to bottom");
-    setTimeout(()=>wrapper.scrollTop = wrapper.scrollHeight, 1000);
   }
 
   onScrollMsgWrapper() {
@@ -184,6 +185,7 @@ export class ConversationMobileComponent implements OnInit {
   }
 
   sendMessageBtn() {
+    this.scrollMsgWrapperBottom();
     //if (event.keyCode === 13) {
     const message = this.messageForm.controls['message'].value.trim();
     if (message === '' || message === undefined || message === null) {
@@ -202,14 +204,10 @@ export class ConversationMobileComponent implements OnInit {
       /* calling method to send the messages */
       this.chatService.sendMessage(data).subscribe(
         () => {
-          this.scrollMsgWrapperBottom();
         },
         err => console.log('Could send message to server, reason: ', err));
 
       this.messageForm.reset();
-      setTimeout(() => {
-        document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
-      }, 100);
     }
     //}
   }
@@ -261,5 +259,11 @@ export class ConversationMobileComponent implements OnInit {
       return false;
     }
 
+  }
+
+  ngOnDestroy(){
+    this.renderer.setStyle(document.querySelector(".main-header"), "display", "flex");
+    this.renderer.setStyle(document.body, "padding-bottom", "55px");
+    console.log("on destroy");
   }
 }
