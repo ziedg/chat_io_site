@@ -664,6 +664,7 @@ export class Home {
     
     let text = $event.clipboardData.getData("text/plain");
     this.link.isGif = false;
+    
     if(this.pubbg){
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
@@ -675,13 +676,15 @@ export class Home {
         text.search("youtube.com/watch") >= 0 ||
         text.search("youtu.be/") >= 0
       ) {
+        //this.youtubeLink = text;
         this.resetPreview();
-
+        
         this.youtubeInput = true;
-        jQuery(".yt-in-url").val(text);
+        //jQuery(".yt-in-url").val(text);
         this.changeDetector.markForCheck();
-        this.youtubeLink = text;
-        this.updateYoutubeFacebook();
+        
+        
+        this.updateYoutubeFacebook(text);
         return 1;
       }
 
@@ -691,10 +694,10 @@ export class Home {
         this.resetPreview();
 
         this.facebookInput = true;
-        jQuery(".yt-in-url").val(text);
+        //jQuery(".yt-in-url").val(text);
         this.changeDetector.markForCheck();
-        this.facebookLink = text;
-        this.updateYoutubeFacebook();
+        //this.facebookLink = text;
+        this.updateYoutubeFacebook(text);
         return 1;
       }
       if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
@@ -706,7 +709,10 @@ export class Home {
         jQuery("#preview-image").show();
         return 1;
       }
-      if(!linkIsImage) {this.resetPreview(); this.analyzeLink(text);  }
+      //if(!linkIsImage && this.facebookLink!="" && this.youtubeLink!="") {  }
+      
+      
+      this.analyzeLink(text);
       
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
@@ -1086,24 +1092,26 @@ export class Home {
     jQuery(".facebook-preview").html("");
   }
 
-  updateYoutubeFacebook() {
-    var a = jQuery(".yt-in-url");
-    var videoLink = a.val();
+  updateYoutubeFacebook(videoLink) {
+    // var a = jQuery(".yt-in-url");
+    // var videoLink = a.val();
     var videoId;
 
     if (videoLink.indexOf("youtube.com") > 0 || videoLink.indexOf("youtu.be") > 0) {
       videoId = this.getIdYoutubeVideoId(videoLink);
       try {
-        jQuery(".facebook-preview").html("");
+        //jQuery(".facebook-preview").html("");
+        this.youtubeLink = videoId;
         jQuery(".youtube-preview").html(
           '<iframe width="560" height="315" src="https://www.youtube.com/embed/' +
           videoId +
           '" frameborder="0" allowfullscreen></iframe>'
         );
+        //console.log(videoId)
         this.uploadedPicture = null;
         this.closeLinkAPI();
-        this.youtubeLink = videoId;
-        jQuery("#preview-image").hide();
+        
+        //jQuery("#preview-image").hide();
       } catch (err) {
         this.displayLinkError();
       }
@@ -1218,42 +1226,23 @@ export class Home {
   analyzeLink(source) {
 
     let myArray = this.linkView.getListLinks(source);
-//console.log("analyyyze");
+
     if (!myArray.length) {
+      //console.log("NOT A LINKKKKK");
       return 1;
     }
     let linkURL = myArray[0];
     //check if linkURL refers to speegar.com
     if (linkURL == this.link.url) {
-
       return 1;
     }
 
-    /*
-    if (linkURL.search(/(\.gif)$/i) > 0) {
-      console.log("this is a gif!");
-      console.log(linkURL);
-      //var checker = linkURL.substr(linkURL.length - 13, 8);
-      //if (checker.indexOf(".gif") >= 0) {
-      this.link.image = linkURL; //.substring(0, linkURL.indexOf(".gif") + 4);
-      this.link.imageWidth = 500;
-      this.link.imageHeight = 500;
-      this.link.isGif = true;
-      this.link.url = linkURL; //.substring(0, linkURL.indexOf(".gif") + 4);
-      this.link.title = "gif";
-      this.link.description = "gif";
-      this.link.isSet = true;
-      return 1;
-      //}
-    }
-          */
-    // if (this.imageFromLink) {
-    //   return 1
-    // }
+    
 
-
+    this.resetPreview();
     this.linkLoading = true;
     
+
     this.http
       .get(
         environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
@@ -1263,11 +1252,16 @@ export class Home {
       .subscribe(
         response => {
           if (response.results.success) {
-            jQuery("#publishDiv").empty();
-            this.resetPublishPicture();
-            jQuery(".video-preview").html("");
+            //jQuery("#publishDiv").empty();
+            
+            var rest = jQuery("#publishDiv").text().replace(linkURL,'');
+            rest = rest.replace(/(?:\r\n|\r|\n)/g, "<br>");
+            
+            jQuery("#publishDiv").html(rest);
+            //this.resetPublishPicture();
+            //jQuery(".video-preview").html("");
             //this.form.controls.publicationYoutubeLink.updateValue('');
-            //console.log("hellooooooo");
+            //
             var r = /:\/\/(.[^/]+)/;
             this.linkDomain = linkURL.match(r)[1];
 //              this.link.url = linkURL.substring(0, linkURL.length - 6);
@@ -1280,7 +1274,8 @@ export class Home {
               {
                 
               this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
-              //console.log(response.results.data.ogImage[1].url);
+              //console.log(response.results.data.ogImage);
+              //console.log(this.link.url);
               //this.resetPreview(linkIsImage = true);
               //console.log("image detected");
               // jQuery("#preview-image").attr("src", this.link.image);
@@ -1314,7 +1309,7 @@ export class Home {
         },
         () => {
           if(this.link.isSet) {
-            //this.resetPreview();
+            
             this.link.isSet = true;
           }
           this.linkLoading = false;
