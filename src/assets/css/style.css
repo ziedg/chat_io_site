@@ -359,7 +359,7 @@
   display: table-cell;
   margin-left: 6vh;
   overflow-wrap: break-word;
-
+  padding-top:0px;
 
 }
 .pubdes8{
@@ -371,7 +371,7 @@
   display: table-cell;
   margin-left: 6vh;
   overflow-wrap: break-word;
-
+  padding-top:0px;
 
 }
 .pubdes9{
@@ -395,7 +395,7 @@
   display: table-cell;
   margin-left: 6vh;
   overflow-wrap: break-word;
-
+  padding-top:0px;
 }
 .pubdes11{
   font-family: "Arial";
@@ -441,8 +441,7 @@
   display: table-cell;
   margin-left: 6vh;
   overflow-wrap: break-word;
-
-
+  padding-top:0px;
 }
 .pubdes15{
   font-family: "Arial";
@@ -453,7 +452,7 @@
   display: table-cell;
   margin-left: 6vh;
   overflow-wrap: break-word;
-
+  padding-top:0px;
 
 }
 .pubdes16{
@@ -498,7 +497,7 @@
   display: table-cell;
   margin-left: 6vh;
   overflow-wrap: break-word;
-
+  margin-top:-66px !important;
 
 }
 .pubdes20{
@@ -510,7 +509,7 @@
   display: table-cell;
   margin-left: 6vh;
   overflow-wrap: break-word;
-
+  padding-top:0px;
 
 }
 .pubdes21{
