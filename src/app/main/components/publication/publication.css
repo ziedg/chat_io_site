@@ -11,10 +11,10 @@
     display: -ms-flexbox;
     display: -webkit-flex;
     color: #999;
-    justify-content: space-between;
+    justify-content: flex-end;
     position: absolute;
-    right: 30px;
-    bottom: 12px;
+    right: 33px;
+    bottom: 11px;
 }
 
 .comment-holder .textarea {
@@ -23,4 +23,45 @@
 
 .loading {
     border-top-color: grey;
+}
+
+.camera-div{
+    display: inline-block;
+}
+
+.addPhoto{
+    width:30px;
+    height:25px;
+    margin: 0 5px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  
+.publishImage{
+    background-image: url(/assets/images/new/sendcomment-grey.png);
+    width:25px;
+    height:25px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+  }
+
+  .toggleEmoji{
+    width:35px;
+    height:23px;
+    margin-right:10px;
+  }
+
+@media screen and (max-width:768px){
+    .camera-div{
+        margin-top: 8px;
+    }
+    .form-more{
+        bottom:9px;
+    }
+    .comment-publish{
+        padding: 0px 22px 9px 2px;
+    }
 }

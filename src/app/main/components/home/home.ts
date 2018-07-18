@@ -241,7 +241,7 @@ export class Home {
     else { this.pubbg = false; this.pubclass=""; }
   }
   getbg0(){
-    if(this.bgvalid){
+    if(!this.bgvalid){
       this.pubbg=false;
       this.pubclass="";
       this.resetPreview();
@@ -668,6 +668,7 @@ export class Home {
     if(this.pubbg){
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
+      this.analyzeLink(text);
       return 1;
     }
     else {
@@ -861,38 +862,52 @@ export class Home {
       this.errorTimed();
 
     }
+    this.bgvalid=false;
   this.getbg0();
   }
 
   
 
   veriftextsize(publishDivRef){
+    console.log("verif");
     
-    let text = publishDivRef.textContent;
-    
+    let text: string = jQuery("#publishDiv").html();
+    text = text.replace(/(\&nbsp;|\ )+/g, ' ')
+
     text = this.publicationTextService.addUrls(text);
     let dividedText = this.publicationTextService.divideText(text);
     //console.log(dividedText);
     let nb=0;
     if(text !== 'null' && text !=='undefined' && text.length > 0) {
+      text=text.replace(/<div><br><\/div>/g,'<br>');
+      text=text.replace(/<br><br>/g,'<br>');
+      text=text.replace(/<div>/g,'<br>');
+      text=text.replace(/<\/div>/g,'');
+      text=text.replace(/<div>/g,'');
       var line_parts = text.split('<br>');
+      let txt=line_parts[line_parts.length-1];
       //
-      for(let i=0;i<line_parts.length;i++){
-        nb=nb+(line_parts[i].length/39);
-        if(line_parts[i].length%39!=0) nb++;
+      text=text.replace(/<br>/g,'');
+
+      for(var i=0;i<line_parts.length;i++)
+      {
+
+        nb=nb+ Math.floor(line_parts[i].length/ 32) +1
+
       }
+
+      this.bgvalid = nb>=5?false:true;
       if(this.pubbg){
-      if(nb>6||dividedText.isLongText){
+      if(nb>=5){
         //console.log("waaaaaaaaaaaaaaaaaaaaaa");
         this.getbg0();
-        this.bgvalid=false;
       }
-      else{this.bgvalid=true;}
+      
     }
   }
   }
 
-  verifNbrOfLines(publishDivRef){
+/*  verifNbrOfLines(publishDivRef){
     let divHeight = parseInt(publishDivRef.offsetHeight);
     let divWidth = parseInt(publishDivRef.offsetWidth);
     let lineHeight = parseInt(jQuery("#publishDiv").css('font-size'));
@@ -902,7 +917,7 @@ export class Home {
     // onBackgroundSwitch();
     if(this.pubbg){
       console.log(lines);
-      if(lines>7 || ( (divWidth >= 300 && text.length >= 37) || ( divWidth < 300 && text.length >= 22) ) ){
+      if(lines>7 || ( (divWidth >= 300 && text.length >= 130) || ( divWidth < 300 && text.length >= 22) ) ){
         
           this.getbg0();
           this.bgvalid=false;
@@ -926,7 +941,7 @@ export class Home {
       
     }
     
-  }
+  }*/
 
   enableTitlePost() {
     this.titleEnable = !this.titleEnable;
@@ -1216,6 +1231,7 @@ export class Home {
 
   closeLinkAPI() {
     this.link.initialise();
+    this.veriftextsize(jQuery(".publishDivRef"));
   }
 
   linkAPI() {
@@ -1232,6 +1248,9 @@ export class Home {
       return 1;
     }
     let linkURL = myArray[0];
+    this.bgvalid=false;
+    this.getbg0();
+    this.bgvalid=true;
     //check if linkURL refers to speegar.com
     if (linkURL == this.link.url) {
       return 1;
