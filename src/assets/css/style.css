@@ -133,7 +133,7 @@
   align-content:center;
   flex-direction:column;
   word-wrap: break-word;
-  padding-bottom: 50px;
+  padding-bottom: 30px; 
 }
 .pubbg9{
   background-image: url("/images/background/background_3.png");
@@ -243,7 +243,7 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
-  padding-bottom: 86px;
+  padding-bottom: 45px;
 }
 .pubbg20{
   background-image: url("/images/background/background_14.png");
@@ -373,6 +373,7 @@
   margin-left: 6vh;
   overflow-wrap: break-word;
   padding-top:0px;
+  padding-bottom: 0px;
   margin-bottom:60px !important;
 }
 .pubdes9{
@@ -500,7 +501,7 @@
   margin-left: 6vh;
   overflow-wrap: break-word;
   margin-top:-66px !important;
-
+  padding-bottom:0;
 }
 .pubdes20{
   font-family: "Arial";
