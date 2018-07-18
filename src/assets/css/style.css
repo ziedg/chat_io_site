@@ -372,7 +372,7 @@
   margin-left: 6vh;
   overflow-wrap: break-word;
   padding-top:0px;
-
+  margin-bottom:60px !important;
 }
 .pubdes9{
   font-family: "Arial";
@@ -442,6 +442,7 @@
   margin-left: 6vh;
   overflow-wrap: break-word;
   padding-top:0px;
+  margin-bottom:40px !important;
 }
 .pubdes15{
   font-family: "Arial";
@@ -453,7 +454,7 @@
   margin-left: 6vh;
   overflow-wrap: break-word;
   padding-top:0px;
-
+  margin-bottom:40px !important;
 }
 .pubdes16{
   font-family: "Arial";
@@ -509,7 +510,7 @@
   display: table-cell;
   margin-left: 6vh;
   overflow-wrap: break-word;
-  padding-top:0px;
+  margin-bottom:40px !important;
 
 }
 .pubdes21{
