@@ -241,7 +241,7 @@ export class Home {
     else { this.pubbg = false; this.pubclass=""; }
   }
   getbg0(){
-    if(this.bgvalid){
+    if(!this.bgvalid){
       this.pubbg=false;
       this.pubclass="";
       this.resetPreview();
@@ -870,7 +870,7 @@ export class Home {
     
     let text: string = jQuery("#publishDiv").html();
     text = text.replace(/(\&nbsp;|\ )+/g, ' ')
-    console.log(text);
+
     text = this.publicationTextService.addUrls(text);
     let dividedText = this.publicationTextService.divideText(text);
     //console.log(dividedText);
@@ -885,21 +885,21 @@ export class Home {
       let txt=line_parts[line_parts.length-1];
       //
       text=text.replace(/<br>/g,'');
-      console.log(line_parts);
+
       for(var i=0;i<line_parts.length;i++)
       {
-        console.log(nb);
+
         nb=nb+ Math.floor(line_parts[i].length/ 32) +1
 
       }
-      console.log(nb);
+
+      this.bgvalid = nb>=5?false:true;
       if(this.pubbg){
       if(nb>=5){
         //console.log("waaaaaaaaaaaaaaaaaaaaaa");
         this.getbg0();
-        this.bgvalid=false;
       }
-      else{this.bgvalid=true;}
+      
     }
   }
   }
