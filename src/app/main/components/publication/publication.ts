@@ -296,6 +296,7 @@ showConfirmButton: false
 
       this.listComments = this.allListComments.slice(0, this.nbMaxAddComments);
     }
+    this.listComments.reverse();
     this.changeDetector.markForCheck();
 
 
@@ -670,23 +671,19 @@ showConfirmButton: false
 
   loadMoreComments(i: number) {
     var j = ++this.i;
-
-
-
-
-
-
     if (this.allListComments.length - 3 * j < 1) {
       this.listComments = this.allListComments.slice(
         0,
         this.allListComments.length
       );
       this.afficheMoreComments = false;
+      this.listComments.reverse();
       this.changeDetector.markForCheck();
     } else {
       this.listComments = this.allListComments.slice(0, 3 * j);
 
       this.afficheMoreComments = true;
+      this.listComments.reverse();
       this.changeDetector.markForCheck();
     }
   }
