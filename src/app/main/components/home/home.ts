@@ -668,6 +668,7 @@ export class Home {
     if(this.pubbg){
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
+      this.analyzeLink(text);
       return 1;
     }
     else {
@@ -861,12 +862,14 @@ export class Home {
       this.errorTimed();
 
     }
+    this.bgvalid=false;
   this.getbg0();
   }
 
   
 
   veriftextsize(publishDivRef){
+    console.log("verif");
     
     let text: string = jQuery("#publishDiv").html();
     text = text.replace(/(\&nbsp;|\ )+/g, ' ')
@@ -1228,6 +1231,7 @@ export class Home {
 
   closeLinkAPI() {
     this.link.initialise();
+    this.veriftextsize(jQuery(".publishDivRef"));
   }
 
   linkAPI() {
@@ -1244,6 +1248,9 @@ export class Home {
       return 1;
     }
     let linkURL = myArray[0];
+    this.bgvalid=false;
+    this.getbg0();
+    this.bgvalid=true;
     //check if linkURL refers to speegar.com
     if (linkURL == this.link.url) {
       return 1;
