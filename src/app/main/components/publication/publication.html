@@ -313,7 +313,7 @@
       </div>
     </div>
     <!-- more comments -->
-    <div *ngIf="afficheMoreComments && commentsDisplayed" class="comment-holder plus-comment" (click)="loadMoreComments(0)">
+    <div *ngIf="afficheMoreComments && hiddenContent" class="comment-holder plus-comment" (click)="loadMoreComments(0)">
       <div class="margin-auto">
         {{ 'publication_display_more_comments' | translate }}
         <i class="fa fa-caret-down"></i>
@@ -338,7 +338,7 @@
             </textarea>
           <textarea placeholder="Votre commentaire ..." formControlName="commentText" style="display:none"></textarea>
           <input type="file" class="{{pubImgId}}" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
-          <div class="textarea text-left" id="{{commentTextareaId}}" placeholder="Votre commentaire ..." contenteditable="true" (focus)="focused(this)"
+          <div class="textarea text-left" id="{{commentTextareaId}}" placeholder="Votre commentaire ..." contenteditable="true" (keyup)="onKey($event)"
             [(contenteditableModel)]="commentInputHtml" (keydown)="scrollToCommentInput()">
             <!--(keydown.Enter)="publishComment()"-->
           </div>

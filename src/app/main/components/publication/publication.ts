@@ -122,16 +122,14 @@ export class Publication {
     private ng2ImgMaxService: Ng2ImgMaxService,
     private location: Location,
     private publicationTextService: PublicationTextService, ) {
-    if (window.matchMedia("(max-width: 768px)").matches) {
-      if (location.path() != '') {
-        if (location.path().indexOf('/main/post') != -1) {
-          this.hiddenContent = true;
-        } else {
-          this.hiddenContent = false;
-        }
+    if (location.path() != '') {
+      if (location.path().indexOf('/main/post') != -1) {
+        this.hiddenContent = true;
+      } else {
+        this.hiddenContent = false;
       }
     }
-    
+
     if (window.matchMedia("(max-width: 768px)").matches) {
       this.hiddenPicture = false;
     }
@@ -249,9 +247,17 @@ export class Publication {
       );
   }
 
-  focused(element) {
-    if (window.matchMedia("(max-width: 768px)").matches) {
-      jQuery(".navigation-bottom").hide();
+  onKey(value: any) {
+    let text:string = value.target.innerHTML;
+    text = text
+      .replace(/(\&nbsp;|\ )+/g, " ")
+      .replace(/(\<.?br\>)+/g, "<br>")
+      .replace(/^\<.?br\>|\<.?br\>$/g, "")
+      .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
+    if(text.length > 0){
+      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment.png)");
+    }else{
+      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment-grey.png)");
     }
   }
 
@@ -494,7 +500,13 @@ export class Publication {
               if (!this.publicationBean.comments.length)
                 this.publicationBean.comments.unshift(response.comment);
 
-              this.listComments.unshift(response.comment);
+              if (this.location.path() != '') {
+                if (this.location.path().indexOf('/main/post') != -1) {
+                  this.listComments.unshift(response.comment);
+                } else {
+                  this.myComments.unshift(response.comment);
+                }
+              }
               this.nbDisplayedComments++;
               //this.formComment.controls.pubComment.updateValue('');
               this.changeDetector.markForCheck();
@@ -504,9 +516,6 @@ export class Publication {
               jQuery("#" + this.pubImgId).hide();
               this.uploadedPictureComment = null;
               this.loadingComment = false;
-              if (window.matchMedia("(max-width: 768px)").matches) {
-                this.myComments.unshift(response.comment);
-              }
             }
           } else {
             console.error(response);
