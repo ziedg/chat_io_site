@@ -55,6 +55,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg2{
   background-image: url("../images/background/bg2.jpg");
@@ -64,6 +66,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg3{
   background-image: url("../images/background/bg3.jpg");
@@ -73,6 +77,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg4{
   background-image: url("../images/background/bg4.jpg");
@@ -82,6 +88,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg5{
   background-image: url("../images/background/bg5.jpg");
@@ -91,6 +99,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg6{
   background-image: url("../images/background/bg6.jpg");
@@ -100,6 +110,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg7{
   background-image: url("/images/background/background_1.jpg");
@@ -109,6 +121,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg8{
   background-image: url("/images/background/background_2.jpg");
@@ -118,6 +132,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+  padding-bottom: 50px;
 }
 .pubbg9{
   background-image: url("/images/background/background_3.png");
@@ -127,6 +143,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg10{
   background-image: url("/images/background/background_4.jpg");
@@ -136,6 +154,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg11{
   background-image: url("/images/background/background_5.jpg");
@@ -145,6 +165,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg12{
   background-image: url("/images/background/background_6.jpg");
@@ -154,6 +176,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg13{
   background-image: url("/images/background/background_7.jpg");
@@ -163,6 +187,8 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  word-wrap: break-word;
+
 }
 .pubbg14{
   background-image: url("/images/background/background_8.png");
@@ -217,6 +243,7 @@
   justify-content:center;
   align-content:center;
   flex-direction:column;
+  padding-bottom: 86px;
 }
 .pubbg20{
   background-image: url("/images/background/background_14.png");
@@ -263,6 +290,8 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
 }
 .pubdes2{
   font-family: "Arial";
@@ -273,6 +302,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
+
 }
 .pubdes3{
   font-family: "Arial";
@@ -282,6 +314,8 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
 }
 .pubdes4{
   font-family: "Arial";
@@ -291,6 +325,8 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
 }
 .pubdes5{
   font-family: "Arial";
@@ -300,6 +336,8 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
 }
 .pubdes6{
   font-family: "Arial";
@@ -309,6 +347,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
+
 }
 .pubdes7{
   font-family: "Arial";
@@ -318,6 +359,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+  padding-top:0px;
+
 }
 .pubdes8{
   font-family: "Arial";
@@ -327,6 +371,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+  padding-top:0px;
+  margin-bottom:60px !important;
 }
 .pubdes9{
   font-family: "Arial";
@@ -336,6 +383,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
+
 }
 .pubdes10{
   font-family: "Arial";
@@ -345,6 +395,8 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+  padding-top:0px;
 }
 .pubdes11{
   font-family: "Arial";
@@ -354,6 +406,8 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
 }
 .pubdes12{
   font-family: "Arial";
@@ -363,6 +417,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
+
 }
 .pubdes13{
   font-family: "Arial";
@@ -372,6 +429,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
+
 }
 .pubdes14{
   font-family: "Arial";
@@ -381,6 +441,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+  padding-top:0px;
+  margin-bottom:40px !important;
 }
 .pubdes15{
   font-family: "Arial";
@@ -390,6 +453,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+  padding-top:0px;
+  margin-bottom:40px !important;
 }
 .pubdes16{
   font-family: "Arial";
@@ -399,6 +465,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
 }
 .pubdes17{
   font-family: "Arial";
@@ -408,6 +475,8 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
 }
 .pubdes18{
   font-family: "Arial";
@@ -417,6 +486,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
+
 }
 .pubdes19{
   font-family: "Arial";
@@ -426,6 +498,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+  margin-top:-66px !important;
+
 }
 .pubdes20{
   font-family: "Arial";
@@ -435,6 +510,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+  margin-bottom:40px !important;
+
 }
 .pubdes21{
   font-family: "Arial";
@@ -444,6 +522,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
+
 }
 .pubdes22{
   font-family: "Arial";
@@ -453,6 +534,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
+
 }
 .pubdes23{
   font-family: "Arial";
@@ -462,6 +546,9 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
+  overflow-wrap: break-word;
+
+
 }
 .pubcenter{
   justify-content: center;
