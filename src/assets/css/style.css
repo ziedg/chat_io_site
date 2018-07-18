@@ -2941,6 +2941,7 @@ facebook-friends .user .user-img {
 
 .publication-text,
 .comment-text {
+  font-size: 13px;
   display: inline-block;
   width: 96%;
   margin-left: 0px;
@@ -2949,7 +2950,10 @@ facebook-friends .user .user-img {
 }
 
 .comment-text {
-  width: calc(100% - 30px)!important;
+  max-width: calc(100vw - 100px)!important;
+  max-width: -moz-calc(100vw - 100px)!important;
+  max-width: -webkit-calc(100vw - 100px)!important;
+
 }
 
 @media (max-width: 767px) {
@@ -3008,14 +3012,52 @@ facebook-friends .user .user-img {
 }
 
 .comment-content {
-  background-color:#F0F1F3;
-  border-radius: 10px;
   margin-left: 20px;
 }
+
+.likes{
+  position:absolute;
+  bottom:-15px;
+  right:0;
+  background-color:white;
+  border-radius:35px;
+}
+
+.likes .nbr{
+  margin-left:-5px;
+  margin-right:5px;
+  color:#ccc;
+  font-size: 12px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.mylikeholder{
+  margin:0 8px;
+}
+
+.mylikeholder>.toggle-icon {
+  margin-bottom: 5px;
+  width:20px!important;
+  height:20px!important;
+}
+
+.mylikeholder>.toggle-icon:before, .toggle-icon:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: all .3s ease-out;
+  content: "";
+  background-size: cover;
+  width:20px!important;
+  height:20px!important;
+}
+
 
 .date-comment button{
   border:none;
   background:transparent;
+  margin-left: 15px;
 }
 
 .comment-holder .like-dislike {
@@ -3161,7 +3203,7 @@ facebook-friends .user .user-img {
 
 .comments-holder .comment-holder {
   padding-bottom: 5px;
-  border-bottom: 0.5px solid #efefef;
+  /* border-bottom: 0.5px solid #efefef; */
 }
 
 .comments-holder comment:last-child .comment-holder {
@@ -3177,21 +3219,21 @@ facebook-friends .user .user-img {
 }
 
 .plus-comment {
-  display: flex;
+  /* display: flex;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   color: #666;
   margin-left: 2px;
   cursor: pointer;
   height: 31px;
   margin-top: 10px;
-  border: solid 1px #c6c6c6;
-  background: #f8f8f8;
+  /* border: solid 1px #c6c6c6;
+  background: #f8f8f8; */
   border-radius: 3px;
-  text-align: center;
+  text-align: left;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 3px;
@@ -3309,6 +3351,14 @@ facebook-friends .user .user-img {
     width: -moz-calc(100% - 60px);
     width: -webkit-calc(100% - 60px);
   }
+}
+.name-and-text-comment{
+  background-color: #F0F1F3;
+  border-radius: 25px;
+  border-top-left-radius: 5px;
+  max-width: 50%;
+  padding: 5px;
+  position: relative;
 }
 
 .name-and-text-comment,
@@ -6481,13 +6531,13 @@ img[src="undefined"] {
 
 
 .profile-chat {
-  width: 40px;
+  width: 30px;
 }
 
 .profile-btn-mobile {
   margin: 0;
   position: unset;
-  margin-right: 20px;
+  margin-right: 12px;
 }
 
 @media(max-width: 767px) {

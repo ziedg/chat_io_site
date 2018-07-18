@@ -199,7 +199,7 @@
               <!-- <div class="facebook-preview-mobile" style="display: none;">
 
                 </div> -->
-              <div class="youtube-preview" *ngIf="youtubeLink">
+              <div class="youtube-preview" >
 
               </div>
 
@@ -285,7 +285,7 @@
                 style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
                 <button *ngIf="bglist || showGifSlider || (userPublishInput || youtubeLink || facebookLink || uploadedPicture|| link.isSet || imageFromLink)" class="publish-button" 
                 style="right:10px;z-index:1;background-color:transparent;border:1px solid #ccc" (click)="cancelPublication()">
-                <p style="color: black;margin-top: 8%;"> Annuler </p></button>
+                <p style="color: black;margin-top: 8%;"> {{'publication_cancel' | translate}} </p></button>
             
              <button class="publish-button" type="submit" *ngIf="!loadingPublish">
                {{ 'home_publish_button' | translate }}
