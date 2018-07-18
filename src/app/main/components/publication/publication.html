@@ -266,7 +266,7 @@
         <div class="dislike-holder" (click)="displayComments()" [class.active]="commentsDisplayed">
           <button class="social-button">
 
-            <img class="social-emoji" src="assets/images/new/comment-active.png" *ngIf="commentsDisplayed">
+            <img class="social-emoji desaturated" src="assets/images/new/comment.png" *ngIf="commentsDisplayed">
             <img class="social-emoji desaturated" src="assets/images/new/comment.png" *ngIf="!commentsDisplayed">
           </button>
           <div class="hint-social" *ngIf="!commentsDisplayed">
