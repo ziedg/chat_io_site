@@ -49,6 +49,7 @@ export class Publication {
   intervalHolder: any;
   commentContent = "";
   public hiddenContent: boolean = true;
+  public hiddenPicture: boolean = true;
   public i: number = 1;
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
@@ -66,7 +67,7 @@ export class Publication {
   public dateDisplay = "";
   public listLink: Array<string>;
   public imageBaseUrl = environment.IMAGE_BASE_URL;
- 
+
   formComment;
   selectedEmojiTab = 0;
   emojiOpacity = 0;
@@ -105,22 +106,22 @@ export class Publication {
 
   @ViewChild("commentInput") commentInput: ElementRef;
 
-  
+
 
   constructor(public translate: TranslateService,
-              public seoService: SeoService,
-              private postService: PostService,
-              private linkView: LinkView,
-              private emojiService: EmojiService,
-              private http: Http,
-              private router: Router,
-              private sanitizer: DomSanitizer,
-              private loginService: LoginService,
-              private changeDetector: ChangeDetectorRef,
-              private dateService: DateService,
-              private ng2ImgMaxService: Ng2ImgMaxService,
-              private location: Location,
-              private publicationTextService: PublicationTextService,) {
+    public seoService: SeoService,
+    private postService: PostService,
+    private linkView: LinkView,
+    private emojiService: EmojiService,
+    private http: Http,
+    private router: Router,
+    private sanitizer: DomSanitizer,
+    private loginService: LoginService,
+    private changeDetector: ChangeDetectorRef,
+    private dateService: DateService,
+    private ng2ImgMaxService: Ng2ImgMaxService,
+    private location: Location,
+    private publicationTextService: PublicationTextService, ) {
     if (window.matchMedia("(max-width: 768px)").matches) {
       if (location.path() != '') {
         if (location.path().indexOf('/main/post') != -1) {
@@ -130,6 +131,11 @@ export class Publication {
         }
       }
     }
+    
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      this.hiddenPicture = false;
+    }
+
     loginService.actualize();
 
     this.user = loginService.user;
@@ -159,29 +165,29 @@ export class Publication {
             this.user.isFollowed = false;
             this.user.nbSubscribers--;
             this.unsubscribeMessage();
-            }
-          },
+          }
+        },
         err => { },
-          () => {
-              this.changeDetector.markForCheck();
-            }
-        );
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
   }
-unsubscribeMessage() {
-swal({
-title: this.translateCode(
-"publication_popup_notification_unsubscribe_title"
-),
-text: this.translateCode(
-"publication_popup_notification_unsubscribe_text"
-),
-type: "success",
-timer: 2000,
-showConfirmButton: false
-}).then(function () {
-}, function (dismiss) {
-});
-}
+  unsubscribeMessage() {
+    swal({
+      title: this.translateCode(
+        "publication_popup_notification_unsubscribe_title"
+      ),
+      text: this.translateCode(
+        "publication_popup_notification_unsubscribe_text"
+      ),
+      type: "success",
+      timer: 2000,
+      showConfirmButton: false
+    }).then(function () {
+    }, function (dismiss) {
+    });
+  }
 
   deletePub() {
     swal({
@@ -247,22 +253,21 @@ showConfirmButton: false
     if (window.matchMedia("(max-width: 768px)").matches) {
       jQuery(".navigation-bottom").hide();
     }
-    jQuery('.publishImage').show();
   }
 
   scrollToCommentInput() {
-    let marge:number = 200;
+    let marge: number = 200;
     //input.scrollIntoView(false);
     window.scroll(0, this.findScrollToWindow(this.commentInput.nativeElement) - marge);
   }
 
-  findScrollToWindow(obj):number {
-    let curtop:number = 0;
+  findScrollToWindow(obj): number {
+    let curtop: number = 0;
     if (obj.offsetParent) {
-        do {
-            curtop += obj.offsetTop;
-        } while (obj = obj.offsetParent);
-    return curtop;
+      do {
+        curtop += obj.offsetTop;
+      } while (obj = obj.offsetParent);
+      return curtop;
     }
   }
 
@@ -296,7 +301,6 @@ showConfirmButton: false
 
       this.listComments = this.allListComments.slice(0, this.nbMaxAddComments);
     }
-    this.listComments.reverse();
     this.changeDetector.markForCheck();
 
 
@@ -312,10 +316,9 @@ showConfirmButton: false
 
   ngOnInit() {
     // check if publication is opened in sperate link
-    if(this.router.routerState.snapshot.url.includes('post')) {
+    if (this.router.routerState.snapshot.url.includes('post')) {
       this.displayComments();
     }
-
     this.intervalHolder = setInterval(() => {
       // Let's refresh the list.
       this.changeDetector.markForCheck();
@@ -404,7 +407,7 @@ showConfirmButton: false
         this.linkFb =
           "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +
           this.publicationBean.publfacebookLink +
-          "%2F&show_text=0&height="+this.publicationBean.publfacebookLinkHeight+"&appId";
+          "%2F&show_text=0&height=" + this.publicationBean.publfacebookLinkHeight + "&appId";
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkFb);
       } else {
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl("");
@@ -677,13 +680,11 @@ showConfirmButton: false
         this.allListComments.length
       );
       this.afficheMoreComments = false;
-      this.listComments.reverse();
       this.changeDetector.markForCheck();
     } else {
       this.listComments = this.allListComments.slice(0, 3 * j);
 
       this.afficheMoreComments = true;
-      this.listComments.reverse();
       this.changeDetector.markForCheck();
     }
   }
@@ -895,7 +896,7 @@ showConfirmButton: false
   changeEmojiTab(tab) {
     this.selectedEmojiTab = tab;
   }
-  
+
   addToComment(emoji) {
     this.commentInputHtml += this.afficheComment(" " + emoji.shortcut);
   }
@@ -966,19 +967,18 @@ showConfirmButton: false
             this.link.title = response.results.data.ogTitle;
             this.link.description = response.results.data.ogDescription;
             if (response.results.data.ogImage) {
-              if(response.results.data.ogImage.length == 2)
-              {
-                
-              this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
-              //console.log(response.results.data.ogImage[1].url);
-              //this.resetPreview(linkIsImage = true);
-              //console.log("image detected");
-              // jQuery("#preview-image").attr("src", this.link.image);
-              // jQuery(".file-input-holder").show();
-              // jQuery("#preview-image").show();
-              
+              if (response.results.data.ogImage.length == 2) {
 
-              }else{
+                this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
+                //console.log(response.results.data.ogImage[1].url);
+                //this.resetPreview(linkIsImage = true);
+                //console.log("image detected");
+                // jQuery("#preview-image").attr("src", this.link.image);
+                // jQuery(".file-input-holder").show();
+                // jQuery("#preview-image").show();
+
+
+              } else {
                 var a = response.results.data.ogImage.url;
                 this.link.image = response.results.data.ogImage.url;
                 this.link.imageWidth = response.results.data.ogImage.width;
@@ -987,7 +987,7 @@ showConfirmButton: false
                   this.link.isGif = true;
                 else this.link.isGif = false;
               }
-              
+
             } else {
               this.link.image = null;
               this.link.imageWidth = 0;

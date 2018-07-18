@@ -11,7 +11,7 @@
     display: -ms-flexbox;
     display: -webkit-flex;
     color: #999;
-    justify-content: space-between;
+    justify-content: flex-end;
     position: absolute;
     right: 30px;
     bottom: 12px;
@@ -24,3 +24,26 @@
 .loading {
     border-top-color: grey;
 }
+
+.camera-div{
+    display: inline-block;
+}
+
+.addPhoto{
+    width:20px;
+    height:20px;
+    margin: 0 5px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  
+.publishImage{
+    background-image: url(/assets/images/new/sendcomment.png);
+    width:20px;
+    height:20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+  }

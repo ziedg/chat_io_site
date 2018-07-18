@@ -2163,7 +2163,7 @@ section.widget {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   cursor: pointer;
-  line-height: 34px;
+  /* line-height: 34px; */
   border: none;
   background-color:transparent;
   font-size: 14px;
@@ -3192,7 +3192,7 @@ facebook-friends .user .user-img {
   display: inline-flex;
   display: -webkit-box;
   display: -ms-flexbox;
-  margin: 0 0 7px 0;
+  margin: 0;
   align-items: flex-start;
   width: 100%;
 }
@@ -3271,28 +3271,19 @@ facebook-friends .user .user-img {
   display: -ms-flexbox;
   display: -webkit-flex;
   align-items: center;
-  width: calc(100% - 45px);
+  width: calc(100% - 150px);
+}
+
+@media screen and (max-width: 768px){
+  .comment-holder form {
+    width: calc(100% - 30px);
+  }
 }
 
 .toggleEmoji{
   width:30px;
   height:20px;
   margin-right:10px;
-}
-
-.addPhoto{
-  width:20px;
-  height:20px;
-  margin-right:10px;
-}
-
-.publishImage{
-  background-image: url(/assets/images/new/sendcomment.png);
-  width:20px;
-  height:20px;
-  display: none;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .form-more .fa {
@@ -3331,9 +3322,9 @@ facebook-friends .user .user-img {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  padding-right: 70px;
+  padding-right: 10px;
   border: 1px solid #E5E5E5;
-  border-radius: 10px;
+  border-radius: 50px;
   -moz-user-select: text;
   white-space: pre-wrap;
   overflow-wrap: break-word;
@@ -3352,13 +3343,28 @@ facebook-friends .user .user-img {
     width: -webkit-calc(100% - 60px);
   }
 }
+
 .name-and-text-comment{
   background-color: #F0F1F3;
   border-radius: 25px;
-  border-top-left-radius: 5px;
-  max-width: 50%;
+  max-width: 75%;
   padding: 5px;
   position: relative;
+}
+
+.comment-content:after { 
+  content: '';
+  position: absolute;
+  left: -8px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border: 15px solid transparent;
+  border-right-color: #F0F1F3;
+  border-left: 0;
+  border-bottom: 0;
+  -webkit-transform: rotate(-35deg);
+  transform: rotate(-35deg);
 }
 
 .name-and-text-comment,
