@@ -25,6 +25,8 @@ export class PublicationTextService {
     
         if (txt !== "null" && txt !== "undefined" && txt.length > 0) {
           let parts = txt.split(" ");
+          txt=txt.replace(/<\/div><div>/g,"<br>");
+          txt=txt.replace(/<\/div><br><div>/g,"<br>");
           if (parts.length > words_max) {
             result.isLongText = true;
   
@@ -53,9 +55,6 @@ export class PublicationTextService {
           }
 
           if(!result.isLongText) {
-            console.log(txt);
-            txt=txt.replace(/<\/div><div>/g,"<br>");
-            console.log(txt);
             let line_parts = txt.split("<br>");
             if (line_parts.length > lines_max ) {
               result.firstPart = line_parts.slice(0, lines_max).join("<br>");
