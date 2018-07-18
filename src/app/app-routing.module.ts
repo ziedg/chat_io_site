@@ -13,8 +13,8 @@ import { FakeComponent } from './shared/fake.component';
 import { MessagingComponent } from './messaging/messaging.component';
 import {SearchMobile} from "./main/components/search-mobile/search-mobile.component";
 import {ConversationMobileComponent} from './messaging/conversation-mobile/conversation-mobile.component';
-import { ProfileResolver } from './main/components/profile/profile.resolver';
-import { PublicationResolver } from './main/components/profile/publication.resolver';
+// import { ProfileResolver } from './main/components/profile/profile.resolver';
+// import { PublicationResolver } from './main/components/profile/publication.resolver';
 //import { MessageResolver } from './messaging/conversation-mobile/messages.resolver';
 
 export const routes: Routes = [
@@ -33,7 +33,7 @@ export const routes: Routes = [
         children: [
             {path: '', redirectTo: 'home', pathMatch: 'full'},
             {path: 'home', component: Home },
-            {path: 'profile/:id', component: Profile, resolve: { publication: PublicationResolver, profile: ProfileResolver  }},
+            {path: 'profile/:id', component: Profile/*, resolve: { publication: PublicationResolver, profile: ProfileResolver  }*/},
             {
                 path: 'parameters', loadChildren: './main/parameters/parameters.module#ProfileParametersModule'
             },
@@ -69,8 +69,8 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   providers: [
-    ProfileResolver,
-    PublicationResolver,
+    //ProfileResolver,
+    //PublicationResolver,
     /*MessageResolver*/
   ]
 })

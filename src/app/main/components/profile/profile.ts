@@ -100,7 +100,8 @@ export class Profile implements OnInit{
       this.changeDetector.markForCheck();
       if (this.route.snapshot.params['id'] != this.lastRouterProfileId) {
         this.lastRouterProfileId = this.route.snapshot.params['id'];
-        // this.getProfile(this.route.snapshot.params['id']);
+        // uncommented the linebelow after removing resolver
+         this.getProfile(this.route.snapshot.params['id']);
         
          this.data = this.route.snapshot.data;
         
@@ -110,8 +111,8 @@ export class Profile implements OnInit{
 
             this.userDisplayed = profileResponse.user;
             this.title.setTitle(this.userDisplayed.firstName + " " + this.userDisplayed.lastName);
-            
-            //this.loadFirstPosts();
+            // uncommented the linebelow after removing resolver
+            this.loadFirstPosts();
             this.isLock = true;
             this.showLoading = true;
             //console.log("first pub");
