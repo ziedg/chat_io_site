@@ -289,7 +289,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 }
 .pubdes2{
@@ -301,7 +301,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -313,7 +313,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 }
 .pubdes4{
@@ -324,7 +324,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 }
 .pubdes5{
@@ -335,7 +335,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 }
 .pubdes6{
@@ -346,7 +346,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -358,7 +358,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -370,7 +370,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -382,7 +382,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -394,7 +394,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 }
 .pubdes11{
@@ -405,8 +405,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
-
+  overflow-wrap: break-word;
 
 }
 .pubdes12{
@@ -417,7 +416,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -429,7 +428,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -441,7 +440,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -453,7 +452,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -465,8 +464,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
-
+  overflow-wrap: break-word;
 }
 .pubdes17{
   font-family: "Arial";
@@ -476,7 +474,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 }
 .pubdes18{
@@ -487,7 +485,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -499,7 +497,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -511,7 +509,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -523,7 +521,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -535,7 +533,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }
@@ -547,7 +545,7 @@
   text-align: center;
   display: table-cell;
   margin-left: 6vh;
-  word-break: break-all;
+  overflow-wrap: break-word;
 
 
 }

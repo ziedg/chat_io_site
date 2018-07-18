@@ -869,6 +869,7 @@ export class Home {
   veriftextsize(publishDivRef){
     
     let text: string = jQuery("#publishDiv").html();
+    text = text.replace(/(\&nbsp;|\ )+/g, ' ')
     console.log(text);
     text = this.publicationTextService.addUrls(text);
     let dividedText = this.publicationTextService.divideText(text);
@@ -876,6 +877,7 @@ export class Home {
     let nb=0;
     if(text !== 'null' && text !=='undefined' && text.length > 0) {
       text=text.replace(/<div><br><\/div>/g,'<br>');
+      text=text.replace(/<br><br>/g,'<br>');
       text=text.replace(/<div>/g,'<br>');
       text=text.replace(/<\/div>/g,'');
       text=text.replace(/<div>/g,'');
