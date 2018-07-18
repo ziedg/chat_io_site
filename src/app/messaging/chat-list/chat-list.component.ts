@@ -76,39 +76,16 @@ export class ChatListComponent implements OnInit {
     this.emitterService.lastMessageEmitter.subscribe((msg) => {
       if (msg.fromUserId === this.userId) {
         let elementPos = this.historyUsers.map(function (x) { return x._id }).indexOf(msg.toUserId);
-
+        this.historyUsers[elementPos]['lastMessage']=JSON.parse(JSON.stringify(msg));
         this.historyUsers[elementPos].lastMessage.message = this.translateCode("you : ") + msg.message;
 
-        let actualDate = new Date(Date.now());
-        let hours = actualDate.getHours().toString();
-        let minutes = actualDate.getMinutes().toString();
-        //console.log(actualDate);
-        if (hours.length == 1) {
-          hours = "0" + hours;
-        }
-        if (minutes.length == 1) {
-          minutes = "0" + minutes;
-        }
-
-        this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
+        this.historyUsers[elementPos].lastMessage.date = this.getCurrentDate();
         this.chatListUsers = this.historyUsers.slice()
 
       } else {
         let elementPos = this.historyUsers.map(function (user) { return user._id }).indexOf(msg.fromUserId)
-        this.historyUsers[elementPos].lastMessage.message = msg.message
-
-        let actualDate = new Date(Date.now());
-        let hours = actualDate.getHours().toString();
-        let minutes = actualDate.getMinutes().toString();
-        //console.log(actualDate);
-        if (hours.length == 1) {
-          hours = "0" + hours;
-        }
-        if (minutes.length == 1) {
-          minutes = "0" + minutes;
-        }
-
-        this.historyUsers[elementPos].lastMessage.date = hours + ":" + minutes;
+        this.historyUsers[elementPos]['lastMessage']=JSON.parse(JSON.stringify(msg));
+        this.historyUsers[elementPos].lastMessage.date = this.getCurrentDate();
         this.chatListUsers = this.historyUsers.slice()
       }
 
@@ -288,18 +265,8 @@ export class ChatListComponent implements OnInit {
         let index = this.historyUsers.findIndex(user => user._id === message.fromUserId);
         this.historyUsers.splice(index, 1);
         profiles[0].lastMessage.message = message.message;
-        let actualDate = new Date(Date.now());
-        let hours = actualDate.getHours().toString();
-        let minutes = actualDate.getMinutes().toString();
-
-        if (hours.length == 1) {
-          hours = "0" + hours;
-        }
-        if (minutes.length == 1) {
-          minutes = "0" + minutes;
-        }
-
-        profiles[0].lastMessage.date = hours + ":" + minutes;
+        
+        profiles[0].lastMessage.date = this.getCurrentDate();
         this.historyUsers.unshift(profiles[0]);
         this.chatListUsers = this.historyUsers.slice()
         this.notread = true;
@@ -307,18 +274,8 @@ export class ChatListComponent implements OnInit {
       } else {
         let profiles = this.suggestions.filter(user => user._id === message.fromUserId);
         if (profiles[0]) {
-          profiles[0].lastMessage = message;
-          let actualDate = new Date(Date.now());
-          let hours = actualDate.getHours().toString();
-          let minutes = actualDate.getMinutes().toString();
-
-          if (hours.length == 1) {
-            hours = "0" + hours;
-          }
-          if (minutes.length == 1) {
-            minutes = "0" + minutes;
-          }
-          profiles[0].lastMessage.date = hours + ":" + minutes;
+          profiles[0]['lastMessage'] =JSON.parse(JSON.stringify(message));
+          profiles[0].lastMessage.date = this.getCurrentDate();
           this.historyUsers.unshift(profiles[0]);
           this.chatListUsers = this.historyUsers.slice()
           this.notread = true;
@@ -331,29 +288,20 @@ export class ChatListComponent implements OnInit {
             .subscribe(
               response => {
                 if (response.status == "0") {
-                  let actualDate = new Date(Date.now());
-                  let hours = actualDate.getHours().toString();
-                  let minutes = actualDate.getMinutes().toString();
-                  if (hours.length == 1) {
-                    hours = "0" + hours;
-                  }
-                  if (minutes.length == 1) {
-                    minutes = "0" + minutes;
-                  }
-                  let newDate = hours + ":" + minutes;
-                  let profile = {
+                 let newUser = {
                     _id: response.user._id,
                     firstName: response.user.firstName,
                     lastName: response.user.lastName,
                     profilePicture: response.user.profilePicture,
                     lastMessage: {
                       ...message,
-                      date: newDate
+                      date: this.getCurrentDate()
                     }
                   }
-                  this.historyUsers.unshift(profile);
+                  this.historyUsers.unshift(newUser);
                   this.chatListUsers = this.historyUsers.slice()
                   this.notread = true;
+                  
                 }
 
               },
@@ -494,4 +442,17 @@ export class ChatListComponent implements OnInit {
     return userId == this.userId ? true : false;
   }
 
+  getCurrentDate(){
+    let actualDate = new Date(Date.now());
+    let hours = actualDate.getHours().toString();
+    let minutes = actualDate.getMinutes().toString();
+    //console.log(actualDate);
+    if (hours.length == 1) {
+      hours = "0" + hours;
+    }
+    if (minutes.length == 1) {
+      minutes = "0" + minutes;
+    }
+   return hours + ":" + minutes
+  }
 }

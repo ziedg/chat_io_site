@@ -233,8 +233,7 @@ export class ConversationMobileComponent implements OnInit {
                 document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
               }, 100);
             }else{
-              
-              this.chatService.newIncomingMessage(message)
+             this.chatService.newIncomingMessage(message)
             }
             
             },
