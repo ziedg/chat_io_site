@@ -868,21 +868,31 @@ export class Home {
 
   veriftextsize(publishDivRef){
     
-    let text = publishDivRef.textContent;
-    
+    let text: string = jQuery("#publishDiv").html();
+    console.log(text);
     text = this.publicationTextService.addUrls(text);
     let dividedText = this.publicationTextService.divideText(text);
     //console.log(dividedText);
     let nb=0;
     if(text !== 'null' && text !=='undefined' && text.length > 0) {
+      text=text.replace(/<div><br><\/div>/g,'<br>');
+      text=text.replace(/<div>/g,'<br>');
+      text=text.replace(/<\/div>/g,'');
+      text=text.replace(/<div>/g,'');
       var line_parts = text.split('<br>');
+      let txt=line_parts[line_parts.length-1];
       //
-      for(let i=0;i<line_parts.length;i++){
-        nb=nb+(line_parts[i].length/39);
-        if(line_parts[i].length%39!=0) nb++;
+      text=text.replace(/<br>/g,'');
+      console.log(line_parts);
+      for(var i=0;i<line_parts.length;i++)
+      {
+        console.log(nb);
+        nb=nb+ Math.floor(line_parts[i].length/ 32) +1
+
       }
+      console.log(nb);
       if(this.pubbg){
-      if(nb>6||dividedText.isLongText){
+      if(nb>=5){
         //console.log("waaaaaaaaaaaaaaaaaaaaaa");
         this.getbg0();
         this.bgvalid=false;
@@ -892,7 +902,7 @@ export class Home {
   }
   }
 
-  verifNbrOfLines(publishDivRef){
+/*  verifNbrOfLines(publishDivRef){
     let divHeight = parseInt(publishDivRef.offsetHeight);
     let divWidth = parseInt(publishDivRef.offsetWidth);
     let lineHeight = parseInt(jQuery("#publishDiv").css('font-size'));
@@ -902,7 +912,7 @@ export class Home {
     // onBackgroundSwitch();
     if(this.pubbg){
       console.log(lines);
-      if(lines>7 || ( (divWidth >= 300 && text.length >= 37) || ( divWidth < 300 && text.length >= 22) ) ){
+      if(lines>7 || ( (divWidth >= 300 && text.length >= 130) || ( divWidth < 300 && text.length >= 22) ) ){
         
           this.getbg0();
           this.bgvalid=false;
@@ -926,7 +936,7 @@ export class Home {
       
     }
     
-  }
+  }*/
 
   enableTitlePost() {
     this.titleEnable = !this.titleEnable;
