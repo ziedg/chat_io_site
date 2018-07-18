@@ -706,7 +706,7 @@ export class Home {
         jQuery("#preview-image").show();
         return 1;
       }
-      if(!linkIsImage) {this.resetPreview(); this.analyzeLink(text);  }
+      if(!linkIsImage) {this.analyzeLink(text);  }
       
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
