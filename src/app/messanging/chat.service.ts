@@ -1,15 +1,14 @@
 //import { getRawMessage } from 'codelyzer/angular/styles/cssLexer';
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
 import * as pathUtils from '../utils/path.utils';
 import { AppSettings } from '../shared/conf/app-settings';
-import { Subject } from 'rxjs';
 
 
 @Injectable()
 export class ChatService {
-  messageEmitter=new Subject<any>();
+  messageEmitter=new EventEmitter<any>();
   ServerUrl;
   constructor(
     private http: Http
@@ -65,7 +64,7 @@ getMessages(users,lastMessageId?) {
     });
   }
   newIncomingMessage(message){
-  this.messageEmitter.next(message)
+  this.messageEmitter.emit(message)
  }
 
 
