@@ -71,18 +71,18 @@ self.addEventListener('push', event => {
 
 if(data.notification.tag=='msg'){
     url="https://integration.speegar.com/main/messaging"
-    
+
 }
-else if(!(data.notification.tag))
+else if((data.notification.body).indexOf('Commence') > -1)
 {
- url=`https://integration.speegar.com`
+ url=`https://integration.speegar.com/main/profile/${data.notification.tag}`
 }
 else
 {
     url=`https://integration.speegar.com/main/post/${data.notification.tag}`
 }
-  
-  
+
+
 
 
   const options = {
@@ -90,7 +90,7 @@ else
     icon:data.notification.icon,
     badge: data.notification.icon
   };
-  
+
   if(data.notification.tag){
       options.tag=data.notification.tag;
   }
