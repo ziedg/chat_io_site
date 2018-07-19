@@ -364,6 +364,7 @@
   font-weight: bolder;
   font-size: calc(0.2vw + 3.3vh);   padding:20px;
   color: black;
+  text-align: center;
   display: inherit;
   margin-left: inherit;
   overflow-wrap: break-word;
