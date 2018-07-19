@@ -97,6 +97,8 @@
 
 
                   <div class="notif-content">
+
+
                     <div *ngIf="notif.type =='comment'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
                       <span *ngIf="notif.profiles && notif.profiles.length == 1">
                         <span class="notif-a">
@@ -118,6 +120,23 @@
 
                       </span>
                     </div>
+
+
+
+
+                              <div *ngIf="notif.type =='joindre'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
+                                  <span *ngIf="notif.profiles.length==1">
+                                    <span class="notif-a">
+                                        Votre ami(e)  {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
+                                    </span>
+                                    <span>{{ 'vient de joidre speegar' | translate }}</span>
+
+                                  </span>
+
+                                </div>
+
+
+
                     <div *ngIf="notif.type =='reagir'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
                       <span *ngIf="notif.profiles.length==1">
                         <span class="notif-a">
@@ -179,6 +198,8 @@
                     </div>
 
                     </article>
+
+
 
 
                 </span>
