@@ -155,7 +155,6 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
   onInputFocus() {
     this.scrollMsgWrapperBottom();
     if(/iPod|iPhone|iPad/.test(navigator.platform)) {
-      alert("iphone");
     }
     setTimeout(() =>
       jQuery(".myContainer").height = window.innerHeight+"px"
