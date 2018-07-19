@@ -158,7 +158,7 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
       alert("iphone");
     }
     setTimeout(() =>
-      document.querySelector(".myContainer").style.height = window.innerHeight+"px"
+      jQuery(".myContainer").height = window.innerHeight+"px"
       ,1000);
   }
 
