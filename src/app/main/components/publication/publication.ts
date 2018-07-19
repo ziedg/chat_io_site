@@ -262,7 +262,7 @@ export class Publication {
   }
 
   scrollToCommentInput() {
-    let marge: number = 200;
+    let marge: number = 120;
     //input.scrollIntoView(false);
     window.scroll(0, this.findScrollToWindow(this.commentInput.nativeElement) - marge);
   }
