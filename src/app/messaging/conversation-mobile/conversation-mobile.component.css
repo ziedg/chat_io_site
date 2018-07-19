@@ -42,10 +42,11 @@
 .homebtn i{
     color:black;
     position: absolute;
-    top:19px;
+    top:10px;
     left: 10px;
     box-shadow: none;
     border: none;
+    padding: 10px;
 }
 .opposite-user {
 	background-color: rgb(255, 255, 255);

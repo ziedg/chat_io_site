@@ -371,7 +371,6 @@ export class Main {
   }
   navigateNotif() {
     this.nbNewNotifications=0;
-    this.router.navigate(["/main/notification"]);
   }
   markView(notifId) {
     let body = JSON.stringify({
