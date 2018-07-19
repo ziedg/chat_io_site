@@ -3335,6 +3335,7 @@ facebook-friends .user .user-img {
 
 .publication .form-comment {
   margin-bottom: 12px;
+  margin-top: 10px;
 }
 
 .comments-holder .comment-holder {
@@ -3410,9 +3411,16 @@ facebook-friends .user .user-img {
   width: calc(100% - 150px);
 }
 
+.position-pic{
+  bottom: 20px !important;
+}
+
 @media screen and (max-width: 768px){
   .comment-holder form {
     width: calc(100% - 30px);
+  }
+  .name-and-text-comment{
+    width: 75% !important;
   }
 }
 

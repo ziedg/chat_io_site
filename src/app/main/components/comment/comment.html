@@ -1,14 +1,14 @@
 <!-- comments -->
-<div class="comment-holder" *ngIf="!commentBean.deleted" style="padding-left: 12px;">
-  <div class="user-img for-comment radiused-img img-circle" style="position:absolute;bottom:20px;" *ngIf="commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePictureMin + ')'}">
+<div class="comment-holder" *ngIf="!commentBean.deleted" style="padding-left: 12px;margin-bottom:5px;">
+  <div class="user-img for-comment radiused-img img-circle" [class.position-pic]="showButtons" style="position:absolute;bottom:0px;" *ngIf="commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePictureMin + ')'}">
   </div>
 
-  <div class="user-img for-comment radiused-img img-circle" style="position:absolute;bottom:20px;" *ngIf="!commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePicture + ')'}">
+  <div class="user-img for-comment radiused-img img-circle" [class.position-pic]="showButtons" style="position:absolute;bottom:0px;" *ngIf="!commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePicture + ')'}">
   </div>
 
-  <div class="row" style="margin-left:30px;max-width: 90%;">
+  <div class="row" style="margin-left:30px;max-width: 100%;">
     <div class="comment-content col-xs-12">
-      <div class="row name-and-text-comment">
+      <div class="row name-and-text-comment" style="width: 50%;">
         <div class="commenter-name col-xs-12" [routerLink]="['/main/profile',commentBean.profileId]">
           {{commentBean.profileFirstName}} {{commentBean.profileLastName}}
         </div>
