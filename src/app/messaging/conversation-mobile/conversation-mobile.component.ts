@@ -153,13 +153,17 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
 
   @ViewChild("container") container:ElementRef;
   onInputFocus() {
-    
+    setTimeout(()=> 
+      this.scrollMsgWrapperBottom(),
+      100);
+    /*
     if(/iPod|iPhone|iPad/.test(navigator.platform)) {
     }
     setTimeout(()=> {
       this.scrollMsgWrapperBottom();
       this.container.nativeElement.style.height = (window.innerHeight - 100)+"px"},
       1000);
+      */
   }
 
   onScrollMsgWrapper() {
