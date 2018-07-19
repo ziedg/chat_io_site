@@ -3330,7 +3330,7 @@ facebook-friends .user .user-img {
   display: -ms-flexbox;
   margin: 0;
   align-items: flex-start;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .publication .form-comment {
