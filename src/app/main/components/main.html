@@ -278,7 +278,7 @@
     <span class="outline-icon-text">{{"Discussion" | translate}}</span>
   </div>
   <div class="notifications-icon outline-icon-container"
-       [routerLink]="['/main', 'notification']"
+  (click)="navigateNotif()"
        style="position:relative"
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
