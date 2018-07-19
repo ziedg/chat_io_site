@@ -1756,9 +1756,9 @@ section.widget {
 }
 
 .sub-profile-btn-old.active {
-  background-color: white;
-  border: 1px solid #edeeee;
-  color: #333333;
+  background-color: transparent;
+  border: 1.4px solid black;
+  color: #333;
 }
 
 .sub-profile-btn {

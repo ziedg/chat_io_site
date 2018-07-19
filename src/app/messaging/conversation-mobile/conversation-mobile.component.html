@@ -28,7 +28,13 @@
 			<div>
 				<!-- <i class="fa fa-camera"></i> -->
 				<div class="embed-submit-field">
-					<input class="message" type="text" placeholder="Message" (keyup)="sendMessage()" formControlName="message" />
+					<div>{{heightField}}</div>
+					<input class="message"
+							type="text"
+							placeholder="Message"
+							(keyup)="sendMessage()"
+							formControlName="message"
+							(focus)="onInputFocus()"/>
 					<button type="submit" (click)="sendMessageBtn()" *ngIf="messageForm.controls['message'].value">
 						<i class="fa fa-arrow-up"></i>
 					</button>
