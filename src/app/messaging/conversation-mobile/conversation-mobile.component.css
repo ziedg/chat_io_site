@@ -29,8 +29,6 @@
     height:55px;
     min-height: 55px;
     border-bottom: 1px solid #efefef;
-    position: fixed;
-    top: 0;
 }
 .header-mobile div>img{
     height: 40px;
@@ -75,7 +73,6 @@
     overflow-y: scroll;
     flex-grow: 1;
     max-height: calc(100% - 107px);
-    margin-top: 55px;
 }
 .message-overlay {
 	height: 100%;
@@ -167,8 +164,6 @@
 
 .message-typer {
     background-color: white;
-    position: fixed;
-    bottom: 0;
     width: 100vw;
 }
 .message-typer form>div{
