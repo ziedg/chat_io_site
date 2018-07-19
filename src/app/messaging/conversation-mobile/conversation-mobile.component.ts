@@ -48,6 +48,7 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
   loadingMessages:boolean =false ;
 
   @ViewChild("msgWrapper") msgWrapper:ElementRef;
+  heightField: number = 0;
 
   constructor(private emitterService: EmitterService,
     private router: Router,
@@ -112,6 +113,7 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.heightField = document.body.offsetHeight;
     this.listenForMessages();
     this.renderer.setStyle(document.querySelector(".main-header"), "display", "none");
     this.renderer.setStyle(document.body, "padding-bottom", "0");
@@ -147,6 +149,13 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
     setTimeout(()=>wrapper.scrollTop = wrapper.scrollHeight, delay);
     let wrapper = this.msgWrapper.nativeElement;
     console.log("scroll to bottom");
+  }
+
+  onInputFocus() {
+    this.scrollMsgWrapperBottom();
+    //if(/iPod|iPhone|iPad/.test(navigator.platform)) {
+      this.heightField = document.body.offsetHeight;
+    //}
   }
 
   onScrollMsgWrapper() {
