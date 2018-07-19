@@ -81,7 +81,7 @@
                   && publicationBean.publText !=='undefined'
                   && publicationBean.publText.length > 0" [ngClass]="{'publication-text': true, 'arabic-text': arabicText}"
         [ngStyle]="{'textAlign': textplace}">
-        <span class="{{pubclass}}" style="width: 600px" [innerHTML]="firstPubText"></span>
+        <span class="{{pubclass}}" [innerHTML]="firstPubText"></span>
         <a *ngIf="isLongText && !isLongTextShow" (click)="isLongTextShow=true" style="display: inline">
           {{"publication_open_last_part" | translate }}</a>
         <span *ngIf="isLongText && isLongTextShow" class="{{pubclass}}" style="width: 600px" [innerHTML]="lastPubText">
