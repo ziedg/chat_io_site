@@ -262,8 +262,8 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.renderer.setStyle(document.querySelector(".main-header"), "display", "flex");
-    this.renderer.setStyle(document.body, "padding-bottom", "55px");
+    this.renderer.setStyle(document.querySelector(".main-header"), "display", "");
+    this.renderer.setStyle(document.body, "padding-bottom", "");
     console.log("on destroy");
   }
 }
