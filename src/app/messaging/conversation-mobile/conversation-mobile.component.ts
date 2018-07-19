@@ -153,6 +153,8 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
 
   onInputFocus() {
     this.scrollMsgWrapperBottom()
+    setTimeout(()=> this.scrollMsgWrapperBottom(),
+      500);
     /*
     if(/iPod|iPhone|iPad/.test(navigator.platform)) {
     }

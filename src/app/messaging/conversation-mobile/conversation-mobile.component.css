@@ -169,6 +169,8 @@
 .message-typer {
     background-color: white;
     width: 100vw;
+    position:absolute;
+    bottom: 0;
 }
 .message-typer form>div{
     text-align: center;
