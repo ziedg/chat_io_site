@@ -151,11 +151,8 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
     console.log("scroll to bottom");
   }
 
-  @ViewChild("container") container:ElementRef;
   onInputFocus() {
-    setTimeout(()=> 
-      this.scrollMsgWrapperBottom(),
-      100);
+    this.scrollMsgWrapperBottom()
     /*
     if(/iPod|iPhone|iPad/.test(navigator.platform)) {
     }
