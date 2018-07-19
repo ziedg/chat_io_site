@@ -99,7 +99,6 @@ export class Main {
       router.events.filter((event: any) => event instanceof NavigationEnd)
         .subscribe(event => {
           this.messagingOpen = /^\/main\/messaging/.test(event.url);
-          console.log(this.messagingOpen, event.url);
       });
 
       this.user=this.loginService.getUser();
@@ -370,7 +369,9 @@ export class Main {
     this.hideNotificationList();
     this.router.navigate(["/main/" + source, parm]);
   }
-
+  navigateNotif() {
+    this.nbNewNotifications=0;
+  }
   markView(notifId) {
     let body = JSON.stringify({
       notificationId: notifId

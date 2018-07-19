@@ -96,19 +96,16 @@ export class Profile implements OnInit{
 
     this.user = this.loginService.user;
 
-    this.router.events.subscribe(route => {
+    this.route.params.subscribe((params)=>{
       this.changeDetector.markForCheck();
-      if (this.route.snapshot.params['id'] != this.lastRouterProfileId) {
-        this.lastRouterProfileId = this.route.snapshot.params['id'];
+      if (params['id'] != this.lastRouterProfileId) {
+        this.lastRouterProfileId = params['id'];
         // uncommented the linebelow after removing resolver
-         this.getProfile(this.route.snapshot.params['id']);
-        
-         this.data = this.route.snapshot.data;
-        
-        let profileResponse = this.data.profile;
-        let publicationResponse = this.data.publication;    
+         this.getProfile(params['id']);
+        /* this.data = this.route.snapshot.data;
+          let profileResponse = this.data.profile;
+          let publicationResponse = this.data.publication;    
           if (profileResponse.status == "0") {
-
             this.userDisplayed = profileResponse.user;
             this.title.setTitle(this.userDisplayed.firstName + " " + this.userDisplayed.lastName);
             // uncommented the linebelow after removing resolver
@@ -125,7 +122,7 @@ export class Profile implements OnInit{
 
           } else {
             this.isNotFound = true;
-          }
+          }*/
 
       
 
