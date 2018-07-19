@@ -32,7 +32,7 @@
 .addPhoto{
     width:30px;
     height:25px;
-    margin: 0 5px;
+    margin: 0;
     display: inline-block;
     vertical-align: middle;
   }
@@ -62,6 +62,7 @@
         bottom:9px;
     }
     .comment-publish{
-        padding: 0px 22px 9px 2px;
+        padding: 0px 10px 9px 2px;
+        margin-left: 10px;
     }
 }

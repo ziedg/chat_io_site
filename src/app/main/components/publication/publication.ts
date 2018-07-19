@@ -460,6 +460,21 @@ export class Publication {
 
   checkEnter(event) { }
 
+  inputFocused(){
+    let text:string = this.commentInputHtml;
+    text = text
+      .replace(/(\&nbsp;|\ )+/g, " ")
+      .replace(/(\<.?br\>)+/g, "<br>")
+      .replace(/^\<.?br\>|\<.?br\>$/g, "")
+      .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
+    var commentToSend = this.emojiService.getCommentTextFromHtml(text)
+    if (!this.uploadedPictureComment && !commentToSend) {
+      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment-grey.png)");
+    }else{
+      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment.png)");
+    }
+  }
+
   publishComment() {
     this.loadingComment = true;
     var txt: string = this.commentInputHtml;

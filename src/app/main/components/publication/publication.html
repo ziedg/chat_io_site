@@ -339,7 +339,7 @@
           <textarea placeholder="Votre commentaire ..." formControlName="commentText" style="display:none"></textarea>
           <input type="file" class="{{pubImgId}}" style="display:none" accept="image/*" (change)="uploadPhoto($event)">
           <div class="textarea text-left" id="{{commentTextareaId}}" placeholder="Votre commentaire ..." contenteditable="true" (keyup)="onKey($event)"
-            [(contenteditableModel)]="commentInputHtml" (keydown)="scrollToCommentInput()">
+            [(contenteditableModel)]="commentInputHtml" (keydown)="scrollToCommentInput()" (focus)="inputFocused()">
             <!--(keydown.Enter)="publishComment()"-->
           </div>
 
