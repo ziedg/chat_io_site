@@ -461,6 +461,7 @@ export class Publication {
   checkEnter(event) { }
 
   publishComment() {
+    this.loadingComment = true;
     var txt: string = this.commentInputHtml;
     txt = txt
       .replace(/(\&nbsp;|\ )+/g, " ")
@@ -475,7 +476,6 @@ export class Publication {
 
     var commentToSend = this.emojiService.getCommentTextFromHtml(txt);
 
-    this.loadingComment = true;
     this.changeDetector.markForCheck();
     var data = new FormData();
 
@@ -498,13 +498,13 @@ export class Publication {
           if (response.status == "0") {
             if (response.comment) {
               if (!this.publicationBean.comments.length)
-                this.publicationBean.comments.unshift(response.comment);
+                this.publicationBean.comments.push(response.comment);
 
               if (this.location.path() != '') {
                 if (this.location.path().indexOf('/main/post') != -1) {
-                  this.listComments.unshift(response.comment);
+                  this.listComments.push(response.comment);
                 } else {
-                  this.myComments.unshift(response.comment);
+                  this.myComments.push(response.comment);
                 }
               }
               this.nbDisplayedComments++;
@@ -515,7 +515,6 @@ export class Publication {
               jQuery("#" + this.pubImgId).attr("src", "");
               jQuery("#" + this.pubImgId).hide();
               this.uploadedPictureComment = null;
-              this.loadingComment = false;
             }
           } else {
             console.error(response);
@@ -523,7 +522,9 @@ export class Publication {
           }
         },
         err => { },
-        () => { }
+        () => { 
+          this.loadingComment = false;
+        }
       );
   }
 

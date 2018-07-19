@@ -2665,6 +2665,23 @@ textarea:focus {
   margin: 25px 0;
   position: relative;
 }
+
+@media screen and (min-width:769px){
+  .margin-publication{
+    margin-top:-15px!important;
+  }
+}
+
+@media screen and (max-width:768px){
+  .publication {
+    margin: 0 !important;
+  }
+  .side-home{
+    padding-top:0!important;
+    padding-bottom:0!important;
+  }
+}
+
 .publicationwithbg {
   padding: 15px 0px 0px 0px;;
   margin: 25px 0;
@@ -3036,12 +3053,12 @@ facebook-friends .user .user-img {
   word-wrap: break-word;
 }
 
-.comment-text {
-  max-width: calc(100vw - 100px)!important;
-  max-width: -moz-calc(100vw - 100px)!important;
-  max-width: -webkit-calc(100vw - 100px)!important;
+/* .comment-text {
+  max-width: calc(100% - 150px)!important;
+  max-width: -moz-calc(100% - 150px)!important;
+  max-width: -webkit-calc(100% - 150px)!important;
 
-}
+} */
 
 @media (max-width: 767px) {
   .publication-text {
@@ -3406,7 +3423,7 @@ facebook-friends .user .user-img {
   box-shadow: none;
   padding-right: 10px;
   border: 1px solid #E5E5E5;
-  border-radius: 50px;
+  border-radius: 18px;
   -moz-user-select: text;
   white-space: pre-wrap;
   overflow-wrap: break-word;
@@ -3429,7 +3446,6 @@ facebook-friends .user .user-img {
 .name-and-text-comment{
   background-color: #F0F1F3;
   border-radius: 25px;
-  max-width: 75%;
   padding: 5px;
   position: relative;
 }

@@ -6,13 +6,13 @@
   <div class="user-img for-comment radiused-img img-circle" style="position:absolute;bottom:20px;" *ngIf="!commentBean.profilePictureMin" [ngStyle]="{'background-image': 'url(' + commentBean.profilePicture + ')'}">
   </div>
 
-  <div class="row" style="margin-left:30px;">
+  <div class="row" style="margin-left:30px;max-width: 90%;">
     <div class="comment-content col-xs-12">
       <div class="row name-and-text-comment">
         <div class="commenter-name col-xs-12" [routerLink]="['/main/profile',commentBean.profileId]">
           {{commentBean.profileFirstName}} {{commentBean.profileLastName}}
         </div>
-        <div class="col-xs-12 comment-text" style="margin-bottom: 5px;max-width: 260px;word-wrap: break-word;overflow-x: hidden;">
+        <div class="col-xs-12 comment-text" style="margin-bottom: 5px;word-wrap: break-word;overflow-x: hidden;">
           <span innerHTML="{{commentText | DetectUrls}}"></span>
           <a *ngIf="isLongComment && !showLastPart" (click)="showLastPart = true">{{"publication_open_last_part" | translate }}</a>
           <span *ngIf="isLongComment && showLastPart" innerHTML="{{commentTextLastPart | DetectUrls }}">
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div style="font-size:12px" class="date-comment col-xs-12">
-      <button style="font-size:12px;margin-left:15px;">
+      <button *ngIf="showButtons" style="font-size:12px;margin-left:15px;">
         <span> {{getCommentTime(commentBean.dateComment)}} </span>
       </button>
       <button *ngIf="showButtons" (click)="addOrRemoveLike()" style="margin-left:-5px;font-size:12px;font-weight: bold;color:#424242;">

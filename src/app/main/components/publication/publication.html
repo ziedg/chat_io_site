@@ -320,13 +320,13 @@
       </div>
     </div>
     <!-- comments -->
-    <comment *ngFor="let commentBean of myComments" [commentBean]="commentBean" [publicationBean]="publicationBean" [(nbDisplayedComments)]="nbDisplayedComments">
-    </comment>
     <div class="comments-holder" *ngIf="commentsDisplayed && hiddenContent">
       <comment *ngFor="let commentBean of listComments" [commentBean]="commentBean" [publicationBean]="publicationBean" [(nbDisplayedComments)]="nbDisplayedComments">
       </comment>
       <loading-bar *ngIf="afficheCommentsLoading"></loading-bar>
     </div>
+    <comment *ngFor="let commentBean of myComments" [commentBean]="commentBean" [publicationBean]="publicationBean" [(nbDisplayedComments)]="nbDisplayedComments">
+    </comment>
     <div [class.comment-with-picture]="uploadedPictureComment">
       <div *ngIf="commentsDisplayed" class="comment-holder form-comment" #commentInput>
         <img *ngIf="hiddenPicture" class="user-img for-comment img-circle" src="{{user | AvailablePicture}}">
@@ -397,8 +397,6 @@
           <button class="comment-publish comment-loading" *ngIf="loadingComment" disabled>
             <div class="loading"></div>
           </button>
-
-
         </form>
       </div>
       <div *ngIf="uploadedPictureComment" class="upload-comment-picture-cont">
