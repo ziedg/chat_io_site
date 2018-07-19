@@ -146,7 +146,7 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
     let delay:number = this.isFirstLoaded ? 500 : 20;
     setTimeout(()=>wrapper.scrollTop = wrapper.scrollHeight, delay);
     let wrapper = this.msgWrapper.nativeElement;
-    //console.log("scroll to bottom");
+    console.log("scroll to bottom");
   }
 
   onScrollMsgWrapper() {
