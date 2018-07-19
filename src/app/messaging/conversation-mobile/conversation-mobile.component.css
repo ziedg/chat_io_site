@@ -72,6 +72,7 @@
     background-color: white;
     overflow-y: scroll;
     flex-grow: 1;
+    max-height: calc(100% - 107px);
 }
 .message-overlay {
 	height: 100%;
@@ -163,6 +164,9 @@
 
 .message-typer {
     background-color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
 }
 .message-typer form>div{
     text-align: center;
