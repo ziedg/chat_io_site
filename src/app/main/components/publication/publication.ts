@@ -531,7 +531,10 @@ export class Publication {
               jQuery("#" + this.pubImgId).hide();
               this.uploadedPictureComment = null;
               jQuery(".comment-holder form").css({
-                'display': 'flex'
+                'display': 'block'
+              });
+              jQuery(".comment-holder form").css({
+                'display': 'initial'
               });
             }
           } else {
