@@ -530,12 +530,12 @@ export class Publication {
               jQuery("#" + this.pubImgId).attr("src", "");
               jQuery("#" + this.pubImgId).hide();
               this.uploadedPictureComment = null;
+              var initialCss = jQuery(".comment-holder form").css("display");
+              console.log(initialCss);
               jQuery(".comment-holder form").css({
                 'display': 'block'
               });
-              jQuery(".comment-holder form").css({
-                'display': 'initial'
-              });
+              jQuery(".comment-holder form").css("display",initialCss);
             }
           } else {
             console.error(response);
