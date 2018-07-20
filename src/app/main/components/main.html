@@ -49,7 +49,7 @@
 			</article>
 
 
-      <article  [routerLink]="['/main/messaging']"  class="notification-parent hidden-xs">
+      <article  [routerLink]="['/main/messaging']" (click)="navigateNotifMessage()" class="notification-parent hidden-xs">
 
         <div class="noPadding">
 
@@ -292,6 +292,7 @@
     <span class="outline-icon-text" style="margin-top:1px">{{"popular" | translate}}</span>
   </div>
   <div class="messaging-icon outline-icon-container"
+    (click)="navigateNotifMessage()"
        [routerLink]="['/main', 'messaging']"
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
