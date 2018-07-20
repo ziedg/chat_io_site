@@ -294,7 +294,9 @@
   <div class="messaging-icon outline-icon-container"
     (click)="navigateNotifMessage()"
        [routerLink]="['/main', 'messaging']"
-       [routerLinkActive]="['active-nav-icon']">
+       [routerLinkActive]="['active-nav-icon']"
+       (click)="navigateNotifMessage()" 
+       >
     <img class="outline-icon"
          alt="messaging-icon"
          src="assets/images/new/nav-icons/messaging-icon-full.png">
