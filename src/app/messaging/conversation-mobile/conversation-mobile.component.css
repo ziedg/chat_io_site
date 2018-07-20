@@ -15,7 +15,7 @@
     100% { transform: rotate(360deg); }
 }
 .myContainer{
-    height: 100vh;
+    height: calc(100vh - 107px);
     position: relative;
 }
 .header-mobile{
@@ -72,7 +72,7 @@
 .message-wrapper{
     background-color: white;
     overflow-y: scroll;
-    max-height: calc(100% - 107px);
+    height: 100%;
     margin-top: 55px;
 }
 .message-overlay {
