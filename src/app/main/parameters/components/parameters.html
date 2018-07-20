@@ -16,7 +16,7 @@
                         <a [routerLink]="['/main/parameters/edit-profile']" routerLinkActive="active">
                             {{ 'parameters_update_profile' | translate }}
                         </a>
-                        <a [routerLink]="['/main/parameters/change-password']" routerLinkActive="active">
+                        <a [routerLink]="['/main/parameters/change-password']" routerLinkActive="active" *ngIf="loginService.getFacebookUser()==null">
                             {{ 'parameters_update_password' | translate }}
                         </a>
                         <article
