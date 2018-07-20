@@ -530,6 +530,9 @@ export class Publication {
               jQuery("#" + this.pubImgId).attr("src", "");
               jQuery("#" + this.pubImgId).hide();
               this.uploadedPictureComment = null;
+              jQuery(".comment-holder form").css({
+                'display': 'flex'
+              });
             }
           } else {
             console.error(response);
