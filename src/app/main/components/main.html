@@ -127,7 +127,7 @@
                               <div *ngIf="notif.type =='joindre'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
                                   <span *ngIf="notif.profiles.length==1">
                                     <span class="notif-a">
-                                        Votre ami(e)  {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
+                                        {{'votre_ami' | translate}}  {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
                                     </span>
                                     <span>{{ 'vient de joindre speegar' | translate }}</span>
 
