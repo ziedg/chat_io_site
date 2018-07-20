@@ -139,7 +139,7 @@ export class Profile implements OnInit{
       showCancelButton: true,
       cancelButtonColor: '#999',
       confirmButtonColor: "#6bac6f",
-      confirmButtonText: this.translateCode("publication_popup_confirm"),
+      confirmButtonText: this.translateCode("send_msg"),
       cancelButtonText: this.translateCode("publication_popup_cancel_button"),
       input: 'textarea',
     }).then(function (text) {
