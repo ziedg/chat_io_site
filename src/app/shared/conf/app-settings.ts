@@ -7,6 +7,7 @@ export class AppSettings {
 
     public static get OPTIONS(): RequestOptions {
         let headers = new Headers();
+      headers.append('Access-Control-Allow-Origin', "*");
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json; charset=UTF-8');
       return new RequestOptions({ headers: headers});
@@ -14,6 +15,7 @@ export class AppSettings {
 
     public static get OPTIONS_POST(): RequestOptions {
         let headers_post = new Headers();
+       headers_post.append('Access-Control-Allow-Origin', "*");
         return new RequestOptions({ headers: headers_post });
     }
     public static get OPTIONS_POST_ENCODED(): RequestOptions {
