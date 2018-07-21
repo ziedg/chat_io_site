@@ -3403,10 +3403,10 @@ facebook-friends .user .user-img {
 
 .comment-holder form {
   position: relative;
-  display: flex;
-  display: -webkit-box;
+  display: inline-flex;
+  /* display: -webkit-box;
   display: -ms-flexbox;
-  display: -webkit-flex;
+  display: -webkit-flex; */
   align-items: center;
   width: calc(100% - 150px);
 }

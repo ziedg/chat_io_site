@@ -390,12 +390,9 @@
           </div>
 
 
-          <button class="comment-publish" type="submit" *ngIf="!loadingComment">
+          <button class="comment-publish" type="submit">
             <!-- {{ 'publication_comment_button' | translate }} -->
             <div class="publishImage"></div>
-          </button>
-          <button class="comment-publish comment-loading" *ngIf="loadingComment" disabled>
-            <div class="loading"></div>
           </button>
         </form>
       </div>

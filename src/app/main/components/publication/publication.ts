@@ -476,7 +476,6 @@ export class Publication {
   }
 
   publishComment() {
-    this.loadingComment = true;
     var txt: string = this.commentInputHtml;
     txt = txt
       .replace(/(\&nbsp;|\ )+/g, " ")
@@ -509,6 +508,11 @@ export class Publication {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
+          this.commentInputHtml = "";
+          jQuery("#" + this.commentTextareaId).empty();
+          jQuery("#" + this.pubImgId).attr("src", "");
+          jQuery("#" + this.pubImgId).hide();
+          this.uploadedPictureComment = null;
           this.changeDetector.markForCheck();
           if (response.status == "0") {
             if (response.comment) {
@@ -525,26 +529,14 @@ export class Publication {
               this.nbDisplayedComments++;
               //this.formComment.controls.pubComment.updateValue('');
               this.changeDetector.markForCheck();
-              this.commentInputHtml = "";
-              jQuery("#" + this.commentTextareaId).empty();
-              jQuery("#" + this.pubImgId).attr("src", "");
-              jQuery("#" + this.pubImgId).hide();
-              this.uploadedPictureComment = null;
-              var initialCss = jQuery(".comment-holder form").css("display");
-              console.log(initialCss);
-              jQuery(".comment-holder form").css({
-                'display': 'block'
-              });
-              jQuery(".comment-holder form").css("display",initialCss);
             }
           } else {
             console.error(response);
-            this.loadingComment = false;
           }
         },
         err => { },
         () => { 
-          this.loadingComment = false;
+          jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment-grey.png)");
         }
       );
   }

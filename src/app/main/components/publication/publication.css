@@ -17,6 +17,14 @@
     bottom: 11px;
 }
 
+.form-comment{
+    display: block!important;
+}
+
+.form-comment .camera-div{
+    display: inline-block!important;
+}
+
 .comment-holder .textarea {
     flex-grow: 1;
 }
