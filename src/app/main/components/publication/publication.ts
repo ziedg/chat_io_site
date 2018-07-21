@@ -476,6 +476,8 @@ export class Publication {
   }
 
   publishComment() {
+    this.loadingComment = true;
+    jQuery(".comment-publish").prop('disabled', true);
     var txt: string = this.commentInputHtml;
     txt = txt
       .replace(/(\&nbsp;|\ )+/g, " ")
@@ -532,10 +534,14 @@ export class Publication {
             }
           } else {
             console.error(response);
+            this.loadingComment = false;
+            jQuery(".comment-publish").prop('disabled', false);
           }
         },
         err => { },
         () => { 
+          this.loadingComment = false;
+          jQuery(".comment-publish").prop('disabled', false);
           jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment-grey.png)");
         }
       );

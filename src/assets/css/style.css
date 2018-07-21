@@ -3408,6 +3408,7 @@ facebook-friends .user .user-img {
   display: -webkit-flex; */
   align-items: center;
   width: calc(100% - 150px);
+  vertical-align: middle;
 }
 
 .position-pic{
@@ -3420,7 +3421,7 @@ facebook-friends .user .user-img {
 
 @media screen and (max-width: 768px){
   .comment-holder form {
-    width: calc(100% - 30px);
+    width: calc(100% - 40px);
   }
   .name-and-text-comment{
     width: 75% !important;
