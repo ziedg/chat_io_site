@@ -221,8 +221,8 @@ export class ChatListComponent implements OnInit {
 
   sortChatList() {
       this.chatListUsers.sort(function (a, b) {
-        if (a.lastMessage.date > b.lastMessage.date) return -1;
-        if (a.lastMessage.date < b.lastMessage.date) return 1;
+        if (a.lastMessage.date > b.lastMessage.date) return 1;
+        if (a.lastMessage.date < b.lastMessage.date) return -1;
         return 0;
       });
   }
