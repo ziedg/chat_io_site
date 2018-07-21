@@ -15,9 +15,7 @@
     100% { transform: rotate(360deg); }
 }
 .myContainer{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+    height: calc(100vh - 107px);
     position: relative;
 }
 .header-mobile{
@@ -30,8 +28,8 @@
     height:55px;
     min-height: 55px;
     border-bottom: 1px solid #efefef;
-    position:absolute;
-    top: 0;
+    position: fixed;
+    top:0;
 }
 .header-mobile div>img{
     height: 40px;
@@ -74,8 +72,7 @@
 .message-wrapper{
     background-color: white;
     overflow-y: scroll;
-    flex-grow: 1;
-    max-height: calc(100% - 107px);
+    height: 100%;
     margin-top: 55px;
 }
 .message-overlay {
@@ -169,7 +166,8 @@
 .message-typer {
     background-color: white;
     width: 100vw;
-    position:absolute;
+    z-index: 10000;
+    position: fixed;
     bottom: 0;
 }
 .message-typer form>div{
@@ -233,5 +231,5 @@
 }
 
 .message-thread>li:last-child{
-    margin-bottom:40px;
+    margin-bottom:80px;
 }

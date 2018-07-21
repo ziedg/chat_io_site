@@ -76,16 +76,23 @@ export class ChatListComponent implements OnInit {
     this.emitterService.lastMessageEmitter.subscribe((msg) => {
       if (msg.fromUserId === this.userId) {
         let elementPos = this.historyUsers.map(function (x) { return x._id }).indexOf(msg.toUserId);
-        this.historyUsers[elementPos]['lastMessage']=JSON.parse(JSON.stringify(msg));
-        this.historyUsers[elementPos].lastMessage.message = this.translateCode("you : ") + msg.message;
+        let profile=this.historyUsers[elementPos];
+        this.historyUsers.splice(elementPos, 1);
 
-        this.historyUsers[elementPos].lastMessage.date = this.getCurrentDate();
+        profile['lastMessage']=JSON.parse(JSON.stringify(msg));
+        profile.lastMessage.message = this.translateCode("you : ") + msg.message;
+
+        profile.lastMessage.date = this.getCurrentDate();
+        this.historyUsers.unshift(profile);
         this.chatListUsers = this.historyUsers.slice()
-
       } else {
         let elementPos = this.historyUsers.map(function (user) { return user._id }).indexOf(msg.fromUserId)
-        this.historyUsers[elementPos]['lastMessage']=JSON.parse(JSON.stringify(msg));
-        this.historyUsers[elementPos].lastMessage.date = this.getCurrentDate();
+        let profile=this.historyUsers[elementPos];
+        this.historyUsers.splice(elementPos, 1);
+
+        profile['lastMessage']=JSON.parse(JSON.stringify(msg));
+        profile.lastMessage.date = this.getCurrentDate();
+        this.historyUsers.unshift(profile);
         this.chatListUsers = this.historyUsers.slice()
       }
 

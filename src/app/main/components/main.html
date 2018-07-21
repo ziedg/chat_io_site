@@ -49,7 +49,7 @@
 			</article>
 
 
-      <article  [routerLink]="['/main/messaging']"  class="notification-parent hidden-xs">
+      <article  [routerLink]="['/main/messaging']" (click)="navigateNotifMessage()" class="notification-parent hidden-xs">
 
         <div class="noPadding">
 
@@ -124,12 +124,13 @@
 
 
 
-                              <div *ngIf="notif.type =='joindre'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
+                              <div *ngIf="notif.type =='joindre'" class="comment-text" (click)="goTo('profile',notif.profiles[0]._id,notif._id)">
                                   <span *ngIf="notif.profiles.length==1">
+                                      <span>{{'votre_ami' | translate}}</span>
                                     <span class="notif-a">
-                                        Votre ami(e)  {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
+                                       {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
                                     </span>
-                                    <span>{{ 'vient de joidre speegar' | translate }}</span>
+                                    <span>{{ 'vient de joindre speegar' | translate }}</span>
 
                                   </span>
 
@@ -275,9 +276,12 @@
 
 <div class="hidden-lg hidden-md hidden-sm navigation-bottom">
   <div class="home-icon outline-icon-container"
+        (click)="scrollTopHome()"
        [routerLink]="['/main', 'home']"
+       
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
+        
          alt="home-icon"
          src="assets/images/new/nav-icons/home-icon-full.png">
     <span class="outline-icon-text">{{"home" | translate}}</span>
@@ -291,8 +295,11 @@
     <span class="outline-icon-text" style="margin-top:1px">{{"popular" | translate}}</span>
   </div>
   <div class="messaging-icon outline-icon-container"
+    (click)="navigateNotifMessage()"
        [routerLink]="['/main', 'messaging']"
-       [routerLinkActive]="['active-nav-icon']">
+       [routerLinkActive]="['active-nav-icon']"
+       (click)="navigateNotifMessage()" 
+       >
     <img class="outline-icon"
          alt="messaging-icon"
          src="assets/images/new/nav-icons/messaging-icon-full.png">

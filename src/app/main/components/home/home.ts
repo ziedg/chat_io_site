@@ -415,6 +415,16 @@ export class Home {
   }
 
 
+  navigateNotifMessage() {
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.RESET_NEW_MESSAGE_NOTIFICATIONS,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
+      .subscribe(response => {}, err => {}, () => {});
+  }
+
   getListSearchUsers(key: string) {
     // this.showRecentSearch = false;
     this.http

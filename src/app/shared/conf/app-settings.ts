@@ -22,10 +22,6 @@ export class AppSettings {
     }
 	 public static get OPTIONSFB(): RequestOptions {
         let headers = new Headers();
-		headers.append('Access-Control-Allow-Origin', "*");
-        headers.append('Content-Type', 'text/plain;application/x-www-form-urlencoded; charset=UTF-8');
-		headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-		headers.append('Access-Control-Allow-Methods', 'GET,OPTIONS');
 		headers.append('Access-Control-Allow-Credentials', 'true');
 
         return new RequestOptions({ headers: headers});

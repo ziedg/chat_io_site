@@ -133,28 +133,29 @@ export class Profile implements OnInit{
   }
 
   showSendMessagePopUp(){
+    var self=this;
     swal({
       title: this.translateCode("publication_popup_send_message_title"),
       text: this.translateCode("publication_popup_send_message_text"),
       showCancelButton: true,
       cancelButtonColor: '#999',
       confirmButtonColor: "#6bac6f",
-      confirmButtonText: this.translateCode("publication_popup_confirm"),
+      confirmButtonText: this.translateCode("send_msg"),
       cancelButtonText: this.translateCode("publication_popup_cancel_button"),
       input: 'textarea',
     }).then(function (text) {
         if (text) {
-          this.sendMessage(text)
+          self.sendMessage(text)
           swal({
-            title: this.translateCode("publication_popup_notification_message_sent_title"),
-            text: this.translateCode("publication_popup_notification_message_sent_text"),
+            title: self.translateCode("publication_popup_notification_message_sent_title"),
+            text: self.translateCode("publication_popup_notification_message_sent_text"),
             type: "success",
             timer: 1000,
             showConfirmButton: false
           }).then(function () {}, function (dismiss) {});
-          this.changeDetector.markForCheck();
+          self.changeDetector.markForCheck();
         }
-      }.bind(this),
+      },
       function (dismiss) {
         if (dismiss === 'overlay') {}
       }

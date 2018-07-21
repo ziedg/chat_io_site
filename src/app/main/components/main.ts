@@ -148,7 +148,12 @@ export class Main {
       }
     });
 
-
+    this.router.events.subscribe((evt) => {
+      
+      // console.log(evt);
+      // console.log(this.activatedRoute);
+      // window.scrollTo(0, 0)
+  });
   }
 
 
@@ -372,6 +377,18 @@ export class Main {
   navigateNotif() {
     this.nbNewNotifications=0;
   }
+
+  navigateNotifMessage() {
+    this.nbNewMessageNotification=0;
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.RESET_NEW_MESSAGE_NOTIFICATIONS,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
+      .subscribe(response => {}, err => {}, () => {});
+  }
+
   markView(notifId) {
     let body = JSON.stringify({
       notificationId: notifId
@@ -424,9 +441,9 @@ checkNewMessageNotification(){
   .subscribe(
     response => {
       if (response.status == 1) {
-
+        console.log(response);
        this.nbNewMessageNotification+=response.nbNewMessageNotifications;
-       //console.log(this.nbNewMessageNotification);
+       console.log(this.nbNewMessageNotification);
       }
     },
     err => {},
@@ -546,4 +563,12 @@ checkNewMessageNotification(){
       });
 
   }
+
+  scrollTopHome(){
+    //console.log("scroll");
+    jQuery("html, body").scrollTop(0, 0);
+    //window.scrollTo(0, 0);
+  }
+
+  
 }

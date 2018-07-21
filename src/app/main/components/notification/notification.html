@@ -11,7 +11,7 @@
   
   <div *ngFor="let notif of listNotif">
     <article style="margin-top: 10px; display: flex;" [class.unseen-notification]="notif.isSeen=='false'"
-             *ngIf="notif.type !='subscribe'"
+             *ngIf="notif.type !='subscribe' && notif.type !='joindre'"
              (click)="goTo('post',notif.publId,notif._id)">
       <div class="user-img for-notif"
            *ngIf="notif.profiles &&notif.profiles.length>0 &&notif.profiles[notif.profiles.length-1].profilePictureMin"
@@ -83,6 +83,31 @@
       </div>
 
     </article>
+
+    <article style="margin-top: 10px; display: flex;" [class.unseen-notification]="notif.isSeen=='false'"
+             *ngIf="notif.type =='joindre'"
+             (click)="goTo('post',notif.publId,notif._id)">
+   <div class="user-img for-notif"
+           *ngIf="notif.profiles && notif.profiles.length>0&&notif.profiles[notif.profiles.length-1].profilePicture"
+           [ngStyle]="{'background-image': 'url(' + notif.profiles[notif.profiles.length-1].profilePicture + ')'}"></div>
+     
+           <div class="notif-content">
+    <div *ngIf="notif.type =='joindre'" class="comment-text" (click)="goTo('profile',notif.profiles[0]._id,notif._id)">
+      <span *ngIf="notif.profiles.length==1">
+          <span>{{'votre_ami' | translate}}</span>
+        <span class="notif-a">
+           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
+        </span>
+        <span>{{ 'vient de joindre speegar' | translate }}</span>
+
+      </span>
+      </div>
+      <div class="time-notif ">
+        {{getNotificationTime(notif.date_notification)}}
+      </div>
+    </div>
+    </article>
+
     <article style="margin-top: 10px; display: flex;" [class.unseen-notification]="notif.isSeen=='false'"
              *ngIf=" notif.type =='subscribe'"
              (click)="goTo('profile',notif.profiles[0]._id,notif._id)">

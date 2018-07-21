@@ -162,7 +162,7 @@ export class Publication {
           if (response.status == 0) {
             this.user.isFollowed = false;
             this.user.nbSubscribers--;
-            this.unsubscribeMessage();
+            //this.unsubscribeMessage();
           }
         },
         err => { },
