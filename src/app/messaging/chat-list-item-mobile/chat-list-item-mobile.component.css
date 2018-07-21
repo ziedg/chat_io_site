@@ -45,6 +45,8 @@
     color:black;
     font-size: 12pt;
     display: inline-block;
+    overflow-x: hidden;
+    width: 75%;
 }
 
 .topdiv p:nth-child(2){
