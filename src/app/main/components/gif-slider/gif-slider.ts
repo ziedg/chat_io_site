@@ -52,46 +52,46 @@ export class GifSlider implements AfterViewInit {
 
     
   }
-  swipeLeft(){
-    let offset_x_n: any = this.offset_x_pos - 1;
-    //console.log("offset_x_n: "+offset_x_n);
+  // swipeLeft(){
+  //   let offset_x_n: any = this.offset_x_pos - 1;
+  //   //console.log("offset_x_n: "+offset_x_n);
 
-    if (offset_x_n == -this.gifLimitIndex) {
-      //console.log("max leeength");
-      this.loadMoreGifs();
-    }
+  //   if (offset_x_n == -this.gifLimitIndex) {
+  //     //console.log("max leeength");
+  //     this.loadMoreGifs();
+  //   }
 
-    if (offset_x_n <= 0 && offset_x_n > -this.UrlGifList.length) {
+  //   if (offset_x_n <= 0 && offset_x_n > -this.UrlGifList.length) {
 
-      this.offset_x_pos = offset_x_n;
-      //console.log("offset_x_pos: "+this.offset_x_pos);
-      let offset_x = 3 * this.offset_x_pos * (this.sliderWidth + this.sliderMarginRight);
-      //console.log("offset_x: "+offset_x);
-      this.renderer.setStyle(this.slidesContainer.nativeElement,
-        'transform',
-        `translatex(${offset_x}px)`);
-    }
-  }
-  swipeRight(){
-    let offset_x_n: any = this.offset_x_pos + 1;
-    //console.log("offset_x_n: "+offset_x_n);
+  //     this.offset_x_pos = offset_x_n;
+  //     //console.log("offset_x_pos: "+this.offset_x_pos);
+  //     let offset_x = 3 * this.offset_x_pos * (this.sliderWidth + this.sliderMarginRight);
+  //     //console.log("offset_x: "+offset_x);
+  //     this.renderer.setStyle(this.slidesContainer.nativeElement,
+  //       'transform',
+  //       `translatex(${offset_x}px)`);
+  //   }
+  // }
+  // swipeRight(){
+  //   let offset_x_n: any = this.offset_x_pos + 1;
+  //   //console.log("offset_x_n: "+offset_x_n);
 
-    if (offset_x_n == -this.gifLimitIndex) {
-      //console.log("max leeength");
-      //this.loadMoreGifs();
-    }
+  //   if (offset_x_n == -this.gifLimitIndex) {
+  //     //console.log("max leeength");
+  //     //this.loadMoreGifs();
+  //   }
 
-    if (offset_x_n <= 0 && offset_x_n > -this.UrlGifList.length) {
+  //   if (offset_x_n <= 0 && offset_x_n > -this.UrlGifList.length) {
 
-      this.offset_x_pos = offset_x_n;
-      //console.log("offset_x_pos: "+this.offset_x_pos);
-      let offset_x = 3 * this.offset_x_pos * (this.sliderWidth + this.sliderMarginRight);
-      //console.log("offset_x: "+offset_x);
-      this.renderer.setStyle(this.slidesContainer.nativeElement,
-        'transform',
-        `translatex(${offset_x}px)`);
-    }
-  }
+  //     this.offset_x_pos = offset_x_n;
+  //     //console.log("offset_x_pos: "+this.offset_x_pos);
+  //     let offset_x = 3 * this.offset_x_pos * (this.sliderWidth + this.sliderMarginRight);
+  //     //console.log("offset_x: "+offset_x);
+  //     this.renderer.setStyle(this.slidesContainer.nativeElement,
+  //       'transform',
+  //       `translatex(${offset_x}px)`);
+  //   }
+  // }
 
   loadMoreGifs() {
     this.isLoadingMoreGifs = true;
