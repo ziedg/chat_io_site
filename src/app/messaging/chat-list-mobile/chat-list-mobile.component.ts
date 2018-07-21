@@ -149,7 +149,7 @@ export class ChatListMobileComponent implements OnInit {
                 }
                 users[i].lastMessage.date = hours + ":" + minutes;
               }else if ((actualDate.getDate() - day) == 1){
-                users[i].lastMessage.date = "yesterday";
+                users[i].lastMessage.date = this.translateCode('prefix_date_yesterday');
               } else {
                 users[i].lastMessage.date = day_text + " " + month_text;
               }

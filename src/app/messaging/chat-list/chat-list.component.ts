@@ -83,6 +83,7 @@ export class ChatListComponent implements OnInit {
         profile.lastMessage.message = this.translateCode("you : ") + msg.message;
 
         profile.lastMessage.date = this.getCurrentDate();
+        profile.lastMessage.isSeen = false;
         this.historyUsers.unshift(profile);
         this.chatListUsers = this.historyUsers.slice()
       } else {
@@ -92,6 +93,7 @@ export class ChatListComponent implements OnInit {
 
         profile['lastMessage'] = JSON.parse(JSON.stringify(msg));
         profile.lastMessage.date = this.getCurrentDate();
+        profile.lastMessage.isSeen = false;
         this.historyUsers.unshift(profile);
         this.chatListUsers = this.historyUsers.slice()
       }
@@ -107,12 +109,9 @@ export class ChatListComponent implements OnInit {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-
           if (response.status == "0") {
-
             this.user = response.user;
           }
-
         },
         err => {
         },
@@ -211,7 +210,7 @@ export class ChatListComponent implements OnInit {
                 }
                 users[i].lastMessage.date = hours + ":" + minutes;
               }else if ((actualDate.getDate() - day) == 1){
-                users[i].lastMessage.date = "yesterday";
+                users[i].lastMessage.date = this.translateCode('prefix_date_yesterday');
               } else {
                 users[i].lastMessage.date = day_text + " " + month_text;
               }
