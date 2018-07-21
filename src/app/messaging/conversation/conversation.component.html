@@ -24,7 +24,7 @@
 					<div class="embed-submit-field">
 						<input class="message" type="text" placeholder="Message" (keyup)="sendMessage()" formControlName="message" />
 						<button type="submit" (click)="sendMessageBtn()" *ngIf="messageForm.controls['message'].value">{{'send_msg' | translate}}</button>
-						<button id="not-active" type="submit" (click)="sendMessageBtn()" *ngIf="!messageForm.controls['message'].value">{{'send_msg' | translate}}</button>
+						<button id="not-active" type="submit" *ngIf="!messageForm.controls['message'].value" disabled>{{'send_msg' | translate}}</button>
 					</div>
 				</div>
 			</form>
