@@ -148,7 +148,12 @@ export class Main {
       }
     });
 
-
+    this.router.events.subscribe((evt) => {
+      
+      // console.log(evt);
+      // console.log(this.activatedRoute);
+      // window.scrollTo(0, 0)
+  });
   }
 
 
@@ -558,4 +563,12 @@ checkNewMessageNotification(){
       });
 
   }
+
+  scrollTopHome(){
+    //console.log("scroll");
+    jQuery("html, body").scrollTop(0, 0);
+    //window.scrollTo(0, 0);
+  }
+
+  
 }

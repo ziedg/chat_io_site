@@ -276,9 +276,12 @@
 
 <div class="hidden-lg hidden-md hidden-sm navigation-bottom">
   <div class="home-icon outline-icon-container"
+        (click)="scrollTopHome()"
        [routerLink]="['/main', 'home']"
+       
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
+        
          alt="home-icon"
          src="assets/images/new/nav-icons/home-icon-full.png">
     <span class="outline-icon-text">{{"home" | translate}}</span>
