@@ -1,4 +1,4 @@
-<div class="publications-holder" *ngIf="publicationBean" id="publication">
+<div class="publications-holder" *ngIf="publicationBean" id="publication" [class.margin-publication]="hiddenContent">
   <article class="publication bordered" *ngIf="publicationBean.displayed == true">
 
     <div class="user" *ngIf="!publicationBean.isShared">

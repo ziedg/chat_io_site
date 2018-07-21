@@ -2688,7 +2688,6 @@ textarea:focus {
 
 .publications-holder {
   width: 100%;
-  margin: -10px 0 0;
 }
 
 .publication {
@@ -3413,6 +3412,10 @@ facebook-friends .user .user-img {
 
 .position-pic{
   bottom: 20px !important;
+}
+
+.no-padding{
+  padding: 0!important;
 }
 
 @media screen and (max-width: 768px){

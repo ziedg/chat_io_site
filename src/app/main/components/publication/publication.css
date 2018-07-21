@@ -3,7 +3,6 @@
     align-self: flex-end;
 }
 
-
 .form-more {
     font-size: 18px;
     display: flex;
@@ -72,5 +71,8 @@
     .comment-publish{
         padding: 0px 17px 9px 2px;
         margin-left: 4px;
+    }
+    .margin-publication{
+        margin-top:-25px;
     }
 }
