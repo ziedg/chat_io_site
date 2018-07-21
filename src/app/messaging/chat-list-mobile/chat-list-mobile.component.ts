@@ -72,7 +72,12 @@ export class ChatListMobileComponent implements OnInit {
      */
     this.chatService.getList(this.userId)
       .map(users => {
-        return users.json();
+        let result = users.json().sort(function (a, b) {
+          if (new Date(a.lastMessage.date) > new Date(b.lastMessage.date)) return -1;
+          if (new Date(a.lastMessage.date) < new Date(b.lastMessage.date)) return 1;
+          return 0;
+        });
+        return result;
       })
       .subscribe((users: any[]) => {
         for (let i = 0; i < users.length; i++) {
@@ -160,18 +165,8 @@ export class ChatListMobileComponent implements OnInit {
         err => { console.log(err) },
         () => {
           this.loaded = true;
-          this.sortChatList();
           this.historyUsers = this.chatListUsers.slice();
         });
-  }
-
-  sortChatList() {
-    this.chatListUsers.sort(function (a, b) {
-      if (a.lastMessage.date > b.lastMessage.date) return 1;
-      if (a.lastMessage.date < b.lastMessage.date) return -1;
-      return 0;
-    });
-
   }
 
   listenForAllMessages(userId: string): void {
