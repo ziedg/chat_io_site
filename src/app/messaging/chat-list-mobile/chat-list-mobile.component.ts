@@ -159,29 +159,9 @@ export class ChatListMobileComponent implements OnInit {
 
   sortChatList() {
     this.chatListUsers.sort(function (a, b) {
-      if (a.lastMessage.date.includes("-") && b.lastMessage.date.includes("-")) {
-        let a_day = Number(a.lastMessage.date.split("-")[0]);
-        let b_day = Number(b.lastMessage.date.split("-")[0]);
-        let a_month = Number(a.lastMessage.date.split("-")[1]);
-        let b_month = Number(b.lastMessage.date.split("-")[1]);
-        let a_year = Number(a.lastMessage.date.split("-")[2]);
-        let b_year = Number(b.lastMessage.date.split("-")[2]);
-        return a_year < b_year ? -1 : a_year > b_year ? 1 : a_month < b_month ? -1 : a_month > b_month ? 1 : a_day < b_day ? -1 : a_day > b_day ? 1 : 0;
-      } else if (a.lastMessage.date.includes(":") && b.lastMessage.date.includes(":")) {
-        let a_hours = Number(a.lastMessage.date.split(":")[0]);
-        let b_hours = Number(b.lastMessage.date.split(":")[0]);
-        let a_minutes = Number(a.lastMessage.date.split(":")[1]);
-        let b_minutes = Number(b.lastMessage.date.split(":")[1]);
-        return a_hours < b_hours ? 1 : a_hours > b_hours ? -1 : a_minutes < b_minutes ? 1 : a_minutes > b_minutes ? -1 : 0;
-      }
-      else if (a.lastMessage.date.includes(":") && b.lastMessage.date.includes("-")) {
-
-        return -1;
-      } else {
-        return 1
-      }
-
-
+      if (a.lastMessage.date > b.lastMessage.date) return -1;
+      if (a.lastMessage.date < b.lastMessage.date) return 1;
+      return 0;
     });
 
   }
