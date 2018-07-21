@@ -76,10 +76,10 @@ export class ChatListComponent implements OnInit {
     this.emitterService.lastMessageEmitter.subscribe((msg) => {
       if (msg.fromUserId === this.userId) {
         let elementPos = this.historyUsers.map(function (x) { return x._id }).indexOf(msg.toUserId);
-        let profile=this.historyUsers[elementPos];
+        let profile = this.historyUsers[elementPos];
         this.historyUsers.splice(elementPos, 1);
 
-        profile['lastMessage']=JSON.parse(JSON.stringify(msg));
+        profile['lastMessage'] = JSON.parse(JSON.stringify(msg));
         profile.lastMessage.message = this.translateCode("you : ") + msg.message;
 
         profile.lastMessage.date = this.getCurrentDate();
@@ -87,10 +87,10 @@ export class ChatListComponent implements OnInit {
         this.chatListUsers = this.historyUsers.slice()
       } else {
         let elementPos = this.historyUsers.map(function (user) { return user._id }).indexOf(msg.fromUserId)
-        let profile=this.historyUsers[elementPos];
+        let profile = this.historyUsers[elementPos];
         this.historyUsers.splice(elementPos, 1);
 
-        profile['lastMessage']=JSON.parse(JSON.stringify(msg));
+        profile['lastMessage'] = JSON.parse(JSON.stringify(msg));
         profile.lastMessage.date = this.getCurrentDate();
         this.historyUsers.unshift(profile);
         this.chatListUsers = this.historyUsers.slice()
@@ -151,62 +151,70 @@ export class ChatListComponent implements OnInit {
             day_text = "0" + day_text;
           }
           let month_text = '';
-          if ((actualDate.getFullYear() - year > 0) ||
-            ((actualDate.getMonth() + 1) - month > 0) ||
-            (actualDate.getDate() - day > 0)) {
-            switch (month) {
-              case 1:
-                month_text = "January";
-                break;
-              case 2:
-                month_text = "February";
-                break;
-              case 3:
-                month_text = "March";
-                break;
-              case 4:
-                month_text = "April";
-                break;
-              case 5:
-                month_text = "May";
-                break;
-              case 6:
-                month_text = "June";
-                break;
-              case 7:
-                month_text = "July";
-                break;
-              case 8:
-                month_text = "August";
-                break;
-              case 9:
-                month_text = "September";
-                break;
-              case 10:
-                month_text = "October";
-                break;
-              case 11:
-                month_text = "November";
-                break;
-              case 12:
-                month_text = "December";
-                break;
+          switch (month) {
+            case 1:
+              month_text = this.translateCode("January");
+              break;
+            case 2:
+              month_text = this.translateCode("February");
+              break;
+            case 3:
+              month_text = this.translateCode("March");
+              break;
+            case 4:
+              month_text = this.translateCode("April");
+              break;
+            case 5:
+              month_text = this.translateCode("May");
+              break;
+            case 6:
+              month_text = this.translateCode("June");
+              break;
+            case 7:
+              month_text = this.translateCode("July");
+              break;
+            case 8:
+              month_text = this.translateCode("August");
+              break;
+            case 9:
+              month_text = this.translateCode("September");
+              break;
+            case 10:
+              month_text = this.translateCode("October");
+              break;
+            case 11:
+              month_text = this.translateCode("November");
+              break;
+            case 12:
+              month_text = this.translateCode("December");
+              break;
+          }
+          if (actualDate.getFullYear() - year == 0) {
+            if ((actualDate.getMonth() + 1) - month == 0) {
+              if ((actualDate.getDate() - day) == 0) {
+                let hours;
+                let minutes;
+                if (dateMsg.getHours().toString().length == 1) {
+                  hours = "0" + dateMsg.getHours().toString();
+                } else {
+                  hours = dateMsg.getHours().toString();
+                }
+                if (dateMsg.getMinutes().toString().length == 1) {
+                  minutes = "0" + dateMsg.getMinutes().toString();
+                } else {
+                  minutes = dateMsg.getMinutes().toString();
+                }
+                users[i].lastMessage.date = hours + ":" + minutes;
+              }else if ((actualDate.getDate() - day) == 1){
+                users[i].lastMessage.date = "yesterday";
+              } else {
+                users[i].lastMessage.date = day_text + " " + month_text;
+              }
+            } else {
+              users[i].lastMessage.date = day_text + " " + month_text;
             }
-            users[i].lastMessage.date = day_text + " " + month_text + " " + year;
           } else {
-            let hours;
-            let minutes;
-            if (dateMsg.getHours().toString().length == 1) {
-              hours = "0" + dateMsg.getHours().toString();
-            } else {
-              hours = dateMsg.getHours().toString();
-            }
-            if (dateMsg.getMinutes().toString().length == 1) {
-              minutes = "0" + dateMsg.getMinutes().toString();
-            } else {
-              minutes = dateMsg.getMinutes().toString();
-            }
-            users[i].lastMessage.date = hours + ":" + minutes;
+            users[i].lastMessage.date = day_text + " " + month_text + " " + year;
           }
           this.chatListUsers.push(users[i]);
         }
@@ -220,11 +228,11 @@ export class ChatListComponent implements OnInit {
   }
 
   sortChatList() {
-      this.chatListUsers.sort(function (a, b) {
-        if (a.lastMessage.date > b.lastMessage.date) return 1;
-        if (a.lastMessage.date < b.lastMessage.date) return -1;
-        return 0;
-      });
+    this.chatListUsers.sort(function (a, b) {
+      if (a.lastMessage.date > b.lastMessage.date) return 1;
+      if (a.lastMessage.date < b.lastMessage.date) return -1;
+      return 0;
+    });
   }
 
   getSuggestionsList() {
@@ -251,7 +259,7 @@ export class ChatListComponent implements OnInit {
         let index = this.historyUsers.findIndex(user => user._id === message.fromUserId);
         this.historyUsers.splice(index, 1);
         profiles[0].lastMessage.message = message.message;
-        
+
         profiles[0].lastMessage.date = this.getCurrentDate();
         this.historyUsers.unshift(profiles[0]);
         this.chatListUsers = this.historyUsers.slice()
@@ -260,7 +268,7 @@ export class ChatListComponent implements OnInit {
       } else {
         let profiles = this.suggestions.filter(user => user._id === message.fromUserId);
         if (profiles[0]) {
-          profiles[0]['lastMessage'] =JSON.parse(JSON.stringify(message));
+          profiles[0]['lastMessage'] = JSON.parse(JSON.stringify(message));
           profiles[0].lastMessage.date = this.getCurrentDate();
           this.historyUsers.unshift(profiles[0]);
           this.chatListUsers = this.historyUsers.slice()
@@ -274,7 +282,7 @@ export class ChatListComponent implements OnInit {
             .subscribe(
               response => {
                 if (response.status == "0") {
-                 let newUser = {
+                  let newUser = {
                     _id: response.user._id,
                     firstName: response.user.firstName,
                     lastName: response.user.lastName,
@@ -287,7 +295,7 @@ export class ChatListComponent implements OnInit {
                   this.historyUsers.unshift(newUser);
                   this.chatListUsers = this.historyUsers.slice()
                   this.notread = true;
-                  
+
                 }
 
               },
@@ -428,7 +436,7 @@ export class ChatListComponent implements OnInit {
     return userId == this.userId ? true : false;
   }
 
-  getCurrentDate(){
+  getCurrentDate() {
     let actualDate = new Date(Date.now());
     let hours = actualDate.getHours().toString();
     let minutes = actualDate.getMinutes().toString();
@@ -439,6 +447,6 @@ export class ChatListComponent implements OnInit {
     if (minutes.length == 1) {
       minutes = "0" + minutes;
     }
-   return hours + ":" + minutes
+    return hours + ":" + minutes
   }
 }

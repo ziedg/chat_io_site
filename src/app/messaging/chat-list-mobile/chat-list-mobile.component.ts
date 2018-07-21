@@ -89,62 +89,70 @@ export class ChatListMobileComponent implements OnInit {
             day_text = "0" + day_text;
           }
           let month_text = '';
-          if ((actualDate.getFullYear() - year > 0) ||
-            ((actualDate.getMonth() + 1) - month > 0) ||
-            (actualDate.getDate() - day > 0)) {
-            switch (month) {
-              case 1:
-                month_text = this.translateCode("January");
-                break;
-              case 2:
-                month_text = this.translateCode("February");
-                break;
-              case 3:
-                month_text = this.translateCode("March");
-                break;
-              case 4:
-                month_text = this.translateCode("April");
-                break;
-              case 5:
-                month_text = this.translateCode("May");
-                break;
-              case 6:
-                month_text = this.translateCode("June");
-                break;
-              case 7:
-                month_text = this.translateCode("July");
-                break;
-              case 8:
-                month_text = this.translateCode("August");
-                break;
-              case 9:
-                month_text = this.translateCode("September");
-                break;
-              case 10:
-                month_text = this.translateCode("October");
-                break;
-              case 11:
-                month_text = this.translateCode("November");
-                break;
-              case 12:
-                month_text = this.translateCode("December");
-                break;
+          switch (month) {
+            case 1:
+              month_text = this.translateCode("January");
+              break;
+            case 2:
+              month_text = this.translateCode("February");
+              break;
+            case 3:
+              month_text = this.translateCode("March");
+              break;
+            case 4:
+              month_text = this.translateCode("April");
+              break;
+            case 5:
+              month_text = this.translateCode("May");
+              break;
+            case 6:
+              month_text = this.translateCode("June");
+              break;
+            case 7:
+              month_text = this.translateCode("July");
+              break;
+            case 8:
+              month_text = this.translateCode("August");
+              break;
+            case 9:
+              month_text = this.translateCode("September");
+              break;
+            case 10:
+              month_text = this.translateCode("October");
+              break;
+            case 11:
+              month_text = this.translateCode("November");
+              break;
+            case 12:
+              month_text = this.translateCode("December");
+              break;
+          }
+          if (actualDate.getFullYear() - year == 0) {
+            if ((actualDate.getMonth() + 1) - month == 0) {
+              if ((actualDate.getDate() - day) == 0) {
+                let hours;
+                let minutes;
+                if (dateMsg.getHours().toString().length == 1) {
+                  hours = "0" + dateMsg.getHours().toString();
+                } else {
+                  hours = dateMsg.getHours().toString();
+                }
+                if (dateMsg.getMinutes().toString().length == 1) {
+                  minutes = "0" + dateMsg.getMinutes().toString();
+                } else {
+                  minutes = dateMsg.getMinutes().toString();
+                }
+                users[i].lastMessage.date = hours + ":" + minutes;
+              }else if ((actualDate.getDate() - day) == 1){
+                users[i].lastMessage.date = "yesterday";
+              } else {
+                users[i].lastMessage.date = day_text + " " + month_text;
+              }
+            } else {
+              users[i].lastMessage.date = day_text + " " + month_text;
             }
-            users[i].lastMessage.date = day_text + " " + month_text + " " + year;
           } else {
-            let hours;
-            let minutes;
-            if (dateMsg.getHours().toString().length == 1) {
-              hours = "0" + dateMsg.getHours().toString();
-            } else {
-              hours = dateMsg.getHours().toString();
-            }
-            if (dateMsg.getMinutes().toString().length == 1) {
-              minutes = "0" + dateMsg.getMinutes().toString();
-            } else {
-              minutes = dateMsg.getMinutes().toString();
-            }
-            users[i].lastMessage.date = hours + ":" + minutes;
+            users[i].lastMessage.date = day_text + " " + month_text + " " + year;
           }
           this.chatListUsers.push(users[i]);
         }
