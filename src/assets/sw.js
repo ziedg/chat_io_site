@@ -70,16 +70,19 @@ self.addEventListener('push', event => {
   const title = data.notification.title;
 
 if(data.notification.tag=='msg'){
-    url="https://integration.speegar.com/main/messaging"
+    url="https://speegar.com/main/messaging"
 
 }
 else if((data.notification.body).indexOf('Commence') > -1)
 {
- url=`https://integration.speegar.com/main/profile/${data.notification.tag}`
+ url=`https://speegar.com/main/profile/${data.notification.tag}`
 }
-else
+else if(data.notification.tag)
 {
-    url=`https://integration.speegar.com/main/post/${data.notification.tag}`
+    url=`https://speegar.com/main/post/${data.notification.tag}`
+}
+else{
+     url=`https://speegar.com`
 }
 
 
