@@ -175,8 +175,8 @@ export class Profile implements OnInit{
         toUserId: this.userDisplayed._id,
       }
       this.chatService.sendMessage(message).subscribe(
-        () => console.log('Sent Message server.'),
-        err => console.log('Could send message to server, reason: ', err));
+        () => {},
+        err => {});
     }
   }
   

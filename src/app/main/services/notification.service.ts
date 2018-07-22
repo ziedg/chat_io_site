@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs/Observable';
 import { AppSettings } from './../../shared/conf/app-settings';
-import {Injectable, Renderer2} from '@angular/core';
+import { Injectable, Renderer2 } from '@angular/core';
 import { Http } from '@angular/http';
-import {environment} from "../../../environments/environment";
+import { environment } from "../../../environments/environment";
 import { urlB64ToUint8Array, VAPID_PUBLIC_KEY } from '../../utils/notification';
-import {BehaviorSubject} from "rxjs"
+import { BehaviorSubject } from "rxjs"
 
 
 @Injectable({
@@ -12,21 +12,21 @@ import {BehaviorSubject} from "rxjs"
 })
 export class NotificationService {
   subscriptionJson = '';
-  isSubscribed:boolean = false;
+  isSubscribed: boolean = false;
   registration = undefined;
-  public subscription ='';
-  isNotifBarClosed:boolean = false;
+  public subscription = '';
+  isNotifBarClosed: boolean = false;
 
   constructor(private http: Http) { }
 
 
   //send subscription to the server
-  addPushSubscriber(sub:any) {
-    return this.http.post(environment.SERVER_URL +'api/push-subscribe', sub,AppSettings.OPTIONS);
+  addPushSubscriber(sub: any) {
+    return this.http.post(environment.SERVER_URL + 'api/push-subscribe', sub, AppSettings.OPTIONS);
   }
 
-  sendNotification(user_id:any) {
-    return this.http.post(environment.SERVER_URL +'send', AppSettings.OPTIONS);
+  sendNotification(user_id: any) {
+    return this.http.post(environment.SERVER_URL + 'send', AppSettings.OPTIONS);
   }
 
 
@@ -47,46 +47,48 @@ export class NotificationService {
         this.isSubscribed = true;
       })
       .catch(err => {
-        console.log('Failed to subscribe the user: ', err);
+        //console.log('Failed to subscribe the user: ', err);
       });
   }
 
 
-private updateSubscriptionOnServer(subscription) {
+  private updateSubscriptionOnServer(subscription) {
     if (subscription) {
       this.subscriptionJson = subscription;
       this.addPushSubscriber(subscription).subscribe(
-        () => {},
-        err =>  console.log('Could not send subscription object to server, reason: ', err));
+        () => { },
+        err => {
+          //console.log('Could not send subscription object to server, reason: ', err)
+        });
     } else {
       this.subscriptionJson = '';
     }
   }
 
 
-  removePushSubscriber(){
-     const subs = this.subscription;
-     //console.log(subs)
-    return  this.http.post(environment.SERVER_URL +'api/push-unsubscribe',subs,AppSettings.OPTIONS);
+  removePushSubscriber() {
+    const subs = this.subscription;
+    //console.log(subs)
+    return this.http.post(environment.SERVER_URL + 'api/push-unsubscribe', subs, AppSettings.OPTIONS);
   }
 
 
 
 
 
-public init(reg) {
-  this.registration=reg;
-  this.registration.pushManager.getSubscription().then(subscription => {
-    this.isSubscribed = !(subscription === null);
-    this.subscription=subscription;
+  public init(reg) {
+    this.registration = reg;
+    this.registration.pushManager.getSubscription().then(subscription => {
+      this.isSubscribed = !(subscription === null);
+      this.subscription = subscription;
 
-    this.updateSubscriptionOnServer(subscription);
+      this.updateSubscriptionOnServer(subscription);
 
-    //console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
-    // if (!this.isSubscribed){
-    //  this.subscribeUser()
-    //}
-  });
-}
+      //console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
+      // if (!this.isSubscribed){
+      //  this.subscribeUser()
+      //}
+    });
+  }
 
 }

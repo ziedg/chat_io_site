@@ -879,7 +879,7 @@ export class Home {
   
 
   veriftextsize(publishDivRef){
-    console.log("verif");
+    //console.log("verif");
     
     let text: string = jQuery("#publishDiv").html();
     text = text.replace(/(\&nbsp;|\ )+/g, ' ')

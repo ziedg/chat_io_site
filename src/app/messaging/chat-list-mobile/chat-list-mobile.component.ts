@@ -148,7 +148,7 @@ export class ChatListMobileComponent implements OnInit {
                   minutes = dateMsg.getMinutes().toString();
                 }
                 users[i].lastMessage.date = hours + ":" + minutes;
-              }else if ((actualDate.getDate() - day) == 1){
+              } else if ((actualDate.getDate() - day) == 1) {
                 users[i].lastMessage.date = this.translateCode('prefix_date_yesterday');
               } else {
                 users[i].lastMessage.date = day_text + " " + month_text;
@@ -162,11 +162,11 @@ export class ChatListMobileComponent implements OnInit {
           this.chatListUsers.push(users[i]);
         }
       },
-        err => { console.log(err) },
-        () => {
-          this.loaded = true;
-          this.historyUsers = this.chatListUsers.slice();
-        });
+        err => { //console.log(err) },
+          () => {
+            this.loaded = true;
+            this.historyUsers = this.chatListUsers.slice();
+          });
   }
 
   sameUser(userId: string) {
@@ -204,7 +204,7 @@ export class ChatListMobileComponent implements OnInit {
             //console.log(hours + ":" + minutes);
 
           },
-          err => console.log('Could send message to server, reason: ', err)
+          err => {//console.log('Could send message to server, reason: ', err)}
         );
       } else {
         this.msgFirstCheck = false;
@@ -228,7 +228,7 @@ export class ChatListMobileComponent implements OnInit {
         let profiles = this.suggestions.filter(user => user._id === message.fromUserId);
         if (profiles[0]) {
           profiles[0].lastMessage = message;
-          
+
           profiles[0].lastMessage.date = this.getCurrentDate();
           this.historyUsers.unshift(profiles[0]);
           this.chatListUsers = this.historyUsers.slice()
@@ -242,7 +242,7 @@ export class ChatListMobileComponent implements OnInit {
             .subscribe(
               response => {
                 if (response.status == "0") {
-                
+
                   let newProfile = {
                     _id: response.user._id,
                     firstName: response.user.firstName,
@@ -406,7 +406,7 @@ export class ChatListMobileComponent implements OnInit {
     jQuery(".recherche-results-holder-1").hide();
     jQuery(".upper-arrow-search").hide();
   }
-  getCurrentDate(){
+  getCurrentDate() {
     let actualDate = new Date(Date.now());
     let hours = actualDate.getHours().toString();
     let minutes = actualDate.getMinutes().toString();
@@ -417,6 +417,6 @@ export class ChatListMobileComponent implements OnInit {
     if (minutes.length == 1) {
       minutes = "0" + minutes;
     }
-   return hours + ":" + minutes
+    return hours + ":" + minutes
   }
 }

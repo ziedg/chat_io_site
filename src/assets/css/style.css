@@ -1411,7 +1411,7 @@ a {
   margin-left: 10px;
   display: flex;
   align-items: center;
-  width: 100%
+  width: 90%
 }
 
 .for-notif {
@@ -4597,14 +4597,13 @@ top-blagueurs-decov .widget .subscribe button {
   background-color: white;
   border: 1px solid #efefef;
   border-radius: 1px;
-  margin: 00px 00px 0px !important;
+  margin: 0px 0px 0px !important;
   padding: 15px 0;
-
   height: 60px;
 }
 
 .boxLogin2.marginned {
-  margin-bottom: 44px !important;
+  margin-bottom: 0px !important;
 }
 
 @media (max-width: 767px) {

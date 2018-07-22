@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { Http, Response } from '@angular/http';
-import {environment} from '../../../environments/environment'
+import { environment } from '../../../environments/environment'
 import * as pathUtils from '../../utils/path.utils';
 import { User } from '../../beans/user';
 import { ChatService } from '../../messanging/chat.service';
@@ -44,10 +44,10 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
   loaded: Boolean = false;
   private msgFirstCheck: Boolean = true;
   isFirstLoaded: boolean = true;
-  loadMoreMessages :boolean =true ;
-  loadingMessages:boolean =false ;
+  loadMoreMessages: boolean = true;
+  loadingMessages: boolean = false;
 
-  @ViewChild("msgWrapper") msgWrapper:ElementRef;
+  @ViewChild("msgWrapper") msgWrapper: ElementRef;
   heightField: string = "bla";
 
   constructor(private emitterService: EmitterService,
@@ -57,7 +57,7 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
     private db: AngularFireDatabase,
     private chatService: ChatService,
     private http: Http,
-    private changeDetector:ChangeDetectorRef,
+    private changeDetector: ChangeDetectorRef,
     private renderer: Renderer2) {
 
     this.user = this.loginService.getUser();
@@ -65,18 +65,18 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
     this.selectedUserId = this.route.snapshot.params['stringid'];
     this.isFirstLoaded = true;
     this.getProfile(this.selectedUserId);
-     this.chatService.getMessages({ fromUserId: this.userId, toUserId:this.selectedUserId })
-    .subscribe((response) => {
-      if(response==undefined){
-        this.messages=[];
-      }
-      else{
-        this.messages = response;
-        this.loaded = true;
-        this.scrollMsgWrapperBottom();
-      }
-    });
-    
+    this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId })
+      .subscribe((response) => {
+        if (response == undefined) {
+          this.messages = [];
+        }
+        else {
+          this.messages = response;
+          this.loaded = true;
+          this.scrollMsgWrapperBottom();
+        }
+      });
+
     // with the Resolver
     // this.data = this.route.snapshot.data;
     // let allMessages = this.data.messages;
@@ -104,7 +104,7 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
     });*/
 
 
-    
+
     this.messageForm = new FormBuilder().group({
       message: new MessageValidation
     });
@@ -113,47 +113,47 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.heightField = document.body.offsetHeight + "-" +  window.innerHeight;
+    this.heightField = document.body.offsetHeight + "-" + window.innerHeight;
     this.listenForMessages();
     this.renderer.setStyle(document.querySelector(".main-header"), "display", "none");
     this.renderer.setStyle(document.body, "padding-bottom", "0");
   }
 
 
-  getProfile(userId:string) {
-      this.http.get(
-        environment.SERVER_URL + pathUtils.GET_PROFILE + userId,
-        AppSettings.OPTIONS)
-        .map((res:Response) => res.json())
-        .subscribe(
-          response => {
-            
+  getProfile(userId: string) {
+    this.http.get(
+      environment.SERVER_URL + pathUtils.GET_PROFILE + userId,
+      AppSettings.OPTIONS)
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+
           if (response.status == "0") {
 
             this.selectedUser = response.user;
-          } 
+          }
 
         },
-          err => {
+        err => {
         },
         () => {
           this.changeDetector.markForCheck();
         }
       );
-    
+
 
   }
 
   scrollMsgWrapperBottom() {
-    let delay:number = this.isFirstLoaded ? 500 : 20;
-    setTimeout(()=>wrapper.scrollTop = wrapper.scrollHeight, delay);
+    let delay: number = this.isFirstLoaded ? 500 : 20;
+    setTimeout(() => wrapper.scrollTop = wrapper.scrollHeight, delay);
     let wrapper = this.msgWrapper.nativeElement;
-    console.log("scroll to bottom");
+    //console.log("scroll to bottom");
   }
 
   onInputFocus() {
     this.scrollMsgWrapperBottom()
-    setTimeout(()=> this.scrollMsgWrapperBottom(),
+    setTimeout(() => this.scrollMsgWrapperBottom(),
       500);
     /*
     if(/iPod|iPhone|iPad/.test(navigator.platform)) {
@@ -168,24 +168,24 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
   onScrollMsgWrapper() {
     //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
     if (!this.msgWrapper.nativeElement.scrollTop && !this.isFirstLoaded) {
-      if (this.messages.length<20) this.loadMoreMessages=false
-     // console.log("reach the top of message-wrapper");
-      if(this.loadMoreMessages){
-      //  console.log('loading more messages')
-        this.loadingMessages=true;
-        this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId},this.messages[0]._id)
-        .subscribe((incomingMessages) => {
-          if (incomingMessages.length<20) this.loadMoreMessages=false; 
-          this.loadingMessages=false
-          for(var i=incomingMessages.length-1; i>=0; i--) { 
-           this.messages.unshift(incomingMessages[i]);
-           } 
-      })
+      if (this.messages.length < 20) this.loadMoreMessages = false
+      // console.log("reach the top of message-wrapper");
+      if (this.loadMoreMessages) {
+        //  console.log('loading more messages')
+        this.loadingMessages = true;
+        this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId }, this.messages[0]._id)
+          .subscribe((incomingMessages) => {
+            if (incomingMessages.length < 20) this.loadMoreMessages = false;
+            this.loadingMessages = false
+            for (var i = incomingMessages.length - 1; i >= 0; i--) {
+              this.messages.unshift(incomingMessages[i]);
+            }
+          })
       }
-   
+
     }
 
-    if(this.isFirstLoaded) this.isFirstLoaded = false;
+    if (this.isFirstLoaded) this.isFirstLoaded = false;
   }
 
   sendMessage() {
@@ -221,7 +221,9 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
       this.chatService.sendMessage(data).subscribe(
         () => {
         },
-        err => console.log('Could send message to server, reason: ', err));
+        err => {
+          //console.log('Could send message to server, reason: ', err)
+        });
 
       this.messageForm.reset();
     }
@@ -229,34 +231,35 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
   }
 
   listenForMessages(): void {
-    
-    this.s = this.db.object('notifications/'+this.userId+'/messaging');
-      this.s.snapshotChanges().subscribe(action => {
-        var notif = action.payload.val();
-        if (notif !== null && !this.msgFirstCheck){
-          this.chatService.getMessage(notif.msgId).subscribe(
-            message => {
-              
-              if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
-                this.chatService.markMessageAsSeen(notif.msgId)
+
+    this.s = this.db.object('notifications/' + this.userId + '/messaging');
+    this.s.snapshotChanges().subscribe(action => {
+      var notif = action.payload.val();
+      if (notif !== null && !this.msgFirstCheck) {
+        this.chatService.getMessage(notif.msgId).subscribe(
+          message => {
+
+            if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
+              this.chatService.markMessageAsSeen(notif.msgId)
                 .subscribe(message => {
                 })
               this.messages = [...this.messages, message];
               setTimeout(() => {
-                
+
                 document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
               }, 100);
-            }else{
-             this.chatService.newIncomingMessage(message)
+            } else {
+              this.chatService.newIncomingMessage(message)
             }
-            
-            },
-            err =>  console.log('Could send message to server, reason: ', err)
-          );
-        } else {
-          this.msgFirstCheck = false;
-        }
-      });
+
+          },
+          err => {
+            //console.log('Could send message to server, reason: ', err)
+          });
+      } else {
+        this.msgFirstCheck = false;
+      }
+    });
   }
 
   alignMessage(userId: string): boolean {
@@ -277,9 +280,9 @@ export class ConversationMobileComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.renderer.setStyle(document.querySelector(".main-header"), "display", "");
     this.renderer.setStyle(document.body, "padding-bottom", "");
-    console.log("on destroy");
+    //console.log("on destroy");
   }
 }

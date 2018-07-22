@@ -223,7 +223,7 @@ export class ChatListComponent implements OnInit {
           this.chatListUsers.push(users[i]);
         }
       },
-        err => { console.log(err) },
+        err => { //console.log(err) },
         () => {
           this.historyUsers = this.chatListUsers.slice();
         });
