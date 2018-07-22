@@ -24,7 +24,8 @@ declare var jQuery: any;
 export class Parameters {
     public user: User = new User();
 	public page;
-    constructor(public translate:TranslateService, private title:Title,private route: ActivatedRoute,private http:Http, private router:Router, private loginService:LoginService,private changeDetector: ChangeDetectorRef) {
+    constructor(public translate:TranslateService, private title:Title,private route: ActivatedRoute,private http:Http,
+                private router:Router, public loginService:LoginService,private changeDetector: ChangeDetectorRef) {
         this.title.setTitle("Modifier profile - Speegar");
 		if (loginService.isConnected()) {
             loginService.actualize();
