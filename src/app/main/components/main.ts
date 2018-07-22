@@ -307,8 +307,12 @@ export class Main {
             for (var i = 0; i < response.length; i++) {
 
               if (response[i]._id && response[i].type != 'message')
-                arr.push(response[i]);
-
+                if(response[i].publType === "text" && response[i].publText != null){
+                  response[i].publText = this.strip_html_tags(response[i].publText);
+                  arr.push(response[i]);
+                }else{
+                  arr.push(response[i]);
+                }
 
               this.lastNotifId = response[i]._id;
 
@@ -326,7 +330,6 @@ export class Main {
 
             this.listNotif = arr;
 
-            console.log(this.listNotif);
 
             if (response.length == 5) this.showButtonMoreNotif = true;
             else this.showButtonMoreNotif = false;
@@ -342,6 +345,13 @@ export class Main {
           this.changeDetector.markForCheck();
         }
       );
+  }
+
+  strip_html_tags(str)
+  {
+    str = str.toString();
+    str = str.replace("</","");
+    return str.replace(/<([^;]*)>/g, ' ');
   }
 
   getNotificationTime(publishDateString: string): string {
