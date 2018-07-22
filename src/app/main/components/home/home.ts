@@ -1073,7 +1073,7 @@ export class Home {
 
   getIdFacebookVideo(facebookLink): string {
 
-    let myRegexp = /(\/(videos\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
+    let myRegexp = /(\/(videos\/)|(\/vb.*\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
     let match = facebookLink.match(myRegexp);
     if (match) {
       return match[match.length - 1];
@@ -1116,7 +1116,16 @@ export class Home {
     jQuery(".youtube-preview").html("");
     jQuery(".facebook-preview").html("");
   }
-
+  getVideoId(facebookLink): String
+  {
+    
+    let Reg = /((story_fbid=))(\d+)/;
+    let match = facebookLink.match(Reg);
+    if (match) {
+      return match[match.length - 1];
+    }}
+    
+  
   updateYoutubeFacebook(videoLink) {
     // var a = jQuery(".yt-in-url");
     // var videoLink = a.val();
@@ -1144,11 +1153,20 @@ export class Home {
     else if (videoLink.indexOf("web.facebook.com") > 0 || videoLink.indexOf("www.facebook.com") > 0 ||
       videoLink.indexOf("m.facebook.com") > 0 || videoLink.indexOf("mobile.facebook.com") > 0) {
       videoId = this.getIdFacebookVideo(videoLink);
+      //console.log(videoId);
       var videoPage = this.getPageFacebookVideo(videoLink);
-      //console.log("faceboook");
+      //console.log(videoPage);
       try {
         this.loadingPublish = true;
      let linkURL = this.linkView.getListLinks(videoLink)[0];
+     if (videoLink.indexOf("m.facebook.com/story.php?")>0){
+       videoId=this.getVideoId(videoLink);
+       videoPage=this.getIdFacebookVideo(videoLink);
+       linkURL="https://www.facebook.com/"+videoPage+"/videos/"+videoId;
+   //    console.log(linkURL);
+     }
+  //   console.log(linkURL);
+
     this.http
       .get(
         environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
@@ -1159,17 +1177,21 @@ export class Home {
         response => {
           if (response.results.success) {
             this.link.image = response.results.data.ogImage.url;
-            //console.log(response.results.data.ogImage);
+    //        console.log(response.results.data.ogImage);
             this.link.imageWidth = response.results.data.ogImage.width;
             this.link.imageHeight = response.results.data.ogImage.height;
             var self =this;
               this.getMeta(response.results.data.ogImage.url,function(width, height){
-                //console.log(height);
-                //console.log(width);
+      //          console.log(height);
+        //        console.log(width);
                 self.setParams(width, height, videoId, videoPage);
                 
               });
-          }});
+          }
+        else {
+          this.resetPublish();
+        }
+        });
         jQuery(".youtube-preview").html("");
 
         // jQuery(".facebook-preview-mobile").html(
@@ -1179,6 +1201,7 @@ export class Home {
         // );
 
         this.uploadedPicture = null;
+        console.log(videoId);
         this.closeLinkAPI();
         this.facebookLink = videoId;
         jQuery("#preview-image").hide();
