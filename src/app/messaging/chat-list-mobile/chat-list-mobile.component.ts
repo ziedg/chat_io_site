@@ -162,7 +162,8 @@ export class ChatListMobileComponent implements OnInit {
           this.chatListUsers.push(users[i]);
         }
       },
-        err => { //console.log(err) },
+        err => { //console.log(err)
+        },
           () => {
             this.loaded = true;
             this.historyUsers = this.chatListUsers.slice();
@@ -205,7 +206,7 @@ export class ChatListMobileComponent implements OnInit {
 
           },
           err => {//console.log('Could send message to server, reason: ', err)}
-        );
+          });
       } else {
         this.msgFirstCheck = false;
       }
