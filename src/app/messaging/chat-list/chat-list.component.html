@@ -27,8 +27,7 @@
 				[class.active]="isUserSelected(user.id)"
 				(click)="loadUser(user)"
 					[user]="user.firstName +' ' + user.lastName"
-					[userImage]="user.profilePicture"
-					[notread]="!user.lastMessage.isSeen" >
+					[userImage]="user.profilePicture" >
 				</app-chat-list-item>
 		</ng-template>
 	</div>
