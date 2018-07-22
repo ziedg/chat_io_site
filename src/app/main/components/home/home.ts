@@ -1153,9 +1153,9 @@ export class Home {
     else if (videoLink.indexOf("web.facebook.com") > 0 || videoLink.indexOf("www.facebook.com") > 0 ||
       videoLink.indexOf("m.facebook.com") > 0 || videoLink.indexOf("mobile.facebook.com") > 0) {
       videoId = this.getIdFacebookVideo(videoLink);
-      //console.log(videoId);
+  //    console.log(videoId);
       var videoPage = this.getPageFacebookVideo(videoLink);
-      //console.log(videoPage);
+  //    console.log(videoPage);
       try {
         this.loadingPublish = true;
      let linkURL = this.linkView.getListLinks(videoLink)[0];
@@ -1163,9 +1163,9 @@ export class Home {
        videoId=this.getVideoId(videoLink);
        videoPage=this.getIdFacebookVideo(videoLink);
        linkURL="https://www.facebook.com/"+videoPage+"/videos/"+videoId;
-   //    console.log(linkURL);
+  //     console.log(linkURL);
      }
-  //   console.log(linkURL);
+  //  console.log(linkURL);
 
     this.http
       .get(
@@ -1175,9 +1175,10 @@ export class Home {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-          if (response.length>0) {
+    //      console.log(response.results.data.ogImage.url);
+          if (response.results.data.ogImage.url) {
             this.link.image = response.results.data.ogImage.url;
-    //        console.log(response.results.data.ogImage);
+        //   console.log(response.results.data.ogImage);
             this.link.imageWidth = response.results.data.ogImage.width;
             this.link.imageHeight = response.results.data.ogImage.height;
             var self =this;
