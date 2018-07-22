@@ -1175,7 +1175,7 @@ export class Home {
       .map((res: Response) => res.json())
       .subscribe(
         response => {
-          if (response.results.success) {
+          if (response.length>0) {
             this.link.image = response.results.data.ogImage.url;
     //        console.log(response.results.data.ogImage);
             this.link.imageWidth = response.results.data.ogImage.width;
@@ -1190,6 +1190,8 @@ export class Home {
           }
         else {
           this.resetPublish();
+          this.errorMsg = "SP_FV_ER_FB_LINK_NOT_VALID";
+          this.errorTimed();
         }
         });
         jQuery(".youtube-preview").html("");
