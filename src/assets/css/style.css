@@ -6469,6 +6469,7 @@ change-password .input-param input {
 .arabic-text {
   text-align: right !important;
   direction: rtl;
+  font-size: 1.14em;
 }
 
 /*-----------publication-icons-animation-begin----------------*/
