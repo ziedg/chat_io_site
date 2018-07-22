@@ -64,7 +64,12 @@ export class Notification implements OnInit {
         if (response.length != 0) {
           this.showNoNotif = false;
           for (let i = 0; i < response.length; i++) {
-            this.listNotif.push(response[i]);
+            if(response[i].publType === "text" && response[i].publText != null){
+              response[i].publText = this.strip_html_tags(response[i].publText);
+              this.listNotif.push(response[i]); }
+              else{
+                this.listNotif.push(response[i]);
+              }
             this.lastNotifId = response[i]._id;
           }
           this.index=5;
@@ -83,6 +88,13 @@ export class Notification implements OnInit {
         this.changeDetector.markForCheck();
       }
     );
+  }
+
+  strip_html_tags(str)
+  {
+    str = str.toString();
+    str = str.replace("</","");
+    return str.replace(/<([^;]*)>/g, ' ');
   }
 
   onScrollDown(){

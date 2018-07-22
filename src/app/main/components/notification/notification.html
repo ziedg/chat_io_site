@@ -19,7 +19,10 @@
             <span class="notif-a">
               {{notif.profiles[notif.profiles.length-1].firstName}} {{notif.profiles[notif.profiles.length-1].lastName}}
             </span>
-            <span>{{ 'main_comment_notification' | translate }}</span>
+            <span *ngIf="notif.publType !== 'text' && notif.publType !== 'pictureLink'" >{{ 'main_comment_notification' | translate }}</span>
+                          <span *ngIf="notif.publType === 'text'">{{ 'main_comment_notification_status' | translate }}</span>
+                          <span *ngIf="notif.publType === 'pictureLink'">{{ 'main_comment_notification_image' | translate }}</span>
+                          <span *ngIf="notif.publText"> "{{ notif.publText }} "</span>
           </span>
           <span *ngIf="notif.profiles &&notif.profiles.length>1">
             <span *ngIf="notif.profiles.length==2" class="notif-a">
@@ -30,7 +33,10 @@
               {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1
               } }}
             </span>
-            <span>{{ 'main_comments_notification' | translate }}</span>
+            <span *ngIf="notif.publType !== 'text' && notif.publType !== 'pictureLink'" >{{ 'main_comments_notification' | translate }}</span>
+                        <span *ngIf="notif.publType === 'text'">{{ 'main_comments_notification_status' | translate }}</span>
+                        <span *ngIf="notif.publType === 'pictureLink'">{{ 'main_comments_notification_image' | translate }}</span>
+                        <span *ngIf="notif.publText"> "{{ notif.publText }} "</span>
           </span>
         </div>
         <div *ngIf="notif.type =='reagir'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
@@ -38,7 +44,10 @@
             <span class="notif-a">
               {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
             </span>
-            <span>{{ 'main_reagir_notification' | translate }}</span>
+            <span *ngIf="notif.publType !== 'text' && notif.publType !== 'pictureLink'" >{{ 'main_reagir_notification' | translate }}</span>
+                        <span *ngIf="notif.publType === 'text'">{{ 'main_reagir_notification_status' | translate }}</span>
+                        <span *ngIf="notif.publType === 'pictureLink'">{{ 'main_reagir_notification_image' | translate }}</span>
+                        <span *ngIf="notif.publText"> "{{ notif.publText }} "</span>
           </span>
           <span *ngIf=" notif.profiles && notif.profiles.length>1">
             <span *ngIf="notif.profiles.length==2" class="notif-a">
@@ -49,7 +58,10 @@
               {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[0].firstName, number: notif.profiles.length-1
               } }}
             </span>
-            <span>{{ 'main_reagirs_notification' | translate}}</span>
+            <span *ngIf="notif.publType !== 'text' && notif.publType !== 'pictureLink'" >{{ 'main_reagirs_notification' | translate }}</span>
+                        <span *ngIf="notif.publType === 'text'">{{ 'main_reagirs_notification_status' | translate }}</span>
+                        <span *ngIf="notif.publType === 'pictureLink'">{{ 'main_reagirs_notification_image' | translate }}</span>
+                        <span *ngIf="notif.publText"> "{{ notif.publText }} "</span>
           </span>
         </div>
         <!-- <div *ngIf="notif.type =='dislike'" class="comment-text"
