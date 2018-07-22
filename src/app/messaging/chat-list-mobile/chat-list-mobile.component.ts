@@ -82,7 +82,7 @@ export class ChatListMobileComponent implements OnInit {
       .subscribe((users: any[]) => {
         for (let i = 0; i < users.length; i++) {
           if (users[i].lastMessage.fromUserId == this.userId) {
-            users[i].lastMessage.message = "Vous : " + users[i].lastMessage.message;
+            users[i].lastMessage.message = this.translateCode("you : ") + users[i].lastMessage.message;
           }
           let dateMsg = new Date(users[i].lastMessage.date);
           let actualDate = new Date(Date.now());
@@ -167,6 +167,10 @@ export class ChatListMobileComponent implements OnInit {
           this.loaded = true;
           this.historyUsers = this.chatListUsers.slice();
         });
+  }
+
+  sameUser(userId: string) {
+    return userId == this.userId ? true : false;
   }
 
   listenForAllMessages(userId: string): void {

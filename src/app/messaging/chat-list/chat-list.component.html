@@ -1,35 +1,27 @@
 <div class="chat-list-container" (clickOutside)="onClickOutside()">
 	<div class="input-search-1">
 		<img alt="search-icon" class="outline-icon" src="assets/images/new/search-icon.png">
-		<input #searchBar placeholder="{{'main_search_placeholder' | translate}}" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)" (focus)="onFocus()" >
+		<input #searchBar placeholder="{{'main_search_placeholder' | translate}}" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)"
+		 (focus)="onFocus()">
 
 	</div>
 	<div class="suggestions-corps " *ngIf="historyUsers.length == 0">
-			<!-- <p class="sub">Suggestions <span>{{suggestions.length}}</span></p> -->
-			<div *ngFor="let s of suggestions" class="row suggestions">
-					<chat-suggestion (click)="loadUser(s)" [user]="s"></chat-suggestion>
-			</div>
+		<!-- <p class="sub">Suggestions <span>{{suggestions.length}}</span></p> -->
+		<div *ngFor="let s of suggestions" class="row suggestions">
+			<chat-suggestion (click)="loadUser(s)" [user]="s"></chat-suggestion>
+		</div>
 	</div>
 	<hr *ngIf="historyUsers.length > 0">
 	<div class="users-list" *ngFor="let user of chatListUsers">
-		<app-chat-list-item *ngIf="user.lastMessage ; else newUser"
-		[class.active]="isUserSelected(user.id)"
-		(click)="loadUser(user)"
-			[myLastMessage]="sameUser(user.lastMessage.fromUserId)"
-			[user]="user.firstName +' ' + user.lastName"
-			[userImage]="user.profilePicture"
-			[lastMessage]="user.lastMessage.message"
-			[date]="user.lastMessage.date"
-			[notread]="!user.lastMessage.isSeen">
+		<app-chat-list-item *ngIf="user.lastMessage ; else newUser" [class.active]="isUserSelected(user.id)" (click)="loadUser(user)"
+		 [myLastMessage]="sameUser(user.lastMessage.fromUserId)" [user]="user.firstName +' ' + user.lastName" [userImage]="user.profilePicture"
+		 [lastMessage]="user.lastMessage.message" [date]="user.lastMessage.date" [notread]="!user.lastMessage.isSeen">
 		</app-chat-list-item>
 		<ng-template #newUser>
-				<app-chat-list-item
-				[class.active]="isUserSelected(user.id)"
-				(click)="loadUser(user)"
-					[user]="user.firstName +' ' + user.lastName"
-					[userImage]="user.profilePicture" >
-				</app-chat-list-item>
+			<app-chat-list-item [class.active]="isUserSelected(user.id)" (click)="loadUser(user)" [user]="user.firstName +' ' + user.lastName"
+			 [userImage]="user.profilePicture">
+			</app-chat-list-item>
 		</ng-template>
 	</div>
 	<hr *ngIf="chatListUsers.length == 0">
-<div>
+	<div>

@@ -248,23 +248,25 @@ export class Publication {
   }
 
   onKey(value: any) {
-    let text:string = value.target.innerHTML;
+    let text: string = value.target.innerHTML;
     text = text
       .replace(/(\&nbsp;|\ )+/g, " ")
       .replace(/(\<.?br\>)+/g, "<br>")
       .replace(/^\<.?br\>|\<.?br\>$/g, "")
       .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
-    if(text.length > 0){
-      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment.png)");
-    }else{
-      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment-grey.png)");
+    if (text.length > 0) {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment.png)");
+    } else {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment-grey.png)");
     }
   }
 
   scrollToCommentInput() {
-    let marge: number = 120;
-    //input.scrollIntoView(false);
-    window.scroll(0, this.findScrollToWindow(this.commentInput.nativeElement) - marge);
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      let marge: number = 120;
+      //input.scrollIntoView(false);
+      window.scroll(0, this.findScrollToWindow(this.commentInput.nativeElement) - marge);
+    }
   }
 
   findScrollToWindow(obj): number {
@@ -460,8 +462,8 @@ export class Publication {
 
   checkEnter(event) { }
 
-  inputFocused(){
-    let text:string = this.commentInputHtml;
+  inputFocused() {
+    let text: string = this.commentInputHtml;
     text = text
       .replace(/(\&nbsp;|\ )+/g, " ")
       .replace(/(\<.?br\>)+/g, "<br>")
@@ -469,9 +471,9 @@ export class Publication {
       .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
     var commentToSend = this.emojiService.getCommentTextFromHtml(text)
     if (!this.uploadedPictureComment && !commentToSend) {
-      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment-grey.png)");
-    }else{
-      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment.png)");
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment-grey.png)");
+    } else {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment.png)");
     }
   }
 
@@ -539,10 +541,10 @@ export class Publication {
           }
         },
         err => { },
-        () => { 
+        () => {
           this.loadingComment = false;
           jQuery(".comment-publish").prop('disabled', false);
-          jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment-grey.png)");
+          jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment-grey.png)");
         }
       );
   }
@@ -570,7 +572,7 @@ export class Publication {
     } else {
       this.uploadedPictureComment = null;
     }
-    let text:string = this.commentInputHtml;
+    let text: string = this.commentInputHtml;
     text = text
       .replace(/(\&nbsp;|\ )+/g, " ")
       .replace(/(\<.?br\>)+/g, "<br>")
@@ -578,9 +580,9 @@ export class Publication {
       .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
     var commentToSend = this.emojiService.getCommentTextFromHtml(text)
     if (!this.uploadedPictureComment && !commentToSend) {
-      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment-grey.png)");
-    }else{
-      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment.png)");
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment-grey.png)");
+    } else {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment.png)");
     }
   }
 
@@ -940,7 +942,7 @@ export class Publication {
 
   addToComment(emoji) {
     this.commentInputHtml += this.afficheComment(" " + emoji.shortcut);
-    let text:string = this.commentInputHtml;
+    let text: string = this.commentInputHtml;
     text = text
       .replace(/(\&nbsp;|\ )+/g, " ")
       .replace(/(\<.?br\>)+/g, "<br>")
@@ -948,9 +950,9 @@ export class Publication {
       .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
     var commentToSend = this.emojiService.getCommentTextFromHtml(text)
     if (!this.uploadedPictureComment && !commentToSend) {
-      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment-grey.png)");
-    }else{
-      jQuery(".publishImage").css("background-image","url(/assets/images/new/sendcomment.png)");
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment-grey.png)");
+    } else {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment.png)");
     }
   }
 

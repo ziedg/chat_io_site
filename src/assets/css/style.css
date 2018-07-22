@@ -3888,7 +3888,7 @@ facebook-friends .user .user-img {
   .user-name-profile > span {
     text-overflow: ellipsis;
     display: inline-block;
-    max-width: calc(100% - 50px);
+    max-width: calc(100%);
     white-space: unset !important;
     overflow: hidden;
   }

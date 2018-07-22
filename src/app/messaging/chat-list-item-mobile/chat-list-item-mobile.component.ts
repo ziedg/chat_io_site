@@ -13,12 +13,12 @@ export class ChatListItemMobileComponent implements OnInit {
   @Input() notread;
   @Input() date;
   constructor() { 
-    this.date = "02:46";
+    this.date = "";
     this.notread = false;
-    this.myLastMessage = true;
-    this.lastMessage = "Bonjour";
-    this.user = "Leyana";
-    this.userImage = "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&h=350";
+    this.myLastMessage = false;
+    this.lastMessage = "";
+    this.user = "";
+    this.userImage = "";
   }
 
   ngOnInit() {

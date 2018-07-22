@@ -5,7 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './chat-list-item.component.html',
   styleUrls: ['./chat-list-item.component.css']
 })
-export class ChatListItemComponent  {
+export class ChatListItemComponent implements OnInit{
   @Input() myLastMessage;
   @Input() lastMessage;
   @Input() user;
@@ -13,9 +13,9 @@ export class ChatListItemComponent  {
   @Input() notread;
   @Input() date;
 
-  constructor() { 
-    this.date =this.getCurrentDate();
-    this.notread = true;
+  constructor() {
+    this.date = "";
+    this.notread = false;
     this.myLastMessage = false;
     this.lastMessage = "";
     this.user = "";
@@ -23,27 +23,7 @@ export class ChatListItemComponent  {
 
   }
 
-
-  getCurrentDate(){
-    var today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth()+1; 
-
-    let yyyy = today.getFullYear();
-    if(dd<10){
-    var day='0'+dd;
-    } else{
-      var day= dd.toString();
-    }
-    
-    if(mm<10){
-    var month='0'+mm;
-    }else{
-      var month= mm.toString();
-    } 
-    var currentDate = day+'-'+month+'-'+yyyy;
-    return currentDate
-
+  ngOnInit(){
+    console.log(this.myLastMessage);
   }
-
 }

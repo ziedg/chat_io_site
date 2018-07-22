@@ -238,7 +238,6 @@ export class ChatListComponent implements OnInit {
         return users.json();
       })
       .subscribe((users: any[]) => {
-        //console.log(users)
         for (let i = 0; i < users.length; i++) {
           this.suggestions.push(users[i]);
         }
@@ -333,7 +332,7 @@ export class ChatListComponent implements OnInit {
     if (!found) this.historyUsers.unshift(user)
 
     this.selectUser(user)
-    if (user.lastMessage) {
+    if (user.lastMessage && this.user._id != user._id) {
       user.lastMessage.isSeen = true;
     }
     this.searchValue = ""
@@ -434,7 +433,6 @@ export class ChatListComponent implements OnInit {
     let actualDate = new Date(Date.now());
     let hours = actualDate.getHours().toString();
     let minutes = actualDate.getMinutes().toString();
-    //console.log(actualDate);
     if (hours.length == 1) {
       hours = "0" + hours;
     }
