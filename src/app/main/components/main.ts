@@ -313,7 +313,7 @@ export class Main {
               this.lastNotifId = response[i]._id;
 
             }
-
+            //console.log(this.listNotif);
             this.loaded = true;
             this.moreLoaded = true;
             arr = _.uniqWith(this.listNotif, _.isEqual);
@@ -322,11 +322,11 @@ export class Main {
             });
 
 
-
+            
 
             this.listNotif = arr;
 
-
+            console.log(this.listNotif);
 
             if (response.length == 5) this.showButtonMoreNotif = true;
             else this.showButtonMoreNotif = false;
