@@ -334,6 +334,7 @@ export class Main {
             if (response.length == 5) this.showButtonMoreNotif = true;
             else this.showButtonMoreNotif = false;
           } else {
+            this.loaded = true;
             this.showNoNotif = true;
             this.showButtonMoreNotif = false;
           }
