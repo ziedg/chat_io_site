@@ -398,6 +398,7 @@ export class Main {
       )
       .map((res: Response) => res.json())
       .subscribe(response => { }, err => { }, () => { });
+      this.router.navigate(["/main/messaging"]);
   }
 
   markView(notifId) {
