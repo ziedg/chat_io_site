@@ -80,7 +80,7 @@ else if(type=='joindre' || type=='subscribe')
 {
  url=`${URL}/main/profile/${data.notification.tag}`
 }
-else if(data.notification.tag)
+else 
 {
     url=`${URL}/main/post/${data.notification.tag}`
 }
