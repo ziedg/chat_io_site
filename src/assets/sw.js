@@ -67,26 +67,29 @@ self.addEventListener('push', event => {
   //console.log('[Service Worker] Push Received.');
   //console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
   let data = JSON.parse(event.data.text())
-  const title = data.notification.title;
+ const  body = data.notification.body.body;
+  const  URL= data.notification.body.url
+  const type= data.notification.body.type;
+ const title = data.notification.title;
 
 if(data.notification.tag=='msg'){
-    url="https://integration.speegar.com/main/messaging"
+    url=`${URL}/main/messaging`
 
 }
-else if((data.notification.body).indexOf('Commence') > -1)
+else if(type=='joindre' || type=='subscribe')
 {
- url=`https://integration.speegar.com/main/profile/${data.notification.tag}`
+ url=`${URL}/main/profile/${data.notification.tag}`
 }
 else
 {
-    url=`https://integration.speegar.com/main/post/${data.notification.tag}`
+    url=`${URL}/main/post/${data.notification.tag}`
 }
 
 
 
 
   const options = {
-    body: data.notification.body,
+    body,
     icon:data.notification.icon,
     badge: data.notification.icon
   };
