@@ -141,7 +141,7 @@
   flex-direction:column;
   overflow-wrap: break-word;
 
-  padding-bottom: 30px; 
+  padding-bottom: 30px;
 }
 .pubbg9{
   background-image: url("/images/background/background_3.png");
@@ -703,7 +703,7 @@
   }
   .initial-loader-img {
     border: none;
-    
+
     border-radius: 100%;
     width: 70px;
     height: 70px;
@@ -712,7 +712,7 @@
     margin-left:0%;
     background-color: transparent;
     position: relative;
-    
+
   }
 
   .loader {
@@ -725,7 +725,7 @@
     margin-left:0%;
     background-color: transparent;
     position: relative;
-    
+
   }
 
   .title-checkbox:hover {
@@ -3525,7 +3525,7 @@ facebook-friends .user .user-img {
   position: relative;
 }
 
-.comment-content:after { 
+.comment-content:after {
   content: '';
   position: absolute;
   left: -8px;
@@ -4076,6 +4076,7 @@ facebook-friends .user .user-img {
 
 /* Style the tab content */
 .interactions-tabcontent {
+  overflow: auto;
   display: none;
   border-top: none;
 }
@@ -5589,7 +5590,7 @@ input.loginInput {
 
 .loader-more-notifications-main {
   border: none;
-  
+
   border-radius: 50%;
   width: 50px;
   height: 50px;
