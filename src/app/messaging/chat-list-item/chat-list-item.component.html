@@ -5,11 +5,12 @@
   <div class="corps">
     <div class="topdiv">
       <p>{{user}}</p>
-      <p style="margin-top: 4px;">{{date}}</p>
+      <p style="margin-top: 4px;" *ngIf="date != ''">{{date}}</p>
     </div>
     <div>
       <!-- <i *ngIf="notread" class="fas fa-circle"></i> -->
-      <p>{{lastMessage}} </p>
+      <p *ngIf="lastMessage != ''">{{lastMessage}} </p>
+      <p *ngIf="lastMessage == ''">{{'Taptodiscuss' | translate}}</p>
     </div>
   </div>
 </div>

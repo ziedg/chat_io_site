@@ -48,7 +48,7 @@
 }
 .pubbg1{
   background-image: url("../images/background/bg1.jpg");
-  height: 190px;
+  height: 240px;
   vertical-align: middle;
   background-size:cover;
   display: flex;
@@ -61,7 +61,7 @@
 }
 .pubbg2{
   background-image: url("../images/background/bg2.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -73,7 +73,7 @@
 }
 .pubbg3{
   background-image: url("../images/background/bg3.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -85,7 +85,7 @@
 }
 .pubbg4{
   background-image: url("../images/background/bg4.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -97,7 +97,7 @@
 }
 .pubbg5{
   background-image: url("../images/background/bg5.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -109,7 +109,7 @@
 }
 .pubbg6{
   background-image: url("../images/background/bg6.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -121,7 +121,7 @@
 }
 .pubbg7{
   background-image: url("/images/background/background_1.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -133,7 +133,7 @@
 }
 .pubbg8{
   background-image: url("/images/background/background_2.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -145,7 +145,7 @@
 }
 .pubbg9{
   background-image: url("/images/background/background_3.png");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -157,7 +157,7 @@
 }
 .pubbg10{
   background-image: url("/images/background/background_4.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -169,7 +169,7 @@
 }
 .pubbg11{
   background-image: url("/images/background/background_5.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -181,7 +181,7 @@
 }
 .pubbg12{
   background-image: url("/images/background/background_6.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -192,7 +192,7 @@
 }
 .pubbg13{
   background-image: url("/images/background/background_7.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -203,7 +203,7 @@
 }
 .pubbg14{
   background-image: url("/images/background/background_8.png");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -214,7 +214,7 @@
 }
 .pubbg15{
   background-image: url("/images/background/background_9.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -225,7 +225,7 @@
 }
 .pubbg16{
   background-image: url("/images/background/background_10.png");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -236,7 +236,7 @@
 }
 .pubbg17{
   background-image: url("/images/background/background_11.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -247,7 +247,7 @@
 }
 .pubbg18{
   background-image: url("/images/background/background_12.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -258,7 +258,7 @@
 }
 .pubbg19{
   background-image: url("/images/background/background_13.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -270,7 +270,7 @@
 }
 .pubbg20{
   background-image: url("/images/background/background_14.png");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -281,7 +281,7 @@
 }
 .pubbg21{
   background-image: url("/images/background/bg22.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -292,7 +292,7 @@
 }
 .pubbg22{
   background-image: url("/images/background/bg27.png");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -303,7 +303,7 @@
 }
 .pubbg23{
   background-image: url("/images/background/bg32.jpg");
-  height: 190px;
+  height: 240px;
   background-size:cover;
   display: flex;
   justify-content:center;
@@ -695,6 +695,37 @@
   .comment-publish:hover {
     color: rgba(255, 255, 255, 1);
     /* background: #55aa55; */
+  }
+
+  .gif-img {
+    width: 100%;
+    height: 100%;
+  }
+  .initial-loader-img {
+    border: none;
+    
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+    animation: spin 0.6s linear infinite;
+    margin-top:4%;
+    margin-left:0%;
+    background-color: transparent;
+    position: relative;
+    
+  }
+
+  .loader {
+    border: none;
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+    animation: spin 0.9s linear infinite;
+    margin-top:18%;
+    margin-left:0%;
+    background-color: transparent;
+    position: relative;
+    
   }
 
   .title-checkbox:hover {
@@ -1411,7 +1442,7 @@ a {
   margin-left: 10px;
   display: flex;
   align-items: center;
-  width: 100%
+  width: 90%
 }
 
 .for-notif {
@@ -2688,7 +2719,6 @@ textarea:focus {
 
 .publications-holder {
   width: 100%;
-  margin: -10px 0 0;
 }
 
 .publication {
@@ -3403,21 +3433,26 @@ facebook-friends .user .user-img {
 
 .comment-holder form {
   position: relative;
-  display: flex;
-  display: -webkit-box;
+  display: inline-flex;
+  /* display: -webkit-box;
   display: -ms-flexbox;
-  display: -webkit-flex;
+  display: -webkit-flex; */
   align-items: center;
   width: calc(100% - 150px);
+  vertical-align: middle;
 }
 
 .position-pic{
   bottom: 20px !important;
 }
 
+.no-padding{
+  padding: 0!important;
+}
+
 @media screen and (max-width: 768px){
   .comment-holder form {
-    width: calc(100% - 30px);
+    width: calc(100% - 40px);
   }
   .name-and-text-comment{
     width: 75% !important;
@@ -3884,7 +3919,7 @@ facebook-friends .user .user-img {
   .user-name-profile > span {
     text-overflow: ellipsis;
     display: inline-block;
-    max-width: calc(100% - 50px);
+    max-width: calc(100%);
     white-space: unset !important;
     overflow: hidden;
   }
@@ -4593,14 +4628,13 @@ top-blagueurs-decov .widget .subscribe button {
   background-color: white;
   border: 1px solid #efefef;
   border-radius: 1px;
-  margin: 00px 00px 0px !important;
+  margin: 0px 0px 0px !important;
   padding: 15px 0;
-
   height: 60px;
 }
 
 .boxLogin2.marginned {
-  margin-bottom: 44px !important;
+  margin-bottom: 0px !important;
 }
 
 @media (max-width: 767px) {
@@ -6466,6 +6500,7 @@ change-password .input-param input {
 .arabic-text {
   text-align: right !important;
   direction: rtl;
+  font-size: 1.14em;
 }
 
 /*-----------publication-icons-animation-begin----------------*/

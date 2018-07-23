@@ -34,7 +34,7 @@ export class Login {
   dontShowSocialNetworksLoginButtons = false;
   loadingFb = false;
   public loacationPath: string = "/login/sign-in";
-  private selectedLanguage: string;
+  public selectedLanguage: string;
 
   constructor(public translate: TranslateService,
               private _loc: Location,

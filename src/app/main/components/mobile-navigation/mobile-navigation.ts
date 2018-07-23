@@ -1,6 +1,9 @@
 import { Component } from "@angular/core";
 import { TranslateService } from '@ngx-translate/core';
 
+import {User} from '../../../beans/user';
+import {LoginService} from '../../../login/services/loginService';
+
 @Component({
     selector: "mobile-navigation",
     templateUrl: "mobile-navigation.html",
@@ -8,6 +11,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class MobileNavigation {
-    constructor(private translate: TranslateService) {
+    public user: User = new User();
+    constructor(private translate: TranslateService, private loginService: LoginService) {
+      this.loginService.redirect();
+      this.user = this.loginService.getUser();
     }
 }

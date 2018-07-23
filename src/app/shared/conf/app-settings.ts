@@ -7,6 +7,7 @@ export class AppSettings {
 
     public static get OPTIONS(): RequestOptions {
         let headers = new Headers();
+      headers.append('Access-Control-Allow-Origin', "*");
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json; charset=UTF-8');
       return new RequestOptions({ headers: headers});
@@ -14,6 +15,7 @@ export class AppSettings {
 
     public static get OPTIONS_POST(): RequestOptions {
         let headers_post = new Headers();
+       headers_post.append('Access-Control-Allow-Origin', "*");
         return new RequestOptions({ headers: headers_post });
     }
     public static get OPTIONS_POST_ENCODED(): RequestOptions {
@@ -21,14 +23,14 @@ export class AppSettings {
         return new RequestOptions({ headers: headers_post_encoded });
     }
 	 public static get OPTIONSFB(): RequestOptions {
-        let headers = new Headers();
-		headers.append('Access-Control-Allow-Origin', '*');
-        headers.append('Content-Type', 'text/plain;application/x-www-form-urlencoded; charset=UTF-8');
-		headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-		headers.append('Access-Control-Allow-Methods', 'GET,OPTIONS');
-		headers.append('Access-Control-Allow-Credentials', 'true');
+     let headers = new Headers();
+     headers.append('Access-Control-Allow-Origin', "*");
+     headers.append('Content-Type', 'text/plain;application/x-www-form-urlencoded; charset=UTF-8');
+     headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+     headers.append('Access-Control-Allow-Methods', 'GET,OPTIONS');
+     headers.append('Access-Control-Allow-Credentials', 'true');
 
-        return new RequestOptions({ headers: headers});
+     return new RequestOptions({ headers: headers});
     }
 
     public static Redirect(route:string) {

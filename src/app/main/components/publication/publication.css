@@ -1,8 +1,7 @@
 .comment-publish {
-    padding: 0 10px 12px 12px;
+    padding: 0 10px 10px 12px;
     align-self: flex-end;
 }
-
 
 .form-more {
     font-size: 18px;
@@ -15,6 +14,14 @@
     position: absolute;
     right: 33px;
     bottom: 11px;
+}
+
+.form-comment{
+    display: block!important;
+}
+
+.form-comment .camera-div{
+    display: inline-block!important;
 }
 
 .comment-holder .textarea {
@@ -64,5 +71,8 @@
     .comment-publish{
         padding: 0px 17px 9px 2px;
         margin-left: 4px;
+    }
+    .margin-publication{
+        margin-top:-25px;
     }
 }

@@ -5,27 +5,27 @@ import { User } from '../beans/user';
 @Injectable()
 export class EmitterService {
 
-userEmitter=new EventEmitter<User>();
-conversationEmitter =new EventEmitter<any>();
-lastMessageEmitter=new EventEmitter<any>();
-public selectedUser: User;
-  constructor(private _http:Http) { }
+  userEmitter = new EventEmitter<User>();
+  conversationEmitter = new EventEmitter<any>();
+  lastMessageEmitter = new EventEmitter<any>();
+  public selectedUser: User;
+  constructor(private _http: Http) { }
 
-  emitUser(user){
-    this.selectedUser=user
+  emitUser(user) {
+    this.selectedUser = user
     this.userEmitter.emit(user);
-    }
+  }
 
-  emitConversation(conversation){
+  emitConversation(conversation) {
     this.conversationEmitter.emit(conversation);
-    }
+  }
 
-  getSelectedUser(){
+  getSelectedUser() {
     return this.selectedUser;
   }
 
-  updateLastMessage(message){
-this.lastMessageEmitter.emit(message)
-}
+  updateLastMessage(message) {
+    this.lastMessageEmitter.emit(message)
+  }
 
 }

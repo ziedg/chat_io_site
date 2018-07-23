@@ -175,8 +175,8 @@ export class Profile implements OnInit{
         toUserId: this.userDisplayed._id,
       }
       this.chatService.sendMessage(message).subscribe(
-        () => console.log('Sent Message server.'),
-        err => console.log('Could send message to server, reason: ', err));
+        () => {},
+        err => {});
     }
   }
   
@@ -513,7 +513,8 @@ reportPub(userDisplayed:User) {
     jQuery(".modal-friends").fadeOut(300);
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+    jQuery(".navigation-bottom").removeClass('hidden-xs');    
     jQuery(document).click(function (e) {
       if (jQuery(e.target).closest(".white-box-edit").length === 0 && jQuery(e.target).closest(".profile-edit").length === 0) {
         jQuery(".modal-edit-profile").fadeOut(300);

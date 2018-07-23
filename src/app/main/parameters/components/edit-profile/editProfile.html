@@ -6,16 +6,14 @@
     </div>
 
     <div class="col-md-8 col-sm-8 col-xs-12 input-param">
-      <input (keyup)="checkLastName()"  formControlName="lastName"
-             [ngClass]="{'invalidInput': (errLastName && errLastName.length>0),
-             'validInput': (errLastName.length==0)}" id="lastName"
-        />
+      <input (keyup)="checkLastName()" formControlName="lastName" [ngClass]="{'invalidInput': (errLastName && errLastName.length>0),
+             'validInput': (errLastName.length==0)}" id="lastName" />
 
       <p *ngIf="errLastName && errLastName.length>0" class="msgErreur">{{'errLastName' | translate}}</p>
-<div *ngIf="form.controls['lastName'].errors">
-  <p *ngIf="form.controls['lastName'].errors.pattern" class="msgErreur">{{'LastName_too_long' |translate }}</p>
-</div>
-      
+      <div *ngIf="form.controls['lastName'].errors">
+        <p *ngIf="form.controls['lastName'].errors.pattern" class="msgErreur">{{'LastName_too_long' |translate }}</p>
+      </div>
+
 
     </div>
     <div class="col-md-4 col-sm-4 col-xs-12 label-param">
@@ -23,10 +21,8 @@
     </div>
 
     <div class="col-md-8 col-sm-8 col-xs-12 input-param">
-      <input (keyup)="checkFirstName()"  formControlName="firstName"
-             [ngClass]="{'invalidInput': (errFistName && errFistName.length>0),
-             'validInput': (errFistName.length==0)}" id="firstName"
-        />
+      <input (keyup)="checkFirstName()" formControlName="firstName" [ngClass]="{'invalidInput': (errFistName && errFistName.length>0),
+             'validInput': (errFistName.length==0)}" id="firstName" />
 
       <p *ngIf="errFistName && errFistName.length>0" class="msgErreur">{{'errFistName' | translate}}</p>
       <div *ngIf="form.controls['firstName'].errors">
@@ -34,8 +30,13 @@
       </div>
 
     </div>
-
-
+    <div class="col-md-4 col-sm-4 col-xs-12 label-param-long">
+      {{ 'update_profile_email' | translate }}
+    </div>
+    <div class="col-md-8 col-sm-8 col-xs-12 input-param">
+      <input formControlName="firstName" id="firstName" value={{user.email}} style="border-color: #09a012!important" disabled="disabled"
+      />
+    </div>
     <div class="col-md-4 col-sm-4 col-xs-12 label-param-long">
       {{ 'update_profile_description' | translate }}
     </div>
