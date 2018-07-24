@@ -226,7 +226,7 @@
                 </a>
               </div>
 
-              <div *ngIf="showNoNotif" style="text-align: center;">
+              <div *ngIf="showNoNotif&&!showNoMoreNotif" style="text-align: center;">
                 <a class="btn more-not" style="width: 100%">
                   {{ 'main_no_notification' | translate }}
                 </a>
