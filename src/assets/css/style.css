@@ -2508,11 +2508,14 @@ textarea:focus {
 .facebook-preview-publication {
 
   margin: 0 0 -5px;
-  text-align: center;
+  /* text-align: center;
   overflow:hidden;
   padding-bottom:56.25%;
   position:relative;
-  height:0;
+  height:0; */
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 .youtube-preview iframe,
@@ -2562,30 +2565,48 @@ textarea:focus {
 }
 .facebook-responsive-short{
   overflow:hidden;
-  padding-bottom:56.25%;
+  /* padding-bottom:56.25%;
   position:relative;
-  height:0;
+  height:0; */
 }
 .facebook-responsive-short iframe {
-  left:0;
+  /* left:0;
   top:0;
   height:100%;
   width:100%;
-  position:absolute;
+  position:absolute; */
+  max-width: 75%;
+  display: block;
+  margin:0 auto;
+}
+
+@media screen and (max-width: 768px){
+  .facebook-responsive-short iframe{
+    max-width: 95% !important;
+  }
+}
+
+@media screen and (min-width: 960px){
+  .facebook-responsive-short iframe{
+    max-width: 65% !important;
+  }
 }
 
 .facebook-responsive-long{
   overflow:hidden;
-  padding-bottom:110%;
+  /* padding-bottom:110%;
   position:relative;
-  height:0;
+  height:0; */
 }
 .facebook-responsive-long iframe {
-  left:0;
+  /* left:0;
   top:0;
   height:100%;
   width:100%;
-  position:absolute;
+  position:absolute; */
+  max-width: 100%;
+  display: block;
+  margin:0 auto;
 }
 
 .upper-form-add div.not-btn {
@@ -6482,9 +6503,9 @@ change-password .input-param input {
   width: 100%;
 }
 
-.facebook-preview {
+/* .facebook-preview {
   width: 100%;
-}
+} */
 
 .publication .content {
   margin: 14px 0;

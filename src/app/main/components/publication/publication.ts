@@ -68,6 +68,7 @@ export class Publication {
   public listLink: Array<string>;
   public imageBaseUrl = environment.IMAGE_BASE_URL;
 
+  facebookHeight:String;
   formComment;
   selectedEmojiTab = 0;
   emojiOpacity = 0;
@@ -279,23 +280,6 @@ export class Publication {
     }
   }
 
-  // initComments() {
-
-  //   if (this.publicationBean.comments.length > this.nbMaxAddComments) {
-  //     this.afficheMoreComments = true;
-  //     this.nbComments = this.nbMaxAddComments;
-  //     for (let i = 0; i < this.nbComments; i++)
-  //       this.listComments.push(this.publicationBean.comments[i]);
-  //   }
-  //   else {
-
-  //     for (let i = 0; i < this.nbComments; i++)
-
-  //       this.listComments.push(this.publicationBean.comments[i]);
-  //   }
-
-  // }
-
   initComments() {
     this.allListComments = this.publicationBean.comments;
 
@@ -323,6 +307,11 @@ export class Publication {
   }
 
   ngOnInit() {
+    if(window.matchMedia("(max-width: 768px)").matches){
+      this.facebookHeight = (this.publicationBean.publfacebookLinkHeight*0.62).toString();
+    }else{
+      this.facebookHeight = (this.publicationBean.publfacebookLinkHeight*0.7).toString();
+    }
     // check if publication is opened in sperate link
     if (this.router.routerState.snapshot.url.includes('post')) {
       this.displayComments();
@@ -382,9 +371,6 @@ export class Publication {
     this.lastPubText = dividedText.lastPart;
     this.isLongText = dividedText.isLongText;
 
-
-    //onsole.log(this.publicationBean);
-
     this.changeDetector.markForCheck();
     if (this.publicationBean.publExternalLink) {
       this.linkAPI();
@@ -405,7 +391,7 @@ export class Publication {
 
       this.nbDisplayedComments = this.publicationBean.comments.length;
 
-      //Youtube Loading
+      //Youtube/Facebook Loading
       if (this.publicationBean.publyoutubeLink) {
         this.linkYtb =
           "https://www.youtube.com/embed/" +
@@ -732,43 +718,11 @@ export class Publication {
     }
   }
 
-  // loadMoreComments(i: number) {
-
-  //   this.afficheCommentsLoading = true;
-  //   this.afficheMoreComments = false;
-  //   if (i >= this.publicationBean.comments.length) {
-  //     this.afficheCommentsLoading = false;
-  //     this.afficheMoreComments = true;
-  //     this.changeDetector.markForCheck();
-  //   }
-  //   // else if ((this.listComments.length) >= this.publicationBean.comments.length) {
-  //   //   this.afficheCommentsLoading = false;
-  //   //   this.afficheMoreComments = false;
-  //   //   this.changeDetector.markForCheck();
-  //   // }
-  //   else {
-  //     i+=3;
-
-  //     setTimeout(() => {
-  //       if(!this.listComments.includes(this.publicationBean.comments[i+this.nbComments]))
-  //       for(let j =i;i<this.nbMaxAddComments+i;j++)
-  //       this.listComments.push(this.publicationBean.comments[i]);
-  //       this.changeDetector.markForCheck();
-  //       this.loadMoreComments(i);
-  //     }, 0);
-  //   }
-  // }
-
   public activateSignal() {
     this.signalButton = !this.signalButton;
   }
-  //setTimeout(updateClock, 1000);
-  // updatePublicationTime(publishDateString: string): string {
-  //   return setTimeout( this.getPublicationTime(publishDateString), 10000);
-  // }
 
   getPublicationTime(publishDateString: string): string {
-    //console.log("after 10 seconds"+publishDateString);
     if (this.isFixedPublishDate) return this.fixedPublishDate;
     let date = new Date();
     let currentDate = new Date(
