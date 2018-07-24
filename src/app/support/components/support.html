@@ -10,13 +10,13 @@
             <div style="width:30px;height:30px;background-size: cover;background-position: center;border-radius: 50%;margin-right:10px;"
                 [ngStyle]="{'background-image': 'url(' + user.profilePicture + ')'}"></div>
             <a [routerLink]="['/main/profile',user._id]">
-                			   {{user.firstName}} {{user.lastName}}
+                {{user.firstName}} {{user.lastName}}
             </a>
         </article>
 
         <article *ngIf="!isConnected">
             <a [routerLink]="['/login/signin']">
-                			   Connectez-vous
+                Connectez-vous
             </a>
         </article>
 
@@ -33,11 +33,12 @@
                                 color: black;
                                 padding: 10px 5px 15px 40px;
                                 font-size: 20px;
-                                border-bottom: 1px solid #e1e1e1;"><i aria-hidden="true" class="fa fa-info" style="font-size:16px;margin-right:10px;"></i> Support
+                                border-bottom: 1px solid #e1e1e1;">
+                            <i aria-hidden="true" class="fa fa-info" style="font-size:16px;margin-right:10px;"></i> Support
                         </article>
                         <a [routerLink]="['/support/about-us']" routerLinkActive="active" (click)="collapse(0)">A propos de nous</a>
                         <a [routerLink]="['/support/cgu']" routerLinkActive="active" (click)="collapse(1)">Conditions générales d'utilisation</a>
-                        <a [routerLink]="['/support/team']" routerLinkActive="active" (click)="collapse(2)">L'equipe</a>
+                        <a [routerLink]="['/support/team']" routerLinkActive="active" (click)="collapse(2)">L'équipe</a>
 
 
                     </ul>
@@ -56,7 +57,7 @@
                         <cgu style="display:none;" class="support-mobile-tab" id="cguTab"></cgu>
                     </div>
                     <div>
-                        <article [routerLink]="['/support/team']" (click)="collapse(2)">L'equipe</article>
+                        <article [routerLink]="['/support/team']" (click)="collapse(2)">L'équipe</article>
                         <team style="display:none;" class="support-mobile-tab" id="teamTab"></team>
                     </div>
                 </div>
