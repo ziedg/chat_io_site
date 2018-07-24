@@ -10,8 +10,8 @@ import { LoginService } from '../../../../login/services/loginService';
 import { AppSettings } from '../../../../shared/conf/app-settings';
 import * as pathUtils from '../../../../utils/path.utils';
 
-declare var jQuery:any;
-declare var swal:any;
+declare var jQuery: any;
+declare var swal: any;
 
 
 @Component({
@@ -25,22 +25,22 @@ declare var swal:any;
 
 export class EditProfile {
   form;
-  public user:User = new User();
+  public user: User = new User();
   public errFistName = "";
   public errLastName = "";
   public errLinkFB = "";
   public errLinkYoutube = "";
   public errLinkTwitter = "";
-  errorMessage:string = null;
+  errorMessage: string = null;
 
-  namePattern :RegExp= /^(\S{1,10})( \S{1,10}){0,2} *$/;
+  namePattern: RegExp = /^(\S{1,12})( \S{1,12}){0,2} *$/;
 
-  constructor(public translate:TranslateService,
-              private route:ActivatedRoute,
-              private http:Http,
-              private changeDetector:ChangeDetectorRef,
-              private router:Router,
-              private loginService:LoginService) {
+  constructor(public translate: TranslateService,
+    private route: ActivatedRoute,
+    private http: Http,
+    private changeDetector: ChangeDetectorRef,
+    private router: Router,
+    private loginService: LoginService) {
 
     this.loginService.redirect();
   }
@@ -52,7 +52,7 @@ export class EditProfile {
       lastName: new FormControl(this.user.lastName, [Validators.required,
       Validators.pattern(this.namePattern)]),
       firstName: new FormControl(this.user.firstName, [Validators.required,
-        Validators.pattern(this.namePattern)]),
+      Validators.pattern(this.namePattern)]),
       userDiscrip: new FormControl(),
       genre: new FormControl(),
       linkFB: new FormControl(),
@@ -63,7 +63,7 @@ export class EditProfile {
 
   }
 
-  getFirstName():string {
+  getFirstName(): string {
     if (this.form.value.firstName) {
       return this.form.value.firstName;
     }
@@ -72,7 +72,7 @@ export class EditProfile {
     }
   }
 
-  checkFirstName():boolean {
+  checkFirstName(): boolean {
     if (this.getFirstName() && this.getFirstName().length > 1) {
       this.errFistName = "";
       return true;
@@ -83,7 +83,7 @@ export class EditProfile {
     }
   }
 
-  getLastName():string {
+  getLastName(): string {
     if (this.form.value.lastName) {
       return this.form.value.lastName;
     }
@@ -92,27 +92,27 @@ export class EditProfile {
     }
   }
 
-  getDisc():string {
+  getDisc(): string {
     return jQuery("#userDiscrip").val();
   }
 
-  getGerne():string {
+  getGerne(): string {
     return jQuery("#genre").val();
   }
 
-  getFBLink():string {
+  getFBLink(): string {
     return jQuery("#linkFB").val();
   }
 
-  getYoutubeLink():string {
+  getYoutubeLink(): string {
     return jQuery("#linkYoutube").val();
   }
 
-  getTwitterLink():string {
+  getTwitterLink(): string {
     return jQuery("#linkTwitter").val();
   }
 
-  checkLastName():boolean {
+  checkLastName(): boolean {
     if (this.getLastName() && this.getLastName().length > 1) {
       this.errLastName = "";
       return true;
@@ -124,7 +124,7 @@ export class EditProfile {
   }
 
   checkYoutubeLink() {
-    if (this.getYoutubeLink() && ( this.getYoutubeLink().indexOf("https://www.youtube.com/") == 0 || this.getYoutubeLink().indexOf("https://youtube.com/") == 0 || this.getYoutubeLink().indexOf("http://www.youtube.com/") == 0 || this.getYoutubeLink().indexOf("http://youtube.com/") == 0)) {
+    if (this.getYoutubeLink() && (this.getYoutubeLink().indexOf("https://www.youtube.com/") == 0 || this.getYoutubeLink().indexOf("https://youtube.com/") == 0 || this.getYoutubeLink().indexOf("http://www.youtube.com/") == 0 || this.getYoutubeLink().indexOf("http://youtube.com/") == 0)) {
       this.errLinkYoutube = "";
       return true;
     }
@@ -139,7 +139,7 @@ export class EditProfile {
   }
 
   checkTwitterLink() {
-    if (this.getTwitterLink() && ( this.getTwitterLink().indexOf("https://www.twitter.com/") == 0 || this.getTwitterLink().indexOf("https://twitter.com/") == 0 || this.getTwitterLink().indexOf("http://www.twitter.com/") == 0 || this.getTwitterLink().indexOf("http://twitter.com/") == 0)) {
+    if (this.getTwitterLink() && (this.getTwitterLink().indexOf("https://www.twitter.com/") == 0 || this.getTwitterLink().indexOf("https://twitter.com/") == 0 || this.getTwitterLink().indexOf("http://www.twitter.com/") == 0 || this.getTwitterLink().indexOf("http://twitter.com/") == 0)) {
       this.errLinkTwitter = "";
       return true;
     }
@@ -154,7 +154,7 @@ export class EditProfile {
   }
 
   checkFBLink() {
-    if (this.getFBLink() && ( this.getFBLink().indexOf("https://www.facebook.com/") == 0 || this.getFBLink().indexOf("https://facebook.com/") == 0 || this.getFBLink().indexOf("http://www.facebook.com/") == 0 || this.getFBLink().indexOf("http://facebook.com/") == 0)) {
+    if (this.getFBLink() && (this.getFBLink().indexOf("https://www.facebook.com/") == 0 || this.getFBLink().indexOf("https://facebook.com/") == 0 || this.getFBLink().indexOf("http://www.facebook.com/") == 0 || this.getFBLink().indexOf("http://facebook.com/") == 0)) {
       this.errLinkFB = "";
       return true;
     }
@@ -169,7 +169,7 @@ export class EditProfile {
   }
 
   saveData() {
-    this.errorMessage=null;
+    this.errorMessage = null;
     if (this.checkFirstName() && this.checkLastName() /*&& this.checkTwitterLink() && this.checkYoutubeLink() && this.checkFBLink()*/) {
 
       let body = JSON.stringify({
@@ -184,45 +184,45 @@ export class EditProfile {
       this.http.post(environment.SERVER_URL + pathUtils.UPDATE_PROFILE,
         body,
         AppSettings.OPTIONS)
-        .map((res:Response) => res.json())
+        .map((res: Response) => res.json())
         .subscribe(
           response => {
 
-          if (response.status == 0) {
-            this.loginService.updateUser(response.profile);
-            this.loginService.actualize();
-            this.user = this.loginService.getUser();
-            this.changeDetector.markForCheck();
+            if (response.status == 0) {
+              this.loginService.updateUser(response.profile);
+              this.loginService.actualize();
+              this.user = this.loginService.getUser();
+              this.changeDetector.markForCheck();
 
-            swal({
-              title: this.translateCode("edit_profile_popup_notification_update_title"),
-              text: this.translateCode("edit_profile_popup_notification_update_text"),
-              type: "success",
-              timer: 2000,
-              showConfirmButton: false
-            }).then(function () {
-            }, function (dismiss) {
-            });   
-            setTimeout((router: Router) => {
-              this.router.navigate(['/main/profile',this.user._id]);
-          }, 2200);
-          } else {
-            this.errorMessage = response.error;
-          }
-        },
+              swal({
+                title: this.translateCode("edit_profile_popup_notification_update_title"),
+                text: this.translateCode("edit_profile_popup_notification_update_text"),
+                type: "success",
+                timer: 2000,
+                showConfirmButton: false
+              }).then(function () {
+              }, function (dismiss) {
+              });
+              setTimeout((router: Router) => {
+                this.router.navigate(['/main/profile', this.user._id]);
+              }, 2200);
+            } else {
+              this.errorMessage = response.error;
+            }
+          },
           err => {
             this.errorMessage = "SP_ER_TECHNICAL_ERROR";
-        },
-        () => {
-        }
-      );
+          },
+          () => {
+          }
+        );
     }
   }
 
 
   translateCode(code) {
     let message;
-    this.translate.get(code).subscribe((resTranslate:string) => {
+    this.translate.get(code).subscribe((resTranslate: string) => {
       message = resTranslate;
     });
     return message;
