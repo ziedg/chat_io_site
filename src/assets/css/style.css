@@ -6681,7 +6681,7 @@ img[src="undefined"] {
 }
 
 .close-button-x {
-  position: absolute;
+  position: fixed;
   margin: 10px 20px;
   right: 0;
   top: 0;
@@ -6689,7 +6689,7 @@ img[src="undefined"] {
   color: #999999;
   font-size: 24px;
   font-family: 'Zapf Dingbats';
-  z-index:101;
+  z-index: 10;
 }
 
 .close-button-x:hover {
