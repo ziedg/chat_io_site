@@ -26,6 +26,7 @@ export class Notification implements OnInit {
     isLock: boolean = false;
     showButtonMoreNotif:Boolean=false;
     showNoNotif:Boolean=false;
+    showNoMoreNotif:Boolean=false;
     listNotif : Array <NotificationBean> = [];
     user:User = new User();
     noMoreNotif:Boolean=false;
@@ -60,8 +61,9 @@ export class Notification implements OnInit {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-
+          console.log(response);
         if (response.length != 0) {
+          this.showNoMoreNotif=true;
           this.showNoNotif = false;
           for (let i = 0; i < response.length; i++) {
             if(response[i].publType === "text" && response[i].publText != null){
@@ -78,7 +80,8 @@ export class Notification implements OnInit {
           
         } else {
           this.showNoNotif = true;
-
+//          console.log("no notification");
+          this.loaded = true;
           this.isLock=false;
         }
       },

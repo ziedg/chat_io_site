@@ -474,7 +474,11 @@ export class Publication {
       .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
     var white_space_regex: RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
     var white_space_only = white_space_regex.test(txt);
+   // console.log(this.loadingComment);
     if (!commentToSend && white_space_only && !this.uploadedPictureComment) {
+      this.loadingComment = false;
+   //   console.log(this.loadingComment);
+      jQuery(".comment-publish").prop('disabled', false);
       return;
     }
 

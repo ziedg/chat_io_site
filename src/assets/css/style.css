@@ -4101,7 +4101,9 @@ facebook-friends .user .user-img {
   display: none;
   border-top: none;
 }
-
+.interactions-tabcontent::-webkit-scrollbar { 
+  display: none; 
+}
 .name {
   font-weight: bold;
   font-size: 24px;
@@ -6686,6 +6688,7 @@ img[src="undefined"] {
   opacity: 0.9;
   color: #999999;
   font-size: 24px;
+  font-family: 'Zapf Dingbats';
 }
 
 .close-button-x:hover {

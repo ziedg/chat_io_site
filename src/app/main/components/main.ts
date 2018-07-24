@@ -56,6 +56,7 @@ export class Main {
   lastNotifId = "";
   showButtonMoreNotif: Boolean = false;
   showNoNotif: Boolean = false;
+  showNoMoreNotif: Boolean = false;
   noSearchResults: Boolean = false;
   public showNotif: boolean = true;
   private s: AngularFireObject<any>;
@@ -303,7 +304,7 @@ export class Main {
           if (response.length != 0) {
             this.showNoNotif = false;
             let arr = this.listNotif;
-
+            this.showNoMoreNotif=true;
             for (var i = 0; i < response.length; i++) {
 
               if (response[i]._id && response[i].type != 'message')
