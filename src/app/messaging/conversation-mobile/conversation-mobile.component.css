@@ -241,7 +241,7 @@
 }
 
 @media (max-width: 768px){
-    .message-thread>li:last-child>.messageContent{
+    .message-thread>li:last-child{
         margin-bottom:40px;
     }
 }

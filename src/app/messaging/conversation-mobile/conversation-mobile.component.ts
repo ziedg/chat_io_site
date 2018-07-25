@@ -31,6 +31,7 @@ export class ConversationMobileComponent implements OnInit {
   @Input() selectedUserInfo: string;
   //data: any ="Initializeeed";
   public selectedUser: User = null;
+  public selectedUserId: string;
   public messageForm: FormGroup;
   private userId: string = null;
   private user: User = null;
@@ -51,7 +52,8 @@ export class ConversationMobileComponent implements OnInit {
     this.user = this.loginService.getUser();
     this.userId = this.user._id;
     this.selectedUser = this.emitterService.getSelectedUser();
-    let selectedUserId = this.route.snapshot.params['stringid'];
+    this.selectedUserId = this.route.snapshot.params['stringid'];
+    console.log(this.selectedUserId);
     // with the Resolver
     // this.data = this.route.snapshot.data;
     // let allMessages = this.data.messages;
@@ -88,18 +90,21 @@ export class ConversationMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.chatService.getMessages({ fromUserId: this.userId, toUserId:this.selectedUser._id })
-    .subscribe((response) => {
-      if(response==undefined)
-         {
-           this.messages=[];
+    this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id })
+      .subscribe((response) => {
+        if (response == undefined) {
+          this.messages = [];
         }
-        else{
-           this.messages = response;
-           this.loaded = true;
+        else {
+          this.messages = response;
+          this.loaded = true;
 
-         }      
-    });
+        }
+      },
+        err => console.log("Error"),
+        () => {
+          console.log(this.messages);
+        });
     this.listenForMessages();
   }
 
@@ -133,7 +138,7 @@ export class ConversationMobileComponent implements OnInit {
       this.messages = [...this.messages, data];
       /* calling method to send the messages */
       this.chatService.sendMessage(data).subscribe(
-        () => {},
+        () => { },
         err => console.log('Could send message to server, reason: ', err));
 
       this.messageForm.reset();
@@ -145,38 +150,38 @@ export class ConversationMobileComponent implements OnInit {
   }
 
   listenForMessages(): void {
-    
-    this.s = this.db.object('notifications/'+this.userId+'/messaging');
-      
-     
-     
-      this.s.snapshotChanges().subscribe(action => {
-        var notif = action.payload.val();
-        if (notif !== null && !this.msgFirstCheck){
-          this.chatService.getMessage(notif.msgId).subscribe(
-            message => {
-              
-              if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
-                this.chatService.markMessageAsSeen(notif.msgId)
+
+    this.s = this.db.object('notifications/' + this.userId + '/messaging');
+
+
+
+    this.s.snapshotChanges().subscribe(action => {
+      var notif = action.payload.val();
+      if (notif !== null && !this.msgFirstCheck) {
+        this.chatService.getMessage(notif.msgId).subscribe(
+          message => {
+
+            if (this.selectedUser !== null && this.selectedUser._id === notif.senderId) {
+              this.chatService.markMessageAsSeen(notif.msgId)
                 .subscribe(message => {
                 })
               this.messages = [...this.messages, message];
               setTimeout(() => {
-                
+
                 document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
               }, 100);
-            }else{
-              
+            } else {
+
               this.chatService.newIncomingMessage(message)
             }
-            
-            },
-            err =>  console.log('Could send message to server, reason: ', err)
-          );
-        } else {
-          this.msgFirstCheck = false;
-        }
-      });
+
+          },
+          err => console.log('Could send message to server, reason: ', err)
+        );
+      } else {
+        this.msgFirstCheck = false;
+      }
+    });
   }
 
   alignMessage(userId: string): boolean {
