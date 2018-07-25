@@ -1,16 +1,23 @@
 <section id="gif-slider-container" class="slider-container" #container>
   <div class="slider-sub-container">
-    <div class="slides-container" #slidesContainer (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
-        
-      <div *ngFor="let Url  of UrlGifList; let i = index" class="slide"  [ngStyle]="{'background-image': 'url(' + Url.Preview + ')' }" style="background-repeat: no-repeat;">
+    <div class="slides-container"  #slidesContainer > 
+      <!-- (swipeleft)="swipeLeft()" (swiperight)="swipeRight()" -->
+      <div *ngFor="let Url  of UrlGifList; let i = index" class="slide" id="test" [ngStyle]="{'background-image': 'url(' + Url.Preview + ')' }" style="background-repeat: no-repeat;">
         <!-- *ngIf="Url.Show" -->
         <div class="gif-img "  *ngIf="!Url.Show" >
           <img class=" loader "  src="/assets/images/new/loading.png">
         </div>
         
-        <a (click)="gifPreview(Url)"> <img class="gif-img" [src]="Url.Preview" *ngIf="Url.Show" /></a>
+        <a (click)="gifPreview(Url)" > <img class="gif-img"   [src]="Url.Preview" *ngIf="Url.Show" /></a>
         
       </div>
+
+
+      <div  class="slide show-more-slide" *ngIf="!isLoadingInitialGifs && !isLoadingMoreGifs" (click)="loadMoreGifs()">
+        <p style="top:3px; ">Show More</p>
+      </div>
+
+
 
       <div  class="slide"  *ngIf="isLoadingMoreGifs">
         <img class="loader"  src="/assets/images/new/loading.png">

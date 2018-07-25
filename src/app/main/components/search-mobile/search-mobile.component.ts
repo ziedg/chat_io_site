@@ -18,14 +18,14 @@ declare var jQuery: any;
 })
 
 export class SearchMobile {
-  searchValue: string;
+  searchValue: string = "";
   listSearchUsers: Array<User> = [];
   noSearchResults: Boolean = false;
   showRecentSearch: Boolean;
   RecentSearchList;
 
-  @ViewChild("searchResults2") searchRes2: ElementRef;
   @ViewChild("searchMobileInput") searchInput: ElementRef;
+  dislayRechercherHolder: boolean = false;
 
   constructor(private translate: TranslateService,
               private changeDetector: ChangeDetectorRef,
@@ -117,13 +117,14 @@ export class SearchMobile {
   }
 
   onFocus() {
-    this.searchRes2.nativeElement.style.display = "block!important";
+    this.dislayRechercherHolder = true;
     this.onChange(this.searchInput.nativeElement.value);
     this.checkAutoComplete();
   }
 
   clearSearchMobile() {
-    this.searchInput.nativeElement.value = "";
+    this.searchValue = "";
+    //this.searchInput.nativeElement.value = "";
     this.listSearchUsers.length = 0;
     this.noSearchResults = false;
   }

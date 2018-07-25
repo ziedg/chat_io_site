@@ -1,7 +1,7 @@
 //import { getRawMessage } from 'codelyzer/angular/styles/cssLexer';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { environment } from 'environments/environment';
+import { environment } from '../../environments/environment';
 import * as pathUtils from '../utils/path.utils';
 import { AppSettings } from '../shared/conf/app-settings';
 import { Subject } from 'rxjs';
@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class ChatService {
-  messageEmitter=new Subject<any>();
+  messageEmitter = new Subject<any>();
   ServerUrl;
   constructor(
     private http: Http
@@ -23,31 +23,31 @@ export class ChatService {
   }
 
   //get suggestions
-getSuggestions(userId) {
-  return this.http.get(`${this.ServerUrl}${pathUtils.GET_MESSAGING_SUGGESTIONS}` + userId);
-}
-
-getMessages(users,lastMessageId?) {
-  /* get messages between current user and the selected user from the list*/
-  if(!lastMessageId){
-    return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + users.fromUserId + '/' + users.toUserId)
-    .map((response) => {
-      return response.json();
-      
-    });
-  }else{
-    return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + users.fromUserId + '/' + users.toUserId +'/' +lastMessageId)
-    .map((response) => {
-      return response.json();
-      
-    });
+  getSuggestions(userId) {
+    return this.http.get(`${this.ServerUrl}${pathUtils.GET_MESSAGING_SUGGESTIONS}` + userId);
   }
-  
 
-}
+  getMessages(users, lastMessageId?) {
+    /* get messages between current user and the selected user from the list*/
+    if (!lastMessageId) {
+      return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + users.fromUserId + '/' + users.toUserId)
+        .map((response) => {
+          return response.json();
+
+        });
+    } else {
+      return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + users.fromUserId + '/' + users.toUserId + '/' + lastMessageId)
+        .map((response) => {
+          return response.json();
+
+        });
+    }
+
+
+  }
 
   getMessage(msgId) {
-    return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + msgId )
+    return this.http.get(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + msgId)
       .map((response) => {
         return response.json()
       });
@@ -58,15 +58,15 @@ getMessages(users,lastMessageId?) {
     return this.http.post(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}`, msg, AppSettings.OPTIONS);
   }
 
-  markMessageAsSeen(msgId){
-    return this.http.put(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + msgId ,'')
-    .map((response) => {
-      return response.json()
-    });
+  markMessageAsSeen(msgId) {
+    return this.http.put(`${this.ServerUrl}${pathUtils.GET_CHAT_MESSAGES}` + msgId, '')
+      .map((response) => {
+        return response.json()
+      });
   }
-  newIncomingMessage(message){
-  this.messageEmitter.next(message)
- }
+  newIncomingMessage(message) {
+    this.messageEmitter.next(message)
+  }
 
 
 }

@@ -49,6 +49,7 @@ export class Publication {
   intervalHolder: any;
   commentContent = "";
   public hiddenContent: boolean = true;
+  public hiddenPicture: boolean = true;
   public i: number = 1;
   private isFixedPublishDate: boolean = false;
   private fixedPublishDate: string;
@@ -66,7 +67,8 @@ export class Publication {
   public dateDisplay = "";
   public listLink: Array<string>;
   public imageBaseUrl = environment.IMAGE_BASE_URL;
- 
+
+  facebookHeight:String;
   formComment;
   selectedEmojiTab = 0;
   emojiOpacity = 0;
@@ -105,31 +107,34 @@ export class Publication {
 
   @ViewChild("commentInput") commentInput: ElementRef;
 
-  
+
 
   constructor(public translate: TranslateService,
-              public seoService: SeoService,
-              private postService: PostService,
-              private linkView: LinkView,
-              private emojiService: EmojiService,
-              private http: Http,
-              private router: Router,
-              private sanitizer: DomSanitizer,
-              private loginService: LoginService,
-              private changeDetector: ChangeDetectorRef,
-              private dateService: DateService,
-              private ng2ImgMaxService: Ng2ImgMaxService,
-              private location: Location,
-              private publicationTextService: PublicationTextService,) {
-    if (window.matchMedia("(max-width: 768px)").matches) {
-      if (location.path() != '') {
-        if (location.path().indexOf('/main/post') != -1) {
-          this.hiddenContent = true;
-        } else {
-          this.hiddenContent = false;
-        }
+    public seoService: SeoService,
+    private postService: PostService,
+    private linkView: LinkView,
+    private emojiService: EmojiService,
+    private http: Http,
+    private router: Router,
+    private sanitizer: DomSanitizer,
+    private loginService: LoginService,
+    private changeDetector: ChangeDetectorRef,
+    private dateService: DateService,
+    private ng2ImgMaxService: Ng2ImgMaxService,
+    private location: Location,
+    private publicationTextService: PublicationTextService, ) {
+    if (location.path() != '') {
+      if (location.path().indexOf('/main/post') != -1) {
+        this.hiddenContent = true;
+      } else {
+        this.hiddenContent = false;
       }
     }
+
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      this.hiddenPicture = false;
+    }
+
     loginService.actualize();
 
     this.user = loginService.user;
@@ -158,30 +163,30 @@ export class Publication {
           if (response.status == 0) {
             this.user.isFollowed = false;
             this.user.nbSubscribers--;
-            this.unsubscribeMessage();
-            }
-          },
+            //this.unsubscribeMessage();
+          }
+        },
         err => { },
-          () => {
-              this.changeDetector.markForCheck();
-            }
-        );
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
   }
-unsubscribeMessage() {
-swal({
-title: this.translateCode(
-"publication_popup_notification_unsubscribe_title"
-),
-text: this.translateCode(
-"publication_popup_notification_unsubscribe_text"
-),
-type: "success",
-timer: 2000,
-showConfirmButton: false
-}).then(function () {
-}, function (dismiss) {
-});
-}
+  unsubscribeMessage() {
+    swal({
+      title: this.translateCode(
+        "publication_popup_notification_unsubscribe_title"
+      ),
+      text: this.translateCode(
+        "publication_popup_notification_unsubscribe_text"
+      ),
+      type: "success",
+      timer: 2000,
+      showConfirmButton: false
+    }).then(function () {
+    }, function (dismiss) {
+    });
+  }
 
   deletePub() {
     swal({
@@ -243,45 +248,37 @@ showConfirmButton: false
       );
   }
 
-  focused(element) {
-    if (window.matchMedia("(max-width: 768px)").matches) {
-      jQuery(".navigation-bottom").hide();
+  onKey(value: any) {
+    let text: string = value.target.innerHTML;
+    text = text
+      .replace(/(\&nbsp;|\ )+/g, " ")
+      .replace(/(\<.?br\>)+/g, "<br>")
+      .replace(/^\<.?br\>|\<.?br\>$/g, "")
+      .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
+    if (text.length > 0) {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment.png)");
+    } else {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment-grey.png)");
     }
-    jQuery('.publishImage').show();
   }
 
   scrollToCommentInput() {
-    let marge:number = 200;
-    //input.scrollIntoView(false);
-    window.scroll(0, this.findScrollToWindow(this.commentInput.nativeElement) - marge);
-  }
-
-  findScrollToWindow(obj):number {
-    let curtop:number = 0;
-    if (obj.offsetParent) {
-        do {
-            curtop += obj.offsetTop;
-        } while (obj = obj.offsetParent);
-    return curtop;
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      let marge: number = 120;
+      //input.scrollIntoView(false);
+      window.scroll(0, this.findScrollToWindow(this.commentInput.nativeElement) - marge);
     }
   }
 
-  // initComments() {
-
-  //   if (this.publicationBean.comments.length > this.nbMaxAddComments) {
-  //     this.afficheMoreComments = true;
-  //     this.nbComments = this.nbMaxAddComments;
-  //     for (let i = 0; i < this.nbComments; i++)
-  //       this.listComments.push(this.publicationBean.comments[i]);
-  //   }
-  //   else {
-
-  //     for (let i = 0; i < this.nbComments; i++)
-
-  //       this.listComments.push(this.publicationBean.comments[i]);
-  //   }
-
-  // }
+  findScrollToWindow(obj): number {
+    let curtop: number = 0;
+    if (obj.offsetParent) {
+      do {
+        curtop += obj.offsetTop;
+      } while (obj = obj.offsetParent);
+      return curtop;
+    }
+  }
 
   initComments() {
     this.allListComments = this.publicationBean.comments;
@@ -310,11 +307,15 @@ showConfirmButton: false
   }
 
   ngOnInit() {
+    if(window.matchMedia("(max-width: 768px)").matches){
+      this.facebookHeight = (this.publicationBean.publfacebookLinkHeight*0.62).toString();
+    }else{
+      this.facebookHeight = (this.publicationBean.publfacebookLinkHeight*0.7).toString();
+    }
     // check if publication is opened in sperate link
-    if(this.router.routerState.snapshot.url.includes('post')) {
+    if (this.router.routerState.snapshot.url.includes('post')) {
       this.displayComments();
     }
-
     this.intervalHolder = setInterval(() => {
       // Let's refresh the list.
       this.changeDetector.markForCheck();
@@ -370,9 +371,6 @@ showConfirmButton: false
     this.lastPubText = dividedText.lastPart;
     this.isLongText = dividedText.isLongText;
 
-
-    //onsole.log(this.publicationBean);
-
     this.changeDetector.markForCheck();
     if (this.publicationBean.publExternalLink) {
       this.linkAPI();
@@ -393,7 +391,7 @@ showConfirmButton: false
 
       this.nbDisplayedComments = this.publicationBean.comments.length;
 
-      //Youtube Loading
+      //Youtube/Facebook Loading
       if (this.publicationBean.publyoutubeLink) {
         this.linkYtb =
           "https://www.youtube.com/embed/" +
@@ -403,7 +401,7 @@ showConfirmButton: false
         this.linkFb =
           "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +
           this.publicationBean.publfacebookLink +
-          "%2F&show_text=0&height="+this.publicationBean.publfacebookLinkHeight+"&appId";
+          "%2F&show_text=0&height=" + this.publicationBean.publfacebookLinkHeight + "&appId";
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkFb);
       } else {
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl("");
@@ -450,7 +448,24 @@ showConfirmButton: false
 
   checkEnter(event) { }
 
+  inputFocused() {
+    let text: string = this.commentInputHtml;
+    text = text
+      .replace(/(\&nbsp;|\ )+/g, " ")
+      .replace(/(\<.?br\>)+/g, "<br>")
+      .replace(/^\<.?br\>|\<.?br\>$/g, "")
+      .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
+    var commentToSend = this.emojiService.getCommentTextFromHtml(text)
+    if (!this.uploadedPictureComment && !commentToSend) {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment-grey.png)");
+    } else {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment.png)");
+    }
+  }
+
   publishComment() {
+    this.loadingComment = true;
+    jQuery(".comment-publish").prop('disabled', true);
     var txt: string = this.commentInputHtml;
     txt = txt
       .replace(/(\&nbsp;|\ )+/g, " ")
@@ -459,13 +474,16 @@ showConfirmButton: false
       .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
     var white_space_regex: RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
     var white_space_only = white_space_regex.test(txt);
+   // console.log(this.loadingComment);
     if (!commentToSend && white_space_only && !this.uploadedPictureComment) {
+      this.loadingComment = false;
+   //   console.log(this.loadingComment);
+      jQuery(".comment-publish").prop('disabled', false);
       return;
     }
 
     var commentToSend = this.emojiService.getCommentTextFromHtml(txt);
 
-    this.loadingComment = true;
     this.changeDetector.markForCheck();
     var data = new FormData();
 
@@ -484,33 +502,40 @@ showConfirmButton: false
       .map((res: Response) => res.json())
       .subscribe(
         response => {
+          this.commentInputHtml = "";
+          jQuery("#" + this.commentTextareaId).empty();
+          jQuery("#" + this.pubImgId).attr("src", "");
+          jQuery("#" + this.pubImgId).hide();
+          this.uploadedPictureComment = null;
           this.changeDetector.markForCheck();
           if (response.status == "0") {
             if (response.comment) {
               if (!this.publicationBean.comments.length)
-                this.publicationBean.comments.unshift(response.comment);
+                this.publicationBean.comments.push(response.comment);
 
-              this.listComments.unshift(response.comment);
+              if (this.location.path() != '') {
+                if (this.location.path().indexOf('/main/post') != -1) {
+                  this.listComments.push(response.comment);
+                } else {
+                  this.myComments.push(response.comment);
+                }
+              }
               this.nbDisplayedComments++;
               //this.formComment.controls.pubComment.updateValue('');
               this.changeDetector.markForCheck();
-              this.commentInputHtml = "";
-              jQuery("#" + this.commentTextareaId).empty();
-              jQuery("#" + this.pubImgId).attr("src", "");
-              jQuery("#" + this.pubImgId).hide();
-              this.uploadedPictureComment = null;
-              this.loadingComment = false;
-              if (window.matchMedia("(max-width: 768px)").matches) {
-                this.myComments.unshift(response.comment);
-              }
             }
           } else {
             console.error(response);
             this.loadingComment = false;
+            jQuery(".comment-publish").prop('disabled', false);
           }
         },
         err => { },
-        () => { }
+        () => {
+          this.loadingComment = false;
+          jQuery(".comment-publish").prop('disabled', false);
+          jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment-grey.png)");
+        }
       );
   }
 
@@ -536,6 +561,18 @@ showConfirmButton: false
         });
     } else {
       this.uploadedPictureComment = null;
+    }
+    let text: string = this.commentInputHtml;
+    text = text
+      .replace(/(\&nbsp;|\ )+/g, " ")
+      .replace(/(\<.?br\>)+/g, "<br>")
+      .replace(/^\<.?br\>|\<.?br\>$/g, "")
+      .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
+    var commentToSend = this.emojiService.getCommentTextFromHtml(text)
+    if (!this.uploadedPictureComment && !commentToSend) {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment-grey.png)");
+    } else {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment.png)");
     }
   }
 
@@ -670,12 +707,6 @@ showConfirmButton: false
 
   loadMoreComments(i: number) {
     var j = ++this.i;
-
-
-
-
-
-
     if (this.allListComments.length - 3 * j < 1) {
       this.listComments = this.allListComments.slice(
         0,
@@ -691,43 +722,11 @@ showConfirmButton: false
     }
   }
 
-  // loadMoreComments(i: number) {
-
-  //   this.afficheCommentsLoading = true;
-  //   this.afficheMoreComments = false;
-  //   if (i >= this.publicationBean.comments.length) {
-  //     this.afficheCommentsLoading = false;
-  //     this.afficheMoreComments = true;
-  //     this.changeDetector.markForCheck();
-  //   }
-  //   // else if ((this.listComments.length) >= this.publicationBean.comments.length) {
-  //   //   this.afficheCommentsLoading = false;
-  //   //   this.afficheMoreComments = false;
-  //   //   this.changeDetector.markForCheck();
-  //   // }
-  //   else {
-  //     i+=3;
-
-  //     setTimeout(() => {
-  //       if(!this.listComments.includes(this.publicationBean.comments[i+this.nbComments]))
-  //       for(let j =i;i<this.nbMaxAddComments+i;j++)
-  //       this.listComments.push(this.publicationBean.comments[i]);
-  //       this.changeDetector.markForCheck();
-  //       this.loadMoreComments(i);
-  //     }, 0);
-  //   }
-  // }
-
   public activateSignal() {
     this.signalButton = !this.signalButton;
   }
-  //setTimeout(updateClock, 1000);
-  // updatePublicationTime(publishDateString: string): string {
-  //   return setTimeout( this.getPublicationTime(publishDateString), 10000);
-  // }
 
   getPublicationTime(publishDateString: string): string {
-    //console.log("after 10 seconds"+publishDateString);
     if (this.isFixedPublishDate) return this.fixedPublishDate;
     let date = new Date();
     let currentDate = new Date(
@@ -898,9 +897,21 @@ showConfirmButton: false
   changeEmojiTab(tab) {
     this.selectedEmojiTab = tab;
   }
-  
+
   addToComment(emoji) {
     this.commentInputHtml += this.afficheComment(" " + emoji.shortcut);
+    let text: string = this.commentInputHtml;
+    text = text
+      .replace(/(\&nbsp;|\ )+/g, " ")
+      .replace(/(\<.?br\>)+/g, "<br>")
+      .replace(/^\<.?br\>|\<.?br\>$/g, "")
+      .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
+    var commentToSend = this.emojiService.getCommentTextFromHtml(text)
+    if (!this.uploadedPictureComment && !commentToSend) {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment-grey.png)");
+    } else {
+      jQuery(".publishImage").css("background-image", "url(/assets/images/new/sendcomment.png)");
+    }
   }
 
   afficheComment(comment): string {
@@ -969,19 +980,18 @@ showConfirmButton: false
             this.link.title = response.results.data.ogTitle;
             this.link.description = response.results.data.ogDescription;
             if (response.results.data.ogImage) {
-              if(response.results.data.ogImage.length == 2)
-              {
-                
-              this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
-              //console.log(response.results.data.ogImage[1].url);
-              //this.resetPreview(linkIsImage = true);
-              //console.log("image detected");
-              // jQuery("#preview-image").attr("src", this.link.image);
-              // jQuery(".file-input-holder").show();
-              // jQuery("#preview-image").show();
-              
+              if (response.results.data.ogImage.length == 2) {
 
-              }else{
+                this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
+                //console.log(response.results.data.ogImage[1].url);
+                //this.resetPreview(linkIsImage = true);
+                //console.log("image detected");
+                // jQuery("#preview-image").attr("src", this.link.image);
+                // jQuery(".file-input-holder").show();
+                // jQuery("#preview-image").show();
+
+
+              } else {
                 var a = response.results.data.ogImage.url;
                 this.link.image = response.results.data.ogImage.url;
                 this.link.imageWidth = response.results.data.ogImage.width;
@@ -990,7 +1000,7 @@ showConfirmButton: false
                   this.link.isGif = true;
                 else this.link.isGif = false;
               }
-              
+
             } else {
               this.link.image = null;
               this.link.imageWidth = 0;

@@ -13,17 +13,22 @@ export class NotificationBar implements OnInit, OnDestroy {
 
     constructor(public notificationService: NotificationService,
                 public translate: TranslateService){
-        
+
     }
 
     ngOnInit() {
     // set body padding
     document.body.style.paddingTop = "116px";
 
+
+
     //Notification Check
     if ('serviceWorker' in navigator && 'PushManager' in window) {
         navigator.serviceWorker.register('assets/sw.js').then(reg => {
           this.registration = reg;
+
+          console.log('enterd service')
+          reg.update();
           this.notificationService.init(reg);
           //console.log('Service Worker and Push is supported');
         });

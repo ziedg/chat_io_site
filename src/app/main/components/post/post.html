@@ -1,8 +1,8 @@
-<div class="container" style="padding-right:0 !important;padding-left:0 !important;padding-top:0 !important">
+<div class="container" style="padding-right:0 !important;padding-left:0 !important;" [class.no-padding]="hiddenContent">
   <div class="row">
-    <div *ngIf="!wrongPost" class="col-md-8 col-sm-7 col-xs-12 side-home" style="padding-right:0 !important;padding-left:0 !important;padding-top:0 !important">
+    <div *ngIf="!wrongPost" class="col-md-8 col-sm-7 col-xs-12 side-home" style="padding-right:0 !important;padding-left:0 !important;" [class.no-padding]="hiddenContent">
 
-      <section *ngIf="user" id="publications" class="col-xs-12" >
+      <section *ngIf="user" id="publications" class="col-xs-12" [class.margin-publication]="hiddenContent">
         <publication *ngFor=" let publicationBean of publicationBeanList" [publicationBean]="publicationBean"></publication>
       </section>
     </div>

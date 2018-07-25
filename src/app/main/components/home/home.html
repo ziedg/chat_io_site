@@ -15,7 +15,7 @@
                    routerLink="/redirect">{{ 'FIL_ACTUALITES' | translate}}</a></span></div>
         <div [routerLink]="['/main/messaging']"><span><img class="home-sidebar-icon"
                                                            src="assets/images/new/chat-grey.png"></span>
-          <span><a style="color:black" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a></span></div>
+          <span><a style="color:black" (click)="navigateNotifMessage()" routerLink="/main/messaging">{{ 'MESSENGER' | translate}}</a></span></div>
         <hr style="width:120px;margin: 22px 0 28px 0">
         <div class="conditions-generales">
           <div style="margin-bottom: 4px;"><a href="/support/cgu">{{'conditions_generales' | translate}}</a></div>
@@ -117,7 +117,7 @@
                      formControlName="publicationTitle" class="new-publication-title">
 
               <div id="publishDiv"
-                   [ngStyle]="pubbg && {'font-size':'calc(0.2vw + 3.3vh)','font-family': 'Arial','font-weight': 'bolder'}"
+                   [ngStyle]="pubbg && {'font-size':'calc(0.2vw + 3.3vh)','display':'inline-block','font-family': 'Arial','font-weight': 'bolder'}"
                    [ngClass]="{'m-t-12px': titleEnable, 'textarea-publish': true, 'arabic-text': arabicText, 'post-title-enable':titleEnable,
                                                                           'pubdes1': pubclass=='pubdes1',
                                                                           'pubdes2': pubclass=='pubdes2',
@@ -144,7 +144,7 @@
                                                                           'pubdes23': pubclass=='pubdes23'
                                                                         }"
                    (paste)="updatePublishTextOnPaste($event)"
-                   contenteditable="true" placeholder=" " (keyup)="checkTyping(publishDivRef)"
+                   contenteditable="true" placeholder="Votre blague ici.." (keyup)="checkTyping(publishDivRef)"
                    (drop)="onDrop($event)"
                    
                    #publishDivRef style="width: calc(100% - 80px)"></div>
@@ -192,13 +192,16 @@
 
                 </div>
               </div>
-              <div class="facebook-preview">
-
+              <div id="facebook" class="facebook-preview" *ngIf="facebookLink"
+              >
+              <div class="gif-img  " *ngIf="isLoadingFacebookLink"  >  
+                <img class="initial-loader-img"  src="/assets/images/new/loading.png">
+              </div>
               </div>
               <!-- <div class="facebook-preview-mobile" style="display: none;">
 
                 </div> -->
-              <div class="youtube-preview">
+              <div class="youtube-preview" >
 
               </div>
 
@@ -284,7 +287,7 @@
                 style="padding: 0;display: flex;align-items: center;justify-content: flex-end;">
                 <button *ngIf="bglist || showGifSlider || (userPublishInput || youtubeLink || facebookLink || uploadedPicture|| link.isSet || imageFromLink)" class="publish-button" 
                 style="right:10px;z-index:1;background-color:transparent;border:1px solid #ccc" (click)="cancelPublication()">
-                <p style="color: black;margin-top: 8%;"> Annuler </p></button>
+                <p style="color: black;margin-top: 8%;"> {{'publication_cancel' | translate}} </p></button>
             
              <button class="publish-button" type="submit" *ngIf="!loadingPublish">
                {{ 'home_publish_button' | translate }}
@@ -314,8 +317,11 @@
         </div>
 
 
-        <div *ngIf="user" infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0"
-             (scrolled)="onScrollDown()">
+        <div *ngIf="user"
+              infinite-scroll
+              [infiniteScrollDistance]="1"
+              [infiniteScrollThrottle]="0"
+              (scrolled)="onScrollDown()">
           <div *ngFor=" let publicationBean of publicationBeanList; let i= index">
 
             <publication [publicationBean]="publicationBean">
@@ -323,7 +329,7 @@
 
             <div *ngIf="i == 2">
               <facebook-friends></facebook-friends>
-              <div style="color:transparent">{{'fb_suggestions' | translate}}</div>
+              <div style="color:transparent;margin-top:-30px">{{'fb_suggestions' | translate}}</div>
             </div>
 
           </div>
@@ -350,7 +356,9 @@
           </article>
         </div>
 
-        <app-suggestions *ngIf="!morePosts" class="col-xs-12 noPadding hidden-lg hidden-md hidden-sm"></app-suggestions>
+        <app-suggestions *ngIf="!morePosts"
+                          class="col-xs-12 noPadding hidden-lg hidden-md hidden-sm"
+                          style="margin-top: 13px;"></app-suggestions>
 
 
       </section>

@@ -20,8 +20,8 @@
       </div>
 
 
-      <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px">
-        <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
+      <div id="Likes" class="interactions-tabcontent" style="display:block;padding-top:3px;height:100%;overflow-y:scroll;">
+        <section *ngIf="InteractionsLikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll;;height: 250px">
           <div class="container-draggable" *ngFor="let user of InteractionsLikes">
             <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
               <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">
@@ -49,8 +49,8 @@
         </section>
       </div>
 
-      <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px" [ngStyle]="nbLikes == 0 && {'display':'block'}">
-        <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll">
+      <div id="Dislikes" class="interactions-tabcontent" style="padding-top:3px;height:100%;overflow-y:scroll;" [ngStyle]="nbLikes == 0 && {'display':'block'}">
+        <section *ngIf="InteractionsDislikes.length != 0" class="suggestions-box widget row " style="margin-bottom:0;overflow-y:scroll;height: 250px;">
           <div class="container-draggable" *ngFor="let user of InteractionsDislikes">
             <div class="user col-xs-12 draggable" style="margin-left:0px;border:none;">
               <div class="user-img-shared" [ngStyle]="{'background-image': 'url('+user.profilepicture+')'}">

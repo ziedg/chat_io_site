@@ -1,12 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, OnDestroy, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
-
+import { Http, Response } from '@angular/http';
+import { environment } from '../../../environments/environment'
+import * as pathUtils from '../../utils/path.utils';
 import { User } from '../../beans/user';
 import { ChatService } from '../../messanging/chat.service';
 import { LoginService } from '../../login/services/loginService';
 import { EmitterService } from '../emitter.service';
+import { AppSettings } from '../../shared/conf/app-settings';
 declare var jQuery: any;
 class MessageValidation {
   constructor() {
@@ -25,13 +28,13 @@ class MessageValidation {
   templateUrl: './conversation-mobile.component.html',
   styleUrls: ['./conversation-mobile.component.css']
 })
-export class ConversationMobileComponent implements OnInit {
+export class ConversationMobileComponent implements OnInit, OnDestroy {
   firstListen: boolean = true;
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
   //data: any ="Initializeeed";
   public selectedUser: User = null;
-  public selectedUserId: string;
+  public selectedUserId;
   public messageForm: FormGroup;
   private userId: string = null;
   private user: User = null;
@@ -40,20 +43,40 @@ export class ConversationMobileComponent implements OnInit {
   private s: AngularFireObject<any>;
   loaded: Boolean = false;
   private msgFirstCheck: Boolean = true;
+  isFirstLoaded: boolean = true;
+  loadMoreMessages: boolean = true;
+  loadingMessages: boolean = false;
+
+  @ViewChild("msgWrapper") msgWrapper: ElementRef;
+  heightField: string = "bla";
 
   constructor(private emitterService: EmitterService,
     private router: Router,
     private route: ActivatedRoute,
     private loginService: LoginService,
     private db: AngularFireDatabase,
-    private chatService: ChatService
-  ) {
+    private chatService: ChatService,
+    private http: Http,
+    private changeDetector: ChangeDetectorRef,
+    private renderer: Renderer2) {
 
     this.user = this.loginService.getUser();
     this.userId = this.user._id;
-    this.selectedUser = this.emitterService.getSelectedUser();
     this.selectedUserId = this.route.snapshot.params['stringid'];
-    console.log(this.selectedUserId);
+    this.isFirstLoaded = true;
+    this.getProfile(this.selectedUserId);
+    this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId })
+      .subscribe((response) => {
+        if (response == undefined) {
+          this.messages = [];
+        }
+        else {
+          this.messages = response;
+          this.loaded = true;
+          this.scrollMsgWrapperBottom();
+        }
+      });
+
     // with the Resolver
     // this.data = this.route.snapshot.data;
     // let allMessages = this.data.messages;
@@ -81,7 +104,7 @@ export class ConversationMobileComponent implements OnInit {
     });*/
 
 
-    jQuery(".message-wrapper").animate({ scrollTop: jQuery('.message-thread').prop("scrollHeight") }, 500);
+
     this.messageForm = new FormBuilder().group({
       message: new MessageValidation
     });
@@ -90,22 +113,79 @@ export class ConversationMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id })
-      .subscribe((response) => {
-        if (response == undefined) {
-          this.messages = [];
-        }
-        else {
-          this.messages = response;
-          this.loaded = true;
-
-        }
-      },
-        err => console.log("Error"),
-        () => {
-          console.log(this.messages);
-        });
+    this.heightField = document.body.offsetHeight + "-" + window.innerHeight;
     this.listenForMessages();
+    this.renderer.setStyle(document.querySelector(".main-header"), "display", "none");
+    this.renderer.setStyle(document.body, "padding-bottom", "0");
+  }
+
+
+  getProfile(userId: string) {
+    this.http.get(
+      environment.SERVER_URL + pathUtils.GET_PROFILE + userId,
+      AppSettings.OPTIONS)
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+
+          if (response.status == "0") {
+
+            this.selectedUser = response.user;
+          }
+
+        },
+        err => {
+        },
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
+
+
+  }
+
+  scrollMsgWrapperBottom() {
+    let delay: number = this.isFirstLoaded ? 500 : 20;
+    setTimeout(() => wrapper.scrollTop = wrapper.scrollHeight, delay);
+    let wrapper = this.msgWrapper.nativeElement;
+    //console.log("scroll to bottom");
+  }
+
+  onInputFocus() {
+    this.scrollMsgWrapperBottom()
+    setTimeout(() => this.scrollMsgWrapperBottom(),
+      500);
+    /*
+    if(/iPod|iPhone|iPad/.test(navigator.platform)) {
+    }
+    setTimeout(()=> {
+      this.scrollMsgWrapperBottom();
+      this.container.nativeElement.style.height = (window.innerHeight - 100)+"px"},
+      1000);
+      */
+  }
+
+  onScrollMsgWrapper() {
+    //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
+    if (!this.msgWrapper.nativeElement.scrollTop && !this.isFirstLoaded) {
+      if (this.messages.length < 20) this.loadMoreMessages = false
+      // console.log("reach the top of message-wrapper");
+      if (this.loadMoreMessages) {
+        //  console.log('loading more messages')
+        this.loadingMessages = true;
+        this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUserId }, this.messages[0]._id)
+          .subscribe((incomingMessages) => {
+            if (incomingMessages.length < 20) this.loadMoreMessages = false;
+            this.loadingMessages = false
+            for (var i = incomingMessages.length - 1; i >= 0; i--) {
+              this.messages.unshift(incomingMessages[i]);
+            }
+          })
+      }
+
+    }
+
+    if (this.isFirstLoaded) this.isFirstLoaded = false;
   }
 
   sendMessage() {
@@ -121,6 +201,7 @@ export class ConversationMobileComponent implements OnInit {
   }
 
   sendMessageBtn() {
+    this.scrollMsgWrapperBottom();
     //if (event.keyCode === 13) {
     const message = this.messageForm.controls['message'].value.trim();
     if (message === '' || message === undefined || message === null) {
@@ -138,13 +219,13 @@ export class ConversationMobileComponent implements OnInit {
       this.messages = [...this.messages, data];
       /* calling method to send the messages */
       this.chatService.sendMessage(data).subscribe(
-        () => { },
-        err => console.log('Could send message to server, reason: ', err));
+        () => {
+        },
+        err => {
+          //console.log('Could send message to server, reason: ', err)
+        });
 
       this.messageForm.reset();
-      setTimeout(() => {
-        document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight;
-      }, 100);
     }
     //}
   }
@@ -152,9 +233,6 @@ export class ConversationMobileComponent implements OnInit {
   listenForMessages(): void {
 
     this.s = this.db.object('notifications/' + this.userId + '/messaging');
-
-
-
     this.s.snapshotChanges().subscribe(action => {
       var notif = action.payload.val();
       if (notif !== null && !this.msgFirstCheck) {
@@ -171,13 +249,13 @@ export class ConversationMobileComponent implements OnInit {
                 document.querySelector(`.message-thread`).scrollTop = document.querySelector(`.message-thread`).scrollHeight + 9999999999999;
               }, 100);
             } else {
-
               this.chatService.newIncomingMessage(message)
             }
 
           },
-          err => console.log('Could send message to server, reason: ', err)
-        );
+          err => {
+            //console.log('Could send message to server, reason: ', err)
+          });
       } else {
         this.msgFirstCheck = false;
       }
@@ -200,5 +278,11 @@ export class ConversationMobileComponent implements OnInit {
       return false;
     }
 
+  }
+
+  ngOnDestroy() {
+    this.renderer.setStyle(document.querySelector(".main-header"), "display", "");
+    this.renderer.setStyle(document.body, "padding-bottom", "");
+    //console.log("on destroy");
   }
 }

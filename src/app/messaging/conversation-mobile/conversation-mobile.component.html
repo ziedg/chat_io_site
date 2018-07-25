@@ -2,19 +2,20 @@
 	<div class="header-mobile">
 		<div>
 			<a class="homebtn" (click)="sendHome()">
-				<i  class="fa fa-chevron-left"></i>
+				<i class="fa fa-chevron-left"></i>
 			</a>
-			<!-- <div *ngIf="selectedUser">
+			<div *ngIf="selectedUser" [routerLink]="['/main', 'profile', selectedUser._id]">
 				<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
 			</div> -->
 		</div>
 	</div>
-	<img class="loader" *ngIf="!loaded" src="/assets/images/new/loading.png">
-	<div class="message-wrapper" *ngIf="loaded">
+	<div class="message-wrapper" (scroll)="onScrollMsgWrapper()" #msgWrapper>
 		<div class="message-container">
-			<ul class="message-thread" >
+			<img class="loader" *ngIf="loadingMessages" src="/assets/images/new/loading.png">
+			<ul class="message-thread">
 				<li *ngFor="let message of messages" [class.self-message]="alignMessage(message.toUserId)" [class.regular-message]="lastMessage(message)">
-					<img *ngIf="alignMessage(message.toUserId) == false && selectedUser !== null" src="{{selectedUser.profilePicture}}" width="40" height="40" class="img-circle" />
+					<img *ngIf="alignMessage(message.toUserId) == false && selectedUser !== null" src="{{selectedUser.profilePicture}}" width="40"
+					 height="40" class="img-circle" />
 					<p class="messageContent">
 						{{message.message | DetectUrls}}
 					</p>
@@ -23,20 +24,24 @@
 		</div>
 	</div>
 	<div class="message-typer">
-			<form [formGroup]="messageForm" novalidate>
-				<div>
-					<!-- <i class="fa fa-camera"></i> -->
-					<div class="embed-submit-field">
-						<input class="message" 
+		<form [formGroup]="messageForm" novalidate>
+			<div>
+				<!-- <i class="fa fa-camera"></i> -->
+				<div class="embed-submit-field">
+					<input class="message"
 							type="text"
-							placeholder="Message" 
-							(keyup)="sendMessage()" 
-							formControlName="message"/>
-						<button type="submit" (click)="sendMessageBtn()" *ngIf="messageForm.controls['message'].value"><i class="fa fa-arrow-up"></i></button>
-						<button id="not-active" *ngIf="!messageForm.controls['message'].value" disabled ><i class="fa fa-arrow-up"></i></button>
-					</div>
+							placeholder="Message"
+							(keyup)="sendMessage()"
+							formControlName="message"
+							(focus)="onInputFocus()"/>
+					<button type="submit" (click)="sendMessageBtn()" *ngIf="messageForm.controls['message'].value">
+						<i class="fa fa-arrow-up"></i>
+					</button>
+					<button id="not-active" *ngIf="!messageForm.controls['message'].value" disabled>
+						<i class="fa fa-arrow-up"></i>
+					</button>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
+	</div>
 </div>
-

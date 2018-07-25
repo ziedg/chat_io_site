@@ -62,20 +62,38 @@ function removeMessagesFromOutBox(response) {
 // -------------------------------------------------------
 // push
 // -------------------------------------------------------
-
+   var url='';
 self.addEventListener('push', event => {
   //console.log('[Service Worker] Push Received.');
   //console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
   let data = JSON.parse(event.data.text())
-  const title = data.notification.title;
+ const  body = data.notification.body.body;
+  const  URL= data.notification.body.url
+  const type= data.notification.body.type;
+ const title = data.notification.title;
+
+if(data.notification.tag=='msg'){
+    url=`${URL}/main/messaging`
+
+}
+else if(type=='joindre' || type=='subscribe')
+{
+ url=`${URL}/main/profile/${data.notification.tag}`
+}
+else 
+{
+    url=`${URL}/main/post/${data.notification.tag}`
+}
+
+
 
 
   const options = {
-    body: data.notification.body,
+    body,
     icon:data.notification.icon,
     badge: data.notification.icon
   };
-  
+
   if(data.notification.tag){
       options.tag=data.notification.tag;
   }
@@ -83,13 +101,12 @@ self.addEventListener('push', event => {
   event.waitUntil(self.registration.showNotification(title, options));
 });
 
-
 self.addEventListener('notificationclick', event => {
   swLog('Notification click Received.');
 
   event.notification.close();
 
-  event.waitUntil(clients.openWindow('https://speegar.com/'));
+  event.waitUntil(clients.openWindow(url));
 });
 
 

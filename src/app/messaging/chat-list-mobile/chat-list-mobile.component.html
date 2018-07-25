@@ -1,10 +1,11 @@
 <div class="myContainer">
-<app-header-mobile class="hidden-md hidden-lg"></app-header-mobile>
-<div class="input-search">
-	<img alt="search-icon" class="outline-icon" src="assets/images/new/search-icon.png">
-	<input #searchBar placeholder="{{'main_search_placeholder' | translate}}" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)" (focus)="onFocus()">
+	<app-header-mobile class="hidden-md hidden-lg"></app-header-mobile>
+	<div class="input-search">
+		<img alt="search-icon" class="outline-icon" src="assets/images/new/search-icon.png">
+		<input #searchBar placeholder="{{'main_search_placeholder' | translate}}" [(ngModel)]="searchValue" (ngModelChange)="onChange($event)"
+		 (focus)="onFocus()">
 
-	<!-- <div class="upper-arrow-search upper-arrow"></div>
+		<!-- <div class="upper-arrow-search upper-arrow"></div>
 	<div class="recherche-results-holder recherche-results-holder-1" style="display:none;" *ngIf="listSearchUsers">
 	  <div class="recherche-results" *ngIf="listSearchUsers.length>0">
 		<article *ngFor="let result of listSearchUsers" (click)="loadUser(result)">
@@ -18,37 +19,29 @@
 		</article>
 	  </div>
 	</div> -->
-</div>
-<!-- <p class="messenger-section">suggestions</p> -->
-		<div class="fb-suggestions-container" style="padding-top:6px">
+	</div>
+	<!-- <p class="messenger-section">suggestions</p> -->
+	<div class="fb-suggestions-container" style="padding-top:6px">
 		<div *ngFor="let s of suggestions">
 			<app-suggestions-mobile [user]="s" (click)="loadUser(s)"></app-suggestions-mobile>
 		</div>
-</div>
-<!-- <p class="sub">Messages Récents</p> -->
+	</div>
+	<!-- <p class="sub">Messages Récents</p> -->
 	<img class="loader" *ngIf="!loaded" src="/assets/images/new/loading.png">
-	<div  *ngIf="loaded">
+	<div *ngIf="loaded">
 		<hr *ngIf="chatListUsers.length > 0">
 		<!-- <p *ngIf="chatListUsers.length > 0" class="messenger-section">messages récents</p> -->
-			<div class="users-list" *ngFor="let user of chatListUsers">
-				<app-chat-list-item-mobile *ngIf="user.lastMessage ; else newUser"
-				[class.active]="isUserSelected(user.id)"
-		(click)="loadUser(user)"
-			[user]="user.firstName +' ' + user.lastName"
-			[userImage]="user.profilePicture"
-			[lastMessage]="user.lastMessage.message"
-			[date]="user.lastMessage.date"
-			[notread]="!user.lastMessage.isSeen">
+		<div class="users-list" *ngFor="let user of chatListUsers">
+			<app-chat-list-item-mobile *ngIf="user.lastMessage ; else newUser" [class.active]="isUserSelected(user.id)" (click)="loadUser(user)"
+			 [myLastMessage]="sameUser(user.lastMessage.fromUserId)" [user]="user.firstName +' ' + user.lastName" [userImage]="user.profilePicture"
+			 [lastMessage]="user.lastMessage.message" [date]="user.lastMessage.date" [notread]="!user.lastMessage.isSeen">
+			</app-chat-list-item-mobile>
+			<ng-template #newUser>
+				<app-chat-list-item-mobile [class.active]="isUserSelected(user.id)" (click)="loadUser(user)" [user]="user.firstName +' ' + user.lastName"
+				 [userImage]="user.profilePicture">
 				</app-chat-list-item-mobile>
-				<ng-template #newUser>
-					<app-chat-list-item-mobile
-					[class.active]="isUserSelected(user.id)"
-					(click)="loadUser(user)"
-						[user]="user.firstName +' ' + user.lastName"
-						[userImage]="user.profilePicture" >
-					</app-chat-list-item-mobile>
 			</ng-template>
-			</div>
+		</div>
 		<hr *ngIf="chatListUsers.length == 0">
 	</div>
 </div>

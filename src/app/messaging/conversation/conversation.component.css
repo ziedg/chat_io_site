@@ -166,6 +166,7 @@
     padding: 20px 15px;
     border: 1px solid #E5E5E5;
     border-radius: 50px;
+    padding-right:10%;
 }
 
 .embed-submit-field button{
@@ -209,4 +210,15 @@
     height: 0;
     line-height: 0;
     visibility: hidden;
+}
+.loader {
+    border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    animation: spin 0.9s linear infinite;
+    margin-top:5%;
+    margin-left:46%;
+    background-color: transparent;
+    position: relative;
 }

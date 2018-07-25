@@ -12,6 +12,7 @@ export const GET_NOTIFICATIONS:string = 'getNotifications?lastNotificationId=LAS
 
 export const CHECK_NEW_NOTIFICATIONS:string = 'checkNewNotifications';
 export const CHECK_NEW_MESSAGE_NOTIFICATIONS:string='checkNewMessageNotifications';
+export const RESET_NEW_MESSAGE_NOTIFICATIONS:string='resetNewMessageNotifications';
 export const FIND_PROFILE:string = 'findProfile?ProfileName=';
 
 export const GET_OPEN_GRAPH_DATA:string = 'getOpenGraphData?url=';

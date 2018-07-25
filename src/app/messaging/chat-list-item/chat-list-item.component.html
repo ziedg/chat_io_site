@@ -1,15 +1,16 @@
-<div class="row item" [class.not-read]="notread">
+<div class="row item" [class.not-read]="notread" [class.mine]="myLastMessage">
   <div class="person-img">
     <img width="50" height="50" src="{{userImage}}" class="img-circle" alt="">
   </div>
   <div class="corps">
     <div class="topdiv">
       <p>{{user}}</p>
-      <p style="margin-top: 4px;">{{date}}</p>
+      <p style="margin-top: 4px;" *ngIf="date != ''">{{date}}</p>
     </div>
     <div>
       <!-- <i *ngIf="notread" class="fas fa-circle"></i> -->
-      <p>{{lastMessage}} </p>
+      <p *ngIf="lastMessage != ''">{{lastMessage}} </p>
+      <p *ngIf="lastMessage == ''">{{'Taptodiscuss' | translate}}</p>
     </div>
   </div>
 </div>

@@ -34,7 +34,7 @@ export class Login {
   dontShowSocialNetworksLoginButtons = false;
   loadingFb = false;
   public loacationPath: string = "/login/sign-in";
-  private selectedLanguage: string;
+  public selectedLanguage: string;
 
   constructor(public translate: TranslateService,
               private _loc: Location,
@@ -239,5 +239,15 @@ export class Login {
     this.selectedLanguage = language;
     this.translate.setDefaultLang(language);
     //console.log(localStorage.getItem('userLang'));
+  }
+  onSelectLanguage(language: string) {
+    this.selectedLanguage = language;
+    language = language.toLowerCase();
+    // jQuery(".dropdown-menu-translate").hide();
+    localStorage.setItem('userLang', language);
+    this.translate.use(language);
+    this.translate.setDefaultLang(language);
+    //location.reload();
+    //console.log(localStorage.getItem('userLang')) ;
   }
 }

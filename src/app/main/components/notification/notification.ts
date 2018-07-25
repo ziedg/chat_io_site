@@ -26,6 +26,7 @@ export class Notification implements OnInit {
     isLock: boolean = false;
     showButtonMoreNotif:Boolean=false;
     showNoNotif:Boolean=false;
+    showNoMoreNotif:Boolean=false;
     listNotif : Array <NotificationBean> = [];
     user:User = new User();
     noMoreNotif:Boolean=false;
@@ -60,11 +61,17 @@ export class Notification implements OnInit {
       .map((res:Response) => res.json())
       .subscribe(
         response => {
-
+          console.log(response);
         if (response.length != 0) {
+          this.showNoMoreNotif=true;
           this.showNoNotif = false;
           for (let i = 0; i < response.length; i++) {
-            this.listNotif.push(response[i]);
+            if(response[i].publType === "text" && response[i].publText != null){
+              response[i].publText = this.strip_html_tags(response[i].publText);
+              this.listNotif.push(response[i]); }
+              else{
+                this.listNotif.push(response[i]);
+              }
             this.lastNotifId = response[i]._id;
           }
           this.index=5;
@@ -73,7 +80,8 @@ export class Notification implements OnInit {
           
         } else {
           this.showNoNotif = true;
-
+//          console.log("no notification");
+          this.loaded = true;
           this.isLock=false;
         }
       },
@@ -83,6 +91,13 @@ export class Notification implements OnInit {
         this.changeDetector.markForCheck();
       }
     );
+  }
+
+  strip_html_tags(str)
+  {
+    str = str.toString();
+    str = str.replace("</","");
+    return str.replace(/<([^;]*)>/g, ' ');
   }
 
   onScrollDown(){

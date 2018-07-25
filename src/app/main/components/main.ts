@@ -11,7 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
@@ -41,7 +41,7 @@ declare const gapi: any;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Main {
-  index="5";
+  index = "5";
   showSearchMobile: boolean;
   autocomplete = false;
   notification = false;
@@ -56,8 +56,9 @@ export class Main {
   lastNotifId = "";
   showButtonMoreNotif: Boolean = false;
   showNoNotif: Boolean = false;
+  showNoMoreNotif: Boolean = false;
   noSearchResults: Boolean = false;
-  public showNotif:boolean=true;
+  public showNotif: boolean = true;
   private s: AngularFireObject<any>;
 
   @ViewChild("searchResults2") searchRes2: ElementRef;
@@ -68,9 +69,10 @@ export class Main {
   private isSubscribed = false;
   private registration = undefined;
   private notifFirstCheck: Boolean = true;
-  nbNewMessageNotification: Number =0;
+  nbNewMessageNotification: Number = 0;
   loaded: Boolean = false;
   moreLoaded: Boolean = true;
+  messagingOpen: boolean = false;
   // end Notification vars
 
 
@@ -94,11 +96,17 @@ export class Main {
     //Angular Notification Listener
     private db: AngularFireDatabase) {
 
-      this.user=this.loginService.getUser();
-         if (!this.recentRechService.isEmptyList())
+    // check if we are on messenger
+    router.events.filter((event: any) => event instanceof NavigationEnd)
+      .subscribe(event => {
+        this.messagingOpen = /^\/main\/messaging/.test(event.url);
+      });
+
+    this.user = this.loginService.getUser();
+    if (!this.recentRechService.isEmptyList())
       this.RecentSearchList = this.recentRechService.getListRecentRech();
-      this.showButtonMoreNotif = false;
-      this.listNotif = [];
+    this.showButtonMoreNotif = false;
+    this.listNotif = [];
   }
 
 
@@ -109,18 +117,18 @@ export class Main {
 
     this.checkNewNotifications();
     this.checkNewMessageNotification();
-    if (this.user!==null)
-    this.listenForNotifications(this.user._id);
+    if (this.user !== null)
+      this.listenForNotifications(this.user._id);
 
 
-    jQuery(".recherche-results-holder").blur(function() {
+    jQuery(".recherche-results-holder").blur(function () {
       jQuery(".file-input-holder").hide();
     });
     setInterval(() => {
       this.changeDetector.markForCheck();
     }, 500);
 
-    jQuery(document).click(function(e) {
+    jQuery(document).click(function (e) {
       if (
         jQuery(e.target).closest(".recherche-results-holder").length === 0 &&
         jQuery(e.target).closest(".header-center").length === 0
@@ -141,7 +149,12 @@ export class Main {
       }
     });
 
+    this.router.events.subscribe((evt) => {
 
+      // console.log(evt);
+      // console.log(this.activatedRoute);
+      // window.scrollTo(0, 0)
+    });
   }
 
 
@@ -280,28 +293,32 @@ export class Main {
     this.moreLoaded = false;
     this.http
       .get(
-        environment.SERVER_URL + pathUtils.GET_NOTIFICATIONS.replace("INDEX",this.index).replace("LAST",this.lastNotifId),
+        environment.SERVER_URL + pathUtils.GET_NOTIFICATIONS.replace("INDEX", this.index).replace("LAST", this.lastNotifId),
         AppSettings.OPTIONS
       )
       .map((res: Response) => res.json())
       .subscribe(
-        (response:NotificationBean[]) => {
+        (response: NotificationBean[]) => {
 
 
           if (response.length != 0) {
             this.showNoNotif = false;
             let arr = this.listNotif;
-
+            this.showNoMoreNotif=true;
             for (var i = 0; i < response.length; i++) {
 
-              if(response[i]._id && response[i].type!='message')
+              if (response[i]._id && response[i].type != 'message')
+                if(response[i].publType === "text" && response[i].publText != null){
+                  response[i].publText = this.strip_html_tags(response[i].publText);
                   arr.push(response[i]);
-
+                }else{
+                  arr.push(response[i]);
+                }
 
               this.lastNotifId = response[i]._id;
 
             }
-
+            //console.log(this.listNotif);
             this.loaded = true;
             this.moreLoaded = true;
             arr = _.uniqWith(this.listNotif, _.isEqual);
@@ -310,26 +327,33 @@ export class Main {
             });
 
 
+            
 
-
-             this.listNotif = arr;
-
+            this.listNotif = arr;
 
 
             if (response.length == 5) this.showButtonMoreNotif = true;
             else this.showButtonMoreNotif = false;
           } else {
+            this.loaded = true;
             this.showNoNotif = true;
             this.showButtonMoreNotif = false;
           }
         },
-        err => {},
+        err => { },
         () => {
           this.nbNewNotifications = 0;
 
           this.changeDetector.markForCheck();
         }
       );
+  }
+
+  strip_html_tags(str)
+  {
+    str = str.toString();
+    str = str.replace("</","");
+    return str.replace(/<([^;]*)>/g, ' ');
   }
 
   getNotificationTime(publishDateString: string): string {
@@ -362,6 +386,21 @@ export class Main {
     this.hideNotificationList();
     this.router.navigate(["/main/" + source, parm]);
   }
+  navigateNotif() {
+    this.nbNewNotifications = 0;
+  }
+
+  navigateNotifMessage() {
+    this.nbNewMessageNotification = 0;
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.RESET_NEW_MESSAGE_NOTIFICATIONS,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
+      .subscribe(response => { }, err => { }, () => { });
+      this.router.navigate(["/main/messaging"]);
+  }
 
   markView(notifId) {
     let body = JSON.stringify({
@@ -374,7 +413,7 @@ export class Main {
         AppSettings.OPTIONS
       )
       .map((res: Response) => res.json())
-      .subscribe(response => {}, err => {}, () => {});
+      .subscribe(response => { }, err => { }, () => { });
   }
 
 
@@ -390,10 +429,14 @@ export class Main {
         response => {
           if (response.status == 0) {
 
-            this.nbNewNotifications += response.nbNewNotifications;
+            const nbNotif = response.nbNewNotifications;
+
+            //console.log(response);
+
+            this.nbNewNotifications = nbNotif;
           }
         },
-        err => {},
+        err => { },
         () => {
           this.changeDetector.markForCheck();
         }
@@ -401,43 +444,43 @@ export class Main {
   }
 
 
-checkNewMessageNotification(){
-  this.http
-  .get(
-    environment.SERVER_URL + pathUtils.CHECK_NEW_MESSAGE_NOTIFICATIONS,
-    AppSettings.OPTIONS
-  )
-  .map((res: Response) => res.json())
-  .subscribe(
-    response => {
-      if (response.status == 1) {
-
-       this.nbNewMessageNotification+=response.nbNewMessageNotifications;
-       //console.log(this.nbNewMessageNotification);
-      }
-    },
-    err => {},
-    () => {
-      this.changeDetector.markForCheck();
-    }
-  );
-}
-
-
-
-
-
-
-
-
-
-/*
-  loadNotif() {
-    setInterval(() => {
-      this.checkNewNotifications();
-    }, 5000);
+  checkNewMessageNotification() {
+    this.http
+      .get(
+        environment.SERVER_URL + pathUtils.CHECK_NEW_MESSAGE_NOTIFICATIONS,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
+      .subscribe(
+        response => {
+          if (response.status == 1) {
+            //console.log(response);
+            this.nbNewMessageNotification += response.nbNewMessageNotifications;
+            //console.log(this.nbNewMessageNotification);
+          }
+        },
+        err => { },
+        () => {
+          this.changeDetector.markForCheck();
+        }
+      );
   }
-  */
+
+
+
+
+
+
+
+
+
+  /*
+    loadNotif() {
+      setInterval(() => {
+        this.checkNewNotifications();
+      }, 5000);
+    }
+    */
 
   showNotificationList() {
     jQuery(".notification-holder").show();
@@ -472,7 +515,7 @@ checkNewMessageNotification(){
       this.isSubscribed = !(subscription === null);
       this.updateSubscriptionOnServer(subscription);
       //console.log(`User ${this.isSubscribed ? 'IS' : 'is NOT'} subscribed.`);
-      if (!this.isSubscribed){
+      if (!this.isSubscribed) {
         this.subscribeUser()
       }
     });
@@ -491,7 +534,7 @@ checkNewMessageNotification(){
         this.isSubscribed = true;
       })
       .catch(err => {
-        console.log('Failed to subscribe the user: ', err);
+        //console.log('Failed to subscribe the user: ', err);
       });
   }
 
@@ -499,8 +542,10 @@ checkNewMessageNotification(){
     if (subscription) {
       this.subscriptionJson = subscription;
       this.notificationService.addPushSubscriber(subscription).subscribe(
-        () => {},
-        err =>  console.log('Could not send subscription object to server, reason: ', err));
+        () => { },
+        err => {
+          //console.log('Could not send subscription object to server, reason: ', err);
+        });
     } else {
       this.subscriptionJson = '';
     }
@@ -509,27 +554,35 @@ checkNewMessageNotification(){
 
   listenForNotifications(userId: string): void {
 
-    this.s = this.db.object('notifications/'+userId+'/notification');
-      this.s.snapshotChanges().subscribe(action => {
-        var notif = action.payload.val();
+    this.s = this.db.object('notifications/' + userId + '/notification');
+    this.s.snapshotChanges().subscribe(action => {
+      var notif = action.payload.val();
 
 
 
 
-        if (notif !== null && !this.notifFirstCheck){
-          if(notif.data.body == 'message'){
-               (this.nbNewMessageNotification as  any)+=1;
-          }
-          else
-          {
-            this.nbNewNotifications++;
-          }
-
-
-        }else{
-          this.notifFirstCheck = false;
+      if (notif !== null && !this.notifFirstCheck) {
+        if (notif.data.body == 'message') {
+          (this.nbNewMessageNotification as any) += 1;
         }
-      });
+        else {
+          this.checkNewNotifications();
+
+        }
+
+
+      } else {
+        this.notifFirstCheck = false;
+      }
+    });
 
   }
+
+  scrollTopHome() {
+    //console.log("scroll");
+    jQuery("html, body").scrollTop(0, 0);
+    //window.scrollTo(0, 0);
+  }
+
+
 }

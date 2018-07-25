@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Location } from '@angular/common';
 import { environment } from '../../../../environments/environment';
 import { PublicationBean } from '../../../beans/publication-bean';
 import { User } from '../../../beans/user';
@@ -20,14 +20,21 @@ declare var jQuery: any;
 
 
 export class Post {
-
+  public hiddenContent: boolean = false;
   public postId;
   public publicationBeanList: Array<PublicationBean> = [];
   public user: User = new User();
   public wrongPost: boolean = false;
 	// TODO: check wrongPost access
 
-    constructor(private title:Title,private route: ActivatedRoute,private http:Http, private router:Router, private loginService:LoginService,private changeDetector: ChangeDetectorRef) {
+    constructor(private location: Location,private title:Title,private route: ActivatedRoute,private http:Http, private router:Router, private loginService:LoginService,private changeDetector: ChangeDetectorRef) {
+      if (location.path() != '') {
+        if (location.path().indexOf('/main/post') != -1) {
+          this.hiddenContent = true;
+        } else {
+          this.hiddenContent = false;
+        }
+      }
       this.loginService.redirect();
       this.user = this.loginService.getUser();
             this.route.params.subscribe((params)=>{

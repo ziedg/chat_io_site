@@ -96,22 +96,20 @@ export class Profile implements OnInit{
 
     this.user = this.loginService.user;
 
-    this.router.events.subscribe(route => {
+    this.route.params.subscribe((params)=>{
       this.changeDetector.markForCheck();
-      if (this.route.snapshot.params['id'] != this.lastRouterProfileId) {
-        this.lastRouterProfileId = this.route.snapshot.params['id'];
-        // this.getProfile(this.route.snapshot.params['id']);
-        
-         this.data = this.route.snapshot.data;
-        
-        let profileResponse = this.data.profile;
-        let publicationResponse = this.data.publication;    
+      if (params['id'] != this.lastRouterProfileId) {
+        this.lastRouterProfileId = params['id'];
+        // uncommented the linebelow after removing resolver
+         this.getProfile(params['id']);
+        /* this.data = this.route.snapshot.data;
+          let profileResponse = this.data.profile;
+          let publicationResponse = this.data.publication;    
           if (profileResponse.status == "0") {
-
             this.userDisplayed = profileResponse.user;
             this.title.setTitle(this.userDisplayed.firstName + " " + this.userDisplayed.lastName);
-            
-            //this.loadFirstPosts();
+            // uncommented the linebelow after removing resolver
+            this.loadFirstPosts();
             this.isLock = true;
             this.showLoading = true;
             //console.log("first pub");
@@ -124,7 +122,7 @@ export class Profile implements OnInit{
 
           } else {
             this.isNotFound = true;
-          }
+          }*/
 
       
 
@@ -135,28 +133,29 @@ export class Profile implements OnInit{
   }
 
   showSendMessagePopUp(){
+    var self=this;
     swal({
       title: this.translateCode("publication_popup_send_message_title"),
       text: this.translateCode("publication_popup_send_message_text"),
       showCancelButton: true,
       cancelButtonColor: '#999',
       confirmButtonColor: "#6bac6f",
-      confirmButtonText: this.translateCode("publication_popup_confirm"),
+      confirmButtonText: this.translateCode("send_msg"),
       cancelButtonText: this.translateCode("publication_popup_cancel_button"),
       input: 'textarea',
     }).then(function (text) {
         if (text) {
-          this.sendMessage(text)
+          self.sendMessage(text)
           swal({
-            title: this.translateCode("publication_popup_notification_message_sent_title"),
-            text: this.translateCode("publication_popup_notification_message_sent_text"),
+            title: self.translateCode("publication_popup_notification_message_sent_title"),
+            text: self.translateCode("publication_popup_notification_message_sent_text"),
             type: "success",
             timer: 1000,
             showConfirmButton: false
           }).then(function () {}, function (dismiss) {});
-          this.changeDetector.markForCheck();
+          self.changeDetector.markForCheck();
         }
-      }.bind(this),
+      },
       function (dismiss) {
         if (dismiss === 'overlay') {}
       }
@@ -176,8 +175,8 @@ export class Profile implements OnInit{
         toUserId: this.userDisplayed._id,
       }
       this.chatService.sendMessage(message).subscribe(
-        () => console.log('Sent Message server.'),
-        err => console.log('Could send message to server, reason: ', err));
+        () => {},
+        err => {});
     }
   }
   
@@ -514,7 +513,8 @@ reportPub(userDisplayed:User) {
     jQuery(".modal-friends").fadeOut(300);
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+    jQuery(".navigation-bottom").removeClass('hidden-xs');    
     jQuery(document).click(function (e) {
       if (jQuery(e.target).closest(".white-box-edit").length === 0 && jQuery(e.target).closest(".profile-edit").length === 0) {
         jQuery(".modal-edit-profile").fadeOut(300);

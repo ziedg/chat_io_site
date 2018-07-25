@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { TranslateService } from '@ngx-translate/core';
-
+import { Router } from "@angular/router";
 import { environment } from '../../../../environments/environment';
 import { CommentBean } from '../../../beans/comment-bean';
 import { EmojiListBean } from '../../../beans/emoji-list-bean';
@@ -43,9 +43,11 @@ export class Comment {
   commentTextLastPart: string = "";
   isLongComment: boolean = false;
   showLastPart: boolean = false;
+  showButtons: boolean = false;
 
   constructor(public translate: TranslateService,
               private http: Http,
+              private router: Router,
               private dateService: DateService,
               private loginService: LoginService,
               public emojiService: EmojiService,
@@ -57,6 +59,9 @@ export class Comment {
   }
 
   ngOnInit() {
+    if (this.router.routerState.snapshot.url.includes('post')) {
+      this.showButtons = true;
+    }
     this.commentText = this.removeWhiteSpaceComment(this.commentBean.commentText);
     if(this.commentText) {
       this.commentText = this.emojiService.AfficheWithEmoji(this.commentText);

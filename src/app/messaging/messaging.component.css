@@ -11,6 +11,7 @@
 .messengerDiv{
 	position: relative;
 	margin: 0 auto;
+	margin-top: 40px;
 }
 
 .messengerDiv>.row>div{
@@ -23,11 +24,22 @@
 	display: -ms-flexbox;
 	display:         flex;
   }
+
+.chat-list, .chat-content {
+	border: 1px solid #eee;
+}
+
 .chat-list{
 	background-color:white;
 	overflow-y: scroll;
-    max-height: 78vh;
+	max-height: 78vh;
+	border-right-width: 0;
 }
+
+.chat-content {
+	border-left-width: 0;
+}
+
 @media(max-width:767px){
 	.messengerDiv{
 		position: unset;

@@ -1,4 +1,4 @@
-<div class="main-header">
+<div [ngClass]="{'main-header' : true, 'hidden-sm hidden-xs' : messagingOpen}">
   <div class="sub-main-header">
     <div class="header-left">
       <article class="logo">
@@ -49,7 +49,7 @@
 			</article>
 
 
-      <article  [routerLink]="['/main/messaging']"  class="notification-parent hidden-xs">
+      <article (click)="navigateNotifMessage()" class="notification-parent hidden-xs">
 
         <div class="noPadding">
 
@@ -97,12 +97,16 @@
 
 
                   <div class="notif-content">
+
+
                     <div *ngIf="notif.type =='comment'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
                       <span *ngIf="notif.profiles && notif.profiles.length == 1">
                         <span class="notif-a">
                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}} </span>
-                        <span>{{ 'main_comment_notification' | translate }}</span>
-
+                          <span *ngIf="notif.publType !== 'text' && notif.publType !== 'pictureLink'" >{{ 'main_comment_notification' | translate }}</span>
+                          <span *ngIf="notif.publType === 'text'">{{ 'main_comment_notification_status' | translate }}</span>
+                          <span *ngIf="notif.publType === 'pictureLink'">{{ 'main_comment_notification_image' | translate }}</span>
+                          <span *ngIf="notif.publText"> "{{ notif.publText }} "</span>
 
                       </span>
                       <span *ngIf="notif.profiles &&notif.profiles.length>1">
@@ -114,17 +118,41 @@
                           {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[notif.profiles.length -1].firstName, number: notif.profiles.length-1
                           } }}
                         </span>
-                        <span>{{ 'main_comments_notification' | translate }}</span>
+                        <span *ngIf="notif.publType !== 'text' && notif.publType !== 'pictureLink'" >{{ 'main_comments_notification' | translate }}</span>
+                        <span *ngIf="notif.publType === 'text'">{{ 'main_comments_notification_status' | translate }}</span>
+                        <span *ngIf="notif.publType === 'pictureLink'">{{ 'main_comments_notification_image' | translate }}</span>
+                        <span *ngIf="notif.publText"> "{{ notif.publText }} "</span>
+                        
 
                       </span>
                     </div>
+
+
+
+
+                              <div *ngIf="notif.type =='joindre'" class="comment-text" (click)="goTo('profile',notif.profiles[0]._id,notif._id)">
+                                  <span *ngIf="notif.profiles.length==1">
+                                      <span>{{'votre_ami' | translate}}</span>
+                                    <span class="notif-a">
+                                       {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
+                                    </span>
+                                    <span>{{ 'vient de joindre speegar' | translate }}</span>
+
+                                  </span>
+
+                                </div>
+
+
+
                     <div *ngIf="notif.type =='reagir'" class="comment-text" (click)="goTo('post',notif.publId,notif._id)">
                       <span *ngIf="notif.profiles.length==1">
                         <span class="notif-a">
                           {{notif.profiles[0].firstName}} {{notif.profiles[0].lastName}}
                         </span>
-                        <span>{{ 'main_reagir_notification' | translate }}</span>
-
+                        <span *ngIf="notif.publType !== 'text' && notif.publType !== 'pictureLink'" >{{ 'main_reagir_notification' | translate }}</span>
+                        <span *ngIf="notif.publType === 'text'">{{ 'main_reagir_notification_status' | translate }}</span>
+                        <span *ngIf="notif.publType === 'pictureLink'">{{ 'main_reagir_notification_image' | translate }}</span>
+                        <span *ngIf="notif.publText"> "{{ notif.publText }} "</span>
                       </span>
                       <span *ngIf=" notif.profiles && notif.profiles.length>1">
                         <span *ngIf="notif.profiles.length==2" class="notif-a">
@@ -134,7 +162,10 @@
                           {{ 'main_notification_from_many_profiles' | translate:{first: notif.profiles[notif.profiles.length -1].firstName, number: notif.profiles.length-1
                           } }}
                         </span>
-                        <span>{{ 'main_reagirs_notification' | translate}}</span>
+                        <span *ngIf="notif.publType !== 'text' && notif.publType !== 'pictureLink'" >{{ 'main_reagirs_notification' | translate }}</span>
+                        <span *ngIf="notif.publType === 'text'">{{ 'main_reagirs_notification_status' | translate }}</span>
+                        <span *ngIf="notif.publType === 'pictureLink'">{{ 'main_reagirs_notification_image' | translate }}</span>
+                        <span *ngIf="notif.publText"> "{{ notif.publText }} "</span>
 
                       </span>
                     </div>
@@ -181,6 +212,8 @@
                     </article>
 
 
+
+
                 </span>
                 <div  *ngIf="!moreLoaded && !showNoNotif">
                     <img class="loader-more-notifications-main"  src="/assets/images/new/loading.png">
@@ -193,7 +226,7 @@
                 </a>
               </div>
 
-              <div *ngIf="showNoNotif" style="text-align: center;">
+              <div *ngIf="showNoNotif&&!showNoMoreNotif" style="text-align: center;">
                 <a class="btn more-not" style="width: 100%">
                   {{ 'main_no_notification' | translate }}
                 </a>
@@ -254,9 +287,12 @@
 
 <div class="hidden-lg hidden-md hidden-sm navigation-bottom">
   <div class="home-icon outline-icon-container"
+        (click)="scrollTopHome()"
        [routerLink]="['/main', 'home']"
+       
        [routerLinkActive]="['active-nav-icon']">
     <img class="outline-icon"
+        
          alt="home-icon"
          src="assets/images/new/nav-icons/home-icon-full.png">
     <span class="outline-icon-text">{{"home" | translate}}</span>
@@ -264,20 +300,22 @@
   <div class="search-icon outline-icon-container"
        [routerLink]="['/main', 'search-mobile']"
        [routerLinkActive]="['active-nav-icon']">
-    <img class="outline-icon"
+    <img class="outline-icon" style="height:21px"
          alt="search-icon"
          src="assets/images/new/nav-icons/popular.png">
-    <span class="outline-icon-text">{{"popular" | translate}}</span>
+    <span class="outline-icon-text" style="margin-top:1px">{{"popular" | translate}}</span>
   </div>
   <div class="messaging-icon outline-icon-container"
-       [routerLink]="['/main', 'messaging']"
-       [routerLinkActive]="['active-nav-icon']">
+    (click)="navigateNotifMessage()"
+       >
     <img class="outline-icon"
          alt="messaging-icon"
          src="assets/images/new/nav-icons/messaging-icon-full.png">
     <span class="outline-icon-text">{{"Discussion" | translate}}</span>
+    <div class="cercle-notice" style="top:0; right: calc(53% - 32px)" *ngIf="nbNewMessageNotification>0">{{nbNewMessageNotification}}</div>
   </div>
   <div class="notifications-icon outline-icon-container"
+       (click)="navigateNotif()"
        [routerLink]="['/main', 'notification']"
        style="position:relative"
        [routerLinkActive]="['active-nav-icon']">

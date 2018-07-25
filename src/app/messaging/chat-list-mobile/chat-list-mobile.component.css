@@ -70,6 +70,7 @@
     -o-border-image: -o-linear-gradient(right, #ffffff, #dedede 150%, #dedede) 1 0%;
     border-image: linear-gradient(to right, #ffffff, #dedede 150%, #dedede) 1 0%;  */
   }
+
 @media (min-width: 1025px) {
   .input-search{
     margin-top:5px;

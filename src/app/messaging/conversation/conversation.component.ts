@@ -26,7 +26,7 @@ class MessageValidation {
   templateUrl: './conversation.component.html',
   styleUrls: ['./conversation.component.css']
 })
-export class ConversationComponent implements OnInit, AfterViewInit{
+export class ConversationComponent implements OnInit, AfterViewInit {
   @Input() conversation: string;
   @Input() selectedUserInfo: string;
   public selectedUser: User = null;
@@ -39,11 +39,11 @@ export class ConversationComponent implements OnInit, AfterViewInit{
   private s: AngularFireObject<any>;
   private msgFirstCheck: Boolean = true;
   isFirstLoaded: boolean = true;
-  loadMoreMessages :boolean =true ;
-  loadingMessages:boolean =true ;
+  loadMoreMessages: boolean = true;
+  loadingMessages: boolean = false;
 
-  @ViewChild("messageThread") messageThread:ElementRef;
-  
+  @ViewChild("messageThread") messageThread: ElementRef;
+
 
   constructor(private emitterService: EmitterService,
     private router: Router,
@@ -56,7 +56,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
       message: new MessageValidation
     });;
     this.user = this.loginService.getUser();
-    this.userId=this.user._id
+    this.userId = this.user._id
   }
 
   ngOnInit() {
@@ -71,36 +71,37 @@ export class ConversationComponent implements OnInit, AfterViewInit{
     //event.target.offsetHeight; event.target.scrollTop; event.target.scrollHeight;
 
     if (!this.messageThread.nativeElement.scrollTop && !this.isFirstLoaded) {
-      console.log("reach the top of message thread");
-      if(this.loadMoreMessages){
-        console.log('loading more messages')
-        this.loadingMessages=true;
-        this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id},this.messages[0]._id)
-        .subscribe((incomingMessages) => {
-          if (incomingMessages.length<20) this.loadMoreMessages=false; 
-          this.loadingMessages=false
-          for(var i=incomingMessages.length-1; i>=0; i--) { 
-           this.messages.unshift(incomingMessages[i]);
-           } 
-      })
+      //console.log("reach the top of message thread");
+      if (this.messages.length < 20) this.loadMoreMessages = false
+      if (this.loadMoreMessages) {
+        //console.log('loading more messages')
+        this.loadingMessages = true;
+        this.chatService.getMessages({ fromUserId: this.userId, toUserId: this.selectedUser._id }, this.messages[0]._id)
+          .subscribe((incomingMessages) => {
+            if (incomingMessages.length < 20) this.loadMoreMessages = false;
+            this.loadingMessages = false
+            for (var i = incomingMessages.length - 1; i >= 0; i--) {
+              this.messages.unshift(incomingMessages[i]);
+            }
+          })
       }
-   
+
     }
 
-    if(this.isFirstLoaded) this.isFirstLoaded = false;
+    if (this.isFirstLoaded) this.isFirstLoaded = false;
   }
 
   scrollMessageThreadBottom() {
     this.isFirstLoaded = true;
     let msgThread = this.messageThread.nativeElement;
     //console.log("scroll to bottom");
-    setTimeout(()=>msgThread.scrollTop = msgThread.scrollHeight, 500);
+    setTimeout(() => msgThread.scrollTop = msgThread.scrollHeight, 500);
   }
 
 
   ngOnChanges(changes: any) {
     /* Fetching selected users information from other component. */
-    
+
     this.emitterService.userEmitter
       .subscribe((selectedUser: User) => {
         this.messageLoading = true;
@@ -108,7 +109,7 @@ export class ConversationComponent implements OnInit, AfterViewInit{
       });
 
     this.emitterService.conversationEmitter.subscribe((data) => {
-      
+
       this.messageLoading = false;
       this.scrollMessageThreadBottom();
       if (data == undefined) {
@@ -138,8 +139,10 @@ export class ConversationComponent implements OnInit, AfterViewInit{
       this.messages = [...this.messages, data];
       /* calling method to send the messages */
       this.chatService.sendMessage(data).subscribe(
-        () => {},
-        err => console.log('Could send message to server, reason: ', err));
+        () => { },
+        err => {
+          //console.log('Could send message to server, reason: ', err)
+        });
 
       //update user's own messages  in the chat list
       this.emitterService.updateLastMessage(data)
@@ -176,8 +179,9 @@ export class ConversationComponent implements OnInit, AfterViewInit{
               this.chatService.newIncomingMessage(message)
             }
           },
-          err => console.log('Could send message to server, reason: ', err)
-        );
+          err => {
+            //console.log('Could send message to server, reason: ', err)
+          });
       } else {
         this.msgFirstCheck = false;
       }

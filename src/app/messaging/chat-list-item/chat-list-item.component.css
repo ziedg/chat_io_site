@@ -26,7 +26,19 @@
 }
 
 .not-read{
-    background-color:#f2f2f2;
+    background-color:rgba(0, 0, 0, .05);;
+}
+
+.not-read>.corps .topdiv>p{
+    font-weight: bold;
+}
+
+.mine{
+    background-color:white!important;
+}
+
+.mine>.corps .topdiv>p{
+    font-weight: normal!important;
 }
 
 .not-read-text{
@@ -45,6 +57,8 @@
     color:black;
     font-size: 12pt;
     display: inline-block;
+    overflow-x: hidden;
+    width: 75%;
 }
 
 .topdiv p:nth-child(2){

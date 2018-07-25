@@ -1,25 +1,25 @@
 import { GifBean } from './../../../beans/gif-bean';
 import 'rxjs/add/operator/map';
 
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Http, Response} from '@angular/http';
-import {Title} from '@angular/platform-browser';
-import {Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {Ng2ImgMaxService} from 'ng2-img-max';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Http, Response } from '@angular/http';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 
-import {environment} from '../../../../environments/environment';
-import {LinkBean} from '../../../beans/linkBean';
-import {PublicationBean} from '../../../beans/publication-bean';
-import {User} from '../../../beans/user';
-import {LoginService} from '../../../login/services/loginService';
-import {AppSettings} from '../../../shared/conf/app-settings';
+import { environment } from '../../../../environments/environment';
+import { LinkBean } from '../../../beans/linkBean';
+import { PublicationBean } from '../../../beans/publication-bean';
+import { User } from '../../../beans/user';
+import { LoginService } from '../../../login/services/loginService';
+import { AppSettings } from '../../../shared/conf/app-settings';
 import * as pathUtils from '../../../utils/path.utils';
-import {LinkPreview} from '../../services/linkPreview';
-import {LinkView} from '../../services/linkView';
-import {NotificationService} from '../../services/notification.service';
-import {PostService} from '../../services/postService';
+import { LinkPreview } from '../../services/linkPreview';
+import { LinkView } from '../../services/linkView';
+import { NotificationService } from '../../services/notification.service';
+import { PostService } from '../../services/postService';
 import { PublicationTextService } from "../../services/publicationText.service";
 import { GifService } from '../../services/gifService';
 
@@ -44,7 +44,7 @@ export class Home {
   form;
   uploadedPicture: File;
   isLock: boolean = false;
-  
+  isLoadingFacebookLink: boolean = false;
   public publicationBeanList: Array<PublicationBean> = [];
   public user: User = new User();
 
@@ -87,20 +87,19 @@ export class Home {
   public arabicText: boolean = false;
   arabicRegex: RegExp = /[\u0600-\u06FF]/;
   public imageFromLink: boolean = false;
-  joke="";
-  bglist=false;
-  bgvalid=true;
-  pubclass="";
-  pubbg=false;
+  bglist = false;
+  bgvalid = true;
+  pubclass = "";
+  pubbg = false;
   /* tag search */
   searchValue: string;
   listTagSearchUsers: Array<User> = [];
   noSearchResults: Boolean = false;
 
 
-  translationLanguages = [{name: 'English (US)', value: 'en'},
-    {name: 'Français (France)', value: 'fr'},
-    {name: '     Español (España)', value: 'es'}];
+  translationLanguages = [{ name: 'English (US)', value: 'en' },
+  { name: 'Français (France)', value: 'fr' },
+  { name: '     Español (España)', value: 'es' }];
   selectedLanguage: String;
 
 
@@ -112,7 +111,7 @@ export class Home {
   private isSubscribed: boolean = true;
   private tagDropdownActive: boolean = false;
   private hashTagPos: number;
-  private showGifSlider:boolean = false;
+  private showGifSlider: boolean = false;
 
   @ViewChild("homeSidebarLeft") homeSidebarLeftRef: ElementRef;
   @ViewChild("homeSideBarRight") homeSidebarRightRef: ElementRef;
@@ -123,21 +122,21 @@ export class Home {
   // end Notification vars
 
   constructor(public translate: TranslateService,
-              private postService: PostService,
-              private linkView: LinkView,
-              private linkPreview: LinkPreview,
-              private gifService: GifService,
-              private title: Title,
-              private http: Http,
-              private router: Router,
-              private loginService: LoginService,
-              private changeDetector: ChangeDetectorRef,
-              private ng2ImgMaxService: Ng2ImgMaxService,
-              private renderer: Renderer2,
-              //Notiifcation
-              public notificationService: NotificationService,
-              private publicationTextService: PublicationTextService,
-              private ref: ChangeDetectorRef) {
+    private postService: PostService,
+    private linkView: LinkView,
+    private linkPreview: LinkPreview,
+    private gifService: GifService,
+    private title: Title,
+    private http: Http,
+    private router: Router,
+    private loginService: LoginService,
+    private changeDetector: ChangeDetectorRef,
+    private ng2ImgMaxService: Ng2ImgMaxService,
+    private renderer: Renderer2,
+    //Notiifcation
+    public notificationService: NotificationService,
+    private publicationTextService: PublicationTextService,
+    private ref: ChangeDetectorRef) {
 
     this.isSubscribed = true;
     this.loginService.redirect();
@@ -168,7 +167,7 @@ export class Home {
   ngOnInit() {
     jQuery(".navigation-bottom").removeClass('hidden-xs');
     window.onscroll = () => {
-     // let k = this.selectLanguageRef.nativeElement.offsetTop;
+      // let k = this.selectLanguageRef.nativeElement.offsetTop;
       /*
       console.log("---------------");
       console.log(k);
@@ -228,146 +227,188 @@ export class Home {
     }, 1000);
 
   }
-  ngAfterViewChecked(){
-    this.selectedLanguage = localStorage.getItem('userLang');
-    this.joke_sentence();
+  Classname() {
+    if (this.pubbg)
+      return this.pubclass;
   }
-  Classname(){
-    if(this.pubbg)
-    return this.pubclass;
-  }
-  bglistf(){
+  bglistf() {
     this.bglist = !this.bglist;
     this.toggling_bglistf()
   }
 
-  toggling_bglistf(){
-    if(this.bglist) { this.resetPreview(); this.bglist = true; this.showGifSlider = false;}
-    else { this.pubbg = false; this.pubclass=""; }
+  toggling_bglistf() {
+    if (this.bglist) { this.resetPreview(); this.bglist = true; this.showGifSlider = false; }
+    else { this.pubbg = false; this.pubclass = ""; }
   }
-  getbg0(){
-    if(this.bgvalid){
-      this.pubbg=false;
-      this.pubclass="";
+  getbg0() {
+    if (!this.bgvalid) {
+      this.pubbg = false;
+      this.pubclass = "";
       this.resetPreview();
-  }}
-  getbg1(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes1";
-    this.resetPreview();
-  }}
+    }
+  }
+  getbg1() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes1";
+      this.resetPreview();
+    }
+  }
 
-  getbg2(){
-    if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes2";
-    this.resetPreview();
-  }}
-  getbg3(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes3";
-    this.resetPreview();
-  }}
-  getbg4(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes4";
-    this.resetPreview();
-  }}
-  getbg5(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes5";
-    this.resetPreview();
-  }}
-  getbg6(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes6";
-    this.resetPreview();
-  }}
-  getbg7(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes7";
-    this.resetPreview();
-  }}
-  getbg8(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes8";
-    this.resetPreview();
-  }}
-  getbg9(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes9";
-    this.resetPreview();
-  }}
-  getbg10(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes10";
-    this.resetPreview();
-  }}
-  getbg11(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes11";
-    this.resetPreview();
-  }}
-  getbg12(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes12";
-    this.resetPreview();
-  }}
-  getbg13(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes13";
-    this.resetPreview();
-  }}
-  getbg14(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes14";
-    this.resetPreview();
-  }}
-  getbg15(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes15";
-    this.resetPreview();
-  }}
-  getbg16(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes16";
-    this.resetPreview();
-  }}
-  getbg17(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes17";
-    this.resetPreview();
-  }}
-  getbg18(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes18";
-    this.resetPreview();
-  }}
-  getbg19(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes19";
-    this.resetPreview();
-  }}
-  getbg20(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes20";
-    this.resetPreview();
-  }}
-  getbg21(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes21";
-    this.resetPreview();
-  }}
-  getbg22(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes22";
-    this.resetPreview();
-  }}
-  getbg23(){if(this.bgvalid){
-    this.pubbg=true;
-    this.pubclass="pubdes23";
-    this.resetPreview();
-  }}
+  getbg2() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes2";
+      this.resetPreview();
+    }
+  }
+  getbg3() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes3";
+      this.resetPreview();
+    }
+  }
+  getbg4() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes4";
+      this.resetPreview();
+    }
+  }
+  getbg5() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes5";
+      this.resetPreview();
+    }
+  }
+  getbg6() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes6";
+      this.resetPreview();
+    }
+  }
+  getbg7() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes7";
+      this.resetPreview();
+    }
+  }
+  getbg8() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes8";
+      this.resetPreview();
+    }
+  }
+  getbg9() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes9";
+      this.resetPreview();
+    }
+  }
+  getbg10() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes10";
+      this.resetPreview();
+    }
+  }
+  getbg11() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes11";
+      this.resetPreview();
+    }
+  }
+  getbg12() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes12";
+      this.resetPreview();
+    }
+  }
+  getbg13() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes13";
+      this.resetPreview();
+    }
+  }
+  getbg14() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes14";
+      this.resetPreview();
+    }
+  }
+  getbg15() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes15";
+      this.resetPreview();
+    }
+  }
+  getbg16() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes16";
+      this.resetPreview();
+    }
+  }
+  getbg17() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes17";
+      this.resetPreview();
+    }
+  }
+  getbg18() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes18";
+      this.resetPreview();
+    }
+  }
+  getbg19() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes19";
+      this.resetPreview();
+    }
+  }
+  getbg20() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes20";
+      this.resetPreview();
+    }
+  }
+  getbg21() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes21";
+      this.resetPreview();
+    }
+  }
+  getbg22() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes22";
+      this.resetPreview();
+    }
+  }
+  getbg23() {
+    if (this.bgvalid) {
+      this.pubbg = true;
+      this.pubclass = "pubdes23";
+      this.resetPreview();
+    }
+  }
   closeWelcomeMsg() {
     jQuery("#welcomeMsgDisplay").fadeOut(1000);
     this.user.isNewInscri = false;
@@ -419,6 +460,16 @@ export class Home {
     }
   }
 
+
+  navigateNotifMessage() {
+    this.http
+      .post(
+        environment.SERVER_URL + pathUtils.RESET_NEW_MESSAGE_NOTIFICATIONS,
+        AppSettings.OPTIONS
+      )
+      .map((res: Response) => res.json())
+      .subscribe(response => { }, err => { }, () => { });
+  }
 
   getListSearchUsers(key: string) {
     // this.showRecentSearch = false;
@@ -586,7 +637,7 @@ export class Home {
     }
   }
 
-  previewGIF(urlGIF){
+  previewGIF(urlGIF) {
 
     var linkURL = urlGIF;
 
@@ -597,17 +648,17 @@ export class Home {
     jQuery(".file-input-holder").hide();
     var gifImageId = document.getElementById('gifImageId');
 
-    if(gifImageId){
+    if (gifImageId) {
 
       gifImageId.onload = () => {
         var a = "hello";
         this.gifService.removeAnimation(a);
 
       }
-    }else{
-    var a = "hello";
-    this.gifService.removeAnimation(a);
-  }
+    } else {
+      var a = "hello";
+      this.gifService.removeAnimation(a);
+    }
 
 
   }
@@ -635,13 +686,13 @@ export class Home {
     this.link.isGif = false;
     jQuery("#file-image").val("");
     jQuery("#file-image-gif").val("");
-    if(!linkIsImage) {
+    if (!linkIsImage) {
       jQuery("#preview-image").attr("src", "");
       jQuery("#preview-image").fadeOut();
     }
     this.uploadedPicture = null;
     this.imageFromLink = false;
-    
+
     this.titleEnable = false;
     this.youtubeInput = false;
     this.youtubeLink = "";
@@ -652,13 +703,13 @@ export class Home {
     jQuery(".facebook-preview").html("");
     this.changeDetector.markForCheck();
 
-    
+
     // this.pubbg = false;
     // this.pubclass="";
-    
+
     //this.resetPreviewGIF();
   }
-  onDrop(event){
+  onDrop(event) {
     //console.log('drooooooooooooop');
     event.preventDefault();
   }
@@ -666,40 +717,44 @@ export class Home {
   updatePublishTextOnPaste($event) {
     $event.preventDefault();
     //this.resetPreview();
-    
+
     let text = $event.clipboardData.getData("text/plain");
     this.link.isGif = false;
-    if(this.pubbg){
+
+    if (this.pubbg) {
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
+      this.analyzeLink(text);
       return 1;
     }
     else {
-      let linkIsImage:boolean = false;
+      let linkIsImage: boolean = false;
       if (
         text.search("youtube.com/watch") >= 0 ||
         text.search("youtu.be/") >= 0
       ) {
+        //this.youtubeLink = text;
         this.resetPreview();
 
         this.youtubeInput = true;
-        jQuery(".yt-in-url").val(text);
+        //jQuery(".yt-in-url").val(text);
         this.changeDetector.markForCheck();
-        this.youtubeLink = text;
-        this.updateYoutubeFacebook();
+
+
+        this.updateYoutubeFacebook(text);
         return 1;
       }
 
       if (text.search("web.facebook.com") >= 0 || text.search("www.facebook.com") > 0 ||
-          text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0) {
-        
+        text.search("m.facebook.com") > 0 || text.search("mobile.facebook.com") > 0) {
+
         this.resetPreview();
 
         this.facebookInput = true;
-        jQuery(".yt-in-url").val(text);
+        //jQuery(".yt-in-url").val(text);
         this.changeDetector.markForCheck();
-        this.facebookLink = text;
-        this.updateYoutubeFacebook();
+        //this.facebookLink = text;
+        this.updateYoutubeFacebook(text);
         return 1;
       }
       if (text.search(/(\.jpg)|(\.jpeg)|(\.png)|(\.gif)$/i) > 0) {
@@ -711,8 +766,11 @@ export class Home {
         jQuery("#preview-image").show();
         return 1;
       }
-      if(!linkIsImage) {this.resetPreview(); this.analyzeLink(text);  }
-      
+      //if(!linkIsImage && this.facebookLink!="" && this.youtubeLink!="") {  }
+
+
+      this.analyzeLink(text);
+
       text = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
       document.execCommand("insertHTML", false, text);
     }
@@ -742,12 +800,14 @@ export class Home {
     jQuery(".youtube-preview").html("");
     jQuery(".facebook-preview").html("");
     this.loadingPublish = false;
+    this.isLoadingFacebookLink = false;
     jQuery(".textarea-publish").html("");
     this.closeLinkAPI();
     this.isEmpty = true;
     this.changeDetector.markForCheck();
     this.userPublishInput = false;
     this.bglist = false;
+    this.bgvalid = true;
     this.showGifSlider = false;
   }
 
@@ -859,28 +919,85 @@ export class Home {
       this.errorTimed();
 
     }
-  this.getbg0();
+    this.bgvalid = false;
+    this.getbg0();
   }
 
-  
 
-  veriftextsize(publishDivRef){
-    let text = publishDivRef.textContent;
+
+  veriftextsize(publishDivRef) {
+    //console.log("verif");
+
+    let text: string = jQuery("#publishDiv").html();
+    text = text.replace(/(\&nbsp;|\ )+/g, ' ')
+
     text = this.publicationTextService.addUrls(text);
     let dividedText = this.publicationTextService.divideText(text);
-    let nb=0;
-    if(text !== 'null' && text !=='undefined' && text.length > 0) {
+    //console.log(dividedText);
+    let nb = 0;
+    if (text !== 'null' && text !== 'undefined' && text.length > 0) {
+      text = text.replace(/<div><br><\/div>/g, '<br>');
+      text = text.replace(/<br><br>/g, '<br>');
+      text = text.replace(/<div>/g, '<br>');
+      text = text.replace(/<\/div>/g, '');
+      text = text.replace(/<div>/g, '');
       var line_parts = text.split('<br>');
-      for(let i=0;i<line_parts.length;i++){
-        nb=nb+(line_parts[i].length/39);
-        if(line_parts[i].length%39!=0) nb++;}
-      if(nb>6||dividedText.isLongText){
-        this.getbg0();
-        this.bgvalid=false;
+      let txt = line_parts[line_parts.length - 1];
+      //
+      text = text.replace(/<br>/g, '');
+
+      for (var i = 0; i < line_parts.length; i++) {
+
+        nb = nb + Math.floor(line_parts[i].length / 32) + 1
+
       }
-      else{this.bgvalid=true;}
+
+      this.bgvalid = nb >= 5 ? false : true;
+      if (this.pubbg) {
+        if (nb >= 5) {
+          //console.log("waaaaaaaaaaaaaaaaaaaaaa");
+          this.getbg0();
+        }
+
+      }
+    }
   }
-  }
+
+  /*  verifNbrOfLines(publishDivRef){
+      let divHeight = parseInt(publishDivRef.offsetHeight);
+      let divWidth = parseInt(publishDivRef.offsetWidth);
+      let lineHeight = parseInt(jQuery("#publishDiv").css('font-size'));
+      let text = publishDivRef.textContent;
+      
+      var lines = Math.round(divHeight / lineHeight) ;
+      // onBackgroundSwitch();
+      if(this.pubbg){
+        console.log(lines);
+        if(lines>7 || ( (divWidth >= 300 && text.length >= 130) || ( divWidth < 300 && text.length >= 22) ) ){
+          
+            this.getbg0();
+            this.bgvalid=false;
+          
+          
+        }
+        else{
+          this.bgvalid=true;
+        }
+  
+      }else{
+        // length + nbr of lines
+        if(divWidth >= 300 && text.length >= 155) {
+          this.bgvalid=false;
+        }else if(divWidth < 300 && text.length >= 130){
+          this.bgvalid=false;
+        }
+        else{
+          this.bgvalid=true;
+        }
+        
+      }
+      
+    }*/
 
   enableTitlePost() {
     this.titleEnable = !this.titleEnable;
@@ -922,7 +1039,7 @@ export class Home {
     jQuery("#errorMsgDisplay").fadeIn(500);
     $("html, body").scrollTop(
       $("#errorMsgDisplay").offset().top - $(".main-header").innerHeight() - $(".welcome-msg").innerHeight()
-       );
+    );
     //document.querySelector("#errorMsgDisplay").scroll; //.scrollIntoView({ behavior: 'smooth' });
     setTimeout(() => {
       jQuery("#errorMsgDisplay").fadeOut(1000);
@@ -943,9 +1060,9 @@ export class Home {
 
   //uploading photo or GIF
   uploadPhoto($event) {
-    if(this.pubbg){
-      this.pubbg=false;
-      this.pubclass="";
+    if (this.pubbg) {
+      this.pubbg = false;
+      this.pubclass = "";
       jQuery(".textarea-publish").html("");
     }
     let inputValue = $event.target;
@@ -953,7 +1070,7 @@ export class Home {
     if (inputValue != null && null != inputValue.files[0]) {
       let inputFile = inputValue.files[0];
       this.resetPreview();
-      if(inputFile.name.endsWith(".gif") || inputFile.name.endsWith(".GIF")) {
+      if (inputFile.name.endsWith(".gif") || inputFile.name.endsWith(".GIF")) {
         //console.log("it ends with gif !");
         this.uploadPhotoGIF($event);
         return
@@ -1002,7 +1119,7 @@ export class Home {
 
   getIdFacebookVideo(facebookLink): string {
 
-    let myRegexp = /(\/(videos\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
+    let myRegexp = /(\/(videos\/)|(\/vb.*\/)|(posts\/)|(v|(&|\?)id)=)(\d+)/;
     let match = facebookLink.match(myRegexp);
     if (match) {
       return match[match.length - 1];
@@ -1045,25 +1162,36 @@ export class Home {
     jQuery(".youtube-preview").html("");
     jQuery(".facebook-preview").html("");
   }
+  getVideoId(facebookLink): String {
 
-  updateYoutubeFacebook() {
-    var a = jQuery(".yt-in-url");
-    var videoLink = a.val();
+    let Reg = /((story_fbid=))(\d+)/;
+    let match = facebookLink.match(Reg);
+    if (match) {
+      return match[match.length - 1];
+    }
+  }
+
+
+  updateYoutubeFacebook(videoLink) {
+    // var a = jQuery(".yt-in-url");
+    // var videoLink = a.val();
     var videoId;
 
     if (videoLink.indexOf("youtube.com") > 0 || videoLink.indexOf("youtu.be") > 0) {
       videoId = this.getIdYoutubeVideoId(videoLink);
       try {
-        jQuery(".facebook-preview").html("");
+        //jQuery(".facebook-preview").html("");
+        this.youtubeLink = videoId;
         jQuery(".youtube-preview").html(
           '<iframe width="560" height="315" src="https://www.youtube.com/embed/' +
           videoId +
           '" frameborder="0" allowfullscreen></iframe>'
         );
+        //console.log(videoId)
         this.uploadedPicture = null;
         this.closeLinkAPI();
-        this.youtubeLink = videoId;
-        jQuery("#preview-image").hide();
+
+        //jQuery("#preview-image").hide();
       } catch (err) {
         this.displayLinkError();
       }
@@ -1072,42 +1200,59 @@ export class Home {
       videoLink.indexOf("m.facebook.com") > 0 || videoLink.indexOf("mobile.facebook.com") > 0) {
       videoId = this.getIdFacebookVideo(videoLink);
       var videoPage = this.getPageFacebookVideo(videoLink);
-      //console.log("faceboook");
       try {
+        this.isLoadingFacebookLink = true;
         this.loadingPublish = true;
-     let linkURL = this.linkView.getListLinks(videoLink)[0];
-    this.http
-      .get(
-        environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
-        AppSettings.OPTIONS
-      )
-      .map((res: Response) => res.json())
-      .subscribe(
-        response => {
-          if (response.results.success) {
-            this.link.image = response.results.data.ogImage.url;
-            //console.log(response.results.data.ogImage);
-            this.link.imageWidth = response.results.data.ogImage.width;
-            this.link.imageHeight = response.results.data.ogImage.height;
-            var self =this;
-              this.getMeta(response.results.data.ogImage.url,function(width, height){
-                console.log(height);
-                console.log(width);
-                self.setParams(width, height);
-                
+        let linkURL = this.linkView.getListLinks(videoLink)[0];
+
+        if (videoLink.indexOf("m.facebook.com/story.php?") > 0) {
+          videoId = this.getVideoId(videoLink);
+          videoPage = this.getIdFacebookVideo(videoLink);
+          linkURL = "https://www.facebook.com/" + videoPage + "/videos/" + videoId;
+        }
+
+        this.http
+          .get(
+            environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
+            AppSettings.OPTIONS
+          )
+          .map((res: Response) => res.json())
+          .subscribe(
+            response => {
+              if (response.results.data.ogImage.url) {
+              this.link.image = response.results.data.ogImage.url;
+              this.link.imageWidth = response.results.data.ogImage.width;
+              this.link.imageHeight = response.results.data.ogImage.height;
+              var self = this;
+              this.getMeta(response.results.data.ogImage.url, function (width, height) {
+                self.setParams(width, height, videoId, videoPage);
+
               });
-          }});
+                }
+              else  
+              {
+                if (videoLink.indexOf("m.facebook.com/story.php?")>0)
+                {
+                jQuery(".facebook-preview").html(
+                 '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
+                 videoId +
+                 '%2F&show_text=0&height="560"&appId" width="400" height="400" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"'+
+                 '></iframe>'
+               ); }
+               else{
+                this.resetPublish();
+                this.isLoadingFacebookLink=false;
+                this.errorMsg = "SP_FV_ER_FB_LINK_NOT_VALID";
+                this.errorTimed();
+               } }
+            });
         jQuery(".youtube-preview").html("");
-        jQuery(".facebook-preview").html(
+
+        jQuery(".facebook-preview-mobile").html(
           '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
           videoId +
-          '%2F&show_text=0&height=580&appId" width="500" height="580" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
+          '%2F&show_text=0&height=360&appId" width="400" height="400" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
         );
-        // jQuery(".facebook-preview-mobile").html(
-        //   '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
-        //   videoId +
-        //   '%2F&show_text=0&height=360&appId" width="230" height="360" style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>'
-        // );
 
         this.uploadedPicture = null;
         this.closeLinkAPI();
@@ -1126,43 +1271,41 @@ export class Home {
 
   }
 
-  cancelPublication(){
-    // console.log(this.userPublishInput);
-    // console.log(this.youtubeLink);
-    // console.log(this.facebookLink);
-    // console.log(this.uploadedPicture);
-    // console.log(this.link.isSet);
-    // console.log(this.imageFromLink);
+  cancelPublication() {
     this.closeBglist();
     this.resetPublish();
   }
 
-  setParams(width, height){
-    if (width-height>300){
-    this.facebookHeight="315";
-    this.facebookWidth=width;
-  }else {
-      this.facebookHeight="560";
-    this.facebookWidth=width;
-    }
+  setParams(width, height, videoId, videoPage) {
+    this.facebookHeight = height;
+    this.facebookWidth = width;
     this.loadingPublish = false;
+    this.isLoadingFacebookLink = false;
+    jQuery(".facebook-preview").html(
+      '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F' + videoPage + '%2Fvideos%2F' +
+      videoId +
+      '%2F&show_text=0&height=' + height + '&appId" width="500" height=' + height + ' style="border:none;overflow:none" scrolling="yes" frameborder="0" allowTransparency="true" allowFullScreen="true"' +
+      '></iframe>'
+    );
+
   }
-  closeBglist(){
+  closeBglist() {
     this.bglist = false;
     this.getbg0();
     this.toggling_bglistf();
   }
-  sideScroll(direction,speed,distance,step){
+  sideScroll(direction, speed, distance, step) {
     var Container = jQuery(".bglist");
-    if(direction == 'left'){
-      Container.animate( { scrollLeft: '-=460' }, 1000);
-    }else{
-      Container.animate( { scrollLeft: '+=460' }, 1000);
+    if (direction == 'left') {
+      Container.animate({ scrollLeft: '-=460' }, 1000);
+    } else {
+      Container.animate({ scrollLeft: '+=460' }, 1000);
     }
   }
 
   closeLinkAPI() {
     this.link.initialise();
+    this.veriftextsize(jQuery(".publishDivRef"));
   }
 
   linkAPI() {
@@ -1173,42 +1316,26 @@ export class Home {
   analyzeLink(source) {
 
     let myArray = this.linkView.getListLinks(source);
-//console.log("analyyyze");
+
     if (!myArray.length) {
+      //console.log("NOT A LINKKKKK");
       return 1;
     }
     let linkURL = myArray[0];
+    this.bgvalid = false;
+    this.getbg0();
+    this.bgvalid = true;
     //check if linkURL refers to speegar.com
     if (linkURL == this.link.url) {
-
       return 1;
     }
 
-    /*
-    if (linkURL.search(/(\.gif)$/i) > 0) {
-      console.log("this is a gif!");
-      console.log(linkURL);
-      //var checker = linkURL.substr(linkURL.length - 13, 8);
-      //if (checker.indexOf(".gif") >= 0) {
-      this.link.image = linkURL; //.substring(0, linkURL.indexOf(".gif") + 4);
-      this.link.imageWidth = 500;
-      this.link.imageHeight = 500;
-      this.link.isGif = true;
-      this.link.url = linkURL; //.substring(0, linkURL.indexOf(".gif") + 4);
-      this.link.title = "gif";
-      this.link.description = "gif";
-      this.link.isSet = true;
-      return 1;
-      //}
-    }
-          */
-    // if (this.imageFromLink) {
-    //   return 1
-    // }
 
 
+    this.resetPreview();
     this.linkLoading = true;
-    
+
+
     this.http
       .get(
         environment.SERVER_URL + pathUtils.GET_OPEN_GRAPH_DATA + linkURL,
@@ -1218,41 +1345,46 @@ export class Home {
       .subscribe(
         response => {
           if (response.results.success) {
-            jQuery("#publishDiv").empty();
-            this.resetPublishPicture();
-            jQuery(".video-preview").html("");
+            //jQuery("#publishDiv").empty();
+
+            var rest = jQuery("#publishDiv").text().replace(linkURL, '');
+            rest = rest.replace(/(?:\r\n|\r|\n)/g, "<br>");
+
+            jQuery("#publishDiv").html(rest);
+            //this.resetPublishPicture();
+            //jQuery(".video-preview").html("");
             //this.form.controls.publicationYoutubeLink.updateValue('');
-            //console.log("hellooooooo");
+            //
             var r = /:\/\/(.[^/]+)/;
             this.linkDomain = linkURL.match(r)[1];
-//              this.link.url = linkURL.substring(0, linkURL.length - 6);
+            //              this.link.url = linkURL.substring(0, linkURL.length - 6);
             this.link.url = linkURL;
 
             this.link.title = response.results.data.ogTitle;
             this.link.description = response.results.data.ogDescription;
             if (response.results.data.ogImage) {
-              if(response.results.data.ogImage.length == 2)
-              {
-                
-              this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
-              //console.log(response.results.data.ogImage[1].url);
-              //this.resetPreview(linkIsImage = true);
-              //console.log("image detected");
-              // jQuery("#preview-image").attr("src", this.link.image);
-              // jQuery(".file-input-holder").show();
-              // jQuery("#preview-image").show();
-              
+              if (response.results.data.ogImage.length == 2) {
 
-              }else{
-              
-              this.link.image = response.results.data.ogImage.url;
-              //console.log(response.results.data.ogImage);
-              this.link.imageWidth = response.results.data.ogImage.width;
-              this.link.imageHeight = response.results.data.ogImage.height;
-              
+                this.link.image = response.results.data.ogImage[1].url.replace(/['"]+/g, '');
+                //console.log(response.results.data.ogImage);
+                //console.log(this.link.url);
+                //this.resetPreview(linkIsImage = true);
+                //console.log("image detected");
+                // jQuery("#preview-image").attr("src", this.link.image);
+                // jQuery(".file-input-holder").show();
+                // jQuery("#preview-image").show();
+
+
+              } else {
+
+                this.link.image = response.results.data.ogImage.url;
+                //console.log(response.results.data.ogImage);
+                this.link.imageWidth = response.results.data.ogImage.width;
+                this.link.imageHeight = response.results.data.ogImage.height;
+
               }
-              
-              
+
+
             } else {
               this.link.image = null;
               this.link.imageWidth = 0;
@@ -1268,8 +1400,8 @@ export class Home {
           console.error("error in link API;");
         },
         () => {
-          if(this.link.isSet) {
-            //this.resetPreview();
+          if (this.link.isSet) {
+
             this.link.isSet = true;
           }
           this.linkLoading = false;
@@ -1278,13 +1410,13 @@ export class Home {
   }
 
 
-   
-   getMeta(url, callback) {
+
+  getMeta(url, callback) {
     var img = new Image();
     img.src = url;
-    img.onload = function() { callback(img.width, img.height); }
-}
-  
+    img.onload = function () { callback(img.width, img.height); }
+  }
+
   pasteInnerHtml($event) {
     $event.preventDefault();
     var plainText = $event.clipboardData.getData("text/plain");
@@ -1299,18 +1431,10 @@ export class Home {
     localStorage.setItem('userLang', language);
     this.translate.use(language);
     this.translate.setDefaultLang(language);
-    this.joke_sentence();
     //location.reload();
     //console.log(localStorage.getItem('userLang')) ;
   }
-  
-  joke_sentence(){
-    
-    if (this.selectedLanguage==='fr'){this.joke="Votre blague ici ..."}
-    else if (this.selectedLanguage==='en'){this.joke="Your joke here ..."}
-    else this.joke="Tu broma aquí ...";
-    $('#publishDiv').attr('placeholder',this.joke);
-  }
+
   toggleTranslateDropdown() {
     jQuery(".dropdown-menu-translate").toggle();
   }
@@ -1322,9 +1446,9 @@ export class Home {
 
   toggleGifSlider() {
     this.showGifSlider = !this.showGifSlider;
-    if(this.showGifSlider) { 
-      this.resetPreview(); this.showGifSlider = true; 
-      this.bglist = false; this.pubbg = false; this.pubclass="";
+    if (this.showGifSlider) {
+      this.resetPreview(); this.showGifSlider = true;
+      this.bglist = false; this.pubbg = false; this.pubclass = "";
     }
   }
 
