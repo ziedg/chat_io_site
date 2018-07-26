@@ -194,7 +194,7 @@
   "SP_AUTORISATION_NOTIF": "Speegar needs your permission to",
   "ACTIVER_NOTIF_BUREAU": "enable desktop notifications.",
   "FIL_ACTUALITES": "News",
-  "votre_ami": "your facebook friend",
+  "votre_ami": "Your facebook friend",
   "vient de joindre speegar": "just joined speegar",
   "MESSENGER": "Messenger",
   "subscribers": "subscribers",
@@ -236,5 +236,6 @@
   "September": "September",
   "November": "November",
   "December": "December",
-  "Taptodiscuss": "Tap to discuss"
+  "Taptodiscuss": "Tap to discuss",
+  "Contact":"Contact"
 }
