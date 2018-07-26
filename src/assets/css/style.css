@@ -2718,7 +2718,7 @@ textarea:focus {
 .publication {
   background-color: white;
   padding: 15px 0px 0px 0px;;
-  margin: 25px 0;
+  margin: 15px 0;
   position: relative;
 }
 
@@ -2878,7 +2878,7 @@ facebook-friends .user .user-img {
   background-color: #fff;
   padding: 10px;
   margin-bottom: -20px;
-  margin-top: -10px;
+  margin-top: 30px;
 }
 
 @media (max-width: 767px) {
@@ -6661,7 +6661,7 @@ img[src="undefined"] {
   opacity: 0.9;
   color: #999999;
   font-size: 24px;
-  font-family: 'Zapf Dingbats';
+  z-index: 10;
 }
 
 .close-button-x:hover {

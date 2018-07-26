@@ -27,7 +27,7 @@ export class NotificationBar implements OnInit, OnDestroy {
         navigator.serviceWorker.register('assets/sw.js').then(reg => {
           this.registration = reg;
 
-          console.log('enterd service')
+          //console.log('enterd service')
           reg.update();
           this.notificationService.init(reg);
           //console.log('Service Worker and Push is supported');
