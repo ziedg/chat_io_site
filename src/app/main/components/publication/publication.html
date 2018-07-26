@@ -120,7 +120,7 @@
       </div>
 
       <div class="facebook-responsive-short" *ngIf="publicationBean.publfacebookLink && publicationBean.publfacebookLink!='null'">
-        <iframe width={{publicationBean.publfacebookLinkWidth}} height={{facebookHeight}} [src]="url" frameborder="0" allowfullscreen>
+        <iframe id="{{publicationBean._id}}" height="{{facebookHeight}}" [src]="url" scrolling="no" frameborder="0" allowfullscreen>
         </iframe>
       </div>
       <div class="youtube-preview-publication" *ngIf="publicationBean.publyoutubeLink && publicationBean.publyoutubeLink!='null'">

@@ -68,7 +68,8 @@ export class Publication {
   public listLink: Array<string>;
   public imageBaseUrl = environment.IMAGE_BASE_URL;
 
-  facebookHeight:String;
+  public width: number;
+  facebookHeight: String;
   formComment;
   selectedEmojiTab = 0;
   emojiOpacity = 0;
@@ -307,11 +308,7 @@ export class Publication {
   }
 
   ngOnInit() {
-    if(window.matchMedia("(max-width: 768px)").matches){
-      this.facebookHeight = (this.publicationBean.publfacebookLinkHeight*0.62).toString();
-    }else{
-      this.facebookHeight = (this.publicationBean.publfacebookLinkHeight*0.7).toString();
-    }
+    let ratio = this.publicationBean.publfacebookLinkWidth / this.publicationBean.publfacebookLinkHeight;
     // check if publication is opened in sperate link
     if (this.router.routerState.snapshot.url.includes('post')) {
       this.displayComments();
@@ -401,8 +398,20 @@ export class Publication {
         this.linkFb =
           "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F" +
           this.publicationBean.publfacebookLink +
-          "%2F&show_text=0&height=" + this.publicationBean.publfacebookLinkHeight + "&appId";
+          "%2F&show_text=0&width=" + this.publicationBean.publfacebookLinkWidth + "&height=" + this.publicationBean.publfacebookLinkHeight + "&appId";
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkFb);
+        if (window.matchMedia("(max-width: 768px)").matches) {
+          this.facebookHeight = (window.innerWidth / ratio).toString();
+        } else {
+          let iframes = Array.from(jQuery(".facebook-responsive-short iframe"));
+          let iframe = iframes[iframes.length-1];
+          if(iframe){
+            this.width = iframe["clientWidth"];
+            this.facebookHeight = (this.width / ratio).toString();
+          }else{
+            this.facebookHeight = (this.publicationBean.publfacebookLinkHeight * 0.5).toString();
+          }
+        }
       } else {
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl("");
       }
@@ -446,8 +455,17 @@ export class Publication {
     this.initComments();
   }
 
+  findObjectByKey(array, value) {
+    for (var i = 0; i < array.length; i++) {
+      console.log(array[i]);
+      if (array[i]["id"] == value) {
+        console.log(array[i]["id"]);
+        return array[i];
+      }
+    }
+    return null;
+  }
   checkEnter(event) { }
-
   inputFocused() {
     let text: string = this.commentInputHtml;
     text = text
@@ -474,10 +492,10 @@ export class Publication {
       .replace(/(\<div\>\<br\>\<\/div\>)/g, "");
     var white_space_regex: RegExp = /^(\ |\&nbsp;|\<br\>)*$/g;
     var white_space_only = white_space_regex.test(txt);
-   // console.log(this.loadingComment);
+    // console.log(this.loadingComment);
     if (!commentToSend && white_space_only && !this.uploadedPictureComment) {
       this.loadingComment = false;
-   //   console.log(this.loadingComment);
+      //   console.log(this.loadingComment);
       jQuery(".comment-publish").prop('disabled', false);
       return;
     }
