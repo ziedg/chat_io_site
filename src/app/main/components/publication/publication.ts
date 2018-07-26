@@ -400,16 +400,29 @@ export class Publication {
           this.publicationBean.publfacebookLink +
           "%2F&show_text=0&width=" + this.publicationBean.publfacebookLinkWidth + "&height=" + this.publicationBean.publfacebookLinkHeight + "&appId";
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.linkFb);
-        if (window.matchMedia("(max-width: 768px)").matches) {
-          this.facebookHeight = (window.innerWidth / ratio).toString();
+        if (this.router.routerState.snapshot.url.includes('post')) {
+          // if(ratio>1){
+          //   this.facebookHeight = ((this.publicationBean.publfacebookLinkHeight*0.55)).toString();
+          // }else{
+
+          // }
+          if (window.matchMedia("(max-width: 768px)").matches) {
+            this.facebookHeight = (window.innerWidth / ratio).toString();
+          } else {
+            this.facebookHeight = ((window.innerWidth*0.52) / ratio).toString();
+          }
         } else {
-          let iframes = Array.from(jQuery(".facebook-responsive-short iframe"));
-          let iframe = iframes[iframes.length-1];
-          if(iframe){
-            this.width = iframe["clientWidth"];
-            this.facebookHeight = (this.width / ratio).toString();
-          }else{
-            this.facebookHeight = (this.publicationBean.publfacebookLinkHeight * 0.5).toString();
+          if (window.matchMedia("(max-width: 768px)").matches) {
+            this.facebookHeight = (window.innerWidth / ratio).toString();
+          } else {
+            let iframes = Array.from(jQuery(".facebook-responsive-short iframe"));
+            let iframe = iframes[iframes.length - 1];
+            if (iframe) {
+              this.width = iframe["clientWidth"];
+              this.facebookHeight = (this.width / ratio).toString();
+            } else {
+              this.facebookHeight = (this.publicationBean.publfacebookLinkHeight * 0.5).toString();
+            }
           }
         }
       } else {
