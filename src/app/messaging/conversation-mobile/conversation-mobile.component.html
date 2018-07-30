@@ -6,7 +6,7 @@
 			</a>
 			<div *ngIf="selectedUser" [routerLink]="['/main', 'profile', selectedUser._id]">
 				<p>{{selectedUser.firstName +' '+selectedUser.lastName}}</p>
-			</div> -->
+			</div> 
 		</div>
 	</div>
 	<div class="message-wrapper" (scroll)="onScrollMsgWrapper()" #msgWrapper>
