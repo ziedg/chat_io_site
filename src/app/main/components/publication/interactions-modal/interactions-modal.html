@@ -40,7 +40,7 @@
                 </button>
                 <button (click)="toggleSubscribe(user)" style="float:none" *ngIf="user.isSubscribed === 'true' && user.userId !== profileId"
                   [ngStyle]="{'background-color':'#ccc'}">
-                  {{'profile_already_subscribed' | translate }}
+                  {{'subscribed' | translate }}
                 </button>
               </div>
             </div>
