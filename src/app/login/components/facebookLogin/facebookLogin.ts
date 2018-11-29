@@ -45,7 +45,8 @@ export class FacebookLogin {
 
 
         FB.init({
-              appId      : '963422573811438',
+              // appId      : '963422573811438',
+               appId: '2092111151071621',
               status: true,  // enable cookies to allow the server to access
               cookie: true,
               xfbml      : true,
